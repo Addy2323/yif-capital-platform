@@ -14,6 +14,22 @@ export interface PaymentProvider {
     instructions: string
 }
 
+export interface Transaction {
+    id: string
+    userId: string
+    amount: number
+    currency: string
+    method: string
+    status: "pending" | "success" | "failed"
+    plan: string
+    sessionId?: string
+    phone?: string
+    cardLast4?: string
+    receiptNumber: string
+    createdAt: string
+    completedAt?: string
+}
+
 export const MOBILE_MONEY_PROVIDERS: PaymentProvider[] = [
     {
         id: "mpesa",
@@ -56,6 +72,18 @@ export const CARD_PROVIDER: PaymentProvider = {
     icon: "/logo payment/crdb.png",
     color: "#1A1F36",
     instructions: "Enter your card details securely. We accept Visa and Mastercard.",
+}
+
+export function getTransactions(): Transaction[] {
+    // This is now a placeholder as we moved to server-side database storage
+    // It returns an empty array to satisfy type requirements during build
+    if (typeof window === "undefined") return []
+    try {
+        const stored = localStorage.getItem("yif_transactions")
+        return stored ? JSON.parse(stored) : []
+    } catch (e) {
+        return []
+    }
 }
 
 export function formatCurrency(amount: number): string {

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
-import { getTransactions, formatCurrency, type Transaction } from "@/lib/payment-service"
+import { formatCurrency } from "@/lib/payment-service"
 import { Button } from "@/components/ui/button"
 import {
     Check,
@@ -20,16 +20,11 @@ import {
 
 function SuccessContent() {
     const { user } = useAuth()
-    const [transaction, setTransaction] = useState<Transaction | null>(null)
+    const [transaction, setTransaction] = useState<any>(null)
 
     useEffect(() => {
-        if (user) {
-            const transactions = getTransactions()
-            const latest = transactions.find((t) => t.userId === user.id && t.status === "success")
-            if (latest) {
-                setTransaction(latest)
-            }
-        }
+        // In the new DB-backed version, we would fetch the latest payment from our API
+        // For now, we'll just show the success state based on the user's updated role
     }, [user])
 
     const formatDate = (dateString: string) => {
