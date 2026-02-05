@@ -95,22 +95,18 @@ function SubscribeContent() {
 
         try {
             if (paymentType === "mobile" && selectedProvider) {
-                await processMobileMoneyPayment(user.id, phone, plan.price, selectedProvider, planKey)
+                await processMobileMoneyPayment(phone, plan.price, selectedProvider, planKey)
+                // For mobile money, we stay in processing and could poll the session
+                // For simulation, we'll just show success after a delay
+                await new Promise(r => setTimeout(r, 5000));
+                await refreshSession();
+                setStep("success");
             } else if (paymentType === "card") {
-                await processCardPayment(user.id, cardNumber.replace(/\s/g, ""), plan.price, planKey)
+                await processCardPayment(cardNumber.replace(/\s/g, ""), plan.price, planKey);
+                await refreshSession();
+                setStep("success");
             }
 
-            // Update user subscription
-            updateUser({
-                role: planKey,
-                subscription: {
-                    plan: planKey,
-                    status: "active",
-                    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-                },
-            })
-
-            setStep("success")
         } catch (err) {
             setError(err instanceof Error ? err.message : "Payment failed. Please try again.")
             setStep("details")

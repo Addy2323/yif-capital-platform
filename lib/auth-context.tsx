@@ -26,80 +26,65 @@ interface AuthContextType {
   logout: () => void
   updateUser: (updates: Partial<User>) => void
   upgradeSubscription: (plan: "pro" | "institutional") => void
+  refreshSession: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-const STORAGE_KEY = "yif_auth"
-const USERS_KEY = "yif_users"
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    // Check for existing session
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored)
-        setUser(parsed)
-      } catch {
-        localStorage.removeItem(STORAGE_KEY)
+  const refreshSession = async () => {
+    try {
+      const res = await fetch("/api/auth/session")
+      const data = await res.json()
+      if (data.user) {
+        setUser({
+          ...data.user,
+          subscription: {
+            plan: data.user.role as "free" | "pro" | "institutional",
+            status: "active"
+          }
+        })
+      } else {
+        setUser(null)
       }
+    } catch {
+      setUser(null)
     }
-    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    // Check for existing session from database
+    refreshSession().finally(() => setIsLoading(false))
   }, [])
 
-  const getUsers = (): Record<string, { password: string; user: User }> => {
-    const stored = localStorage.getItem(USERS_KEY)
-    if (stored) {
-      try {
-        return JSON.parse(stored)
-      } catch {
-        return {}
-      }
-    }
-    return {}
-  }
-
-  const saveUsers = (users: Record<string, { password: string; user: User }>) => {
-    localStorage.setItem(USERS_KEY, JSON.stringify(users))
-  }
-
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
-    // Hardcoded Admin Credentials i will update nikiwa na impliment backend
-    if (email.toLowerCase() === "admin@yif.com" && password === "admin123") {
-      const adminUser: User = {
-        id: "admin-id",
-        email: "admin@yif.com",
-        name: "System Admin",
-        role: "admin",
-        createdAt: new Date().toISOString(),
-        subscription: {
-          plan: "institutional",
-          status: "active",
-        },
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        return { success: false, error: data.error || "Login failed" }
       }
-      setUser(adminUser)
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(adminUser))
+
+      setUser({
+        ...data,
+        subscription: {
+          plan: data.role as "free" | "pro" | "institutional",
+          status: "active"
+        }
+      })
       return { success: true }
+    } catch (error) {
+      return { success: false, error: "Network error" }
     }
-
-    const users = getUsers()
-    const userRecord = users[email.toLowerCase()]
-
-    if (!userRecord) {
-      return { success: false, error: "Invalid email or password" }
-    }
-
-    if (userRecord.password !== password) {
-      return { success: false, error: "Invalid email or password" }
-    }
-
-    setUser(userRecord.user)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(userRecord.user))
-    return { success: true }
   }
 
   const register = async (
@@ -107,56 +92,44 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     password: string,
     name: string
   ): Promise<{ success: boolean; error?: string }> => {
-    const users = getUsers()
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, name })
+      })
 
-    if (users[email.toLowerCase()]) {
-      return { success: false, error: "Email already registered" }
+      const data = await res.json()
+
+      if (!res.ok) {
+        return { success: false, error: data.error || "Registration failed" }
+      }
+
+      // Auto-login after registration
+      return await login(email, password)
+    } catch (error) {
+      return { success: false, error: "Network error" }
     }
-
-    const newUser: User = {
-      id: crypto.randomUUID(),
-      email: email.toLowerCase(),
-      name,
-      role: "free",
-      createdAt: new Date().toISOString(),
-      subscription: {
-        plan: "free",
-        status: "active",
-      },
-    }
-
-    users[email.toLowerCase()] = { password, user: newUser }
-    saveUsers(users)
-
-    setUser(newUser)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser))
-    return { success: true }
   }
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/session", { method: "DELETE" })
+    } catch {
+      // Ignore errors
+    }
     setUser(null)
-    localStorage.removeItem(STORAGE_KEY)
   }
 
   const updateUser = (updates: Partial<User>) => {
     if (!user) return
-
-    const updatedUser = { ...user, ...updates }
-    setUser(updatedUser)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser))
-
-    // Also update in users storage
-    const users = getUsers()
-    if (users[user.email]) {
-      users[user.email].user = updatedUser
-      saveUsers(users)
-    }
+    setUser({ ...user, ...updates })
+    // TODO: Implement API call to update user in database
   }
 
   const upgradeSubscription = (plan: "pro" | "institutional") => {
     if (!user) return
-
-    const updatedUser: User = {
+    setUser({
       ...user,
       role: plan,
       subscription: {
@@ -164,20 +137,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         status: "active",
         expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
       },
-    }
-    setUser(updatedUser)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser))
-
-    // Also update in users storage
-    const users = getUsers()
-    if (users[user.email]) {
-      users[user.email].user = updatedUser
-      saveUsers(users)
-    }
+    })
+    // TODO: Implement API call to upgrade subscription
   }
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout, updateUser, upgradeSubscription }}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout, updateUser, upgradeSubscription, refreshSession }}>
       {children}
     </AuthContext.Provider>
   )

@@ -23,6 +23,8 @@ import {
     Target,
     Newspaper,
     ArrowLeft,
+    Video,
+    ShieldAlert,
 } from "lucide-react"
 
 interface NavItem {
@@ -39,6 +41,8 @@ interface NavItem {
 const navigation: NavItem[] = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Users", href: "/admin/users", icon: Users },
+    { name: "Live Sessions", href: "/admin/sessions", icon: Video },
+    { name: "Access Logs", href: "/admin/access-logs", icon: ShieldAlert },
     { name: "Subscriptions", href: "/admin/subscriptions", icon: CreditCard },
     {
         name: "Content",

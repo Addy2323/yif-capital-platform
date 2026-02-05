@@ -20,6 +20,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { MarketTable } from "@/components/dashboard/market-table"
+import { LiveSessionsDashboard } from "@/components/dashboard/live-sessions"
 
 export default function DashboardPage() {
   const { user } = useAuth()
@@ -51,6 +52,11 @@ export default function DashboardPage() {
             </Button>
           )}
         </div>
+      </div>
+
+      {/* Live Sessions Section - High Visibility */}
+      <div className="grid gap-8">
+        <LiveSessionsDashboard />
       </div>
 
       {/* Tanzania Use Case & Fun Fact */}
