@@ -11,6 +11,18 @@ import { Loader2, CheckCircle2, Phone, Calendar, Clock, AlertCircle, ArrowLeft }
 import { useAuth } from "@/lib/auth-context"
 import { format } from "date-fns"
 
+// Safe date formatting helper
+function safeFormatDate(dateString: string | undefined | null, formatStr: string, fallback = "N/A"): string {
+    if (!dateString) return fallback
+    try {
+        const date = new Date(dateString)
+        if (isNaN(date.getTime())) return fallback
+        return format(date, formatStr)
+    } catch {
+        return fallback
+    }
+}
+
 interface SessionDetails {
     id: string
     title: string
@@ -164,12 +176,12 @@ export default function SessionPaymentPage() {
                     <CardContent className="space-y-4">
                         <div className="flex items-center gap-2 text-slate-300">
                             <Calendar className="h-4 w-4 text-blue-400" />
-                            <span>{format(new Date(session.scheduledStart), "PPP")}</span>
+                            <span>{safeFormatDate(session.scheduledStart, "PPP")}</span>
                         </div>
                         <div className="flex items-center gap-2 text-slate-300">
                             <Clock className="h-4 w-4 text-blue-400" />
                             <span>
-                                {format(new Date(session.scheduledStart), "p")} - {format(new Date(session.scheduledEnd), "p")}
+                                {safeFormatDate(session.scheduledStart, "p")} - {safeFormatDate(session.scheduledEnd, "p")}
                             </span>
                         </div>
 

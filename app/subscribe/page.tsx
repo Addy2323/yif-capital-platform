@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
+import { getPricingPlans, type PricingPlan } from "@/lib/pricing-data"
 import {
     MOBILE_MONEY_PROVIDERS,
     CARD_PROVIDER,
@@ -28,45 +29,74 @@ import {
     Crown,
 } from "lucide-react"
 
-const PLANS = {
-    pro: {
-        name: "Pro",
-        price: 49000,
-        period: "month",
-        features: [
-            "Real-time market prices",
-            "Advanced interactive charts",
-            "Technical indicators (50+)",
-            "Stock screener",
-            "Unlimited watchlists",
-            "Portfolio tracking",
-            "Price alerts & notifications",
-            "All Academy courses",
-            "Priority support",
-        ],
-    },
-    institutional: {
-        name: "Institutional",
-        price: 299000,
-        period: "month",
-        features: [
-            "Everything in Pro",
-            "REST API access",
-            "Historical data downloads",
-            "Custom data feeds",
-            "Dedicated account manager",
-            "SLA guarantees",
-        ],
-    },
+// Default features for each plan (used as fallback)
+const DEFAULT_FEATURES = {
+    pro: [
+        "Real-time market prices",
+        "Advanced interactive charts",
+        "Technical indicators (50+)",
+        "Stock screener",
+        "Unlimited watchlists",
+        "Portfolio tracking",
+        "Price alerts & notifications",
+        "All Academy courses",
+        "Priority support",
+    ],
+    institutional: [
+        "Everything in Pro",
+        "REST API access",
+        "Historical data downloads",
+        "Custom data feeds",
+        "Dedicated account manager",
+        "SLA guarantees",
+    ],
+}
+
+interface PlanDisplay {
+    name: string
+    price: number
+    period: string
+    features: string[]
 }
 
 function SubscribeContent() {
     const searchParams = useSearchParams()
     const router = useRouter()
-    const { user, isLoading, updateUser } = useAuth()
+    const { user, isLoading, updateUser, refreshSession } = useAuth()
 
     const planKey = (searchParams.get("plan") as "pro" | "institutional") || "pro"
-    const plan = PLANS[planKey] || PLANS.pro
+
+    // State for dynamic pricing
+    const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([])
+
+    // Load pricing from localStorage on mount
+    useEffect(() => {
+        setPricingPlans(getPricingPlans())
+    }, [])
+
+    // Get the current plan with dynamic pricing
+    const getPlan = (): PlanDisplay => {
+        const pricingPlan = pricingPlans.find(p => p.id === planKey)
+        if (pricingPlan) {
+            return {
+                name: pricingPlan.name,
+                price: pricingPlan.price,
+                period: "month",
+                features: pricingPlan.features
+                    .filter(f => f.included)
+                    .map(f => f.name)
+            }
+        }
+        // Fallback to defaults if pricing not loaded yet
+        return {
+            name: planKey === "pro" ? "Pro" : "Institutional",
+            price: planKey === "pro" ? 49000 : 299000,
+            period: "month",
+            features: DEFAULT_FEATURES[planKey] || DEFAULT_FEATURES.pro
+        }
+    }
+
+    const plan = getPlan()
 
     const [step, setStep] = useState<"method" | "details" | "processing" | "success">("method")
     const [paymentType, setPaymentType] = useState<"mobile" | "card" | null>(null)
