@@ -119,6 +119,7 @@ export async function GET() {
 export async function PUT(req: NextRequest) {
     try {
         console.log("[PUT /api/pricing] Request received");
+        console.log("[PUT /api/pricing] Prisma available models:", Object.keys(prisma).filter(k => k[0] !== '_'));
 
         // Check admin auth
         const cookieStore = await cookies()
@@ -129,6 +130,11 @@ export async function PUT(req: NextRequest) {
             return NextResponse.json({ error: "Unauthorized: No user session" }, { status: 401 })
         }
 
+        console.log(`[PUT /api/pricing] Checking user ${userId}`);
+        if (!prisma.user) {
+            console.error("[PUT /api/pricing] CRITICAL: prisma.user is EQUAL TO", typeof prisma.user);
+        }
+
         const user = await prisma.user.findUnique({
             where: { id: userId },
             select: { role: true, name: true }
@@ -136,7 +142,7 @@ export async function PUT(req: NextRequest) {
 
         console.log(`[PUT /api/pricing] User lookup:`, user ? `${user.name} (${user.role})` : "Not found");
 
-        if (!user || (user.role !== "ADMIN" && (user.role as string).toUpperCase() !== "ADMIN")) {
+        if (!user || (user.role !== "ADMIN" && (user.role as string).toUpperCase() !== "ADMIN") && (user.role as string) !== "admin") {
             console.error(`[PUT /api/pricing] Forbidden: User ${userId} has role ${user?.role}`)
             return NextResponse.json({ error: "Forbidden: Admin access required" }, { status: 403 })
         }
@@ -152,6 +158,10 @@ export async function PUT(req: NextRequest) {
         }
 
         console.log(`[PUT /api/pricing] Updating plan ${planId} with:`, JSON.stringify(updates, null, 2));
+
+        if (!prisma.pricingPlan) {
+            console.error("[PUT /api/pricing] CRITICAL: prisma.pricingPlan is EQUAL TO", typeof prisma.pricingPlan);
+        }
 
         // Check if plan exists
         const existing = await prisma.pricingPlan.findUnique({
