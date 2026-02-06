@@ -4,9 +4,9 @@ import { cookies } from "next/headers";
 
 export async function POST(
     req: NextRequest,
-    { params }: { params: { sessionId: string } }
+    { params }: { params: Promise<{ sessionId: string }> }
 ) {
-    const sessionId = params.sessionId;
+    const { sessionId } = await params;
 
     // Get userId from cookies (secure)
     const cookieStore = await cookies();

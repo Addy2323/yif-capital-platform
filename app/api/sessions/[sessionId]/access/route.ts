@@ -10,9 +10,9 @@ const SUBDOMAIN_URL = process.env.NEXT_PUBLIC_SUBDOMAIN_URL || "https://meet.yif
  */
 export async function GET(
     req: NextRequest,
-    { params }: { params: { sessionId: string } }
+    { params }: { params: Promise<{ sessionId: string }> }
 ) {
-    const sessionId = params.sessionId;
+    const { sessionId } = await params;
 
     // Get userId from cookies
     const cookieStore = await cookies();
