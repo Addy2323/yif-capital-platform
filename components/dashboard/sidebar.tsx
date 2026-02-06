@@ -119,7 +119,7 @@ export function DashboardSidebar() {
   const { user, logout } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState<string[]>([])
-  const isPro = user?.subscription?.plan === "pro" || user?.subscription?.plan === "institutional"
+  const isPro = user?.subscription?.plan === "pro" || user?.subscription?.plan === "institutional" || user?.role === "admin"
 
   const toggleExpanded = (name: string) => {
     setExpandedItems((prev) =>

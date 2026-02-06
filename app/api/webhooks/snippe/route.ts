@@ -109,10 +109,19 @@ export async function POST(req: NextRequest) {
 
                 await EnrollmentService.createEnrollment(userId, courseId, payment.id);
 
-                await prisma.user.update({
+                // Fetch user to check current role
+                const user = await prisma.user.findUnique({
                     where: { id: userId },
-                    data: { role: (plan.toUpperCase() === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'PRO') as any },
+                    select: { role: true }
                 });
+
+                // Only update role if user is NOT an admin
+                if (user && user.role !== 'ADMIN') {
+                    await prisma.user.update({
+                        where: { id: userId },
+                        data: { role: (plan.toUpperCase() === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'PRO') as any },
+                    });
+                }
 
                 console.log(`Subscription payment successful for user ${userId}, plan ${plan}`);
             }
