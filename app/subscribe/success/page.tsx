@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
 import { formatCurrency } from "@/lib/payment-service"
+import { fetchPricingPlans, type PricingPlan, initialPlans } from "@/lib/pricing-data"
 import { Button } from "@/components/ui/button"
 import {
     Check,
@@ -21,11 +22,20 @@ import {
 function SuccessContent() {
     const { user } = useAuth()
     const [transaction, setTransaction] = useState<any>(null)
+    const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>(initialPlans)
 
     useEffect(() => {
-        // In the new DB-backed version, we would fetch the latest payment from our API
-        // For now, we'll just show the success state based on the user's updated role
-    }, [user])
+        fetchPricingPlans().then(setPricingPlans)
+    }, [])
+
+    // Get the price for the user's current plan
+    const getPlanPrice = () => {
+        const planKey = user?.subscription?.plan || "pro"
+        const plan = pricingPlans.find(p => p.id === planKey)
+        return plan?.price || (planKey === "pro" ? 49000 : 299000)
+    }
+
+    const planPrice = getPlanPrice()
 
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString("en-TZ", {
@@ -96,12 +106,12 @@ function SuccessContent() {
                             </div>
                             <div className="flex-1">
                                 <h3 className="font-semibold text-white">
-                                    {transaction?.plan === "pro" ? "Pro" : "Institutional"} Plan
+                                    {(user?.subscription?.plan || transaction?.plan || "pro").toUpperCase()} Plan
                                 </h3>
                                 <p className="text-sm text-white/60">Monthly subscription</p>
                             </div>
                             <div className="text-right">
-                                <p className="font-bold text-gold">TZS {formatCurrency(transaction?.amount || 49000)}</p>
+                                <p className="font-bold text-gold">TZS {formatCurrency(transaction?.amount || planPrice)}</p>
                                 <p className="text-sm text-white/60">/month</p>
                             </div>
                         </div>
@@ -149,7 +159,7 @@ function SuccessContent() {
                             <div className="flex items-center justify-between py-3">
                                 <span className="font-semibold text-white">Total Paid</span>
                                 <span className="text-xl font-bold text-gold">
-                                    TZS {formatCurrency(transaction?.amount || 49000)}
+                                    TZS {formatCurrency(transaction?.amount || planPrice)}
                                 </span>
                             </div>
                         </div>
@@ -189,7 +199,7 @@ function SuccessContent() {
                                     if (navigator.share) {
                                         navigator.share({
                                             title: "YIF Capital Payment Receipt",
-                                            text: `Payment of TZS ${formatCurrency(transaction?.amount || 49000)} for ${transaction?.plan} plan`,
+                                            text: `Payment of TZS ${formatCurrency(transaction?.amount || planPrice)} for ${user?.subscription?.plan || transaction?.plan || "pro"} plan`,
                                         })
                                     }
                                 }}

@@ -19,9 +19,11 @@ import { Button } from "@/components/ui/button"
 import {
     getAnalyticsData,
     getSubscriptionStats,
+    getAllUsers,
     type AnalyticsData,
     type SubscriptionStats
 } from "@/lib/admin-service"
+import { fetchPricingPlans } from "@/lib/pricing-data"
 import { formatCurrency } from "@/lib/payment-service"
 
 export default function AdminAnalyticsPage() {
@@ -29,8 +31,27 @@ export default function AdminAnalyticsPage() {
     const [stats, setStats] = useState<SubscriptionStats | null>(null)
 
     useEffect(() => {
-        setAnalytics(getAnalyticsData())
-        setStats(getSubscriptionStats())
+        const loadData = async () => {
+            const fetchedPlans = await fetchPricingPlans()
+            const allUsers = getAllUsers()
+
+            const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
+            const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
+            const proPrice = fetchedPlans.find(p => p.id === "pro")?.price || 49000
+            const institutionalPrice = fetchedPlans.find(p => p.id === "institutional")?.price || 299000
+
+            setStats({
+                totalUsers: allUsers.length,
+                freeUsers: allUsers.length - proUsers - institutionalUsers,
+                proUsers,
+                institutionalUsers,
+                monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
+                totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
+            })
+            setAnalytics(getAnalyticsData())
+        }
+
+        loadData()
     }, [])
 
     if (!analytics || !stats) return null

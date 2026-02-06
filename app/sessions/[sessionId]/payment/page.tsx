@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, CheckCircle2, Phone, Calendar, Clock, AlertCircle, ArrowLeft } from "lucide-react"
-import { useAuth } from "@/lib/auth-context"
+import { AuthProvider, useAuth } from "@/lib/auth-context"
 import { format } from "date-fns"
 
 // Safe date formatting helper
@@ -36,7 +36,7 @@ interface SessionDetails {
 
 type PaymentStep = "details" | "processing" | "success" | "error"
 
-export default function SessionPaymentPage() {
+function SessionPaymentContent() {
     const params = useParams()
     const router = useRouter()
     const { user, refreshSession } = useAuth()
@@ -100,16 +100,53 @@ export default function SessionPaymentPage() {
                 throw new Error(data.message || data.error || "Payment failed")
             }
 
-            // Wait for USSD push and webhook
-            // In production, you might poll for status or use WebSockets
-            await new Promise(r => setTimeout(r, 5000))
-            await refreshSession()
-            setStep("success")
+            const reference = data.reference;
+
+            if (reference) {
+                // Polling for status
+                const pollInterval = 3000; // 3 seconds
+                const maxAttempts = 40; // ~2 minutes
+                let attempts = 0;
+
+                const checkStatus = async () => {
+                    try {
+                        const res = await fetch(`/api/payments/status?reference=${reference}`);
+                        if (res.ok) {
+                            const statusData = await res.json();
+                            if (statusData.status === "success" || statusData.status === "completed") {
+                                await refreshSession();
+                                setStep("success");
+                                return true;
+                            } else if (statusData.status === "failed") {
+                                throw new Error("Payment was declined or failed. Please try again.");
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Polling error:", e);
+                        if (e instanceof Error && e.message.includes("failed")) {
+                            throw e;
+                        }
+                    }
+                    return false;
+                };
+
+                const intervalId = setInterval(async () => {
+                    attempts++;
+                    const isDone = await checkStatus();
+                    if (isDone || attempts >= maxAttempts) {
+                        clearInterval(intervalId);
+                        if (!isDone) {
+                            setError("Payment verification timed out. If you've paid, your access will be granted shortly.");
+                            setStep("details");
+                            setIsProcessing(false);
+                        }
+                    }
+                }, pollInterval);
+            }
 
         } catch (err) {
             setError(err instanceof Error ? err.message : "Payment failed. Please try again.")
             setStep("error")
-        } finally {
             setIsProcessing(false)
         }
     }
@@ -307,5 +344,13 @@ export default function SessionPaymentPage() {
                 )}
             </div>
         </div>
+    )
+}
+
+export default function SessionPaymentPage() {
+    return (
+        <AuthProvider>
+            <SessionPaymentContent />
+        </AuthProvider>
     )
 }

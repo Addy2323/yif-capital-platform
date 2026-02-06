@@ -29,11 +29,9 @@ import {
     getAllUsers,
     exportToCSV,
     type SubscriptionStats,
-    getSubscriptionPlans,
-    updateSubscriptionPlan,
     updateUser,
-    type SubscriptionPlan
 } from "@/lib/admin-service"
+import { fetchPricingPlans, updatePricingPlanAPI, type PricingPlan as SubscriptionPlan, initialPlans } from "@/lib/pricing-data"
 import { formatCurrency } from "@/lib/payment-service"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -59,7 +57,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 export default function AdminSubscriptionsPage() {
     const [stats, setStats] = useState<SubscriptionStats | null>(null)
     const [users, setUsers] = useState<any[]>([])
-    const [plans, setPlans] = useState<SubscriptionPlan[]>([])
+    const [plans, setPlans] = useState<SubscriptionPlan[]>(initialPlans)
     const [searchQuery, setSearchQuery] = useState("")
     const [planFilter, setPlanFilter] = useState("all")
 
@@ -80,10 +78,28 @@ export default function AdminSubscriptionsPage() {
         features: { name: string; included: boolean }[];
     } | null>(null)
 
-    const fetchData = () => {
-        setStats(getSubscriptionStats())
-        setUsers(getAllUsers().filter(u => u.subscription?.plan && u.subscription.plan !== "free"))
-        setPlans(getSubscriptionPlans())
+    const fetchData = async () => {
+        const fetchedPlans = await fetchPricingPlans()
+        setPlans(fetchedPlans)
+
+        // Calculate stats manually using fetched plans to ensure correctness
+        const allUsers = getAllUsers()
+        const subscribedUsers = allUsers.filter(u => u.subscription?.plan && u.subscription.plan !== "free")
+        setUsers(subscribedUsers)
+
+        const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
+        const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
+        const proPrice = fetchedPlans.find(p => p.id === "pro")?.price || 49000
+        const institutionalPrice = fetchedPlans.find(p => p.id === "institutional")?.price || 299000
+
+        setStats({
+            totalUsers: allUsers.length,
+            freeUsers: allUsers.length - proUsers - institutionalUsers,
+            proUsers,
+            institutionalUsers,
+            monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
+            totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
+        })
     }
 
     useEffect(() => {
@@ -101,13 +117,16 @@ export default function AdminSubscriptionsPage() {
     })
 
     const handleExport = () => {
+        const proPrice = plans.find(p => p.id === "pro")?.price || 49000
+        const institutionalPrice = plans.find(p => p.id === "institutional")?.price || 299000
+
         const data = users.map(u => ({
             name: u.name,
             email: u.email,
             plan: u.subscription?.plan,
             status: u.subscription?.status,
             expiresAt: u.subscription?.expiresAt,
-            revenue: u.subscription?.plan === "pro" ? 49000 : 299000
+            revenue: u.subscription?.plan === "pro" ? proPrice : institutionalPrice
         }))
         exportToCSV(data, "subscriptions_export")
     }
@@ -132,9 +151,9 @@ export default function AdminSubscriptionsPage() {
         }
     }
 
-    const handleUpdatePlan = () => {
+    const handleUpdatePlan = async () => {
         if (!editingPlan || !planForm) return
-        const success = updateSubscriptionPlan(editingPlan.id, planForm)
+        const success = await updatePricingPlanAPI(editingPlan.id, planForm)
         if (success) {
             toast.success("Plan updated successfully")
             setEditingPlan(null)

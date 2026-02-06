@@ -21,41 +21,58 @@ import Link from "next/link"
 import {
     PricingPlan,
     PricingFeature,
-    getPricingPlans,
-    savePricingPlans
+    fetchPricingPlans,
+    updatePricingPlanAPI,
+    initialPlans
 } from "@/lib/pricing-data"
 
 export default function AdminPricingPage() {
-    const [plans, setPlans] = useState<PricingPlan[]>([])
+    const [plans, setPlans] = useState<PricingPlan[]>(initialPlans)
     const [editingId, setEditingId] = useState<string | null>(null)
     const [editForm, setEditForm] = useState<PricingPlan | null>(null)
+    const [isSaving, setIsSaving] = useState(false)
 
     useEffect(() => {
-        setPlans(getPricingPlans())
+        fetchPricingPlans().then(setPlans)
     }, [])
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (!editForm) return
 
-        let newPlans: PricingPlan[]
-        if (editingId === "new") {
-            newPlans = [...plans, { ...editForm, id: Date.now().toString() }]
-        } else {
-            newPlans = plans.map(p => p.id === editingId ? editForm : p)
-        }
+        setIsSaving(true)
+        try {
+            // Update via API
+            const success = await updatePricingPlanAPI(editForm.id, {
+                name: editForm.name,
+                price: Number(editForm.price),
+                period: editForm.period,
+                description: editForm.description,
+                features: editForm.features,
+                cta: editForm.cta,
+                href: editForm.href,
+                popular: editForm.popular
+            })
 
-        setPlans(newPlans)
-        savePricingPlans(newPlans)
-        setEditingId(null)
-        setEditForm(null)
+            if (success) {
+                // Refresh plans from API
+                const updatedPlans = await fetchPricingPlans()
+                setPlans(updatedPlans)
+            } else {
+                alert("Failed to save changes")
+            }
+        } catch (error) {
+            alert("Failed to save changes")
+        } finally {
+            setIsSaving(false)
+            setEditingId(null)
+            setEditForm(null)
+        }
     }
 
     const handleDelete = (id: string) => {
-        if (confirm("Are you sure you want to delete this plan?")) {
-            const newPlans = plans.filter(p => p.id !== id)
-            setPlans(newPlans)
-            savePricingPlans(newPlans)
-        }
+        // Note: Delete functionality would need a separate API endpoint
+        // For now, just show a message
+        alert("Deleting plans is not supported. Contact developer.")
     }
 
     const startEdit = (plan: PricingPlan) => {
@@ -68,7 +85,8 @@ export default function AdminPricingPage() {
         setEditForm({
             id: "new",
             name: "",
-            price: "",
+            price: 0,
+            currency: "TZS",
             description: "",
             features: [],
             cta: "Get Started",
@@ -182,8 +200,9 @@ export default function AdminPricingPage() {
                                 <div className="space-y-2">
                                     <Label className="text-white">Price (TZS)</Label>
                                     <Input
+                                        type="number"
                                         value={editForm.price}
-                                        onChange={e => setEditForm({ ...editForm, price: e.target.value })}
+                                        onChange={e => setEditForm({ ...editForm, price: Number(e.target.value) || 0 })}
                                         className="bg-white/5 border-white/10 text-white"
                                     />
                                 </div>

@@ -16,8 +16,7 @@ export interface PricingPlan {
   popular: boolean
 }
 
-export const PRICING_KEY = "yif_pricing_plans"
-
+// Initial plans used for seeding and as fallback if API fails
 export const initialPlans: PricingPlan[] = [
   {
     id: "free",
@@ -88,35 +87,28 @@ export const initialPlans: PricingPlan[] = [
   },
 ]
 
-export function getPricingPlans(): PricingPlan[] {
-  if (typeof window === "undefined") return initialPlans
-
-  const stored = localStorage.getItem(PRICING_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored)
-    } catch {
-      return initialPlans
-    }
-  }
-  return initialPlans
-}
-
-export function savePricingPlans(plans: PricingPlan[]) {
-  if (typeof window !== "undefined") {
-    localStorage.setItem(PRICING_KEY, JSON.stringify(plans))
-  }
-}
-
-export function updatePricingPlan(id: string, updates: Partial<PricingPlan>): boolean {
-  if (typeof window === "undefined") return false
+// Fetch pricing from API (database-backed)
+export async function fetchPricingPlans(): Promise<PricingPlan[]> {
   try {
-    const plans = getPricingPlans()
-    const index = plans.findIndex(p => p.id === id)
-    if (index === -1) return false
-    plans[index] = { ...plans[index], ...updates }
-    savePricingPlans(plans)
-    return true
+    const res = await fetch("/api/pricing")
+    if (res.ok) {
+      return await res.json()
+    }
+    return initialPlans
+  } catch {
+    return initialPlans
+  }
+}
+
+// Update pricing via API (admin only)
+export async function updatePricingPlanAPI(planId: string, updates: Partial<PricingPlan>): Promise<boolean> {
+  try {
+    const res = await fetch("/api/pricing", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ planId, ...updates })
+    })
+    return res.ok
   } catch {
     return false
   }

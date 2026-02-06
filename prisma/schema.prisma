@@ -134,3 +134,19 @@ model Payment {
 
   @@index([sessionId])
 }
+
+model PricingPlan {
+  id          String   @id @default(uuid())
+  planId      String   @unique  // "free", "pro", "institutional"
+  name        String
+  price       Float
+  currency    String   @default("TZS")
+  period      String?
+  description String
+  features    Json     // Array of {name: string, included: boolean}
+  cta         String
+  href        String
+  popular     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -2,14 +2,14 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Check, X } from "lucide-react"
-import { getPricingPlans, PricingPlan } from "@/lib/pricing-data"
+import { fetchPricingPlans, PricingPlan, initialPlans } from "@/lib/pricing-data"
 import { ScrollAnimation } from "@/components/ui/scroll-animation"
 
 export function PricingSection() {
-  const [plans, setPlans] = useState<PricingPlan[]>([])
+  const [plans, setPlans] = useState<PricingPlan[]>(initialPlans)
 
   useEffect(() => {
-    setPlans(getPricingPlans())
+    fetchPricingPlans().then(setPlans)
   }, [])
 
   if (plans.length === 0) return null

@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
-import { getPricingPlans, type PricingPlan } from "@/lib/pricing-data"
+import { fetchPricingPlans, type PricingPlan, initialPlans } from "@/lib/pricing-data"
 import {
     MOBILE_MONEY_PROVIDERS,
     CARD_PROVIDER,
@@ -66,12 +66,12 @@ function SubscribeContent() {
 
     const planKey = (searchParams.get("plan") as "pro" | "institutional") || "pro"
 
-    // State for dynamic pricing
-    const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([])
+    // State for dynamic pricing from database
+    const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>(initialPlans)
 
-    // Load pricing from localStorage on mount
+    // Load pricing from API on mount
     useEffect(() => {
-        setPricingPlans(getPricingPlans())
+        fetchPricingPlans().then(setPricingPlans)
     }, [])
 
     // Get the current plan with dynamic pricing
@@ -124,23 +124,64 @@ function SubscribeContent() {
         setStep("processing")
 
         try {
+            let reference = ""
             if (paymentType === "mobile" && selectedProvider) {
-                await processMobileMoneyPayment(phone, plan.price, selectedProvider, planKey)
-                // For mobile money, we stay in processing and could poll the session
-                // For simulation, we'll just show success after a delay
-                await new Promise(r => setTimeout(r, 5000));
-                await refreshSession();
-                setStep("success");
+                const result = await processMobileMoneyPayment(phone, plan.price, selectedProvider, planKey)
+                reference = result.reference
             } else if (paymentType === "card") {
-                await processCardPayment(cardNumber.replace(/\s/g, ""), plan.price, planKey);
+                const result = await processCardPayment(cardNumber.replace(/\s/g, ""), plan.price, planKey);
+                reference = result.paymentId // The card simulation returns paymentId as reference
+                // For cards specifically in the simulation, it's already successful
                 await refreshSession();
                 setStep("success");
+                return;
+            }
+
+            if (reference) {
+                // Polling for status
+                const pollInterval = 3000; // 3 seconds
+                const maxAttempts = 40; // ~2 minutes
+                let attempts = 0;
+
+                const checkStatus = async () => {
+                    try {
+                        const res = await fetch(`/api/payments/status?reference=${reference}`);
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (data.status === "success" || data.status === "completed") {
+                                await refreshSession();
+                                setStep("success");
+                                return true;
+                            } else if (data.status === "failed") {
+                                throw new Error("Payment was declined or failed. Please try again.");
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Polling error:", e);
+                        if (e instanceof Error && e.message.includes("failed")) {
+                            throw e;
+                        }
+                    }
+                    return false;
+                };
+
+                const intervalId = setInterval(async () => {
+                    attempts++;
+                    const isDone = await checkStatus();
+                    if (isDone || attempts >= maxAttempts) {
+                        clearInterval(intervalId);
+                        if (!isDone) {
+                            setError("Payment verification timed out. If you've paid, your account will be updated shortly.");
+                            setStep("details");
+                            setIsProcessing(false);
+                        }
+                    }
+                }, pollInterval);
             }
 
         } catch (err) {
             setError(err instanceof Error ? err.message : "Payment failed. Please try again.")
             setStep("details")
-        } finally {
             setIsProcessing(false)
         }
     }

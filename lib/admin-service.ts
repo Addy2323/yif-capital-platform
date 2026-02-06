@@ -4,9 +4,6 @@ import { User } from "@/lib/auth-context"
 
 import {
     type PricingPlan,
-    getPricingPlans,
-    updatePricingPlan,
-    PRICING_KEY
 } from "@/lib/pricing-data"
 
 // Storage keys
@@ -145,26 +142,19 @@ export function createUser(userData: { name: string; email: string; password: st
     }
 }
 
-// Subscription Plans
-export function getSubscriptionPlans(): PricingPlan[] {
-    return getPricingPlans()
-}
-
-export function updateSubscriptionPlan(id: string, updates: Partial<PricingPlan>): boolean {
-    return updatePricingPlan(id, updates)
-}
+// Subscription Stats are now calculated in the components using the pricing API
+// This function is kept for basic user stats but pricing parts are mostly mock/fallback now.
 
 
 // Subscription Stats
 export function getSubscriptionStats(): SubscriptionStats {
     const users = getAllUsers()
-    const plans = getSubscriptionPlans()
     const freeUsers = users.filter((u) => u.subscription?.plan === "free" || !u.subscription).length
     const proUsers = users.filter((u) => u.subscription?.plan === "pro").length
     const institutionalUsers = users.filter((u) => u.subscription?.plan === "institutional").length
 
-    const proPrice = plans.find(p => p.id === "pro")?.price || 49000
-    const institutionalPrice = plans.find(p => p.id === "institutional")?.price || 299000
+    const proPrice = 49000
+    const institutionalPrice = 299000
 
     return {
         totalUsers: users.length,

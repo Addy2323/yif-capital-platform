@@ -17,9 +17,11 @@ import {
     getSubscriptionStats,
     getAnalyticsData,
     exportUsersToCSV,
+    getAllUsers,
     type SubscriptionStats,
     type AnalyticsData
 } from "@/lib/admin-service"
+import { fetchPricingPlans } from "@/lib/pricing-data"
 import { formatCurrency } from "@/lib/payment-service"
 
 export default function AdminDashboardPage() {
@@ -27,8 +29,27 @@ export default function AdminDashboardPage() {
     const [analytics, setAnalytics] = useState<AnalyticsData | null>(null)
 
     useEffect(() => {
-        setStats(getSubscriptionStats())
-        setAnalytics(getAnalyticsData())
+        const loadStats = async () => {
+            const fetchedPlans = await fetchPricingPlans()
+            const allUsers = getAllUsers()
+
+            const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
+            const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
+            const proPrice = fetchedPlans.find(p => p.id === "pro")?.price || 49000
+            const institutionalPrice = fetchedPlans.find(p => p.id === "institutional")?.price || 299000
+
+            setStats({
+                totalUsers: allUsers.length,
+                freeUsers: allUsers.length - proUsers - institutionalUsers,
+                proUsers,
+                institutionalUsers,
+                monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
+                totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
+            })
+            setAnalytics(getAnalyticsData())
+        }
+
+        loadStats()
     }, [])
 
     if (!stats || !analytics) return null
