@@ -4,6 +4,11 @@ import { prisma } from "@/lib/prisma";
 export async function GET(req: NextRequest) {
     try {
         const sessions = await prisma.liveSession.findMany({
+            include: {
+                _count: {
+                    select: { payments: true }
+                }
+            },
             orderBy: { scheduledStart: "desc" }
         });
         return NextResponse.json(sessions);

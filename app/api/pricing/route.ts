@@ -120,14 +120,20 @@ export async function PUT(req: NextRequest) {
     try {
         // Check admin auth
         const cookieStore = await cookies()
-        const sessionCookie = cookieStore.get("session")
+        const userId = cookieStore.get("user_id")?.value
 
-        if (!sessionCookie) {
+        if (!userId) {
+            console.error("[PUT /api/pricing] Unauthorized: No user_id cookie found")
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
         }
 
-        const session = JSON.parse(sessionCookie.value)
-        if (session.role !== "ADMIN" && session.role !== "admin") {
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { role: true }
+        })
+
+        if (!user || (user.role !== "ADMIN" && (user.role as string).toUpperCase() !== "ADMIN")) {
+            console.error(`[PUT /api/pricing] Forbidden: User ${userId} has role ${user?.role}`)
             return NextResponse.json({ error: "Forbidden" }, { status: 403 })
         }
 

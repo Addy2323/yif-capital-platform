@@ -50,6 +50,9 @@ interface LiveSession {
     price: number
     currency: string
     isFree: boolean
+    _count?: {
+        payments: number
+    }
 }
 
 export default function AdminSessionsPage() {
@@ -140,6 +143,7 @@ export default function AdminSessionsPage() {
         if (!editingSession) return
 
         toast.loading("Updating session...", { id: "session-action" })
+        console.log("Saving updated session data:", formData)
 
         try {
             const res = await fetch(`/api/admin/sessions/${editingSession.id}`, {
@@ -150,14 +154,18 @@ export default function AdminSessionsPage() {
 
             if (res.ok) {
                 const updatedSession = await res.json()
+                console.log("Updated session response:", updatedSession)
                 setSessions(sessions.map(s => s.id === updatedSession.id ? updatedSession : s))
                 setIsAddingSession(false)
                 resetForm()
                 toast.success("Live session updated!", { id: "session-action" })
             } else {
-                toast.error("Failed to update session", { id: "session-action" })
+                const err = await res.json()
+                console.error("Update failed:", err)
+                toast.error(`Update failed: ${err.error || 'Server error'}`, { id: "session-action" })
             }
         } catch (error) {
+            console.error("Network error during update:", error)
             toast.error("Network error", { id: "session-action" })
         }
     }
@@ -187,13 +195,16 @@ export default function AdminSessionsPage() {
 
     const openEditModal = (session: LiveSession) => {
         setEditingSession(session)
+        const start = session.scheduledStart ? new Date(session.scheduledStart) : new Date()
+        const end = session.scheduledEnd ? new Date(session.scheduledEnd) : new Date()
+
         setFormData({
             title: session.title,
             description: session.description || "",
             courseId: session.courseId,
             meetingUrl: session.meetingUrl || "",
-            scheduledStart: new Date(session.scheduledStart).toISOString().slice(0, 16),
-            scheduledEnd: new Date(session.scheduledEnd).toISOString().slice(0, 16),
+            scheduledStart: start.toISOString().slice(0, 16),
+            scheduledEnd: end.toISOString().slice(0, 16),
             price: session.price,
             currency: session.currency,
             isFree: session.isFree,
@@ -283,7 +294,7 @@ export default function AdminSessionsPage() {
                                         <td className="px-4 py-4">
                                             <div className="flex items-center gap-1.5 text-xs">
                                                 <Users className="h-3.5 w-3.5 text-muted-foreground" />
-                                                <span>0 Enrolled</span>
+                                                <span>{session._count?.payments || 0} Enrolled</span>
                                             </div>
                                         </td>
                                         <td className="px-4 py-4 text-right">

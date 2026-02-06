@@ -9,15 +9,26 @@ export async function PATCH(
         const { id } = await params;
         const body = await req.json();
 
+        console.log(`[PATCH /api/admin/sessions/${id}] Received body:`, JSON.stringify(body, null, 2));
+
         const scheduledStart = body.scheduledStart ? new Date(body.scheduledStart) : undefined;
         const scheduledEnd = body.scheduledEnd ? new Date(body.scheduledEnd) : undefined;
 
         if (scheduledStart && isNaN(scheduledStart.getTime())) {
+            console.error("Invalid scheduledStart:", body.scheduledStart);
             return NextResponse.json({ error: "Invalid start date format" }, { status: 400 });
         }
         if (scheduledEnd && isNaN(scheduledEnd.getTime())) {
+            console.error("Invalid scheduledEnd:", body.scheduledEnd);
             return NextResponse.json({ error: "Invalid end date format" }, { status: 400 });
         }
+
+        console.log("Updating session with data:", {
+            title: body.title,
+            scheduledStart: scheduledStart?.toISOString(),
+            scheduledEnd: scheduledEnd?.toISOString(),
+            status: body.status
+        });
 
         const session = await prisma.liveSession.update({
             where: { id },
@@ -35,6 +46,7 @@ export async function PATCH(
             }
         });
 
+        console.log("Session updated successfully:", session.id);
         return NextResponse.json(session);
     } catch (error) {
         console.error("Failed to update session:", error);
