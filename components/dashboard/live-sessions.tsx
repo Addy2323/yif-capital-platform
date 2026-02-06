@@ -23,6 +23,7 @@ interface Session {
     price: number
     currency: string
     isFree: boolean
+    hasAccess?: boolean
 }
 
 export function LiveSessionsDashboard({ courseId }: { courseId?: string }) {
@@ -66,8 +67,8 @@ export function LiveSessionsDashboard({ courseId }: { courseId?: string }) {
             return
         }
 
-        // For paid sessions, redirect to session-specific payment page
-        if (!session.isFree) {
+        // For paid sessions, redirect to payment page if no access
+        if (!session.isFree && !session.hasAccess) {
             router.push(`/sessions/${sessionId}/payment`)
             return
         }
@@ -242,6 +243,9 @@ function SessionItem({
                 ) : (
                     <Badge variant="outline">SCHEDULED</Badge>
                 )}
+                {session.hasAccess && !session.isFree && !isPast && (
+                    <Badge className="bg-green-500 hover:bg-green-600 text-white border-none">ACTIVATED</Badge>
+                )}
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
@@ -264,10 +268,15 @@ function SessionItem({
             {!isPast && (
                 <Button
                     onClick={onJoin}
-                    disabled={!isLive && session.isFree}
-                    className={`w-full ${isLive || !session.isFree ? 'bg-gold text-navy hover:bg-gold/90' : 'bg-muted'}`}
+                    disabled={!isLive && session.isFree && !session.hasAccess}
+                    className={`w-full ${isLive || !session.isFree || session.hasAccess ? 'bg-gold text-navy hover:bg-gold/90' : 'bg-muted'}`}
                 >
-                    {isLive ? (
+                    {session.hasAccess && !session.isFree ? (
+                        <>
+                            {isActuallyLive ? "Join Live Session Now" : "Join Session (Reserved)"}
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                        </>
+                    ) : isLive ? (
                         <>
                             Click to Go Live
                             <ExternalLink className="ml-2 h-4 w-4" />
