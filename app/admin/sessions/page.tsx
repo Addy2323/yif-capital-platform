@@ -55,6 +55,9 @@ interface LiveSession {
 export default function AdminSessionsPage() {
     const [sessions, setSessions] = useState<LiveSession[]>([])
     const [isAddingSession, setIsAddingSession] = useState(false)
+    const [isDeletingSession, setIsDeletingSession] = useState(false)
+    const [sessionToDelete, setSessionToDelete] = useState<string | null>(null)
+    const [editingSession, setEditingSession] = useState<LiveSession | null>(null)
     const [searchQuery, setSearchQuery] = useState("")
     const [isLoading, setIsLoading] = useState(true)
 
@@ -69,6 +72,7 @@ export default function AdminSessionsPage() {
         price: 0,
         currency: "TZS",
         isFree: true,
+        status: "scheduled" as "scheduled" | "live" | "ended" | "cancelled"
     })
 
     useEffect(() => {
@@ -90,9 +94,25 @@ export default function AdminSessionsPage() {
         }
     }
 
+    const resetForm = () => {
+        setFormData({
+            title: "",
+            description: "",
+            courseId: "",
+            meetingUrl: "",
+            scheduledStart: "",
+            scheduledEnd: "",
+            price: 0,
+            currency: "TZS",
+            isFree: true,
+            status: "scheduled"
+        })
+        setEditingSession(null)
+    }
+
     const handleCreateSession = async (e: React.FormEvent) => {
         e.preventDefault()
-        toast.loading("Creating session...", { id: "create-session" })
+        toast.loading("Creating session...", { id: "session-action" })
 
         try {
             const res = await fetch('/api/admin/sessions', {
@@ -105,24 +125,81 @@ export default function AdminSessionsPage() {
                 const newSession = await res.json()
                 setSessions([newSession, ...sessions])
                 setIsAddingSession(false)
-                setFormData({
-                    title: "",
-                    description: "",
-                    courseId: "",
-                    meetingUrl: "",
-                    scheduledStart: "",
-                    scheduledEnd: "",
-                    price: 0,
-                    currency: "TZS",
-                    isFree: true,
-                })
-                toast.success("Live session scheduled and secured!", { id: "create-session" })
+                resetForm()
+                toast.success("Live session scheduled and secured!", { id: "session-action" })
             } else {
-                toast.error("Failed to create session", { id: "create-session" })
+                toast.error("Failed to create session", { id: "session-action" })
             }
         } catch (error) {
-            toast.error("Network error", { id: "create-session" })
+            toast.error("Network error", { id: "session-action" })
         }
+    }
+
+    const handleUpdateSession = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!editingSession) return
+
+        toast.loading("Updating session...", { id: "session-action" })
+
+        try {
+            const res = await fetch(`/api/admin/sessions/${editingSession.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+
+            if (res.ok) {
+                const updatedSession = await res.json()
+                setSessions(sessions.map(s => s.id === updatedSession.id ? updatedSession : s))
+                setIsAddingSession(false)
+                resetForm()
+                toast.success("Live session updated!", { id: "session-action" })
+            } else {
+                toast.error("Failed to update session", { id: "session-action" })
+            }
+        } catch (error) {
+            toast.error("Network error", { id: "session-action" })
+        }
+    }
+
+    const handleDeleteSession = async () => {
+        if (!sessionToDelete) return
+
+        toast.loading("Deleting session...", { id: "delete-session" })
+
+        try {
+            const res = await fetch(`/api/admin/sessions/${sessionToDelete}`, {
+                method: 'DELETE'
+            })
+
+            if (res.ok) {
+                setSessions(sessions.filter(s => s.id !== sessionToDelete))
+                setIsDeletingSession(false)
+                setSessionToDelete(null)
+                toast.success("Session deleted successfully", { id: "delete-session" })
+            } else {
+                toast.error("Failed to delete session", { id: "delete-session" })
+            }
+        } catch (error) {
+            toast.error("Network error", { id: "delete-session" })
+        }
+    }
+
+    const openEditModal = (session: LiveSession) => {
+        setEditingSession(session)
+        setFormData({
+            title: session.title,
+            description: session.description || "",
+            courseId: session.courseId,
+            meetingUrl: session.meetingUrl || "",
+            scheduledStart: new Date(session.scheduledStart).toISOString().slice(0, 16),
+            scheduledEnd: new Date(session.scheduledEnd).toISOString().slice(0, 16),
+            price: session.price,
+            currency: session.currency,
+            isFree: session.isFree,
+            status: session.status
+        })
+        setIsAddingSession(true)
     }
 
     const filteredSessions = sessions.filter(s =>
@@ -137,7 +214,7 @@ export default function AdminSessionsPage() {
                     <h1 className="text-2xl font-bold">Live Session Management</h1>
                     <p className="text-muted-foreground">Schedule and manage secure live classes.</p>
                 </div>
-                <Button onClick={() => setIsAddingSession(true)} className="bg-gold text-navy hover:bg-gold/90">
+                <Button onClick={() => { resetForm(); setIsAddingSession(true) }} className="bg-gold text-navy hover:bg-gold/90">
                     <Plus className="mr-2 h-4 w-4" />
                     Schedule Session
                 </Button>
@@ -217,7 +294,7 @@ export default function AdminSessionsPage() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
-                                                    <DropdownMenuItem className="cursor-pointer">
+                                                    <DropdownMenuItem className="cursor-pointer" onClick={() => openEditModal(session)}>
                                                         <Edit2 className="mr-2 h-4 w-4" />
                                                         Edit Session
                                                     </DropdownMenuItem>
@@ -229,7 +306,13 @@ export default function AdminSessionsPage() {
                                                         <ShieldAlert className="mr-2 h-4 w-4 text-gold" />
                                                         View Access logs
                                                     </DropdownMenuItem>
-                                                    <DropdownMenuItem className="cursor-pointer text-error">
+                                                    <DropdownMenuItem
+                                                        className="cursor-pointer text-error"
+                                                        onClick={() => {
+                                                            setSessionToDelete(session.id)
+                                                            setIsDeletingSession(true)
+                                                        }}
+                                                    >
                                                         <Trash2 className="mr-2 h-4 w-4" />
                                                         Delete
                                                     </DropdownMenuItem>
@@ -244,16 +327,23 @@ export default function AdminSessionsPage() {
                 </CardContent>
             </Card>
 
-            {/* Add Session Dialog */}
-            <Dialog open={isAddingSession} onOpenChange={setIsAddingSession}>
+            {/* Add/Edit Session Dialog */}
+            <Dialog open={isAddingSession} onOpenChange={(open) => {
+                if (!open) {
+                    setIsAddingSession(false)
+                    resetForm()
+                } else {
+                    setIsAddingSession(true)
+                }
+            }}>
                 <DialogContent className="max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>Schedule Secure Live Session</DialogTitle>
+                        <DialogTitle>{editingSession ? "Edit Secure Live Session" : "Schedule Secure Live Session"}</DialogTitle>
                         <DialogDescription>
                             This session will be protected by payment-verified enrollment and single-use tokens.
                         </DialogDescription>
                     </DialogHeader>
-                    <form onSubmit={handleCreateSession} className="space-y-4">
+                    <form onSubmit={editingSession ? handleUpdateSession : handleCreateSession} className="space-y-4">
                         <div className="grid gap-4 md:grid-cols-2">
                             <div className="space-y-2">
                                 <Label htmlFor="title">Session Title</Label>
@@ -375,11 +465,46 @@ export default function AdminSessionsPage() {
                             </div>
                         </div>
 
+                        {editingSession && (
+                            <div className="space-y-2">
+                                <Label htmlFor="status">Session Status</Label>
+                                <select
+                                    id="status"
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                    value={formData.status}
+                                    onChange={e => setFormData({ ...formData, status: e.target.value as any })}
+                                >
+                                    <option value="scheduled">Scheduled</option>
+                                    <option value="live">Live Now</option>
+                                    <option value="ended">Ended</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        )}
+
                         <DialogFooter>
-                            <Button type="button" variant="outline" onClick={() => setIsAddingSession(false)}>Cancel</Button>
-                            <Button type="submit" className="bg-gold text-navy hover:bg-gold/90">Create & Secure Session</Button>
+                            <Button type="button" variant="outline" onClick={() => { setIsAddingSession(false); resetForm() }}>Cancel</Button>
+                            <Button type="submit" className="bg-gold text-navy hover:bg-gold/90">
+                                {editingSession ? "Update Session" : "Create & Secure Session"}
+                            </Button>
                         </DialogFooter>
                     </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Confirmation Dialog */}
+            <Dialog open={isDeletingSession} onOpenChange={setIsDeletingSession}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Delete Session</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to delete this session? This action cannot be undone.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setIsDeletingSession(false)}>Cancel</Button>
+                        <Button variant="destructive" onClick={handleDeleteSession}>Delete Permanently</Button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </div>
