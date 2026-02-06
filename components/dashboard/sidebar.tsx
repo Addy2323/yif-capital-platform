@@ -258,7 +258,7 @@ export function DashboardSidebar() {
 
       {/* Bottom Navigation */}
       <div className="border-t border-sidebar-border p-3 space-y-1">
-        {user?.role === "admin" && adminNav.map((item) => {
+        {(user?.role?.toLowerCase() === "admin") && adminNav.map((item) => {
           const isActive = pathname.startsWith(item.href!)
 
           return (

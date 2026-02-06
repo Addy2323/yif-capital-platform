@@ -40,10 +40,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await fetch("/api/auth/session")
       const data = await res.json()
       if (data.user) {
+        const userRole = data.user.role.toLowerCase() as UserRole
         setUser({
           ...data.user,
+          role: userRole,
           subscription: {
-            plan: data.user.role as "free" | "pro" | "institutional",
+            plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
             status: "active"
           }
         })
@@ -74,10 +76,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { success: false, error: data.error || "Login failed" }
       }
 
+      const userRole = data.role.toLowerCase() as UserRole
       setUser({
         ...data,
+        role: userRole,
         subscription: {
-          plan: data.role as "free" | "pro" | "institutional",
+          plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
           status: "active"
         }
       })
@@ -129,9 +133,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const upgradeSubscription = (plan: "pro" | "institutional") => {
     if (!user) return
+
+    // Don't downgrade an admin to pro/institutional role-wise, 
+    // just update their subscription status
+    const newRole = user.role === "admin" ? "admin" : plan
+
     setUser({
       ...user,
-      role: plan,
+      role: newRole,
       subscription: {
         plan,
         status: "active",
