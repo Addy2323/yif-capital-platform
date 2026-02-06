@@ -153,14 +153,29 @@ export default function AdminSubscriptionsPage() {
 
     const handleUpdatePlan = async () => {
         if (!editingPlan || !planForm) return
-        const success = await updatePricingPlanAPI(editingPlan.id, planForm)
-        if (success) {
-            toast.success("Plan updated successfully")
-            setEditingPlan(null)
-            setPlanForm(null)
-            fetchData()
-        } else {
-            toast.error("Failed to update plan")
+
+        toast.loading("Updating plan...", { id: "plan-update" })
+
+        try {
+            const res = await fetch("/api/pricing", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ planId: editingPlan.id, ...planForm })
+            })
+
+            if (res.ok) {
+                toast.success("Plan updated successfully", { id: "plan-update" })
+                setEditingPlan(null)
+                setPlanForm(null)
+                fetchData()
+            } else {
+                const err = await res.json()
+                console.error("Plan update failed:", err)
+                toast.error(`Update failed: ${err.error || 'Server error'}. ${err.details || ''}`, { id: "plan-update" })
+            }
+        } catch (error: any) {
+            console.error("Network error updating plan:", error)
+            toast.error("Network error: " + error.message, { id: "plan-update" })
         }
     }
 

@@ -118,36 +118,57 @@ export async function GET() {
 // PUT: Update a pricing plan (admin only)
 export async function PUT(req: NextRequest) {
     try {
+        console.log("[PUT /api/pricing] Request received");
+
         // Check admin auth
         const cookieStore = await cookies()
         const userId = cookieStore.get("user_id")?.value
 
         if (!userId) {
             console.error("[PUT /api/pricing] Unauthorized: No user_id cookie found")
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+            return NextResponse.json({ error: "Unauthorized: No user session" }, { status: 401 })
         }
 
         const user = await prisma.user.findUnique({
             where: { id: userId },
-            select: { role: true }
+            select: { role: true, name: true }
         })
+
+        console.log(`[PUT /api/pricing] User lookup:`, user ? `${user.name} (${user.role})` : "Not found");
 
         if (!user || (user.role !== "ADMIN" && (user.role as string).toUpperCase() !== "ADMIN")) {
             console.error(`[PUT /api/pricing] Forbidden: User ${userId} has role ${user?.role}`)
-            return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+            return NextResponse.json({ error: "Forbidden: Admin access required" }, { status: 403 })
         }
 
         const body = await req.json()
+        console.log(`[PUT /api/pricing] Body:`, JSON.stringify(body, null, 2));
+
         const { planId, ...updates } = body
 
         if (!planId) {
+            console.error("[PUT /api/pricing] Missing planId");
             return NextResponse.json({ error: "planId is required" }, { status: 400 })
+        }
+
+        console.log(`[PUT /api/pricing] Updating plan ${planId} with:`, JSON.stringify(updates, null, 2));
+
+        // Check if plan exists
+        const existing = await prisma.pricingPlan.findUnique({
+            where: { planId }
+        });
+
+        if (!existing) {
+            console.error(`[PUT /api/pricing] Plan not found: ${planId}`);
+            return NextResponse.json({ error: `Plan ${planId} not found` }, { status: 404 });
         }
 
         const updated = await prisma.pricingPlan.update({
             where: { planId },
             data: updates
         })
+
+        console.log(`[PUT /api/pricing] Success: Updated ${updated.planId}`);
 
         return NextResponse.json({
             id: updated.planId,
@@ -163,6 +184,10 @@ export async function PUT(req: NextRequest) {
         })
     } catch (error) {
         console.error("Update Pricing Error:", error)
-        return NextResponse.json({ error: "Failed to update pricing" }, { status: 500 })
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        return NextResponse.json({
+            error: "Failed to update pricing",
+            details: errorMessage
+        }, { status: 500 })
     }
 }
