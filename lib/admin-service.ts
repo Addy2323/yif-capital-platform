@@ -52,91 +52,59 @@ const defaultSettings: AdminSettings = {
 }
 
 // User Management
-export function getAllUsers(): User[] {
-    if (typeof window === "undefined") return []
-    const stored = localStorage.getItem(USERS_KEY)
-    if (!stored) return []
+export async function getAllUsers(): Promise<User[]> {
     try {
-        const users: Record<string, UserWithPassword> = JSON.parse(stored)
-        return Object.values(users).map((u) => u.user)
+        const res = await fetch("/api/admin/users")
+        if (!res.ok) return []
+        return await res.json()
     } catch {
         return []
     }
 }
 
-export function getUserByEmail(email: string): User | null {
-    if (typeof window === "undefined") return null
-    const stored = localStorage.getItem(USERS_KEY)
-    if (!stored) return null
+export async function getUserByEmail(email: string): Promise<User | null> {
+    // This is less efficient if we fetch all users, so we can implementation a specific route if needed
+    // For now, filtering the list or using the specific userId route if we have the ID
     try {
-        const users: Record<string, UserWithPassword> = JSON.parse(stored)
-        return users[email.toLowerCase()]?.user || null
+        const users = await getAllUsers()
+        return users.find(u => u.email.toLowerCase() === email.toLowerCase()) || null
     } catch {
         return null
     }
 }
 
-export function updateUser(email: string, updates: Partial<User>): boolean {
-    if (typeof window === "undefined") return false
-    const stored = localStorage.getItem(USERS_KEY)
-    if (!stored) return false
+export async function updateUser(userId: string, updates: Partial<User>): Promise<boolean> {
     try {
-        const users: Record<string, UserWithPassword> = JSON.parse(stored)
-        if (!users[email.toLowerCase()]) return false
-        users[email.toLowerCase()].user = { ...users[email.toLowerCase()].user, ...updates }
-        localStorage.setItem(USERS_KEY, JSON.stringify(users))
-        return true
+        const res = await fetch(`/api/admin/users/${userId}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updates)
+        })
+        return res.ok
     } catch {
         return false
     }
 }
 
-export function deleteUser(email: string): boolean {
-    if (typeof window === "undefined") return false
-    const stored = localStorage.getItem(USERS_KEY)
-    if (!stored) return false
+export async function deleteUser(userId: string): Promise<boolean> {
     try {
-        const users: Record<string, UserWithPassword> = JSON.parse(stored)
-        if (!users[email.toLowerCase()]) return false
-        delete users[email.toLowerCase()]
-        localStorage.setItem(USERS_KEY, JSON.stringify(users))
-        return true
+        const res = await fetch(`/api/admin/users/${userId}`, {
+            method: "DELETE"
+        })
+        return res.ok
     } catch {
         return false
     }
 }
 
-export function createUser(userData: { name: string; email: string; password: string; role: string }): boolean {
-    if (typeof window === "undefined") return false
+export async function createUser(userData: { name: string; email: string; password: string; role: string }): Promise<boolean> {
     try {
-        const stored = localStorage.getItem(USERS_KEY)
-        const users: Record<string, UserWithPassword> = stored ? JSON.parse(stored) : {}
-
-        // Check if user already exists
-        if (users[userData.email.toLowerCase()]) {
-            return false
-        }
-
-        const newUser: User = {
-            id: Date.now().toString(),
-            name: userData.name,
-            email: userData.email,
-            role: userData.role as "free" | "pro" | "institutional" | "admin",
-            createdAt: new Date().toISOString(),
-            subscription: userData.role === "pro" || userData.role === "institutional" ? {
-                plan: userData.role as "pro" | "institutional",
-                status: "active",
-                expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-            } : undefined,
-        }
-
-        users[userData.email.toLowerCase()] = {
-            password: userData.password,
-            user: newUser,
-        }
-
-        localStorage.setItem(USERS_KEY, JSON.stringify(users))
-        return true
+        const res = await fetch("/api/admin/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData)
+        })
+        return res.ok
     } catch {
         return false
     }
@@ -147,8 +115,8 @@ export function createUser(userData: { name: string; email: string; password: st
 
 
 // Subscription Stats
-export function getSubscriptionStats(): SubscriptionStats {
-    const users = getAllUsers()
+export async function getSubscriptionStats(): Promise<SubscriptionStats> {
+    const users = await getAllUsers()
     const freeUsers = users.filter((u) => u.subscription?.plan === "free" || !u.subscription).length
     const proUsers = users.filter((u) => u.subscription?.plan === "pro").length
     const institutionalUsers = users.filter((u) => u.subscription?.plan === "institutional").length
@@ -167,9 +135,9 @@ export function getSubscriptionStats(): SubscriptionStats {
 }
 
 // Analytics
-export function getAnalyticsData(): AnalyticsData {
-    const users = getAllUsers()
-    const stats = getSubscriptionStats()
+export async function getAnalyticsData(): Promise<AnalyticsData> {
+    const users = await getAllUsers()
+    const stats = await getSubscriptionStats()
 
     // Generate user growth data (mock)
     const userGrowth = []
@@ -262,8 +230,8 @@ export function exportToCSV(data: Record<string, unknown>[], filename: string): 
     link.click()
 }
 
-export function exportUsersToCSV(): void {
-    const users = getAllUsers()
+export async function exportUsersToCSV(): Promise<void> {
+    const users = await getAllUsers()
     const data = users.map((u) => ({
         id: u.id,
         name: u.name,

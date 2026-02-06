@@ -52,6 +52,8 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+import { toast } from "sonner"
+
 interface UserFormData {
     name: string
     email: string
@@ -68,6 +70,7 @@ const emptyFormData: UserFormData = {
 
 export default function AdminUsersPage() {
     const [users, setUsers] = useState<User[]>([])
+    const [isLoading, setIsLoading] = useState(true)
     const [searchQuery, setSearchQuery] = useState("")
     const [roleFilter, setRoleFilter] = useState<string>("all")
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
@@ -76,8 +79,21 @@ export default function AdminUsersPage() {
     const [selectedUser, setSelectedUser] = useState<User | null>(null)
     const [formData, setFormData] = useState<UserFormData>(emptyFormData)
 
+    const fetchUsers = async () => {
+        setIsLoading(true);
+        try {
+            const data = await getAllUsers();
+            setUsers(data);
+        } catch (error) {
+            console.error("Failed to fetch users:", error);
+            toast.error("Failed to load users");
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     useEffect(() => {
-        setUsers(getAllUsers())
+        fetchUsers()
     }, [])
 
     const filteredUsers = users.filter(user => {
@@ -90,43 +106,69 @@ export default function AdminUsersPage() {
         return matchesSearch && matchesRole
     })
 
-    const handleAddUser = () => {
-        const success = createUser({
+    const handleAddUser = async () => {
+        setIsLoading(true)
+        const success = await createUser({
             name: formData.name,
             email: formData.email,
             password: formData.password,
             role: formData.role,
         })
         if (success) {
-            setUsers(getAllUsers())
+            await fetchUsers()
             setFormData(emptyFormData)
             setIsAddDialogOpen(false)
+            toast.success("User created successfully")
+        } else {
+            toast.error("Failed to create user")
         }
+        setIsLoading(false)
     }
 
-    const handleEditUser = () => {
+    const handleEditUser = async () => {
         if (!selectedUser) return
-        if (updateUser(selectedUser.email, { name: formData.name, role: formData.role as any })) {
-            setUsers(getAllUsers())
+        setIsLoading(true)
+        const success = await updateUser(selectedUser.id, {
+            name: formData.name,
+            role: formData.role as any
+        })
+        if (success) {
+            await fetchUsers()
             setFormData(emptyFormData)
             setSelectedUser(null)
             setIsEditDialogOpen(false)
+            toast.success("User updated successfully")
+        } else {
+            toast.error("Failed to update user")
         }
+        setIsLoading(false)
     }
 
-    const handleDeleteUser = () => {
+    const handleDeleteUser = async () => {
         if (!selectedUser) return
-        if (deleteUser(selectedUser.email)) {
-            setUsers(getAllUsers())
+        setIsLoading(true)
+        const success = await deleteUser(selectedUser.id)
+        if (success) {
+            await fetchUsers()
             setSelectedUser(null)
             setIsDeleteDialogOpen(false)
+            toast.success("User deleted successfully")
+        } else {
+            toast.error("Failed to delete user")
         }
+        setIsLoading(false)
     }
 
-    const handleRoleChange = (email: string, newRole: any) => {
-        if (updateUser(email, { role: newRole })) {
-            setUsers(getAllUsers())
+    const handleRoleChange = async (userId: string, newRole: any) => {
+        setIsLoading(true)
+        const success = await updateUser(userId, { role: newRole })
+        if (success) {
+            await fetchUsers()
+            toast.success("Role updated successfully")
+        } else {
+            toast.error("Failed to update role")
         }
+        setIsLoading(false)
     }
 
     const openEditDialog = (user: User) => {
@@ -340,10 +382,10 @@ export default function AdminUsersPage() {
                                                 </DropdownMenuItem>
                                                 <DropdownMenuSeparator className="bg-white/10" />
                                                 <DropdownMenuLabel>Change Role</DropdownMenuLabel>
-                                                <DropdownMenuItem onClick={() => handleRoleChange(user.email, "free")} className="hover:bg-white/5 cursor-pointer">Free</DropdownMenuItem>
-                                                <DropdownMenuItem onClick={() => handleRoleChange(user.email, "pro")} className="hover:bg-white/5 cursor-pointer text-gold">Pro</DropdownMenuItem>
-                                                <DropdownMenuItem onClick={() => handleRoleChange(user.email, "institutional")} className="hover:bg-white/5 cursor-pointer text-blue-400">Institutional</DropdownMenuItem>
-                                                <DropdownMenuItem onClick={() => handleRoleChange(user.email, "admin")} className="hover:bg-white/5 cursor-pointer text-red-400">Admin</DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => handleRoleChange(user.id, "free")} className="hover:bg-white/5 cursor-pointer">Free</DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => handleRoleChange(user.id, "pro")} className="hover:bg-white/5 cursor-pointer text-gold">Pro</DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => handleRoleChange(user.id, "institutional")} className="hover:bg-white/5 cursor-pointer text-blue-400">Institutional</DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => handleRoleChange(user.id, "admin")} className="hover:bg-white/5 cursor-pointer text-red-400">Admin</DropdownMenuItem>
                                                 <DropdownMenuSeparator className="bg-white/10" />
                                                 <DropdownMenuItem
                                                     onClick={() => openDeleteDialog(user)}

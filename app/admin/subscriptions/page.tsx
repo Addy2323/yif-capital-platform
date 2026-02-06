@@ -83,7 +83,7 @@ export default function AdminSubscriptionsPage() {
         setPlans(fetchedPlans)
 
         // Calculate stats manually using fetched plans to ensure correctness
-        const allUsers = getAllUsers()
+        const allUsers = await getAllUsers()
         const subscribedUsers = allUsers.filter(u => u.subscription?.plan && u.subscription.plan !== "free")
         setUsers(subscribedUsers)
 
@@ -131,9 +131,9 @@ export default function AdminSubscriptionsPage() {
         exportToCSV(data, "subscriptions_export")
     }
 
-    const handleUpdateUser = () => {
+    const handleUpdateUser = async () => {
         if (!editingUser) return
-        const success = updateUser(editingUser.email, {
+        const success = await updateUser(editingUser.id, {
             role: userForm.plan as any,
             subscription: {
                 ...editingUser.subscription,
