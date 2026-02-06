@@ -119,7 +119,8 @@ export async function GET() {
 export async function PUT(req: NextRequest) {
     try {
         console.log("[PUT /api/pricing] Request received");
-        console.log("[PUT /api/pricing] Prisma available models:", Object.keys(prisma).filter(k => k[0] !== '_'));
+        const prismaKeys = Object.keys(prisma);
+        console.log("[PUT /api/pricing] Prisma keys:", prismaKeys.filter(k => !k.startsWith('_')).join(', '));
 
         // Check admin auth
         const cookieStore = await cookies()
@@ -130,9 +131,12 @@ export async function PUT(req: NextRequest) {
             return NextResponse.json({ error: "Unauthorized: No user session" }, { status: 401 })
         }
 
-        console.log(`[PUT /api/pricing] Checking user ${userId}`);
         if (!prisma.user) {
-            console.error("[PUT /api/pricing] CRITICAL: prisma.user is EQUAL TO", typeof prisma.user);
+            console.error("[PUT /api/pricing] CRITICAL: prisma.user is undefined!");
+            return NextResponse.json({
+                error: "Internal Configuration Error",
+                details: `prisma.user is undefined. Available models: ${prismaKeys.filter(k => k[0] === k[0].toLowerCase() && !k.startsWith('_')).join(', ')}`
+            }, { status: 500 });
         }
 
         const user = await prisma.user.findUnique({
@@ -142,7 +146,8 @@ export async function PUT(req: NextRequest) {
 
         console.log(`[PUT /api/pricing] User lookup:`, user ? `${user.name} (${user.role})` : "Not found");
 
-        if (!user || (user.role !== "ADMIN" && (user.role as string).toUpperCase() !== "ADMIN") && (user.role as string) !== "admin") {
+        const userRole = (user?.role as string || "").toUpperCase();
+        if (!user || (userRole !== "ADMIN")) {
             console.error(`[PUT /api/pricing] Forbidden: User ${userId} has role ${user?.role}`)
             return NextResponse.json({ error: "Forbidden: Admin access required" }, { status: 403 })
         }
@@ -157,13 +162,17 @@ export async function PUT(req: NextRequest) {
             return NextResponse.json({ error: "planId is required" }, { status: 400 })
         }
 
-        console.log(`[PUT /api/pricing] Updating plan ${planId} with:`, JSON.stringify(updates, null, 2));
-
         if (!prisma.pricingPlan) {
-            console.error("[PUT /api/pricing] CRITICAL: prisma.pricingPlan is EQUAL TO", typeof prisma.pricingPlan);
+            console.error("[PUT /api/pricing] CRITICAL: prisma.pricingPlan is undefined!");
+            return NextResponse.json({
+                error: "Internal Configuration Error",
+                details: `prisma.pricingPlan is undefined. Available models: ${prismaKeys.filter(k => k[0] === k[0].toLowerCase() && !k.startsWith('_')).join(', ')}`
+            }, { status: 500 });
         }
 
-        // Check if plan exists
+        console.log(`[PUT /api/pricing] Updating plan ${planId}`);
+
+        // Check if plan exists (using findUnique which is the one reported failing)
         const existing = await prisma.pricingPlan.findUnique({
             where: { planId }
         });
