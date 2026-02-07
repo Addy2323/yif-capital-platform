@@ -25,8 +25,10 @@ export async function PATCH(
 
         console.log("Updating session with data:", {
             title: body.title,
-            scheduledStart: scheduledStart?.toISOString(),
-            scheduledEnd: scheduledEnd?.toISOString(),
+            incomingStart: body.scheduledStart,
+            incomingEnd: body.scheduledEnd,
+            parsedStart: scheduledStart?.toISOString(),
+            parsedEnd: scheduledEnd?.toISOString(),
             status: body.status
         });
 

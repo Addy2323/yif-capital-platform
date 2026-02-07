@@ -33,8 +33,10 @@ export async function POST(req: NextRequest) {
         }
 
         console.log("Parsed dates:", {
-            scheduledStart: scheduledStart.toISOString(),
-            scheduledEnd: scheduledEnd.toISOString()
+            incomingStart: body.scheduledStart,
+            incomingEnd: body.scheduledEnd,
+            parsedStart: scheduledStart.toISOString(),
+            parsedEnd: scheduledEnd.toISOString()
         });
 
         const session = await prisma.liveSession.create({

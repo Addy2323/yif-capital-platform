@@ -118,10 +118,16 @@ export default function AdminSessionsPage() {
         toast.loading("Creating session...", { id: "session-action" })
 
         try {
+            const dataToSend = {
+                ...formData,
+                scheduledStart: new Date(formData.scheduledStart).toISOString(),
+                scheduledEnd: new Date(formData.scheduledEnd).toISOString(),
+            }
+
             const res = await fetch('/api/admin/sessions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(dataToSend)
             })
 
             if (res.ok) {
@@ -146,10 +152,16 @@ export default function AdminSessionsPage() {
         console.log("Saving updated session data:", formData)
 
         try {
+            const dataToSend = {
+                ...formData,
+                scheduledStart: new Date(formData.scheduledStart).toISOString(),
+                scheduledEnd: new Date(formData.scheduledEnd).toISOString(),
+            }
+
             const res = await fetch(`/api/admin/sessions/${editingSession.id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(dataToSend)
             })
 
             if (res.ok) {
