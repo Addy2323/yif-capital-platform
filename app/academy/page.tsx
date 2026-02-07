@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -23,6 +24,8 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { ScrollAnimation } from "@/components/ui/scroll-animation"
+import { LiveSessionsDashboard } from "@/components/dashboard/live-sessions"
+import { Video } from "lucide-react"
 
 const courses = [
   {
@@ -101,6 +104,7 @@ const learningPaths = [
 
 function AcademyContent() {
   const { user } = useAuth()
+  const [showSessions, setShowSessions] = useState(false)
   const isPro = user?.subscription?.plan === "pro" || user?.subscription?.plan === "institutional"
 
   return (
@@ -150,6 +154,65 @@ function AcademyContent() {
                   <span>Certificates</span>
                 </div>
               </div>
+            </ScrollAnimation>
+          </div>
+        </section>
+
+        {/* Live Sessions Feature Card */}
+        <section className="py-12 lg:py-16 bg-gradient-to-b from-navy/5 to-transparent">
+          <div className="mx-auto max-w-7xl px-4 lg:px-8">
+            <ScrollAnimation animation="slide-up">
+              {!showSessions ? (
+                <Card
+                  className="relative overflow-hidden border-gold/30 bg-navy text-white cursor-pointer group hover:border-gold/50 transition-all duration-300"
+                  onClick={() => setShowSessions(true)}
+                >
+                  <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <Video className="h-32 w-32 text-gold" />
+                  </div>
+                  <CardContent className="p-8 md:p-12">
+                    <div className="max-w-3xl space-y-6">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-gold/20 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gold">
+                        <span className="flex h-2 w-2 rounded-full bg-gold animate-pulse" />
+                        Live Experience
+                      </div>
+                      <h2 className="text-3xl font-bold sm:text-4xl text-white">
+                        Interactive Live Sessions
+                      </h2>
+                      <p className="text-lg text-white/70 leading-relaxed">
+                        Elevate your investment strategy with real-time expert guidance.
+                        Our Interactive Live Sessions bring you direct access to market professionals,
+                        deep-dive analysis, and interactive Q&A sessions designed to sharpen your edge
+                        in the Tanzanian and global markets.
+                      </p>
+                      <Button
+                        size="lg"
+                        className="bg-gold text-navy hover:bg-gold/90 font-bold"
+                      >
+                        Explore Live & Upcoming Sessions
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-2xl font-bold text-foreground">Live & Upcoming Sessions</h2>
+                      <p className="text-muted-foreground">Join our real-time interactive masterclasses</p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      onClick={() => setShowSessions(false)}
+                      className="text-gold hover:text-gold/80 hover:bg-gold/10"
+                    >
+                      Close Sessions
+                    </Button>
+                  </div>
+                  <LiveSessionsDashboard />
+                </div>
+              )}
             </ScrollAnimation>
           </div>
         </section>
