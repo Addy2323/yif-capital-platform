@@ -74,10 +74,10 @@ export function HeroSection() {
 
             {/* Trust Badges */}
             <FadeIn delay={0.3} className="mt-10 flex flex-wrap items-center justify-center gap-6 lg:justify-start">
-              <div className="flex items-center gap-2 text-sm text-white/60 hover:text-white/80 transition-colors">
+              {/* <div className="flex items-center gap-2 text-sm text-white/60 hover:text-white/80 transition-colors">
                 <Shield className="h-5 w-5 text-gold" />
                 <span>CMSA Regulated</span>
-              </div>
+              </div> */}
               <div className="flex items-center gap-2 text-sm text-white/60 hover:text-white/80 transition-colors">
                 <BarChart3 className="h-5 w-5 text-gold" />
                 <span>Real-time Data</span>
