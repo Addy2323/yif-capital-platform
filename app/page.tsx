@@ -18,7 +18,7 @@ export default function HomePage() {
         <Header />
         <main className="flex-1">
           <HeroSection />
-          <MarketOverviewSection />
+          {/* <MarketOverviewSection /> */}
           <ProductsSection />
           <FeaturesSection />
           <PricingSection />

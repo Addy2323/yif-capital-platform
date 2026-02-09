@@ -108,7 +108,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} YIF Capital Limited. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <span className="text-xs text-white/50">Regulated by Capital Markets and Securities Authority (CMSA)</span>
+            {/* <span className="text-xs text-white/50">Regulated by Capital Markets and Securities Authority (CMSA)</span> */}
           </div>
         </div>
       </div>

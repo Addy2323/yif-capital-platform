@@ -49,9 +49,9 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { name: "Home", href: "/dashboard", icon: Home },
-  { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },
-  {
+  // { name: "Home", href: "/dashboard", icon: Home },
+  // { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },
+  /* {
     name: "Stocks",
     icon: BarChart3,
     children: [
@@ -89,9 +89,9 @@ const navigation: NavItem[] = [
   },
   { name: "News", href: "/dashboard/news", icon: Newspaper },
   { name: "Trending", href: "/dashboard/trending", icon: TrendingUp },
-  { name: "Articles", href: "/dashboard/articles", icon: FileText },
-  { name: "Technical Chart", href: "/dashboard/charts", icon: LineChart },
-  {
+  { name: "Articles", href: "/dashboard/articles", icon: FileText }, */
+  // { name: "Technical Chart", href: "/dashboard/charts", icon: LineChart },
+  /* {
     name: "Market Movers",
     icon: ArrowUpDown,
     children: [
@@ -102,8 +102,8 @@ const navigation: NavItem[] = [
       { name: "After Hours", href: "/dashboard/market-movers/after-hours" },
       { name: "Market Heatmap", href: "/dashboard/market-movers/heatmap" },
     ],
-  },
-  { name: "Stock Analysis Pro", href: "/dashboard/analysis-pro", icon: Search, pro: true },
+  }, */
+  // { name: "Stock Analysis Pro", href: "/dashboard/analysis-pro", icon: Search, pro: true },
 ]
 
 const bottomNav = [

@@ -14,21 +14,21 @@ import {
 } from "lucide-react"
 
 const features = [
-  {
-    name: "Real-time Market Data",
-    description: "Live DSE prices with low latency feeds and comprehensive market depth.",
-    icon: BarChart3,
-  },
-  {
-    name: "Advanced Charting",
-    description: "Professional charting tools with multiple timeframes and technical indicators.",
-    icon: LineChart,
-  },
-  {
-    name: "Smart Alerts",
-    description: "Custom price alerts, volume spikes, and corporate action notifications.",
-    icon: Bell,
-  },
+  /* {
+      name: "Real-time Market Data",
+      description: "Live DSE prices with low latency feeds and comprehensive market depth.",
+      icon: BarChart3,
+    },
+    {
+      name: "Advanced Charting",
+      description: "Professional charting tools with multiple timeframes and technical indicators.",
+      icon: LineChart,
+    },
+    {
+      name: "Smart Alerts",
+      description: "Custom price alerts, volume spikes, and corporate action notifications.",
+      icon: Bell,
+    }, */
   {
     name: "Bank-grade Security",
     description: "Enterprise security with 2FA, encryption, and regulatory compliance.",
@@ -39,11 +39,11 @@ const features = [
     description: "Responsive platform that works seamlessly on any device.",
     icon: Smartphone,
   },
-  {
-    name: "Regional Coverage",
-    description: "Data and insights for Tanzanian and East African markets.",
-    icon: Globe,
-  },
+  /* {
+      name: "Regional Coverage",
+      description: "Data and insights for Tanzanian and East African markets.",
+      icon: Globe,
+    }, */
   {
     name: "Fast Performance",
     description: "Optimized platform with instant loading and real-time updates.",
@@ -54,21 +54,21 @@ const features = [
     description: "Active investor community and dedicated customer support.",
     icon: Users,
   },
-  {
-    name: "Research Reports",
-    description: "In-depth company analysis and market research from experts.",
-    icon: FileText,
-  },
-  {
-    name: "Portfolio Analytics",
-    description: "Comprehensive portfolio tracking with performance metrics.",
-    icon: PieChart,
-  },
-  {
-    name: "Stock Screener",
-    description: "Powerful screening tools to find investment opportunities.",
-    icon: TrendingUp,
-  },
+  /* {
+      name: "Research Reports",
+      description: "In-depth company analysis and market research from experts.",
+      icon: FileText,
+    },
+    {
+      name: "Portfolio Analytics",
+      description: "Comprehensive portfolio tracking with performance metrics.",
+      icon: PieChart,
+    },
+    {
+      name: "Stock Screener",
+      description: "Powerful screening tools to find investment opportunities.",
+      icon: TrendingUp,
+    }, */
   {
     name: "Learning Resources",
     description: "Educational content from basics to advanced strategies.",

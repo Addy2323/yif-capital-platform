@@ -20,12 +20,12 @@ const navigation = [
     name: "Products",
     href: "#",
     children: [
-      { name: "YIF Analytics", href: "/analytics", icon: BarChart3, description: "Market data & analysis" },
+      // { name: "YIF Analytics", href: "/analytics", icon: BarChart3, description: "Market data & analysis" },
       { name: "YIF Academy", href: "/academy", icon: GraduationCap, description: "Investment education" },
-      { name: "YIF Investment Pro", href: "/investment-pro", icon: Briefcase, description: "Portfolio & advisory" },
+      // { name: "YIF Investment Pro", href: "/investment-pro", icon: Briefcase, description: "Portfolio & advisory" },
     ],
   },
-  { name: "Research", href: "/research" },
+  // { name: "Research", href: "/research" },
   { name: "Pricing", href: "/pricing" },
   { name: "Contact", href: "/contact" },
 ]
@@ -104,12 +104,12 @@ export function Header() {
                   </span>
                 </div>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
+                {/* <DropdownMenuItem asChild>
                   <Link href="/dashboard" className="flex items-center gap-2">
                     <BarChart3 className="h-4 w-4" />
                     Dashboard
                   </Link>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem asChild>
                   <Link href="/settings" className="flex items-center gap-2">
                     <Settings className="h-4 w-4" />
@@ -189,13 +189,13 @@ export function Header() {
                       <p className="text-xs text-muted-foreground">{user.email}</p>
                     </div>
                   </div>
-                  <Link
+                  {/* <Link
                     href="/dashboard"
                     className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Dashboard
-                  </Link>
+                  </Link> */}
                   <button
                     onClick={() => {
                       logout()

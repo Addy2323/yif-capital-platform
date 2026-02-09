@@ -3,20 +3,20 @@ import { Button } from "@/components/ui/button"
 import { BarChart3, GraduationCap, Briefcase, ArrowRight, Check } from "lucide-react"
 
 const products = [
-  {
-    name: "YIF Analytics",
-    description: "Professional-grade market data, research, and analytics for traders and institutions.",
-    icon: BarChart3,
-    href: "/analytics",
-    features: [
-      "Real-time DSE prices",
-      "Interactive charting",
-      "Stock screener",
-      "Technical indicators",
-      "Market heatmaps",
-    ],
-    color: "bg-gold/10 text-gold",
-  },
+  /* {
+      name: "YIF Analytics",
+      description: "Professional-grade market data, research, and analytics for traders and institutions.",
+      icon: BarChart3,
+      href: "/analytics",
+      features: [
+        "Real-time DSE prices",
+        "Interactive charting",
+        "Stock screener",
+        "Technical indicators",
+        "Market heatmaps",
+      ],
+      color: "bg-gold/10 text-gold",
+    }, */
   {
     name: "YIF Academy",
     description: "Comprehensive investment education from basics to advanced portfolio management.",
@@ -31,20 +31,20 @@ const products = [
     ],
     color: "bg-navy/10 text-navy",
   },
-  {
-    name: "YIF Investment Pro",
-    description: "Advanced portfolio tracking, advisory tools, and personalized investment insights.",
-    icon: Briefcase,
-    href: "/investment-pro",
-    features: [
-      "Portfolio tracking",
-      "Performance analytics",
-      "Dividend calendar",
-      "Price alerts",
-      "Personalized insights",
-    ],
-    color: "bg-silver/30 text-charcoal",
-  },
+  /* {
+      name: "YIF Investment Pro",
+      description: "Advanced portfolio tracking, advisory tools, and personalized investment insights.",
+      icon: Briefcase,
+      href: "/investment-pro",
+      features: [
+        "Portfolio tracking",
+        "Performance analytics",
+        "Dividend calendar",
+        "Price alerts",
+        "Personalized insights",
+      ],
+      color: "bg-silver/30 text-charcoal",
+    }, */
 ]
 
 export function ProductsSection() {
