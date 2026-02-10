@@ -259,7 +259,6 @@ function SessionItem({
                 </div>
                 {!session.isFree && (
                     <div className="flex items-center gap-1.5 font-semibold text-gold">
-                        <DollarSign className="h-3.5 w-3.5" />
                         {session.currency} {session.price.toLocaleString()}
                     </div>
                 )}

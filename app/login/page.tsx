@@ -5,7 +5,7 @@ import React from "react"
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,6 +14,8 @@ import { Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react"
 
 function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirect = searchParams.get("redirect")
   const { login } = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -29,7 +31,11 @@ function LoginForm() {
     const result = await login(email, password)
 
     if (result.success) {
-      router.push("/dashboard")
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        window.location.href = "https://yifcapital.co.tz/academy"
+      }
     } else {
       setError(result.error || "An error occurred")
     }

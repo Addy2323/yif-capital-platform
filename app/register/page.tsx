@@ -57,7 +57,7 @@ function RegisterForm() {
     const result = await register(email, password, name)
 
     if (result.success) {
-      router.push("/dashboard")
+      window.location.href = "https://yifcapital.co.tz/academy"
     } else {
       setError(result.error || "An error occurred")
     }
