@@ -233,8 +233,8 @@ function SessionItem({
                         </span>
                     )}
                     <h3 className="font-semibold">{session.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-1">
-                        {session.shortDescription || session.description}
+                    <p className="text-sm text-muted-foreground">
+                        {session.description || session.shortDescription}
                     </p>
                 </div>
                 {isActuallyLive ? (
