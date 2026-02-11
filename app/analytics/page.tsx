@@ -283,8 +283,8 @@ export default function AnalyticsPage() {
                   Get real-time data, advanced charting, stock screener, and more with Pro.
                 </p>
                 <Button size="lg" asChild className="mt-8 bg-gold text-navy hover:bg-gold/90">
-                  <Link href="/pricing">
-                    View Pricing
+                  <Link href="/contact">
+                    Inquire About Pro
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>

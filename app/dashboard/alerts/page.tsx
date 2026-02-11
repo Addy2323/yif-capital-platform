@@ -23,11 +23,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { 
-  Bell, 
-  Plus, 
-  TrendingUp, 
-  TrendingDown, 
+import {
+  Bell,
+  Plus,
+  TrendingUp,
+  TrendingDown,
   Trash2,
   AlertTriangle,
   Lock
@@ -105,7 +105,7 @@ export default function AlertsPage() {
             This feature is available on Pro and Institutional plans.
           </p>
           <Button asChild className="mt-8 bg-gold text-navy hover:bg-gold/90">
-            <Link href="/pricing">Upgrade to Pro</Link>
+            <Link href="/contact">Inquire About Pro</Link>
           </Button>
         </div>
       </div>
@@ -239,16 +239,15 @@ export default function AlertsPage() {
             <div className="space-y-4">
               {alerts.map((alert) => {
                 const stock = stocks.find((s) => s.symbol === alert.symbol)
-                
+
                 return (
                   <div
                     key={alert.id}
                     className="flex items-center justify-between rounded-lg border p-4"
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-full ${
-                        alert.condition === "above" ? "bg-green-100" : "bg-red-100"
-                      }`}>
+                      <div className={`flex h-10 w-10 items-center justify-center rounded-full ${alert.condition === "above" ? "bg-green-100" : "bg-red-100"
+                        }`}>
                         {alert.condition === "above" ? (
                           <TrendingUp className="h-5 w-5 text-green-600" />
                         ) : (

@@ -207,9 +207,9 @@ function AcademyContent() {
               </div>
               {!isPro && (
                 <Button asChild className="hidden bg-gold text-navy hover:bg-gold/90 sm:flex">
-                  <Link href="/pricing">
+                  <Link href="/contact">
                     <Crown className="mr-2 h-4 w-4" />
-                    Unlock All Courses
+                    Inquire About Pro
                   </Link>
                 </Button>
               )}
@@ -279,10 +279,10 @@ function AcademyContent() {
                             </Link>
                           </Button>
                         ) : (
-                          <Button asChild variant="outline" className="flex-1 bg-transparent">
-                            <Link href="/pricing">
+                          <Button asChild variant="outline" className="flex-1 bg-transparent border-gold/30 text-gold hover:bg-gold/10">
+                            <Link href="/contact">
                               <Crown className="mr-2 h-4 w-4" />
-                              Unlock with Pro
+                              Contact for Pro
                             </Link>
                           </Button>
                         )}
@@ -358,7 +358,7 @@ function AcademyContent() {
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="border-white/30 text-white hover:bg-white/10 bg-transparent">
-                  <Link href="/pricing">View Pro Benefits</Link>
+                  <Link href="/contact">Inquire About Pro</Link>
                 </Button>
               </div>
             </div>

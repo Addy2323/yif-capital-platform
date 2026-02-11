@@ -26,7 +26,7 @@ const navigation = [
     ],
   },
   // { name: "Research", href: "/research" },
-  { name: "Pricing", href: "/pricing" },
+  // { name: "Pricing", href: "/pricing" },
   { name: "Contact", href: "/contact" },
 ]
 

@@ -42,14 +42,14 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          {!isPro && (
+          {/* {!isPro && (
             <Button asChild className="bg-gold text-navy hover:bg-gold/90">
               <Link href="/pricing">
                 <Crown className="mr-2 h-4 w-4" />
                 Upgrade to Pro
               </Link>
             </Button>
-          )}
+          )} */}
         </div>
       </div>
 

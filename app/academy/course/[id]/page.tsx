@@ -174,13 +174,12 @@ function CourseContent({ courseId }: { courseId: string }) {
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div>
                 <span
-                  className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${
-                    course.level === "Beginner"
+                  className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${course.level === "Beginner"
                       ? "bg-success/10 text-success"
                       : course.level === "Intermediate"
-                      ? "bg-gold/10 text-gold"
-                      : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
-                  }`}
+                        ? "bg-gold/10 text-gold"
+                        : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
+                    }`}
                 >
                   {course.level}
                 </span>
@@ -240,22 +239,20 @@ function CourseContent({ courseId }: { courseId: string }) {
                           key={lesson.title}
                           onClick={() => canAccess && setCurrentLesson(index)}
                           disabled={!canAccess}
-                          className={`flex w-full items-center gap-3 p-4 text-left transition-colors ${
-                            isCurrent
+                          className={`flex w-full items-center gap-3 p-4 text-left transition-colors ${isCurrent
                               ? "bg-gold/10"
                               : canAccess
-                              ? "hover:bg-muted/50"
-                              : "opacity-60"
-                          }`}
+                                ? "hover:bg-muted/50"
+                                : "opacity-60"
+                            }`}
                         >
                           <div
-                            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full ${
-                              isCompleted
+                            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full ${isCompleted
                                 ? "bg-success text-white"
                                 : isCurrent
-                                ? "bg-gold text-navy"
-                                : "bg-muted text-muted-foreground"
-                            }`}
+                                  ? "bg-gold text-navy"
+                                  : "bg-muted text-muted-foreground"
+                              }`}
                           >
                             {isCompleted ? (
                               <Check className="h-4 w-4" />
@@ -267,9 +264,8 @@ function CourseContent({ courseId }: { courseId: string }) {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p
-                              className={`truncate text-sm font-medium ${
-                                isCurrent ? "text-gold" : "text-foreground"
-                              }`}
+                              className={`truncate text-sm font-medium ${isCurrent ? "text-gold" : "text-foreground"
+                                }`}
                             >
                               {lesson.title}
                             </p>
@@ -349,9 +345,9 @@ function CourseContent({ courseId }: { courseId: string }) {
                         Upgrade to Pro to unlock all lessons and earn your certificate.
                       </p>
                       <Button asChild className="mt-6 bg-gold text-navy hover:bg-gold/90">
-                        <Link href="/pricing">
+                        <Link href="/contact">
                           <Crown className="mr-2 h-4 w-4" />
-                          Upgrade to Pro
+                          Inquire About Pro
                         </Link>
                       </Button>
                     </div>

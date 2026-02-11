@@ -102,7 +102,7 @@ function ResearchContent() {
                     Tanzania Market Outlook 2026
                   </CardTitle>
                   <CardDescription className="mt-4 text-white/70 text-base">
-                    Our flagship annual report covering macroeconomic trends, sector analysis, 
+                    Our flagship annual report covering macroeconomic trends, sector analysis,
                     stock picks, and investment strategies for the year ahead.
                   </CardDescription>
                   <div className="mt-6 flex flex-wrap gap-4 text-sm text-white/60">
@@ -180,7 +180,7 @@ function ResearchContent() {
                     <div className="mt-4 flex gap-2">
                       {report.premium ? (
                         <Button asChild className="w-full bg-gold text-navy hover:bg-gold/90">
-                          <Link href="/pricing">Upgrade to Access</Link>
+                          <Link href="/contact">Inquire About Access</Link>
                         </Button>
                       ) : (
                         <Button variant="outline" className="w-full bg-transparent">
@@ -203,11 +203,11 @@ function ResearchContent() {
               Want Full Access to All Reports?
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Upgrade to YIF Pro and get unlimited access to all research reports, 
+              Upgrade to YIF Pro and get unlimited access to all research reports,
               real-time market data, and advanced analytics tools.
             </p>
             <Button asChild className="mt-8 bg-gold text-navy hover:bg-gold/90">
-              <Link href="/pricing">View Pricing Plans</Link>
+              <Link href="/contact">Inquire About Pro</Link>
             </Button>
           </div>
         </section>

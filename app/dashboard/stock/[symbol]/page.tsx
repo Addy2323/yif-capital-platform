@@ -195,9 +195,9 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
                     </Button>
                   ) : (
                     <Button asChild size="sm" className="bg-gold text-navy hover:bg-gold/90">
-                      <Link href="/pricing">
+                      <Link href="/contact">
                         <Crown className="mr-2 h-4 w-4" />
-                        Upgrade for Full Data
+                        Inquire for Full Data
                       </Link>
                     </Button>
                   )}

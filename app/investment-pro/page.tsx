@@ -101,7 +101,7 @@ function InvestmentProContent() {
                     </Link>
                   </Button>
                   <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-transparent">
-                    <Link href="/pricing">View Pricing</Link>
+                    <Link href="/contact">Inquire About Pro</Link>
                   </Button>
                 </div>
               </ScrollAnimation>
@@ -209,8 +209,8 @@ function InvestmentProContent() {
                     </div>
                   </div>
                   <Button asChild className="w-full bg-gold text-navy hover:bg-gold/90">
-                    <Link href="/register?plan=pro">
-                      Start 14-Day Free Trial
+                    <Link href="/contact">
+                      Inquire About Pro
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>

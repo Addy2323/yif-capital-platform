@@ -23,17 +23,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { 
-  Briefcase, 
-  Plus, 
-  TrendingUp, 
-  TrendingDown, 
+import {
+  Briefcase,
+  Plus,
+  TrendingUp,
+  TrendingDown,
   PieChart,
   Wallet,
   ArrowUpRight,
   ArrowDownRight,
   Trash2
 } from "lucide-react"
+import Link from "next/link"
 
 interface PortfolioHolding {
   symbol: string
@@ -61,7 +62,7 @@ export default function PortfolioPage() {
     if (stored) {
       const parsed = JSON.parse(stored) as PortfolioHolding[]
       setHoldings(parsed)
-      
+
       // Fetch stock data for holdings
       const data: Record<string, Stock> = {}
       for (const holding of parsed) {
@@ -120,7 +121,7 @@ export default function PortfolioPage() {
     { totalValue: 0, totalCost: 0, totalGainLoss: 0 }
   )
 
-  const totalReturn = portfolioMetrics.totalCost > 0 
+  const totalReturn = portfolioMetrics.totalCost > 0
     ? ((portfolioMetrics.totalGainLoss / portfolioMetrics.totalCost) * 100)
     : 0
 
@@ -358,7 +359,7 @@ export default function PortfolioPage() {
               </p>
             </div>
             <Button asChild className="bg-gold text-navy hover:bg-gold/90">
-              <a href="/pricing">Upgrade to Pro</a>
+              <Link href="/contact">Inquire About Pro</Link>
             </Button>
           </CardContent>
         </Card>

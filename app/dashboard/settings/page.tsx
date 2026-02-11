@@ -13,6 +13,7 @@ import { Switch } from "@/components/ui/switch"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { User, Bell, Shield, CreditCard, Loader2, CheckCircle } from "lucide-react"
+import Link from "next/link"
 
 export default function SettingsPage() {
   const { user, updateUser } = useAuth()
@@ -33,10 +34,10 @@ export default function SettingsPage() {
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsUpdating(true)
-    
+
     // Simulate update
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    
+
     updateUser({ name: profileData.name })
     setIsUpdating(false)
     setShowSuccess(true)
@@ -85,7 +86,7 @@ export default function SettingsPage() {
                     Profile updated successfully!
                   </div>
                 )}
-                
+
                 <div className="flex items-center gap-6">
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-3xl font-bold text-navy">
                     {user?.name?.charAt(0).toUpperCase()}
@@ -254,23 +255,23 @@ export default function SettingsPage() {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-semibold">
-                        {user?.subscription?.plan === "free" ? "Free Plan" : 
-                         user?.subscription?.plan === "pro" ? "Pro Plan" : "Institutional Plan"}
+                        {user?.subscription?.plan === "free" ? "Free Plan" :
+                          user?.subscription?.plan === "pro" ? "Pro Plan" : "Institutional Plan"}
                       </span>
                       <Badge className="bg-gold/10 text-gold">
                         {user?.subscription?.status || "Active"}
                       </Badge>
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      {user?.subscription?.plan === "free" 
+                      {user?.subscription?.plan === "free"
                         ? "Basic access to market data and features"
                         : "Full access to all premium features"}
                     </div>
                   </div>
                   <Button asChild className="bg-gold text-navy hover:bg-gold/90">
-                    <a href="/pricing">
-                      {user?.subscription?.plan === "free" ? "Upgrade Plan" : "Manage Plan"}
-                    </a>
+                    <Link href="/contact">
+                      {user?.subscription?.plan === "free" ? "Inquire About Pro" : "Contact Support"}
+                    </Link>
                   </Button>
                 </div>
               </CardContent>

@@ -135,7 +135,7 @@ export default function ETFDetailPage({ params }: { params: Promise<{ symbol: st
                                     Get full historical NAV data, benchmark comparisons, and detailed holdings.
                                 </p>
                                 <Button asChild size="sm" className="mt-3 bg-gold text-navy hover:bg-gold/90">
-                                    <Link href="/pricing">Upgrade Now</Link>
+                                    <Link href="/contact">Inquire for Pro</Link>
                                 </Button>
                             </div>
                         )}

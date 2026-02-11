@@ -5,7 +5,11 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { PricingSection } from "@/components/landing/pricing-section"
 
+import { redirect } from "next/navigation"
+
 export default function PricingPage() {
+  redirect("/academy")
+
   return (
     <AuthProvider>
       <div className="flex min-h-screen flex-col">

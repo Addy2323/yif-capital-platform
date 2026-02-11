@@ -28,8 +28,8 @@ export default function AccessDeniedPage() {
                     icon: <Lock className="h-12 w-12 text-gold" />,
                     title: "Session Locked",
                     message: "This live class is reserved for Pro and Institutional members. No free seats are available today.",
-                    cta: "Unlock Access Now",
-                    href: "/pricing",
+                    cta: "Contact Support",
+                    href: "/contact",
                     variant: "gold"
                 }
             case "expired":
@@ -73,8 +73,8 @@ export default function AccessDeniedPage() {
                     icon: <ShieldAlert className="h-12 w-12 text-error" />,
                     title: "Access Denied",
                     message: "We couldn't verify your access to this session. Please contact support if you believe this is an error.",
-                    cta: "Upgrade to Pro",
-                    href: "/pricing",
+                    cta: "Contact Support",
+                    href: "/contact",
                     variant: "gold"
                 }
         }
