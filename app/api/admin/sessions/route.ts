@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
         const session = await prisma.liveSession.create({
             data: {
                 title: body.title,
+                shortDescription: body.shortDescription,
                 description: body.description,
                 courseId: body.courseId,
                 meetingUrl: body.meetingUrl,

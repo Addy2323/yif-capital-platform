@@ -15,7 +15,7 @@ import {
 import { Menu, X, User, LogOut, Settings, BarChart3, GraduationCap, Briefcase, ChevronDown } from "lucide-react"
 
 const navigation = [
-  { name: "Home", href: "/" },
+  { name: "Home", href: "/academy" },
   {
     name: "Products",
     href: "#",
@@ -38,7 +38,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/academy" className="flex items-center gap-2">
           <Image src="/logo.png" alt="YIF Capital" width={40} height={40} className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover" />
           <span className="text-lg font-bold text-navy sm:text-xl">YIF Capital</span>
         </Link>

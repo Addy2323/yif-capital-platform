@@ -78,29 +78,6 @@ const courses = [
   },
 ]
 
-const learningPaths = [
-  {
-    title: "Complete Investor",
-    description: "From beginner to confident investor",
-    courses: 4,
-    duration: "28 hours",
-    color: "bg-gold/10 text-gold",
-  },
-  {
-    title: "Technical Trader",
-    description: "Master technical analysis",
-    courses: 3,
-    duration: "16 hours",
-    color: "bg-navy/10 text-navy",
-  },
-  {
-    title: "Youth Empowerment",
-    description: "Financial literacy for young investors",
-    courses: 2,
-    duration: "6 hours",
-    color: "bg-success/10 text-success",
-  },
-]
 
 function AcademyContent() {
   const { user } = useAuth()
@@ -217,39 +194,6 @@ function AcademyContent() {
           </div>
         </section>
 
-        {/* Learning Paths */}
-        <section className="border-b border-border py-12 lg:py-16">
-          <div className="mx-auto max-w-7xl px-4 lg:px-8">
-            <h2 className="text-2xl font-bold text-foreground">Learning Paths</h2>
-            <p className="mt-2 text-muted-foreground">
-              Structured programs to guide your learning journey
-            </p>
-
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {learningPaths.map((path, index) => (
-                <ScrollAnimation key={path.title} animation="slide-up" delay={index * 100}>
-                  <Card className="transition-all hover:border-gold/50 hover:shadow-lg">
-                    <CardContent className="p-6">
-                      <div className={`inline-flex rounded-lg p-3 ${path.color}`}>
-                        <GraduationCap className="h-6 w-6" />
-                      </div>
-                      <h3 className="mt-4 text-lg font-semibold text-card-foreground">{path.title}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground">{path.description}</p>
-                      <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
-                        <span>{path.courses} Courses</span>
-                        <span>{path.duration}</span>
-                      </div>
-                      <Button variant="ghost" className="mt-4 w-full justify-between hover:bg-gold/10 hover:text-gold">
-                        View Path
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </ScrollAnimation>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Courses */}
         <section className="py-12 lg:py-16">

@@ -42,6 +42,7 @@ interface LiveSession {
     id: string
     courseId: string
     title: string
+    shortDescription: string | null
     description: string | null
     meetingUrl: string | null
     scheduledStart: string
@@ -67,6 +68,7 @@ export default function AdminSessionsPage() {
     // Form State
     const [formData, setFormData] = useState({
         title: "",
+        shortDescription: "",
         description: "",
         courseId: "",
         meetingUrl: "",
@@ -100,6 +102,7 @@ export default function AdminSessionsPage() {
     const resetForm = () => {
         setFormData({
             title: "",
+            shortDescription: "",
             description: "",
             courseId: "",
             meetingUrl: "",
@@ -212,6 +215,7 @@ export default function AdminSessionsPage() {
 
         setFormData({
             title: session.title,
+            shortDescription: session.shortDescription || "",
             description: session.description || "",
             courseId: session.courseId,
             meetingUrl: session.meetingUrl || "",
@@ -391,7 +395,17 @@ export default function AdminSessionsPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="description">Session Description</Label>
+                            <Label htmlFor="shortDescription">Short Description (for simple view)</Label>
+                            <Input
+                                id="shortDescription"
+                                placeholder="A brief one-sentence summary"
+                                value={formData.shortDescription}
+                                onChange={e => setFormData({ ...formData, shortDescription: e.target.value })}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="description">Full Session description</Label>
                             <Textarea
                                 id="description"
                                 placeholder="What will students learn in this session?"

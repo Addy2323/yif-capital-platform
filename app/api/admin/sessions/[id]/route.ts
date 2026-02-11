@@ -36,6 +36,7 @@ export async function PATCH(
             where: { id },
             data: {
                 title: body.title,
+                shortDescription: body.shortDescription,
                 description: body.description,
                 courseId: body.courseId,
                 meetingUrl: body.meetingUrl,

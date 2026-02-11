@@ -14,6 +14,7 @@ import { format } from "date-fns"
 interface Session {
     id: string
     title: string
+    shortDescription: string | null
     description: string | null
     scheduledStart: string
     scheduledEnd: string
@@ -232,7 +233,9 @@ function SessionItem({
                         </span>
                     )}
                     <h3 className="font-semibold">{session.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-1">{session.description}</p>
+                    <p className="text-sm text-muted-foreground line-clamp-1">
+                        {session.shortDescription || session.description}
+                    </p>
                 </div>
                 {isActuallyLive ? (
                     <Badge className="bg-red-500 hover:bg-red-600">LIVE</Badge>

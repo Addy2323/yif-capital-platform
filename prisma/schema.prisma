@@ -41,6 +41,7 @@ model LiveSession {
   id             String             @id @default(uuid())
   courseId       String
   title          String
+  shortDescription String?
   description    String?
   meetingUrl     String?
   scheduledStart DateTime

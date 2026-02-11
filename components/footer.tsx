@@ -1,32 +1,34 @@
 import Link from "next/link"
 import Image from "next/image"
 
+/*
 const footerLinks = {
   products: [
-    { name: "YIF Analytics", href: "/analytics" },
-    { name: "YIF Academy", href: "/academy" },
-    { name: "YIF Investment Pro", href: "/investment-pro" },
-    { name: "API Access", href: "/api-access" },
+    { name: "YIF Analytics", href: "#" },
+    { name: "YIF Academy", href: "#" },
+    { name: "YIF Investment Pro", href: "#" },
+    { name: "API Access", href: "#" },
   ],
   resources: [
-    { name: "Market Research", href: "/research" },
-    { name: "Learning Center", href: "/academy" },
-    { name: "Documentation", href: "/docs" },
-    { name: "Blog", href: "/blog" },
+    { name: "Market Research", href: "#" },
+    { name: "Learning Center", href: "#" },
+    { name: "Documentation", href: "#" },
+    { name: "Blog", href: "#" },
   ],
   company: [
-    { name: "About Us", href: "/about" },
-    { name: "Careers", href: "/careers" },
-    { name: "Contact", href: "/contact" },
-    { name: "Press", href: "/press" },
+    { name: "About Us", href: "#" },
+    { name: "Careers", href: "#" },
+    { name: "Contact", href: "#" },
+    { name: "Press", href: "#" },
   ],
   legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
-    { name: "Disclaimer", href: "/disclaimer" },
-    { name: "Compliance", href: "/compliance" },
+    { name: "Privacy Policy", href: "#" },
+    { name: "Terms of Service", href: "#" },
+    { name: "Disclaimer", href: "#" },
+    { name: "Compliance", href: "#" },
   ],
 }
+*/
 
 export function Footer() {
   return (
@@ -35,7 +37,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/academy" className="flex items-center gap-2">
               <Image src="/logo.png" alt="YIF Capital" width={40} height={40} className="h-10 w-10" />
               <span className="text-xl font-bold">YIF Capital</span>
             </Link>
@@ -46,7 +48,7 @@ export function Footer() {
           </div>
 
           {/* Products */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-gold">Products</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.products.map((link) => (
@@ -57,10 +59,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Resources */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-gold">Resources</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.resources.map((link) => (
@@ -71,10 +73,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Company */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-gold">Company</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.company.map((link) => (
@@ -85,10 +87,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Legal */}
-          <div>
+          {/* <div>
             <h3 className="font-semibold text-gold">Legal</h3>
             <ul className="mt-4 space-y-2">
               {footerLinks.legal.map((link) => (
@@ -99,7 +101,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom */}

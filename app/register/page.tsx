@@ -151,6 +151,8 @@ function RegisterForm() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   className="h-12"
+                  autoComplete="name"
+                  suppressHydrationWarning
                 />
               </div>
 
@@ -164,6 +166,8 @@ function RegisterForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="h-12"
+                  autoComplete="email"
+                  suppressHydrationWarning
                 />
               </div>
 
@@ -178,6 +182,8 @@ function RegisterForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     className="h-12 pr-12"
+                    autoComplete="new-password"
+                    suppressHydrationWarning
                   />
                   <button
                     type="button"
@@ -214,6 +220,8 @@ function RegisterForm() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   className="h-12"
+                  autoComplete="new-password"
+                  suppressHydrationWarning
                 />
               </div>
 
