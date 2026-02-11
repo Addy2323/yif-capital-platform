@@ -225,30 +225,32 @@ function SessionItem({
 
     return (
         <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 transition-all hover:border-gold/30">
-            <div className="flex items-start justify-between">
-                <div className="space-y-1">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="space-y-1 flex-1">
                     {session.courseName && (
                         <span className="text-[10px] font-bold uppercase tracking-wider text-gold">
                             {session.courseName}
                         </span>
                     )}
-                    <h3 className="font-semibold">{session.title}</h3>
+                    <h3 className="font-semibold text-lg">{session.title}</h3>
                     <p className="text-sm text-muted-foreground">
                         {session.description || session.shortDescription}
                     </p>
                 </div>
-                {isActuallyLive ? (
-                    <Badge className="bg-red-500 hover:bg-red-600">LIVE</Badge>
-                ) : isLive ? (
-                    <Badge variant="outline" className="border-gold text-gold">STARTING SOON</Badge>
-                ) : isPast ? (
-                    <Badge variant="secondary">ENDED</Badge>
-                ) : (
-                    <Badge variant="outline">SCHEDULED</Badge>
-                )}
-                {session.hasAccess && !session.isFree && !isPast && (
-                    <Badge className="bg-green-500 hover:bg-green-600 text-white border-none">ACTIVATED</Badge>
-                )}
+                <div className="flex flex-wrap gap-2">
+                    {isActuallyLive ? (
+                        <Badge className="bg-red-500 hover:bg-red-600">LIVE</Badge>
+                    ) : isLive ? (
+                        <Badge variant="outline" className="border-gold text-gold">STARTING SOON</Badge>
+                    ) : isPast ? (
+                        <Badge variant="secondary">ENDED</Badge>
+                    ) : (
+                        <Badge variant="outline">SCHEDULED</Badge>
+                    )}
+                    {session.hasAccess && !session.isFree && !isPast && (
+                        <Badge className="bg-green-500 hover:bg-green-600 text-white border-none">ACTIVATED</Badge>
+                    )}
+                </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
