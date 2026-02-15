@@ -9,6 +9,7 @@ export interface LiveSession {
     scheduledEnd: Date;
     status: SessionStatus;
     meetingUrl?: string | null;
+    recordingUrl?: string | null;
 }
 
 export interface UserEnrollment {

@@ -25,6 +25,7 @@ interface Session {
     currency: string
     isFree: boolean
     hasAccess?: boolean
+    recordingUrl?: string | null
 }
 
 export function LiveSessionsDashboard({ courseId }: { courseId?: string }) {
@@ -300,8 +301,17 @@ function SessionItem({
             )}
 
             {isPast && (
-                <Button variant="outline" className="w-full border-gold/20 text-gold hover:bg-gold/5">
-                    Watch Recording
+                <Button
+                    variant="outline"
+                    className={`w-full border-gold/20 text-gold hover:bg-gold/5 ${!session.recordingUrl ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={!session.recordingUrl}
+                    onClick={() => {
+                        if (session.recordingUrl) {
+                            window.open(session.recordingUrl, '_blank', 'noopener,noreferrer')
+                        }
+                    }}
+                >
+                    {session.recordingUrl ? 'Watch Recording' : 'Recording Not Available'}
                 </Button>
             )}
         </div>

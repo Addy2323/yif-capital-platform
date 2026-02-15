@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
                 description: body.description,
                 courseId: body.courseId,
                 meetingUrl: body.meetingUrl,
+                recordingUrl: body.recordingUrl || null,
                 scheduledStart: scheduledStart,
                 scheduledEnd: scheduledEnd,
                 status: "scheduled",

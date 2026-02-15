@@ -18,7 +18,6 @@ export async function GET(req: NextRequest) {
             where: {
                 ...(courseId ? { courseId } : {}),
                 status: { not: "cancelled" },
-                scheduledEnd: { gt: new Date(Date.now() - 24 * 60 * 60 * 1000) } // Show last 24h as well
             },
             orderBy: {
                 scheduledStart: "asc"

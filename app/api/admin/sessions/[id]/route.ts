@@ -40,6 +40,7 @@ export async function PATCH(
                 description: body.description,
                 courseId: body.courseId,
                 meetingUrl: body.meetingUrl,
+                recordingUrl: body.recordingUrl !== undefined ? (body.recordingUrl || null) : undefined,
                 scheduledStart: scheduledStart,
                 scheduledEnd: scheduledEnd,
                 status: body.status,

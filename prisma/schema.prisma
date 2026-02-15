@@ -44,6 +44,7 @@ model LiveSession {
   shortDescription String?
   description    String?
   meetingUrl     String?
+  recordingUrl   String?
   scheduledStart DateTime
   scheduledEnd   DateTime
   status         String             @default("scheduled")

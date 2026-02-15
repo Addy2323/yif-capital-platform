@@ -45,6 +45,7 @@ interface LiveSession {
     shortDescription: string | null
     description: string | null
     meetingUrl: string | null
+    recordingUrl: string | null
     scheduledStart: string
     scheduledEnd: string
     status: "scheduled" | "live" | "ended" | "cancelled"
@@ -72,6 +73,7 @@ export default function AdminSessionsPage() {
         description: "",
         courseId: "",
         meetingUrl: "",
+        recordingUrl: "",
         scheduledStart: "",
         scheduledEnd: "",
         price: 0,
@@ -106,6 +108,7 @@ export default function AdminSessionsPage() {
             description: "",
             courseId: "",
             meetingUrl: "",
+            recordingUrl: "",
             scheduledStart: "",
             scheduledEnd: "",
             price: 0,
@@ -219,6 +222,7 @@ export default function AdminSessionsPage() {
             description: session.description || "",
             courseId: session.courseId,
             meetingUrl: session.meetingUrl || "",
+            recordingUrl: session.recordingUrl || "",
             scheduledStart: start.toISOString().slice(0, 16),
             scheduledEnd: end.toISOString().slice(0, 16),
             price: session.price,
@@ -518,6 +522,19 @@ export default function AdminSessionsPage() {
                                 </select>
                             </div>
                         )}
+
+                        <div className="space-y-2">
+                            <Label htmlFor="recordingUrl">Recording URL (YouTube/Drive/etc.)</Label>
+                            <Input
+                                id="recordingUrl"
+                                placeholder="https://youtube.com/watch?v=... or any recording link"
+                                value={formData.recordingUrl}
+                                onChange={e => setFormData({ ...formData, recordingUrl: e.target.value })}
+                            />
+                            <p className="text-[10px] text-muted-foreground">
+                                Add a recording link after the session ends. This will be shown to users on the Recording tab.
+                            </p>
+                        </div>
 
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => { setIsAddingSession(false); resetForm() }}>Cancel</Button>
