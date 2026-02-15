@@ -1,50 +1,30 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { BarChart3, GraduationCap, Briefcase, ArrowRight, Check } from "lucide-react"
+import { BarChart3, GraduationCap, Briefcase, ArrowRight, Check, MessagesSquare } from "lucide-react"
 
 const products = [
-  /* {
-      name: "YIF Analytics",
-      description: "Professional-grade market data, research, and analytics for traders and institutions.",
-      icon: BarChart3,
-      href: "/analytics",
-      features: [
-        "Real-time DSE prices",
-        "Interactive charting",
-        "Stock screener",
-        "Technical indicators",
-        "Market heatmaps",
-      ],
-      color: "bg-gold/10 text-gold",
-    }, */
   {
-    name: "YIF Academy",
-    description: "Comprehensive investment education from basics to advanced portfolio management.",
+    name: "YIF ANALYTICS",
+    description: "Advanced tools and market insights for informed investment decisions. Access technical charts and market movers.",
+    icon: BarChart3,
+    href: "/analytics",
+    label: "Coming Soon",
+    comingSoon: true,
+  },
+  {
+    name: "YIF LMS",
+    description: "Comprehensive investment education, from basics to advanced strategies. 82+ lessons and certificates.",
     icon: GraduationCap,
     href: "/academy",
-    features: [
-      "Structured courses",
-      "Video lessons",
-      "Quizzes & certificates",
-      "Community forums",
-      "Expert mentorship",
-    ],
-    color: "bg-navy/10 text-navy",
+    label: "Explore Courses",
   },
-  /* {
-      name: "YIF Investment Pro",
-      description: "Advanced portfolio tracking, advisory tools, and personalized investment insights.",
-      icon: Briefcase,
-      href: "/investment-pro",
-      features: [
-        "Portfolio tracking",
-        "Performance analytics",
-        "Dividend calendar",
-        "Price alerts",
-        "Personalized insights",
-      ],
-      color: "bg-silver/30 text-charcoal",
-    }, */
+  {
+    name: "YIF FORUM",
+    description: "Join the community, discuss market trends, and connect with other investors. Share knowledge and grow together.",
+    icon: MessagesSquare,
+    href: "https://forum.yifcapital.co.tz",
+    label: "Join Community",
+  },
 ]
 
 export function ProductsSection() {
@@ -53,46 +33,42 @@ export function ProductsSection() {
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         {/* Header */}
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-            One Platform, Three Powerful Products
+          <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            Our Products
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground text-pretty">
-            Everything you need to analyze markets, learn investing, and manage your portfolio in one unified ecosystem.
-          </p>
         </div>
 
         {/* Products Grid */}
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <div
               key={product.name}
-              className="group relative rounded-2xl border border-border bg-card p-8 transition-all hover:border-gold/50 hover:shadow-lg"
+              className="flex flex-col items-center text-center rounded-2xl border border-border bg-white p-10 shadow-sm transition-all hover:shadow-md"
             >
-              <div className={`inline-flex rounded-xl p-3 ${product.color}`}>
-                <product.icon className="h-6 w-6" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold/40 text-gold mb-6">
+                <product.icon className="h-8 w-8" />
               </div>
 
-              <h3 className="mt-6 text-xl font-semibold text-card-foreground">{product.name}</h3>
-              <p className="mt-2 text-muted-foreground leading-relaxed">{product.description}</p>
-
-              <ul className="mt-6 space-y-3">
-                {product.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Check className="h-4 w-4 text-gold flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              <h3 className="text-xl font-bold text-navy mb-3">{product.name}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-8 flex-1">
+                {product.description}
+              </p>
 
               <Button
-                asChild
-                variant="ghost"
-                className="mt-8 w-full justify-between hover:bg-gold/10 hover:text-gold"
+                asChild={!product.comingSoon}
+                disabled={product.comingSoon}
+                className={`w-full font-semibold ${product.comingSoon
+                    ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : "bg-gold text-navy hover:bg-gold/90"
+                  }`}
               >
-                <Link href={product.href}>
-                  Learn More
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+                {product.comingSoon ? (
+                  <span>{product.label}</span>
+                ) : (
+                  <Link href={product.href}>
+                    {product.label}
+                  </Link>
+                )}
               </Button>
             </div>
           ))}

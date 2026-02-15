@@ -12,21 +12,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Menu, X, User, LogOut, Settings, BarChart3, GraduationCap, Briefcase, ChevronDown } from "lucide-react"
+import { Menu, X, User, LogOut, Settings, BarChart3, GraduationCap, Briefcase, ChevronDown, MessagesSquare } from "lucide-react"
 
 const navigation = [
-  { name: "Home", href: "/academy" },
+  { name: "Home", href: "/" },
   {
     name: "Products",
     href: "#",
     children: [
-      // { name: "YIF Analytics", href: "/analytics", icon: BarChart3, description: "Market data & analysis" },
+      { name: "YIF Analytics (Coming Soon)", href: "#", icon: BarChart3, description: "Market data & analysis" },
       { name: "YIF Academy", href: "/academy", icon: GraduationCap, description: "Investment education" },
-      // { name: "YIF Investment Pro", href: "/investment-pro", icon: Briefcase, description: "Portfolio & advisory" },
+      { name: "YIF Forum", href: "https://forum.yifcapital.co.tz", icon: MessagesSquare, description: "Community & discussion" },
     ],
   },
-  // { name: "Research", href: "/research" },
-  // { name: "Pricing", href: "/pricing" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -35,31 +34,30 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+    <header className="sticky top-0 z-50 w-full bg-navy border-b border-white/5">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
-        <Link href="/academy" className="flex items-center gap-2">
-          <Image src="/logo.png" alt="YIF Capital" width={40} height={40} className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover" />
-          <span className="text-lg font-bold text-navy sm:text-xl">YIF Capital</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" alt="YIF Capital" width={44} height={44} className="rounded-full" />
+          <span className="text-xl font-bold text-white tracking-tight">YIF Capital</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:items-center lg:gap-8">
+        <div className="hidden lg:flex lg:items-center lg:gap-10">
           {navigation.map((item) =>
             item.children ? (
               <DropdownMenu key={item.name}>
                 <DropdownMenuTrigger asChild>
-                  <button className="group relative flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground">
+                  <button className="group relative flex items-center gap-1.5 text-sm font-medium text-white/80 transition-colors hover:text-white">
                     {item.name}
                     <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gold transition-all duration-300 group-hover:w-full" />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="w-64">
                   {item.children.map((child) => (
                     <DropdownMenuItem key={child.name} asChild>
-                      <Link href={child.href} className="group flex items-start gap-3 rounded-md p-3 transition-all duration-200 hover:bg-muted hover:pl-4">
-                        <child.icon className="mt-0.5 h-5 w-5 text-gold transition-transform duration-200 group-hover:scale-110" />
+                      <Link href={child.href} className="flex items-start gap-3 p-3 transition-colors hover:bg-muted">
+                        <child.icon className="mt-0.5 h-5 w-5 text-gold" />
                         <div>
                           <div className="font-medium">{child.name}</div>
                           <div className="text-xs text-muted-foreground">{child.description}</div>
@@ -73,10 +71,9 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="group relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                className="text-sm font-medium text-white/80 transition-colors hover:text-white"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gold transition-all duration-300 group-hover:w-full" />
               </Link>
             )
           )}
@@ -138,7 +135,7 @@ export function Header() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="lg:hidden"
+          className="lg:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
