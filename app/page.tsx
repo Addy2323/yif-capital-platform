@@ -7,6 +7,7 @@ import { MarketOverviewSection } from "@/components/landing/market-overview-sect
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { CTASection } from "@/components/landing/cta-section"
 import { AuthProvider } from "@/lib/auth-context"
+import { ScrollAnimation } from "@/components/ui/scroll-animation"
 
 export default function HomePage() {
   return (
@@ -16,12 +17,16 @@ export default function HomePage() {
         <main className="flex-1">
           <HeroSection />
           <ProductsSection />
-          {/* We can decide to hide these below if wanted to strictly match only the visible part of the image, 
-              but usually, the image shows the top folds. I'll include them for a complete landing page experience. */}
-          {/* <MarketOverviewSection /> */}
-          {/* <FeaturesSection /> */}
-          {/* <TestimonialsSection /> */}
-          {/* <CTASection /> */}
+          <ScrollAnimation animation="fade-in">
+            <MarketOverviewSection />
+          </ScrollAnimation>
+          <ScrollAnimation animation="slide-up">
+            <FeaturesSection />
+          </ScrollAnimation>
+          <ScrollAnimation animation="zoom-in" delay={200}>
+            <TestimonialsSection />
+          </ScrollAnimation>
+          <CTASection />
         </main>
         <Footer />
       </div>
