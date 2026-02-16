@@ -1,41 +1,17 @@
-"use client"
-
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { ScrollAnimation } from "@/components/ui/scroll-animation"
-import { Typewriter } from "@/components/ui/typewriter"
-
 export function HeroSection() {
   return (
-    <section className="relative min-h-[600px] sm:min-h-[700px] flex items-center justify-center overflow-hidden bg-navy">
-      {/* Background Image with Overlay & Animation */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 z-0 animate-auto-zoom">
-          <Image
-            src="/logo%20payment/background/academy.png"
-            alt="Wealth Background"
-            fill
-            className="object-cover opacity-30"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/40 to-navy" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 lg:px-8">
-        <ScrollAnimation animation="slide-up" duration={800}>
-          <div className="text-center">
-            <h1 className="hero-title text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl text-balance leading-tight">
-              Empowering Your <br className="hidden sm:block" />
-              <Typewriter
-                phrases={["Financial Future", "Investment Journey", "Wealth Creation"]}
-                className="text-white"
-              /> <br className="hidden sm:block" />
-              with <span className="text-gradient-gold">YIF Capital</span>
-            </h1>
-          </div>
-        </ScrollAnimation>
+    <section
+      className="relative py-1.5 lg:py-2 flex-none hidden sm:flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/logo%20payment/background/hero1.png')" }}
+    >
+      <div className="absolute inset-0 bg-navy/70 z-0" />
+      <div className="mx-auto max-w-3xl px-4 lg:px-8 text-center relative z-10">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">
+          Empowering Your Financial{" "}
+          <br className="hidden sm:block" />
+          Future with{" "}
+          <span className="text-gold">YIF Capital</span>
+        </h1>
       </div>
     </section>
   )
