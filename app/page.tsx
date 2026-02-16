@@ -17,7 +17,7 @@ export default function HomePage() {
         <main className="flex-1">
           <HeroSection />
           <ProductsSection />
-          <ScrollAnimation animation="fade-in">
+          {/* <ScrollAnimation animation="fade-in">
             <MarketOverviewSection />
           </ScrollAnimation>
           <ScrollAnimation animation="slide-up">
@@ -26,7 +26,7 @@ export default function HomePage() {
           <ScrollAnimation animation="zoom-in" delay={200}>
             <TestimonialsSection />
           </ScrollAnimation>
-          <CTASection />
+          <CTASection /> */}
         </main>
         <Footer />
       </div>
