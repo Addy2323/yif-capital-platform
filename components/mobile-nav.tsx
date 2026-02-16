@@ -21,7 +21,7 @@ export function MobileNav() {
         },
         {
             name: "Analytics",
-            href: "/analytics",
+            href: "/",
             icon: BarChart3,
         },
     ]

@@ -34,7 +34,7 @@ export function ProductsSection() {
   return (
     <section
       id="products"
-      className="py-6 sm:py-2 lg:py-3 pb-24 sm:pb-4 lg:pb-4 bg-navy sm:bg-white flex flex-col justify-start min-h-0 sm:rounded-b-[2rem] z-10 relative sm:shadow-lg start-0"
+      className="py-6 sm:py-2 lg:py-3 pb-24 sm:pb-4 lg:pb-4 bg-transparent sm:bg-white flex flex-col justify-start min-h-0 sm:rounded-b-[2rem] z-10 relative sm:shadow-lg start-0"
     >
       <div className="mx-auto max-w-7xl px-4 lg:px-8 w-full h-full flex flex-col justify-start pt-4 sm:pt-1 lg:pt-2">
         {/* Header */}
