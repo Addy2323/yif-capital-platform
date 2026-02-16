@@ -150,12 +150,12 @@ export function Header() {
             {navigation.map((item) =>
               item.children ? (
                 <div key={item.name} className="space-y-1">
-                  <div className="px-3 py-2 text-sm font-medium text-muted-foreground">{item.name}</div>
+                  <div className="px-3 py-2 text-sm font-medium text-white/60">{item.name}</div>
                   {item.children.map((child) => (
                     <Link
                       key={child.name}
                       href={child.href}
-                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-muted"
+                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <child.icon className="h-5 w-5 text-gold" />
@@ -167,7 +167,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
