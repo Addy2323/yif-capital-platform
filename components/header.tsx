@@ -122,7 +122,7 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <>
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" asChild className="text-white hover:text-gold hover:bg-white/10">
                 <Link href="/login">Sign In</Link>
               </Button>
               <Button asChild className="bg-gold text-navy transition-all duration-300 hover:bg-gold/90 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 active:translate-y-0">
