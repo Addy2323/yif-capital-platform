@@ -57,7 +57,7 @@ function RegisterForm() {
     const result = await register(email, password, name)
 
     if (result.success) {
-      window.location.href = "https://yifcapital.co.tz/academy"
+      window.location.href = "/"
     } else {
       setError(result.error || "An error occurred")
     }

@@ -34,7 +34,7 @@ function LoginForm() {
       if (redirect) {
         router.push(redirect)
       } else {
-        window.location.href = "https://yifcapital.co.tz/academy"
+        window.location.href = "/"
       }
     } else {
       setError(result.error || "An error occurred")
@@ -55,7 +55,7 @@ function LoginForm() {
         </div>
 
         <div className="relative z-10">
-          <Link href="/academy" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
               <div className="absolute inset-0 bg-gold/20 rounded-full blur-md group-hover:blur-lg transition-all" />
               <Image src="/logo.png" alt="YIF Capital" width={64} height={64} className="relative h-16 w-16 rounded-full object-cover border-2 border-gold/30" />
@@ -99,7 +99,7 @@ function LoginForm() {
         <div className="mx-auto w-full max-w-md space-y-10">
           {/* Mobile Logo */}
           <div className="lg:hidden">
-            <Link href="/academy" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <Image src="/logo.png" alt="YIF Capital" width={48} height={48} className="h-12 w-12 rounded-full object-cover border border-gold/20" />
               <span className="text-xl font-bold text-navy">YIF Capital</span>
             </Link>
