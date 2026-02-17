@@ -251,8 +251,6 @@ function InvestmentProContent() {
 
 export default function InvestmentProPage() {
   return (
-    <AuthProvider>
-      <InvestmentProContent />
-    </AuthProvider>
+    <InvestmentProContent />
   )
 }

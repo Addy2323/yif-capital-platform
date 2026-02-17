@@ -244,8 +244,6 @@ function ContactContent() {
 
 export default function ContactPage() {
   return (
-    <AuthProvider>
-      <ContactContent />
-    </AuthProvider>
+    <ContactContent />
   )
 }

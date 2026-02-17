@@ -219,8 +219,6 @@ function ResearchContent() {
 
 export default function ResearchPage() {
   return (
-    <AuthProvider>
-      <ResearchContent />
-    </AuthProvider>
+    <ResearchContent />
   )
 }

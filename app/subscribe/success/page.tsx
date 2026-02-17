@@ -237,8 +237,6 @@ function SuccessContent() {
 
 export default function SuccessPage() {
     return (
-        <AuthProvider>
-            <SuccessContent />
-        </AuthProvider>
+        <SuccessContent />
     )
 }

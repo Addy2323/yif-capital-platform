@@ -6,6 +6,7 @@ import { SweetAlertProvider } from '@/components/ui/sweet-alert'
 import { Toaster } from '@/components/ui/sonner'
 import { StartupLoader } from '@/components/startup-loader'
 import { AdminDataProvider } from '@/lib/admin-data-context'
+import { AuthProvider } from '@/lib/auth-context'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -36,19 +37,21 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <StartupLoader />
         <AdminDataProvider>
-          <SweetAlertProvider>
-            {children}
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                style: {
-                  background: 'var(--card)',
-                  color: 'var(--card-foreground)',
-                  border: '1px solid var(--border)',
-                },
-              }}
-            />
-          </SweetAlertProvider>
+          <AuthProvider>
+            <SweetAlertProvider>
+              {children}
+              <Toaster
+                position="top-right"
+                toastOptions={{
+                  style: {
+                    background: 'var(--card)',
+                    color: 'var(--card-foreground)',
+                    border: '1px solid var(--border)',
+                  },
+                }}
+              />
+            </SweetAlertProvider>
+          </AuthProvider>
         </AdminDataProvider>
         <Analytics />
       </body>

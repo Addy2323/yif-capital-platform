@@ -627,8 +627,6 @@ function SubscribeContent() {
 
 export default function SubscribePage() {
     return (
-        <AuthProvider>
-            <SubscribeContent />
-        </AuthProvider>
+        <SubscribeContent />
     )
 }

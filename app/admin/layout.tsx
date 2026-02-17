@@ -49,8 +49,6 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
-        <AuthProvider>
-            <AdminLayoutContent>{children}</AdminLayoutContent>
-        </AuthProvider>
+        <AdminLayoutContent>{children}</AdminLayoutContent>
     )
 }
