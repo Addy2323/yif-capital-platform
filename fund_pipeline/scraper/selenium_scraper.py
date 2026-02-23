@@ -296,12 +296,17 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
             return dedup_rows
 
         except Exception as e:
+            # Capture failure details for easier debugging on server
+            page_title = driver.title if driver else "Unknown"
+            page_source = driver.page_source[:500] if driver else "No source"
             logger.error(f"[{name}] Attempt {attempt} failed: {e}")
-        finally:
+            logger.error(f"[{name}] Page Title: {page_title}")
+            logger.debug(f"[{name}] Page Snippet: {page_source}")
+            
             if driver:
                 driver.quit()
-
-    logger.error(f"[{name}] All {retry_count} attempts exhausted")
+            if attempt == retry_count:
+                logger.error(f"[{name}] All {retry_count} attempts exhausted")
     return []
 
 
