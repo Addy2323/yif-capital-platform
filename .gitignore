@@ -25,4 +25,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/lib/generated/client
 /lib/generated/prisma
+
+# python
+.venv/
+__pycache__/
+*.pyc
+fund_pipeline/.venv/
+fund_pipeline/data/raw/
+fund_pipeline/data/processed/
+fund_pipeline/data/archive/
+fund_pipeline/logs/
+fund_pipeline/scraper/__pycache__/
