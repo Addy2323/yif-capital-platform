@@ -7677,3 +7677,15 @@ Symbols not available. Dumping unresolved backtrace:
 2026-02-23 06:20:20,444 [INFO] [utt-amis] Page 34 is all duplicates. Skipping save and speeding up.
 2026-02-23 06:20:25,942 [INFO] [utt-amis] Clicking 'Next' button...
 2026-02-23 06:20:27,973 [INFO] [utt-amis] Scraping page 35/300
+2026-02-23 06:21:00,083 [INFO] [utt-amis] Found 50 rows on page 35 (New: False)
+2026-02-23 06:21:00,084 [INFO] [utt-amis] Page 35 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:21:06,022 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:21:08,054 [INFO] [utt-amis] Scraping page 36/300
+2026-02-23 06:21:38,487 [INFO] [utt-amis] Found 50 rows on page 36 (New: False)
+2026-02-23 06:21:38,488 [INFO] [utt-amis] Page 36 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:21:44,057 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:21:46,088 [INFO] [utt-amis] Scraping page 37/300
+2026-02-23 06:22:16,121 [INFO] [utt-amis] Found 50 rows on page 37 (New: False)
+2026-02-23 06:22:16,122 [INFO] [utt-amis] Page 37 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:22:21,889 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:22:23,917 [INFO] [utt-amis] Scraping page 38/300
