@@ -22,10 +22,12 @@ export async function POST(req: NextRequest) {
         }
 
         const nameMap: Record<string, string> = {
-            "zansec-bond": "Zansec Bond Fund",
-            "utt-umoja": "Umoja Fund",
-            "whi-income": "WHI Income Fund",
-            "vertex-bond": "Vertex Bond Fund"
+            "zansec-bond": "Zan Securities Fixed Income Fund",
+            "utt-amis": "UTT AMIS Fund",
+            "whi-income": "Watumishi Housing Investment Fund",
+            "vertex-bond": "Vertex Bond Fund",
+            "itrust": "iTrust Finance Fund Family",
+            "sanlam-pesa": "SanlamAllianz Pesa Fund"
         }
 
         const fundId = fundMap[source]

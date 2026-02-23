@@ -7689,3 +7689,482 @@ Symbols not available. Dumping unresolved backtrace:
 2026-02-23 06:22:16,122 [INFO] [utt-amis] Page 37 is all duplicates. Skipping save and speeding up.
 2026-02-23 06:22:21,889 [INFO] [utt-amis] Clicking 'Next' button...
 2026-02-23 06:22:23,917 [INFO] [utt-amis] Scraping page 38/300
+2026-02-23 06:22:53,932 [INFO] [utt-amis] Found 50 rows on page 38 (New: False)
+2026-02-23 06:22:53,933 [INFO] [utt-amis] Page 38 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:22:59,715 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:23:01,764 [INFO] [utt-amis] Scraping page 39/300
+2026-02-23 06:23:31,903 [INFO] [utt-amis] Found 50 rows on page 39 (New: False)
+2026-02-23 06:23:31,903 [INFO] [utt-amis] Page 39 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:23:37,622 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:23:39,681 [INFO] [utt-amis] Scraping page 40/300
+2026-02-23 06:24:10,257 [INFO] [utt-amis] Found 50 rows on page 40 (New: False)
+2026-02-23 06:24:10,258 [INFO] [utt-amis] Page 40 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:24:16,096 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:24:18,141 [INFO] [utt-amis] Scraping page 41/300
+2026-02-23 06:24:48,395 [INFO] [utt-amis] Found 50 rows on page 41 (New: False)
+2026-02-23 06:24:48,396 [INFO] [utt-amis] Page 41 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:24:54,254 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:24:56,299 [INFO] [utt-amis] Scraping page 42/300
+2026-02-23 06:25:26,319 [INFO] [utt-amis] Found 50 rows on page 42 (New: False)
+2026-02-23 06:25:26,319 [INFO] [utt-amis] Page 42 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:25:31,972 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:25:34,009 [INFO] [utt-amis] Scraping page 43/300
+2026-02-23 06:26:04,019 [INFO] [utt-amis] Found 50 rows on page 43 (New: False)
+2026-02-23 06:26:04,019 [INFO] [utt-amis] Page 43 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:26:09,664 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:26:11,701 [INFO] [utt-amis] Scraping page 44/300
+2026-02-23 06:26:41,642 [INFO] [utt-amis] Found 50 rows on page 44 (New: False)
+2026-02-23 06:26:41,642 [INFO] [utt-amis] Page 44 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:26:47,353 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:26:49,394 [INFO] [utt-amis] Scraping page 45/300
+2026-02-23 06:27:19,635 [INFO] [utt-amis] Found 50 rows on page 45 (New: False)
+2026-02-23 06:27:19,636 [INFO] [utt-amis] Page 45 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:27:25,305 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:27:27,344 [INFO] [utt-amis] Scraping page 46/300
+2026-02-23 06:27:57,383 [INFO] [utt-amis] Found 50 rows on page 46 (New: False)
+2026-02-23 06:27:57,384 [INFO] [utt-amis] Page 46 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:28:03,197 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:28:05,230 [INFO] [utt-amis] Scraping page 47/300
+2026-02-23 06:28:35,341 [INFO] [utt-amis] Found 50 rows on page 47 (New: False)
+2026-02-23 06:28:35,342 [INFO] [utt-amis] Page 47 is all duplicates. Skipping save and speeding up.
+2026-02-23 06:28:41,198 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 06:28:43,235 [INFO] [utt-amis] Scraping page 48/300
+2026-02-23 06:29:13,298 [INFO] [utt-amis] Found 50 rows on page 48 (New: False)
+2026-02-23 06:29:13,299 [INFO] [utt-amis] Reached stop date 2024-07-09 (oldest on page: 2024-07-09). Stopping.
+2026-02-23 06:29:13,303 [INFO] [utt-amis] Scraped 2400 total rows across multi-page attempt
+2026-02-23 06:29:15,754 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-02-23.json
+2026-02-23 06:29:17,262 [INFO] [utt-amis] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\utt-amis.json
+2026-02-23 06:29:18,799 [INFO] [utt-amis] Saved structured data -> data\processed\utt-amis_processed_2026-02-23.json and data\processed\utt-amis_data_2026-02-23.csv
+2026-02-23 06:29:18,800 [INFO] [utt-amis] Pushing chunk 1/2107 (10 records) to API
+2026-02-23 06:29:22,865 [ERROR] [utt-amis] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 06:29:22,866 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 06:29:22,867 [INFO] ====== WebDriver manager ======
+2026-02-23 06:29:24,619 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:29:25,679 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:29:26,875 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 06:29:28,058 [INFO] [vertex] Starting scrape with max_pages=1
+2026-02-23 06:29:47,727 [INFO] [vertex] Scraping page 1/1
+2026-02-23 06:30:02,931 [INFO] [vertex] Captured row: ['20 February 2026', '-', '-', '-', '6,441,440,184', '58,679,777', '109.7727']
+2026-02-23 06:30:03,022 [INFO] [vertex] Captured row: ['19 February 2026', '-', '-', '-', '6,438,051,825', '58,681,223', '109.7123']
+2026-02-23 06:30:03,113 [INFO] [vertex] Captured row: ['18 February 2026', '-', '-', '-', '6,434,037,832', '58,643,823', '109.7138']
+2026-02-23 06:30:03,204 [INFO] [vertex] Captured row: ['17 February 2026', '-', '-', '-', '6,401,653,927', '58,384,045', '109.6473']
+2026-02-23 06:30:03,290 [INFO] [vertex] Captured row: ['16 February 2026', '-', '-', '-', '6,445,876,567', '58,802,440', '109.6192']
+2026-02-23 06:30:03,377 [INFO] [vertex] Captured row: ['13 February 2026', '-', '-', '-', '6,381,341,623', '58,265,071', '109.5226']
+2026-02-23 06:30:03,461 [INFO] [vertex] Captured row: ['12 February 2026', '-', '-', '-', '6,204,007,549', '56,661,889', '109.4917']
+2026-02-23 06:30:03,545 [INFO] [vertex] Captured row: ['11 February 2026', '-', '-', '-', '6,199,331,047', '56,637,762', '109.4558']
+2026-02-23 06:30:03,633 [INFO] [vertex] Captured row: ['10 February 2026', '-', '-', '-', '6,196,050,589', '56,625,217', '109.4221']
+2026-02-23 06:30:03,718 [INFO] [vertex] Captured row: ['9 February 2026', '-', '-', '-', '6,190,589,996', '56,630,938', '109.3146']
+2026-02-23 06:30:03,718 [INFO] [vertex] Found 10 rows on page 1 (New: True)
+2026-02-23 06:30:03,719 [INFO] [vertex] Scraped 10 total rows across multi-page attempt
+2026-02-23 06:30:06,010 [INFO] [vertex] Saved raw data -> data/raw/vertex_2026-02-23.json
+2026-02-23 06:30:06,034 [INFO] [vertex] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\vertex.json
+2026-02-23 06:30:06,095 [INFO] [vertex] Saved structured data -> data\processed\vertex_processed_2026-02-23.json and data\processed\vertex_data_2026-02-23.csv
+2026-02-23 06:30:06,096 [INFO] [vertex] Pushing chunk 1/29 (10 records) to API
+2026-02-23 06:30:10,187 [ERROR] [vertex] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 06:30:10,188 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 06:30:10,189 [INFO] ====== WebDriver manager ======
+2026-02-23 06:30:11,943 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:30:13,012 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:30:14,050 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 06:30:14,675 [INFO] [sanlam-pesa] Starting scrape with max_pages=15
+2026-02-23 06:30:32,625 [INFO] [sanlam-pesa] Scraping page 1/15
+2026-02-23 06:30:35,222 [INFO] [sanlam-pesa] Successfully set entries per page to 50
+2026-02-23 06:30:55,549 [INFO] [sanlam-pesa] Found 50 rows on page 1 (New: True)
+2026-02-23 06:30:55,607 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:30:58,866 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:31:00,897 [INFO] [sanlam-pesa] Scraping page 2/15
+2026-02-23 06:31:16,168 [INFO] [sanlam-pesa] Found 50 rows on page 2 (New: True)
+2026-02-23 06:31:16,238 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:31:19,618 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:31:21,666 [INFO] [sanlam-pesa] Scraping page 3/15
+2026-02-23 06:31:37,279 [INFO] [sanlam-pesa] Found 50 rows on page 3 (New: True)
+2026-02-23 06:31:37,354 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:31:40,622 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:31:42,661 [INFO] [sanlam-pesa] Scraping page 4/15
+2026-02-23 06:31:58,009 [INFO] [sanlam-pesa] Found 50 rows on page 4 (New: True)
+2026-02-23 06:31:58,090 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:32:01,371 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:32:03,413 [INFO] [sanlam-pesa] Scraping page 5/15
+2026-02-23 06:32:18,829 [INFO] [sanlam-pesa] Found 50 rows on page 5 (New: True)
+2026-02-23 06:32:18,910 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:32:22,217 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:32:24,252 [INFO] [sanlam-pesa] Scraping page 6/15
+2026-02-23 06:32:39,760 [INFO] [sanlam-pesa] Found 50 rows on page 6 (New: True)
+2026-02-23 06:32:39,847 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:32:43,336 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:32:45,374 [INFO] [sanlam-pesa] Scraping page 7/15
+2026-02-23 06:33:00,685 [INFO] [sanlam-pesa] Found 50 rows on page 7 (New: True)
+2026-02-23 06:33:00,801 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:33:04,169 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:33:06,199 [INFO] [sanlam-pesa] Scraping page 8/15
+2026-02-23 06:33:21,982 [INFO] [sanlam-pesa] Found 50 rows on page 8 (New: True)
+2026-02-23 06:33:22,080 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:33:25,409 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:33:27,444 [INFO] [sanlam-pesa] Scraping page 9/15
+2026-02-23 06:33:42,934 [INFO] [sanlam-pesa] Found 50 rows on page 9 (New: True)
+2026-02-23 06:33:43,029 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:33:47,621 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:33:49,677 [INFO] [sanlam-pesa] Scraping page 10/15
+2026-02-23 06:34:07,529 [INFO] [sanlam-pesa] Found 50 rows on page 10 (New: True)
+2026-02-23 06:34:07,689 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:34:11,092 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:34:13,127 [INFO] [sanlam-pesa] Scraping page 11/15
+2026-02-23 06:34:29,482 [INFO] [sanlam-pesa] Found 50 rows on page 11 (New: True)
+2026-02-23 06:34:29,587 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 06:34:33,547 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 06:34:35,593 [INFO] [sanlam-pesa] Scraping page 12/15
+2026-02-23 06:34:52,475 [INFO] [sanlam-pesa] Found 43 rows on page 12 (New: True)
+2026-02-23 06:34:52,476 [INFO] [sanlam-pesa] Reached stop date 2024-07-09 (oldest on page: 2024-07-09). Stopping.
+2026-02-23 06:34:52,477 [INFO] [sanlam-pesa] Scraped 593 total rows across multi-page attempt
+2026-02-23 06:34:54,906 [INFO] [sanlam-pesa] Saved raw data -> data/raw/sanlam-pesa_2026-02-23.json
+2026-02-23 06:34:54,990 [INFO] [sanlam-pesa] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\sanlam-pesa.json
+2026-02-23 06:34:55,147 [INFO] [sanlam-pesa] Saved structured data -> data\processed\sanlam-pesa_processed_2026-02-23.json and data\processed\sanlam-pesa_data_2026-02-23.csv
+2026-02-23 06:34:55,148 [INFO] [sanlam-pesa] Pushing chunk 1/115 (10 records) to API
+2026-02-23 06:34:59,206 [ERROR] [sanlam-pesa] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 06:34:59,207 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-02-23 06:34:59,208 [INFO] ====== WebDriver manager ======
+2026-02-23 06:35:00,902 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:35:01,945 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:35:03,001 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 06:35:04,221 [INFO] [zansec] Starting scrape with max_pages=45
+2026-02-23 06:35:19,907 [INFO] [zansec] Scraping page 1/45
+2026-02-23 06:35:32,925 [INFO] [zansec] Found 10 rows on page 1 (New: True)
+2026-02-23 06:35:32,973 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:35:36,703 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:35:38,736 [INFO] [zansec] Scraping page 2/45
+2026-02-23 06:35:51,877 [INFO] [zansec] Found 10 rows on page 2 (New: True)
+2026-02-23 06:35:51,915 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:35:55,540 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:35:57,585 [INFO] [zansec] Scraping page 3/45
+2026-02-23 06:36:10,572 [INFO] [zansec] Found 10 rows on page 3 (New: True)
+2026-02-23 06:36:10,609 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:36:14,396 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:36:16,429 [INFO] [zansec] Scraping page 4/45
+2026-02-23 06:36:29,479 [INFO] [zansec] Found 10 rows on page 4 (New: True)
+2026-02-23 06:36:29,520 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:36:33,609 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:36:35,643 [INFO] [zansec] Scraping page 5/45
+2026-02-23 06:36:48,638 [INFO] [zansec] Found 10 rows on page 5 (New: True)
+2026-02-23 06:36:48,677 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:36:52,423 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:36:54,466 [INFO] [zansec] Scraping page 6/45
+2026-02-23 06:37:07,433 [INFO] [zansec] Found 10 rows on page 6 (New: True)
+2026-02-23 06:37:07,473 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:37:11,086 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:37:13,127 [INFO] [zansec] Scraping page 7/45
+2026-02-23 06:37:26,106 [INFO] [zansec] Found 10 rows on page 7 (New: True)
+2026-02-23 06:37:26,147 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:37:29,691 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:37:31,727 [INFO] [zansec] Scraping page 8/45
+2026-02-23 06:37:44,704 [INFO] [zansec] Found 10 rows on page 8 (New: True)
+2026-02-23 06:37:44,745 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:37:48,428 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:37:50,454 [INFO] [zansec] Scraping page 9/45
+2026-02-23 06:38:03,450 [INFO] [zansec] Found 10 rows on page 9 (New: True)
+2026-02-23 06:38:03,491 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:38:07,192 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:38:09,230 [INFO] [zansec] Scraping page 10/45
+2026-02-23 06:38:22,268 [INFO] [zansec] Found 10 rows on page 10 (New: True)
+2026-02-23 06:38:22,311 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:38:25,954 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:38:28,000 [INFO] [zansec] Scraping page 11/45
+2026-02-23 06:38:40,968 [INFO] [zansec] Found 10 rows on page 11 (New: True)
+2026-02-23 06:38:41,012 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:38:44,642 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:38:46,685 [INFO] [zansec] Scraping page 12/45
+2026-02-23 06:38:59,666 [INFO] [zansec] Found 10 rows on page 12 (New: True)
+2026-02-23 06:38:59,712 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:39:03,306 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:39:05,345 [INFO] [zansec] Scraping page 13/45
+2026-02-23 06:39:18,987 [INFO] [zansec] Found 10 rows on page 13 (New: True)
+2026-02-23 06:39:19,055 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:39:24,693 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:39:26,740 [INFO] [zansec] Scraping page 14/45
+2026-02-23 06:39:39,831 [INFO] [zansec] Found 10 rows on page 14 (New: True)
+2026-02-23 06:39:39,884 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:39:44,302 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:39:46,344 [INFO] [zansec] Scraping page 15/45
+2026-02-23 06:39:59,888 [INFO] [zansec] Found 10 rows on page 15 (New: True)
+2026-02-23 06:39:59,926 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:40:03,662 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:40:05,707 [INFO] [zansec] Scraping page 16/45
+2026-02-23 06:40:18,851 [INFO] [zansec] Found 10 rows on page 16 (New: True)
+2026-02-23 06:40:18,913 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:40:22,630 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:40:24,681 [INFO] [zansec] Scraping page 17/45
+2026-02-23 06:40:37,649 [INFO] [zansec] Found 10 rows on page 17 (New: True)
+2026-02-23 06:40:37,703 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:40:41,428 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:40:43,450 [INFO] [zansec] Scraping page 18/45
+2026-02-23 06:40:56,447 [INFO] [zansec] Found 10 rows on page 18 (New: True)
+2026-02-23 06:40:56,506 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:41:00,231 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:41:02,268 [INFO] [zansec] Scraping page 19/45
+2026-02-23 06:41:15,415 [INFO] [zansec] Found 10 rows on page 19 (New: True)
+2026-02-23 06:41:15,482 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:41:19,068 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:41:21,096 [INFO] [zansec] Scraping page 20/45
+2026-02-23 06:41:35,795 [INFO] [zansec] Found 10 rows on page 20 (New: True)
+2026-02-23 06:41:35,949 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:41:40,533 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:41:42,617 [INFO] [zansec] Scraping page 21/45
+2026-02-23 06:41:55,624 [INFO] [zansec] Found 10 rows on page 21 (New: True)
+2026-02-23 06:41:55,671 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:41:59,321 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:42:01,348 [INFO] [zansec] Scraping page 22/45
+2026-02-23 06:42:14,336 [INFO] [zansec] Found 10 rows on page 22 (New: True)
+2026-02-23 06:42:14,392 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:42:18,036 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:42:20,066 [INFO] [zansec] Scraping page 23/45
+2026-02-23 06:42:32,964 [INFO] [zansec] Found 10 rows on page 23 (New: True)
+2026-02-23 06:42:33,019 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:42:36,635 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:42:38,681 [INFO] [zansec] Scraping page 24/45
+2026-02-23 06:42:51,822 [INFO] [zansec] Found 10 rows on page 24 (New: True)
+2026-02-23 06:42:51,873 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:42:55,599 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:42:57,636 [INFO] [zansec] Scraping page 25/45
+2026-02-23 06:43:10,608 [INFO] [zansec] Found 10 rows on page 25 (New: True)
+2026-02-23 06:43:10,701 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:43:14,312 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:43:16,345 [INFO] [zansec] Scraping page 26/45
+2026-02-23 06:43:29,305 [INFO] [zansec] Found 10 rows on page 26 (New: True)
+2026-02-23 06:43:29,358 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:43:33,049 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:43:35,077 [INFO] [zansec] Scraping page 27/45
+2026-02-23 06:43:48,143 [INFO] [zansec] Found 10 rows on page 27 (New: True)
+2026-02-23 06:43:48,205 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:43:52,944 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:43:54,993 [INFO] [zansec] Scraping page 28/45
+2026-02-23 06:44:08,482 [INFO] [zansec] Found 10 rows on page 28 (New: True)
+2026-02-23 06:44:08,570 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:44:12,398 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:44:14,438 [INFO] [zansec] Scraping page 29/45
+2026-02-23 06:44:27,376 [INFO] [zansec] Found 10 rows on page 29 (New: True)
+2026-02-23 06:44:27,443 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:44:31,065 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:44:33,091 [INFO] [zansec] Scraping page 30/45
+2026-02-23 06:44:46,057 [INFO] [zansec] Found 10 rows on page 30 (New: True)
+2026-02-23 06:44:46,125 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:44:49,745 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:44:51,776 [INFO] [zansec] Scraping page 31/45
+2026-02-23 06:45:04,958 [INFO] [zansec] Found 10 rows on page 31 (New: True)
+2026-02-23 06:45:05,023 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:45:08,758 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:45:10,803 [INFO] [zansec] Scraping page 32/45
+2026-02-23 06:45:23,904 [INFO] [zansec] Found 10 rows on page 32 (New: True)
+2026-02-23 06:45:23,999 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:45:27,662 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:45:29,698 [INFO] [zansec] Scraping page 33/45
+2026-02-23 06:45:42,726 [INFO] [zansec] Found 10 rows on page 33 (New: True)
+2026-02-23 06:45:42,795 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:45:46,606 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:45:48,636 [INFO] [zansec] Scraping page 34/45
+2026-02-23 06:46:01,641 [INFO] [zansec] Found 10 rows on page 34 (New: True)
+2026-02-23 06:46:01,699 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:46:05,375 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:46:07,400 [INFO] [zansec] Scraping page 35/45
+2026-02-23 06:46:20,450 [INFO] [zansec] Found 10 rows on page 35 (New: True)
+2026-02-23 06:46:20,524 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:46:24,438 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:46:26,488 [INFO] [zansec] Scraping page 36/45
+2026-02-23 06:46:39,443 [INFO] [zansec] Found 10 rows on page 36 (New: True)
+2026-02-23 06:46:39,509 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:46:43,158 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:46:45,181 [INFO] [zansec] Scraping page 37/45
+2026-02-23 06:46:58,119 [INFO] [zansec] Found 10 rows on page 37 (New: True)
+2026-02-23 06:46:58,188 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:47:01,876 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:47:03,925 [INFO] [zansec] Scraping page 38/45
+2026-02-23 06:47:16,927 [INFO] [zansec] Found 10 rows on page 38 (New: True)
+2026-02-23 06:47:16,996 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:47:20,677 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 06:47:22,717 [INFO] [zansec] Scraping page 39/45
+2026-02-23 06:47:35,407 [INFO] [zansec] Found 7 rows on page 39 (New: True)
+2026-02-23 06:47:35,481 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 06:47:40,292 [INFO] [zansec] No 'Next' button found. Found 50 links on page
+2026-02-23 06:47:40,313 [INFO] [zansec] Link 0: text='Info.dsm@zansec.co.tz', class=''
+2026-02-23 06:47:40,334 [INFO] [zansec] Link 1: text='0756 111 888', class=''
+2026-02-23 06:47:40,360 [INFO] [zansec] Link 2: text='Login', class=''
+2026-02-23 06:47:40,387 [INFO] [zansec] Link 3: text='Register', class=''
+2026-02-23 06:47:40,413 [INFO] [zansec] Link 4: text='', class='slicknav_btn slicknav_collapsed'
+2026-02-23 06:47:40,438 [INFO] [zansec] Link 5: text='', class=''
+2026-02-23 06:47:40,465 [INFO] [zansec] Link 6: text='', class=''
+2026-02-23 06:47:40,491 [INFO] [zansec] Link 7: text='', class=''
+2026-02-23 06:47:40,517 [INFO] [zansec] Link 8: text='', class=''
+2026-02-23 06:47:40,544 [INFO] [zansec] Link 9: text='', class=''
+2026-02-23 06:47:40,570 [INFO] [zansec] Link 10: text='', class=''
+2026-02-23 06:47:40,596 [INFO] [zansec] Link 11: text='', class=''
+2026-02-23 06:47:40,623 [INFO] [zansec] Link 12: text='', class=''
+2026-02-23 06:47:40,649 [INFO] [zansec] Link 13: text='HOME', class=''
+2026-02-23 06:47:40,675 [INFO] [zansec] Link 14: text='ABOUT', class=''
+2026-02-23 06:47:40,702 [INFO] [zansec] Link 15: text='TIMIZA FUND', class=''
+2026-02-23 06:47:40,730 [INFO] [zansec] Link 16: text='FUND PERFORMANCE', class=''
+2026-02-23 06:47:40,755 [INFO] [zansec] Link 17: text='FAQ', class=''
+2026-02-23 06:47:40,776 [INFO] [zansec] Link 18: text='FORMS DOWNLOAD', class=''
+2026-02-23 06:47:40,798 [INFO] [zansec] Link 19: text='CONTACT', class=''
+2026-02-23 06:47:40,821 [INFO] [zansec] Link 20: text='REGISTER NOW', class='button_1'
+2026-02-23 06:47:40,847 [INFO] [zansec] Link 21: text='Previous', class='paginate_button previous'
+2026-02-23 06:47:40,874 [INFO] [zansec] Link 22: text='1', class='paginate_button '
+2026-02-23 06:47:40,903 [INFO] [zansec] Link 23: text='35', class='paginate_button '
+2026-02-23 06:47:40,930 [INFO] [zansec] Link 24: text='36', class='paginate_button '
+2026-02-23 06:47:40,955 [INFO] [zansec] Link 25: text='37', class='paginate_button '
+2026-02-23 06:47:40,983 [INFO] [zansec] Link 26: text='38', class='paginate_button '
+2026-02-23 06:47:41,010 [INFO] [zansec] Link 27: text='39', class='paginate_button current'
+2026-02-23 06:47:41,031 [INFO] [zansec] Link 28: text='Next', class='paginate_button next disabled'
+2026-02-23 06:47:41,057 [INFO] [zansec] Link 29: text='', class='button_1'
+2026-02-23 06:47:41,084 [INFO] [zansec] Link 30: text='', class='button_1'
+2026-02-23 06:47:41,109 [INFO] [zansec] Link 31: text='', class='button_1'
+2026-02-23 06:47:41,136 [INFO] [zansec] Link 32: text='', class='button_1'
+2026-02-23 06:47:41,165 [INFO] [zansec] Link 33: text='', class=''
+2026-02-23 06:47:41,192 [INFO] [zansec] Link 34: text='', class=''
+2026-02-23 06:47:41,219 [INFO] [zansec] Link 35: text='', class=''
+2026-02-23 06:47:41,244 [INFO] [zansec] Link 36: text='', class=''
+2026-02-23 06:47:41,264 [INFO] [zansec] Link 37: text='', class=''
+2026-02-23 06:47:41,288 [INFO] [zansec] Link 38: text='ABOUT US', class=''
+2026-02-23 06:47:41,316 [INFO] [zansec] Link 39: text='OUR SERVICES', class=''
+2026-02-23 06:47:41,343 [INFO] [zansec] Link 40: text='TIMIZA FUND', class=''
+2026-02-23 06:47:41,369 [INFO] [zansec] Link 41: text='FORMS & DOWNLOADS', class=''
+2026-02-23 06:47:41,396 [INFO] [zansec] Link 42: text='REPORTS', class=''
+2026-02-23 06:47:41,424 [INFO] [zansec] Link 43: text='CONTACT US', class=''
+2026-02-23 06:47:41,452 [INFO] [zansec] Link 44: text='ZAN INVEST APP', class=''
+2026-02-23 06:47:41,478 [INFO] [zansec] Link 45: text='HELP & SUPPORT CENTER', class=''
+2026-02-23 06:47:41,504 [INFO] [zansec] Link 46: text='RETURENS & REFUNDS', class=''
+2026-02-23 06:47:41,531 [INFO] [zansec] Link 47: text='ONLINE STORE', class=''
+2026-02-23 06:47:41,556 [INFO] [zansec] Link 48: text='TERMS & CONDITIONS', class=''
+2026-02-23 06:47:41,583 [INFO] [zansec] Link 49: text='', class=''
+2026-02-23 06:47:41,584 [INFO] [zansec] Scraped 387 total rows across multi-page attempt
+2026-02-23 06:47:43,860 [INFO] [zansec] Saved raw data -> data/raw/zansec_2026-02-23.json
+2026-02-23 06:47:43,939 [INFO] [zansec] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\zansec.json
+2026-02-23 06:47:44,044 [INFO] [zansec] Saved structured data -> data\processed\zansec_processed_2026-02-23.json and data\processed\zansec_data_2026-02-23.csv
+2026-02-23 06:47:44,045 [INFO] [zansec] Pushing chunk 1/116 (10 records) to API
+2026-02-23 06:47:48,085 [ERROR] [zansec] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 06:47:48,085 [INFO] [whi] Attempt 1/3 — https://www.watumishihousing.go.tz/housing-investment-fund/performance
+2026-02-23 06:47:48,086 [INFO] ====== WebDriver manager ======
+2026-02-23 06:47:49,992 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:47:51,333 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:47:52,390 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 06:47:53,581 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 06:47:54,195 [ERROR] [whi] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf3f59e
+	0xf32674
+	0xf340dc
+	0xf32b17
+	0xf32445
+	0xf32145
+	0xf30258
+	0xf3096a
+	0xf45b1e
+	0xfcc554
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 06:47:56,379 [INFO] [whi] Attempt 2/3 — https://www.watumishihousing.go.tz/housing-investment-fund/performance
+2026-02-23 06:47:56,380 [INFO] ====== WebDriver manager ======
+2026-02-23 06:47:58,001 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:47:59,081 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:48:00,113 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 06:48:00,727 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 06:48:02,333 [ERROR] [whi] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf3f59e
+	0xf32674
+	0xf340dc
+	0xf32b17
+	0xf32445
+	0xf32145
+	0xf30258
+	0xf3096a
+	0xf45b1e
+	0xfcc554
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 06:48:04,569 [INFO] [whi] Attempt 3/3 — https://www.watumishihousing.go.tz/housing-investment-fund/performance
+2026-02-23 06:48:04,569 [INFO] ====== WebDriver manager ======
+2026-02-23 06:48:06,347 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:48:07,556 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 06:48:08,754 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 06:48:09,433 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 06:48:10,168 [ERROR] [whi] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf3f59e
+	0xf32674
+	0xf340dc
+	0xf32b17
+	0xf32445
+	0xf32145
+	0xf30258
+	0xf3096a
+	0xf45b1e
+	0xfcc554
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 06:48:12,355 [ERROR] [whi] All 3 attempts exhausted
+2026-02-23 06:48:12,357 [INFO] ------------------------------------------------------------
+2026-02-23 06:48:12,358 [INFO]   utt-amis: success (2400 rows) - Local only
+2026-02-23 06:48:12,359 [INFO]   vertex: success (10 rows) - Local only
+2026-02-23 06:48:12,360 [INFO]   sanlam-pesa: success (593 rows) - Local only
+2026-02-23 06:48:12,361 [INFO]   zansec: success (387 rows) - Local only
+2026-02-23 06:48:12,363 [INFO]   whi: no data (0 rows) - Local only
+2026-02-23 06:48:12,364 [INFO] ============================================================
+2026-02-23 06:48:12,365 [INFO] Fund Data Scraper — Complete
