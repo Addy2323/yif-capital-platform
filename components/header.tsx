@@ -15,7 +15,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { useAuth } from "@/lib/auth-context"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -60,7 +59,6 @@ export function Header() {
   const { user, logout } = useAuth()
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { user, logout } = useAuth()
 
   return (
     <header className="bg-navy sticky top-0 z-50 transition-all duration-300">
@@ -234,24 +232,6 @@ export function Header() {
                 <div className="flex flex-col gap-4">
                   {user ? (
                     <>
-<<<<<<< HEAD
-                      <div className="flex items-center gap-3 px-1 py-2">
-                        <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold border border-gold/30">
-                          {user.name.charAt(0).toUpperCase()}
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-white font-semibold line-clamp-1">{user.name}</span>
-                          <span className="text-white/50 text-xs lowercase">{user.role}</span>
-                        </div>
-                      </div>
-                      <Link
-                        href="/dashboard"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex text-lg font-medium text-white/90 hover:text-white transition-colors"
-                      >
-                        Dashboard
-                      </Link>
-=======
                       <Link
                         href="/dashboard"
                         onClick={() => setIsMobileMenuOpen(false)}
@@ -268,20 +248,14 @@ export function Header() {
                         <Settings className="h-5 w-5" />
                         Settings
                       </Link>
->>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
                       <button
                         onClick={() => {
                           logout()
                           setIsMobileMenuOpen(false)
                         }}
-<<<<<<< HEAD
-                        className="flex text-lg font-medium text-destructive hover:text-destructive/80 transition-colors text-left"
-                      >
-=======
                         className="flex items-center gap-2 text-lg font-medium text-destructive hover:text-destructive/80 transition-colors"
                       >
                         <LogOut className="h-5 w-5" />
->>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
                         Sign Out
                       </button>
                     </>
@@ -312,31 +286,6 @@ export function Header() {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
             {user ? (
-<<<<<<< HEAD
-              <div className="flex items-center gap-4">
-                <Link
-                  href="/dashboard"
-                  className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <div className="h-4 w-px bg-white/20" />
-                <div className="flex items-center gap-3">
-                  <div className="flex flex-col items-end mr-1">
-                    <span className="text-sm font-semibold text-white leading-tight">{user.name.split(' ')[0]}</span>
-                    <span className="text-[10px] text-gold font-bold uppercase tracking-wider">{user.role}</span>
-                  </div>
-                  <button
-                    onClick={() => logout()}
-                    className="h-9 w-9 rounded-full bg-gold/10 flex items-center justify-center text-gold font-bold border border-gold/20 hover:bg-gold/20 transition-all group/avatar relative"
-                    title="Sign Out"
-                  >
-                    {user.name.charAt(0).toUpperCase()}
-                    <div className="absolute -bottom-1 -right-1 h-3 w-3 bg-green-500 border-2 border-navy rounded-full" />
-                  </button>
-                </div>
-              </div>
-=======
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center gap-2 text-white hover:bg-white/10 px-3">
@@ -374,7 +323,6 @@ export function Header() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
->>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
             ) : (
               <>
                 <Link

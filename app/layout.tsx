@@ -36,13 +36,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased">
         <StartupLoader />
-<<<<<<< HEAD
         <AuthProvider>
           <AdminDataProvider>
-=======
-        <AdminDataProvider>
-          <AuthProvider>
->>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
             <SweetAlertProvider>
               {children}
               <Toaster
@@ -56,13 +51,8 @@ export default function RootLayout({
                 }}
               />
             </SweetAlertProvider>
-<<<<<<< HEAD
           </AdminDataProvider>
         </AuthProvider>
-=======
-          </AuthProvider>
-        </AdminDataProvider>
->>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
         <Analytics />
       </body>
     </html>
