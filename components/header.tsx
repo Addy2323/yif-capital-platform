@@ -15,6 +15,15 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
+import { useAuth } from "@/lib/auth-context"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { LogOut, User as UserIcon, LayoutDashboard, Settings } from "lucide-react"
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -51,6 +60,7 @@ export function Header() {
   const { user, logout } = useAuth()
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { user, logout } = useAuth()
 
   return (
     <header className="bg-navy sticky top-0 z-50 transition-all duration-300">
@@ -224,6 +234,7 @@ export function Header() {
                 <div className="flex flex-col gap-4">
                   {user ? (
                     <>
+<<<<<<< HEAD
                       <div className="flex items-center gap-3 px-1 py-2">
                         <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold border border-gold/30">
                           {user.name.charAt(0).toUpperCase()}
@@ -240,13 +251,37 @@ export function Header() {
                       >
                         Dashboard
                       </Link>
+=======
+                      <Link
+                        href="/dashboard"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-2 text-lg font-medium text-white/90 hover:text-white transition-colors"
+                      >
+                        <LayoutDashboard className="h-5 w-5" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        href="/dashboard/settings"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-2 text-lg font-medium text-white/90 hover:text-white transition-colors"
+                      >
+                        <Settings className="h-5 w-5" />
+                        Settings
+                      </Link>
+>>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
                       <button
                         onClick={() => {
                           logout()
                           setIsMobileMenuOpen(false)
                         }}
+<<<<<<< HEAD
                         className="flex text-lg font-medium text-destructive hover:text-destructive/80 transition-colors text-left"
                       >
+=======
+                        className="flex items-center gap-2 text-lg font-medium text-destructive hover:text-destructive/80 transition-colors"
+                      >
+                        <LogOut className="h-5 w-5" />
+>>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
                         Sign Out
                       </button>
                     </>
@@ -277,6 +312,7 @@ export function Header() {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
             {user ? (
+<<<<<<< HEAD
               <div className="flex items-center gap-4">
                 <Link
                   href="/dashboard"
@@ -300,6 +336,45 @@ export function Header() {
                   </button>
                 </div>
               </div>
+=======
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-2 text-white hover:bg-white/10 px-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold text-navy font-bold shadow-lg">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-sm font-semibold">{user.name.split(' ')[0]}</span>
+                    <ChevronDown className="h-4 w-4 text-white/60" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-white border-gray-100 shadow-xl rounded-xl p-1">
+                  <div className="px-3 py-2 border-b border-gray-50 mb-1">
+                    <p className="text-sm font-bold text-navy truncate">{user.name}</p>
+                    <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                  </div>
+                  <DropdownMenuItem asChild className="rounded-lg cursor-pointer">
+                    <Link href="/dashboard" className="flex items-center gap-2 py-2">
+                      <LayoutDashboard className="h-4 w-4 text-navy/70" />
+                      <span className="font-medium">Dashboard</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="rounded-lg cursor-pointer">
+                    <Link href="/dashboard/settings" className="flex items-center gap-2 py-2">
+                      <Settings className="h-4 w-4 text-navy/70" />
+                      <span className="font-medium">Profile Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-gray-50" />
+                  <DropdownMenuItem
+                    onClick={() => logout()}
+                    className="text-red-500 hover:text-red-600 hover:bg-red-50 focus:text-red-600 focus:bg-red-50 rounded-lg cursor-pointer py-2"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    <span className="font-medium">Sign Out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+>>>>>>> 5709441db5d0555eda67346d55e86eb88b10eb86
             ) : (
               <>
                 <Link
