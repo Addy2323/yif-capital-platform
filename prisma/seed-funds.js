@@ -80,7 +80,19 @@ const FUND_METADATA = {
 async function main() {
   console.log('Starting fund registry seed...')
 
-  // Seed all funds defined in metadata
+  // 1. Delete legacy/unused funds to avoid ID conflicts
+  try {
+    const legacy = await prisma.fund.deleteMany({
+      where: {
+        OR: [{ fundId: 'utt-umoja' }, { fundSlug: 'utt' }]
+      }
+    });
+    if (legacy.count > 0) console.log(`Cleaned up ${legacy.count} legacy fund records.`);
+  } catch (e) {
+    console.log('No legacy funds to clean (or foreign key error - skipping)');
+  }
+
+  // 2. Seed all funds defined in metadata
   const fundIds = Object.keys(FUND_METADATA)
   console.log(`Found ${fundIds.length} funds in metadata registry`)
 

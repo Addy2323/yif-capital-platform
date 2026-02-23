@@ -38,7 +38,7 @@
         },
         {
             "name": "whi",
-            "url": "https://watumishihousing.go.tz/housing-investment-fund/performance",
+            "url": "https://www.whi.go.tz/faida-fund-nav-performance/",
             "provider": "WHI",
             "type": "selenium",
             "wait_seconds": 10,
