@@ -10677,3 +10677,54 @@ Symbols not available. Dumping unresolved backtrace:
 2026-02-23 11:29:42,322 [INFO]   whi: no data (0 rows) - Local only
 2026-02-23 11:29:42,322 [INFO] ============================================================
 2026-02-23 11:29:42,323 [INFO] Fund Data Scraper — Complete
+2026-02-23 11:34:19,223 [INFO] ============================================================
+2026-02-23 11:34:19,223 [INFO] Fund Data Scraper — Starting
+2026-02-23 11:34:19,223 [INFO] ============================================================
+2026-02-23 11:34:19,236 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 11:34:19,250 [INFO] ====== WebDriver manager ======
+2026-02-23 11:34:20,151 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 11:34:20,754 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 11:34:21,384 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 11:34:21,771 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 11:34:52,856 [INFO] [utt-amis] Scraping page 1/300
+2026-02-23 11:34:52,926 [INFO] [utt-amis] Successfully set entries per page to 50
+2026-02-23 11:35:26,665 [INFO] [utt-amis] Found 50 rows on page 1 (New: True)
+2026-02-23 11:35:27,307 [INFO] [utt-amis] Updated consolidated data -> data\utt-amis.json
+2026-02-23 11:35:31,185 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:35:33,224 [INFO] [utt-amis] Scraping page 2/300
+2026-02-23 11:36:02,220 [INFO] [utt-amis] Found 50 rows on page 2 (New: False)
+2026-02-23 11:36:02,220 [INFO] [utt-amis] Page 2 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:36:06,806 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:36:08,847 [INFO] [utt-amis] Scraping page 3/300
+2026-02-23 11:36:37,437 [INFO] [utt-amis] Found 50 rows on page 3 (New: False)
+2026-02-23 11:36:37,437 [INFO] [utt-amis] Page 3 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:36:41,949 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:36:43,972 [INFO] [utt-amis] Scraping page 4/300
+2026-02-23 11:37:11,594 [INFO] [utt-amis] Found 50 rows on page 4 (New: False)
+2026-02-23 11:37:11,594 [INFO] [utt-amis] Page 4 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:37:15,830 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:37:17,861 [INFO] [utt-amis] Scraping page 5/300
+2026-02-23 11:37:45,361 [INFO] [utt-amis] Found 50 rows on page 5 (New: False)
+2026-02-23 11:37:45,361 [INFO] [utt-amis] Page 5 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:37:49,602 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:37:51,620 [INFO] [utt-amis] Scraping page 6/300
+2026-02-23 11:38:18,941 [INFO] [utt-amis] Found 50 rows on page 6 (New: False)
+2026-02-23 11:38:18,942 [INFO] [utt-amis] Page 6 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:38:23,129 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:38:25,155 [INFO] [utt-amis] Scraping page 7/300
+2026-02-23 11:38:52,616 [INFO] [utt-amis] Found 50 rows on page 7 (New: False)
+2026-02-23 11:38:52,616 [INFO] [utt-amis] Page 7 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:38:56,930 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:38:58,958 [INFO] [utt-amis] Scraping page 8/300
+2026-02-23 11:39:26,391 [INFO] [utt-amis] Found 50 rows on page 8 (New: False)
+2026-02-23 11:39:26,391 [INFO] [utt-amis] Page 8 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:39:30,699 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:39:32,719 [INFO] [utt-amis] Scraping page 9/300
+2026-02-23 11:40:00,791 [INFO] [utt-amis] Found 50 rows on page 9 (New: False)
+2026-02-23 11:40:00,791 [INFO] [utt-amis] Page 9 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:40:06,075 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:40:08,101 [INFO] [utt-amis] Scraping page 10/300
+2026-02-23 11:40:35,361 [INFO] [utt-amis] Found 50 rows on page 10 (New: False)
+2026-02-23 11:40:35,362 [INFO] [utt-amis] Page 10 is all duplicates. Skipping save and speeding up.
+2026-02-23 11:40:40,081 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 11:40:42,116 [INFO] [utt-amis] Scraping page 11/300
