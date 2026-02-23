@@ -91,33 +91,43 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
             logger.info(f"[{name}] Starting scrape with max_pages={max_pages}")
             driver.get(url)
 
-            # Explicit wait for at least one table to appear
-            WebDriverWait(driver, wait_seconds + 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, "table"))
-            )
-            time.sleep(wait_seconds)  # extra settle time for JS rendering
+            # 1. Wait for page to settle
+            time.sleep(wait_seconds)
+            
+            # 2. Try to find table in main content or iframes
+            table_found = False
+            try:
+                # First check main content
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "table"))
+                )
+                table_found = True
+                logger.debug(f"[{name}] Table found in main content")
+            except:
+                # Then check iframes
+                logger.info(f"[{name}] Table not found in main content, checking iframes...")
+                iframes = driver.find_elements(By.TAG_NAME, "iframe")
+                for i, frame in enumerate(iframes):
+                    try:
+                        driver.switch_to.frame(frame)
+                        WebDriverWait(driver, 5).until(
+                            EC.presence_of_element_located((By.TAG_NAME, "table"))
+                        )
+                        table_found = True
+                        logger.info(f"[{name}] Found table in iframe {i}")
+                        break
+                    except:
+                        driver.switch_to.default_content()
+            
+            if not table_found:
+                raise Exception("No table found in main content or any iframe")
 
             rows_data = []
             
-            # Load existing records to count and skip pages
-            existing_count = 0
-            file_path = f"data/{name}.json"
-            if os.path.exists(file_path):
-                try:
-                    with open(file_path, "r", encoding="utf-8") as f:
-                        existing_count = len(json.load(f))
-                except: pass
-
-            # Rough estimate of records per page for UTT AMIS
-            # Every date has ~6 funds. 50 rows per page = ~8 dates. 48 records.
-            # Let's say we skip pages if we have a significant overlap.
-            # Actually, the simplest resume is to let it run but skipping logic is better.
-            
-            # Date limit for historical scraping (July 9, 2024)
+            # Helper to parse date
             STOP_DATE = datetime(2024, 7, 9)
             
             def parse_row_date(cols, source_name):
-                """Extract and parse date from row based on source."""
                 try:
                     if source_name == "utt-amis":
                         raw_date = cols[7] if len(cols) > 7 else ""
@@ -144,164 +154,81 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                 except:
                     pass
                 return None
-            
+
             for page in range(1, max_pages + 1):
-                logger.info(f"[{name}] Scraping page {page}/{max_pages}")
-                
-                # Try to set "Show 50 entries" at the start to catch all data on one or two pages
-                if page == 1:
-                    try:
-                        all_selects = driver.find_elements(By.TAG_NAME, "select")
-                        for s in all_selects:
-                            try:
-                                from selenium.webdriver.support.ui import Select
-                                sel = Select(s)
-                                options = [o.get_attribute("value") for o in sel.options]
-                                for val in ["50", "100"]:
-                                    if val in options:
-                                        sel.select_by_value(val)
-                                        logger.info(f"[{name}] Successfully set entries per page to {val}")
-                                        time.sleep(5) # wait for reload
-                                        break
-                            except: pass
-                    except: pass
-
-                # Settle time for page load
-                time.sleep(wait_seconds)
-                
-                # Load existing keys for skipping check
-                existing_keys = set()
-                if os.path.exists(file_path):
-                    try:
-                        with open(file_path, "r", encoding="utf-8") as f:
-                            ext_data = json.load(f)
-                            for item in ext_data:
-                                if name == "utt-amis":
-                                    existing_keys.add(f"{item.get('fund_name', '')}_{item.get('date', '')}")
-                                else:
-                                    existing_keys.add(json.dumps(item, sort_keys=True))
-                    except: pass
-
                 tables = driver.find_elements(By.TAG_NAME, "table")
-                page_rows = 0
-                new_data_on_page = False
-                oldest_date_on_page = None
-                
-                for table in tables:
-                    rows = table.find_elements(By.TAG_NAME, "tr")
-                    for row in rows:
-                        cols = [c.get_attribute("textContent").strip() for c in row.find_elements(By.TAG_NAME, "td")]
-                        if cols and any(c for c in cols if c.strip()):
-                            rows_data.append(cols)
-                            page_rows += 1
-                            if name == 'vertex': logging.info(f"[vertex] Captured row: {cols}")
-                            
-                            # Check if this row is new
-                            # Map raw row to structured enough for keying
-                            if name == "utt-amis":
-                                # Row indices: 1 is name, 7 is date
-                                row_key = f"{cols[1] if len(cols)>1 else ''}_{cols[7] if len(cols)>7 else ''}"
-                            else:
-                                row_key = str(cols)
-                                
-                            if row_key not in existing_keys:
-                                new_data_on_page = True
-                            
-                            # Track oldest date on this page
-                            row_date = parse_row_date(cols, name)
-                            if row_date:
-                                if oldest_date_on_page is None or row_date < oldest_date_on_page:
-                                    oldest_date_on_page = row_date
-                
-                logger.info(f"[{name}] Found {page_rows} rows on page {page} (New: {new_data_on_page})")
-                
-                # Check if we've reached the stop date
-                if oldest_date_on_page and oldest_date_on_page <= STOP_DATE:
-                    logger.info(f"[{name}] Reached stop date {STOP_DATE.strftime('%Y-%m-%d')} (oldest on page: {oldest_date_on_page.strftime('%Y-%m-%d')}). Stopping.")
+                if not tables:
                     break
-
-                # Incremental progress save only if new data found
-                if page_rows > 0 and new_data_on_page:
-                    try:
-                        structured_batch = map_data(rows_data, name)
-                        save_consolidated(structured_batch, name, "data")
-                    except Exception as inc_err:
-                        logger.debug(f"[{name}] Incremental save failed: {inc_err}")
-                elif page_rows > 0 and not new_data_on_page:
-                    logger.info(f"[{name}] Page {page} is all duplicates. Skipping save and speeding up.")
-                    time.sleep(1) # minimize wait for known pages
-
+                    
+                # Find the main data table (usually the one with most rows)
+                main_table = max(tables, key=lambda t: len(t.find_elements(By.TAG_NAME, "tr")))
+                rows = main_table.find_elements(By.TAG_NAME, "tr")
+                logger.info(f"[{name}] Page {page}: Found {len(rows)} rows")
+                
+                page_stop_hit = False
+                for row in rows:
+                    cols = [c.text.strip() for c in row.find_elements(By.TAG_NAME, "td")]
+                    if not cols:
+                        # Try th if td is empty (header)
+                        cols = [c.text.strip() for c in row.find_elements(By.TAG_NAME, "th")]
+                    
+                    if cols and len(cols) > 3:
+                        rows_data.append(cols)
+                        
+                        # Stop check for UTT AMIS historical data
+                        rd = parse_row_date(cols, name)
+                        if rd and rd <= STOP_DATE:
+                            logger.info(f"[{name}] Reached STOP_DATE: {STOP_DATE.date()}")
+                            page_stop_hit = True
+                            break
+                
+                if page_stop_hit:
+                    break
+                    
                 if page < max_pages:
                     try:
                         # Scroll down to ensure pagination is visible
                         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                         time.sleep(2)
                         
-                        # Re-find Next button right before clicking to avoid staleness
                         next_btn = None
-                        potentials = driver.find_elements(By.XPATH, "//a | //button | //span[@onclick] | //div[contains(@class, 'button')]")
+                        potentials = driver.find_elements(By.XPATH, "//a | //button | //span[@onclick]")
                         for p in potentials:
                             try:
                                 if not p.is_displayed(): continue
                                 text = p.text.strip()
-                                aria = p.get_attribute("aria-label") or ""
-                                title = p.get_attribute("title") or ""
-                                cls = p.get_attribute("class") or ""
-                                
-                                if text == ">" or text == "Next" or "next" in text.lower() or "next" in aria.lower() or "next" in title.lower() or "next" in cls.lower():
-                                    if "disabled" not in cls.lower():
-                                        next_btn = p
-                                        if text in [">", "Next"]:
-                                            break
+                                if text in [">", "Next"] or "next" in text.lower():
+                                    next_btn = p
+                                    break
                             except: continue
 
                         if next_btn:
-                            logger.info(f"[{name}] Clicking 'Next' button...")
-                            driver.execute_script("arguments[0].scrollIntoView();", next_btn)
-                            time.sleep(2)
                             driver.execute_script("arguments[0].click();", next_btn)
+                            time.sleep(5)
                         else:
-                            # Debug: log all clickable elements if next button not found
-                            try:
-                                all_links = driver.find_elements(By.TAG_NAME, "a")
-                                logger.info(f"[{name}] No 'Next' button found. Found {len(all_links)} links on page")
-                                for i, link in enumerate(all_links):
-                                    try:
-                                        text = link.text.strip()[:30]
-                                        class_attr = link.get_attribute("class") or ""
-                                        logger.info(f"[{name}] Link {i}: text='{text}', class='{class_attr}'")
-                                    except:
-                                        pass
-                            except Exception as debug_err:
-                                logger.debug(f"[{name}] Debug logging failed: {debug_err}")
                             break
-                    except Exception as pg_err:
-                        logger.warning(f"[{name}] Navigation failed: {pg_err}")
+                    except:
                         break
-
-            if not rows_data:
-                logger.warning(f"[{name}] No table data found on attempt {attempt}")
-                continue
-
-            # Basic deduplication while preserving order
-            seen = set()
+            
+            # Deduplicate by full row content
             dedup_rows = []
-            for row in rows_data:
-                row_tuple = tuple(row)
-                if row_tuple not in seen:
-                    seen.add(row_tuple)
-                    dedup_rows.append(row)
-
-            logger.info(f"[{name}] Scraped {len(dedup_rows)} total rows across multi-page attempt")
+            seen = set()
+            for r in rows_data:
+                r_tuple = tuple(r)
+                if r_tuple not in seen:
+                    seen.add(r_tuple)
+                    dedup_rows.append(r)
+            
+            logger.info(f"[{name}] Successfully scraped {len(dedup_rows)} unique rows")
             return dedup_rows
 
         except Exception as e:
             # Capture failure details for easier debugging on server
             page_title = driver.title if driver else "Unknown"
-            page_source = driver.page_source[:500] if driver else "No source"
+            page_snippet = driver.page_source[:500] if driver else "No source"
             logger.error(f"[{name}] Attempt {attempt} failed: {e}")
             logger.error(f"[{name}] Page Title: {page_title}")
-            logger.debug(f"[{name}] Page Snippet: {page_source}")
+            logger.debug(f"[{name}] Page Snippet: {page_snippet}")
             
             if driver:
                 driver.quit()
@@ -329,7 +256,6 @@ def save_consolidated(data: list, name: str, output_path: str):
             logger.error(f"[{name}] Failed to load existing data for consolidation: {e}")
     
     # Merge and deduplicate (using date as key if available)
-    # For now, we'll use a simple merge and check for duplicates by record content
     combined = existing_data + data
     
     # Deduplicate by converting to tuples of items
@@ -342,7 +268,6 @@ def save_consolidated(data: list, name: str, output_path: str):
     for item in combined:
         if name in needs_name_key:
             # For UTT AMIS raw rows: Col 1 is fund_name, Col 7 is date
-            # If it's already structured (from previous runs or incremental), handle both
             if isinstance(item, dict):
                 key = f"{item.get('fund_name', '')}_{item.get('date', '')}"
             else:
@@ -371,7 +296,7 @@ def save_consolidated(data: list, name: str, output_path: str):
             except: pass
             return datetime.min
             
-        unique_data.sort(key=lambda x: parse_date(x.get("date", "")), reverse=True)
+        unique_data.sort(key=lambda x: parse_date(x.get("date", "") if isinstance(x, dict) else (x[-1] if x else "")), reverse=True)
     except Exception as sort_err:
         logger.debug(f"Sorting failed: {sort_err}")
 
@@ -439,7 +364,6 @@ def push_to_api(data: list, name: str):
     """Send data to API (Sending to API)."""
     api_url = os.getenv("FUND_API_URL", "http://localhost:3000/api/funds/update")
     chunk_size = 10
-    total_success = True
     
     try:
         for i in range(0, len(data), chunk_size):
@@ -459,8 +383,6 @@ def map_data(raw_rows: list, source_name: str) -> list:
     """Map raw table rows to structured exact data (Scraping)."""
     structured = []
     
-    # Generic mapping logic based on Zansec screenshot
-    # Columns likely: index, nav, units, nav_per_unit, sale_price, repurchase_price, date
     for row in raw_rows:
         try:
             # If row is already structured (dict), we just need to ensure date format is correct
@@ -485,9 +407,9 @@ def map_data(raw_rows: list, source_name: str) -> list:
             def clean_num(val):
                 if not val: return 0.0
                 if isinstance(val, (int, float)): return float(val)
-                return float(str(val).replace(",", "").strip())
+                return float(str(val).replace(",", "").replace("-", "0").strip())
 
-            # Specific mapping based on Zansec structure:
+            # Specific mapping:
             if source_name == "zansec":
                 record = {
                     "source": source_name,
@@ -522,14 +444,10 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "status": "extracted"
                 }
             elif source_name == "vertex":
-                # wpDataTables structure with hidden columns (0-4)
-                # Indices: 5: Date, 9: Total NAV (Fund Net Value), 10: Units, 11: NAV per Unit
                 if len(row) < 12:
                     continue
-                
                 raw_date = row[5]
                 formatted_date = raw_date
-                # Try to parse "10 November 2025"
                 try:
                     from datetime import datetime
                     dt = datetime.strptime(raw_date.strip(), "%d %B %Y")
@@ -537,7 +455,6 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 except:
                     pass
 
-                # Skip header or empty rows
                 if not formatted_date or any(x.lower() in formatted_date.lower() for x in ["date", "redeemed"]):
                     continue
 
@@ -547,8 +464,8 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "fund_name": "Vertex Bond Fund",
                     "date": formatted_date,
                     "nav_per_unit": nav,
-                    "sale_price": nav,        # Fallback to NAV as source doesn't provide explicit price
-                    "repurchase_price": nav,  # Fallback to NAV
+                    "sale_price": nav,
+                    "repurchase_price": nav,
                     "total_nav": clean_num(row[9]),
                     "units": clean_num(row[10]),
                     "status": "extracted"
@@ -566,10 +483,7 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "status": "extracted"
                 }
             elif source_name == "sanlam-pesa":
-                # Sanlam table: Date | Fund | Code | Currency | Net Asset Value | Outstanding Units | NAV/Unit | Sale Price | Buy Price
-                # Column mapping based on screenshot
                 raw_date = row[0] if len(row) > 0 else ""
-                # Convert "Feb 20, 2026" to "2026-02-20"
                 formatted_date = raw_date
                 if raw_date:
                     try:
@@ -583,8 +497,6 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "source": source_name,
                     "date": formatted_date,
                     "fund_name": row[1] if len(row) > 1 else "SanlamAllianz Pesa Money Market Fund",
-                    "code": row[2] if len(row) > 2 else "001",
-                    "currency": row[3] if len(row) > 3 else "TZS",
                     "total_nav": clean_num(row[4]) if len(row) > 4 else 0.0,
                     "units": clean_num(row[5]) if len(row) > 5 else 0.0,
                     "nav_per_unit": clean_num(row[6]) if len(row) > 6 else 0.0,
@@ -656,7 +568,6 @@ def main():
             consolidated_file = save_consolidated(data, name, str(data_dir))
             
             # 3. Map to Structured Platform Data
-            # Map the FULL consolidated history to ensure complete processed files
             try:
                 if consolidated_file:
                     with open(consolidated_file, "r", encoding="utf-8") as f:
