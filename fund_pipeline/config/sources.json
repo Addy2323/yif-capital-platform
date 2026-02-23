@@ -44,6 +44,15 @@
             "wait_seconds": 10,
             "retry_count": 3,
             "max_pages": 10
+        },
+        {
+            "name": "itrust",
+            "url": "https://itrust.co.tz/itrust-funds/",
+            "provider": "iTrust Finance",
+            "type": "selenium",
+            "wait_seconds": 15,
+            "retry_count": 3,
+            "max_pages": 1
         }
     ],
     "output": {

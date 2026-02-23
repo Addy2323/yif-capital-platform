@@ -8933,3 +8933,1133 @@ Symbols not available. Dumping unresolved backtrace:
 2026-02-23 09:32:24,237 [INFO] [utt-amis] Page 12 is all duplicates. Skipping save and speeding up.
 2026-02-23 09:32:29,218 [INFO] [utt-amis] Clicking 'Next' button...
 2026-02-23 09:32:31,237 [INFO] [utt-amis] Scraping page 13/300
+2026-02-23 09:32:59,227 [INFO] [utt-amis] Found 50 rows on page 13 (New: False)
+2026-02-23 09:32:59,228 [INFO] [utt-amis] Page 13 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:33:04,352 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:33:06,384 [INFO] [utt-amis] Scraping page 14/300
+2026-02-23 09:33:34,413 [INFO] [utt-amis] Found 50 rows on page 14 (New: False)
+2026-02-23 09:33:34,414 [INFO] [utt-amis] Page 14 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:33:39,233 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:33:41,259 [INFO] [utt-amis] Scraping page 15/300
+2026-02-23 09:34:10,529 [INFO] [utt-amis] Found 50 rows on page 15 (New: False)
+2026-02-23 09:34:10,530 [INFO] [utt-amis] Page 15 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:34:15,753 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:34:17,794 [INFO] [utt-amis] Scraping page 16/300
+2026-02-23 09:34:46,848 [INFO] [utt-amis] Found 50 rows on page 16 (New: False)
+2026-02-23 09:34:46,849 [INFO] [utt-amis] Page 16 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:34:52,212 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:34:54,251 [INFO] [utt-amis] Scraping page 17/300
+2026-02-23 09:35:23,618 [INFO] [utt-amis] Found 50 rows on page 17 (New: False)
+2026-02-23 09:35:23,618 [INFO] [utt-amis] Page 17 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:35:29,113 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:35:31,147 [INFO] [utt-amis] Scraping page 18/300
+2026-02-23 09:35:59,946 [INFO] [utt-amis] Found 50 rows on page 18 (New: False)
+2026-02-23 09:35:59,947 [INFO] [utt-amis] Page 18 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:36:05,278 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:36:07,316 [INFO] [utt-amis] Scraping page 19/300
+2026-02-23 09:36:36,854 [INFO] [utt-amis] Found 50 rows on page 19 (New: False)
+2026-02-23 09:36:36,854 [INFO] [utt-amis] Page 19 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:36:42,444 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:36:44,478 [INFO] [utt-amis] Scraping page 20/300
+2026-02-23 09:37:13,529 [INFO] [utt-amis] Found 50 rows on page 20 (New: False)
+2026-02-23 09:37:13,529 [INFO] [utt-amis] Page 20 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:37:19,038 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:37:21,069 [INFO] [utt-amis] Scraping page 21/300
+2026-02-23 09:37:50,413 [INFO] [utt-amis] Found 50 rows on page 21 (New: False)
+2026-02-23 09:37:50,414 [INFO] [utt-amis] Page 21 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:37:55,949 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:37:57,978 [INFO] [utt-amis] Scraping page 22/300
+2026-02-23 09:38:26,908 [INFO] [utt-amis] Found 50 rows on page 22 (New: False)
+2026-02-23 09:38:26,909 [INFO] [utt-amis] Page 22 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:38:32,506 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:38:34,535 [INFO] [utt-amis] Scraping page 23/300
+2026-02-23 09:39:03,845 [INFO] [utt-amis] Found 50 rows on page 23 (New: False)
+2026-02-23 09:39:03,845 [INFO] [utt-amis] Page 23 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:39:08,911 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:39:10,930 [INFO] [utt-amis] Scraping page 24/300
+2026-02-23 09:39:40,442 [INFO] [utt-amis] Found 50 rows on page 24 (New: False)
+2026-02-23 09:39:40,443 [INFO] [utt-amis] Page 24 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:39:45,391 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:39:47,425 [INFO] [utt-amis] Scraping page 25/300
+2026-02-23 09:40:16,761 [INFO] [utt-amis] Found 50 rows on page 25 (New: False)
+2026-02-23 09:40:16,761 [INFO] [utt-amis] Page 25 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:40:22,328 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:40:24,355 [INFO] [utt-amis] Scraping page 26/300
+2026-02-23 09:40:53,778 [INFO] [utt-amis] Found 50 rows on page 26 (New: False)
+2026-02-23 09:40:53,779 [INFO] [utt-amis] Page 26 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:40:59,151 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:41:01,179 [INFO] [utt-amis] Scraping page 27/300
+2026-02-23 09:41:30,112 [INFO] [utt-amis] Found 50 rows on page 27 (New: False)
+2026-02-23 09:41:30,112 [INFO] [utt-amis] Page 27 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:41:35,148 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:41:37,179 [INFO] [utt-amis] Scraping page 28/300
+2026-02-23 09:42:06,646 [INFO] [utt-amis] Found 50 rows on page 28 (New: False)
+2026-02-23 09:42:06,646 [INFO] [utt-amis] Page 28 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:42:11,802 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:42:13,835 [INFO] [utt-amis] Scraping page 29/300
+2026-02-23 09:42:43,328 [INFO] [utt-amis] Found 50 rows on page 29 (New: False)
+2026-02-23 09:42:43,328 [INFO] [utt-amis] Page 29 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:42:48,788 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:42:50,817 [INFO] [utt-amis] Scraping page 30/300
+2026-02-23 09:43:20,784 [INFO] [utt-amis] Found 50 rows on page 30 (New: False)
+2026-02-23 09:43:20,784 [INFO] [utt-amis] Page 30 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:43:26,240 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:43:28,267 [INFO] [utt-amis] Scraping page 31/300
+2026-02-23 09:43:57,637 [INFO] [utt-amis] Found 50 rows on page 31 (New: False)
+2026-02-23 09:43:57,637 [INFO] [utt-amis] Page 31 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:44:03,069 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:44:05,097 [INFO] [utt-amis] Scraping page 32/300
+2026-02-23 09:44:34,180 [INFO] [utt-amis] Found 50 rows on page 32 (New: False)
+2026-02-23 09:44:34,181 [INFO] [utt-amis] Page 32 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:44:39,690 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:44:41,717 [INFO] [utt-amis] Scraping page 33/300
+2026-02-23 09:45:10,979 [INFO] [utt-amis] Found 50 rows on page 33 (New: False)
+2026-02-23 09:45:10,979 [INFO] [utt-amis] Page 33 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:45:16,436 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:45:18,475 [INFO] [utt-amis] Scraping page 34/300
+2026-02-23 09:45:47,972 [INFO] [utt-amis] Found 50 rows on page 34 (New: False)
+2026-02-23 09:45:47,972 [INFO] [utt-amis] Page 34 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:45:53,458 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:45:55,486 [INFO] [utt-amis] Scraping page 35/300
+2026-02-23 09:46:25,149 [INFO] [utt-amis] Found 50 rows on page 35 (New: False)
+2026-02-23 09:46:25,149 [INFO] [utt-amis] Page 35 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:46:30,639 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:46:32,670 [INFO] [utt-amis] Scraping page 36/300
+2026-02-23 09:47:02,330 [INFO] [utt-amis] Found 50 rows on page 36 (New: False)
+2026-02-23 09:47:02,331 [INFO] [utt-amis] Page 36 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:47:07,612 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:47:09,646 [INFO] [utt-amis] Scraping page 37/300
+2026-02-23 09:47:39,307 [INFO] [utt-amis] Found 50 rows on page 37 (New: False)
+2026-02-23 09:47:39,308 [INFO] [utt-amis] Page 37 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:47:44,985 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:47:47,005 [INFO] [utt-amis] Scraping page 38/300
+2026-02-23 09:48:16,413 [INFO] [utt-amis] Found 50 rows on page 38 (New: False)
+2026-02-23 09:48:16,413 [INFO] [utt-amis] Page 38 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:48:21,961 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:48:23,991 [INFO] [utt-amis] Scraping page 39/300
+2026-02-23 09:48:53,567 [INFO] [utt-amis] Found 50 rows on page 39 (New: False)
+2026-02-23 09:48:53,567 [INFO] [utt-amis] Page 39 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:48:58,501 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:49:00,530 [INFO] [utt-amis] Scraping page 40/300
+2026-02-23 09:49:30,164 [INFO] [utt-amis] Found 50 rows on page 40 (New: False)
+2026-02-23 09:49:30,164 [INFO] [utt-amis] Page 40 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:49:35,418 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:49:37,450 [INFO] [utt-amis] Scraping page 41/300
+2026-02-23 09:50:06,911 [INFO] [utt-amis] Found 50 rows on page 41 (New: False)
+2026-02-23 09:50:06,912 [INFO] [utt-amis] Page 41 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:50:12,051 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:50:14,075 [INFO] [utt-amis] Scraping page 42/300
+2026-02-23 09:50:43,444 [INFO] [utt-amis] Found 50 rows on page 42 (New: False)
+2026-02-23 09:50:43,444 [INFO] [utt-amis] Page 42 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:50:48,952 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:50:50,984 [INFO] [utt-amis] Scraping page 43/300
+2026-02-23 09:51:20,441 [INFO] [utt-amis] Found 50 rows on page 43 (New: False)
+2026-02-23 09:51:20,442 [INFO] [utt-amis] Page 43 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:51:26,017 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:51:28,046 [INFO] [utt-amis] Scraping page 44/300
+2026-02-23 09:51:57,533 [INFO] [utt-amis] Found 50 rows on page 44 (New: False)
+2026-02-23 09:51:57,533 [INFO] [utt-amis] Page 44 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:52:03,002 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:52:05,036 [INFO] [utt-amis] Scraping page 45/300
+2026-02-23 09:52:34,520 [INFO] [utt-amis] Found 50 rows on page 45 (New: False)
+2026-02-23 09:52:34,520 [INFO] [utt-amis] Page 45 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:52:39,883 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:52:41,901 [INFO] [utt-amis] Scraping page 46/300
+2026-02-23 09:53:10,319 [INFO] [utt-amis] Found 50 rows on page 46 (New: False)
+2026-02-23 09:53:10,319 [INFO] [utt-amis] Page 46 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:53:15,721 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:53:17,758 [INFO] [utt-amis] Scraping page 47/300
+2026-02-23 09:53:46,974 [INFO] [utt-amis] Found 50 rows on page 47 (New: False)
+2026-02-23 09:53:46,975 [INFO] [utt-amis] Page 47 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:53:52,521 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:53:54,550 [INFO] [utt-amis] Scraping page 48/300
+2026-02-23 09:54:24,161 [INFO] [utt-amis] Found 50 rows on page 48 (New: False)
+2026-02-23 09:54:24,161 [INFO] [utt-amis] Reached stop date 2024-07-09 (oldest on page: 2024-07-09). Stopping.
+2026-02-23 09:54:24,165 [INFO] [utt-amis] Scraped 2400 total rows across multi-page attempt
+2026-02-23 09:54:26,415 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-02-23.json
+2026-02-23 09:54:27,156 [INFO] [utt-amis] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\utt-amis.json
+2026-02-23 09:54:27,911 [INFO] [utt-amis] Saved structured data -> data\processed\utt-amis_processed_2026-02-23.json and data\processed\utt-amis_data_2026-02-23.csv
+2026-02-23 09:54:27,912 [INFO] [utt-amis] Pushing chunk 1/2107 (10 records) to API
+2026-02-23 09:54:31,982 [ERROR] [utt-amis] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 09:54:31,983 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 09:54:31,984 [INFO] ====== WebDriver manager ======
+2026-02-23 09:54:33,730 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 09:54:35,718 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 09:54:36,433 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 09:54:37,398 [INFO] [vertex] Starting scrape with max_pages=1
+2026-02-23 09:54:58,679 [INFO] [vertex] Scraping page 1/1
+2026-02-23 09:55:13,907 [INFO] [vertex] Captured row: ['20 February 2026', '-', '-', '-', '6,441,440,184', '58,679,777', '109.7727']
+2026-02-23 09:55:14,020 [INFO] [vertex] Captured row: ['19 February 2026', '-', '-', '-', '6,438,051,825', '58,681,223', '109.7123']
+2026-02-23 09:55:14,107 [INFO] [vertex] Captured row: ['18 February 2026', '-', '-', '-', '6,434,037,832', '58,643,823', '109.7138']
+2026-02-23 09:55:14,193 [INFO] [vertex] Captured row: ['17 February 2026', '-', '-', '-', '6,401,653,927', '58,384,045', '109.6473']
+2026-02-23 09:55:14,279 [INFO] [vertex] Captured row: ['16 February 2026', '-', '-', '-', '6,445,876,567', '58,802,440', '109.6192']
+2026-02-23 09:55:14,365 [INFO] [vertex] Captured row: ['13 February 2026', '-', '-', '-', '6,381,341,623', '58,265,071', '109.5226']
+2026-02-23 09:55:14,450 [INFO] [vertex] Captured row: ['12 February 2026', '-', '-', '-', '6,204,007,549', '56,661,889', '109.4917']
+2026-02-23 09:55:14,535 [INFO] [vertex] Captured row: ['11 February 2026', '-', '-', '-', '6,199,331,047', '56,637,762', '109.4558']
+2026-02-23 09:55:14,623 [INFO] [vertex] Captured row: ['10 February 2026', '-', '-', '-', '6,196,050,589', '56,625,217', '109.4221']
+2026-02-23 09:55:14,709 [INFO] [vertex] Captured row: ['9 February 2026', '-', '-', '-', '6,190,589,996', '56,630,938', '109.3146']
+2026-02-23 09:55:14,709 [INFO] [vertex] Found 10 rows on page 1 (New: True)
+2026-02-23 09:55:14,710 [INFO] [vertex] Scraped 10 total rows across multi-page attempt
+2026-02-23 09:55:17,016 [INFO] [vertex] Saved raw data -> data/raw/vertex_2026-02-23.json
+2026-02-23 09:55:17,032 [INFO] [vertex] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\vertex.json
+2026-02-23 09:55:17,093 [INFO] [vertex] Saved structured data -> data\processed\vertex_processed_2026-02-23.json and data\processed\vertex_data_2026-02-23.csv
+2026-02-23 09:55:17,094 [INFO] [vertex] Pushing chunk 1/29 (10 records) to API
+2026-02-23 09:55:21,148 [ERROR] [vertex] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 09:55:21,149 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 09:55:21,150 [INFO] ====== WebDriver manager ======
+2026-02-23 09:55:22,915 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 09:55:24,030 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 09:55:25,133 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 09:55:26,286 [INFO] [sanlam-pesa] Starting scrape with max_pages=15
+2026-02-23 09:55:43,462 [INFO] [sanlam-pesa] Scraping page 1/15
+2026-02-23 09:55:46,281 [INFO] [sanlam-pesa] Successfully set entries per page to 50
+2026-02-23 09:56:06,706 [INFO] [sanlam-pesa] Found 50 rows on page 1 (New: True)
+2026-02-23 09:56:06,782 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:56:10,139 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:56:12,185 [INFO] [sanlam-pesa] Scraping page 2/15
+2026-02-23 09:56:27,585 [INFO] [sanlam-pesa] Found 50 rows on page 2 (New: True)
+2026-02-23 09:56:27,668 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:56:31,003 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:56:33,043 [INFO] [sanlam-pesa] Scraping page 3/15
+2026-02-23 09:56:48,616 [INFO] [sanlam-pesa] Found 50 rows on page 3 (New: True)
+2026-02-23 09:56:48,695 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:56:52,058 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:56:54,094 [INFO] [sanlam-pesa] Scraping page 4/15
+2026-02-23 09:57:09,466 [INFO] [sanlam-pesa] Found 50 rows on page 4 (New: True)
+2026-02-23 09:57:09,548 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:57:12,872 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:57:14,905 [INFO] [sanlam-pesa] Scraping page 5/15
+2026-02-23 09:57:30,302 [INFO] [sanlam-pesa] Found 50 rows on page 5 (New: True)
+2026-02-23 09:57:30,385 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:57:33,814 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:57:35,857 [INFO] [sanlam-pesa] Scraping page 6/15
+2026-02-23 09:57:51,269 [INFO] [sanlam-pesa] Found 50 rows on page 6 (New: True)
+2026-02-23 09:57:51,355 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:57:54,699 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:57:56,735 [INFO] [sanlam-pesa] Scraping page 7/15
+2026-02-23 09:58:12,130 [INFO] [sanlam-pesa] Found 50 rows on page 7 (New: True)
+2026-02-23 09:58:12,221 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:58:15,553 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:58:17,592 [INFO] [sanlam-pesa] Scraping page 8/15
+2026-02-23 09:58:33,147 [INFO] [sanlam-pesa] Found 50 rows on page 8 (New: True)
+2026-02-23 09:58:33,206 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:58:36,564 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:58:38,605 [INFO] [sanlam-pesa] Scraping page 9/15
+2026-02-23 09:58:53,992 [INFO] [sanlam-pesa] Found 50 rows on page 9 (New: True)
+2026-02-23 09:58:54,098 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:58:57,440 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:58:59,479 [INFO] [sanlam-pesa] Scraping page 10/15
+2026-02-23 09:59:14,541 [INFO] [sanlam-pesa] Found 50 rows on page 10 (New: True)
+2026-02-23 09:59:14,644 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:59:18,062 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:59:20,095 [INFO] [sanlam-pesa] Scraping page 11/15
+2026-02-23 09:59:35,268 [INFO] [sanlam-pesa] Found 50 rows on page 11 (New: True)
+2026-02-23 09:59:35,371 [INFO] [sanlam-pesa] Updated consolidated data -> data\sanlam-pesa.json
+2026-02-23 09:59:38,806 [INFO] [sanlam-pesa] Clicking 'Next' button...
+2026-02-23 09:59:40,838 [INFO] [sanlam-pesa] Scraping page 12/15
+2026-02-23 09:59:55,470 [INFO] [sanlam-pesa] Found 43 rows on page 12 (New: True)
+2026-02-23 09:59:55,470 [INFO] [sanlam-pesa] Reached stop date 2024-07-09 (oldest on page: 2024-07-09). Stopping.
+2026-02-23 09:59:55,471 [INFO] [sanlam-pesa] Scraped 593 total rows across multi-page attempt
+2026-02-23 09:59:57,784 [INFO] [sanlam-pesa] Saved raw data -> data/raw/sanlam-pesa_2026-02-23.json
+2026-02-23 09:59:57,858 [INFO] [sanlam-pesa] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\sanlam-pesa.json
+2026-02-23 09:59:57,994 [INFO] [sanlam-pesa] Saved structured data -> data\processed\sanlam-pesa_processed_2026-02-23.json and data\processed\sanlam-pesa_data_2026-02-23.csv
+2026-02-23 09:59:57,994 [INFO] [sanlam-pesa] Pushing chunk 1/115 (10 records) to API
+2026-02-23 10:00:02,077 [ERROR] [sanlam-pesa] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 10:00:02,078 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-02-23 10:00:02,079 [INFO] ====== WebDriver manager ======
+2026-02-23 10:00:03,843 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:00:04,968 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:00:06,043 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:00:07,229 [INFO] [zansec] Starting scrape with max_pages=45
+2026-02-23 10:00:23,384 [INFO] [zansec] Scraping page 1/45
+2026-02-23 10:00:36,407 [INFO] [zansec] Found 10 rows on page 1 (New: True)
+2026-02-23 10:00:36,480 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:00:40,237 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:00:42,288 [INFO] [zansec] Scraping page 2/45
+2026-02-23 10:00:55,293 [INFO] [zansec] Found 10 rows on page 2 (New: True)
+2026-02-23 10:00:55,363 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:00:59,066 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:01:01,114 [INFO] [zansec] Scraping page 3/45
+2026-02-23 10:01:14,130 [INFO] [zansec] Found 10 rows on page 3 (New: True)
+2026-02-23 10:01:14,206 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:01:17,957 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:01:19,999 [INFO] [zansec] Scraping page 4/45
+2026-02-23 10:01:33,010 [INFO] [zansec] Found 10 rows on page 4 (New: True)
+2026-02-23 10:01:33,086 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:01:36,836 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:01:38,870 [INFO] [zansec] Scraping page 5/45
+2026-02-23 10:01:51,894 [INFO] [zansec] Found 10 rows on page 5 (New: True)
+2026-02-23 10:01:51,964 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:01:55,783 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:01:57,823 [INFO] [zansec] Scraping page 6/45
+2026-02-23 10:02:11,073 [INFO] [zansec] Found 10 rows on page 6 (New: True)
+2026-02-23 10:02:11,387 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:02:13,718 [INFO] ============================================================
+2026-02-23 10:02:13,719 [INFO] Fund Data Scraper — Starting
+2026-02-23 10:02:13,719 [INFO] ============================================================
+2026-02-23 10:02:13,720 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 10:02:13,730 [INFO] ====== WebDriver manager ======
+2026-02-23 10:02:14,337 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:02:14,750 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:15,945 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:16,355 [INFO] [zansec] Scraping page 7/45
+2026-02-23 10:02:16,809 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:02:19,357 [ERROR] [utt-amis] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:02:19,359 [INFO] [utt-amis] Attempt 2/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 10:02:19,360 [INFO] ====== WebDriver manager ======
+2026-02-23 10:02:20,439 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:21,276 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:22,057 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:02:24,589 [ERROR] [utt-amis] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:02:24,592 [INFO] [utt-amis] Attempt 3/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 10:02:24,593 [INFO] ====== WebDriver manager ======
+2026-02-23 10:02:25,743 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:26,552 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:27,287 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:02:29,113 [INFO] [zansec] Found 10 rows on page 7 (New: True)
+2026-02-23 10:02:29,155 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:02:29,802 [ERROR] [utt-amis] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:02:29,804 [INFO] [utt-amis] Attempt 4/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 10:02:29,804 [INFO] ====== WebDriver manager ======
+2026-02-23 10:02:30,819 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:31,767 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:31,906 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:02:32,505 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:02:33,928 [INFO] [zansec] Scraping page 8/45
+2026-02-23 10:02:35,586 [ERROR] [utt-amis] Attempt 4 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:02:35,588 [INFO] [utt-amis] Attempt 5/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 10:02:35,588 [INFO] ====== WebDriver manager ======
+2026-02-23 10:02:36,659 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:37,398 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:02:38,164 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:02:38,552 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 10:02:49,589 [INFO] [zansec] Found 50 rows on page 8 (New: True)
+2026-02-23 10:02:49,657 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:02:53,076 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:02:55,113 [INFO] [zansec] Scraping page 9/45
+2026-02-23 10:03:09,144 [INFO] [utt-amis] Scraping page 1/300
+2026-02-23 10:03:09,214 [INFO] [utt-amis] Successfully set entries per page to 50
+2026-02-23 10:03:10,145 [INFO] [zansec] Found 50 rows on page 9 (New: True)
+2026-02-23 10:03:10,253 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:03:14,512 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:03:16,543 [INFO] [zansec] Scraping page 10/45
+2026-02-23 10:03:32,246 [INFO] [zansec] Found 50 rows on page 10 (New: True)
+2026-02-23 10:03:32,330 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:03:37,000 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:03:39,038 [INFO] [zansec] Scraping page 11/45
+2026-02-23 10:03:40,735 [ERROR] [utt-amis] Attempt 5 failed: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=145.0.7632.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf48cc1
+	0xf4b252
+	0xfcc851
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:03:42,886 [ERROR] [utt-amis] All 5 attempts exhausted
+2026-02-23 10:03:42,905 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 10:03:42,906 [INFO] ====== WebDriver manager ======
+2026-02-23 10:03:44,133 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:03:44,925 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:03:45,635 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:03:48,798 [ERROR] [vertex] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:03:48,801 [INFO] [vertex] Attempt 2/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 10:03:48,801 [INFO] ====== WebDriver manager ======
+2026-02-23 10:03:49,903 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:03:50,462 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:03:51,043 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:03:53,904 [INFO] [zansec] Found 50 rows on page 11 (New: True)
+2026-02-23 10:03:53,943 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:03:53,980 [ERROR] [vertex] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:03:53,981 [INFO] [vertex] Attempt 3/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 10:03:53,981 [INFO] ====== WebDriver manager ======
+2026-02-23 10:03:55,053 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:03:55,663 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:03:56,449 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:03:57,517 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:03:59,512 [ERROR] [vertex] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:03:59,513 [ERROR] [vertex] All 3 attempts exhausted
+2026-02-23 10:03:59,513 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 10:03:59,513 [INFO] ====== WebDriver manager ======
+2026-02-23 10:03:59,534 [INFO] [zansec] Scraping page 12/45
+2026-02-23 10:04:00,505 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:01,259 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:02,065 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:04:05,106 [ERROR] [sanlam-pesa] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:04:05,107 [INFO] [sanlam-pesa] Attempt 2/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 10:04:05,107 [INFO] ====== WebDriver manager ======
+2026-02-23 10:04:06,308 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:07,023 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:07,832 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:04:08,759 [INFO] [sanlam-pesa] Starting scrape with max_pages=15
+2026-02-23 10:04:17,633 [INFO] [zansec] Found 10 rows on page 12 (New: True)
+2026-02-23 10:04:17,670 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:04:20,790 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:04:22,805 [INFO] [zansec] Scraping page 13/45
+2026-02-23 10:04:27,090 [INFO] [sanlam-pesa] Scraping page 1/15
+2026-02-23 10:04:28,363 [INFO] [sanlam-pesa] Successfully set entries per page to 50
+2026-02-23 10:04:38,885 [INFO] [zansec] Found 50 rows on page 13 (New: True)
+2026-02-23 10:04:38,921 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:04:41,974 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:04:44,010 [INFO] [zansec] Scraping page 14/45
+2026-02-23 10:04:44,018 [ERROR] [sanlam-pesa] Attempt 2 failed: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=145.0.7632.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf48cc1
+	0xf4b252
+	0xfcc851
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:04:46,181 [INFO] [sanlam-pesa] Attempt 3/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 10:04:46,182 [INFO] ====== WebDriver manager ======
+2026-02-23 10:04:47,378 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:48,155 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:48,911 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:04:51,463 [ERROR] [sanlam-pesa] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:04:51,464 [ERROR] [sanlam-pesa] All 3 attempts exhausted
+2026-02-23 10:04:51,466 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-02-23 10:04:51,466 [INFO] ====== WebDriver manager ======
+2026-02-23 10:04:52,802 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:53,547 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:54,377 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:04:56,915 [ERROR] [zansec] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:04:56,917 [INFO] [zansec] Attempt 2/3 — https://zansec.co.tz/nav.php
+2026-02-23 10:04:56,918 [INFO] ====== WebDriver manager ======
+2026-02-23 10:04:57,855 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:58,802 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:04:59,156 [INFO] [zansec] Found 50 rows on page 14 (New: True)
+2026-02-23 10:04:59,194 [INFO] [zansec] Updated consolidated data -> data\zansec.json
+2026-02-23 10:04:59,483 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:05:02,476 [ERROR] [zansec] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:05:02,477 [INFO] [zansec] Attempt 3/3 — https://zansec.co.tz/nav.php
+2026-02-23 10:05:02,478 [INFO] ====== WebDriver manager ======
+2026-02-23 10:05:02,556 [INFO] [zansec] Clicking 'Next' button...
+2026-02-23 10:05:03,420 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:05:04,230 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:05:04,573 [INFO] [zansec] Scraping page 15/45
+2026-02-23 10:05:05,076 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:05:08,060 [ERROR] [zansec] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:05:08,062 [ERROR] [zansec] All 3 attempts exhausted
+2026-02-23 10:05:08,062 [INFO] [whi] Attempt 1/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 10:05:08,063 [INFO] ====== WebDriver manager ======
+2026-02-23 10:05:09,423 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:05:10,174 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:05:11,422 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:05:12,368 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 10:05:48,291 [INFO] [zansec] Found 0 rows on page 15 (New: False)
+2026-02-23 10:05:52,949 [INFO] [zansec] No 'Next' button found. Found 130 links on page
+2026-02-23 10:05:52,975 [INFO] [zansec] Link 0: text='', class=''
+2026-02-23 10:05:53,002 [INFO] [zansec] Link 1: text='ABOUT US', class='elementor-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,027 [INFO] [zansec] Link 2: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,052 [INFO] [zansec] Link 3: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,077 [INFO] [zansec] Link 4: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,101 [INFO] [zansec] Link 5: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,127 [INFO] [zansec] Link 6: text='', class='elementor-sub-item elementor-item-anchor'
+2026-02-23 10:05:53,151 [INFO] [zansec] Link 7: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,177 [INFO] [zansec] Link 8: text='FAIDA FUND', class='elementor-item has-submenu'
+2026-02-23 10:05:53,201 [INFO] [zansec] Link 9: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,225 [INFO] [zansec] Link 10: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,250 [INFO] [zansec] Link 11: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,274 [INFO] [zansec] Link 12: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,301 [INFO] [zansec] Link 13: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,326 [INFO] [zansec] Link 14: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,351 [INFO] [zansec] Link 15: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,375 [INFO] [zansec] Link 16: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,402 [INFO] [zansec] Link 17: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,427 [INFO] [zansec] Link 18: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,454 [INFO] [zansec] Link 19: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,479 [INFO] [zansec] Link 20: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,503 [INFO] [zansec] Link 21: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,530 [INFO] [zansec] Link 22: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,555 [INFO] [zansec] Link 23: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,579 [INFO] [zansec] Link 24: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,603 [INFO] [zansec] Link 25: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,627 [INFO] [zansec] Link 26: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,653 [INFO] [zansec] Link 27: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,678 [INFO] [zansec] Link 28: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,703 [INFO] [zansec] Link 29: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,727 [INFO] [zansec] Link 30: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,751 [INFO] [zansec] Link 31: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,775 [INFO] [zansec] Link 32: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,800 [INFO] [zansec] Link 33: text='', class='elementor-sub-item has-submenu'
+2026-02-23 10:05:53,824 [INFO] [zansec] Link 34: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,849 [INFO] [zansec] Link 35: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,878 [INFO] [zansec] Link 36: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,902 [INFO] [zansec] Link 37: text='BUY OR RENT', class='elementor-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,928 [INFO] [zansec] Link 38: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:53,954 [INFO] [zansec] Link 39: text='', class='elementor-sub-item'
+2026-02-23 10:05:53,979 [INFO] [zansec] Link 40: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,003 [INFO] [zansec] Link 41: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,029 [INFO] [zansec] Link 42: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,057 [INFO] [zansec] Link 43: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,081 [INFO] [zansec] Link 44: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,105 [INFO] [zansec] Link 45: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,129 [INFO] [zansec] Link 46: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,153 [INFO] [zansec] Link 47: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,179 [INFO] [zansec] Link 48: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,203 [INFO] [zansec] Link 49: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,233 [INFO] [zansec] Link 50: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,257 [INFO] [zansec] Link 51: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,284 [INFO] [zansec] Link 52: text='PLOTS', class='elementor-item has-submenu'
+2026-02-23 10:05:54,308 [INFO] [zansec] Link 53: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,331 [INFO] [zansec] Link 54: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,356 [INFO] [zansec] Link 55: text='MEDIA CENTER', class='elementor-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,381 [INFO] [zansec] Link 56: text='', class='elementor-sub-item elementor-item-anchor'
+2026-02-23 10:05:54,405 [INFO] [zansec] Link 57: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,430 [INFO] [zansec] Link 58: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,456 [INFO] [zansec] Link 59: text='', class='elementor-sub-item elementor-item-anchor'
+2026-02-23 10:05:54,480 [INFO] [zansec] Link 60: text='CONTACT US', class='elementor-item'
+2026-02-23 10:05:54,506 [INFO] [zansec] Link 61: text='SWAHILI', class='elementor-item'
+2026-02-23 10:05:54,530 [INFO] [zansec] Link 62: text='', class='elementor-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,558 [INFO] [zansec] Link 63: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,582 [INFO] [zansec] Link 64: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,605 [INFO] [zansec] Link 65: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,630 [INFO] [zansec] Link 66: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,653 [INFO] [zansec] Link 67: text='', class='elementor-sub-item elementor-item-anchor'
+2026-02-23 10:05:54,679 [INFO] [zansec] Link 68: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,704 [INFO] [zansec] Link 69: text='', class='elementor-item has-submenu'
+2026-02-23 10:05:54,728 [INFO] [zansec] Link 70: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,752 [INFO] [zansec] Link 71: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,776 [INFO] [zansec] Link 72: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,800 [INFO] [zansec] Link 73: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,825 [INFO] [zansec] Link 74: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,849 [INFO] [zansec] Link 75: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,875 [INFO] [zansec] Link 76: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,899 [INFO] [zansec] Link 77: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:54,923 [INFO] [zansec] Link 78: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,948 [INFO] [zansec] Link 79: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,974 [INFO] [zansec] Link 80: text='', class='elementor-sub-item'
+2026-02-23 10:05:54,999 [INFO] [zansec] Link 81: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,022 [INFO] [zansec] Link 82: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,046 [INFO] [zansec] Link 83: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,074 [INFO] [zansec] Link 84: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,099 [INFO] [zansec] Link 85: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,123 [INFO] [zansec] Link 86: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,147 [INFO] [zansec] Link 87: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,172 [INFO] [zansec] Link 88: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,196 [INFO] [zansec] Link 89: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,222 [INFO] [zansec] Link 90: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,245 [INFO] [zansec] Link 91: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,270 [INFO] [zansec] Link 92: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,293 [INFO] [zansec] Link 93: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,318 [INFO] [zansec] Link 94: text='', class='elementor-sub-item has-submenu'
+2026-02-23 10:05:55,341 [INFO] [zansec] Link 95: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,365 [INFO] [zansec] Link 96: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,389 [INFO] [zansec] Link 97: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,415 [INFO] [zansec] Link 98: text='', class='elementor-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,441 [INFO] [zansec] Link 99: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,466 [INFO] [zansec] Link 100: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,495 [INFO] [zansec] Link 101: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,519 [INFO] [zansec] Link 102: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,544 [INFO] [zansec] Link 103: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,568 [INFO] [zansec] Link 104: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,594 [INFO] [zansec] Link 105: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,618 [INFO] [zansec] Link 106: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,642 [INFO] [zansec] Link 107: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,666 [INFO] [zansec] Link 108: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,692 [INFO] [zansec] Link 109: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,717 [INFO] [zansec] Link 110: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,742 [INFO] [zansec] Link 111: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,767 [INFO] [zansec] Link 112: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,792 [INFO] [zansec] Link 113: text='', class='elementor-item has-submenu'
+2026-02-23 10:05:55,816 [INFO] [zansec] Link 114: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,839 [INFO] [zansec] Link 115: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,865 [INFO] [zansec] Link 116: text='', class='elementor-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,889 [INFO] [zansec] Link 117: text='', class='elementor-sub-item elementor-item-anchor'
+2026-02-23 10:05:55,914 [INFO] [zansec] Link 118: text='', class='elementor-sub-item elementor-item-anchor has-submenu'
+2026-02-23 10:05:55,938 [INFO] [zansec] Link 119: text='', class='elementor-sub-item'
+2026-02-23 10:05:55,962 [INFO] [zansec] Link 120: text='', class='elementor-sub-item elementor-item-anchor'
+2026-02-23 10:05:55,986 [INFO] [zansec] Link 121: text='', class='elementor-item'
+2026-02-23 10:05:56,014 [INFO] [zansec] Link 122: text='', class='elementor-item'
+2026-02-23 10:05:56,040 [INFO] [zansec] Link 123: text='', class=''
+2026-02-23 10:05:56,065 [INFO] [zansec] Link 124: text='GALLERY', class=''
+2026-02-23 10:05:56,092 [INFO] [zansec] Link 125: text='BLOG
+TERMS & PRIVACY POLICY', class=''
+2026-02-23 10:05:56,117 [INFO] [zansec] Link 126: text='Management Team', class=''
+2026-02-23 10:05:56,144 [INFO] [zansec] Link 127: text='Board of Directors', class=''
+2026-02-23 10:05:56,169 [INFO] [zansec] Link 128: text='Partner Banks', class=''
+2026-02-23 10:05:56,194 [INFO] [zansec] Link 129: text='Staff Mail', class=''
+2026-02-23 10:05:56,195 [INFO] [zansec] Scraped 370 total rows across multi-page attempt
+2026-02-23 10:05:56,669 [ERROR] [whi] Attempt 1 failed: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.110); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf30fee
+	0xf4fb03
+	0xfb56cc
+	0xfcb4b9
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:05:58,617 [INFO] [zansec] Saved raw data -> data/raw/zansec_2026-02-23.json
+2026-02-23 10:05:58,692 [INFO] [zansec] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\zansec.json
+2026-02-23 10:05:58,839 [INFO] [zansec] Saved structured data -> data\processed\zansec_processed_2026-02-23.json and data\processed\zansec_data_2026-02-23.csv
+2026-02-23 10:05:58,840 [INFO] [zansec] Pushing chunk 1/155 (10 records) to API
+2026-02-23 10:05:58,881 [INFO] [whi] Attempt 2/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 10:05:58,881 [INFO] ====== WebDriver manager ======
+2026-02-23 10:06:00,635 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:01,780 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:02,907 [ERROR] [zansec] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 10:06:02,907 [INFO] [whi] Attempt 1/3 — https://watumishihousing.go.tz/housing-investment-fund/performance
+2026-02-23 10:06:02,908 [INFO] ====== WebDriver manager ======
+2026-02-23 10:06:02,914 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:06:03,622 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 10:06:04,854 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:06,004 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:07,142 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:06:07,661 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 10:06:32,071 [ERROR] [whi] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf3f59e
+	0xf32674
+	0xf340dc
+	0xf32b17
+	0xf32445
+	0xf32145
+	0xf30258
+	0xf3096a
+	0xf45b1e
+	0xfcc554
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:06:32,071 [ERROR] [whi] Attempt 2 failed: Message: 
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf8c51a
+	0xf8c7bb
+	0xfce212
+	0xfaee64
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:06:34,356 [INFO] [whi] Attempt 2/3 — https://watumishihousing.go.tz/housing-investment-fund/performance
+2026-02-23 10:06:34,357 [INFO] ====== WebDriver manager ======
+2026-02-23 10:06:34,371 [INFO] [whi] Attempt 3/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 10:06:34,372 [INFO] ====== WebDriver manager ======
+2026-02-23 10:06:36,416 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:36,445 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:37,798 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:37,810 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:39,075 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:06:39,075 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:06:40,461 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 10:06:42,734 [ERROR] [whi] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf7cd17
+	0xf771ae
+	0xf72750
+	0xfbae7f
+	0xfba697
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:06:42,736 [ERROR] [whi] All 3 attempts exhausted
+2026-02-23 10:06:42,737 [INFO] ------------------------------------------------------------
+2026-02-23 10:06:42,738 [INFO]   utt-amis: no data (0 rows) - Local only
+2026-02-23 10:06:42,739 [INFO]   vertex: no data (0 rows) - Local only
+2026-02-23 10:06:42,740 [INFO]   sanlam-pesa: no data (0 rows) - Local only
+2026-02-23 10:06:42,740 [INFO]   zansec: no data (0 rows) - Local only
+2026-02-23 10:06:42,741 [INFO]   whi: no data (0 rows) - Local only
+2026-02-23 10:06:42,742 [INFO] ============================================================
+2026-02-23 10:06:42,742 [INFO] Fund Data Scraper — Complete
+2026-02-23 10:06:49,485 [ERROR] [whi] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf3f59e
+	0xf32674
+	0xf340dc
+	0xf32b17
+	0xf32445
+	0xf32145
+	0xf30258
+	0xf3096a
+	0xf45b1e
+	0xfcc554
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:06:51,721 [INFO] [whi] Attempt 3/3 — https://watumishihousing.go.tz/housing-investment-fund/performance
+2026-02-23 10:06:51,722 [INFO] ====== WebDriver manager ======
+2026-02-23 10:06:53,514 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:54,689 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 10:06:55,829 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 10:06:56,510 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 10:07:03,120 [ERROR] [whi] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x114f3e3
+	0x114f424
+	0xf42090
+	0xf3f59e
+	0xf32674
+	0xf340dc
+	0xf32b17
+	0xf32445
+	0xf32145
+	0xf30258
+	0xf3096a
+	0xf45b1e
+	0xfcc554
+	0xfaee1c
+	0xfcbb23
+	0xfaebb6
+	0xf80319
+	0xf810d4
+	0x13a46a4
+	0x139f9a9
+	0x13bc940
+	0x11680f8
+	0x116fe4d
+	0x1157c18
+	0x1157de2
+	0x11418ea
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 10:07:05,308 [ERROR] [whi] All 3 attempts exhausted
+2026-02-23 10:07:05,309 [INFO] ------------------------------------------------------------
+2026-02-23 10:07:05,311 [INFO]   utt-amis: success (2400 rows) - Local only
+2026-02-23 10:07:05,312 [INFO]   vertex: success (10 rows) - Local only
+2026-02-23 10:07:05,313 [INFO]   sanlam-pesa: success (593 rows) - Local only
+2026-02-23 10:07:05,314 [INFO]   zansec: success (370 rows) - Local only
+2026-02-23 10:07:05,315 [INFO]   whi: no data (0 rows) - Local only
+2026-02-23 10:07:05,315 [INFO] ============================================================
+2026-02-23 10:07:05,316 [INFO] Fund Data Scraper — Complete

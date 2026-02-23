@@ -611,9 +611,21 @@ def main():
     logger.info("Fund Data Scraper — Starting")
     logger.info("=" * 60)
 
+    import argparse
+    parser = argparse.ArgumentParser(description="Fund Data Scraper")
+    parser.add_argument("--fund", help="Specific fund name to scrape (e.g. 'whi' or 'utt-amis')")
+    args = parser.parse_args()
+
     config = load_config()
     sources = config.get("sources", [])
     
+    if args.fund:
+        sources = [s for s in sources if s["name"] == args.fund]
+        if not sources:
+            logger.error(f"Fund '{args.fund}' not found in configuration.")
+            return
+        logger.info(f"Filtering to single fund: {args.fund}")
+
     results = []
     for source in sources:
         name = source["name"]
