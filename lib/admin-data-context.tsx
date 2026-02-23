@@ -1,7 +1,7 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect } from "react"
-import { dseStocks, etfs, ipos, marketNews, Stock, ETF, IPO, MarketNews } from "@/lib/market-data"
+import { dseStocks, etfs, ipos, marketNews, tanzanianFunds, Stock, ETF, IPO, MarketNews, Fund } from "@/lib/market-data"
 
 // Storage keys
 const STORAGE_KEYS = {
@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
     ETFS: "yif_admin_etfs",
     IPOS: "yif_admin_ipos",
     NEWS: "yif_admin_news",
+    FUNDS: "yif_admin_funds",
 }
 
 interface AdminDataContextType {
@@ -35,10 +36,18 @@ interface AdminDataContextType {
     addNews: (news: MarketNews) => void
     updateNews: (id: string, data: Partial<MarketNews>) => void
     deleteNews: (id: string) => void
+
+    // Funds
+    fundList: Fund[]
+    addFund: (fund: Fund) => void
+    updateFund: (id: string, data: Partial<Fund>) => void
+    deleteFund: (id: string) => void
+
     // Helpers
     getStockBySymbol: (symbol: string) => Stock | undefined
     getEtfBySymbol: (symbol: string) => ETF | undefined
     getIpoBySymbol: (symbol: string) => IPO | undefined
+    getFundById: (id: string) => Fund | undefined
 }
 
 const AdminDataContext = createContext<AdminDataContextType | undefined>(undefined)
@@ -48,6 +57,7 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
     const [etfList, setEtfList] = useState<ETF[]>([])
     const [ipoList, setIpoList] = useState<IPO[]>([])
     const [newsList, setNewsList] = useState<MarketNews[]>([])
+    const [fundList, setFundList] = useState<Fund[]>([])
     const [isInitialized, setIsInitialized] = useState(false)
 
     // Load data from localStorage on mount
@@ -58,11 +68,30 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         const savedEtfs = localStorage.getItem(STORAGE_KEYS.ETFS)
         const savedIpos = localStorage.getItem(STORAGE_KEYS.IPOS)
         const savedNews = localStorage.getItem(STORAGE_KEYS.NEWS)
+        const savedFunds = localStorage.getItem(STORAGE_KEYS.FUNDS)
 
         setStocks(savedStocks ? JSON.parse(savedStocks) : dseStocks)
         setEtfList(savedEtfs ? JSON.parse(savedEtfs) : etfs)
         setIpoList(savedIpos ? JSON.parse(savedIpos) : ipos)
         setNewsList(savedNews ? JSON.parse(savedNews) : marketNews)
+
+        // Fetch funds from API instead of just local mocks
+        const fetchFunds = async () => {
+            try {
+                const response = await fetch("/api/funds")
+                const result = await response.json()
+                if (result.success) {
+                    setFundList(result.data)
+                } else {
+                    setFundList(savedFunds ? JSON.parse(savedFunds) : tanzanianFunds)
+                }
+            } catch (error) {
+                console.error("Failed to fetch funds:", error)
+                setFundList(savedFunds ? JSON.parse(savedFunds) : tanzanianFunds)
+            }
+        }
+
+        fetchFunds()
         setIsInitialized(true)
     }, [])
 
@@ -84,9 +113,13 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         if (!isInitialized || typeof window === "undefined") return
-        // This useEffect will now only handle addNews and updateNews, as deleteNews updates localStorage directly.
         localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(newsList))
     }, [newsList, isInitialized])
+
+    useEffect(() => {
+        if (!isInitialized || typeof window === "undefined") return
+        localStorage.setItem(STORAGE_KEYS.FUNDS, JSON.stringify(fundList))
+    }, [fundList, isInitialized])
 
     // Stock operations
     const addStock = (stock: Stock) => setStocks(prev => [...prev, stock])
@@ -116,18 +149,26 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem(STORAGE_KEYS.NEWS, JSON.stringify(updated))
     }
 
+    // Fund operations
+    const addFund = (fund: Fund) => setFundList(prev => [...prev, fund])
+    const updateFund = (id: string, data: Partial<Fund>) =>
+        setFundList(prev => prev.map(f => f.id === id ? { ...f, ...data } : f))
+    const deleteFund = (id: string) => setFundList(prev => prev.filter(f => f.id !== id))
+
     const getStockBySymbol = (symbol: string) => stocks.find(s => s.symbol === symbol)
     const getEtfBySymbol = (symbol: string) => etfList.find(e => e.symbol === symbol)
     const getIpoBySymbol = (symbol: string) => ipoList.find(i => i.symbol === symbol)
+    const getFundById = (id: string) => fundList.find(f => f.id === id)
 
     return (
         <AdminDataContext.Provider value={{
-            stocks, etfList, ipoList, newsList,
+            stocks, etfList, ipoList, newsList, fundList,
             addStock, updateStock, deleteStock,
             addEtf, updateEtf, deleteEtf,
             addIpo, updateIpo, deleteIpo,
             addNews, updateNews, deleteNews,
-            getStockBySymbol, getEtfBySymbol, getIpoBySymbol
+            addFund, updateFund, deleteFund,
+            getStockBySymbol, getEtfBySymbol, getIpoBySymbol, getFundById
         }}>
             {children}
         </AdminDataContext.Provider>
@@ -152,9 +193,11 @@ export function useMarketData() {
             etfList: etfs,
             ipoList: ipos,
             newsList: marketNews,
+            fundList: tanzanianFunds,
             getStockBySymbol: (symbol: string) => dseStocks.find(s => s.symbol.toUpperCase() === symbol.toUpperCase()),
             getEtfBySymbol: (symbol: string) => etfs.find(e => e.symbol.toUpperCase() === symbol.toUpperCase()),
             getIpoBySymbol: (symbol: string) => ipos.find(i => i.symbol.toUpperCase() === symbol.toUpperCase()),
+            getFundById: (id: string) => tanzanianFunds.find(f => f.id === id),
         }
     }
     return {
@@ -162,8 +205,10 @@ export function useMarketData() {
         etfList: context.etfList,
         ipoList: context.ipoList,
         newsList: context.newsList,
+        fundList: context.fundList,
         getStockBySymbol: context.getStockBySymbol,
         getEtfBySymbol: context.getEtfBySymbol,
         getIpoBySymbol: context.getIpoBySymbol,
+        getFundById: context.getFundById,
     }
 }

@@ -274,8 +274,6 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <AuthProvider>
-      <RegisterForm />
-    </AuthProvider>
+    <RegisterForm />
   )
 }

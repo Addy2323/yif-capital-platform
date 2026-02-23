@@ -1,0 +1,102 @@
+[
+    {
+        "source": "zansec",
+        "date": "2026-02-20",
+        "nav_per_unit": 129.7931,
+        "sale_price": 129.7931,
+        "repurchase_price": 129.7931,
+        "total_nav": 31097304742.78,
+        "units": 239591355.34,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-19",
+        "nav_per_unit": 129.7519,
+        "sale_price": 129.7519,
+        "repurchase_price": 129.7519,
+        "total_nav": 31021686530.35,
+        "units": 239084641.77,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-18",
+        "nav_per_unit": 129.7107,
+        "sale_price": 129.7107,
+        "repurchase_price": 129.7107,
+        "total_nav": 31010179842.27,
+        "units": 239071871.81,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-17",
+        "nav_per_unit": 129.6695,
+        "sale_price": 129.6695,
+        "repurchase_price": 129.6695,
+        "total_nav": 30838592210.05,
+        "units": 237824563.29,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-16",
+        "nav_per_unit": 129.6283,
+        "sale_price": 129.6283,
+        "repurchase_price": 129.6283,
+        "total_nav": 30833958865.6,
+        "units": 237864408.2,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-13",
+        "nav_per_unit": 129.5047,
+        "sale_price": 129.5047,
+        "repurchase_price": 129.5047,
+        "total_nav": 30605778234.89,
+        "units": 236329478.66,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-12",
+        "nav_per_unit": 129.4635,
+        "sale_price": 129.4635,
+        "repurchase_price": 129.4635,
+        "total_nav": 30251986254.83,
+        "units": 233671932.67,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-11",
+        "nav_per_unit": 129.4223,
+        "sale_price": 129.4223,
+        "repurchase_price": 129.4223,
+        "total_nav": 30215399171.21,
+        "units": 233463623.9,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-10",
+        "nav_per_unit": 129.381,
+        "sale_price": 129.381,
+        "repurchase_price": 129.381,
+        "total_nav": 30096173405.13,
+        "units": 232616639.27,
+        "status": "extracted"
+    },
+    {
+        "source": "zansec",
+        "date": "2026-02-09",
+        "nav_per_unit": 129.3398,
+        "sale_price": 129.3398,
+        "repurchase_price": 129.3398,
+        "total_nav": 29971617276.53,
+        "units": 231727722.45,
+        "status": "extracted"
+    }
+]

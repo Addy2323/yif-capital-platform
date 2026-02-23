@@ -533,6 +533,212 @@ export const etfs: ETF[] = [
   },
 ]
 
+// Fund Data Types & Mock Data
+export interface Fund {
+  id: string
+  name: string
+  provider: string
+  category: "equity" | "fixed-income" | "money-market" | "balanced"
+  nav: number
+  previousNav: number
+  dailyReturn: number
+  aum: number
+  volatility: number
+  unitsOutstanding: number
+  inceptionDate: string
+  currency: string
+  date: string
+  description: string
+  navHistory: { date: string; nav: number }[]
+}
+
+export interface FundDailySummary {
+  fundId: string
+  date: string
+  nav: number
+  dailyReturn: number
+  aum: number
+  volatility: number
+}
+
+export const tanzanianFunds: Fund[] = [
+  {
+    id: "utt-umoja",
+    name: "UTT Umoja Fund",
+    provider: "UTT AMIS",
+    category: "balanced",
+    nav: 282.45,
+    previousNav: 280.12,
+    dailyReturn: 0.83,
+    aum: 185000000000,
+    volatility: 4.2,
+    unitsOutstanding: 655000000,
+    inceptionDate: "2005-07-01",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "A balanced unit trust fund investing in equities, fixed income securities, and money market instruments in Tanzania.",
+    navHistory: [
+      { date: "2026-02-20", nav: 282.45 },
+      { date: "2026-02-19", nav: 280.12 },
+      { date: "2026-02-18", nav: 279.50 },
+      { date: "2026-02-17", nav: 281.00 },
+      { date: "2026-02-14", nav: 278.90 },
+      { date: "2026-02-13", nav: 277.15 },
+      { date: "2026-02-12", nav: 276.80 },
+    ],
+  },
+  {
+    id: "utt-wekeza",
+    name: "UTT Wekeza Maisha Fund",
+    provider: "UTT AMIS",
+    category: "equity",
+    nav: 198.30,
+    previousNav: 196.15,
+    dailyReturn: 1.1,
+    aum: 92000000000,
+    volatility: 6.8,
+    unitsOutstanding: 464000000,
+    inceptionDate: "2008-03-15",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "An equity-focused unit trust fund targeting long-term capital growth through investments in DSE-listed companies.",
+    navHistory: [
+      { date: "2026-02-20", nav: 198.30 },
+      { date: "2026-02-19", nav: 196.15 },
+      { date: "2026-02-18", nav: 195.40 },
+      { date: "2026-02-17", nav: 197.00 },
+      { date: "2026-02-14", nav: 194.80 },
+      { date: "2026-02-13", nav: 193.50 },
+      { date: "2026-02-12", nav: 192.90 },
+    ],
+  },
+  {
+    id: "utt-jikimu",
+    name: "UTT Jikimu Fund",
+    provider: "UTT AMIS",
+    category: "money-market",
+    nav: 145.60,
+    previousNav: 145.50,
+    dailyReturn: 0.07,
+    aum: 320000000000,
+    volatility: 0.8,
+    unitsOutstanding: 2197000000,
+    inceptionDate: "2003-06-01",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "A money market fund providing stable returns through investments in government securities and bank deposits.",
+    navHistory: [
+      { date: "2026-02-20", nav: 145.60 },
+      { date: "2026-02-19", nav: 145.50 },
+      { date: "2026-02-18", nav: 145.42 },
+      { date: "2026-02-17", nav: 145.35 },
+      { date: "2026-02-14", nav: 145.28 },
+      { date: "2026-02-13", nav: 145.20 },
+      { date: "2026-02-12", nav: 145.12 },
+    ],
+  },
+  {
+    id: "zansec-bond",
+    name: "Zansec Bond Fund",
+    provider: "Zansec",
+    category: "fixed-income",
+    nav: 1250.80,
+    previousNav: 1248.20,
+    dailyReturn: 0.21,
+    aum: 78000000000,
+    volatility: 2.1,
+    unitsOutstanding: 62400000,
+    inceptionDate: "2012-09-01",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "A fixed-income fund investing primarily in Tanzanian government bonds and corporate debt instruments.",
+    navHistory: [
+      { date: "2026-02-20", nav: 1250.80 },
+      { date: "2026-02-19", nav: 1248.20 },
+      { date: "2026-02-18", nav: 1246.90 },
+      { date: "2026-02-17", nav: 1249.10 },
+      { date: "2026-02-14", nav: 1245.50 },
+      { date: "2026-02-13", nav: 1244.00 },
+      { date: "2026-02-12", nav: 1243.20 },
+    ],
+  },
+  {
+    id: "zansec-equity",
+    name: "Zansec Equity Growth Fund",
+    provider: "Zansec",
+    category: "equity",
+    nav: 890.25,
+    previousNav: 885.10,
+    dailyReturn: 0.58,
+    aum: 45000000000,
+    volatility: 7.5,
+    unitsOutstanding: 50500000,
+    inceptionDate: "2015-01-10",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "An equity growth fund focused on high-growth DSE-listed companies with strong fundamentals.",
+    navHistory: [
+      { date: "2026-02-20", nav: 890.25 },
+      { date: "2026-02-19", nav: 885.10 },
+      { date: "2026-02-18", nav: 882.00 },
+      { date: "2026-02-17", nav: 888.40 },
+      { date: "2026-02-14", nav: 879.60 },
+      { date: "2026-02-13", nav: 876.90 },
+      { date: "2026-02-12", nav: 875.10 },
+    ],
+  },
+  {
+    id: "whi-income",
+    name: "WHI Income Fund",
+    provider: "WHI",
+    category: "fixed-income",
+    nav: 520.15,
+    previousNav: 519.80,
+    dailyReturn: 0.07,
+    aum: 55000000000,
+    volatility: 1.5,
+    unitsOutstanding: 105700000,
+    inceptionDate: "2010-04-20",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "A fixed-income fund designed for investors seeking steady income from Tanzanian debt instruments.",
+    navHistory: [
+      { date: "2026-02-20", nav: 520.15 },
+      { date: "2026-02-19", nav: 519.80 },
+      { date: "2026-02-18", nav: 519.50 },
+      { date: "2026-02-17", nav: 519.90 },
+      { date: "2026-02-14", nav: 519.20 },
+      { date: "2026-02-13", nav: 518.90 },
+      { date: "2026-02-12", nav: 518.60 },
+    ],
+  },
+  {
+    id: "whi-balanced",
+    name: "WHI Balanced Fund",
+    provider: "WHI",
+    category: "balanced",
+    nav: 340.90,
+    previousNav: 338.50,
+    dailyReturn: 0.71,
+    aum: 38000000000,
+    volatility: 3.9,
+    unitsOutstanding: 111400000,
+    inceptionDate: "2014-08-01",
+    currency: "TZS",
+    date: "2026-02-20",
+    description: "A balanced fund combining equity and fixed-income exposure for moderate growth and income.",
+    navHistory: [
+      { date: "2026-02-20", nav: 340.90 },
+      { date: "2026-02-19", nav: 338.50 },
+      { date: "2026-02-18", nav: 337.80 },
+      { date: "2026-02-17", nav: 339.60 },
+      { date: "2026-02-14", nav: 336.90 },
+      { date: "2026-02-13", nav: 335.70 },
+      { date: "2026-02-12", nav: 335.10 },
+    ],
+  },
+]
+
 // Analyst Ratings
 export interface AnalystRating {
   symbol: string

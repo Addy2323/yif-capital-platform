@@ -49,6 +49,7 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
+  { name: "Funds", href: "/funds", icon: Activity },
   // { name: "Home", href: "/dashboard", icon: Home },
   // { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },
   /* {

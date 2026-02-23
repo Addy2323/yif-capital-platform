@@ -175,10 +175,10 @@ function CourseContent({ courseId }: { courseId: string }) {
               <div>
                 <span
                   className={`inline-block rounded-full px-3 py-1 text-xs font-medium ${course.level === "Beginner"
-                      ? "bg-success/10 text-success"
-                      : course.level === "Intermediate"
-                        ? "bg-gold/10 text-gold"
-                        : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
+                    ? "bg-success/10 text-success"
+                    : course.level === "Intermediate"
+                      ? "bg-gold/10 text-gold"
+                      : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
                     }`}
                 >
                   {course.level}
@@ -240,18 +240,18 @@ function CourseContent({ courseId }: { courseId: string }) {
                           onClick={() => canAccess && setCurrentLesson(index)}
                           disabled={!canAccess}
                           className={`flex w-full items-center gap-3 p-4 text-left transition-colors ${isCurrent
-                              ? "bg-gold/10"
-                              : canAccess
-                                ? "hover:bg-muted/50"
-                                : "opacity-60"
+                            ? "bg-gold/10"
+                            : canAccess
+                              ? "hover:bg-muted/50"
+                              : "opacity-60"
                             }`}
                         >
                           <div
                             className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full ${isCompleted
-                                ? "bg-success text-white"
-                                : isCurrent
-                                  ? "bg-gold text-navy"
-                                  : "bg-muted text-muted-foreground"
+                              ? "bg-success text-white"
+                              : isCurrent
+                                ? "bg-gold text-navy"
+                                : "bg-muted text-muted-foreground"
                               }`}
                           >
                             {isCompleted ? (
@@ -367,8 +367,6 @@ export default function CoursePage({ params }: { params: Promise<{ id: string }>
   const { id } = use(params)
 
   return (
-    <AuthProvider>
-      <CourseContent courseId={id} />
-    </AuthProvider>
+    <CourseContent courseId={id} />
   )
 }

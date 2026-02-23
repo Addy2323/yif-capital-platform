@@ -349,8 +349,6 @@ function SessionPaymentContent() {
 
 export default function SessionPaymentPage() {
     return (
-        <AuthProvider>
-            <SessionPaymentContent />
-        </AuthProvider>
+        <SessionPaymentContent />
     )
 }

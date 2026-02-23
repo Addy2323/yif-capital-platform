@@ -372,8 +372,6 @@ function AcademyContent() {
 
 export default function AcademyPage() {
   return (
-    <AuthProvider>
-      <AcademyContent />
-    </AuthProvider>
+    <AcademyContent />
   )
 }
