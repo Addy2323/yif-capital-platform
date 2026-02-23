@@ -6,8 +6,9 @@
 cd "$(dirname "$0")/.."
 
 # Environment Variables
-export FUND_API_URL="https://yifcapital.co.tz/api/funds/update"
-export PYTHON_EXEC="./fund_pipeline/.venv/bin/python3"
+# Using localhost to avoid DNS/SSL issues from inside the server
+export FUND_API_URL="http://localhost:3000/api/funds/update"
+export PYTHON_EXEC="/var/www/yif-capital-platform/fund_pipeline/.venv/bin/python3"
 
 # Log start
 echo "[$(date)] Starting Daily Fund Sync..." >> fund_pipeline/logs/automation.log

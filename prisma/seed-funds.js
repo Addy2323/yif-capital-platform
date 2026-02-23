@@ -80,23 +80,12 @@ const FUND_METADATA = {
 async function main() {
   console.log('Starting fund registry seed...')
 
-  // Get unique fund IDs from FundDailySummary
-  const existingFunds = await prisma.fundDailySummary.groupBy({
-    by: ['fundId'],
-    _count: { fundId: true },
-    _max: { date: true },
-  })
+  // Seed all funds defined in metadata
+  const fundIds = Object.keys(FUND_METADATA)
+  console.log(`Found ${fundIds.length} funds in metadata registry`)
 
-  console.log(`Found ${existingFunds.length} funds in FundDailySummary`)
-
-  for (const fund of existingFunds) {
-    const fundId = fund.fundId
+  for (const fundId of fundIds) {
     const metadata = FUND_METADATA[fundId]
-
-    if (!metadata) {
-      console.log(`No metadata for fund ${fundId}, skipping...`)
-      continue
-    }
 
     // Check if fund already exists
     const existing = await prisma.fund.findUnique({

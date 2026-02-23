@@ -25,6 +25,24 @@
             "type": "selenium",
             "wait_seconds": 10,
             "retry_count": 3,
+            "max_pages": 15
+        },
+        {
+            "name": "zansec",
+            "url": "https://zansec.co.tz/nav.php",
+            "provider": "ZANSEC",
+            "type": "selenium",
+            "wait_seconds": 12,
+            "retry_count": 3,
+            "max_pages": 45
+        },
+        {
+            "name": "whi",
+            "url": "https://www.watumishihousing.go.tz/housing-investment-fund/performance",
+            "provider": "WHI",
+            "type": "selenium",
+            "wait_seconds": 10,
+            "retry_count": 3,
             "max_pages": 10
         }
     ],

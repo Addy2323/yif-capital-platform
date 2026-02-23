@@ -1,0 +1,2740 @@
+[
+    {
+        "source": "vertex",
+        "date": "",
+        "nav_per_unit": 0.0,
+        "total_nav": 0.0,
+        "units": 0.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-10",
+        "nav_per_unit": 105.7111,
+        "total_nav": 5494010662.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-11",
+        "nav_per_unit": 106.0,
+        "total_nav": 5517714755.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-12",
+        "nav_per_unit": 106.2063,
+        "total_nav": 5518684372.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-13",
+        "nav_per_unit": 106.2427,
+        "total_nav": 5520574266.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-14",
+        "nav_per_unit": 106.285,
+        "total_nav": 5593632762.0,
+        "units": 52628617.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-17",
+        "nav_per_unit": 106.3218,
+        "total_nav": 5611225491.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-18",
+        "nav_per_unit": 106.357,
+        "total_nav": 5613082771.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-19",
+        "nav_per_unit": 106.3936,
+        "total_nav": 5615012811.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-20",
+        "nav_per_unit": 106.5326,
+        "total_nav": 5624356276.0,
+        "units": 52794677.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-21",
+        "nav_per_unit": 106.5693,
+        "total_nav": 5624288358.05,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-24",
+        "nav_per_unit": 106.679,
+        "total_nav": 5630076213.77,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-25",
+        "nav_per_unit": 106.7114,
+        "total_nav": 5681933962.27,
+        "units": 53245813.09,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-26",
+        "nav_per_unit": 106.8275,
+        "total_nav": 5640247111.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-27",
+        "nav_per_unit": 106.8641,
+        "total_nav": 5642178753.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-11-28",
+        "nav_per_unit": 106.9006,
+        "total_nav": 5644110318.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-01",
+        "nav_per_unit": 107.0104,
+        "total_nav": 5649904559.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-02",
+        "nav_per_unit": 107.0432,
+        "total_nav": 5651634261.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-03",
+        "nav_per_unit": 107.0797,
+        "total_nav": 5653565446.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-04",
+        "nav_per_unit": 107.0797,
+        "total_nav": 5659100845.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-05",
+        "nav_per_unit": 107.1528,
+        "total_nav": 5662962594.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-08",
+        "nav_per_unit": 107.2586,
+        "total_nav": 5668552587.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-10",
+        "nav_per_unit": 107.3006,
+        "total_nav": 5733528712.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-11",
+        "nav_per_unit": 107.3367,
+        "total_nav": 5735456923.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-12",
+        "nav_per_unit": 107.3366,
+        "total_nav": 5740149852.0,
+        "units": 53478038.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-15",
+        "nav_per_unit": 107.3726,
+        "total_nav": 5747744027.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-16",
+        "nav_per_unit": 107.5243,
+        "total_nav": 5755864824.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-17",
+        "nav_per_unit": 107.5603,
+        "total_nav": 5758237001.0,
+        "units": 53534959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-18",
+        "nav_per_unit": 107.5924,
+        "total_nav": 5757935936.0,
+        "units": 53516211.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-19",
+        "nav_per_unit": 107.6283,
+        "total_nav": 5780865733.0,
+        "units": 53592974.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-22",
+        "nav_per_unit": 107.7438,
+        "total_nav": 5774313984.0,
+        "units": 53592995.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-23",
+        "nav_per_unit": 108.7229,
+        "total_nav": 5776257204.0,
+        "units": 53128257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-24",
+        "nav_per_unit": 108.7589,
+        "total_nav": 5780882308.0,
+        "units": 53153193.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-29",
+        "nav_per_unit": 107.8146,
+        "total_nav": 5818560994.0,
+        "units": 53968233.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-30",
+        "nav_per_unit": 108.0475,
+        "total_nav": 5835061718.0,
+        "units": 54004619.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2025-12-31",
+        "nav_per_unit": 108.083,
+        "total_nav": 5896683809.0,
+        "units": 54556987.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-02",
+        "nav_per_unit": 108.1487,
+        "total_nav": 5922123480.0,
+        "units": 54759081.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-05",
+        "nav_per_unit": 108.1493,
+        "total_nav": 5954649765.0,
+        "units": 55059552.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-06",
+        "nav_per_unit": 108.2693,
+        "total_nav": 5970246802.0,
+        "units": 55128834.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-07",
+        "nav_per_unit": 108.3295,
+        "total_nav": 6027653579.0,
+        "units": 55641873.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-08",
+        "nav_per_unit": 108.3142,
+        "total_nav": 6028938648.0,
+        "units": 55661556.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-09",
+        "nav_per_unit": 108.3012,
+        "total_nav": 6029015444.0,
+        "units": 55668970.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-13",
+        "nav_per_unit": 108.4878,
+        "total_nav": 6068537517.0,
+        "units": 55937508.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-14",
+        "nav_per_unit": 108.4719,
+        "total_nav": 6060406837.0,
+        "units": 55870754.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-15",
+        "nav_per_unit": 108.5328,
+        "total_nav": 6090087289.0,
+        "units": 56112871.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-16",
+        "nav_per_unit": 108.5651,
+        "total_nav": 6097022501.0,
+        "units": 56160053.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-19",
+        "nav_per_unit": 108.565,
+        "total_nav": 6106114742.0,
+        "units": 56243851.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-20",
+        "nav_per_unit": 108.565,
+        "total_nav": 6106424742.0,
+        "units": 56246730.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-21",
+        "nav_per_unit": 108.564,
+        "total_nav": 6118173742.0,
+        "units": 56355443.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-22",
+        "nav_per_unit": 108.564,
+        "total_nav": 6118373742.0,
+        "units": 56357283.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-23",
+        "nav_per_unit": 108.8246,
+        "total_nav": 6141746259.0,
+        "units": 56437137.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-26",
+        "nav_per_unit": 108.8244,
+        "total_nav": 6145537259.0,
+        "units": 56472050.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-27",
+        "nav_per_unit": 108.9701,
+        "total_nav": 6118377202.0,
+        "units": 56147313.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-28",
+        "nav_per_unit": 109.0042,
+        "total_nav": 6118521921.0,
+        "units": 56131041.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-29",
+        "nav_per_unit": 109.0038,
+        "total_nav": 6134654336.0,
+        "units": 56279288.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-01-30",
+        "nav_per_unit": 109.0372,
+        "total_nav": 6143836764.0,
+        "units": 56346257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-02",
+        "nav_per_unit": 109.071,
+        "total_nav": 6148932826.0,
+        "units": 56375518.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-03",
+        "nav_per_unit": 109.1919,
+        "total_nav": 6157327075.0,
+        "units": 56389959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-04",
+        "nav_per_unit": 109.2481,
+        "total_nav": 6162295059.0,
+        "units": 56406445.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-05",
+        "nav_per_unit": 109.2485,
+        "total_nav": 6173286471.0,
+        "units": 56506820.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-06",
+        "nav_per_unit": 109.2813,
+        "total_nav": 6179184457.0,
+        "units": 56543863.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-09",
+        "nav_per_unit": 109.3146,
+        "total_nav": 6190589996.0,
+        "units": 56630938.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-10",
+        "nav_per_unit": 109.4221,
+        "total_nav": 6196050589.0,
+        "units": 56625217.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-11",
+        "nav_per_unit": 109.4558,
+        "total_nav": 6199331047.0,
+        "units": 56637762.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-12",
+        "nav_per_unit": 109.4917,
+        "total_nav": 6204007549.0,
+        "units": 56661889.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-13",
+        "nav_per_unit": 109.5226,
+        "total_nav": 6381341623.0,
+        "units": 58265071.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-16",
+        "nav_per_unit": 109.6192,
+        "total_nav": 6445876567.0,
+        "units": 58802440.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-17",
+        "nav_per_unit": 109.6473,
+        "total_nav": 6401653927.0,
+        "units": 58384045.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-18",
+        "nav_per_unit": 109.7138,
+        "total_nav": 6434037832.0,
+        "units": 58643823.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-19",
+        "nav_per_unit": 109.7123,
+        "total_nav": 6438051825.0,
+        "units": 58681223.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "date": "2026-02-20",
+        "nav_per_unit": 109.7727,
+        "total_nav": 6441440184.0,
+        "units": 58679777.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-10",
+        "nav_per_unit": 105.7111,
+        "sale_price": 105.7111,
+        "repurchase_price": 105.7111,
+        "total_nav": 5494010662.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-11",
+        "nav_per_unit": 106.0,
+        "sale_price": 106.0,
+        "repurchase_price": 106.0,
+        "total_nav": 5517714755.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-12",
+        "nav_per_unit": 106.2063,
+        "sale_price": 106.2063,
+        "repurchase_price": 106.2063,
+        "total_nav": 5518684372.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-13",
+        "nav_per_unit": 106.2427,
+        "sale_price": 106.2427,
+        "repurchase_price": 106.2427,
+        "total_nav": 5520574266.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-14",
+        "nav_per_unit": 106.285,
+        "sale_price": 106.285,
+        "repurchase_price": 106.285,
+        "total_nav": 5593632762.0,
+        "units": 52628617.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-17",
+        "nav_per_unit": 106.3218,
+        "sale_price": 106.3218,
+        "repurchase_price": 106.3218,
+        "total_nav": 5611225491.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-18",
+        "nav_per_unit": 106.357,
+        "sale_price": 106.357,
+        "repurchase_price": 106.357,
+        "total_nav": 5613082771.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-19",
+        "nav_per_unit": 106.3936,
+        "sale_price": 106.3936,
+        "repurchase_price": 106.3936,
+        "total_nav": 5615012811.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-20",
+        "nav_per_unit": 106.5326,
+        "sale_price": 106.5326,
+        "repurchase_price": 106.5326,
+        "total_nav": 5624356276.0,
+        "units": 52794677.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-21",
+        "nav_per_unit": 106.5693,
+        "sale_price": 106.5693,
+        "repurchase_price": 106.5693,
+        "total_nav": 5624288358.05,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-24",
+        "nav_per_unit": 106.679,
+        "sale_price": 106.679,
+        "repurchase_price": 106.679,
+        "total_nav": 5630076213.77,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-25",
+        "nav_per_unit": 106.7114,
+        "sale_price": 106.7114,
+        "repurchase_price": 106.7114,
+        "total_nav": 5681933962.27,
+        "units": 53245813.09,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-26",
+        "nav_per_unit": 106.8275,
+        "sale_price": 106.8275,
+        "repurchase_price": 106.8275,
+        "total_nav": 5640247111.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-27",
+        "nav_per_unit": 106.8641,
+        "sale_price": 106.8641,
+        "repurchase_price": 106.8641,
+        "total_nav": 5642178753.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-28",
+        "nav_per_unit": 106.9006,
+        "sale_price": 106.9006,
+        "repurchase_price": 106.9006,
+        "total_nav": 5644110318.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-01",
+        "nav_per_unit": 107.0104,
+        "sale_price": 107.0104,
+        "repurchase_price": 107.0104,
+        "total_nav": 5649904559.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-02",
+        "nav_per_unit": 107.0432,
+        "sale_price": 107.0432,
+        "repurchase_price": 107.0432,
+        "total_nav": 5651634261.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-03",
+        "nav_per_unit": 107.0797,
+        "sale_price": 107.0797,
+        "repurchase_price": 107.0797,
+        "total_nav": 5653565446.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-04",
+        "nav_per_unit": 107.0797,
+        "sale_price": 107.0797,
+        "repurchase_price": 107.0797,
+        "total_nav": 5659100845.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-05",
+        "nav_per_unit": 107.1528,
+        "sale_price": 107.1528,
+        "repurchase_price": 107.1528,
+        "total_nav": 5662962594.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-08",
+        "nav_per_unit": 107.2586,
+        "sale_price": 107.2586,
+        "repurchase_price": 107.2586,
+        "total_nav": 5668552587.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-10",
+        "nav_per_unit": 107.3006,
+        "sale_price": 107.3006,
+        "repurchase_price": 107.3006,
+        "total_nav": 5733528712.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-11",
+        "nav_per_unit": 107.3367,
+        "sale_price": 107.3367,
+        "repurchase_price": 107.3367,
+        "total_nav": 5735456923.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-12",
+        "nav_per_unit": 107.3366,
+        "sale_price": 107.3366,
+        "repurchase_price": 107.3366,
+        "total_nav": 5740149852.0,
+        "units": 53478038.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-15",
+        "nav_per_unit": 107.3726,
+        "sale_price": 107.3726,
+        "repurchase_price": 107.3726,
+        "total_nav": 5747744027.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-16",
+        "nav_per_unit": 107.5243,
+        "sale_price": 107.5243,
+        "repurchase_price": 107.5243,
+        "total_nav": 5755864824.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-17",
+        "nav_per_unit": 107.5603,
+        "sale_price": 107.5603,
+        "repurchase_price": 107.5603,
+        "total_nav": 5758237001.0,
+        "units": 53534959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-18",
+        "nav_per_unit": 107.5924,
+        "sale_price": 107.5924,
+        "repurchase_price": 107.5924,
+        "total_nav": 5757935936.0,
+        "units": 53516211.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-19",
+        "nav_per_unit": 107.6283,
+        "sale_price": 107.6283,
+        "repurchase_price": 107.6283,
+        "total_nav": 5780865733.0,
+        "units": 53592974.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-22",
+        "nav_per_unit": 107.7438,
+        "sale_price": 107.7438,
+        "repurchase_price": 107.7438,
+        "total_nav": 5774313984.0,
+        "units": 53592995.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-23",
+        "nav_per_unit": 108.7229,
+        "sale_price": 108.7229,
+        "repurchase_price": 108.7229,
+        "total_nav": 5776257204.0,
+        "units": 53128257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-24",
+        "nav_per_unit": 108.7589,
+        "sale_price": 108.7589,
+        "repurchase_price": 108.7589,
+        "total_nav": 5780882308.0,
+        "units": 53153193.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-29",
+        "nav_per_unit": 107.8146,
+        "sale_price": 107.8146,
+        "repurchase_price": 107.8146,
+        "total_nav": 5818560994.0,
+        "units": 53968233.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-30",
+        "nav_per_unit": 108.0475,
+        "sale_price": 108.0475,
+        "repurchase_price": 108.0475,
+        "total_nav": 5835061718.0,
+        "units": 54004619.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-31",
+        "nav_per_unit": 108.083,
+        "sale_price": 108.083,
+        "repurchase_price": 108.083,
+        "total_nav": 5896683809.0,
+        "units": 54556987.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-02",
+        "nav_per_unit": 108.1487,
+        "sale_price": 108.1487,
+        "repurchase_price": 108.1487,
+        "total_nav": 5922123480.0,
+        "units": 54759081.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-05",
+        "nav_per_unit": 108.1493,
+        "sale_price": 108.1493,
+        "repurchase_price": 108.1493,
+        "total_nav": 5954649765.0,
+        "units": 55059552.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-06",
+        "nav_per_unit": 108.2693,
+        "sale_price": 108.2693,
+        "repurchase_price": 108.2693,
+        "total_nav": 5970246802.0,
+        "units": 55128834.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-07",
+        "nav_per_unit": 108.3295,
+        "sale_price": 108.3295,
+        "repurchase_price": 108.3295,
+        "total_nav": 6027653579.0,
+        "units": 55641873.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-08",
+        "nav_per_unit": 108.3142,
+        "sale_price": 108.3142,
+        "repurchase_price": 108.3142,
+        "total_nav": 6028938648.0,
+        "units": 55661556.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-09",
+        "nav_per_unit": 108.3012,
+        "sale_price": 108.3012,
+        "repurchase_price": 108.3012,
+        "total_nav": 6029015444.0,
+        "units": 55668970.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-13",
+        "nav_per_unit": 108.4878,
+        "sale_price": 108.4878,
+        "repurchase_price": 108.4878,
+        "total_nav": 6068537517.0,
+        "units": 55937508.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-14",
+        "nav_per_unit": 108.4719,
+        "sale_price": 108.4719,
+        "repurchase_price": 108.4719,
+        "total_nav": 6060406837.0,
+        "units": 55870754.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-15",
+        "nav_per_unit": 108.5328,
+        "sale_price": 108.5328,
+        "repurchase_price": 108.5328,
+        "total_nav": 6090087289.0,
+        "units": 56112871.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-16",
+        "nav_per_unit": 108.5651,
+        "sale_price": 108.5651,
+        "repurchase_price": 108.5651,
+        "total_nav": 6097022501.0,
+        "units": 56160053.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-19",
+        "nav_per_unit": 108.565,
+        "sale_price": 108.565,
+        "repurchase_price": 108.565,
+        "total_nav": 6106114742.0,
+        "units": 56243851.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-20",
+        "nav_per_unit": 108.565,
+        "sale_price": 108.565,
+        "repurchase_price": 108.565,
+        "total_nav": 6106424742.0,
+        "units": 56246730.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-21",
+        "nav_per_unit": 108.564,
+        "sale_price": 108.564,
+        "repurchase_price": 108.564,
+        "total_nav": 6118173742.0,
+        "units": 56355443.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-22",
+        "nav_per_unit": 108.564,
+        "sale_price": 108.564,
+        "repurchase_price": 108.564,
+        "total_nav": 6118373742.0,
+        "units": 56357283.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-23",
+        "nav_per_unit": 108.8246,
+        "sale_price": 108.8246,
+        "repurchase_price": 108.8246,
+        "total_nav": 6141746259.0,
+        "units": 56437137.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-26",
+        "nav_per_unit": 108.8244,
+        "sale_price": 108.8244,
+        "repurchase_price": 108.8244,
+        "total_nav": 6145537259.0,
+        "units": 56472050.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-27",
+        "nav_per_unit": 108.9701,
+        "sale_price": 108.9701,
+        "repurchase_price": 108.9701,
+        "total_nav": 6118377202.0,
+        "units": 56147313.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-28",
+        "nav_per_unit": 109.0042,
+        "sale_price": 109.0042,
+        "repurchase_price": 109.0042,
+        "total_nav": 6118521921.0,
+        "units": 56131041.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-29",
+        "nav_per_unit": 109.0038,
+        "sale_price": 109.0038,
+        "repurchase_price": 109.0038,
+        "total_nav": 6134654336.0,
+        "units": 56279288.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-30",
+        "nav_per_unit": 109.0372,
+        "sale_price": 109.0372,
+        "repurchase_price": 109.0372,
+        "total_nav": 6143836764.0,
+        "units": 56346257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-02",
+        "nav_per_unit": 109.071,
+        "sale_price": 109.071,
+        "repurchase_price": 109.071,
+        "total_nav": 6148932826.0,
+        "units": 56375518.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-03",
+        "nav_per_unit": 109.1919,
+        "sale_price": 109.1919,
+        "repurchase_price": 109.1919,
+        "total_nav": 6157327075.0,
+        "units": 56389959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-04",
+        "nav_per_unit": 109.2481,
+        "sale_price": 109.2481,
+        "repurchase_price": 109.2481,
+        "total_nav": 6162295059.0,
+        "units": 56406445.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-05",
+        "nav_per_unit": 109.2485,
+        "sale_price": 109.2485,
+        "repurchase_price": 109.2485,
+        "total_nav": 6173286471.0,
+        "units": 56506820.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-06",
+        "nav_per_unit": 109.2813,
+        "sale_price": 109.2813,
+        "repurchase_price": 109.2813,
+        "total_nav": 6179184457.0,
+        "units": 56543863.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-09",
+        "nav_per_unit": 109.3146,
+        "sale_price": 109.3146,
+        "repurchase_price": 109.3146,
+        "total_nav": 6190589996.0,
+        "units": 56630938.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-10",
+        "nav_per_unit": 109.4221,
+        "sale_price": 109.4221,
+        "repurchase_price": 109.4221,
+        "total_nav": 6196050589.0,
+        "units": 56625217.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-11",
+        "nav_per_unit": 109.4558,
+        "sale_price": 109.4558,
+        "repurchase_price": 109.4558,
+        "total_nav": 6199331047.0,
+        "units": 56637762.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-12",
+        "nav_per_unit": 109.4917,
+        "sale_price": 109.4917,
+        "repurchase_price": 109.4917,
+        "total_nav": 6204007549.0,
+        "units": 56661889.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-13",
+        "nav_per_unit": 109.5226,
+        "sale_price": 109.5226,
+        "repurchase_price": 109.5226,
+        "total_nav": 6381341623.0,
+        "units": 58265071.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-16",
+        "nav_per_unit": 109.6192,
+        "sale_price": 109.6192,
+        "repurchase_price": 109.6192,
+        "total_nav": 6445876567.0,
+        "units": 58802440.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-17",
+        "nav_per_unit": 109.6473,
+        "sale_price": 109.6473,
+        "repurchase_price": 109.6473,
+        "total_nav": 6401653927.0,
+        "units": 58384045.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-18",
+        "nav_per_unit": 109.7138,
+        "sale_price": 109.7138,
+        "repurchase_price": 109.7138,
+        "total_nav": 6434037832.0,
+        "units": 58643823.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-19",
+        "nav_per_unit": 109.7123,
+        "sale_price": 109.7123,
+        "repurchase_price": 109.7123,
+        "total_nav": 6438051825.0,
+        "units": 58681223.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-20",
+        "nav_per_unit": 109.7727,
+        "sale_price": 109.7727,
+        "repurchase_price": 109.7727,
+        "total_nav": 6441440184.0,
+        "units": 58679777.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-10",
+        "nav_per_unit": 105.7111,
+        "total_nav": 5494010662.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-11",
+        "nav_per_unit": 106.0,
+        "total_nav": 5517714755.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-12",
+        "nav_per_unit": 106.2063,
+        "total_nav": 5518684372.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-13",
+        "nav_per_unit": 106.2427,
+        "total_nav": 5520574266.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-14",
+        "nav_per_unit": 106.285,
+        "total_nav": 5593632762.0,
+        "units": 52628617.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-17",
+        "nav_per_unit": 106.3218,
+        "total_nav": 5611225491.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-18",
+        "nav_per_unit": 106.357,
+        "total_nav": 5613082771.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-19",
+        "nav_per_unit": 106.3936,
+        "total_nav": 5615012811.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-20",
+        "nav_per_unit": 106.5326,
+        "total_nav": 5624356276.0,
+        "units": 52794677.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-21",
+        "nav_per_unit": 106.5693,
+        "total_nav": 5624288358.05,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-24",
+        "nav_per_unit": 106.679,
+        "total_nav": 5630076213.77,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-25",
+        "nav_per_unit": 106.7114,
+        "total_nav": 5681933962.27,
+        "units": 53245813.09,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-26",
+        "nav_per_unit": 106.8275,
+        "total_nav": 5640247111.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-27",
+        "nav_per_unit": 106.8641,
+        "total_nav": 5642178753.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-28",
+        "nav_per_unit": 106.9006,
+        "total_nav": 5644110318.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-01",
+        "nav_per_unit": 107.0104,
+        "total_nav": 5649904559.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-02",
+        "nav_per_unit": 107.0432,
+        "total_nav": 5651634261.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-03",
+        "nav_per_unit": 107.0797,
+        "total_nav": 5653565446.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-04",
+        "nav_per_unit": 107.0797,
+        "total_nav": 5659100845.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-05",
+        "nav_per_unit": 107.1528,
+        "total_nav": 5662962594.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-08",
+        "nav_per_unit": 107.2586,
+        "total_nav": 5668552587.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-10",
+        "nav_per_unit": 107.3006,
+        "total_nav": 5733528712.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-11",
+        "nav_per_unit": 107.3367,
+        "total_nav": 5735456923.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-12",
+        "nav_per_unit": 107.3366,
+        "total_nav": 5740149852.0,
+        "units": 53478038.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-15",
+        "nav_per_unit": 107.3726,
+        "total_nav": 5747744027.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-16",
+        "nav_per_unit": 107.5243,
+        "total_nav": 5755864824.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-17",
+        "nav_per_unit": 107.5603,
+        "total_nav": 5758237001.0,
+        "units": 53534959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-18",
+        "nav_per_unit": 107.5924,
+        "total_nav": 5757935936.0,
+        "units": 53516211.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-19",
+        "nav_per_unit": 107.6283,
+        "total_nav": 5780865733.0,
+        "units": 53592974.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-22",
+        "nav_per_unit": 107.7438,
+        "total_nav": 5774313984.0,
+        "units": 53592995.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-23",
+        "nav_per_unit": 108.7229,
+        "total_nav": 5776257204.0,
+        "units": 53128257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-24",
+        "nav_per_unit": 108.7589,
+        "total_nav": 5780882308.0,
+        "units": 53153193.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-29",
+        "nav_per_unit": 107.8146,
+        "total_nav": 5818560994.0,
+        "units": 53968233.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-30",
+        "nav_per_unit": 108.0475,
+        "total_nav": 5835061718.0,
+        "units": 54004619.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-31",
+        "nav_per_unit": 108.083,
+        "total_nav": 5896683809.0,
+        "units": 54556987.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-02",
+        "nav_per_unit": 108.1487,
+        "total_nav": 5922123480.0,
+        "units": 54759081.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-05",
+        "nav_per_unit": 108.1493,
+        "total_nav": 5954649765.0,
+        "units": 55059552.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-06",
+        "nav_per_unit": 108.2693,
+        "total_nav": 5970246802.0,
+        "units": 55128834.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-07",
+        "nav_per_unit": 108.3295,
+        "total_nav": 6027653579.0,
+        "units": 55641873.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-08",
+        "nav_per_unit": 108.3142,
+        "total_nav": 6028938648.0,
+        "units": 55661556.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-09",
+        "nav_per_unit": 108.3012,
+        "total_nav": 6029015444.0,
+        "units": 55668970.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-13",
+        "nav_per_unit": 108.4878,
+        "total_nav": 6068537517.0,
+        "units": 55937508.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-14",
+        "nav_per_unit": 108.4719,
+        "total_nav": 6060406837.0,
+        "units": 55870754.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-15",
+        "nav_per_unit": 108.5328,
+        "total_nav": 6090087289.0,
+        "units": 56112871.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-16",
+        "nav_per_unit": 108.5651,
+        "total_nav": 6097022501.0,
+        "units": 56160053.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-19",
+        "nav_per_unit": 108.565,
+        "total_nav": 6106114742.0,
+        "units": 56243851.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-20",
+        "nav_per_unit": 108.565,
+        "total_nav": 6106424742.0,
+        "units": 56246730.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-21",
+        "nav_per_unit": 108.564,
+        "total_nav": 6118173742.0,
+        "units": 56355443.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-22",
+        "nav_per_unit": 108.564,
+        "total_nav": 6118373742.0,
+        "units": 56357283.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-23",
+        "nav_per_unit": 108.8246,
+        "total_nav": 6141746259.0,
+        "units": 56437137.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-26",
+        "nav_per_unit": 108.8244,
+        "total_nav": 6145537259.0,
+        "units": 56472050.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-27",
+        "nav_per_unit": 108.9701,
+        "total_nav": 6118377202.0,
+        "units": 56147313.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-28",
+        "nav_per_unit": 109.0042,
+        "total_nav": 6118521921.0,
+        "units": 56131041.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-29",
+        "nav_per_unit": 109.0038,
+        "total_nav": 6134654336.0,
+        "units": 56279288.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-30",
+        "nav_per_unit": 109.0372,
+        "total_nav": 6143836764.0,
+        "units": 56346257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-02",
+        "nav_per_unit": 109.071,
+        "total_nav": 6148932826.0,
+        "units": 56375518.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-03",
+        "nav_per_unit": 109.1919,
+        "total_nav": 6157327075.0,
+        "units": 56389959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-04",
+        "nav_per_unit": 109.2481,
+        "total_nav": 6162295059.0,
+        "units": 56406445.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-05",
+        "nav_per_unit": 109.2485,
+        "total_nav": 6173286471.0,
+        "units": 56506820.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-06",
+        "nav_per_unit": 109.2813,
+        "total_nav": 6179184457.0,
+        "units": 56543863.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-09",
+        "nav_per_unit": 109.3146,
+        "total_nav": 6190589996.0,
+        "units": 56630938.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-10",
+        "nav_per_unit": 109.4221,
+        "total_nav": 6196050589.0,
+        "units": 56625217.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-11",
+        "nav_per_unit": 109.4558,
+        "total_nav": 6199331047.0,
+        "units": 56637762.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-12",
+        "nav_per_unit": 109.4917,
+        "total_nav": 6204007549.0,
+        "units": 56661889.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-13",
+        "nav_per_unit": 109.5226,
+        "total_nav": 6381341623.0,
+        "units": 58265071.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-16",
+        "nav_per_unit": 109.6192,
+        "total_nav": 6445876567.0,
+        "units": 58802440.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-17",
+        "nav_per_unit": 109.6473,
+        "total_nav": 6401653927.0,
+        "units": 58384045.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-18",
+        "nav_per_unit": 109.7138,
+        "total_nav": 6434037832.0,
+        "units": 58643823.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-19",
+        "nav_per_unit": 109.7123,
+        "total_nav": 6438051825.0,
+        "units": 58681223.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-20",
+        "nav_per_unit": 109.7727,
+        "total_nav": 6441440184.0,
+        "units": 58679777.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-10",
+        "nav_per_unit": 105.7111,
+        "sale_price": 105.7111,
+        "repurchase_price": 105.7111,
+        "total_nav": 5494010662.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-11",
+        "nav_per_unit": 106.0,
+        "sale_price": 106.0,
+        "repurchase_price": 106.0,
+        "total_nav": 5517714755.0,
+        "units": 51971940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-12",
+        "nav_per_unit": 106.2063,
+        "sale_price": 106.2063,
+        "repurchase_price": 106.2063,
+        "total_nav": 5518684372.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-13",
+        "nav_per_unit": 106.2427,
+        "sale_price": 106.2427,
+        "repurchase_price": 106.2427,
+        "total_nav": 5520574266.0,
+        "units": 51961940.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-14",
+        "nav_per_unit": 106.285,
+        "sale_price": 106.285,
+        "repurchase_price": 106.285,
+        "total_nav": 5593632762.0,
+        "units": 52628617.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-17",
+        "nav_per_unit": 106.3218,
+        "sale_price": 106.3218,
+        "repurchase_price": 106.3218,
+        "total_nav": 5611225491.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-18",
+        "nav_per_unit": 106.357,
+        "sale_price": 106.357,
+        "repurchase_price": 106.357,
+        "total_nav": 5613082771.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-19",
+        "nav_per_unit": 106.3936,
+        "sale_price": 106.3936,
+        "repurchase_price": 106.3936,
+        "total_nav": 5615012811.0,
+        "units": 52775860.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-20",
+        "nav_per_unit": 106.5326,
+        "sale_price": 106.5326,
+        "repurchase_price": 106.5326,
+        "total_nav": 5624356276.0,
+        "units": 52794677.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-21",
+        "nav_per_unit": 106.5693,
+        "sale_price": 106.5693,
+        "repurchase_price": 106.5693,
+        "total_nav": 5624288358.05,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-24",
+        "nav_per_unit": 106.679,
+        "sale_price": 106.679,
+        "repurchase_price": 106.679,
+        "total_nav": 5630076213.77,
+        "units": 52775860.01,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-25",
+        "nav_per_unit": 106.7114,
+        "sale_price": 106.7114,
+        "repurchase_price": 106.7114,
+        "total_nav": 5681933962.27,
+        "units": 53245813.09,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-26",
+        "nav_per_unit": 106.8275,
+        "sale_price": 106.8275,
+        "repurchase_price": 106.8275,
+        "total_nav": 5640247111.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-27",
+        "nav_per_unit": 106.8641,
+        "sale_price": 106.8641,
+        "repurchase_price": 106.8641,
+        "total_nav": 5642178753.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-11-28",
+        "nav_per_unit": 106.9006,
+        "sale_price": 106.9006,
+        "repurchase_price": 106.9006,
+        "total_nav": 5644110318.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-01",
+        "nav_per_unit": 107.0104,
+        "sale_price": 107.0104,
+        "repurchase_price": 107.0104,
+        "total_nav": 5649904559.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-02",
+        "nav_per_unit": 107.0432,
+        "sale_price": 107.0432,
+        "repurchase_price": 107.0432,
+        "total_nav": 5651634261.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-03",
+        "nav_per_unit": 107.0797,
+        "sale_price": 107.0797,
+        "repurchase_price": 107.0797,
+        "total_nav": 5653565446.0,
+        "units": 52797718.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-04",
+        "nav_per_unit": 107.0797,
+        "sale_price": 107.0797,
+        "repurchase_price": 107.0797,
+        "total_nav": 5659100845.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-05",
+        "nav_per_unit": 107.1528,
+        "sale_price": 107.1528,
+        "repurchase_price": 107.1528,
+        "total_nav": 5662962594.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-08",
+        "nav_per_unit": 107.2586,
+        "sale_price": 107.2586,
+        "repurchase_price": 107.2586,
+        "total_nav": 5668552587.0,
+        "units": 52849412.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-10",
+        "nav_per_unit": 107.3006,
+        "sale_price": 107.3006,
+        "repurchase_price": 107.3006,
+        "total_nav": 5733528712.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-11",
+        "nav_per_unit": 107.3367,
+        "sale_price": 107.3367,
+        "repurchase_price": 107.3367,
+        "total_nav": 5735456923.0,
+        "units": 53434261.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-12",
+        "nav_per_unit": 107.3366,
+        "sale_price": 107.3366,
+        "repurchase_price": 107.3366,
+        "total_nav": 5740149852.0,
+        "units": 53478038.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-15",
+        "nav_per_unit": 107.3726,
+        "sale_price": 107.3726,
+        "repurchase_price": 107.3726,
+        "total_nav": 5747744027.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-16",
+        "nav_per_unit": 107.5243,
+        "sale_price": 107.5243,
+        "repurchase_price": 107.5243,
+        "total_nav": 5755864824.0,
+        "units": 53530819.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-17",
+        "nav_per_unit": 107.5603,
+        "sale_price": 107.5603,
+        "repurchase_price": 107.5603,
+        "total_nav": 5758237001.0,
+        "units": 53534959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-18",
+        "nav_per_unit": 107.5924,
+        "sale_price": 107.5924,
+        "repurchase_price": 107.5924,
+        "total_nav": 5757935936.0,
+        "units": 53516211.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-19",
+        "nav_per_unit": 107.6283,
+        "sale_price": 107.6283,
+        "repurchase_price": 107.6283,
+        "total_nav": 5780865733.0,
+        "units": 53592974.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-22",
+        "nav_per_unit": 107.7438,
+        "sale_price": 107.7438,
+        "repurchase_price": 107.7438,
+        "total_nav": 5774313984.0,
+        "units": 53592995.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-23",
+        "nav_per_unit": 108.7229,
+        "sale_price": 108.7229,
+        "repurchase_price": 108.7229,
+        "total_nav": 5776257204.0,
+        "units": 53128257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-24",
+        "nav_per_unit": 108.7589,
+        "sale_price": 108.7589,
+        "repurchase_price": 108.7589,
+        "total_nav": 5780882308.0,
+        "units": 53153193.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-29",
+        "nav_per_unit": 107.8146,
+        "sale_price": 107.8146,
+        "repurchase_price": 107.8146,
+        "total_nav": 5818560994.0,
+        "units": 53968233.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-30",
+        "nav_per_unit": 108.0475,
+        "sale_price": 108.0475,
+        "repurchase_price": 108.0475,
+        "total_nav": 5835061718.0,
+        "units": 54004619.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2025-12-31",
+        "nav_per_unit": 108.083,
+        "sale_price": 108.083,
+        "repurchase_price": 108.083,
+        "total_nav": 5896683809.0,
+        "units": 54556987.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-02",
+        "nav_per_unit": 108.1487,
+        "sale_price": 108.1487,
+        "repurchase_price": 108.1487,
+        "total_nav": 5922123480.0,
+        "units": 54759081.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-05",
+        "nav_per_unit": 108.1493,
+        "sale_price": 108.1493,
+        "repurchase_price": 108.1493,
+        "total_nav": 5954649765.0,
+        "units": 55059552.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-06",
+        "nav_per_unit": 108.2693,
+        "sale_price": 108.2693,
+        "repurchase_price": 108.2693,
+        "total_nav": 5970246802.0,
+        "units": 55128834.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-07",
+        "nav_per_unit": 108.3295,
+        "sale_price": 108.3295,
+        "repurchase_price": 108.3295,
+        "total_nav": 6027653579.0,
+        "units": 55641873.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-08",
+        "nav_per_unit": 108.3142,
+        "sale_price": 108.3142,
+        "repurchase_price": 108.3142,
+        "total_nav": 6028938648.0,
+        "units": 55661556.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-09",
+        "nav_per_unit": 108.3012,
+        "sale_price": 108.3012,
+        "repurchase_price": 108.3012,
+        "total_nav": 6029015444.0,
+        "units": 55668970.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-13",
+        "nav_per_unit": 108.4878,
+        "sale_price": 108.4878,
+        "repurchase_price": 108.4878,
+        "total_nav": 6068537517.0,
+        "units": 55937508.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-14",
+        "nav_per_unit": 108.4719,
+        "sale_price": 108.4719,
+        "repurchase_price": 108.4719,
+        "total_nav": 6060406837.0,
+        "units": 55870754.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-15",
+        "nav_per_unit": 108.5328,
+        "sale_price": 108.5328,
+        "repurchase_price": 108.5328,
+        "total_nav": 6090087289.0,
+        "units": 56112871.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-16",
+        "nav_per_unit": 108.5651,
+        "sale_price": 108.5651,
+        "repurchase_price": 108.5651,
+        "total_nav": 6097022501.0,
+        "units": 56160053.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-19",
+        "nav_per_unit": 108.565,
+        "sale_price": 108.565,
+        "repurchase_price": 108.565,
+        "total_nav": 6106114742.0,
+        "units": 56243851.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-20",
+        "nav_per_unit": 108.565,
+        "sale_price": 108.565,
+        "repurchase_price": 108.565,
+        "total_nav": 6106424742.0,
+        "units": 56246730.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-21",
+        "nav_per_unit": 108.564,
+        "sale_price": 108.564,
+        "repurchase_price": 108.564,
+        "total_nav": 6118173742.0,
+        "units": 56355443.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-22",
+        "nav_per_unit": 108.564,
+        "sale_price": 108.564,
+        "repurchase_price": 108.564,
+        "total_nav": 6118373742.0,
+        "units": 56357283.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-23",
+        "nav_per_unit": 108.8246,
+        "sale_price": 108.8246,
+        "repurchase_price": 108.8246,
+        "total_nav": 6141746259.0,
+        "units": 56437137.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-26",
+        "nav_per_unit": 108.8244,
+        "sale_price": 108.8244,
+        "repurchase_price": 108.8244,
+        "total_nav": 6145537259.0,
+        "units": 56472050.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-27",
+        "nav_per_unit": 108.9701,
+        "sale_price": 108.9701,
+        "repurchase_price": 108.9701,
+        "total_nav": 6118377202.0,
+        "units": 56147313.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-28",
+        "nav_per_unit": 109.0042,
+        "sale_price": 109.0042,
+        "repurchase_price": 109.0042,
+        "total_nav": 6118521921.0,
+        "units": 56131041.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-29",
+        "nav_per_unit": 109.0038,
+        "sale_price": 109.0038,
+        "repurchase_price": 109.0038,
+        "total_nav": 6134654336.0,
+        "units": 56279288.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-01-30",
+        "nav_per_unit": 109.0372,
+        "sale_price": 109.0372,
+        "repurchase_price": 109.0372,
+        "total_nav": 6143836764.0,
+        "units": 56346257.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-02",
+        "nav_per_unit": 109.071,
+        "sale_price": 109.071,
+        "repurchase_price": 109.071,
+        "total_nav": 6148932826.0,
+        "units": 56375518.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-03",
+        "nav_per_unit": 109.1919,
+        "sale_price": 109.1919,
+        "repurchase_price": 109.1919,
+        "total_nav": 6157327075.0,
+        "units": 56389959.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-04",
+        "nav_per_unit": 109.2481,
+        "sale_price": 109.2481,
+        "repurchase_price": 109.2481,
+        "total_nav": 6162295059.0,
+        "units": 56406445.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-05",
+        "nav_per_unit": 109.2485,
+        "sale_price": 109.2485,
+        "repurchase_price": 109.2485,
+        "total_nav": 6173286471.0,
+        "units": 56506820.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-06",
+        "nav_per_unit": 109.2813,
+        "sale_price": 109.2813,
+        "repurchase_price": 109.2813,
+        "total_nav": 6179184457.0,
+        "units": 56543863.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-09",
+        "nav_per_unit": 109.3146,
+        "sale_price": 109.3146,
+        "repurchase_price": 109.3146,
+        "total_nav": 6190589996.0,
+        "units": 56630938.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-10",
+        "nav_per_unit": 109.4221,
+        "sale_price": 109.4221,
+        "repurchase_price": 109.4221,
+        "total_nav": 6196050589.0,
+        "units": 56625217.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-11",
+        "nav_per_unit": 109.4558,
+        "sale_price": 109.4558,
+        "repurchase_price": 109.4558,
+        "total_nav": 6199331047.0,
+        "units": 56637762.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-12",
+        "nav_per_unit": 109.4917,
+        "sale_price": 109.4917,
+        "repurchase_price": 109.4917,
+        "total_nav": 6204007549.0,
+        "units": 56661889.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-13",
+        "nav_per_unit": 109.5226,
+        "sale_price": 109.5226,
+        "repurchase_price": 109.5226,
+        "total_nav": 6381341623.0,
+        "units": 58265071.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-16",
+        "nav_per_unit": 109.6192,
+        "sale_price": 109.6192,
+        "repurchase_price": 109.6192,
+        "total_nav": 6445876567.0,
+        "units": 58802440.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-17",
+        "nav_per_unit": 109.6473,
+        "sale_price": 109.6473,
+        "repurchase_price": 109.6473,
+        "total_nav": 6401653927.0,
+        "units": 58384045.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-18",
+        "nav_per_unit": 109.7138,
+        "sale_price": 109.7138,
+        "repurchase_price": 109.7138,
+        "total_nav": 6434037832.0,
+        "units": 58643823.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-19",
+        "nav_per_unit": 109.7123,
+        "sale_price": 109.7123,
+        "repurchase_price": 109.7123,
+        "total_nav": 6438051825.0,
+        "units": 58681223.0,
+        "status": "extracted"
+    },
+    {
+        "source": "vertex",
+        "fund_name": "Vertex Bond Fund",
+        "date": "2026-02-20",
+        "nav_per_unit": 109.7727,
+        "sale_price": 109.7727,
+        "repurchase_price": 109.7727,
+        "total_nav": 6441440184.0,
+        "units": 58679777.0,
+        "status": "extracted"
+    }
+]
