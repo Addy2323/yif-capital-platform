@@ -8,6 +8,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 // Fund metadata mapping
+// These keys must match the IDs used in fundMap within app/api/funds/update/route.ts
 const FUND_METADATA: Record<string, {
   fundSlug: string
   fundName: string
@@ -30,7 +31,7 @@ const FUND_METADATA: Record<string, {
     baseCurrency: 'TZS',
     benchmarkName: 'DSE All Share Index',
   },
-  'zansec': {
+  'zansec-bond': {
     fundSlug: 'zansec',
     fundName: 'Zan Securities Fixed Income Fund',
     fundType: 'FIXED_INCOME',
@@ -40,7 +41,7 @@ const FUND_METADATA: Record<string, {
     inceptionDate: '2015-06-01',
     baseCurrency: 'TZS',
   },
-  'whi': {
+  'whi-income': {
     fundSlug: 'whi',
     fundName: 'Watumishi Housing Investment Fund',
     fundType: 'INCOME',
@@ -50,7 +51,7 @@ const FUND_METADATA: Record<string, {
     inceptionDate: '2012-03-15',
     baseCurrency: 'TZS',
   },
-  'vertex': {
+  'vertex-bond': {
     fundSlug: 'vertex',
     fundName: 'Vertex Bond Fund',
     fundType: 'BOND',

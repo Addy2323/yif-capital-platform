@@ -22,7 +22,7 @@ const FUND_METADATA = {
     baseCurrency: 'TZS',
     benchmarkName: 'DSE All Share Index',
   },
-  'zansec': {
+  'zansec-bond': {
     fundSlug: 'zansec',
     fundName: 'Zan Securities Fixed Income Fund',
     fundType: 'FIXED_INCOME',
@@ -32,7 +32,7 @@ const FUND_METADATA = {
     inceptionDate: '2015-06-01',
     baseCurrency: 'TZS',
   },
-  'whi': {
+  'whi-income': {
     fundSlug: 'whi',
     fundName: 'Watumishi Housing Investment Fund',
     fundType: 'INCOME',
@@ -42,7 +42,7 @@ const FUND_METADATA = {
     inceptionDate: '2012-03-15',
     baseCurrency: 'TZS',
   },
-  'vertex': {
+  'vertex-bond': {
     fundSlug: 'vertex',
     fundName: 'Vertex Bond Fund',
     fundType: 'BOND',
@@ -72,46 +72,6 @@ const FUND_METADATA = {
     inceptionDate: '2017-07-01',
     baseCurrency: 'TZS',
     benchmarkName: 'Tanzania 91-Day T-Bill Rate',
-  },
-  'zansec-bond': {
-    fundSlug: 'zansec-bond',
-    fundName: 'Zan Securities Bond Fund',
-    fundType: 'BOND',
-    managerName: 'Zan Securities',
-    description: 'Specialized bond fund offering diversified fixed-income exposure.',
-    logoUrl: '/logo payment/background/zansecurity.png',
-    inceptionDate: '2016-01-01',
-    baseCurrency: 'TZS',
-  },
-  'utt-umoja': {
-    fundSlug: 'utt-umoja',
-    fundName: 'UTT AMIS Umoja Fund',
-    fundType: 'BALANCED',
-    managerName: 'UTT AMIS',
-    description: 'The flagship balanced fund by UTT AMIS, offering long-term capital growth.',
-    logoUrl: '/logo payment/background/uttamislogof.png',
-    inceptionDate: '2005-05-16',
-    baseCurrency: 'TZS',
-  },
-  'vertex-bond': {
-    fundSlug: 'vertex-bond',
-    fundName: 'Vertex Bond Fund',
-    fundType: 'BOND',
-    managerName: 'Vertex International Securities',
-    description: 'Secure, steady fixed-income investment approved by CMSA.',
-    logoUrl: '/logo payment/background/vertex.png',
-    inceptionDate: '2018-01-01',
-    baseCurrency: 'TZS',
-  },
-  'whi-income': {
-    fundSlug: 'whi-income',
-    fundName: 'Watumishi Housing Investment Income Fund',
-    fundType: 'INCOME',
-    managerName: 'Watumishi Housing Investments',
-    description: 'Income fund focused on real estate and housing sector investments.',
-    logoUrl: '/logo payment/background/WHI.jpg',
-    inceptionDate: '2012-03-15',
-    baseCurrency: 'TZS',
   },
 }
 

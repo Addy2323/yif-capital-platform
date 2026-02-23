@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
             "utt-amis": "utt-amis",
             "whi": "whi-income",
             "vertex": "vertex-bond",
-            "sanlam-pesa": "sanlam-pesa"
+            "sanlam-pesa": "sanlam-pesa",
+            "itrust": "itrust"
         }
 
         const nameMap: Record<string, string> = {
