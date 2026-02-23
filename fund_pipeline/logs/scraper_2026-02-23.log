@@ -8929,3 +8929,7 @@ Symbols not available. Dumping unresolved backtrace:
 2026-02-23 09:31:49,730 [INFO] [utt-amis] Page 11 is all duplicates. Skipping save and speeding up.
 2026-02-23 09:31:54,525 [INFO] [utt-amis] Clicking 'Next' button...
 2026-02-23 09:31:56,564 [INFO] [utt-amis] Scraping page 12/300
+2026-02-23 09:32:24,237 [INFO] [utt-amis] Found 50 rows on page 12 (New: False)
+2026-02-23 09:32:24,237 [INFO] [utt-amis] Page 12 is all duplicates. Skipping save and speeding up.
+2026-02-23 09:32:29,218 [INFO] [utt-amis] Clicking 'Next' button...
+2026-02-23 09:32:31,237 [INFO] [utt-amis] Scraping page 13/300
