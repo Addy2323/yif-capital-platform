@@ -7,6 +7,11 @@ This guide provides step-by-step instructions for hosting the YIF Capital Platfo
 * **Node.js**: v18 or v20.
 * **PostgreSQL**: 14+.
 * **Python**: 3.10+ (for data scraping).
+  * **Linux Dependency Note**: On Ubuntu/Debian, install these first:
+    ```bash
+    sudo apt update
+    sudo apt install python3-venv python3-pip
+    ```
 * **Chrome Browser**: Installed on the server (for Selenium).
 
 ---

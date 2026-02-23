@@ -66,6 +66,7 @@ def init_driver():
     options.add_argument("--ignore-certificate-errors")
     options.add_argument("--allow-running-insecure-content")
     options.add_argument("--ignore-ssl-errors=yes")
+    options.add_argument("--remote-debugging-port=9222")
 
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
@@ -264,7 +265,7 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                             try:
                                 all_links = driver.find_elements(By.TAG_NAME, "a")
                                 logger.info(f"[{name}] No 'Next' button found. Found {len(all_links)} links on page")
-                                for i, link in enumerate(visible_links):
+                                for i, link in enumerate(all_links):
                                     try:
                                         text = link.text.strip()[:30]
                                         class_attr = link.get_attribute("class") or ""
