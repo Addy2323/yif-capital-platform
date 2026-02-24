@@ -1,5 +1,14 @@
 [
     [
+        "Date",
+        "Redeemed Units",
+        "Initial Units",
+        "Added Units",
+        "Fund Net Value (TZS)",
+        "Total Number of Units",
+        "NAV (TZS)"
+    ],
+    [
         "20 February 2026",
         "-",
         "-",

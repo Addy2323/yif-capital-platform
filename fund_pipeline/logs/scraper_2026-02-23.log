@@ -11389,3 +11389,1240 @@ Symbols not available. Dumping unresolved backtrace:
 2026-02-23 12:26:03,783 [INFO]   itrust: no data (0 rows) - Local only
 2026-02-23 12:26:03,783 [INFO] ============================================================
 2026-02-23 12:26:03,784 [INFO] Fund Data Scraper — Complete
+2026-02-23 14:14:05,789 [INFO] ============================================================
+2026-02-23 14:14:05,790 [INFO] Fund Data Scraper — Starting
+2026-02-23 14:14:05,790 [INFO] ============================================================
+2026-02-23 14:14:05,797 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:14:05,821 [INFO] ====== WebDriver manager ======
+2026-02-23 14:14:10,715 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:11,557 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:12,300 [INFO] There is no [win64] chromedriver "145.0.7632.117" for browser google-chrome "145.0.7632" in cache
+2026-02-23 14:14:12,300 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:14,009 [INFO] WebDriver version 145.0.7632.117 selected
+2026-02-23 14:14:14,018 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/145.0.7632.117/win32/chromedriver-win32.zip
+2026-02-23 14:14:14,018 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/145.0.7632.117/win32/chromedriver-win32.zip
+2026-02-23 14:14:14,720 [INFO] Driver downloading response is 200
+2026-02-23 14:14:16,645 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:17,789 [INFO] Driver has been saved in cache [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117]
+2026-02-23 14:14:19,187 [INFO] ============================================================
+2026-02-23 14:14:19,187 [INFO] Fund Data Scraper — Starting
+2026-02-23 14:14:19,187 [INFO] ============================================================
+2026-02-23 14:14:19,195 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:14:19,212 [INFO] ====== WebDriver manager ======
+2026-02-23 14:14:20,455 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:20,842 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 14:14:21,280 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:22,084 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:14:25,096 [ERROR] [utt-amis] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:14:25,097 [ERROR] [utt-amis] Page Title: Unknown
+2026-02-23 14:14:25,098 [INFO] [utt-amis] Attempt 2/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:14:25,098 [INFO] ====== WebDriver manager ======
+2026-02-23 14:14:26,692 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:27,519 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:28,279 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:14:31,305 [ERROR] [utt-amis] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:14:31,307 [ERROR] [utt-amis] Page Title: Unknown
+2026-02-23 14:14:31,308 [INFO] [utt-amis] Attempt 3/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:14:31,308 [INFO] ====== WebDriver manager ======
+2026-02-23 14:14:32,459 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:33,090 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:33,816 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:14:37,229 [ERROR] [utt-amis] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:14:37,231 [ERROR] [utt-amis] Page Title: Unknown
+2026-02-23 14:14:37,232 [INFO] [utt-amis] Attempt 4/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:14:37,232 [INFO] ====== WebDriver manager ======
+2026-02-23 14:14:38,592 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:40,310 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:14:42,175 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:14:43,146 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 14:14:51,718 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-02-23 14:15:04,905 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-02-23 14:15:14,615 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-02-23 14:15:17,516 [INFO] [utt-amis] Page 3: Found 51 rows
+2026-02-23 14:15:27,624 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-02-23 14:15:30,395 [INFO] [utt-amis] Page 4: Found 51 rows
+2026-02-23 14:15:38,351 [INFO] [utt-amis] Successfully scraped 201 unique rows
+2026-02-23 14:15:38,353 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-02-23.json
+2026-02-23 14:15:39,326 [INFO] [utt-amis] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\utt-amis.json
+2026-02-23 14:15:42,468 [INFO] [utt-amis] Saved structured data -> data\processed\utt-amis_processed_2026-02-23.json and data\processed\utt-amis_data_2026-02-23.csv
+2026-02-23 14:15:42,468 [INFO] [utt-amis] Pushing chunk 1/2109 (10 records) to API
+2026-02-23 14:15:46,555 [ERROR] [utt-amis] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:15:46,556 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 14:15:46,556 [INFO] ====== WebDriver manager ======
+2026-02-23 14:15:47,834 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:15:48,584 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:15:49,376 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:15:50,458 [INFO] [vertex] Starting scrape with max_pages=1
+2026-02-23 14:16:09,842 [INFO] [vertex] Page 1: Found 11 rows
+2026-02-23 14:16:10,590 [INFO] [vertex] Successfully scraped 11 unique rows
+2026-02-23 14:16:10,592 [INFO] [vertex] Saved raw data -> data/raw/vertex_2026-02-23.json
+2026-02-23 14:16:10,603 [INFO] [vertex] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\vertex.json
+2026-02-23 14:16:10,628 [INFO] [vertex] Saved structured data -> data\processed\vertex_processed_2026-02-23.json and data\processed\vertex_data_2026-02-23.csv
+2026-02-23 14:16:10,629 [INFO] [vertex] Pushing chunk 1/29 (10 records) to API
+2026-02-23 14:16:14,716 [ERROR] [vertex] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:16:14,716 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:16:14,717 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:15,791 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:16,431 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:17,096 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:19,649 [ERROR] [sanlam-pesa] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:16:19,651 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:16:19,653 [INFO] [sanlam-pesa] Attempt 2/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:16:19,653 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:20,865 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:21,593 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:22,377 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:25,437 [ERROR] [sanlam-pesa] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:16:25,438 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:16:25,439 [INFO] [sanlam-pesa] Attempt 3/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:16:25,440 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:26,629 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:27,349 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:28,080 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:30,663 [ERROR] [sanlam-pesa] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:16:30,666 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:16:30,666 [ERROR] [sanlam-pesa] All 3 attempts exhausted
+2026-02-23 14:16:30,667 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:16:30,668 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:31,888 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:32,624 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:33,404 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:36,439 [ERROR] [zansec] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:16:36,441 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:16:36,441 [INFO] [zansec] Attempt 2/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:16:36,442 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:37,673 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:38,422 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:39,173 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:42,290 [ERROR] [zansec] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:16:42,291 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:16:42,292 [INFO] [zansec] Attempt 3/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:16:42,294 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:43,596 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:44,391 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:45,171 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:48,253 [ERROR] [zansec] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:16:48,255 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:16:48,256 [ERROR] [zansec] All 3 attempts exhausted
+2026-02-23 14:16:48,257 [INFO] [whi] Attempt 1/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 14:16:48,259 [INFO] ====== WebDriver manager ======
+2026-02-23 14:16:49,496 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:52,381 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:16:53,143 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:16:54,171 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 14:18:21,840 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 14:18:21,901 [ERROR] [whi] Attempt 1 failed: No table found in main content or any iframe
+2026-02-23 14:18:21,901 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 14:18:24,105 [INFO] [whi] Attempt 2/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 14:18:24,106 [INFO] ====== WebDriver manager ======
+2026-02-23 14:18:25,386 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:18:26,186 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:18:26,969 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:18:28,021 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 14:19:10,921 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 14:19:10,959 [ERROR] [whi] Attempt 2 failed: No table found in main content or any iframe
+2026-02-23 14:19:10,959 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 14:19:13,176 [INFO] [whi] Attempt 3/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 14:19:13,178 [INFO] ====== WebDriver manager ======
+2026-02-23 14:19:14,391 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:15,111 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:15,941 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:19:16,926 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 14:19:19,311 [INFO] ============================================================
+2026-02-23 14:19:19,311 [INFO] Fund Data Scraper — Starting
+2026-02-23 14:19:19,312 [INFO] ============================================================
+2026-02-23 14:19:19,316 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:19:19,328 [INFO] ====== WebDriver manager ======
+2026-02-23 14:19:20,888 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:21,603 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:22,372 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:19:24,985 [ERROR] [utt-amis] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:19:24,986 [ERROR] [utt-amis] Page Title: Unknown
+2026-02-23 14:19:24,987 [INFO] [utt-amis] Attempt 2/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:19:24,987 [INFO] ====== WebDriver manager ======
+2026-02-23 14:19:26,203 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:27,060 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:27,852 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:19:30,382 [ERROR] [utt-amis] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:19:30,383 [ERROR] [utt-amis] Page Title: Unknown
+2026-02-23 14:19:30,383 [INFO] [utt-amis] Attempt 3/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:19:30,383 [INFO] ====== WebDriver manager ======
+2026-02-23 14:19:31,597 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:32,301 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:33,029 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:19:35,667 [ERROR] [utt-amis] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:19:35,668 [ERROR] [utt-amis] Page Title: Unknown
+2026-02-23 14:19:35,669 [INFO] [utt-amis] Attempt 4/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:19:35,669 [INFO] ====== WebDriver manager ======
+2026-02-23 14:19:36,787 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:38,723 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:19:39,613 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:19:40,584 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 14:19:51,877 [INFO] [whi] Page 1: Found 51 rows
+2026-02-23 14:20:04,481 [INFO] [whi] Page 2: Found 51 rows
+2026-02-23 14:20:13,579 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-02-23 14:20:16,868 [INFO] [whi] Page 3: Found 51 rows
+2026-02-23 14:20:26,472 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-02-23 14:20:29,537 [INFO] [whi] Page 4: Found 51 rows
+2026-02-23 14:20:39,009 [INFO] [utt-amis] Page 3: Found 51 rows
+2026-02-23 14:20:41,905 [INFO] [whi] Page 5: Found 51 rows
+2026-02-23 14:20:51,886 [INFO] [utt-amis] Page 4: Found 51 rows
+2026-02-23 14:20:54,607 [INFO] [whi] Page 6: Found 51 rows
+2026-02-23 14:21:04,400 [INFO] [utt-amis] Page 5: Found 51 rows
+2026-02-23 14:21:07,151 [INFO] [whi] Page 7: Found 51 rows
+2026-02-23 14:21:17,200 [INFO] [utt-amis] Page 6: Found 51 rows
+2026-02-23 14:21:19,916 [INFO] [whi] Page 8: Found 51 rows
+2026-02-23 14:21:29,986 [INFO] [utt-amis] Page 7: Found 51 rows
+2026-02-23 14:21:32,587 [INFO] [whi] Page 9: Found 51 rows
+2026-02-23 14:21:42,797 [INFO] [utt-amis] Page 8: Found 51 rows
+2026-02-23 14:21:45,107 [INFO] [whi] Page 10: Found 51 rows
+2026-02-23 14:21:49,483 [INFO] [whi] Successfully scraped 501 unique rows
+2026-02-23 14:21:49,490 [INFO] [whi] Saved raw data -> data/raw/whi_2026-02-23.json
+2026-02-23 14:21:49,536 [INFO] [whi] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\whi.json
+2026-02-23 14:21:49,608 [INFO] [whi] Saved structured data -> data\processed\whi_processed_2026-02-23.json and data\processed\whi_data_2026-02-23.csv
+2026-02-23 14:21:49,609 [INFO] [whi] Pushing chunk 1/81 (10 records) to API
+2026-02-23 14:21:53,675 [ERROR] [whi] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:21:53,676 [INFO] [itrust] Attempt 1/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 14:21:53,677 [INFO] ====== WebDriver manager ======
+2026-02-23 14:21:54,905 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:21:55,316 [INFO] [utt-amis] Page 9: Found 51 rows
+2026-02-23 14:21:57,651 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:21:58,432 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:21:58,867 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 14:22:24,869 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 14:22:24,893 [ERROR] [itrust] Attempt 1 failed: No table found in main content or any iframe
+2026-02-23 14:22:24,893 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 14:22:27,078 [INFO] [itrust] Attempt 2/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 14:22:27,078 [INFO] ====== WebDriver manager ======
+2026-02-23 14:22:28,375 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:22:29,211 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:22:30,154 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:22:31,173 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 14:22:57,241 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 14:22:57,265 [ERROR] [itrust] Attempt 2 failed: No table found in main content or any iframe
+2026-02-23 14:22:57,265 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 14:22:59,432 [INFO] [itrust] Attempt 3/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 14:22:59,433 [INFO] ====== WebDriver manager ======
+2026-02-23 14:23:00,649 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:23:01,404 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:23:02,147 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:23:03,214 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 14:23:29,255 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 14:23:29,275 [ERROR] [itrust] Attempt 3 failed: No table found in main content or any iframe
+2026-02-23 14:23:29,275 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 14:23:31,462 [ERROR] [itrust] All 3 attempts exhausted
+2026-02-23 14:23:31,464 [INFO] ------------------------------------------------------------
+2026-02-23 14:23:31,465 [INFO]   utt-amis: success (201 rows) - Local only
+2026-02-23 14:23:31,466 [INFO]   vertex: success (11 rows) - Local only
+2026-02-23 14:23:31,466 [INFO]   sanlam-pesa: no data (0 rows) - Local only
+2026-02-23 14:23:31,467 [INFO]   zansec: no data (0 rows) - Local only
+2026-02-23 14:23:31,467 [INFO]   whi: success (501 rows) - Local only
+2026-02-23 14:23:31,468 [INFO]   itrust: no data (0 rows) - Local only
+2026-02-23 14:23:31,468 [INFO] ============================================================
+2026-02-23 14:23:31,469 [INFO] Fund Data Scraper — Complete
+2026-02-23 14:24:19,342 [INFO] ============================================================
+2026-02-23 14:24:19,342 [INFO] Fund Data Scraper — Starting
+2026-02-23 14:24:19,343 [INFO] ============================================================
+2026-02-23 14:24:19,349 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:24:19,360 [INFO] ====== WebDriver manager ======
+2026-02-23 14:24:20,838 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:24:21,585 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:24:22,352 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:24:22,880 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 14:24:53,413 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-02-23 14:25:05,752 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-02-23 14:25:17,973 [INFO] [utt-amis] Page 3: Found 51 rows
+2026-02-23 14:25:30,376 [INFO] [utt-amis] Page 4: Found 51 rows
+2026-02-23 14:25:42,943 [INFO] [utt-amis] Page 5: Found 51 rows
+2026-02-23 14:25:55,142 [INFO] [utt-amis] Page 6: Found 51 rows
+2026-02-23 14:26:07,366 [INFO] [utt-amis] Page 7: Found 51 rows
+2026-02-23 14:26:19,693 [INFO] [utt-amis] Page 8: Found 51 rows
+2026-02-23 14:26:32,095 [INFO] [utt-amis] Page 9: Found 51 rows
+2026-02-23 14:26:44,533 [INFO] [utt-amis] Page 10: Found 51 rows
+2026-02-23 14:26:56,814 [INFO] [utt-amis] Page 11: Found 51 rows
+2026-02-23 14:27:08,981 [INFO] [utt-amis] Page 12: Found 51 rows
+2026-02-23 14:27:21,201 [INFO] [utt-amis] Page 13: Found 51 rows
+2026-02-23 14:27:33,932 [INFO] [utt-amis] Page 14: Found 51 rows
+2026-02-23 14:27:46,215 [INFO] [utt-amis] Page 15: Found 51 rows
+2026-02-23 14:27:58,420 [INFO] [utt-amis] Page 16: Found 51 rows
+2026-02-23 14:28:10,680 [INFO] [utt-amis] Page 17: Found 51 rows
+2026-02-23 14:28:23,004 [INFO] [utt-amis] Page 18: Found 51 rows
+2026-02-23 14:28:35,418 [INFO] [utt-amis] Page 19: Found 51 rows
+2026-02-23 14:28:48,420 [INFO] [utt-amis] Page 20: Found 51 rows
+2026-02-23 14:29:00,711 [INFO] [utt-amis] Page 21: Found 51 rows
+2026-02-23 14:29:13,039 [INFO] [utt-amis] Page 22: Found 51 rows
+2026-02-23 14:29:25,329 [INFO] [utt-amis] Page 23: Found 51 rows
+2026-02-23 14:29:37,614 [INFO] [utt-amis] Page 24: Found 51 rows
+2026-02-23 14:29:50,783 [INFO] [utt-amis] Page 25: Found 51 rows
+2026-02-23 14:30:03,091 [INFO] [utt-amis] Page 26: Found 51 rows
+2026-02-23 14:30:16,021 [INFO] [utt-amis] Page 27: Found 51 rows
+2026-02-23 14:30:28,405 [INFO] [utt-amis] Page 28: Found 51 rows
+2026-02-23 14:30:40,840 [INFO] [utt-amis] Page 29: Found 51 rows
+2026-02-23 14:30:53,139 [INFO] [utt-amis] Page 30: Found 51 rows
+2026-02-23 14:31:05,583 [INFO] [utt-amis] Page 31: Found 51 rows
+2026-02-23 14:31:18,066 [INFO] [utt-amis] Page 32: Found 51 rows
+2026-02-23 14:31:30,358 [INFO] [utt-amis] Page 33: Found 51 rows
+2026-02-23 14:31:42,566 [INFO] [utt-amis] Page 34: Found 51 rows
+2026-02-23 14:31:55,034 [INFO] [utt-amis] Page 35: Found 51 rows
+2026-02-23 14:32:07,285 [INFO] [utt-amis] Page 36: Found 51 rows
+2026-02-23 14:32:19,684 [INFO] [utt-amis] Page 37: Found 51 rows
+2026-02-23 14:32:32,002 [INFO] [utt-amis] Page 38: Found 51 rows
+2026-02-23 14:32:44,443 [INFO] [utt-amis] Page 39: Found 51 rows
+2026-02-23 14:32:56,869 [INFO] [utt-amis] Page 40: Found 51 rows
+2026-02-23 14:33:09,311 [INFO] [utt-amis] Page 41: Found 51 rows
+2026-02-23 14:33:21,792 [INFO] [utt-amis] Page 42: Found 51 rows
+2026-02-23 14:33:33,955 [INFO] [utt-amis] Page 43: Found 51 rows
+2026-02-23 14:33:46,402 [INFO] [utt-amis] Page 44: Found 51 rows
+2026-02-23 14:33:58,816 [INFO] [utt-amis] Page 45: Found 51 rows
+2026-02-23 14:34:11,291 [INFO] [utt-amis] Page 46: Found 51 rows
+2026-02-23 14:34:23,760 [INFO] [utt-amis] Page 47: Found 51 rows
+2026-02-23 14:34:36,157 [INFO] [utt-amis] Page 48: Found 51 rows
+2026-02-23 14:34:40,029 [INFO] [utt-amis] Reached STOP_DATE: 2024-07-09
+2026-02-23 14:34:40,031 [INFO] [utt-amis] Successfully scraped 2396 unique rows
+2026-02-23 14:34:40,072 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-02-23.json
+2026-02-23 14:34:41,375 [INFO] [utt-amis] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\utt-amis.json
+2026-02-23 14:34:44,521 [INFO] [utt-amis] Saved structured data -> data\processed\utt-amis_processed_2026-02-23.json and data\processed\utt-amis_data_2026-02-23.csv
+2026-02-23 14:34:44,522 [INFO] [utt-amis] Pushing chunk 1/2109 (10 records) to API
+2026-02-23 14:34:48,645 [ERROR] [utt-amis] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:34:48,646 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 14:34:48,647 [INFO] ====== WebDriver manager ======
+2026-02-23 14:34:49,879 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:34:50,659 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:34:51,476 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:34:52,449 [INFO] [vertex] Starting scrape with max_pages=1
+2026-02-23 14:35:10,625 [INFO] [vertex] Page 1: Found 11 rows
+2026-02-23 14:35:11,510 [INFO] [vertex] Successfully scraped 11 unique rows
+2026-02-23 14:35:11,512 [INFO] [vertex] Saved raw data -> data/raw/vertex_2026-02-23.json
+2026-02-23 14:35:11,530 [INFO] [vertex] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\vertex.json
+2026-02-23 14:35:11,561 [INFO] [vertex] Saved structured data -> data\processed\vertex_processed_2026-02-23.json and data\processed\vertex_data_2026-02-23.csv
+2026-02-23 14:35:11,561 [INFO] [vertex] Pushing chunk 1/29 (10 records) to API
+2026-02-23 14:35:15,646 [ERROR] [vertex] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:35:15,647 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:35:15,648 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:16,687 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:18,577 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:19,412 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:22,488 [ERROR] [sanlam-pesa] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:35:22,490 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:35:22,491 [INFO] [sanlam-pesa] Attempt 2/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:35:22,492 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:23,804 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:24,576 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:25,412 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:28,469 [ERROR] [sanlam-pesa] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:35:28,470 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:35:28,470 [INFO] [sanlam-pesa] Attempt 3/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:35:28,471 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:29,745 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:30,469 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:31,143 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:34,196 [ERROR] [sanlam-pesa] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:35:34,198 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:35:34,199 [ERROR] [sanlam-pesa] All 3 attempts exhausted
+2026-02-23 14:35:34,200 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:35:34,202 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:35,523 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:36,350 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:37,125 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:39,689 [ERROR] [zansec] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:35:39,690 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:35:39,690 [INFO] [zansec] Attempt 2/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:35:39,690 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:40,895 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:41,649 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:42,494 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:45,560 [ERROR] [zansec] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:35:45,561 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:35:45,562 [INFO] [zansec] Attempt 3/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:35:45,562 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:46,776 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:47,579 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:48,396 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:50,881 [ERROR] [zansec] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:35:50,882 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:35:50,883 [ERROR] [zansec] All 3 attempts exhausted
+2026-02-23 14:35:50,883 [INFO] [whi] Attempt 1/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 14:35:50,884 [INFO] ====== WebDriver manager ======
+2026-02-23 14:35:52,298 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:55,257 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:35:56,103 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:35:57,075 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 14:36:40,097 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 14:36:40,159 [ERROR] [whi] Attempt 1 failed: No table found in main content or any iframe
+2026-02-23 14:36:40,159 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 14:36:42,343 [INFO] [whi] Attempt 2/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 14:36:42,344 [INFO] ====== WebDriver manager ======
+2026-02-23 14:36:43,637 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:36:44,449 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:36:45,246 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:36:46,277 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 14:37:29,687 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 14:37:29,733 [ERROR] [whi] Attempt 2 failed: No table found in main content or any iframe
+2026-02-23 14:37:29,733 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 14:37:31,994 [INFO] [whi] Attempt 3/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 14:37:31,995 [INFO] ====== WebDriver manager ======
+2026-02-23 14:37:33,258 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:37:34,110 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:37:34,911 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:37:35,973 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 14:38:44,939 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 14:38:44,986 [ERROR] [whi] Attempt 3 failed: No table found in main content or any iframe
+2026-02-23 14:38:44,986 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 14:38:47,197 [ERROR] [whi] All 3 attempts exhausted
+2026-02-23 14:38:47,198 [INFO] [itrust] Attempt 1/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 14:38:47,199 [INFO] ====== WebDriver manager ======
+2026-02-23 14:38:48,488 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:38:49,291 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:38:50,085 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:38:51,047 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 14:39:17,255 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 14:39:17,296 [ERROR] [itrust] Attempt 1 failed: No table found in main content or any iframe
+2026-02-23 14:39:17,296 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 14:39:19,475 [INFO] [itrust] Attempt 2/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 14:39:19,476 [INFO] ====== WebDriver manager ======
+2026-02-23 14:39:20,758 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:39:21,535 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:39:22,454 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:39:23,420 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 14:39:49,627 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 14:39:49,655 [ERROR] [itrust] Attempt 2 failed: No table found in main content or any iframe
+2026-02-23 14:39:49,655 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 14:39:51,886 [INFO] [itrust] Attempt 3/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 14:39:51,887 [INFO] ====== WebDriver manager ======
+2026-02-23 14:39:53,181 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:39:54,035 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:39:54,944 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:39:55,895 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 14:40:22,236 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 14:40:22,304 [ERROR] [itrust] Attempt 3 failed: No table found in main content or any iframe
+2026-02-23 14:40:22,305 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 14:40:24,545 [ERROR] [itrust] All 3 attempts exhausted
+2026-02-23 14:40:24,553 [INFO] ------------------------------------------------------------
+2026-02-23 14:40:24,554 [INFO]   utt-amis: success (2396 rows) - Local only
+2026-02-23 14:40:24,555 [INFO]   vertex: success (11 rows) - Local only
+2026-02-23 14:40:24,556 [INFO]   sanlam-pesa: no data (0 rows) - Local only
+2026-02-23 14:40:24,556 [INFO]   zansec: no data (0 rows) - Local only
+2026-02-23 14:40:24,557 [INFO]   whi: no data (0 rows) - Local only
+2026-02-23 14:40:24,558 [INFO]   itrust: no data (0 rows) - Local only
+2026-02-23 14:40:24,559 [INFO] ============================================================
+2026-02-23 14:40:24,559 [INFO] Fund Data Scraper — Complete
+2026-02-23 14:44:19,469 [INFO] ============================================================
+2026-02-23 14:44:19,469 [INFO] Fund Data Scraper — Starting
+2026-02-23 14:44:19,470 [INFO] ============================================================
+2026-02-23 14:44:19,477 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 14:44:19,492 [INFO] ====== WebDriver manager ======
+2026-02-23 14:44:20,655 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:44:21,373 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:44:22,104 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:44:23,114 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 14:44:53,527 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-02-23 14:45:07,486 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-02-23 14:45:21,923 [INFO] [utt-amis] Page 3: Found 51 rows
+2026-02-23 14:45:36,679 [INFO] [utt-amis] Page 4: Found 51 rows
+2026-02-23 14:45:51,270 [INFO] [utt-amis] Page 5: Found 51 rows
+2026-02-23 14:46:06,290 [INFO] [utt-amis] Page 6: Found 51 rows
+2026-02-23 14:46:21,539 [INFO] [utt-amis] Page 7: Found 51 rows
+2026-02-23 14:46:36,176 [INFO] [utt-amis] Page 8: Found 51 rows
+2026-02-23 14:46:51,116 [INFO] [utt-amis] Page 9: Found 51 rows
+2026-02-23 14:47:05,461 [INFO] [utt-amis] Page 10: Found 51 rows
+2026-02-23 14:47:20,046 [INFO] [utt-amis] Page 11: Found 51 rows
+2026-02-23 14:47:34,097 [INFO] [utt-amis] Page 12: Found 51 rows
+2026-02-23 14:47:48,973 [INFO] [utt-amis] Page 13: Found 51 rows
+2026-02-23 14:48:04,106 [INFO] [utt-amis] Page 14: Found 51 rows
+2026-02-23 14:48:18,620 [INFO] [utt-amis] Page 15: Found 51 rows
+2026-02-23 14:48:33,396 [INFO] [utt-amis] Page 16: Found 51 rows
+2026-02-23 14:48:47,271 [INFO] [utt-amis] Page 17: Found 51 rows
+2026-02-23 14:49:01,084 [INFO] [utt-amis] Page 18: Found 51 rows
+2026-02-23 14:49:15,134 [INFO] [utt-amis] Page 19: Found 51 rows
+2026-02-23 14:49:29,721 [INFO] [utt-amis] Page 20: Found 51 rows
+2026-02-23 14:49:43,615 [INFO] [utt-amis] Page 21: Found 51 rows
+2026-02-23 14:49:57,465 [INFO] [utt-amis] Page 22: Found 51 rows
+2026-02-23 14:50:12,241 [INFO] [utt-amis] Page 23: Found 51 rows
+2026-02-23 14:50:26,851 [INFO] [utt-amis] Page 24: Found 51 rows
+2026-02-23 14:50:40,627 [INFO] [utt-amis] Page 25: Found 51 rows
+2026-02-23 14:50:55,385 [INFO] [utt-amis] Page 26: Found 51 rows
+2026-02-23 14:51:10,547 [INFO] [utt-amis] Page 27: Found 51 rows
+2026-02-23 14:51:25,566 [INFO] [utt-amis] Page 28: Found 51 rows
+2026-02-23 14:51:40,370 [INFO] [utt-amis] Page 29: Found 51 rows
+2026-02-23 14:51:55,185 [INFO] [utt-amis] Page 30: Found 51 rows
+2026-02-23 14:52:10,169 [INFO] [utt-amis] Page 31: Found 51 rows
+2026-02-23 14:52:24,162 [INFO] [utt-amis] Page 32: Found 51 rows
+2026-02-23 14:52:39,069 [INFO] [utt-amis] Page 33: Found 51 rows
+2026-02-23 14:52:53,830 [INFO] [utt-amis] Page 34: Found 51 rows
+2026-02-23 14:53:08,488 [INFO] [utt-amis] Page 35: Found 51 rows
+2026-02-23 14:53:23,313 [INFO] [utt-amis] Page 36: Found 51 rows
+2026-02-23 14:53:38,156 [INFO] [utt-amis] Page 37: Found 51 rows
+2026-02-23 14:53:52,852 [INFO] [utt-amis] Page 38: Found 51 rows
+2026-02-23 14:54:06,889 [INFO] [utt-amis] Page 39: Found 51 rows
+2026-02-23 14:54:21,474 [INFO] [utt-amis] Page 40: Found 51 rows
+2026-02-23 14:54:35,838 [INFO] [utt-amis] Page 41: Found 51 rows
+2026-02-23 14:54:50,669 [INFO] [utt-amis] Page 42: Found 51 rows
+2026-02-23 14:55:05,452 [INFO] [utt-amis] Page 43: Found 51 rows
+2026-02-23 14:55:18,717 [INFO] [utt-amis] Page 44: Found 51 rows
+2026-02-23 14:55:33,279 [INFO] [utt-amis] Page 45: Found 51 rows
+2026-02-23 14:55:47,102 [INFO] [utt-amis] Page 46: Found 51 rows
+2026-02-23 14:56:01,909 [INFO] [utt-amis] Page 47: Found 51 rows
+2026-02-23 14:56:16,890 [INFO] [utt-amis] Page 48: Found 51 rows
+2026-02-23 14:56:22,406 [INFO] [utt-amis] Reached STOP_DATE: 2024-07-09
+2026-02-23 14:56:22,407 [INFO] [utt-amis] Successfully scraped 2396 unique rows
+2026-02-23 14:56:22,442 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-02-23.json
+2026-02-23 14:56:23,195 [INFO] [utt-amis] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\utt-amis.json
+2026-02-23 14:56:26,082 [INFO] [utt-amis] Saved structured data -> data\processed\utt-amis_processed_2026-02-23.json and data\processed\utt-amis_data_2026-02-23.csv
+2026-02-23 14:56:26,083 [INFO] [utt-amis] Pushing chunk 1/2109 (10 records) to API
+2026-02-23 14:56:30,134 [ERROR] [utt-amis] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:56:30,136 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-02-23 14:56:30,137 [INFO] ====== WebDriver manager ======
+2026-02-23 14:56:31,386 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:56:32,127 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:56:32,850 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:56:33,265 [INFO] [vertex] Starting scrape with max_pages=1
+2026-02-23 14:56:51,610 [INFO] [vertex] Page 1: Found 11 rows
+2026-02-23 14:56:52,376 [INFO] [vertex] Successfully scraped 11 unique rows
+2026-02-23 14:56:52,378 [INFO] [vertex] Saved raw data -> data/raw/vertex_2026-02-23.json
+2026-02-23 14:56:52,390 [INFO] [vertex] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\vertex.json
+2026-02-23 14:56:52,419 [INFO] [vertex] Saved structured data -> data\processed\vertex_processed_2026-02-23.json and data\processed\vertex_data_2026-02-23.csv
+2026-02-23 14:56:52,420 [INFO] [vertex] Pushing chunk 1/29 (10 records) to API
+2026-02-23 14:56:56,497 [ERROR] [vertex] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 14:56:56,498 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:56:56,499 [INFO] ====== WebDriver manager ======
+2026-02-23 14:56:57,402 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:00,517 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:01,228 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:57:03,741 [ERROR] [sanlam-pesa] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:57:03,743 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:57:03,744 [INFO] [sanlam-pesa] Attempt 2/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:57:03,744 [INFO] ====== WebDriver manager ======
+2026-02-23 14:57:04,890 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:05,613 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:06,343 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:57:09,358 [ERROR] [sanlam-pesa] Attempt 2 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:57:09,360 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:57:09,361 [INFO] [sanlam-pesa] Attempt 3/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-02-23 14:57:09,362 [INFO] ====== WebDriver manager ======
+2026-02-23 14:57:10,584 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:11,274 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:11,939 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:57:14,507 [ERROR] [sanlam-pesa] Attempt 3 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:57:14,508 [ERROR] [sanlam-pesa] Page Title: Unknown
+2026-02-23 14:57:14,509 [ERROR] [sanlam-pesa] All 3 attempts exhausted
+2026-02-23 14:57:14,509 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:57:14,510 [INFO] ====== WebDriver manager ======
+2026-02-23 14:57:15,611 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:16,328 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:17,019 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:57:20,072 [ERROR] [zansec] Attempt 1 failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x6f7dd3
+	0x6f7e14
+	0x501db0
+	0x53ca47
+	0x536ebe
+	0x532460
+	0x57aa9f
+	0x57a2b7
+	0x56e7d6
+	0x540049
+	0x540e04
+	0x956924
+	0x951bf7
+	0x96f5a0
+	0x710f58
+	0x71891d
+	0x700648
+	0x700812
+	0x6ea21a
+	0x75fefcc9
+	0x779682ae
+	0x7796827e
+
+2026-02-23 14:57:20,073 [ERROR] [zansec] Page Title: Unknown
+2026-02-23 14:57:20,074 [INFO] [zansec] Attempt 2/3 — https://zansec.co.tz/nav.php
+2026-02-23 14:57:20,074 [INFO] ====== WebDriver manager ======
+2026-02-23 14:57:21,197 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:21,862 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 14:57:22,509 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 14:57:23,457 [INFO] [zansec] Starting scrape with max_pages=45
+2026-02-23 14:57:38,301 [INFO] [zansec] Page 1: Found 11 rows
+2026-02-23 14:57:46,533 [INFO] [zansec] Page 2: Found 11 rows
+2026-02-23 14:57:55,021 [INFO] [zansec] Page 3: Found 11 rows
+2026-02-23 14:58:03,541 [INFO] [zansec] Page 4: Found 11 rows
+2026-02-23 14:58:12,409 [INFO] [zansec] Page 5: Found 11 rows
+2026-02-23 14:58:21,134 [INFO] [zansec] Page 6: Found 11 rows
+2026-02-23 14:58:29,932 [INFO] [zansec] Page 7: Found 11 rows
+2026-02-23 14:58:38,788 [INFO] [zansec] Page 8: Found 11 rows
+2026-02-23 14:58:47,460 [INFO] [zansec] Page 9: Found 11 rows
+2026-02-23 14:58:55,951 [INFO] [zansec] Page 10: Found 11 rows
+2026-02-23 14:59:04,857 [INFO] [zansec] Page 11: Found 11 rows
+2026-02-23 14:59:13,324 [INFO] [zansec] Page 12: Found 11 rows
+2026-02-23 14:59:22,345 [INFO] [zansec] Page 13: Found 11 rows
+2026-02-23 14:59:31,213 [INFO] [zansec] Page 14: Found 11 rows
+2026-02-23 14:59:39,972 [INFO] [zansec] Page 15: Found 11 rows
+2026-02-23 14:59:48,863 [INFO] [zansec] Page 16: Found 11 rows
+2026-02-23 14:59:57,852 [INFO] [zansec] Page 17: Found 11 rows
+2026-02-23 15:00:06,637 [INFO] [zansec] Page 18: Found 11 rows
+2026-02-23 15:00:15,192 [INFO] [zansec] Page 19: Found 11 rows
+2026-02-23 15:00:23,764 [INFO] [zansec] Page 20: Found 11 rows
+2026-02-23 15:00:32,426 [INFO] [zansec] Page 21: Found 11 rows
+2026-02-23 15:00:41,217 [INFO] [zansec] Page 22: Found 11 rows
+2026-02-23 15:00:49,914 [INFO] [zansec] Page 23: Found 11 rows
+2026-02-23 15:00:58,581 [INFO] [zansec] Page 24: Found 11 rows
+2026-02-23 15:01:07,192 [INFO] [zansec] Page 25: Found 11 rows
+2026-02-23 15:01:16,135 [INFO] [zansec] Page 26: Found 11 rows
+2026-02-23 15:01:24,798 [INFO] [zansec] Page 27: Found 11 rows
+2026-02-23 15:01:33,389 [INFO] [zansec] Page 28: Found 11 rows
+2026-02-23 15:01:42,042 [INFO] [zansec] Page 29: Found 11 rows
+2026-02-23 15:01:50,794 [INFO] [zansec] Page 30: Found 11 rows
+2026-02-23 15:01:59,599 [INFO] [zansec] Page 31: Found 11 rows
+2026-02-23 15:02:08,322 [INFO] [zansec] Page 32: Found 11 rows
+2026-02-23 15:02:17,097 [INFO] [zansec] Page 33: Found 11 rows
+2026-02-23 15:02:26,129 [INFO] [zansec] Page 34: Found 11 rows
+2026-02-23 15:02:34,836 [INFO] [zansec] Page 35: Found 11 rows
+2026-02-23 15:02:43,412 [INFO] [zansec] Page 36: Found 11 rows
+2026-02-23 15:02:52,146 [INFO] [zansec] Page 37: Found 11 rows
+2026-02-23 15:03:01,117 [INFO] [zansec] Page 38: Found 11 rows
+2026-02-23 15:03:09,987 [INFO] [zansec] Page 39: Found 9 rows
+2026-02-23 15:03:18,506 [INFO] [zansec] Page 40: Found 9 rows
+2026-02-23 15:03:27,352 [INFO] [zansec] Page 41: Found 9 rows
+2026-02-23 15:03:35,914 [INFO] [zansec] Page 42: Found 9 rows
+2026-02-23 15:03:44,453 [INFO] [zansec] Page 43: Found 9 rows
+2026-02-23 15:03:52,928 [INFO] [zansec] Page 44: Found 9 rows
+2026-02-23 15:04:01,366 [INFO] [zansec] Page 45: Found 9 rows
+2026-02-23 15:04:02,161 [INFO] [zansec] Successfully scraped 389 unique rows
+2026-02-23 15:04:02,172 [INFO] [zansec] Saved raw data -> data/raw/zansec_2026-02-23.json
+2026-02-23 15:04:06,575 [INFO] [zansec] Updated consolidated data -> C:\Users\DevStromer\Desktop\projects\yif-capital-platform\fund_pipeline\data\zansec.json
+2026-02-23 15:04:06,745 [INFO] [zansec] Saved structured data -> data\processed\zansec_processed_2026-02-23.json and data\processed\zansec_data_2026-02-23.csv
+2026-02-23 15:04:06,746 [INFO] [zansec] Pushing chunk 1/155 (10 records) to API
+2026-02-23 15:04:10,814 [ERROR] [zansec] API push failed: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/funds/update (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+2026-02-23 15:04:10,815 [INFO] [whi] Attempt 1/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 15:04:10,816 [INFO] ====== WebDriver manager ======
+2026-02-23 15:04:11,999 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:04:12,708 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:04:13,502 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:04:14,573 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 15:04:57,491 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 15:04:57,531 [ERROR] [whi] Attempt 1 failed: No table found in main content or any iframe
+2026-02-23 15:04:57,531 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 15:04:59,683 [INFO] [whi] Attempt 2/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 15:04:59,684 [INFO] ====== WebDriver manager ======
+2026-02-23 15:05:00,754 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:05:01,446 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:05:02,128 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:05:03,147 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 15:05:46,764 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 15:05:46,803 [ERROR] [whi] Attempt 2 failed: No table found in main content or any iframe
+2026-02-23 15:05:46,803 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 15:05:48,943 [INFO] [whi] Attempt 3/3 — https://www.whi.go.tz/faida-fund-nav-performance/
+2026-02-23 15:05:48,944 [INFO] ====== WebDriver manager ======
+2026-02-23 15:05:50,094 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:05:50,826 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:05:51,542 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:05:52,000 [INFO] [whi] Starting scrape with max_pages=10
+2026-02-23 15:06:34,896 [INFO] [whi] Table not found in main content, checking iframes...
+2026-02-23 15:06:34,943 [ERROR] [whi] Attempt 3 failed: No table found in main content or any iframe
+2026-02-23 15:06:34,943 [ERROR] [whi] Page Title: Page not found – Watumishi Housing Investments
+2026-02-23 15:06:37,100 [ERROR] [whi] All 3 attempts exhausted
+2026-02-23 15:06:37,101 [INFO] [itrust] Attempt 1/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 15:06:37,102 [INFO] ====== WebDriver manager ======
+2026-02-23 15:06:38,392 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:06:39,146 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:06:39,890 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:06:40,869 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 15:07:07,184 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 15:07:07,230 [ERROR] [itrust] Attempt 1 failed: No table found in main content or any iframe
+2026-02-23 15:07:07,230 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 15:07:09,422 [INFO] [itrust] Attempt 2/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 15:07:09,423 [INFO] ====== WebDriver manager ======
+2026-02-23 15:07:10,545 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:07:11,206 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:07:11,774 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:07:12,792 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 15:07:39,122 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 15:07:39,175 [ERROR] [itrust] Attempt 2 failed: No table found in main content or any iframe
+2026-02-23 15:07:39,175 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 15:07:41,379 [INFO] [itrust] Attempt 3/3 — https://itrust.co.tz/itrust-funds/
+2026-02-23 15:07:41,380 [INFO] ====== WebDriver manager ======
+2026-02-23 15:07:42,539 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:07:43,249 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:07:43,959 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:07:44,993 [INFO] [itrust] Starting scrape with max_pages=1
+2026-02-23 15:08:11,457 [INFO] [itrust] Table not found in main content, checking iframes...
+2026-02-23 15:08:11,506 [ERROR] [itrust] Attempt 3 failed: No table found in main content or any iframe
+2026-02-23 15:08:11,506 [ERROR] [itrust] Page Title: iTrust Finance
+2026-02-23 15:08:13,700 [ERROR] [itrust] All 3 attempts exhausted
+2026-02-23 15:08:13,701 [INFO] ------------------------------------------------------------
+2026-02-23 15:08:13,701 [INFO]   utt-amis: success (2396 rows) - Local only
+2026-02-23 15:08:13,702 [INFO]   vertex: success (11 rows) - Local only
+2026-02-23 15:08:13,703 [INFO]   sanlam-pesa: no data (0 rows) - Local only
+2026-02-23 15:08:13,703 [INFO]   zansec: success (389 rows) - Local only
+2026-02-23 15:08:13,704 [INFO]   whi: no data (0 rows) - Local only
+2026-02-23 15:08:13,705 [INFO]   itrust: no data (0 rows) - Local only
+2026-02-23 15:08:13,705 [INFO] ============================================================
+2026-02-23 15:08:13,706 [INFO] Fund Data Scraper — Complete
+2026-02-23 15:09:19,630 [INFO] ============================================================
+2026-02-23 15:09:19,630 [INFO] Fund Data Scraper — Starting
+2026-02-23 15:09:19,630 [INFO] ============================================================
+2026-02-23 15:09:19,637 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-02-23 15:09:19,651 [INFO] ====== WebDriver manager ======
+2026-02-23 15:09:20,679 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:09:21,353 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-23 15:09:22,020 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.117\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-23 15:09:22,410 [INFO] [utt-amis] Starting scrape with max_pages=300
+2026-02-23 15:09:52,792 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-02-23 15:10:07,382 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-02-23 15:10:22,160 [INFO] [utt-amis] Page 3: Found 51 rows
+2026-02-23 15:10:36,800 [INFO] [utt-amis] Page 4: Found 51 rows
+2026-02-23 15:10:51,572 [INFO] [utt-amis] Page 5: Found 51 rows
+2026-02-23 15:11:06,132 [INFO] [utt-amis] Page 6: Found 51 rows
+2026-02-23 15:11:19,750 [INFO] [utt-amis] Page 7: Found 51 rows
+2026-02-23 15:11:33,767 [INFO] [utt-amis] Page 8: Found 51 rows
+2026-02-23 15:11:48,189 [INFO] [utt-amis] Page 9: Found 51 rows
+2026-02-23 15:12:02,888 [INFO] [utt-amis] Page 10: Found 51 rows
+2026-02-23 15:12:17,453 [INFO] [utt-amis] Page 11: Found 51 rows
