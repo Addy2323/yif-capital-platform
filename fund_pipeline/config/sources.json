@@ -38,7 +38,7 @@
         },
         {
             "name": "whi",
-            "url": "https://www.whi.go.tz/faida-fund-nav-performance/",
+            "url": "https://fas.whi.go.tz/",
             "provider": "WHI",
             "type": "selenium",
             "wait_seconds": 30,

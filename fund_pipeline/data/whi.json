@@ -1,6 +1,16 @@
 [
     {
         "source": "whi",
+        "date": "2026-02-25",
+        "nav_per_unit": 141.4646,
+        "sale_price": 141.4646,
+        "repurchase_price": 141.4646,
+        "total_nav": 63857225757.64,
+        "units": 451400639.5975,
+        "status": "manual_entry"
+    },
+    {
+        "source": "whi",
         "date": "2026-02-20",
         "nav_per_unit": 141.2767,
         "sale_price": 141.2767,
