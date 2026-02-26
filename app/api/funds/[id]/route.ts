@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { resolveFundId } from "@/lib/fund-utils"
 
 export async function GET(
     request: NextRequest,
@@ -8,16 +9,7 @@ export async function GET(
     const { id } = await params
 
     try {
-        // Map common IDs to database fundIds
-        const fundMap: Record<string, string> = {
-            "zansec": "zansec-bond",
-            "utt-amis": "utt-umoja",
-            "whi": "whi-income",
-            "vertex": "vertex-bond",
-            "sanlam-pesa": "sanlam-pesa"
-        }
-
-        const fundId = fundMap[id] || id
+        const fundId = resolveFundId(id)
 
         // Fetch from Prisma instead of local JSON for better reliability
         const summaries = await prisma.fundDailySummary.findMany({
