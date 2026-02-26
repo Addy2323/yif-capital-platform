@@ -125,7 +125,7 @@ function calculateMultiSeriesReturns(rawHistory: any[], days: number): any[] {
   const cutoffDate = new Date()
   cutoffDate.setDate(cutoffDate.getDate() - days)
 
-  const history = rawHistory.filter(h => h.date >= cutoffDate)
+  const history = rawHistory.filter(h => h.date >= cutoffDate && isNaN(Number(String(h.schemeName).replace(/,/g, ""))))
 
   history.forEach(h => {
     const d = h.date.toISOString().split("T")[0]

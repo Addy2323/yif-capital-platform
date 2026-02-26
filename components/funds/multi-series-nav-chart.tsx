@@ -84,16 +84,16 @@ function CustomTooltip({ active, payload, label, isPerformance }: any) {
 export function MultiSeriesNavChart({ data = [], processedData, height = 350, isPerformance = false }: MultiSeriesNavChartProps) {
     const [selectedFund, setSelectedFund] = useState<string>("all")
 
-    // Extract unique fund names from the data
+    // Extract unique fund names from the data (filter out numeric values that may have leaked in as scheme names)
     const fundNames = useMemo(() => {
         const names = new Set<string>()
         if (processedData && processedData.length > 0) {
             Object.keys(processedData[0]).forEach(key => {
-                if (key !== "date") names.add(key)
+                if (key !== "date" && isNaN(Number(key.replace(/,/g, "")))) names.add(key)
             })
         } else {
             data.forEach((record) => {
-                if (record.fund_name) names.add(record.fund_name)
+                if (record.fund_name && isNaN(Number(record.fund_name.replace(/,/g, "")))) names.add(record.fund_name)
             })
         }
         return Array.from(names).sort()
