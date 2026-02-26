@@ -32,9 +32,9 @@ const navLinks = [
     hasDropdown: true,
     dropdownItems: [
       {
-        name: "YIF Analytics (Coming Soon)",
+        name: "YIF Analytics",
         description: "Market data & analysis",
-        href: "/",
+        href: "/funds",
         icon: BarChart2
       },
       {
@@ -199,14 +199,14 @@ export function Header() {
                     YIF Academy
                   </Link>
                   <Link
-                    href="/analytics"
+                    href="/funds"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "text-lg font-medium transition-colors",
-                      pathname === "/analytics" ? "text-gold" : "text-white/80 hover:text-white"
+                      pathname === "/funds" ? "text-gold" : "text-white/80 hover:text-white"
                     )}
                   >
-                    YIF Analytics <span className="text-xs text-gold border border-gold/20 bg-gold/10 px-1.5 py-0.5 rounded ml-2">Soon</span>
+                    YIF Analytics
                   </Link>
                   <Link
                     href="https://forum.yifcapital.co.tz"

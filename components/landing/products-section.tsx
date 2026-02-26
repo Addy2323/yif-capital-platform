@@ -25,7 +25,7 @@ const products = [
     description:
       "Analyze the markets with advanced tools and insights",
     icon: BarChart3,
-    href: "/",
+    href: "/funds",
     label: "Learn More",
   },
 ]
