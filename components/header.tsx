@@ -35,7 +35,7 @@ const navLinks = [
       {
         name: "YIF Analytics",
         description: "Market data & analysis",
-        href: "/funds",
+        href: "/dashboard",
         icon: BarChart2
       },
       {
@@ -215,11 +215,11 @@ export function Header() {
                     YIF Academy
                   </Link>
                   <Link
-                    href="/funds"
+                    href="/dashboard"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "text-lg font-medium transition-colors",
-                      pathname === "/funds" ? "text-gold" : "text-white/80 hover:text-white"
+                      pathname === "/dashboard" ? "text-gold" : "text-white/80 hover:text-white"
                     )}
                   >
                     YIF Analytics
