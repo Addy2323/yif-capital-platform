@@ -11,8 +11,8 @@ set PYTHON_EXEC=.\fund_pipeline\.venv\Scripts\python.exe
 
 echo [%date% %time%] Starting Daily Fund Sync... >> fund_pipeline\logs\automation.log
 
-:: 1. Run the Scraper
-%PYTHON_EXEC% fund_pipeline\scraper\selenium_scraper.py >> fund_pipeline\logs\automation.log 2>&1
+:: 1. Run the Scraper (latest-only mode for daily runs)
+%PYTHON_EXEC% fund_pipeline\scraper\selenium_scraper.py --latest-only >> fund_pipeline\logs\automation.log 2>&1
 
 echo [%date% %time%] Daily Fund Sync Complete. >> fund_pipeline\logs\automation.log
 endlocal

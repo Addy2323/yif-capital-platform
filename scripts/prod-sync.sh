@@ -45,7 +45,7 @@ PROJECT_DIR="/var/www/yif-capital-platform"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$PROJECT_DIR"
 
-export FUND_API_URL="http://localhost:3000/api/funds/update"
+export FUND_API_URL="${FUND_API_URL:-http://localhost:3000/api/funds/update}"
 PYTHON_EXEC="$PROJECT_DIR/fund_pipeline/.venv/bin/python3"
 LOG_FILE="$PROJECT_DIR/fund_pipeline/logs/automation.log"
 
@@ -74,7 +74,7 @@ echo "[$(date)] Starting Daily Fund Sync..." >> "$LOG_FILE"
 echo "================================================================" >> "$LOG_FILE"
 
 # Run the scraper — it scrapes ALL sources and pushes to the API
-$PYTHON_EXEC "$PROJECT_DIR/fund_pipeline/scraper/selenium_scraper.py" >> "$LOG_FILE" 2>&1
+$PYTHON_EXEC "$PROJECT_DIR/fund_pipeline/scraper/selenium_scraper.py" --latest-only >> "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 
 # ---------------------------------------------------------------------------

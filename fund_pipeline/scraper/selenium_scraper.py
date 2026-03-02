@@ -364,16 +364,32 @@ def push_to_api(data: list, name: str):
     """Send data to API (Sending to API)."""
     api_url = os.getenv("FUND_API_URL", "http://localhost:3000/api/funds/update")
     chunk_size = 10
+    total_chunks = max(1, (len(data) - 1) // chunk_size + 1)
     
     try:
         for i in range(0, len(data), chunk_size):
             chunk = data[i:i + chunk_size]
-            logger.info(f"[{name}] Pushing chunk {i//chunk_size + 1}/{(len(data)-1)//chunk_size + 1} ({len(chunk)} records) to API")
+            chunk_num = i // chunk_size + 1
+            logger.info(f"[{name}] Pushing chunk {chunk_num}/{total_chunks} ({len(chunk)} records) to {api_url}")
             response = requests.post(api_url, json={"source": name, "data": chunk}, timeout=60)
-            response.raise_for_status()
-            logger.info(f"[{name}] Chunk {i//chunk_size + 1} push successful")
+            
+            if response.status_code != 200:
+                logger.error(f"[{name}] API returned status {response.status_code}: {response.text[:500]}")
+                response.raise_for_status()
+            
+            # Log the API response details
+            try:
+                resp_json = response.json()
+                upserted = resp_json.get('upserted', '?')
+                errors = resp_json.get('errors', '?')
+                logger.info(f"[{name}] Chunk {chunk_num} → upserted={upserted}, errors={errors}")
+            except:
+                logger.info(f"[{name}] Chunk {chunk_num} push successful")
         
         return True
+    except requests.exceptions.ConnectionError as e:
+        logger.error(f"[{name}] API connection failed (is the server running?): {e}")
+        return False
     except Exception as e:
         logger.error(f"[{name}] API push failed: {e}")
         return False
@@ -531,6 +547,8 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="Fund Data Scraper")
     parser.add_argument("--fund", help="Specific fund name to scrape (e.g. 'whi' or 'utt-amis')")
+    parser.add_argument("--latest-only", action="store_true",
+                        help="Only scrape the first 2 pages (latest data) — use for daily cron runs")
     args = parser.parse_args()
 
     config = load_config()
@@ -542,6 +560,12 @@ def main():
             logger.error(f"Fund '{args.fund}' not found in configuration.")
             return
         logger.info(f"Filtering to single fund: {args.fund}")
+    
+    # In latest-only mode, cap max_pages to 2 so daily runs are fast
+    if args.latest_only:
+        logger.info("Running in --latest-only mode (max 2 pages per source)")
+        for s in sources:
+            s["max_pages"] = min(s.get("max_pages", 1), 2)
 
     results = []
     for source in sources:
