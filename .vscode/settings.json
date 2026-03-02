@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "fund_pipeline/.venv/Scripts/python.exe",
+    "python.analysis.extraPaths": [
+        "./fund_pipeline"
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "sources": [
+        {
+            "name": "sanlam-pesa",
+            "url": "https://invest-tz.sanlamallianzinvestments.com/en",
+            "provider": "Sanlam Allianz Investments",
+            "type": "selenium",
+            "wait_seconds": 10,
+            "retry_count": 3,
+            "max_pages": 10
+        }
+    ],
+    "output": {
+        "raw_path": "data/raw/",
+        "processed_path": "data/processed/",
+        "archive_path": "data/archive/",
+        "format": "json"
+    },
+    "retention": {
+        "raw_days": 1825,
+        "processed_days": -1,
+        "logs_days": 90,
+        "failed_days": 30
+    }
+}

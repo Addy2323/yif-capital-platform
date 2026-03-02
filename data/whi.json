@@ -1,0 +1,3702 @@
+[
+    {
+        "source": "whi",
+        "date": "2026-02-20",
+        "nav_per_unit": 141.2767,
+        "sale_price": 141.2767,
+        "repurchase_price": 141.2767,
+        "total_nav": 63613412167.31,
+        "units": 450275180.0521,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-19",
+        "nav_per_unit": 141.2398,
+        "sale_price": 141.2398,
+        "repurchase_price": 141.2398,
+        "total_nav": 63666382634.74,
+        "units": 450767879.0611,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-18",
+        "nav_per_unit": 141.2023,
+        "sale_price": 141.2023,
+        "repurchase_price": 141.2023,
+        "total_nav": 63633956368.81,
+        "units": 450658048.2599,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-17",
+        "nav_per_unit": 141.1651,
+        "sale_price": 141.1651,
+        "repurchase_price": 141.1651,
+        "total_nav": 63561904012.14,
+        "units": 450266428.7255,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-16",
+        "nav_per_unit": 141.1265,
+        "sale_price": 141.1265,
+        "repurchase_price": 141.1265,
+        "total_nav": 63688222325.71,
+        "units": 451284678.4015,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-13",
+        "nav_per_unit": 141.0142,
+        "sale_price": 141.0142,
+        "repurchase_price": 141.0142,
+        "total_nav": 63486796833.25,
+        "units": 450215715.8501,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-12",
+        "nav_per_unit": 140.9767,
+        "sale_price": 140.9767,
+        "repurchase_price": 140.9767,
+        "total_nav": 63235996027.49,
+        "units": 448556465.8619,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-11",
+        "nav_per_unit": 140.9382,
+        "sale_price": 140.9382,
+        "repurchase_price": 140.9382,
+        "total_nav": 63113737516.5,
+        "units": 447811507.1772,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-10",
+        "nav_per_unit": 140.8986,
+        "sale_price": 140.8986,
+        "repurchase_price": 140.8986,
+        "total_nav": 63014351122.68,
+        "units": 447232070.0348,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-09",
+        "nav_per_unit": 140.861,
+        "sale_price": 140.861,
+        "repurchase_price": 140.861,
+        "total_nav": 62997461178.33,
+        "units": 447231514.5679,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-06",
+        "nav_per_unit": 140.7472,
+        "sale_price": 140.7472,
+        "repurchase_price": 140.7472,
+        "total_nav": 62763939970.79,
+        "units": 445933702.3346,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-05",
+        "nav_per_unit": 140.7083,
+        "sale_price": 140.7083,
+        "repurchase_price": 140.7083,
+        "total_nav": 62709118742.07,
+        "units": 445667392.9428,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-04",
+        "nav_per_unit": 140.6698,
+        "sale_price": 140.6698,
+        "repurchase_price": 140.6698,
+        "total_nav": 62498743001.32,
+        "units": 444294029.9017,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-03",
+        "nav_per_unit": 140.6317,
+        "sale_price": 140.6317,
+        "repurchase_price": 140.6317,
+        "total_nav": 62541908175.5,
+        "units": 444721305.6434,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-02-02",
+        "nav_per_unit": 140.5918,
+        "sale_price": 140.5918,
+        "repurchase_price": 140.5918,
+        "total_nav": 62437321130.92,
+        "units": 444103683.1088,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-30",
+        "nav_per_unit": 140.4674,
+        "sale_price": 140.4674,
+        "repurchase_price": 140.4674,
+        "total_nav": 62450288669.3,
+        "units": 444589227.937,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-29",
+        "nav_per_unit": 140.4193,
+        "sale_price": 140.4193,
+        "repurchase_price": 140.4193,
+        "total_nav": 62435158956.57,
+        "units": 444633619.2426,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-28",
+        "nav_per_unit": 140.3724,
+        "sale_price": 140.3724,
+        "repurchase_price": 140.3724,
+        "total_nav": 62412741890.31,
+        "units": 444622586.372,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-27",
+        "nav_per_unit": 140.3239,
+        "sale_price": 140.3239,
+        "repurchase_price": 140.3239,
+        "total_nav": 62409073811.29,
+        "units": 444750231.0847,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-26",
+        "nav_per_unit": 140.2766,
+        "sale_price": 140.2766,
+        "repurchase_price": 140.2766,
+        "total_nav": 62247134405.87,
+        "units": 443745677.4817,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-23",
+        "nav_per_unit": 140.1349,
+        "sale_price": 140.1349,
+        "repurchase_price": 140.1349,
+        "total_nav": 62207530921.57,
+        "units": 443911744.7307,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-22",
+        "nav_per_unit": 140.0865,
+        "sale_price": 140.0865,
+        "repurchase_price": 140.0865,
+        "total_nav": 62083451487.02,
+        "units": 443179464.277,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-21",
+        "nav_per_unit": 140.0395,
+        "sale_price": 140.0395,
+        "repurchase_price": 140.0395,
+        "total_nav": 61987701418.13,
+        "units": 442644371.3702,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-20",
+        "nav_per_unit": 139.9926,
+        "sale_price": 139.9926,
+        "repurchase_price": 139.9926,
+        "total_nav": 61995492049.12,
+        "units": 442848389.9573,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-19",
+        "nav_per_unit": 139.9438,
+        "sale_price": 139.9438,
+        "repurchase_price": 139.9438,
+        "total_nav": 61853638096.89,
+        "units": 441989118.1585,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-16",
+        "nav_per_unit": 139.8105,
+        "sale_price": 139.8105,
+        "repurchase_price": 139.8105,
+        "total_nav": 61784438946.55,
+        "units": 441915453.5533,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-15",
+        "nav_per_unit": 139.7679,
+        "sale_price": 139.7679,
+        "repurchase_price": 139.7679,
+        "total_nav": 61648231456.55,
+        "units": 441075800.9732,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-14",
+        "nav_per_unit": 139.7221,
+        "sale_price": 139.7221,
+        "repurchase_price": 139.7221,
+        "total_nav": 61593393849.89,
+        "units": 440827903.5039,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-13",
+        "nav_per_unit": 139.6829,
+        "sale_price": 139.6829,
+        "repurchase_price": 139.6829,
+        "total_nav": 61552268152.46,
+        "units": 440657266.5713,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-09",
+        "nav_per_unit": 139.5248,
+        "sale_price": 139.5248,
+        "repurchase_price": 139.5248,
+        "total_nav": 61326482476.04,
+        "units": 439538173.4112,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-08",
+        "nav_per_unit": 139.4854,
+        "sale_price": 139.4854,
+        "repurchase_price": 139.4854,
+        "total_nav": 61302414888.61,
+        "units": 439489875.249,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-07",
+        "nav_per_unit": 139.4454,
+        "sale_price": 139.4454,
+        "repurchase_price": 139.4454,
+        "total_nav": 61326748134.17,
+        "units": 439790358.972,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-06",
+        "nav_per_unit": 139.4044,
+        "sale_price": 139.4044,
+        "repurchase_price": 139.4044,
+        "total_nav": 61246301960.91,
+        "units": 439342625.4561,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-05",
+        "nav_per_unit": 139.3757,
+        "sale_price": 139.3757,
+        "repurchase_price": 139.3757,
+        "total_nav": 56808677848.48,
+        "units": 407593905.9809,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-02",
+        "nav_per_unit": 139.2763,
+        "sale_price": 139.2763,
+        "repurchase_price": 139.2763,
+        "total_nav": 51460045317.94,
+        "units": 369481807.1969,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2026-01-01",
+        "nav_per_unit": 139.2439,
+        "sale_price": 139.2439,
+        "repurchase_price": 139.2439,
+        "total_nav": 51403368004.09,
+        "units": 369160681.0657,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-31",
+        "nav_per_unit": 139.2102,
+        "sale_price": 139.2102,
+        "repurchase_price": 139.2102,
+        "total_nav": 51360152055.76,
+        "units": 368939605.4871,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-30",
+        "nav_per_unit": 139.1776,
+        "sale_price": 139.1776,
+        "repurchase_price": 139.1776,
+        "total_nav": 51211054451.98,
+        "units": 367954813.5907,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-29",
+        "nav_per_unit": 139.1411,
+        "sale_price": 139.1411,
+        "repurchase_price": 139.1411,
+        "total_nav": 51306357079.44,
+        "units": 368736175.316,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-24",
+        "nav_per_unit": 138.9776,
+        "sale_price": 138.9776,
+        "repurchase_price": 138.9776,
+        "total_nav": 51113018666.58,
+        "units": 367778740.5129,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-23",
+        "nav_per_unit": 138.9429,
+        "sale_price": 138.9429,
+        "repurchase_price": 138.9429,
+        "total_nav": 51007161236.12,
+        "units": 367108875.0447,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-22",
+        "nav_per_unit": 138.9099,
+        "sale_price": 138.9099,
+        "repurchase_price": 138.9099,
+        "total_nav": 50953135218.58,
+        "units": 366807045.849,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-19",
+        "nav_per_unit": 138.8047,
+        "sale_price": 138.8047,
+        "repurchase_price": 138.8047,
+        "total_nav": 50806842898.85,
+        "units": 366031261.5191,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-18",
+        "nav_per_unit": 138.7712,
+        "sale_price": 138.7712,
+        "repurchase_price": 138.7712,
+        "total_nav": 50771822629.31,
+        "units": 365867213.0395,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-17",
+        "nav_per_unit": 138.7384,
+        "sale_price": 138.7384,
+        "repurchase_price": 138.7384,
+        "total_nav": 50948092379.39,
+        "units": 367224175.3631,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-16",
+        "nav_per_unit": 138.7031,
+        "sale_price": 138.7031,
+        "repurchase_price": 138.7031,
+        "total_nav": 50894060219.99,
+        "units": 366927965.8142,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-15",
+        "nav_per_unit": 138.6701,
+        "sale_price": 138.6701,
+        "repurchase_price": 138.6701,
+        "total_nav": 50829651846.15,
+        "units": 366550951.0159,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-12",
+        "nav_per_unit": 138.5685,
+        "sale_price": 138.5685,
+        "repurchase_price": 138.5685,
+        "total_nav": 50515873251.66,
+        "units": 364555343.6194,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-11",
+        "nav_per_unit": 138.5335,
+        "sale_price": 138.5335,
+        "repurchase_price": 138.5335,
+        "total_nav": 50469196273.47,
+        "units": 364310492.8458,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-10",
+        "nav_per_unit": 138.4973,
+        "sale_price": 138.4973,
+        "repurchase_price": 138.4973,
+        "total_nav": 50383100648.22,
+        "units": 363784051.0523,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-08",
+        "nav_per_unit": 138.4298,
+        "sale_price": 138.4298,
+        "repurchase_price": 138.4298,
+        "total_nav": 50345494827.78,
+        "units": 363689741.0835,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-05",
+        "nav_per_unit": 138.3276,
+        "sale_price": 138.3276,
+        "repurchase_price": 138.3276,
+        "total_nav": 50243696612.01,
+        "units": 363222616.2579,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-04",
+        "nav_per_unit": 138.2929,
+        "sale_price": 138.2929,
+        "repurchase_price": 138.2929,
+        "total_nav": 50142550934.44,
+        "units": 362582241.7359,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-03",
+        "nav_per_unit": 138.2576,
+        "sale_price": 138.2576,
+        "repurchase_price": 138.2576,
+        "total_nav": 50095598211.66,
+        "units": 362335212.6545,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-02",
+        "nav_per_unit": 138.2235,
+        "sale_price": 138.2235,
+        "repurchase_price": 138.2235,
+        "total_nav": 50022584996.64,
+        "units": 361896289.9803,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-12-01",
+        "nav_per_unit": 138.1872,
+        "sale_price": 138.1872,
+        "repurchase_price": 138.1872,
+        "total_nav": 49794622085.65,
+        "units": 360341890.3008,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-28",
+        "nav_per_unit": 138.0836,
+        "sale_price": 138.0836,
+        "repurchase_price": 138.0836,
+        "total_nav": 49652211225.13,
+        "units": 359580775.6854,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-27",
+        "nav_per_unit": 138.0485,
+        "sale_price": 138.0485,
+        "repurchase_price": 138.0485,
+        "total_nav": 49502494281.72,
+        "units": 358587695.9587,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-26",
+        "nav_per_unit": 138.0131,
+        "sale_price": 138.0131,
+        "repurchase_price": 138.0131,
+        "total_nav": 49489651993.48,
+        "units": 358586500.4368,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-25",
+        "nav_per_unit": 137.978,
+        "sale_price": 137.978,
+        "repurchase_price": 137.978,
+        "total_nav": 49481113782.34,
+        "units": 358615917.1767,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-24",
+        "nav_per_unit": 137.9412,
+        "sale_price": 137.9412,
+        "repurchase_price": 137.9412,
+        "total_nav": 49292578612.79,
+        "units": 357344736.6302,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-21",
+        "nav_per_unit": 137.8368,
+        "sale_price": 137.8368,
+        "repurchase_price": 137.8368,
+        "total_nav": 49233138643.44,
+        "units": 357184288.2013,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-20",
+        "nav_per_unit": 137.8013,
+        "sale_price": 137.8013,
+        "repurchase_price": 137.8013,
+        "total_nav": 49180497804.12,
+        "units": 356894379.255,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-19",
+        "nav_per_unit": 137.7654,
+        "sale_price": 137.7654,
+        "repurchase_price": 137.7654,
+        "total_nav": 49116589787.08,
+        "units": 356523486.6912,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-18",
+        "nav_per_unit": 137.7281,
+        "sale_price": 137.7281,
+        "repurchase_price": 137.7281,
+        "total_nav": 49113764031.81,
+        "units": 356599527.3026,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-17",
+        "nav_per_unit": 137.695,
+        "sale_price": 137.695,
+        "repurchase_price": 137.695,
+        "total_nav": 49134035783.48,
+        "units": 356832379.2797,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-14",
+        "nav_per_unit": 137.5951,
+        "sale_price": 137.5951,
+        "repurchase_price": 137.5951,
+        "total_nav": 48873003174.3,
+        "units": 355194380.4921,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-13",
+        "nav_per_unit": 137.5617,
+        "sale_price": 137.5617,
+        "repurchase_price": 137.5617,
+        "total_nav": 48832869355.78,
+        "units": 354988908.2127,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-12",
+        "nav_per_unit": 137.5276,
+        "sale_price": 137.5276,
+        "repurchase_price": 137.5276,
+        "total_nav": 48753841278.99,
+        "units": 354502322.7605,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-11",
+        "nav_per_unit": 137.4939,
+        "sale_price": 137.4939,
+        "repurchase_price": 137.4939,
+        "total_nav": 48542930460.96,
+        "units": 353055077.4955,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-10",
+        "nav_per_unit": 137.4583,
+        "sale_price": 137.4583,
+        "repurchase_price": 137.4583,
+        "total_nav": 48491435769.24,
+        "units": 352772037.3383,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-07",
+        "nav_per_unit": 137.3551,
+        "sale_price": 137.3551,
+        "repurchase_price": 137.3551,
+        "total_nav": 48337267166.08,
+        "units": 351914695.0633,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-06",
+        "nav_per_unit": 137.3195,
+        "sale_price": 137.3195,
+        "repurchase_price": 137.3195,
+        "total_nav": 48239883531.13,
+        "units": 351296779.1874,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-05",
+        "nav_per_unit": 137.2839,
+        "sale_price": 137.2839,
+        "repurchase_price": 137.2839,
+        "total_nav": 48195084712.4,
+        "units": 351061557.7658,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-04",
+        "nav_per_unit": 137.2488,
+        "sale_price": 137.2488,
+        "repurchase_price": 137.2488,
+        "total_nav": 48144874667.8,
+        "units": 350785431.4194,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-11-03",
+        "nav_per_unit": 137.2132,
+        "sale_price": 137.2132,
+        "repurchase_price": 137.2132,
+        "total_nav": 48254018700.37,
+        "units": 351671824.2444,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-28",
+        "nav_per_unit": 137.0118,
+        "sale_price": 137.0118,
+        "repurchase_price": 137.0118,
+        "total_nav": 48185291745.94,
+        "units": 351687062.8386,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-27",
+        "nav_per_unit": 136.9779,
+        "sale_price": 136.9779,
+        "repurchase_price": 136.9779,
+        "total_nav": 48150825067.01,
+        "units": 351522596.5993,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-24",
+        "nav_per_unit": 136.8754,
+        "sale_price": 136.8754,
+        "repurchase_price": 136.8754,
+        "total_nav": 47993065700.33,
+        "units": 350633371.542,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-23",
+        "nav_per_unit": 136.8408,
+        "sale_price": 136.8408,
+        "repurchase_price": 136.8408,
+        "total_nav": 48014741465.37,
+        "units": 350880350.9277,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-22",
+        "nav_per_unit": 136.8068,
+        "sale_price": 136.8068,
+        "repurchase_price": 136.8068,
+        "total_nav": 48022286312.51,
+        "units": 351022650.0331,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-21",
+        "nav_per_unit": 136.7704,
+        "sale_price": 136.7704,
+        "repurchase_price": 136.7704,
+        "total_nav": 47905188326.41,
+        "units": 350259937.0753,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-20",
+        "nav_per_unit": 136.7362,
+        "sale_price": 136.7362,
+        "repurchase_price": 136.7362,
+        "total_nav": 47789119818.31,
+        "units": 349498680.9997,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-17",
+        "nav_per_unit": 136.6332,
+        "sale_price": 136.6332,
+        "repurchase_price": 136.6332,
+        "total_nav": 47640670282.44,
+        "units": 348675672.7576,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-16",
+        "nav_per_unit": 136.598,
+        "sale_price": 136.598,
+        "repurchase_price": 136.598,
+        "total_nav": 47668933924.51,
+        "units": 348972521.6677,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-15",
+        "nav_per_unit": 136.5641,
+        "sale_price": 136.5641,
+        "repurchase_price": 136.5641,
+        "total_nav": 47662532495.49,
+        "units": 349012240.5889,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-13",
+        "nav_per_unit": 136.4945,
+        "sale_price": 136.4945,
+        "repurchase_price": 136.4945,
+        "total_nav": 47596641968.91,
+        "units": 348707301.6526,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-10",
+        "nav_per_unit": 136.392,
+        "sale_price": 136.392,
+        "repurchase_price": 136.392,
+        "total_nav": 47489837631.5,
+        "units": 348186387.1762,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-09",
+        "nav_per_unit": 136.3566,
+        "sale_price": 136.3566,
+        "repurchase_price": 136.3566,
+        "total_nav": 47473181339.22,
+        "units": 348154572.5128,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-08",
+        "nav_per_unit": 136.3218,
+        "sale_price": 136.3218,
+        "repurchase_price": 136.3218,
+        "total_nav": 47429166315.88,
+        "units": 347920654.5497,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-07",
+        "nav_per_unit": 136.2837,
+        "sale_price": 136.2837,
+        "repurchase_price": 136.2837,
+        "total_nav": 47366241638.49,
+        "units": 347556095.8049,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-06",
+        "nav_per_unit": 136.2442,
+        "sale_price": 136.2442,
+        "repurchase_price": 136.2442,
+        "total_nav": 47229445031.73,
+        "units": 346652861.4049,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-03",
+        "nav_per_unit": 136.1251,
+        "sale_price": 136.1251,
+        "repurchase_price": 136.1251,
+        "total_nav": 47178589141.39,
+        "units": 346582626.3637,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-02",
+        "nav_per_unit": 136.0859,
+        "sale_price": 136.0859,
+        "repurchase_price": 136.0859,
+        "total_nav": 47158621262.77,
+        "units": 346535671.0993,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-10-01",
+        "nav_per_unit": 136.0439,
+        "sale_price": 136.0439,
+        "repurchase_price": 136.0439,
+        "total_nav": 47039001396.15,
+        "units": 345763316.0295,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-30",
+        "nav_per_unit": 136.0044,
+        "sale_price": 136.0044,
+        "repurchase_price": 136.0044,
+        "total_nav": 46912533220.77,
+        "units": 344933912.7777,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-29",
+        "nav_per_unit": 135.9643,
+        "sale_price": 135.9643,
+        "repurchase_price": 135.9643,
+        "total_nav": 46899080414.22,
+        "units": 344936817.9808,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-26",
+        "nav_per_unit": 135.8428,
+        "sale_price": 135.8428,
+        "repurchase_price": 135.8428,
+        "total_nav": 46805222025.5,
+        "units": 344554396.694,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-25",
+        "nav_per_unit": 135.8027,
+        "sale_price": 135.8027,
+        "repurchase_price": 135.8027,
+        "total_nav": 46716641689.89,
+        "units": 344003793.6736,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-24",
+        "nav_per_unit": 135.7587,
+        "sale_price": 135.7587,
+        "repurchase_price": 135.7587,
+        "total_nav": 46660880424.13,
+        "units": 343704475.7371,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-23",
+        "nav_per_unit": 135.718,
+        "sale_price": 135.718,
+        "repurchase_price": 135.718,
+        "total_nav": 46611245188.94,
+        "units": 343441990.6942,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-22",
+        "nav_per_unit": 135.6757,
+        "sale_price": 135.6757,
+        "repurchase_price": 135.6757,
+        "total_nav": 46597976714.46,
+        "units": 343451076.8139,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-19",
+        "nav_per_unit": 135.5534,
+        "sale_price": 135.5534,
+        "repurchase_price": 135.5534,
+        "total_nav": 46550788204.12,
+        "units": 343412939.2393,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-18",
+        "nav_per_unit": 135.5102,
+        "sale_price": 135.5102,
+        "repurchase_price": 135.5102,
+        "total_nav": 46444615533.7,
+        "units": 342738856.8013,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-17",
+        "nav_per_unit": 135.4683,
+        "sale_price": 135.4683,
+        "repurchase_price": 135.4683,
+        "total_nav": 46367101825.08,
+        "units": 342272753.132,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-16",
+        "nav_per_unit": 135.4238,
+        "sale_price": 135.4238,
+        "repurchase_price": 135.4238,
+        "total_nav": 46311294844.05,
+        "units": 341973200.6306,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-15",
+        "nav_per_unit": 135.3817,
+        "sale_price": 135.3817,
+        "repurchase_price": 135.3817,
+        "total_nav": 46330337449.7,
+        "units": 342220149.1464,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-12",
+        "nav_per_unit": 135.2568,
+        "sale_price": 135.2568,
+        "repurchase_price": 135.2568,
+        "total_nav": 46249935897.34,
+        "units": 341941596.5451,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-11",
+        "nav_per_unit": 135.2146,
+        "sale_price": 135.2146,
+        "repurchase_price": 135.2146,
+        "total_nav": 46210479744.42,
+        "units": 341756521.891,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-10",
+        "nav_per_unit": 135.17,
+        "sale_price": 135.17,
+        "repurchase_price": 135.17,
+        "total_nav": 46216469100.98,
+        "units": 341913640.3338,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-09",
+        "nav_per_unit": 135.1284,
+        "sale_price": 135.1284,
+        "repurchase_price": 135.1284,
+        "total_nav": 46229568675.17,
+        "units": 342115763.2503,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-08",
+        "nav_per_unit": 135.0843,
+        "sale_price": 135.0843,
+        "repurchase_price": 135.0843,
+        "total_nav": 46181404467.86,
+        "units": 341871066.7024,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-04",
+        "nav_per_unit": 134.9178,
+        "sale_price": 134.9178,
+        "repurchase_price": 134.9178,
+        "total_nav": 46311022935.96,
+        "units": 343253612.2123,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-03",
+        "nav_per_unit": 134.8749,
+        "sale_price": 134.8749,
+        "repurchase_price": 134.8749,
+        "total_nav": 46203976289.05,
+        "units": 342569231.5896,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-02",
+        "nav_per_unit": 134.8337,
+        "sale_price": 134.8337,
+        "repurchase_price": 134.8337,
+        "total_nav": 46170064609.66,
+        "units": 342422297.2677,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-09-01",
+        "nav_per_unit": 134.7908,
+        "sale_price": 134.7908,
+        "repurchase_price": 134.7908,
+        "total_nav": 46254879607.94,
+        "units": 343160507.705,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-29",
+        "nav_per_unit": 134.6672,
+        "sale_price": 134.6672,
+        "repurchase_price": 134.6672,
+        "total_nav": 46144140658.71,
+        "units": 342653197.4215,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-28",
+        "nav_per_unit": 134.6255,
+        "sale_price": 134.6255,
+        "repurchase_price": 134.6255,
+        "total_nav": 46102521858.95,
+        "units": 342450256.305,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-27",
+        "nav_per_unit": 134.5839,
+        "sale_price": 134.5839,
+        "repurchase_price": 134.5839,
+        "total_nav": 46180638660.47,
+        "units": 343136367.7741,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-26",
+        "nav_per_unit": 134.5423,
+        "sale_price": 134.5423,
+        "repurchase_price": 134.5423,
+        "total_nav": 46155694725.61,
+        "units": 343057224.6053,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-25",
+        "nav_per_unit": 134.499,
+        "sale_price": 134.499,
+        "repurchase_price": 134.499,
+        "total_nav": 46094397253.57,
+        "units": 342711825.3211,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-22",
+        "nav_per_unit": 134.3844,
+        "sale_price": 134.3844,
+        "repurchase_price": 134.3844,
+        "total_nav": 46017609437.45,
+        "units": 342432597.5158,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-21",
+        "nav_per_unit": 134.3459,
+        "sale_price": 134.3459,
+        "repurchase_price": 134.3459,
+        "total_nav": 45919003281.24,
+        "units": 341796707.1129,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-20",
+        "nav_per_unit": 134.3073,
+        "sale_price": 134.3073,
+        "repurchase_price": 134.3073,
+        "total_nav": 45822377035.93,
+        "units": 341175732.7432,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-19",
+        "nav_per_unit": 134.2682,
+        "sale_price": 134.2682,
+        "repurchase_price": 134.2682,
+        "total_nav": 45815139899.55,
+        "units": 341221171.0311,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-18",
+        "nav_per_unit": 134.228,
+        "sale_price": 134.228,
+        "repurchase_price": 134.228,
+        "total_nav": 45806202603.32,
+        "units": 341256671.8626,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-15",
+        "nav_per_unit": 134.1136,
+        "sale_price": 134.1136,
+        "repurchase_price": 134.1136,
+        "total_nav": 45889785851.51,
+        "units": 342170907.7779,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-14",
+        "nav_per_unit": 134.0752,
+        "sale_price": 134.0752,
+        "repurchase_price": 134.0752,
+        "total_nav": 45819364266.69,
+        "units": 341743896.6762,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-13",
+        "nav_per_unit": 134.0367,
+        "sale_price": 134.0367,
+        "repurchase_price": 134.0367,
+        "total_nav": 45812557343.88,
+        "units": 341791045.6189,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-12",
+        "nav_per_unit": 133.9983,
+        "sale_price": 133.9983,
+        "repurchase_price": 133.9983,
+        "total_nav": 45843729118.21,
+        "units": 342121614.1081,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-11",
+        "nav_per_unit": 133.9577,
+        "sale_price": 133.9577,
+        "repurchase_price": 133.9577,
+        "total_nav": 45804858638.39,
+        "units": 341935320.8687,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-07",
+        "nav_per_unit": 133.805,
+        "sale_price": 133.805,
+        "repurchase_price": 133.805,
+        "total_nav": 45559023665.65,
+        "units": 340488261.2449,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-06",
+        "nav_per_unit": 133.7666,
+        "sale_price": 133.7666,
+        "repurchase_price": 133.7666,
+        "total_nav": 46051508302.87,
+        "units": 344267487.562,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-05",
+        "nav_per_unit": 133.7286,
+        "sale_price": 133.7286,
+        "repurchase_price": 133.7286,
+        "total_nav": 46171366185.24,
+        "units": 345261814.6188,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-04",
+        "nav_per_unit": 133.6891,
+        "sale_price": 133.6891,
+        "repurchase_price": 133.6891,
+        "total_nav": 46192477686.07,
+        "units": 345521520.8981,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-08-01",
+        "nav_per_unit": 133.5763,
+        "sale_price": 133.5763,
+        "repurchase_price": 133.5763,
+        "total_nav": 46084988514.91,
+        "units": 345008838.532,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-31",
+        "nav_per_unit": 133.5381,
+        "sale_price": 133.5381,
+        "repurchase_price": 133.5381,
+        "total_nav": 45952519181.79,
+        "units": 344115364.5059,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-30",
+        "nav_per_unit": 133.4991,
+        "sale_price": 133.4991,
+        "repurchase_price": 133.4991,
+        "total_nav": 45867151437.38,
+        "units": 343576461.6619,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-29",
+        "nav_per_unit": 133.4609,
+        "sale_price": 133.4609,
+        "repurchase_price": 133.4609,
+        "total_nav": 45783521772.24,
+        "units": 343048272.6695,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-28",
+        "nav_per_unit": 133.421,
+        "sale_price": 133.421,
+        "repurchase_price": 133.421,
+        "total_nav": 45642244217.19,
+        "units": 342091924.8321,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-25",
+        "nav_per_unit": 133.332,
+        "sale_price": 133.332,
+        "repurchase_price": 133.332,
+        "total_nav": 55470520990.74,
+        "units": 416032929.4703,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-24",
+        "nav_per_unit": 133.301,
+        "sale_price": 133.301,
+        "repurchase_price": 133.301,
+        "total_nav": 55407293560.42,
+        "units": 415655458.2581,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-23",
+        "nav_per_unit": 133.2706,
+        "sale_price": 133.2706,
+        "repurchase_price": 133.2706,
+        "total_nav": 55263093972.76,
+        "units": 414668454.5322,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-22",
+        "nav_per_unit": 133.2403,
+        "sale_price": 133.2403,
+        "repurchase_price": 133.2403,
+        "total_nav": 55261328322.19,
+        "units": 414749405.2397,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-21",
+        "nav_per_unit": 133.209,
+        "sale_price": 133.209,
+        "repurchase_price": 133.209,
+        "total_nav": 55259861777.71,
+        "units": 414835725.7749,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-18",
+        "nav_per_unit": 133.1195,
+        "sale_price": 133.1195,
+        "repurchase_price": 133.1195,
+        "total_nav": 55200823549.27,
+        "units": 414671350.5353,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-17",
+        "nav_per_unit": 133.0901,
+        "sale_price": 133.0901,
+        "repurchase_price": 133.0901,
+        "total_nav": 56535959959.03,
+        "units": 424794539.0999,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-16",
+        "nav_per_unit": 133.0607,
+        "sale_price": 133.0607,
+        "repurchase_price": 133.0607,
+        "total_nav": 56363698166.65,
+        "units": 423593766.788,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-15",
+        "nav_per_unit": 133.031,
+        "sale_price": 133.031,
+        "repurchase_price": 133.031,
+        "total_nav": 56312961623.64,
+        "units": 423306957.5304,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-14",
+        "nav_per_unit": 133.0,
+        "sale_price": 133.0,
+        "repurchase_price": 133.0,
+        "total_nav": 56104248859.53,
+        "units": 421836582.554,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-11",
+        "nav_per_unit": 132.9092,
+        "sale_price": 132.9092,
+        "repurchase_price": 132.9092,
+        "total_nav": 54639007099.54,
+        "units": 411100395.2738,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-10",
+        "nav_per_unit": 132.878,
+        "sale_price": 132.878,
+        "repurchase_price": 132.878,
+        "total_nav": 54543371654.35,
+        "units": 410476968.415,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-09",
+        "nav_per_unit": 132.8451,
+        "sale_price": 132.8451,
+        "repurchase_price": 132.8451,
+        "total_nav": 54466751970.8,
+        "units": 410001828.2117,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-08",
+        "nav_per_unit": 132.815,
+        "sale_price": 132.815,
+        "repurchase_price": 132.815,
+        "total_nav": 54350778192.98,
+        "units": 409221745.2487,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-04",
+        "nav_per_unit": 132.6572,
+        "sale_price": 132.6572,
+        "repurchase_price": 132.6572,
+        "total_nav": 44174997461.77,
+        "units": 333001051.0768,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-03",
+        "nav_per_unit": 132.6109,
+        "sale_price": 132.6109,
+        "repurchase_price": 132.6109,
+        "total_nav": 44174457756.03,
+        "units": 333113374.7916,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-02",
+        "nav_per_unit": 132.5716,
+        "sale_price": 132.5716,
+        "repurchase_price": 132.5716,
+        "total_nav": 44086516377.33,
+        "units": 332548708.3825,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-07-01",
+        "nav_per_unit": 132.5309,
+        "sale_price": 132.5309,
+        "repurchase_price": 132.5309,
+        "total_nav": 44017383410.87,
+        "units": 332129143.3565,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-30",
+        "nav_per_unit": 132.4886,
+        "sale_price": 132.4886,
+        "repurchase_price": 132.4886,
+        "total_nav": 43937746006.67,
+        "units": 331634067.1743,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-27",
+        "nav_per_unit": 132.2272,
+        "sale_price": 132.2272,
+        "repurchase_price": 132.2272,
+        "total_nav": 47220665440.28,
+        "units": 357117755.1473,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-26",
+        "nav_per_unit": 132.1473,
+        "sale_price": 132.1473,
+        "repurchase_price": 132.1473,
+        "total_nav": 47071616431.84,
+        "units": 356205752.8516,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-25",
+        "nav_per_unit": 132.0665,
+        "sale_price": 132.0665,
+        "repurchase_price": 132.0665,
+        "total_nav": 46979976133.15,
+        "units": 355729693.6531,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-24",
+        "nav_per_unit": 131.9871,
+        "sale_price": 131.9871,
+        "repurchase_price": 131.9871,
+        "total_nav": 46897865498.0,
+        "units": 355321635.7126,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-23",
+        "nav_per_unit": 131.9056,
+        "sale_price": 131.9056,
+        "repurchase_price": 131.9056,
+        "total_nav": 46800957551.13,
+        "units": 354806373.5067,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-20",
+        "nav_per_unit": 131.6577,
+        "sale_price": 131.6577,
+        "repurchase_price": 131.6577,
+        "total_nav": 46699687964.98,
+        "units": 354705392.0066,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-19",
+        "nav_per_unit": 131.5745,
+        "sale_price": 131.5745,
+        "repurchase_price": 131.5745,
+        "total_nav": 46616491593.38,
+        "units": 354297435.6947,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-18",
+        "nav_per_unit": 131.4884,
+        "sale_price": 131.4884,
+        "repurchase_price": 131.4884,
+        "total_nav": 46544458003.79,
+        "units": 353981501.4391,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-17",
+        "nav_per_unit": 131.4052,
+        "sale_price": 131.4052,
+        "repurchase_price": 131.4052,
+        "total_nav": 46403992895.94,
+        "units": 353136564.8787,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-16",
+        "nav_per_unit": 131.3201,
+        "sale_price": 131.3201,
+        "repurchase_price": 131.3201,
+        "total_nav": 46392933679.14,
+        "units": 353281406.1224,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-13",
+        "nav_per_unit": 131.0699,
+        "sale_price": 131.0699,
+        "repurchase_price": 131.0699,
+        "total_nav": 46122081202.47,
+        "units": 351889083.8021,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-12",
+        "nav_per_unit": 130.9869,
+        "sale_price": 130.9869,
+        "repurchase_price": 130.9869,
+        "total_nav": 45662109836.3,
+        "units": 348600501.2191,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-11",
+        "nav_per_unit": 130.9102,
+        "sale_price": 130.9102,
+        "repurchase_price": 130.9102,
+        "total_nav": 45633480267.63,
+        "units": 348586157.4206,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-10",
+        "nav_per_unit": 130.8327,
+        "sale_price": 130.8327,
+        "repurchase_price": 130.8327,
+        "total_nav": 45506104873.07,
+        "units": 347818945.4811,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-09",
+        "nav_per_unit": 130.7554,
+        "sale_price": 130.7554,
+        "repurchase_price": 130.7554,
+        "total_nav": 45466555415.75,
+        "units": 347722332.8208,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-06",
+        "nav_per_unit": 130.5245,
+        "sale_price": 130.5245,
+        "repurchase_price": 130.5245,
+        "total_nav": 45301671994.75,
+        "units": 347074117.1484,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-05",
+        "nav_per_unit": 130.4472,
+        "sale_price": 130.4472,
+        "repurchase_price": 130.4472,
+        "total_nav": 45145329904.16,
+        "units": 346081184.1259,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-04",
+        "nav_per_unit": 130.3685,
+        "sale_price": 130.3685,
+        "repurchase_price": 130.3685,
+        "total_nav": 45014427989.34,
+        "units": 345286056.7564,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-03",
+        "nav_per_unit": 130.2909,
+        "sale_price": 130.2909,
+        "repurchase_price": 130.2909,
+        "total_nav": 44916416926.86,
+        "units": 344739522.7394,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-06-02",
+        "nav_per_unit": 130.2124,
+        "sale_price": 130.2124,
+        "repurchase_price": 130.2124,
+        "total_nav": 44875905284.36,
+        "units": 344636121.1826,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-30",
+        "nav_per_unit": 129.9795,
+        "sale_price": 129.9795,
+        "repurchase_price": 129.9795,
+        "total_nav": 44710859040.81,
+        "units": 343983803.716,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-29",
+        "nav_per_unit": 129.9018,
+        "sale_price": 129.9018,
+        "repurchase_price": 129.9018,
+        "total_nav": 44672348165.62,
+        "units": 343893343.7513,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-28",
+        "nav_per_unit": 129.824,
+        "sale_price": 129.824,
+        "repurchase_price": 129.824,
+        "total_nav": 44581292269.76,
+        "units": 343398048.8439,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-27",
+        "nav_per_unit": 129.746,
+        "sale_price": 129.746,
+        "repurchase_price": 129.746,
+        "total_nav": 44549151421.65,
+        "units": 343356550.3259,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-26",
+        "nav_per_unit": 129.6673,
+        "sale_price": 129.6673,
+        "repurchase_price": 129.6673,
+        "total_nav": 44448224519.05,
+        "units": 342786795.5351,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-23",
+        "nav_per_unit": 129.4316,
+        "sale_price": 129.4316,
+        "repurchase_price": 129.4316,
+        "total_nav": 44255922045.39,
+        "units": 341925046.0687,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-22",
+        "nav_per_unit": 129.353,
+        "sale_price": 129.353,
+        "repurchase_price": 129.353,
+        "total_nav": 44119386510.23,
+        "units": 341077462.6472,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-21",
+        "nav_per_unit": 129.2743,
+        "sale_price": 129.2743,
+        "repurchase_price": 129.2743,
+        "total_nav": 44024276615.84,
+        "units": 340549293.1034,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-20",
+        "nav_per_unit": 129.1833,
+        "sale_price": 129.1833,
+        "repurchase_price": 129.1833,
+        "total_nav": 38710861419.68,
+        "units": 299658377.0557,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-19",
+        "nav_per_unit": 129.0932,
+        "sale_price": 129.0932,
+        "repurchase_price": 129.0932,
+        "total_nav": 38692765929.44,
+        "units": 299727303.4342,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-16",
+        "nav_per_unit": 128.8141,
+        "sale_price": 128.8141,
+        "repurchase_price": 128.8141,
+        "total_nav": 38569786117.73,
+        "units": 299422185.3848,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-15",
+        "nav_per_unit": 128.7209,
+        "sale_price": 128.7209,
+        "repurchase_price": 128.7209,
+        "total_nav": 38519260151.63,
+        "units": 299246283.4089,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-14",
+        "nav_per_unit": 128.6273,
+        "sale_price": 128.6273,
+        "repurchase_price": 128.6273,
+        "total_nav": 38250077789.47,
+        "units": 297371392.0121,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-13",
+        "nav_per_unit": 128.5869,
+        "sale_price": 128.5869,
+        "repurchase_price": 128.5869,
+        "total_nav": 38306836243.33,
+        "units": 297906206.4869,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-12",
+        "nav_per_unit": 128.547,
+        "sale_price": 128.547,
+        "repurchase_price": 128.547,
+        "total_nav": 38189124263.52,
+        "units": 297082995.1283,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-09",
+        "nav_per_unit": 128.4291,
+        "sale_price": 128.4291,
+        "repurchase_price": 128.4291,
+        "total_nav": 38152796759.27,
+        "units": 297072799.9685,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-08",
+        "nav_per_unit": 128.3866,
+        "sale_price": 128.3866,
+        "repurchase_price": 128.3866,
+        "total_nav": 36084848842.58,
+        "units": 281063926.2008,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-07",
+        "nav_per_unit": 128.3448,
+        "sale_price": 128.3448,
+        "repurchase_price": 128.3448,
+        "total_nav": 36312708687.73,
+        "units": 282930984.5291,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-06",
+        "nav_per_unit": 128.3028,
+        "sale_price": 128.3028,
+        "repurchase_price": 128.3028,
+        "total_nav": 36234216745.83,
+        "units": 282411744.8638,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-05",
+        "nav_per_unit": 128.263,
+        "sale_price": 128.263,
+        "repurchase_price": 128.263,
+        "total_nav": 38174800027.13,
+        "units": 297629001.4374,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-05-02",
+        "nav_per_unit": 128.1452,
+        "sale_price": 128.1452,
+        "repurchase_price": 128.1452,
+        "total_nav": 38104954843.65,
+        "units": 297357595.198,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-30",
+        "nav_per_unit": 128.0665,
+        "sale_price": 128.0665,
+        "repurchase_price": 128.0665,
+        "total_nav": 37909380425.85,
+        "units": 296013173.9727,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-29",
+        "nav_per_unit": 128.0269,
+        "sale_price": 128.0269,
+        "repurchase_price": 128.0269,
+        "total_nav": 37866195873.02,
+        "units": 295767407.4502,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-28",
+        "nav_per_unit": 127.9869,
+        "sale_price": 127.9869,
+        "repurchase_price": 127.9869,
+        "total_nav": 37844664309.72,
+        "units": 295691642.2804,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-25",
+        "nav_per_unit": 127.8677,
+        "sale_price": 127.8677,
+        "repurchase_price": 127.8677,
+        "total_nav": 37696704573.39,
+        "units": 294810303.7769,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-24",
+        "nav_per_unit": 127.8281,
+        "sale_price": 127.8281,
+        "repurchase_price": 127.8281,
+        "total_nav": 37636697449.62,
+        "units": 294432208.8945,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-23",
+        "nav_per_unit": 127.7884,
+        "sale_price": 127.7884,
+        "repurchase_price": 127.7884,
+        "total_nav": 37478365915.08,
+        "units": 293284641.557,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-22",
+        "nav_per_unit": 127.7482,
+        "sale_price": 127.7482,
+        "repurchase_price": 127.7482,
+        "total_nav": 37405826268.79,
+        "units": 292809045.5385,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-17",
+        "nav_per_unit": 127.5495,
+        "sale_price": 127.5495,
+        "repurchase_price": 127.5495,
+        "total_nav": 37270717958.55,
+        "units": 292206012.8401,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-16",
+        "nav_per_unit": 127.5094,
+        "sale_price": 127.5094,
+        "repurchase_price": 127.5094,
+        "total_nav": 37161207423.92,
+        "units": 291438891.94,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-15",
+        "nav_per_unit": 127.4691,
+        "sale_price": 127.4691,
+        "repurchase_price": 127.4691,
+        "total_nav": 37152777449.88,
+        "units": 291464943.6546,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-14",
+        "nav_per_unit": 127.4271,
+        "sale_price": 127.4271,
+        "repurchase_price": 127.4271,
+        "total_nav": 37053548160.79,
+        "units": 290782363.5626,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-11",
+        "nav_per_unit": 127.3069,
+        "sale_price": 127.3069,
+        "repurchase_price": 127.3069,
+        "total_nav": 36982880302.2,
+        "units": 290501798.8368,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-10",
+        "nav_per_unit": 127.2666,
+        "sale_price": 127.2666,
+        "repurchase_price": 127.2666,
+        "total_nav": 36911257276.19,
+        "units": 290030981.6812,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-09",
+        "nav_per_unit": 127.2262,
+        "sale_price": 127.2262,
+        "repurchase_price": 127.2262,
+        "total_nav": 36853162008.58,
+        "units": 289666465.9125,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-08",
+        "nav_per_unit": 127.1852,
+        "sale_price": 127.1852,
+        "repurchase_price": 127.1852,
+        "total_nav": 36808636792.2,
+        "units": 289409823.6966,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-04",
+        "nav_per_unit": 127.0237,
+        "sale_price": 127.0237,
+        "repurchase_price": 127.0237,
+        "total_nav": 36680971261.89,
+        "units": 288772659.3368,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-03",
+        "nav_per_unit": 126.9834,
+        "sale_price": 126.9834,
+        "repurchase_price": 126.9834,
+        "total_nav": 36854911660.27,
+        "units": 290234136.926,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-04-02",
+        "nav_per_unit": 126.942,
+        "sale_price": 126.942,
+        "repurchase_price": 126.942,
+        "total_nav": 36797259542.73,
+        "units": 289874506.327,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-28",
+        "nav_per_unit": 126.7312,
+        "sale_price": 126.7312,
+        "repurchase_price": 126.7312,
+        "total_nav": 36557231255.15,
+        "units": 288462815.1086,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-27",
+        "nav_per_unit": 126.6932,
+        "sale_price": 126.6932,
+        "repurchase_price": 126.6932,
+        "total_nav": 36543439104.27,
+        "units": 288440394.2635,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-26",
+        "nav_per_unit": 126.6552,
+        "sale_price": 126.6552,
+        "repurchase_price": 126.6552,
+        "total_nav": 36513269882.51,
+        "units": 288288824.8025,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-25",
+        "nav_per_unit": 126.6172,
+        "sale_price": 126.6172,
+        "repurchase_price": 126.6172,
+        "total_nav": 36496940628.35,
+        "units": 288246242.932,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-24",
+        "nav_per_unit": 126.579,
+        "sale_price": 126.579,
+        "repurchase_price": 126.579,
+        "total_nav": 36531836869.31,
+        "units": 288609056.0851,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-21",
+        "nav_per_unit": 126.4584,
+        "sale_price": 126.4584,
+        "repurchase_price": 126.4584,
+        "total_nav": 36354397391.88,
+        "units": 287480968.0935,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-20",
+        "nav_per_unit": 126.4174,
+        "sale_price": 126.4174,
+        "repurchase_price": 126.4174,
+        "total_nav": 36320167391.3,
+        "units": 287303493.2049,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-19",
+        "nav_per_unit": 126.376,
+        "sale_price": 126.376,
+        "repurchase_price": 126.376,
+        "total_nav": 36299520003.75,
+        "units": 287234295.1876,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-18",
+        "nav_per_unit": 126.3353,
+        "sale_price": 126.3353,
+        "repurchase_price": 126.3353,
+        "total_nav": 36278695611.7,
+        "units": 287161981.9904,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-17",
+        "nav_per_unit": 126.2939,
+        "sale_price": 126.2939,
+        "repurchase_price": 126.2939,
+        "total_nav": 35945563986.05,
+        "units": 284618443.3201,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-14",
+        "nav_per_unit": 126.1708,
+        "sale_price": 126.1708,
+        "repurchase_price": 126.1708,
+        "total_nav": 35686173927.22,
+        "units": 282840288.6871,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-13",
+        "nav_per_unit": 126.1297,
+        "sale_price": 126.1297,
+        "repurchase_price": 126.1297,
+        "total_nav": 35645118274.38,
+        "units": 282606906.2761,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-12",
+        "nav_per_unit": 126.0886,
+        "sale_price": 126.0886,
+        "repurchase_price": 126.0886,
+        "total_nav": 35595943675.78,
+        "units": 282309086.8963,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-11",
+        "nav_per_unit": 126.0472,
+        "sale_price": 126.0472,
+        "repurchase_price": 126.0472,
+        "total_nav": 35516885982.56,
+        "units": 281774409.6197,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-10",
+        "nav_per_unit": 126.0055,
+        "sale_price": 126.0055,
+        "repurchase_price": 126.0055,
+        "total_nav": 35469887948.38,
+        "units": 281494867.9385,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-07",
+        "nav_per_unit": 125.8819,
+        "sale_price": 125.8819,
+        "repurchase_price": 125.8819,
+        "total_nav": 35400825714.65,
+        "units": 281222563.9601,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-06",
+        "nav_per_unit": 125.8405,
+        "sale_price": 125.8405,
+        "repurchase_price": 125.8405,
+        "total_nav": 35378589901.57,
+        "units": 281138302.3667,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-05",
+        "nav_per_unit": 125.7991,
+        "sale_price": 125.7991,
+        "repurchase_price": 125.7991,
+        "total_nav": 35334312472.34,
+        "units": 280878789.9313,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-04",
+        "nav_per_unit": 125.7577,
+        "sale_price": 125.7577,
+        "repurchase_price": 125.7577,
+        "total_nav": 35307014234.96,
+        "units": 280754276.666,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-03-03",
+        "nav_per_unit": 125.716,
+        "sale_price": 125.716,
+        "repurchase_price": 125.716,
+        "total_nav": 35256156177.17,
+        "units": 280442943.8378,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-28",
+        "nav_per_unit": 125.5917,
+        "sale_price": 125.5917,
+        "repurchase_price": 125.5917,
+        "total_nav": 35129794539.93,
+        "units": 279714240.6168,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-27",
+        "nav_per_unit": 125.5497,
+        "sale_price": 125.5497,
+        "repurchase_price": 125.5497,
+        "total_nav": 35185754109.75,
+        "units": 280253559.4637,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-26",
+        "nav_per_unit": 125.5076,
+        "sale_price": 125.5076,
+        "repurchase_price": 125.5076,
+        "total_nav": 35125458982.25,
+        "units": 279867108.2134,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-25",
+        "nav_per_unit": 125.4632,
+        "sale_price": 125.4632,
+        "repurchase_price": 125.4632,
+        "total_nav": 35103510638.96,
+        "units": 279791398.6306,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-24",
+        "nav_per_unit": 125.4209,
+        "sale_price": 125.4209,
+        "repurchase_price": 125.4209,
+        "total_nav": 35058961970.94,
+        "units": 279530517.6956,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-21",
+        "nav_per_unit": 125.3105,
+        "sale_price": 125.3105,
+        "repurchase_price": 125.3105,
+        "total_nav": 35057454743.02,
+        "units": 279764681.3615,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-20",
+        "nav_per_unit": 125.2735,
+        "sale_price": 125.2735,
+        "repurchase_price": 125.2735,
+        "total_nav": 34976688100.74,
+        "units": 279202690.9457,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-19",
+        "nav_per_unit": 125.2364,
+        "sale_price": 125.2364,
+        "repurchase_price": 125.2364,
+        "total_nav": 34920581302.11,
+        "units": 278837406.4995,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-18",
+        "nav_per_unit": 125.1993,
+        "sale_price": 125.1993,
+        "repurchase_price": 125.1993,
+        "total_nav": 34930788087.11,
+        "units": 279001518.3191,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-17",
+        "nav_per_unit": 125.1618,
+        "sale_price": 125.1618,
+        "repurchase_price": 125.1618,
+        "total_nav": 34824708399.63,
+        "units": 278237457.3745,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-14",
+        "nav_per_unit": 125.0391,
+        "sale_price": 125.0391,
+        "repurchase_price": 125.0391,
+        "total_nav": 34760094776.19,
+        "units": 277993891.0091,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-13",
+        "nav_per_unit": 124.9981,
+        "sale_price": 124.9981,
+        "repurchase_price": 124.9981,
+        "total_nav": 34802698819.12,
+        "units": 278425725.8672,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-12",
+        "nav_per_unit": 124.9572,
+        "sale_price": 124.9572,
+        "repurchase_price": 124.9572,
+        "total_nav": 34763249386.52,
+        "units": 278201268.897,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-11",
+        "nav_per_unit": 124.9163,
+        "sale_price": 124.9163,
+        "repurchase_price": 124.9163,
+        "total_nav": 34791794089.24,
+        "units": 278520865.7078,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-10",
+        "nav_per_unit": 124.8751,
+        "sale_price": 124.8751,
+        "repurchase_price": 124.8751,
+        "total_nav": 34749577704.84,
+        "units": 278274663.3751,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-07",
+        "nav_per_unit": 124.7524,
+        "sale_price": 124.7524,
+        "repurchase_price": 124.7524,
+        "total_nav": 34670741323.22,
+        "units": 277916466.7168,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-06",
+        "nav_per_unit": 124.7113,
+        "sale_price": 124.7113,
+        "repurchase_price": 124.7113,
+        "total_nav": 34626929780.48,
+        "units": 277656612.034,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-05",
+        "nav_per_unit": 124.6704,
+        "sale_price": 124.6704,
+        "repurchase_price": 124.6704,
+        "total_nav": 34624641102.65,
+        "units": 277729436.4075,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-04",
+        "nav_per_unit": 124.6291,
+        "sale_price": 124.6291,
+        "repurchase_price": 124.6291,
+        "total_nav": 34604529438.75,
+        "units": 277660215.1168,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-02-03",
+        "nav_per_unit": 124.5878,
+        "sale_price": 124.5878,
+        "repurchase_price": 124.5878,
+        "total_nav": 34577350811.4,
+        "units": 277533917.7753,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-31",
+        "nav_per_unit": 124.4549,
+        "sale_price": 124.4549,
+        "repurchase_price": 124.4549,
+        "total_nav": 34500508683.87,
+        "units": 277212937.8043,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-30",
+        "nav_per_unit": 124.4139,
+        "sale_price": 124.4139,
+        "repurchase_price": 124.4139,
+        "total_nav": 34496477564.2,
+        "units": 277271939.1614,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-29",
+        "nav_per_unit": 124.3729,
+        "sale_price": 124.3729,
+        "repurchase_price": 124.3729,
+        "total_nav": 34467512762.87,
+        "units": 277130503.7328,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-28",
+        "nav_per_unit": 124.3318,
+        "sale_price": 124.3318,
+        "repurchase_price": 124.3318,
+        "total_nav": 34434296923.91,
+        "units": 276954830.7078,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-27",
+        "nav_per_unit": 124.2905,
+        "sale_price": 124.2905,
+        "repurchase_price": 124.2905,
+        "total_nav": 34406148952.26,
+        "units": 276820372.5521,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-24",
+        "nav_per_unit": 124.1655,
+        "sale_price": 124.1655,
+        "repurchase_price": 124.1655,
+        "total_nav": 34303732180.11,
+        "units": 276274320.21,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-23",
+        "nav_per_unit": 124.1237,
+        "sale_price": 124.1237,
+        "repurchase_price": 124.1237,
+        "total_nav": 34253929732.96,
+        "units": 275966161.9857,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-22",
+        "nav_per_unit": 124.0818,
+        "sale_price": 124.0818,
+        "repurchase_price": 124.0818,
+        "total_nav": 34236034841.08,
+        "units": 275914950.5732,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-21",
+        "nav_per_unit": 124.0399,
+        "sale_price": 124.0399,
+        "repurchase_price": 124.0399,
+        "total_nav": 34191404326.58,
+        "units": 275648510.1265,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-20",
+        "nav_per_unit": 123.9976,
+        "sale_price": 123.9976,
+        "repurchase_price": 123.9976,
+        "total_nav": 34166258780.03,
+        "units": 275539641.5584,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-17",
+        "nav_per_unit": 123.8714,
+        "sale_price": 123.8714,
+        "repurchase_price": 123.8714,
+        "total_nav": 33995603763.61,
+        "units": 274442628.1074,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-16",
+        "nav_per_unit": 123.831,
+        "sale_price": 123.831,
+        "repurchase_price": 123.831,
+        "total_nav": 33934664048.17,
+        "units": 274040077.8986,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-15",
+        "nav_per_unit": 123.79,
+        "sale_price": 123.79,
+        "repurchase_price": 123.79,
+        "total_nav": 33893729707.62,
+        "units": 273800155.5447,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-14",
+        "nav_per_unit": 123.749,
+        "sale_price": 123.749,
+        "repurchase_price": 123.749,
+        "total_nav": 33857404495.92,
+        "units": 273597405.4518,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-13",
+        "nav_per_unit": 123.7077,
+        "sale_price": 123.7077,
+        "repurchase_price": 123.7077,
+        "total_nav": 33827988272.79,
+        "units": 273450889.6717,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-10",
+        "nav_per_unit": 123.5846,
+        "sale_price": 123.5846,
+        "repurchase_price": 123.5846,
+        "total_nav": 33752423451.43,
+        "units": 273111799.2368,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-09",
+        "nav_per_unit": 123.5435,
+        "sale_price": 123.5435,
+        "repurchase_price": 123.5435,
+        "total_nav": 33750762944.93,
+        "units": 273189345.6172,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-08",
+        "nav_per_unit": 123.5023,
+        "sale_price": 123.5023,
+        "repurchase_price": 123.5023,
+        "total_nav": 33711145296.74,
+        "units": 272959696.723,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-07",
+        "nav_per_unit": 123.4611,
+        "sale_price": 123.4611,
+        "repurchase_price": 123.4611,
+        "total_nav": 33695231999.37,
+        "units": 272921913.8867,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-06",
+        "nav_per_unit": 123.4196,
+        "sale_price": 123.4196,
+        "repurchase_price": 123.4196,
+        "total_nav": 33646140114.94,
+        "units": 272615961.5605,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-03",
+        "nav_per_unit": 123.2952,
+        "sale_price": 123.2952,
+        "repurchase_price": 123.2952,
+        "total_nav": 33549820019.6,
+        "units": 272109603.544,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2025-01-02",
+        "nav_per_unit": 123.2533,
+        "sale_price": 123.2533,
+        "repurchase_price": 123.2533,
+        "total_nav": 33537683245.26,
+        "units": 272103776.9665,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-31",
+        "nav_per_unit": 123.1697,
+        "sale_price": 123.1697,
+        "repurchase_price": 123.1697,
+        "total_nav": 33491896212.64,
+        "units": 271916713.5228,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-30",
+        "nav_per_unit": 123.1259,
+        "sale_price": 123.1259,
+        "repurchase_price": 123.1259,
+        "total_nav": 33466710174.7,
+        "units": 271808961.5003,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-27",
+        "nav_per_unit": 122.9948,
+        "sale_price": 122.9948,
+        "repurchase_price": 122.9948,
+        "total_nav": 33370491021.14,
+        "units": 271316361.7863,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-24",
+        "nav_per_unit": 122.8645,
+        "sale_price": 122.8645,
+        "repurchase_price": 122.8645,
+        "total_nav": 33336354602.21,
+        "units": 271326099.0815,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-23",
+        "nav_per_unit": 122.8208,
+        "sale_price": 122.8208,
+        "repurchase_price": 122.8208,
+        "total_nav": 33300756857.36,
+        "units": 271132951.1283,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-20",
+        "nav_per_unit": 122.6979,
+        "sale_price": 122.6979,
+        "repurchase_price": 122.6979,
+        "total_nav": 33211569666.9,
+        "units": 270677523.8449,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-19",
+        "nav_per_unit": 122.6569,
+        "sale_price": 122.6569,
+        "repurchase_price": 122.6569,
+        "total_nav": 33177051705.29,
+        "units": 270486634.6095,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-18",
+        "nav_per_unit": 122.6158,
+        "sale_price": 122.6158,
+        "repurchase_price": 122.6158,
+        "total_nav": 33172150112.94,
+        "units": 270537415.8629,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-17",
+        "nav_per_unit": 122.5749,
+        "sale_price": 122.5749,
+        "repurchase_price": 122.5749,
+        "total_nav": 33162617558.46,
+        "units": 270549897.8069,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-16",
+        "nav_per_unit": 122.5331,
+        "sale_price": 122.5331,
+        "repurchase_price": 122.5331,
+        "total_nav": 33101675219.67,
+        "units": 270144709.7684,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-13",
+        "nav_per_unit": 122.4091,
+        "sale_price": 122.4091,
+        "repurchase_price": 122.4091,
+        "total_nav": 33057277229.44,
+        "units": 270055683.1543,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-12",
+        "nav_per_unit": 122.3665,
+        "sale_price": 122.3665,
+        "repurchase_price": 122.3665,
+        "total_nav": 33056207675.4,
+        "units": 270140986.7224,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-11",
+        "nav_per_unit": 122.3239,
+        "sale_price": 122.3239,
+        "repurchase_price": 122.3239,
+        "total_nav": 33039248053.38,
+        "units": 270096483.8016,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-10",
+        "nav_per_unit": 122.2808,
+        "sale_price": 122.2808,
+        "repurchase_price": 122.2808,
+        "total_nav": 33007954659.0,
+        "units": 269935612.9341,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-06",
+        "nav_per_unit": 122.1102,
+        "sale_price": 122.1102,
+        "repurchase_price": 122.1102,
+        "total_nav": 32960098803.04,
+        "units": 269920855.3344,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-05",
+        "nav_per_unit": 122.0659,
+        "sale_price": 122.0659,
+        "repurchase_price": 122.0659,
+        "total_nav": 32838244326.87,
+        "units": 269020577.8425,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-04",
+        "nav_per_unit": 122.0198,
+        "sale_price": 122.0198,
+        "repurchase_price": 122.0198,
+        "total_nav": 32786272388.7,
+        "units": 268696332.1104,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-03",
+        "nav_per_unit": 121.9763,
+        "sale_price": 121.9763,
+        "repurchase_price": 121.9763,
+        "total_nav": 32764907524.12,
+        "units": 268616958.1117,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-12-02",
+        "nav_per_unit": 121.9327,
+        "sale_price": 121.9327,
+        "repurchase_price": 121.9327,
+        "total_nav": 32821263887.47,
+        "units": 269175274.6239,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-29",
+        "nav_per_unit": 121.8012,
+        "sale_price": 121.8012,
+        "repurchase_price": 121.8012,
+        "total_nav": 32778087752.67,
+        "units": 269111342.627,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-28",
+        "nav_per_unit": 121.7566,
+        "sale_price": 121.7566,
+        "repurchase_price": 121.7566,
+        "total_nav": 32717136449.8,
+        "units": 268709263.6053,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-26",
+        "nav_per_unit": 121.6673,
+        "sale_price": 121.6673,
+        "repurchase_price": 121.6673,
+        "total_nav": 32647850050.4,
+        "units": 268337012.7455,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-25",
+        "nav_per_unit": 121.6246,
+        "sale_price": 121.6246,
+        "repurchase_price": 121.6246,
+        "total_nav": 32599262750.71,
+        "units": 268031890.6215,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-22",
+        "nav_per_unit": 121.4977,
+        "sale_price": 121.4977,
+        "repurchase_price": 121.4977,
+        "total_nav": 32560650141.17,
+        "units": 267993891.1488,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-21",
+        "nav_per_unit": 121.4552,
+        "sale_price": 121.4552,
+        "repurchase_price": 121.4552,
+        "total_nav": 32507724650.67,
+        "units": 267652086.1025,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-20",
+        "nav_per_unit": 121.4127,
+        "sale_price": 121.4127,
+        "repurchase_price": 121.4127,
+        "total_nav": 32446340427.55,
+        "units": 267239983.7104,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-19",
+        "nav_per_unit": 121.3703,
+        "sale_price": 121.3703,
+        "repurchase_price": 121.3703,
+        "total_nav": 32424459524.56,
+        "units": 267153083.2039,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-18",
+        "nav_per_unit": 121.3277,
+        "sale_price": 121.3277,
+        "repurchase_price": 121.3277,
+        "total_nav": 32447554431.05,
+        "units": 267437299.1819,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-15",
+        "nav_per_unit": 121.2006,
+        "sale_price": 121.2006,
+        "repurchase_price": 121.2006,
+        "total_nav": 32345165627.6,
+        "units": 266873087.5669,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-14",
+        "nav_per_unit": 121.1581,
+        "sale_price": 121.1581,
+        "repurchase_price": 121.1581,
+        "total_nav": 32364392259.62,
+        "units": 267125206.5529,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-13",
+        "nav_per_unit": 121.1154,
+        "sale_price": 121.1154,
+        "repurchase_price": 121.1154,
+        "total_nav": 32334445051.96,
+        "units": 266972139.4465,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-12",
+        "nav_per_unit": 121.0723,
+        "sale_price": 121.0723,
+        "repurchase_price": 121.0723,
+        "total_nav": 32316838328.79,
+        "units": 266921719.3926,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-11",
+        "nav_per_unit": 121.0295,
+        "sale_price": 121.0295,
+        "repurchase_price": 121.0295,
+        "total_nav": 32245914313.42,
+        "units": 266430095.6356,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-08",
+        "nav_per_unit": 120.9006,
+        "sale_price": 120.9006,
+        "repurchase_price": 120.9006,
+        "total_nav": 32163771973.01,
+        "units": 266034933.1997,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-07",
+        "nav_per_unit": 120.8575,
+        "sale_price": 120.8575,
+        "repurchase_price": 120.8575,
+        "total_nav": 32128440392.01,
+        "units": 265837343.2514,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-06",
+        "nav_per_unit": 120.8144,
+        "sale_price": 120.8144,
+        "repurchase_price": 120.8144,
+        "total_nav": 32100982345.68,
+        "units": 265704905.491,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-05",
+        "nav_per_unit": 120.7713,
+        "sale_price": 120.7713,
+        "repurchase_price": 120.7713,
+        "total_nav": 32057706196.9,
+        "units": 265441428.828,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-04",
+        "nav_per_unit": 120.7342,
+        "sale_price": 120.7342,
+        "repurchase_price": 120.7342,
+        "total_nav": 32056093498.6,
+        "units": 265509641.5573,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-11-01",
+        "nav_per_unit": 120.6237,
+        "sale_price": 120.6237,
+        "repurchase_price": 120.6237,
+        "total_nav": 31985133386.42,
+        "units": 265164553.5582,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-31",
+        "nav_per_unit": 120.5868,
+        "sale_price": 120.5868,
+        "repurchase_price": 120.5868,
+        "total_nav": 31943857139.57,
+        "units": 264903518.6206,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-30",
+        "nav_per_unit": 120.5496,
+        "sale_price": 120.5496,
+        "repurchase_price": 120.5496,
+        "total_nav": 31902794095.78,
+        "units": 264644564.2717,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-29",
+        "nav_per_unit": 120.5124,
+        "sale_price": 120.5124,
+        "repurchase_price": 120.5124,
+        "total_nav": 31884923760.87,
+        "units": 264577925.9644,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-28",
+        "nav_per_unit": 120.475,
+        "sale_price": 120.475,
+        "repurchase_price": 120.475,
+        "total_nav": 31864190412.84,
+        "units": 264488072.6793,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-25",
+        "nav_per_unit": 120.3637,
+        "sale_price": 120.3637,
+        "repurchase_price": 120.3637,
+        "total_nav": 31823100014.91,
+        "units": 264391256.6527,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-24",
+        "nav_per_unit": 120.3264,
+        "sale_price": 120.3264,
+        "repurchase_price": 120.3264,
+        "total_nav": 31760306220.07,
+        "units": 263951207.567,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-23",
+        "nav_per_unit": 120.2892,
+        "sale_price": 120.2892,
+        "repurchase_price": 120.2892,
+        "total_nav": 31724299416.03,
+        "units": 263733635.3786,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-22",
+        "nav_per_unit": 120.252,
+        "sale_price": 120.252,
+        "repurchase_price": 120.252,
+        "total_nav": 31658631887.15,
+        "units": 263269055.8449,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-21",
+        "nav_per_unit": 120.2116,
+        "sale_price": 120.2116,
+        "repurchase_price": 120.2116,
+        "total_nav": 29600998417.2,
+        "units": 246240846.7986,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-18",
+        "nav_per_unit": 120.0911,
+        "sale_price": 120.0911,
+        "repurchase_price": 120.0911,
+        "total_nav": 29533580851.76,
+        "units": 245926414.9682,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-17",
+        "nav_per_unit": 120.0508,
+        "sale_price": 120.0508,
+        "repurchase_price": 120.0508,
+        "total_nav": 29478231521.26,
+        "units": 245548077.595,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-16",
+        "nav_per_unit": 120.0103,
+        "sale_price": 120.0103,
+        "repurchase_price": 120.0103,
+        "total_nav": 29447393871.04,
+        "units": 245373790.11,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-15",
+        "nav_per_unit": 119.9695,
+        "sale_price": 119.9695,
+        "repurchase_price": 119.9695,
+        "total_nav": 29409487454.86,
+        "units": 245141416.3421,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-11",
+        "nav_per_unit": 119.808,
+        "sale_price": 119.808,
+        "repurchase_price": 119.808,
+        "total_nav": 29372260342.68,
+        "units": 245161071.2218,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-10",
+        "nav_per_unit": 119.7675,
+        "sale_price": 119.7675,
+        "repurchase_price": 119.7675,
+        "total_nav": 29354038627.97,
+        "units": 245091797.588,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-09",
+        "nav_per_unit": 119.7271,
+        "sale_price": 119.7271,
+        "repurchase_price": 119.7271,
+        "total_nav": 29368900642.22,
+        "units": 245298718.9443,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-08",
+        "nav_per_unit": 119.6866,
+        "sale_price": 119.6866,
+        "repurchase_price": 119.6866,
+        "total_nav": 29344867402.27,
+        "units": 245180847.1058,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-07",
+        "nav_per_unit": 119.6458,
+        "sale_price": 119.6458,
+        "repurchase_price": 119.6458,
+        "total_nav": 29229862007.12,
+        "units": 244303371.2731,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-04",
+        "nav_per_unit": 119.5242,
+        "sale_price": 119.5242,
+        "repurchase_price": 119.5242,
+        "total_nav": 29179760350.05,
+        "units": 244132680.9991,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-03",
+        "nav_per_unit": 119.4836,
+        "sale_price": 119.4836,
+        "repurchase_price": 119.4836,
+        "total_nav": 29138694509.58,
+        "units": 243871980.1536,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-02",
+        "nav_per_unit": 119.4427,
+        "sale_price": 119.4427,
+        "repurchase_price": 119.4427,
+        "total_nav": 29040133565.94,
+        "units": 243130302.2155,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-10-01",
+        "nav_per_unit": 119.402,
+        "sale_price": 119.402,
+        "repurchase_price": 119.402,
+        "total_nav": 29020148594.28,
+        "units": 243045700.5315,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-30",
+        "nav_per_unit": 119.3609,
+        "sale_price": 119.3609,
+        "repurchase_price": 119.3609,
+        "total_nav": 28982761436.28,
+        "units": 242816164.8621,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-27",
+        "nav_per_unit": 119.2236,
+        "sale_price": 119.2236,
+        "repurchase_price": 119.2236,
+        "total_nav": 28928235784.33,
+        "units": 242638596.1157,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-26",
+        "nav_per_unit": 119.1743,
+        "sale_price": 119.1743,
+        "repurchase_price": 119.1743,
+        "total_nav": 28907017605.07,
+        "units": 242560935.317,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-25",
+        "nav_per_unit": 119.1258,
+        "sale_price": 119.1258,
+        "repurchase_price": 119.1258,
+        "total_nav": 28878738485.02,
+        "units": 242422102.2455,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-24",
+        "nav_per_unit": 119.0773,
+        "sale_price": 119.0773,
+        "repurchase_price": 119.0773,
+        "total_nav": 28808913260.48,
+        "units": 241934483.7071,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-23",
+        "nav_per_unit": 119.0285,
+        "sale_price": 119.0285,
+        "repurchase_price": 119.0285,
+        "total_nav": 28769820492.46,
+        "units": 241705338.095,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-20",
+        "nav_per_unit": 118.8735,
+        "sale_price": 118.8735,
+        "repurchase_price": 118.8735,
+        "total_nav": 28728300892.0,
+        "units": 241671278.6487,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-19",
+        "nav_per_unit": 118.8176,
+        "sale_price": 118.8176,
+        "repurchase_price": 118.8176,
+        "total_nav": 28695005274.94,
+        "units": 241504649.9215,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-18",
+        "nav_per_unit": 118.7698,
+        "sale_price": 118.7698,
+        "repurchase_price": 118.7698,
+        "total_nav": 28687405090.45,
+        "units": 241537862.2671,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-17",
+        "nav_per_unit": 118.72,
+        "sale_price": 118.72,
+        "repurchase_price": 118.72,
+        "total_nav": 28676576813.74,
+        "units": 241548027.259,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-13",
+        "nav_per_unit": 118.5622,
+        "sale_price": 118.5622,
+        "repurchase_price": 118.5622,
+        "total_nav": 28642905356.04,
+        "units": 241585379.347,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-12",
+        "nav_per_unit": 118.521,
+        "sale_price": 118.521,
+        "repurchase_price": 118.521,
+        "total_nav": 28506462270.41,
+        "units": 240518241.0888,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-11",
+        "nav_per_unit": 118.4802,
+        "sale_price": 118.4802,
+        "repurchase_price": 118.4802,
+        "total_nav": 28494915160.56,
+        "units": 240503545.8149,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-10",
+        "nav_per_unit": 118.4433,
+        "sale_price": 118.4433,
+        "repurchase_price": 118.4433,
+        "total_nav": 28465502764.66,
+        "units": 240330143.9028,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-09",
+        "nav_per_unit": 118.4049,
+        "sale_price": 118.4049,
+        "repurchase_price": 118.4049,
+        "total_nav": 28447870359.15,
+        "units": 240259314.9745,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-06",
+        "nav_per_unit": 118.2943,
+        "sale_price": 118.2943,
+        "repurchase_price": 118.2943,
+        "total_nav": 28169575404.12,
+        "units": 238131387.9208,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-05",
+        "nav_per_unit": 118.2568,
+        "sale_price": 118.2568,
+        "repurchase_price": 118.2568,
+        "total_nav": 28153304430.38,
+        "units": 238069132.1863,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-04",
+        "nav_per_unit": 118.2191,
+        "sale_price": 118.2191,
+        "repurchase_price": 118.2191,
+        "total_nav": 28141276770.01,
+        "units": 238043311.3393,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-03",
+        "nav_per_unit": 118.1814,
+        "sale_price": 118.1814,
+        "repurchase_price": 118.1814,
+        "total_nav": 28130927750.08,
+        "units": 238031721.317,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-09-02",
+        "nav_per_unit": 118.1416,
+        "sale_price": 118.1416,
+        "repurchase_price": 118.1416,
+        "total_nav": 28128014362.92,
+        "units": 238087230.5734,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-30",
+        "nav_per_unit": 118.0271,
+        "sale_price": 118.0271,
+        "repurchase_price": 118.0271,
+        "total_nav": 27954464213.08,
+        "units": 236847891.0081,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-29",
+        "nav_per_unit": 117.9871,
+        "sale_price": 117.9871,
+        "repurchase_price": 117.9871,
+        "total_nav": 27895078353.06,
+        "units": 236424737.7899,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-28",
+        "nav_per_unit": 117.9472,
+        "sale_price": 117.9472,
+        "repurchase_price": 117.9472,
+        "total_nav": 27872116797.07,
+        "units": 236310165.5358,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-27",
+        "nav_per_unit": 117.9083,
+        "sale_price": 117.9083,
+        "repurchase_price": 117.9083,
+        "total_nav": 27816229613.48,
+        "units": 235914024.2115,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-26",
+        "nav_per_unit": 117.8672,
+        "sale_price": 117.8672,
+        "repurchase_price": 117.8672,
+        "total_nav": 27807766576.18,
+        "units": 235924629.726,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-23",
+        "nav_per_unit": 117.7391,
+        "sale_price": 117.7391,
+        "repurchase_price": 117.7391,
+        "total_nav": 27411802407.55,
+        "units": 232818121.4404,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-22",
+        "nav_per_unit": 117.6968,
+        "sale_price": 117.6968,
+        "repurchase_price": 117.6968,
+        "total_nav": 27401690124.43,
+        "units": 232815953.5285,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-21",
+        "nav_per_unit": 117.6544,
+        "sale_price": 117.6544,
+        "repurchase_price": 117.6544,
+        "total_nav": 27372676839.57,
+        "units": 232653200.5904,
+        "status": "extracted"
+    },
+    {
+        "source": "whi",
+        "date": "2024-08-20",
+        "nav_per_unit": 117.6209,
+        "sale_price": 117.6209,
+        "repurchase_price": 117.6209,
+        "total_nav": 27267379055.69,
+        "units": 231824345.7594,
+        "status": "extracted"
+    }
+]

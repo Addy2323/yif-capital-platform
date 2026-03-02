@@ -1,0 +1,229 @@
+﻿node.exe : 
+prisma:cli:bin 
+Failed to initialize 
+the command state: 
+Error: ENOENT: no 
+such file or 
+directory, open 'C:\U
+sers\ADDO\AppData\Roa
+ming\prisma-nodejs\Co
+nfig\commands.json' 
++2113ms
+At C:\Users\ADDO\AppD
+ata\Roaming\npm\npx.p
+s1:24 char:5
++     & "node$exe"  "
+$basedir/node_modules
+/npm/bin/npx-cli.js" 
+$args
++     ~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (prisma:   
+ cli:bin ...s.jso    
+n' +2113ms:Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+prisma:config:defineC
+onfig [default]: 
+'{\n  
+"loadedFromFile": 
+null\n}' +1293ms
+prisma:config:defineC
+onfig 
+[config.schema]: 'pri
+sma/schema.prisma' 
++1ms
+prisma:config:defineC
+onfig 
+[config.datasource]: 
+'{\n' +
+  '  "url": "postgres
+ql://postgres:myamba2
+323@localhost:5432/yi
+fdb?schema=public"\n'
+ +
+  '}' +0ms
+prisma:config:defineC
+onfig 
+[config.migrations]: 
+'{\n  "path": "prisma
+/migrations"\n}' +1ms
+prisma:config:loadCon
+figFromFile Config 
+file loaded in 
+164.15ms +2ms
+prisma:config:PrismaC
+onfig Parsing PrismaC
+onfigInternal: '{\n' 
++
+  '  
+"loadedFromFile": 
+null,\n' +
+  '  "schema": "prism
+a/schema.prisma",\n' 
++
+  '  "datasource": 
+{\n' +
+  '    "url": "postgr
+esql://postgres:myamb
+a2323@localhost:5432/
+yifdb?schema=public"\
+n' +
+  '  },\n' +
+  '  "migrations": 
+{\n' +
+  '    "path": "prism
+a/migrations"\n' +
+  '  }\n' +
+  '}' +3ms
+prisma:config:PrismaC
+onfig Short-circuit: 
+input is already a 
+PrismaConfigInternal 
+object +0ms
+Loaded Prisma config 
+from 
+prisma.config.ts.
+
+prisma:engines 
+binaries to download 
+schema-engine +2277ms
+prisma:getSchema 
+Reading schema from 
+single file C:\Users\
+ADDO\Desktop\yif-capi
+tal-platform\prisma\s
+chema.prisma +180ms
+prisma:getSchema 
+Reading schema from 
+single file C:\Users\
+ADDO\Desktop\yif-capi
+tal-platform\prisma\s
+chema.prisma +1ms
+prisma:getConfig 
+Using getConfig Wasm 
++21ms
+prisma:cli:checkpoint
+ Error from tryToRead
+DataFromSchema() 
+while processing the 
+schema. This is not 
+a fatal error. It 
+will continue 
+without the 
+processed data. +34ms
+prisma:cli:checkpoint
+ {
+  "name": 
+"GetConfigError"
+} +0ms
+prisma:cli:checkpoint
+ runCheckpointClientC
+heck(): Execution 
+time for getting 
+info: 
+62.597699999999804 
+ms +0ms
+prisma:getSchema 
+Reading schema from 
+single file C:\Users\
+ADDO\Desktop\yif-capi
+tal-platform\prisma\s
+chema.prisma +29ms
+Prisma schema loaded 
+from 
+prisma\schema.prisma.
+prisma:getConfig 
+Using getConfig Wasm 
++2ms
+Error: 
+GetConfigError: 
+Prisma schema 
+validation - 
+(get-config wasm)
+Error code: P1012
+error: The 
+datasource property 
+`url` is no longer 
+supported in schema 
+files. Move 
+connection URLs for 
+Migrate to 
+`prisma.config.ts` 
+and pass either 
+`adapter` for a 
+direct database 
+connection or 
+`accelerateUrl` for 
+Accelerate to the 
+`PrismaClient` 
+constructor. See http
+s://pris.ly/d/config-
+datasource and https:
+//pris.ly/d/prisma7-c
+lient-config
+  -->  prisma\schema.
+prisma:10
+   | 
+ 9 |   provider = 
+"postgresql"
+10 |   url      = 
+env("DATABASE_URL")
+   | 
+
+Validation Error 
+Count: 1
+[Context: getConfig]
+
+Prisma CLI Version : 
+7.3.0
+    at C:\Users\ADDO\
+Desktop\yif-capital-p
+latform\node_modules\
+prisma\build\index.js
+:203:1073
+    at e.with (C:\Use
+rs\ADDO\Desktop\yif-c
+apital-platform\node_
+modules\prisma\build\
+index.js:163:41041)
+    at wy (C:\Users\A
+DDO\Desktop\yif-capit
+al-platform\node_modu
+les\prisma\build\inde
+x.js:203:1043)
+    at eD (C:\Users\A
+DDO\Desktop\yif-capit
+al-platform\node_modu
+les\prisma\build\inde
+x.js:222:1318)
+    at Yn (C:\Users\A
+DDO\Desktop\yif-capit
+al-platform\node_modu
+les\prisma\build\inde
+x.js:222:1109)
+    at async e.parse 
+(C:\Users\ADDO\Deskto
+p\yif-capital-platfor
+m\node_modules\prisma
+\build\index.js:576:2
+85)
+    at async e.parse 
+(C:\Users\ADDO\Deskto
+p\yif-capital-platfor
+m\node_modules\prisma
+\build\index.js:1060:
+2319)
+    at async Oir (C:\
+Users\ADDO\Desktop\yi
+f-capital-platform\no
+de_modules\prisma\bui
+ld\index.js:4920:136)

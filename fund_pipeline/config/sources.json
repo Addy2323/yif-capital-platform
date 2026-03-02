@@ -1,0 +1,70 @@
+{
+    "sources": [
+        {
+            "name": "utt-amis",
+            "url": "https://uttamis.co.tz/fund-performance",
+            "provider": "UTT AMIS",
+            "type": "selenium",
+            "wait_seconds": 25,
+            "retry_count": 5,
+            "max_pages": 300
+        },
+        {
+            "name": "vertex",
+            "url": "https://vertex.co.tz/vertex-bond-fund/",
+            "provider": "Vertex International",
+            "type": "selenium",
+            "wait_seconds": 15,
+            "retry_count": 3,
+            "max_pages": 1
+        },
+        {
+            "name": "sanlam-pesa",
+            "url": "https://invest-tz.sanlamallianzinvestments.com/en",
+            "provider": "Sanlam Allianz Investments",
+            "type": "selenium",
+            "wait_seconds": 10,
+            "retry_count": 3,
+            "max_pages": 15
+        },
+        {
+            "name": "zansec",
+            "url": "https://zansec.co.tz/nav.php",
+            "provider": "ZANSEC",
+            "type": "selenium",
+            "wait_seconds": 12,
+            "retry_count": 3,
+            "max_pages": 45
+        },
+        {
+            "name": "whi",
+            "url": "https://fas.whi.go.tz/",
+            "provider": "WHI",
+            "type": "selenium",
+            "wait_seconds": 30,
+            "retry_count": 3,
+            "max_pages": 10
+        },
+        {
+            "name": "itrust",
+            "url": "https://itrust.co.tz/itrust-funds/",
+            "provider": "iTrust Finance",
+            "type": "selenium",
+            "wait_seconds": 15,
+            "retry_count": 3,
+            "max_pages": 1
+        }
+    ],
+    "output": {
+        "raw_path": "data/raw/",
+        "processed_path": "data/processed/",
+        "archive_path": "data/archive/",
+        "format": "json"
+    },
+    "retention": {
+        "raw_days": 1825,
+        "processed_days": -1,
+        "logs_days": 90,
+        "failed_days": 30
+    }
+}
