@@ -13,11 +13,10 @@ import {
   Layers
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ModuleLayout } from "@/components/funds/module-layout"
 import { KPICard } from "@/components/funds/kpi-card"
 import { MultiSeriesNavChart } from "@/components/funds/multi-series-nav-chart"
-import { FundAreaChart } from "@/components/funds/fund-area-chart"
-import { EmptyState } from "@/components/ui/empty-state"
+import { FundAreaChart } from "@/components/funds/fund-chart"
+import { ModuleLayout, EmptyState } from "@/components/funds/module-layout"
 import { cn } from "@/lib/utils"
 import type { Fund, OverviewData, Timeframe } from "@/lib/types/funds"
 
