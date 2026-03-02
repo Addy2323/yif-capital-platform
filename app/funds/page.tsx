@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { FundCard, FundCardSkeleton } from "@/components/funds/fund-card"
 import { MobileFundsView } from "@/components/funds/mobile-funds-view"
 import { Input } from "@/components/ui/input"
@@ -43,6 +44,16 @@ export default function FundsPage() {
     fetchFunds()
   }, [])
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  }
+
   // Filter and sort funds
   const filteredFunds = funds
     .filter((fund) => {
@@ -74,10 +85,15 @@ export default function FundsPage() {
       {/* Mobile Layout */}
       <MobileFundsView funds={funds} isLoading={isLoading} error={error} />
 
-      {/* Desktop Layout - unchanged */}
+      {/* Desktop Layout */}
       <div className="min-h-screen bg-background/95 hidden md:block">
         {/* Hero Header Section */}
-        <div className="relative overflow-hidden bg-slate-950 py-20 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative overflow-hidden bg-slate-950 py-20 mb-12"
+        >
           {/* Abstract background elements */}
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
             <div className="absolute -top-1/2 -left-1/4 w-full h-full bg-primary/20 blur-[120px] rounded-full animate-pulse" />
@@ -95,11 +111,16 @@ export default function FundsPage() {
               Access real-time performance data and historical NAV tracking for Tanzania's leading investment funds.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <div className="container mx-auto py-4 px-4 max-w-7xl">
           {/* Filters Bar */}
-          <div className="flex flex-col md:flex-row gap-4 mb-10 items-center justify-between bg-card/40 p-4 rounded-2xl border border-border/40 backdrop-blur-sm sticky top-4 z-40 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="flex flex-col md:flex-row gap-4 mb-10 items-center justify-between bg-card/40 p-4 rounded-2xl border border-border/40 backdrop-blur-sm sticky top-4 z-40 shadow-sm"
+          >
             {/* Search */}
             <div className="relative flex-1 w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
@@ -143,10 +164,15 @@ export default function FundsPage() {
                 </SelectContent>
               </Select>
             </div>
-          </div>
+          </motion.div>
 
           {/* Results Info */}
-          <div className="flex items-center justify-between mb-8 px-2 font-bold uppercase tracking-widest text-[10px] text-muted-foreground/60">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex items-center justify-between mb-8 px-2 font-bold uppercase tracking-widest text-[10px] text-muted-foreground/60"
+          >
             <p>
               Showing <span className="text-foreground">{filteredFunds.length}</span> of{" "}
               <span className="text-foreground">{funds.length}</span> results
@@ -157,38 +183,63 @@ export default function FundsPage() {
                 Sync: {new Date(lastUpdated).toLocaleDateString()}
               </div>
             )}
-          </div>
+          </motion.div>
 
           {/* Funds Grid */}
-          {isLoading ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {[...Array(6)].map((_, i) => (
-                <FundCardSkeleton key={i} />
-              ))}
-            </div>
-          ) : filteredFunds.length === 0 ? (
-            <div className="text-center py-20 bg-muted/20 rounded-3xl border-2 border-dashed border-border/40">
-              <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-muted-foreground/40" />
-              </div>
-              <p className="text-muted-foreground font-semibold">No results found for your filters.</p>
-              <button
-                onClick={() => { setSearchQuery(""); setSelectedType("all") }}
-                className="mt-4 text-primary font-bold hover:underline"
+          <AnimatePresence mode="popLayout">
+            {isLoading ? (
+              <motion.div
+                key="skeleton"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
               >
-                Clear all filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-20">
-              {filteredFunds.map((fund) => (
-                <FundCard key={fund.fund_id} fund={fund} />
-              ))}
-            </div>
-          )}
+                {[...Array(6)].map((_, i) => (
+                  <FundCardSkeleton key={i} />
+                ))}
+              </motion.div>
+            ) : filteredFunds.length === 0 ? (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-20 bg-muted/20 rounded-3xl border-2 border-dashed border-border/40"
+              >
+                <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-8 h-8 text-muted-foreground/40" />
+                </div>
+                <p className="text-muted-foreground font-semibold">No results found for your filters.</p>
+                <button
+                  onClick={() => { setSearchQuery(""); setSelectedType("all") }}
+                  className="mt-4 text-primary font-bold hover:underline"
+                >
+                  Clear all filters
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="grid"
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-20"
+              >
+                {filteredFunds.map((fund) => (
+                  <FundCard key={fund.fund_id} fund={fund} />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Info Banner */}
-          <div className="mt-16 bg-muted/30 rounded-2xl p-8 border border-border/50">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-16 bg-muted/30 rounded-2xl p-8 border border-border/50"
+          >
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
                 <h3 className="text-xl font-bold mb-2">Automated Data System</h3>
@@ -205,9 +256,10 @@ export default function FundsPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
   )
 }
+

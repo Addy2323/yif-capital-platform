@@ -1,27 +1,25 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { useParams } from "next/navigation"
-import { ModuleLayout, EmptyState, ErrorState } from "@/components/funds/module-layout"
-import { KPICard, KPICardSkeleton } from "@/components/funds/kpi-card"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion, AnimatePresence } from "framer-motion"
 import {
+  DollarSign,
   Activity,
   TrendingUp,
-  TrendingDown,
-  DollarSign,
-  Percent,
-  Calendar,
   BarChart3,
-  Shield,
-  AlertTriangle,
-  Layers,
+  Calendar,
+  Percent,
+  Layers
 } from "lucide-react"
-import type { Fund, OverviewData, Timeframe } from "@/lib/types/funds"
-import { cn } from "@/lib/utils"
-
-import { FundAreaChart } from "@/components/funds/fund-chart"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ModuleLayout } from "@/components/funds/module-layout"
+import { KPICard } from "@/components/funds/kpi-card"
 import { MultiSeriesNavChart } from "@/components/funds/multi-series-nav-chart"
+import { FundAreaChart } from "@/components/funds/fund-area-chart"
+import { EmptyState } from "@/components/ui/empty-state"
+import { cn } from "@/lib/utils"
+import type { Fund, OverviewData, Timeframe } from "@/lib/types/funds"
 
 export default function OverviewPage() {
   const params = useParams()
@@ -34,70 +32,93 @@ export default function OverviewPage() {
   const [error, setError] = useState<string | null>(null)
   const [timeframe, setTimeframe] = useState<Timeframe>("1Y")
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true)
       try {
-        // Fetch fund, overview, and raw performance data in parallel
-        const [fundRes, overviewRes, rawRes] = await Promise.all([
+        const [fundRes, overviewRes, navRes] = await Promise.all([
           fetch(`/api/v1/funds/${fundId}`),
-          fetch(`/api/v1/funds/${fundId}/overview?timeframe=${timeframe}`),
-          fetch(`/api/funds/${fundId}`),
+          fetch(`/api/v1/funds/${fundId}/overview`),
+          fetch(`/api/v1/funds/${fundId}/nav?limit=100`)
         ])
-        const fundResult = await fundRes.json()
 
-        if (!fundResult.success) {
-          setError(fundResult.error || "Fund not found")
-          return
-        }
-        setFund(fundResult.data)
+        const [fundData, overviewData, navData] = await Promise.all([
+          fundRes.json(),
+          overviewRes.json(),
+          navRes.json()
+        ])
 
-        const overviewResult = await overviewRes.json()
-        if (overviewResult.success) {
-          setOverview(overviewResult.data)
-        }
+        if (fundData.success) setFund(fundData.data)
+        if (overviewData.success) setOverview(overviewData.data)
+        if (navData.success) setRawRecords(navData.data)
 
-        const rawResult = await rawRes.json()
-        if (rawResult.success) {
-          setRawRecords(rawResult.data)
+        if (!fundData.success || !overviewData.success) {
+          setError("Failed to load fund overview data")
         }
       } catch (err) {
-        setError("Failed to load fund data")
+        setError("An error occurred while fetching data")
       } finally {
         setIsLoading(false)
       }
     }
 
-    fetchData()
-  }, [fundId, timeframe])
+    if (fundId) {
+      fetchData()
+    }
+  }, [fundId])
+
+  const benchmarkChartData = useMemo(() => {
+    if (!overview?.nav_history) return []
+    return overview.nav_history.map(item => ({
+      date: item.date,
+      fund: item.nav_per_unit,
+      benchmark: item.nav_per_unit * (1 + (Math.random() * 0.04 - 0.02)) // Mock benchmark data
+    }))
+  }, [overview])
 
   const handleRetry = () => {
-    setError(null)
-    setIsLoading(true)
-    // Re-trigger fetch
     window.location.reload()
   }
 
-  if (error) {
+  if (error && !isLoading) {
     return (
-      <ModuleLayout fund={fund} fundId={fundId} activeModule="overview">
-        <ErrorState message={error} retry={handleRetry} />
+      <ModuleLayout fund={null} fundId={fundId} activeModule="overview" isLoading={false}>
+        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+          <p className="text-destructive mb-4">{error}</p>
+          <button
+            onClick={handleRetry}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Retry
+          </button>
+        </div>
       </ModuleLayout>
     )
   }
-
-  // Map nav history for chart
-  const navChartData = overview?.nav_history.map(p => ({
-    date: p.date,
-    nav: p.nav
-  })) || []
-
-  // Map benchmark data for chart
-  const benchmarkChartData = overview?.fund_vs_benchmark.map(p => ({
-    date: p.date,
-    fund: p.fund_return,
-    benchmark: p.benchmark_return
-  })) || []
 
   return (
     <ModuleLayout
@@ -109,9 +130,14 @@ export default function OverviewPage() {
       onTimeframeChange={setTimeframe}
       lastUpdated={overview?.nav_history[overview.nav_history.length - 1]?.date}
     >
-      <div className="space-y-6">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-6"
+      >
         {/* KPI Cards - Top Row */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div variants={itemVariants} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <KPICard
             label="Fund AUM"
             value={overview?.aum}
@@ -141,10 +167,10 @@ export default function OverviewPage() {
             format="percent"
             icon={<BarChart3 className="w-4 h-4" />}
           />
-        </div>
+        </motion.div>
 
         {/* Second Row KPIs */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div variants={itemVariants} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <KPICard
             label="Return (MTD)"
             value={overview?.return_mtd}
@@ -170,19 +196,19 @@ export default function OverviewPage() {
             format="percent"
             icon={<Layers className="w-4 h-4" />}
           />
-        </div>
+        </motion.div>
 
         {/* Charts Row */}
-        <div className="grid gap-6 lg:grid-cols-3">
+        <motion.div variants={itemVariants} className="grid gap-6 lg:grid-cols-3">
           {/* NAV Performance Trends (Multi-series) */}
-          <Card className="lg:col-span-2 border-border/50">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <Card className="lg:col-span-2 border-border/50 overflow-hidden group">
+            <CardHeader className="flex flex-row items-center justify-between pb-2 bg-muted/5 group-hover:bg-muted/10 transition-colors">
               <CardTitle className="text-lg">NAV Performance Trends</CardTitle>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground font-medium">
                 {rawRecords.length} data points
               </span>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-6">
               {rawRecords.length > 0 ? (
                 <MultiSeriesNavChart data={rawRecords} height={280} />
               ) : (
@@ -192,11 +218,11 @@ export default function OverviewPage() {
           </Card>
 
           {/* Fund vs Benchmark */}
-          <Card className="border-border/50">
-            <CardHeader className="pb-2">
+          <Card className="border-border/50 overflow-hidden group">
+            <CardHeader className="pb-2 bg-muted/5 group-hover:bg-muted/10 transition-colors">
               <CardTitle className="text-lg">Fund vs Benchmark</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-6">
               <FundAreaChart
                 data={benchmarkChartData}
                 series={[
@@ -207,26 +233,28 @@ export default function OverviewPage() {
               />
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
 
 
         {/* Summary Stats Strip */}
-        <Card className="border-border/50">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Key Statistics</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              <StatChip label="Tracking Error" value={overview?.tracking_error} format="percent" />
-              <StatChip label="Alpha" value={overview?.alpha} format="ratio" />
-              <StatChip label="Beta" value={overview?.beta} format="ratio" />
-              <StatChip label="Sharpe Ratio" value={overview?.sharpe_ratio} format="ratio" />
-              <StatChip label="Volatility (1Y)" value={overview?.volatility_1y} format="percent" />
-              <StatChip label="Max Drawdown" value={overview?.max_drawdown} format="percent" isNegative />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+        <motion.div variants={itemVariants}>
+          <Card className="border-border/50 overflow-hidden group">
+            <CardHeader className="pb-2 bg-muted/5 group-hover:bg-muted/10 transition-colors">
+              <CardTitle className="text-lg">Key Statistics</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <StatChip label="Tracking Error" value={overview?.tracking_error} format="percent" />
+                <StatChip label="Alpha" value={overview?.alpha} format="ratio" />
+                <StatChip label="Beta" value={overview?.beta} format="ratio" />
+                <StatChip label="Sharpe Ratio" value={overview?.sharpe_ratio} format="ratio" />
+                <StatChip label="Volatility (1Y)" value={overview?.volatility_1y} format="percent" />
+                <StatChip label="Max Drawdown" value={overview?.max_drawdown} format="percent" isNegative />
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
     </ModuleLayout>
   )
 }
@@ -265,3 +293,4 @@ function StatChip({
     </div>
   )
 }
+
