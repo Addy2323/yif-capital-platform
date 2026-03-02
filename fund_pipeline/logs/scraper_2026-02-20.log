@@ -1,0 +1,766 @@
+2026-02-20 23:16:16,894 [INFO] ============================================================
+2026-02-20 23:16:16,894 [INFO] Fund Data Scraper — Starting
+2026-02-20 23:16:16,895 [INFO] ============================================================
+2026-02-20 23:16:16,897 [INFO] [utt_amis] Attempt 1/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:16:16,917 [INFO] ====== WebDriver manager ======
+2026-02-20 23:16:19,784 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:16:22,686 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:16:25,164 [INFO] There is no [win64] chromedriver "145.0.7632.77" for browser google-chrome "145.0.7632" in cache
+2026-02-20 23:16:25,166 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:16:30,173 [INFO] WebDriver version 145.0.7632.77 selected
+2026-02-20 23:16:30,182 [INFO] Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/145.0.7632.77/win32/chromedriver-win32.zip
+2026-02-20 23:16:30,183 [INFO] About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/145.0.7632.77/win32/chromedriver-win32.zip
+2026-02-20 23:16:32,265 [INFO] Driver downloading response is 200
+2026-02-20 23:16:47,180 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:16:48,425 [INFO] Driver has been saved in cache [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77]
+2026-02-20 23:16:54,742 [ERROR] [utt_amis] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:16:56,960 [INFO] [utt_amis] Attempt 2/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:16:56,961 [INFO] ====== WebDriver manager ======
+2026-02-20 23:16:58,585 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:16:59,906 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:17:01,061 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:17:03,300 [ERROR] [utt_amis] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:17:05,501 [INFO] [utt_amis] Attempt 3/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:17:05,503 [INFO] ====== WebDriver manager ======
+2026-02-20 23:17:07,311 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:17:35,049 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:17:36,704 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:17:39,419 [ERROR] [utt_amis] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:17:41,657 [ERROR] [utt_amis] All 3 attempts exhausted
+2026-02-20 23:17:41,669 [WARNING] [utt_amis] Empty dataframe — skipping save
+2026-02-20 23:17:41,670 [INFO] [zansec] Attempt 1/3 — https://www.zansec.co.tz/nav
+2026-02-20 23:17:41,672 [INFO] ====== WebDriver manager ======
+2026-02-20 23:17:43,574 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:17:45,223 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:17:46,845 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:18:10,636 [INFO] [zansec] Scraped 10 rows
+2026-02-20 23:18:13,915 [INFO] [whi] Attempt 1/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:18:13,918 [INFO] ====== WebDriver manager ======
+2026-02-20 23:18:16,707 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:18:19,300 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:18:22,163 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:18:25,701 [ERROR] [whi] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:18:27,946 [INFO] [whi] Attempt 2/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:18:27,947 [INFO] ====== WebDriver manager ======
+2026-02-20 23:18:29,667 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:18:31,496 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:18:38,001 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:18:40,139 [ERROR] [whi] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:18:42,341 [INFO] [whi] Attempt 3/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:18:42,343 [INFO] ====== WebDriver manager ======
+2026-02-20 23:18:43,981 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:18:45,194 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:18:46,302 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:18:48,901 [ERROR] [whi] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:18:51,111 [ERROR] [whi] All 3 attempts exhausted
+2026-02-20 23:18:51,113 [WARNING] [whi] Empty dataframe — skipping save
+2026-02-20 23:18:51,114 [INFO] ------------------------------------------------------------
+2026-02-20 23:18:51,116 [INFO]   utt_amis: failed (0 rows)
+2026-02-20 23:18:51,117 [INFO]   zansec: success (10 rows)
+2026-02-20 23:18:51,118 [INFO]   whi: failed (0 rows)
+2026-02-20 23:18:51,119 [INFO] ============================================================
+2026-02-20 23:18:51,121 [INFO] Fund Data Scraper — Complete
+2026-02-20 23:21:57,586 [INFO] ============================================================
+2026-02-20 23:21:57,587 [INFO] Fund Data Scraper — Starting
+2026-02-20 23:21:57,588 [INFO] ============================================================
+2026-02-20 23:21:57,589 [INFO] [utt_amis] Attempt 1/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:21:57,608 [INFO] ====== WebDriver manager ======
+2026-02-20 23:21:59,496 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:00,941 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:02,180 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:22:04,180 [ERROR] [utt_amis] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:22:06,470 [INFO] [utt_amis] Attempt 2/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:22:06,471 [INFO] ====== WebDriver manager ======
+2026-02-20 23:22:08,211 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:09,637 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:11,464 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:22:13,677 [ERROR] [utt_amis] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:22:15,893 [INFO] [utt_amis] Attempt 3/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:22:15,894 [INFO] ====== WebDriver manager ======
+2026-02-20 23:22:17,412 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:18,809 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:20,952 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:22:24,176 [ERROR] [utt_amis] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:22:26,374 [ERROR] [utt_amis] All 3 attempts exhausted
+2026-02-20 23:22:26,376 [WARNING] [utt_amis] Empty dataframe — skipping save
+2026-02-20 23:22:26,377 [INFO] [zansec] Attempt 1/3 — https://www.zansec.co.tz/nav
+2026-02-20 23:22:26,379 [INFO] ====== WebDriver manager ======
+2026-02-20 23:22:28,522 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:30,575 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:32,637 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:22:47,482 [INFO] [zansec] Scraped 10 rows
+2026-02-20 23:22:49,815 [INFO] [whi] Attempt 1/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:22:49,816 [INFO] ====== WebDriver manager ======
+2026-02-20 23:22:52,731 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:54,181 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:22:56,960 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:23:00,763 [ERROR] [whi] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:23:03,163 [INFO] [whi] Attempt 2/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:23:03,168 [INFO] ====== WebDriver manager ======
+2026-02-20 23:23:06,111 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:23:08,875 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:23:12,560 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:23:16,874 [ERROR] [whi] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:23:19,143 [INFO] [whi] Attempt 3/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:23:19,144 [INFO] ====== WebDriver manager ======
+2026-02-20 23:23:22,015 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:23:23,360 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:23:24,713 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:23:26,964 [ERROR] [whi] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:23:29,243 [ERROR] [whi] All 3 attempts exhausted
+2026-02-20 23:23:29,245 [WARNING] [whi] Empty dataframe — skipping save
+2026-02-20 23:23:29,246 [INFO] ------------------------------------------------------------
+2026-02-20 23:23:29,248 [INFO]   utt_amis: failed (0 rows)
+2026-02-20 23:23:29,249 [INFO]   zansec: success (10 rows)
+2026-02-20 23:23:29,250 [INFO]   whi: failed (0 rows)
+2026-02-20 23:23:29,251 [INFO] ============================================================
+2026-02-20 23:23:29,253 [INFO] Fund Data Scraper — Complete
+2026-02-20 23:42:44,213 [INFO] ============================================================
+2026-02-20 23:42:44,214 [INFO] Fund Data Scraper — Starting
+2026-02-20 23:42:44,214 [INFO] ============================================================
+2026-02-20 23:42:44,216 [INFO] [utt_amis] Attempt 1/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:42:44,229 [INFO] ====== WebDriver manager ======
+2026-02-20 23:42:46,065 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:42:47,439 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:42:48,392 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:42:50,178 [ERROR] [utt_amis] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:42:52,378 [INFO] [utt_amis] Attempt 2/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:42:52,380 [INFO] ====== WebDriver manager ======
+2026-02-20 23:42:54,176 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:42:55,240 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:42:56,174 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:42:58,107 [ERROR] [utt_amis] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:43:00,284 [INFO] [utt_amis] Attempt 3/3 — https://www.utt-amis.co.tz/fund-performance
+2026-02-20 23:43:00,285 [INFO] ====== WebDriver manager ======
+2026-02-20 23:43:01,968 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:02,945 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:04,049 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:43:05,794 [ERROR] [utt_amis] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:43:07,974 [ERROR] [utt_amis] All 3 attempts exhausted
+2026-02-20 23:43:07,976 [WARNING] [utt_amis] Empty dataframe — skipping save
+2026-02-20 23:43:07,978 [INFO] [zansec] Attempt 1/3 — https://www.zansec.co.tz/nav
+2026-02-20 23:43:07,980 [INFO] ====== WebDriver manager ======
+2026-02-20 23:43:09,602 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:10,684 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:11,578 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:43:23,042 [INFO] [zansec] Scraped 10 rows
+2026-02-20 23:43:25,329 [INFO] [whi] Attempt 1/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:43:25,330 [INFO] ====== WebDriver manager ======
+2026-02-20 23:43:27,826 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:28,997 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:31,156 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:43:34,696 [ERROR] [whi] Attempt 1 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:43:37,334 [INFO] [whi] Attempt 2/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:43:37,336 [INFO] ====== WebDriver manager ======
+2026-02-20 23:43:39,526 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:40,811 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:41,925 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:43:43,984 [ERROR] [whi] Attempt 2 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:43:46,179 [INFO] [whi] Attempt 3/3 — https://www.whi.co.tz/nav-data
+2026-02-20 23:43:46,180 [INFO] ====== WebDriver manager ======
+2026-02-20 23:43:47,907 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:49,151 [INFO] Get LATEST chromedriver version for google-chrome
+2026-02-20 23:43:50,152 [INFO] Driver [C:\Users\DevStromer\.wdm\drivers\chromedriver\win64\145.0.7632.77\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-20 23:43:52,059 [ERROR] [whi] Attempt 3 failed: Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=145.0.7632.110)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x122f3e3
+	0x122f424
+	0x1022090
+	0x101f59e
+	0x1012674
+	0x10140dc
+	0x1012b17
+	0x1012445
+	0x1012145
+	0x1010258
+	0x101096a
+	0x1025b1e
+	0x10ac554
+	0x108ee1c
+	0x10abb23
+	0x108ebb6
+	0x1060319
+	0x10610d4
+	0x14846a4
+	0x147f9a9
+	0x149c940
+	0x12480f8
+	0x124fe4d
+	0x1237c18
+	0x1237de2
+	0x12218ea
+	0x773e00c9
+	0x77897b4e
+	0x77897b1e
+
+2026-02-20 23:43:54,260 [ERROR] [whi] All 3 attempts exhausted
+2026-02-20 23:43:54,262 [WARNING] [whi] Empty dataframe — skipping save
+2026-02-20 23:43:54,264 [INFO] ------------------------------------------------------------
+2026-02-20 23:43:54,265 [INFO]   utt_amis: failed (0 rows)
+2026-02-20 23:43:54,266 [INFO]   zansec: success (10 rows)
+2026-02-20 23:43:54,270 [INFO]   whi: failed (0 rows)
+2026-02-20 23:43:54,271 [INFO] ============================================================
+2026-02-20 23:43:54,273 [INFO] Fund Data Scraper — Complete

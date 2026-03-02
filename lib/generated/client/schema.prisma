@@ -1,0 +1,527 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String             @id @default(uuid())
+  email        String             @unique
+  name         String
+  password     String
+  role         UserRole           @default(FREE)
+  avatar       String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  accessLogs   AccessAttemptLog[]
+  accessTokens AccessToken[]
+  enrollments  Enrollment[]
+  payments     Payment[]
+}
+
+model Enrollment {
+  id         String             @id @default(uuid())
+  userId     String
+  courseId   String
+  status     SubscriptionStatus @default(ACTIVE)
+  enrolledAt DateTime           @default(now())
+  expiresAt  DateTime?
+  paymentId  String?            @unique
+  payment    Payment?           @relation(fields: [paymentId], references: [id])
+  user       User               @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([courseId])
+}
+
+model LiveSession {
+  id               String             @id @default(uuid())
+  courseId         String
+  title            String
+  shortDescription String?
+  description      String?
+  meetingUrl       String?
+  recordingUrl     String?
+  scheduledStart   DateTime
+  scheduledEnd     DateTime
+  status           String             @default("scheduled")
+  currency         String             @default("TZS")
+  isFree           Boolean            @default(true)
+  price            Float              @default(0)
+  accessLogs       AccessAttemptLog[]
+  accessTokens     AccessToken[]
+  payments         Payment[]
+
+  @@index([courseId])
+  @@index([scheduledStart])
+}
+
+model AccessToken {
+  id                String      @id @default(uuid())
+  tokenHash         String      @unique
+  userId            String
+  sessionId         String
+  deviceFingerprint String
+  expiresAt         DateTime
+  usedAt            DateTime?
+  createdAt         DateTime    @default(now())
+  session           LiveSession @relation(fields: [sessionId], references: [id])
+  user              User        @relation(fields: [userId], references: [id])
+
+  @@index([tokenHash])
+  @@index([userId])
+  @@index([sessionId])
+}
+
+model AccessAttemptLog {
+  id                String       @id @default(uuid())
+  userId            String?
+  sessionId         String?
+  ipAddress         String?
+  deviceFingerprint String?
+  userAgent         String?
+  status            String
+  reason            String?
+  createdAt         DateTime     @default(now())
+  session           LiveSession? @relation(fields: [sessionId], references: [id])
+  user              User?        @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([sessionId])
+  @@index([createdAt])
+}
+
+model Payment {
+  id                String       @id @default(uuid())
+  userId            String
+  amount            Float
+  currency          String       @default("TZS")
+  provider          String
+  providerReference String?      @unique
+  status            String
+  plan              String
+  createdAt         DateTime     @default(now())
+  completedAt       DateTime?
+  sessionId         String?
+  enrollment        Enrollment?
+  session           LiveSession? @relation(fields: [sessionId], references: [id])
+  user              User         @relation(fields: [userId], references: [id])
+
+  @@index([sessionId])
+}
+
+enum UserRole {
+  FREE
+  PRO
+  INSTITUTIONAL
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+}
+
+model PricingPlan {
+  id          String   @id @default(uuid())
+  planId      String   @unique // "free", "pro", "institutional"
+  name        String
+  price       Float
+  currency    String   @default("TZS")
+  period      String?
+  description String
+  features    Json // Array of {name: string, included: boolean}
+  cta         String
+  href        String
+  popular     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PasswordReset {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([token])
+}
+
+// ============================================
+// FUND ANALYTICS PLATFORM - CORE MODELS
+// ============================================
+
+// Fund Type Enum
+enum FundType {
+  BALANCED
+  FIXED_INCOME
+  INCOME
+  BOND
+  FUND_FAMILY
+  MONEY_MARKET
+  EQUITY
+}
+
+// Risk Level Enum
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// Compliance Status Enum
+enum ComplianceStatus {
+  COMPLIANT
+  WATCH
+  BREACH
+}
+
+// Fund Registry - Core fund information
+model Fund {
+  id            String   @id @default(uuid())
+  fundId        String   @unique // URL-friendly ID (e.g., 'utt-amis')
+  fundSlug      String   @unique // Alternative slug
+  fundName      String
+  fundType      FundType
+  managerName   String
+  managerId     String?
+  description   String
+  logoUrl       String?
+  inceptionDate DateTime
+  baseCurrency  String   @default("TZS")
+  benchmarkId   String?
+  benchmarkName String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  dailySummaries     FundDailySummary[]
+  performanceMetrics FundPerformance[]
+  portfolioData      FundPortfolio[]
+  riskMetrics        FundRisk[]
+  incomeData         FundIncome[]
+  financials         FundFinancials[]
+  complianceChecks   FundCompliance[]
+  attributionData    FundAttribution[]
+  benchmarkingData   FundBenchmarking[]
+  navHistory         FundNavHistory[]
+  holdings           FundHolding[]
+
+  @@index([fundId])
+  @@index([fundType])
+  @@index([isActive])
+}
+
+// NAV History - Daily NAV tracking
+model FundDailySummary {
+  id              String   @id @default(uuid())
+  fundId          String
+  date            DateTime
+  schemeName      String?
+  nav             Float
+  dailyReturn     Float
+  aum             Float
+  volatility      Float
+  salePrice       Float?
+  repurchasePrice Float?
+  createdAt       DateTime @default(now())
+
+  // Relation
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, schemeName])
+  @@index([fundId, date, schemeName])
+}
+
+// NAV History Extended - For chart data
+model FundNavHistory {
+  id               String   @id @default(uuid())
+  fundId           String
+  date             DateTime
+  nav              Float
+  navChange        Float?
+  navChangePct     Float?
+  aum              Float
+  unitsOutstanding Float?
+  createdAt        DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date])
+  @@index([fundId, date])
+}
+
+// Module 1: Overview Dashboard Data
+model FundPerformance {
+  id        String   @id @default(uuid())
+  fundId    String
+  date      DateTime
+  timeframe String // 1W, 1M, 3M, 6M, YTD, 1Y, 3Y, 5Y, SINCE_INCEPTION
+
+  // Overview KPIs
+  aum                  Float?
+  aumChangePct         Float?
+  nav                  Float?
+  navChange1d          Float?
+  navChangeYtd         Float?
+  returnMtd            Float?
+  returnYtd            Float?
+  return1y             Float?
+  returnSinceInception Float?
+  expenseRatio         Float?
+  cashPositionPct      Float?
+
+  // Summary Stats
+  trackingError Float?
+  alpha         Float?
+  beta          Float?
+  sharpeRatio   Float?
+  volatility1y  Float?
+  maxDrawdown   Float?
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, timeframe])
+  @@index([fundId, date])
+}
+
+// Module 3: Portfolio Composition
+model FundPortfolio {
+  id     String   @id @default(uuid())
+  fundId String
+  date   DateTime
+
+  // Asset Allocation (stored as JSON array)
+  assetAllocation Json? // [{ label, pct }]
+
+  // Sector Allocation (stored as JSON array)
+  sectorAllocation Json? // [{ label, pct }]
+
+  // Geographic Allocation (stored as JSON array)
+  geoAllocation Json? // [{ country, pct }]
+
+  // Market Cap Exposure (stored as JSON array)
+  marketCapExposure Json? // [{ label, pct }]
+
+  // Top Holdings Count
+  totalHoldings Int?
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date])
+  @@index([fundId, date])
+}
+
+// Individual Holdings
+model FundHolding {
+  id     String   @id @default(uuid())
+  fundId String
+  date   DateTime
+
+  holdingName String
+  assetType   String?
+  weightPct   Float
+  value       Float?
+  changePct   Float?
+  isin        String?
+  sector      String?
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@index([fundId, date])
+  @@index([fundId, holdingName])
+}
+
+// Module 4: Risk Analytics
+model FundRisk {
+  id        String   @id @default(uuid())
+  fundId    String
+  date      DateTime
+  timeframe String
+
+  // Risk KPIs
+  maxDrawdown       Float?
+  var95             Float? // Value at Risk 95%
+  cvar95            Float? // Conditional VaR
+  downsideDeviation Float?
+  volatility1y      Float?
+  sharpeRatio       Float?
+  sortinoRatio      Float?
+  riskLevel         RiskLevel?
+  riskScore         Int? // 0-100 normalized
+
+  // Bond/Fixed Income specific
+  durationYears Float?
+  creditRatings Json? // [{ rating, pct }]
+
+  // Stress Tests (stored as JSON array)
+  stressTests Json? // [{ scenario_name, impact_pct, description }]
+
+  // Drawdown Series (stored as JSON array)
+  drawdownSeries Json? // [{ date, drawdown_pct }]
+
+  // Volatility Series (stored as JSON array)
+  volatilitySeries Json? // [{ date, rolling_vol_pct }]
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, timeframe])
+  @@index([fundId, date])
+}
+
+// Module 5: Income & Cash Flow
+model FundIncome {
+  id     String   @id @default(uuid())
+  fundId String
+  date   DateTime
+  period String // MTD, QTD, YTD, 1Y
+
+  // Income KPIs
+  dailyLiquidityRatio Float?
+  interestIncome      Float?
+  dividendIncome      Float?
+  totalIncome         Float?
+  expenseRatio        Float?
+  netInvestmentIncome Float?
+  cashInflows         Float?
+  cashOutflows        Float?
+
+  // Maturity Profile (stored as JSON array) - for bond/fixed income
+  maturityProfile Json? // [{ bucket_label, value, pct_of_aum }]
+
+  // Cash Flow Timeline (stored as JSON array)
+  cashFlowTimeline Json? // [{ date, inflow, outflow, net }]
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, period])
+  @@index([fundId, date])
+}
+
+// Module 6: Financial Statements
+model FundFinancials {
+  id     String   @id @default(uuid())
+  fundId String
+  date   DateTime
+  period String // Q1, Q2, Q3, Q4, FY
+
+  // Income Statement (stored as JSON)
+  incomeStatement Json? // { interest_income, dividend_income, unrealized_gains_losses, realized_gains_losses, management_fees, custody_fees, other_expenses, net_investment_income, total_comprehensive_income, expense_ratio_trend, net_income_margin_pct, income_yield_pct, fee_drag_pct }
+
+  // Balance Sheet (stored as JSON)
+  balanceSheet Json? // { assets: { cash, investments, receivables }, total_assets, liabilities: { payables, mgmt_fees }, total_liabilities, net_assets, units_outstanding, nav_per_unit, liquidity_ratio, net_assets_trend }
+
+  // Cash Flow Statement (stored as JSON)
+  cashFlow Json? // { operating: { investment_income_cash, expenses_paid, net }, investing: { purchases, proceeds, net }, financing: { units_issued, units_redeemed, distributions, net }, net_cash_movement, waterfall, net_movement_timeline, sub_redemption_ratio }
+
+  // Ratios & Reconciliation
+  ratios Json? // { nav_net_assets_variance, cash_coverage, distribution_coverage, accrual_vs_cash_variance }
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, period])
+  @@index([fundId, date])
+}
+
+// Module 7: Benchmark & Peer Comparison
+model FundBenchmarking {
+  id        String   @id @default(uuid())
+  fundId    String
+  date      DateTime
+  timeframe String
+
+  // Benchmark Comparison
+  fundReturn       Float?
+  benchmarkReturn  Float?
+  alpha            Float?
+  beta             Float?
+  trackingError    Float?
+  informationRatio Float?
+  benchmarkName    String?
+
+  // Peer Comparison (stored as JSON array)
+  peers Json? // [{ fund_id, fund_name, return_pct, volatility, sharpe_ratio, max_drawdown, rank }]
+
+  // Radar Chart Axes (stored as JSON array)
+  radarAxes Json? // [{ axis_label, fund_score, benchmark_score }]
+
+  // Ranking
+  rankPercentile Int?
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, timeframe])
+  @@index([fundId, date])
+}
+
+// Module 8: Compliance & Policy Monitoring
+model FundCompliance {
+  id     String   @id @default(uuid())
+  fundId String
+  date   DateTime
+
+  // Overall Status
+  overallStatus ComplianceStatus
+  greenCount    Int              @default(0)
+  amberCount    Int              @default(0)
+  redCount      Int              @default(0)
+
+  // Compliance Checks (stored as JSON array)
+  checks Json? // [{ rule_name, rule_type, current_value, limit_value, format, status, last_checked_at, breach_history }]
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date])
+  @@index([fundId, date])
+}
+
+// Module 9: Attribution Analysis
+model FundAttribution {
+  id        String   @id @default(uuid())
+  fundId    String
+  date      DateTime
+  timeframe String
+
+  // Attribution Effects
+  totalReturn             Float?
+  benchmarkReturn         Float?
+  assetAllocationEffect   Float?
+  securitySelectionEffect Float?
+  interactionEffect       Float?
+  activeReturn            Float?
+
+  // Waterfall Data (stored as JSON array)
+  waterfall Json? // [{ label, value, type }]
+
+  createdAt DateTime @default(now())
+
+  fund Fund @relation(fields: [fundId], references: [fundId])
+
+  @@unique([fundId, date, timeframe])
+  @@index([fundId, date])
+}
