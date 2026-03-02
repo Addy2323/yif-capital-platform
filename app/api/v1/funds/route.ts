@@ -59,17 +59,33 @@ export async function GET(request: NextRequest) {
       )
     ).then(res => res.filter((s): s is NonNullable<typeof s> => s !== null))
 
+    // Fallback: for funds without 1-year-ago data, get the earliest available record
+    const fundIdsWithYearAgo = new Set(yearAgoSummaries.map(s => s.fundId))
+    const fundsMissingYearAgo = latestSummaries.filter(s => !fundIdsWithYearAgo.has(s.fundId))
+
+    const earliestSummaries = await Promise.all(
+      fundsMissingYearAgo.map(latest =>
+        prisma.fundDailySummary.findFirst({
+          where: {
+            fundId: latest.fundId,
+            schemeName: latest.schemeName,
+            date: { lt: latest.date }  // any earlier record
+          },
+          orderBy: { date: "asc" }
+        })
+      )
+    ).then(res => res.filter((s): s is NonNullable<typeof s> => s !== null))
+
     // Map to response format
     const mappedFunds: Fund[] = funds.map((fund) => {
       const summary = latestSummaries.find((s) => s.fundId === fund.fundId)
       const yearAgoSummary = yearAgoSummaries.find((s) => s.fundId === fund.fundId && s.schemeName === summary?.schemeName)
+      // Fallback to earliest available record for funds with <1 year of data
+      const baselineSummary = yearAgoSummary
+        || earliestSummaries.find((s) => s.fundId === fund.fundId && s.schemeName === summary?.schemeName)
 
-      // For 1d change, we need the record before the latest
-      // This is a bit tricky with distinct, but for a small number of funds we can fetch it or just use the second record if we fetched more
-      // For now, let's focus on 1Y return and AUM
-
-      const return1y = summary && yearAgoSummary && yearAgoSummary.nav > 0
-        ? ((summary.nav - yearAgoSummary.nav) / yearAgoSummary.nav) * 100
+      const return1y = summary && baselineSummary && baselineSummary.nav > 0
+        ? ((summary.nav - baselineSummary.nav) / baselineSummary.nav) * 100
         : null
 
       return {

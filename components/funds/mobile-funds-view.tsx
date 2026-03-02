@@ -181,35 +181,35 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
               <button
                 onClick={() => setActiveTab("total")}
                 className={cn(
-                  "rounded-xl p-3 text-left transition-all duration-200 border",
+                  "rounded-xl p-3 text-left transition-all duration-200 border shadow-sm",
                   activeTab === "total"
-                    ? "bg-[#1a3a6e]/80 border-blue-500/30 shadow-lg shadow-blue-500/5"
-                    : "bg-white/5 border-white/5 hover:bg-white/10"
+                    ? "bg-white border-blue-400 shadow-md"
+                    : "bg-white border-gray-200 hover:shadow-md"
                 )}
               >
-                <p className="text-[9px] font-bold text-white/50 uppercase tracking-wider mb-1.5">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
                   Total Funds
                 </p>
-                <p className="text-2xl font-black text-white">{stats.totalFunds}</p>
-                <p className="text-[10px] text-white/40 font-medium mt-0.5">Licensed Funds</p>
+                <p className="text-2xl font-black text-gray-900">{stats.totalFunds}</p>
+                <p className="text-[10px] text-gray-400 font-medium mt-0.5">Licensed Funds</p>
               </button>
 
               {/* Top Fund Manager Tab */}
               <button
                 onClick={() => setActiveTab("manager")}
                 className={cn(
-                  "rounded-xl p-3 text-left transition-all duration-200 border",
+                  "rounded-xl p-3 text-left transition-all duration-200 border shadow-sm",
                   activeTab === "manager"
-                    ? "bg-[#1a3a6e]/80 border-blue-500/30 shadow-lg shadow-blue-500/5"
-                    : "bg-white/5 border-white/5 hover:bg-white/10"
+                    ? "bg-white border-blue-400 shadow-md"
+                    : "bg-white border-gray-200 hover:shadow-md"
                 )}
               >
-                <p className="text-[9px] font-bold text-white/50 uppercase tracking-wider mb-1.5">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
                   Top Fund Manager
                 </p>
                 <div className="flex items-center gap-1.5">
                   {managers[0]?.logoUrl && (
-                    <div className="w-5 h-5 rounded-full overflow-hidden bg-white/10 shrink-0">
+                    <div className="w-5 h-5 rounded-full overflow-hidden bg-gray-100 shrink-0">
                       <Image
                         src={managers[0].logoUrl}
                         alt={stats.topManagerName}
@@ -219,9 +219,9 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
                       />
                     </div>
                   )}
-                  <p className="text-xs font-bold text-white truncate">{stats.topManagerName.split(' ')[0]}</p>
+                  <p className="text-xs font-bold text-gray-900 truncate">{stats.topManagerName.split(' ')[0]}</p>
                 </div>
-                <p className="text-[10px] text-white/40 font-medium mt-0.5">
+                <p className="text-[10px] text-gray-400 font-medium mt-0.5">
                   {stats.topManagerCount} Funds
                 </p>
               </button>
@@ -230,20 +230,20 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
               <button
                 onClick={() => setActiveTab("market")}
                 className={cn(
-                  "rounded-xl p-3 text-left transition-all duration-200 border",
+                  "rounded-xl p-3 text-left transition-all duration-200 border shadow-sm",
                   activeTab === "market"
-                    ? "bg-[#1a3a6e]/80 border-blue-500/30 shadow-lg shadow-blue-500/5"
-                    : "bg-white/5 border-white/5 hover:bg-white/10"
+                    ? "bg-white border-blue-400 shadow-md"
+                    : "bg-white border-gray-200 hover:shadow-md"
                 )}
               >
-                <p className="text-[9px] font-bold text-white/50 uppercase tracking-wider mb-1.5">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
                   Market Updates
                 </p>
                 <div className="flex items-center gap-1">
-                  <TrendingUp className="w-4 h-4 text-emerald-400" />
-                  <p className="text-base font-black text-white">{stats.quarterlyGrowth}</p>
+                  <TrendingUp className="w-4 h-4 text-emerald-500" />
+                  <p className="text-base font-black text-gray-900">{stats.quarterlyGrowth}</p>
                 </div>
-                <p className="text-[10px] text-white/40 font-medium mt-0.5">Quarterly Growth</p>
+                <p className="text-[10px] text-gray-400 font-medium mt-0.5">Quarterly Growth</p>
               </button>
             </div>
           </div>
@@ -258,10 +258,10 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
                 <Link
                   key={manager.managerName}
                   href={`/funds?manager=${encodeURIComponent(manager.managerName)}`}
-                  className="flex items-center gap-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] rounded-xl px-4 py-3 transition-all duration-200 group"
+                  className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 transition-all duration-200 shadow-sm hover:shadow-md group"
                 >
                   {/* Manager Logo */}
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden shrink-0 border border-white/10">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden shrink-0 border border-gray-200">
                     {manager.logoUrl ? (
                       <Image
                         src={manager.logoUrl}
@@ -271,7 +271,7 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
                         className="object-contain w-full h-full p-1"
                       />
                     ) : (
-                      <span className="text-xs font-bold text-white/40">
+                      <span className="text-xs font-bold text-gray-400">
                         {manager.managerName.split(" ").map(w => w[0]).join("").slice(0, 2)}
                       </span>
                     )}
@@ -279,16 +279,16 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
 
                   {/* Manager Info */}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-white truncate">
+                    <p className="text-sm font-bold text-gray-900 truncate">
                       {manager.managerName}
                     </p>
-                    <p className="text-xs text-white/40 font-medium">
+                    <p className="text-xs text-gray-400 font-medium">
                       {manager.funds.length} Fund{manager.funds.length !== 1 ? "s" : ""}
                     </p>
                   </div>
 
                   {/* Chevron */}
-                  <ChevronRight className="w-4 h-4 text-white/20 group-hover:text-white/40 transition-colors shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-500 transition-colors shrink-0" />
                 </Link>
               ))}
             </div>
@@ -299,28 +299,27 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
             <h2 className="text-sm font-bold text-white mb-3 tracking-tight">
               Top Investment Funds
             </h2>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {topFunds.map((fund) => {
                 const typeConfig = FUND_TYPE_CONFIG[fund.fund_type]
                 const returnVal = fund.return_1y || 0
-                const barWidth = Math.min(Math.abs(returnVal) / maxReturn * 100, 100)
 
                 return (
                   <Link
                     key={fund.fund_id}
                     href={`/funds/${fund.fund_id}/overview`}
-                    className="block bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] rounded-xl px-4 py-3 transition-all duration-200"
+                    className="block bg-white rounded-xl px-4 py-3.5 transition-all duration-200 shadow-sm hover:shadow-md"
                   >
-                    <div className="flex items-start justify-between gap-3 mb-2">
+                    <div className="flex items-start justify-between gap-3">
                       <div className="flex items-start gap-2.5 min-w-0 flex-1">
-                        {/* Color indicator */}
-                        <div className={cn("w-1.5 h-8 rounded-full mt-0.5 shrink-0", typeConfig?.color || "bg-blue-500")} />
+                        {/* Color square indicator */}
+                        <div className={cn("w-3 h-3 rounded-[3px] mt-1 shrink-0", typeConfig?.color || "bg-blue-500")} />
                         <div className="min-w-0">
-                          <p className="text-sm font-bold text-white truncate">
+                          <p className="text-sm font-bold text-gray-900 truncate">
                             {fund.fund_name}
                           </p>
-                          <p className="text-[11px] text-white/40 font-medium">
-                            {typeConfig?.label || fund.fund_type}
+                          <p className="text-[11px] text-gray-400 font-medium">
+                            {typeConfig?.label || fund.fund_type} Fund
                           </p>
                         </div>
                       </div>
@@ -330,31 +329,21 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
                         <p
                           className={cn(
                             "text-base font-black tracking-tight",
-                            returnVal >= 0 ? "text-emerald-400" : "text-rose-400"
+                            returnVal >= 0 ? "text-emerald-600" : "text-rose-500"
                           )}
                         >
                           {returnVal >= 0 ? "↑" : "↓"}{Math.abs(returnVal).toFixed(1)}%
-                          <span className="text-[10px] font-bold text-white/30 ml-1">YTD</span>
+                          <span className="text-[10px] font-bold text-gray-400 ml-1">YTD</span>
                         </p>
                         {fund.current_nav != null && (
-                          <p className="text-[10px] text-white/30 font-medium">
+                          <p className="text-[10px] text-gray-400 font-medium">
                             {fund.base_currency} {fund.current_nav.toLocaleString("en-TZ", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                           </p>
                         )}
+                        <p className="text-[10px] text-gray-400 font-medium">
+                          Min. Investment
+                        </p>
                       </div>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                      <div
-                        className={cn(
-                          "h-full rounded-full transition-all duration-500",
-                          returnVal >= 0
-                            ? "bg-gradient-to-r from-emerald-500/60 to-emerald-400"
-                            : "bg-gradient-to-r from-rose-500/60 to-rose-400"
-                        )}
-                        style={{ width: `${barWidth}%` }}
-                      />
                     </div>
                   </Link>
                 )
