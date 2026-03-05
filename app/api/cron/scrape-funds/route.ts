@@ -69,31 +69,66 @@ export async function GET(req: Request) {
         // Set the API URL so the scraper pushes to this server
         const apiUrl = process.env.FUND_API_URL || `http://localhost:${process.env.PORT || 3000}/api/funds/update`
 
+        // -------------------------------------------------------------
+        // 1. Run Fund Scraper
+        // -------------------------------------------------------------
         console.log(`[CRON] Starting fund scraper: ${pythonExec} ${scraperScript} --latest-only`)
 
-        const { stdout, stderr } = await execAsync(
+        const { stdout: fundStdout, stderr: fundStderr } = await execAsync(
             `"${pythonExec}" "${scraperScript}" --latest-only`,
             {
                 cwd: path.join(projectDir, "fund_pipeline"),
-                timeout: 280_000, // 4m 40s hard timeout
+                timeout: 200_000,
                 env: {
                     ...process.env,
                     FUND_API_URL: apiUrl,
                 },
             },
         )
+        console.log(`[CRON] Fund scraper completed successfully`)
 
-        console.log(`[CRON] Scraper completed successfully`)
+        // -------------------------------------------------------------
+        // 2. Run Stock Scraper
+        // -------------------------------------------------------------
+        const stockScraperScript = path.join(projectDir, "fund_pipeline", "scraper", "dse_scraper.py")
+        const stockApiUrl = process.env.STOCK_API_URL || `http://localhost:${process.env.PORT || 3000}`
 
-        // Extract summary from the last few lines of stdout
-        const lines = stdout.trim().split("\n")
-        const summaryLines = lines.slice(-15)
+        console.log(`[CRON] Starting stock scraper: ${pythonExec} ${stockScraperScript} --push`)
+
+        let stockStdout = ""
+        let stockStderr = ""
+
+        if (fs.existsSync(stockScraperScript)) {
+            const result = await execAsync(
+                `"${pythonExec}" "${stockScraperScript}" --push`,
+                {
+                    cwd: path.join(projectDir, "fund_pipeline"),
+                    timeout: 60_000,
+                    env: {
+                        ...process.env,
+                        STOCK_API_URL: stockApiUrl,
+                    },
+                },
+            )
+            stockStdout = result.stdout
+            stockStderr = result.stderr
+            console.log(`[CRON] Stock scraper completed successfully`)
+        } else {
+            console.error(`[CRON] Stock scraper not found at ${stockScraperScript}`)
+        }
+
+        // Extract summaries
+        const fundLines = fundStdout.trim().split("\n").slice(-10)
+        const stockLines = stockStdout.trim().split("\n").slice(-10)
 
         return NextResponse.json({
             success: true,
-            message: "Fund scraper completed",
-            summary: summaryLines.join("\n"),
-            stderr: stderr ? stderr.slice(0, 500) : null,
+            message: "Fund & Stock scrapers completed",
+            summary: {
+                funds: fundLines.join("\n"),
+                stocks: stockLines.join("\n"),
+            },
+            stderr: (fundStderr + "\n" + stockStderr).trim().slice(0, 500) || null,
         })
     } catch (error: any) {
         console.error("[CRON] Scraper execution failed:", error.message)

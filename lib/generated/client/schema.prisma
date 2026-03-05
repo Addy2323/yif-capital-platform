@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../lib/generated/client"
+  provider      = "prisma-client-js"
+  output        = "../lib/generated/client"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -524,4 +525,56 @@ model FundAttribution {
 
   @@unique([fundId, date, timeframe])
   @@index([fundId, date])
+}
+
+// ============================================
+// DSE STOCK MARKET DATA
+// ============================================
+
+model DseStock {
+  id              String   @id @default(uuid())
+  symbol          String
+  name            String
+  price           Float
+  change          Float    @default(0)
+  changePct       Float    @default(0)
+  marketCap       Float?
+  volume          Int?
+  revenue         Float?
+  peRatio         Float?
+  dividendYield   Float?
+  payoutRatio     Float?
+  netIncome       Float?
+  eps             Float?
+  ytdChange       Float?
+  change1w        Float?
+  change1m        Float?
+  change6m        Float?
+  change1y        Float?
+  change3y        Float?
+  change5y        Float?
+  psRatio         Float?
+  pbRatio         Float?
+  roe             Float?
+  roa             Float?
+  debtToEquity    Float?
+  dps             Float?
+  dividendGrowth  Float?
+  payoutFrequency String?
+  operatingIncome Float?
+  fcf             Float?
+  fcfPerShare     Float?
+  sharesOut       Float?
+  averageVolume   Float?
+  beta            Float?
+  rsi             Float?
+  description     String?
+  sector          String?
+  industry        String?
+  scrapedAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([symbol, scrapedAt])
+  @@index([symbol])
+  @@index([scrapedAt])
 }

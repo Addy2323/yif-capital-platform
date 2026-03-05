@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { BarChart3, GraduationCap, MessageSquare } from "lucide-react"
+import { BarChart3, GraduationCap, MessageSquare, Activity } from "lucide-react"
 
 export function MobileNav() {
     const pathname = usePathname()
@@ -18,6 +18,16 @@ export function MobileNav() {
             name: "Forum",
             href: "https://forum.yifcapital.co.tz",
             icon: MessageSquare,
+        },
+        {
+            name: "Funds",
+            href: "/funds",
+            icon: Activity,
+        },
+        {
+            name: "Stocks",
+            href: "/stocks",
+            icon: BarChart3,
         },
         {
             name: "Analytics",

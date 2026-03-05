@@ -91,7 +91,42 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
             }
         }
 
+        // Fetch live DSE stocks from our new scraper API
+        const fetchStocks = async () => {
+            try {
+                const response = await fetch("/api/v1/stocks")
+                const result = await response.json()
+                if (result.success && result.data.length > 0) {
+                    // Map the API shape (StockData) to the mock context shape (Stock)
+                    const liveStocks = result.data.map((s: any) => ({
+                        symbol: s.symbol,
+                        name: s.name,
+                        price: s.price,
+                        change: s.change,
+                        changePercent: s.changePct,
+                        volume: s.volume || 0,
+                        marketCap: s.marketCap || 0,
+                        sector: s.sector || "Other",
+                        industry: s.industry || "Other",
+                        description: "",
+                        listingDate: "",
+                        freeFloat: "",
+                        avgVolume: 0,
+                        high52w: 0,
+                        low52w: 0,
+                    }))
+                    setStocks(liveStocks)
+                } else {
+                    setStocks(savedStocks ? JSON.parse(savedStocks) : dseStocks)
+                }
+            } catch (error) {
+                console.error("Failed to fetch live stocks:", error)
+                setStocks(savedStocks ? JSON.parse(savedStocks) : dseStocks)
+            }
+        }
+
         fetchFunds()
+        fetchStocks()
         setIsInitialized(true)
     }, [])
 

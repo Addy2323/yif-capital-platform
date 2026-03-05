@@ -52,22 +52,8 @@ const navigation: NavItem[] = [
   { name: "Funds", href: "/funds", icon: Activity },
   // { name: "Home", href: "/dashboard", icon: Home },
   // { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },
+  { name: "Stocks", href: "/stocks", icon: BarChart3 },
   /* {
-    name: "Stocks",
-    icon: BarChart3,
-    children: [
-      { name: "Stock Screener", href: "/dashboard/stocks/screener" },
-      { name: "Stock Exchanges", href: "/dashboard/stocks/exchanges" },
-      { name: "Comparison Tool", href: "/dashboard/stocks/comparison" },
-      { name: "Earnings Calendar", href: "/dashboard/stocks/earnings" },
-      { name: "By Industry", href: "/dashboard/stocks/industry" },
-      { name: "Stock Lists", href: "/dashboard/stocks/lists" },
-      { name: "Top Analysts", href: "/dashboard/stocks/analysts" },
-      { name: "Top Stocks", href: "/dashboard/stocks/top" },
-      { name: "Corporate Actions", href: "/dashboard/stocks/corporate-actions" },
-    ],
-  },
-  {
     name: "IPOs",
     icon: Target,
     children: [
