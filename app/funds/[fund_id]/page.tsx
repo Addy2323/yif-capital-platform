@@ -98,7 +98,8 @@ export default function FundDetailPage() {
 
     const filteredHistory = navHistory.filter(record =>
         record.date.includes(searchTerm) ||
-        record.nav_per_unit.toString().includes(searchTerm)
+        record.nav_per_unit.toString().includes(searchTerm) ||
+        (record.scheme_name && record.scheme_name.toLowerCase().includes(searchTerm.toLowerCase()))
     )
 
     const totalPages = Math.ceil(filteredHistory.length / itemsPerPage)
@@ -115,7 +116,7 @@ export default function FundDetailPage() {
     }
 
     if (isLoading) {
-        return <ModuleLayout fund={null} fundId={fundId} activeModule="performance" isLoading={true} />
+        return <ModuleLayout fund={null} fundId={fundId} activeModule="performance" isLoading={true}><></></ModuleLayout>
     }
 
     const latest = navHistory[0] || {}
@@ -252,6 +253,7 @@ export default function FundDetailPage() {
                                 <TableHeader>
                                     <TableRow className="bg-muted/5 font-bold uppercase tracking-wider text-[10px]">
                                         <TableHead>Valuation Date</TableHead>
+                                        <TableHead>Scheme / Fund</TableHead>
                                         <TableHead className="text-right">NAV per Unit (TZS)</TableHead>
                                         <TableHead className="text-right">Total Fund NAV</TableHead>
                                         <TableHead className="text-right">Outstanding Units</TableHead>
@@ -266,11 +268,14 @@ export default function FundDetailPage() {
                                         const dPct = prev ? (dChange / prev.nav_per_unit) * 100 : 0
 
                                         return (
-                                            <TableRow key={record.date} className="hover:bg-muted/5 transition-colors">
+                                            <TableRow key={`${record.date}-${record.scheme_name || index}`} className="hover:bg-muted/5 transition-colors">
                                                 <TableCell className="font-medium text-sm">
                                                     {new Date(record.date).toLocaleDateString('en-US', {
                                                         year: 'numeric', month: 'short', day: 'numeric'
                                                     })}
+                                                </TableCell>
+                                                <TableCell className="text-sm font-medium text-muted-foreground">
+                                                    {record.scheme_name || '—'}
                                                 </TableCell>
                                                 <TableCell className="text-right font-mono text-sm">
                                                     {record.nav_per_unit.toFixed(4)}

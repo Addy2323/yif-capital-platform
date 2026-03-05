@@ -30,12 +30,13 @@ const FALLBACK_COLORS = [
 interface FundRecord {
     date: string
     fund_name?: string
+    scheme_name?: string
     nav_per_unit?: number
     total_nav?: number
     sale_price?: number
     repurchase_price?: number
     units?: number
-    source: string
+    source?: string
 }
 
 interface MultiSeriesNavChartProps {
@@ -93,7 +94,8 @@ export function MultiSeriesNavChart({ data = [], processedData, height = 350, is
             })
         } else {
             data.forEach((record) => {
-                if (record.fund_name && isNaN(Number(record.fund_name.replace(/,/g, "")))) names.add(record.fund_name)
+                const name = record.fund_name || record.scheme_name
+                if (name && isNaN(Number(name.replace(/,/g, "")))) names.add(name)
             })
         }
         return Array.from(names).sort()
@@ -119,10 +121,11 @@ export function MultiSeriesNavChart({ data = [], processedData, height = 350, is
         const allDates = new Set<string>()
 
         data.forEach((record) => {
-            if (!record.fund_name || !record.nav_per_unit || !record.date) return
+            const fundName = record.fund_name || record.scheme_name
+            if (!fundName || !record.nav_per_unit || !record.date) return
             allDates.add(record.date)
             if (!byDate.has(record.date)) byDate.set(record.date, new Map())
-            byDate.get(record.date)!.set(record.fund_name, record.nav_per_unit)
+            byDate.get(record.date)!.set(fundName, record.nav_per_unit)
         })
 
         // Sort dates chronologically (ascending)

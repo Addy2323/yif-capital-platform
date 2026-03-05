@@ -116,6 +116,14 @@ export interface NavHistoryPoint {
   nav: number
 }
 
+export interface NavRecord {
+  date: string
+  nav_per_unit: number
+  total_nav: number
+  units: number
+  scheme_name?: string
+}
+
 export interface FundBenchmarkPoint {
   date: string
   fund_return: number
