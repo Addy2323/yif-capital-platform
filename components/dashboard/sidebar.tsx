@@ -35,6 +35,7 @@ import {
   Clock,
   Map,
   Shield,
+  Briefcase,
 } from "lucide-react"
 
 interface NavItem {
@@ -49,6 +50,7 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
+  { name: "Portfolio", href: "/portfolio", icon: Briefcase },
   { name: "Funds", href: "/funds", icon: Activity },
   // { name: "Home", href: "/dashboard", icon: Home },
   // { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },

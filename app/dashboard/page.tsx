@@ -89,6 +89,35 @@ export default function DashboardPage() {
         ...
       </div> */}
 
+      {/* Portfolio Quick Access */}
+      <Card className="border-gold/20 bg-gradient-to-r from-navy/80 to-navy/60">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-lg font-bold text-gold">
+            <Briefcase className="h-5 w-5" />
+            My Portfolio
+          </CardTitle>
+          <CardDescription className="text-muted-foreground">
+            Track your stocks, funds, and bonds — all in one place.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild className="bg-gold text-navy hover:bg-gold/90">
+              <Link href="/portfolio">
+                <Briefcase className="mr-2 h-4 w-4" />
+                View Portfolio
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
+              <Link href="/portfolio">
+                <TrendingUp className="mr-2 h-4 w-4" />
+                Track Performance
+              </Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Indices */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {indices.map((index) => (
