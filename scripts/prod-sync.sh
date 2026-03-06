@@ -1,12 +1,13 @@
 #!/bin/bash
 # =============================================================================
-# Production Fund Sync Script for yifcapital.co.tz
+# Production Data Sync Script for yifcapital.co.tz
 # =============================================================================
 #
 # PURPOSE:
 #   Automatically scrapes fund data from all configured sources (UTT AMIS,
-#   Vertex, Sanlam Pesa, Zansec, WHI, iTrust) and pushes updates to the
-#   production Next.js API so the website always shows fresh data.
+#   Vertex, Sanlam Pesa, Zansec, WHI, iTrust) AND DSE stock data from
+#   stockanalysis.com, then pushes updates to the production Next.js API
+#   so the website always shows fresh data.
 #
 # CRON SETUP (run these commands on your production server):
 # ----------------------------------------------------------------
@@ -46,6 +47,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$PROJECT_DIR"
 
 export FUND_API_URL="${FUND_API_URL:-http://localhost:3000/api/funds/update}"
+export STOCK_API_URL="${STOCK_API_URL:-http://localhost:3000}"
 PYTHON_EXEC="$PROJECT_DIR/fund_pipeline/.venv/bin/python3"
 LOG_FILE="$PROJECT_DIR/fund_pipeline/logs/automation.log"
 
@@ -66,24 +68,44 @@ if ! curl -s -o /dev/null -w "%{http_code}" http://localhost:3000 | grep -q "200
 fi
 
 # ---------------------------------------------------------------------------
-# Run Scraper
+# Run Fund Scraper
 # ---------------------------------------------------------------------------
 echo "" >> "$LOG_FILE"
 echo "================================================================" >> "$LOG_FILE"
-echo "[$(date)] Starting Daily Fund Sync..." >> "$LOG_FILE"
+echo "[$(date)] Starting Daily Data Sync..." >> "$LOG_FILE"
 echo "================================================================" >> "$LOG_FILE"
 
-# Run the scraper — it scrapes ALL sources and pushes to the API
+echo "[$(date)] [1/2] Running Fund Scraper..." >> "$LOG_FILE"
 $PYTHON_EXEC "$PROJECT_DIR/fund_pipeline/scraper/selenium_scraper.py" --latest-only >> "$LOG_FILE" 2>&1
-EXIT_CODE=$?
+FUND_EXIT=$?
+
+if [ $FUND_EXIT -eq 0 ]; then
+    echo "[$(date)] ✅ Fund Scraper Complete" >> "$LOG_FILE"
+else
+    echo "[$(date)] ❌ Fund Scraper FAILED (exit code: $FUND_EXIT)" >> "$LOG_FILE"
+fi
+
+# ---------------------------------------------------------------------------
+# Run DSE Stock Scraper
+# ---------------------------------------------------------------------------
+echo "[$(date)] [2/2] Running DSE Stock Scraper..." >> "$LOG_FILE"
+$PYTHON_EXEC "$PROJECT_DIR/fund_pipeline/scraper/dse_scraper.py" --push >> "$LOG_FILE" 2>&1
+STOCK_EXIT=$?
+
+if [ $STOCK_EXIT -eq 0 ]; then
+    echo "[$(date)] ✅ DSE Stock Scraper Complete" >> "$LOG_FILE"
+else
+    echo "[$(date)] ❌ DSE Stock Scraper FAILED (exit code: $STOCK_EXIT)" >> "$LOG_FILE"
+fi
 
 # ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
-if [ $EXIT_CODE -eq 0 ]; then
-    echo "[$(date)] ✅ Daily Fund Sync Complete (exit code: $EXIT_CODE)" >> "$LOG_FILE"
+if [ $FUND_EXIT -eq 0 ] && [ $STOCK_EXIT -eq 0 ]; then
+    echo "[$(date)] ✅ Daily Data Sync Complete — All scrapers succeeded" >> "$LOG_FILE"
 else
-    echo "[$(date)] ❌ Daily Fund Sync FAILED (exit code: $EXIT_CODE)" >> "$LOG_FILE"
+    echo "[$(date)] ⚠️  Daily Data Sync Finished with errors (Fund=$FUND_EXIT, Stocks=$STOCK_EXIT)" >> "$LOG_FILE"
 fi
 
 echo "================================================================" >> "$LOG_FILE"
+
