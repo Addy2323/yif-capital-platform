@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { ChevronDown, BarChart2, GraduationCap, MessageSquare, Menu, ArrowLeft } from "lucide-react"
+import { ChevronDown, BarChart2, GraduationCap, MessageSquare, Menu, ArrowLeft, Briefcase } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/lib/auth-context"
@@ -49,6 +49,12 @@ const navLinks = [
         description: "Community & discussion",
         href: "https://forum.yifcapital.co.tz",
         icon: MessageSquare
+      },
+      {
+        name: "Portfolio",
+        description: "Track your investments",
+        href: "/portfolio",
+        icon: Briefcase
       },
     ]
   },
@@ -223,6 +229,16 @@ export function Header() {
                     )}
                   >
                     YIF Analytics
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "text-lg font-medium transition-colors",
+                      pathname === "/portfolio" ? "text-gold" : "text-white/80 hover:text-white"
+                    )}
+                  >
+                    Portfolio
                   </Link>
                   <Link
                     href="https://forum.yifcapital.co.tz"

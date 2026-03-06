@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { BarChart3, GraduationCap, MessageSquare, Activity } from "lucide-react"
+import { BarChart3, GraduationCap, MessageSquare, Activity, Briefcase } from "lucide-react"
 
 export function MobileNav() {
     const pathname = usePathname()
@@ -30,9 +30,9 @@ export function MobileNav() {
             icon: BarChart3,
         },
         {
-            name: "Analytics",
-            href: "/dashboard",
-            icon: BarChart3,
+            name: "Portfolio",
+            href: "/portfolio",
+            icon: Briefcase,
         },
     ]
 
