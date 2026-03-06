@@ -247,6 +247,52 @@ const InputField = ({ label, type = "text", value, onChange, placeholder, list }
     </div>
 );
 
+const AutocompleteField = ({ label, value, onChange, placeholder, options, onSelect }: any) => {
+    const [open, setOpen] = useState(false);
+
+    // Filter options based on input
+    const filtered = options.filter((o: any) =>
+        o.label.toLowerCase().includes(value.toLowerCase()) ||
+        (o.sub && o.sub.toLowerCase().includes(value.toLowerCase()))
+    );
+
+    return (
+        <div style={{ marginBottom: 16, position: "relative" }}>
+            <label style={{ display: "block", color: "#E2E8F0", fontSize: 12, fontWeight: 600, letterSpacing: 1, marginBottom: 6, textTransform: "uppercase" as const }}>{label}</label>
+            <input
+                type="text" value={value}
+                onChange={(e: any) => { onChange(e.target.value); setOpen(true); }}
+                onFocus={() => setOpen(true)}
+                onBlur={() => setTimeout(() => setOpen(false), 200)}
+                placeholder={placeholder}
+                style={{
+                    width: "100%", background: "#0A1F44", border: "1px solid #24427E", borderRadius: 10,
+                    padding: "10px 14px", color: "#e8f0fe", fontSize: 14, outline: "none",
+                    fontFamily: "'Outfit', sans-serif", boxSizing: "border-box" as const
+                }}
+            />
+            {open && filtered.length > 0 && (
+                <div style={{
+                    position: "absolute", top: "100%", left: 0, right: 0, marginTop: 4,
+                    background: "#0A1F44", border: "1px solid #24427E", borderRadius: 10,
+                    maxHeight: 220, overflowY: "auto", zIndex: 300, boxShadow: "0 10px 25px rgba(0,0,0,0.5)"
+                }}>
+                    {filtered.map((o: any, i: number) => (
+                        <div key={i} onClick={() => { onChange(o.value); onSelect && onSelect(o); setOpen(false); }}
+                            style={{ padding: "12px 14px", borderBottom: i < filtered.length - 1 ? "1px solid #1A3A6E" : "none", cursor: "pointer" }}
+                            onMouseEnter={(e: any) => e.currentTarget.style.background = "#1A3A6E"}
+                            onMouseLeave={(e: any) => e.currentTarget.style.background = "transparent"}
+                        >
+                            <div style={{ fontWeight: 600, color: "#e8f0fe", fontSize: 14 }}>{o.label}</div>
+                            {o.sub && <div style={{ color: "#B0B8C1", fontSize: 12, marginTop: 2 }}>{o.sub}</div>}
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
 /* ─── MAIN PAGE ─── */
 export default function PortfolioPage() {
     const { user, isLoading: authLoading } = useAuth();
@@ -489,9 +535,10 @@ export default function PortfolioPage() {
                                             <Btn variant="danger" onClick={() => deletePortfolio(activePortfolio.id)}>Delete</Btn>
                                         </div>
                                     </div>
-                                    <div style={{ display: "flex", gap: 0, borderBottom: "1px solid #24427E", marginTop: 16 }}>
+                                    <div style={{ display: "flex", gap: 0, borderBottom: "1px solid #24427E", marginTop: 16, overflowX: "auto", scrollbarWidth: "none", msOverflowStyle: "none" }} className="hide-scrollbar">
                                         {tabs.map(t => (
                                             <button key={t} onClick={() => setTab(t)} style={{
+                                                flexShrink: 0, whiteSpace: "nowrap",
                                                 background: "none", border: "none", borderBottom: tab === t ? "2px solid #D4A017" : "2px solid transparent",
                                                 color: tab === t ? "#D4A017" : "#B0B8C1", padding: "10px 20px", fontSize: 13, fontWeight: 600,
                                                 cursor: "pointer", textTransform: "capitalize" as const, transition: "all 0.15s", letterSpacing: 0.3
@@ -840,15 +887,17 @@ export default function PortfolioPage() {
 
                         {(showAddStock || showEditStock) && (
                             <Modal title={showEditStock ? `Edit ${showEditStock.ticker}` : "Add Tanzanian Stock"} onClose={() => { setShowAddStock(false); setShowEditStock(null); resetStockForm(); }}>
-                                <datalist id="tickers">
-                                    {DSE_STOCKS.map(s => <option key={s.ticker} value={s.ticker}>{s.name} — {s.sector}</option>)}
-                                </datalist>
                                 {!showEditStock && (
-                                    <InputField label="Ticker Symbol" value={sTicker} onChange={(v: string) => {
-                                        setSTicker(v.toUpperCase());
-                                        const found = DSE_STOCKS.find(s => s.ticker === v.toUpperCase());
-                                        if (found && found.price) setSCurPrice(String(found.price));
-                                    }} placeholder="e.g. CRDB" list="tickers" />
+                                    <AutocompleteField
+                                        label="Ticker Symbol"
+                                        value={sTicker}
+                                        onChange={(v: string) => setSTicker(v.toUpperCase())}
+                                        placeholder="e.g. CRDB"
+                                        options={DSE_STOCKS.map(s => ({ value: s.ticker, label: s.ticker, sub: `${s.name} — ${s.sector}`, price: s.price }))}
+                                        onSelect={(o: any) => {
+                                            if (o.price) setSCurPrice(String(o.price));
+                                        }}
+                                    />
                                 )}
                                 <InputField label="Purchase Date (Optional)" type="date" value={sBuyDate} onChange={setSBuyDate} />
                                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
@@ -875,14 +924,16 @@ export default function PortfolioPage() {
 
                         {(showAddFund || showEditFund) && (
                             <Modal title={showEditFund ? "Edit Fund" : "Add Fund / Bond"} onClose={() => { setShowAddFund(false); setShowEditFund(null); resetFundForm(); }}>
-                                <datalist id="funds">
-                                    {FUND_CATALOGUE.map(f => <option key={f.name} value={f.name}>{f.provider} — {f.type}</option>)}
-                                </datalist>
-                                <InputField label="Fund / Bond Name" value={fName} onChange={(v: string) => {
-                                    setFName(v);
-                                    const found = FUND_CATALOGUE.find(f => f.name === v);
-                                    if (found) setFType(found.type);
-                                }} placeholder="e.g. Umoja Fund" list="funds" />
+                                <AutocompleteField
+                                    label="Fund / Bond Name"
+                                    value={fName}
+                                    onChange={setFName}
+                                    placeholder="e.g. Umoja Fund"
+                                    options={FUND_CATALOGUE.map(f => ({ value: f.name, label: f.name, sub: `${f.provider} — ${f.type}`, type: f.type }))}
+                                    onSelect={(o: any) => {
+                                        if (o.type) setFType(o.type);
+                                    }}
+                                />
                                 <div style={{ marginBottom: 16 }}>
                                     <label style={{ display: "block", color: "#E2E8F0", fontSize: 12, fontWeight: 600, letterSpacing: 1, marginBottom: 6, textTransform: "uppercase" as const }}>Type</label>
                                     <select value={fType} onChange={(e: any) => setFType(e.target.value)} style={{
