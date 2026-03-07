@@ -7,12 +7,9 @@ import { Building2, Landmark, Zap, Factory, ShoppingBag, Truck, Phone } from "lu
 import Link from "next/link"
 
 const sectorIcons: Record<string, any> = {
-    "Banking": Landmark,
-    "Consumer Goods": ShoppingBag,
-    "Construction": Factory,
-    "Services": Truck,
-    "Industrial": Zap,
-    "Telecommunications": Phone,
+    "Banks, Finance and Investment": Landmark,
+    "Commercial Services": Phone,
+    "Industrial and Allied": Factory,
 }
 
 export default function ByIndustryPage() {
