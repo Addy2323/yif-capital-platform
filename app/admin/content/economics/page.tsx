@@ -102,7 +102,7 @@ export default function AdminEconomicsPage() {
 
     return (
         <div className="space-y-6 pb-20">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" size="icon" asChild className="text-white/60">
                         <Link href="/admin/content">
@@ -110,23 +110,21 @@ export default function AdminEconomicsPage() {
                         </Link>
                     </Button>
                     <div>
-                        <h1 className="text-2xl font-bold text-white">Economic Indicators</h1>
-                        <p className="text-white/60">Manually update macroeconomic data for the platform.</p>
+                        <h1 className="text-xl md:text-2xl font-bold text-white">Economic Indicators</h1>
+                        <p className="text-xs md:text-sm text-white/60">Manually update macroeconomic data for the platform.</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Button variant="outline" onClick={fetchIndicators} className="border-white/10 text-white hover:bg-white/5">
+                <div className="flex items-center gap-2 md:gap-3">
+                    <Button variant="outline" size="sm" onClick={fetchIndicators} className="border-white/10 text-white hover:bg-white/5 h-9 md:h-10 px-3 md:px-4">
                         <RefreshCcw className={`mr-2 h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-                        Refresh
+                        <span className="hidden xs:inline">Refresh</span>
                     </Button>
-                    <Button onClick={saveAll} disabled={saving} className="bg-gold text-navy hover:bg-gold/90">
+                    <Button size="sm" onClick={saveAll} disabled={saving} className="bg-gold text-navy hover:bg-gold/90 h-9 md:h-10 px-3 md:px-4">
                         <Save className="mr-2 h-4 w-4" />
-                        {saving ? "Saving..." : "Save All Changes"}
+                        {saving ? "Saving..." : "Save Changes"}
                     </Button>
                 </div>
-            </div>
-
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
+            </div>            <Card className="bg-white/5 border-white/10 overflow-hidden">
                 <CardHeader className="border-b border-white/10 bg-white/[0.02]">
                     <div className="flex items-center justify-between">
                         <CardTitle className="text-sm font-bold uppercase tracking-widest text-white/40">Indicator List</CardTitle>

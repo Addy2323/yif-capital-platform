@@ -67,10 +67,10 @@ export default function EconomicsPage() {
                     <div className="inline-block mb-4 border border-gold/30 text-gold bg-gold/10 px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">
                         Market Intelligence
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white flex flex-col items-center justify-center gap-2">
+                    <h1 className="text-3xl md:text-6xl font-black mb-4 md:mb-6 tracking-tight text-white flex flex-col items-center justify-center gap-2">
                         Economic <span className="text-gold italic">Indicators</span>
                     </h1>
-                    <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
+                    <p className="text-slate-400 text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
                         Monitor Tanzanian macroeconomic trends and key monetary policy rates in real-time.
                     </p>
                 </div>
@@ -103,9 +103,9 @@ export default function EconomicsPage() {
                                 >
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                         <div>
-                                            <h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider mb-1">{indicator.title}</h3>
+                                            <h3 className="text-slate-400 text-[10px] md:text-sm font-bold uppercase tracking-wider mb-1">{indicator.title}</h3>
                                             <div className="flex items-baseline gap-3">
-                                                <span className="text-3xl md:text-4xl font-black text-white group-hover:text-gold transition-colors">{indicator.value}</span>
+                                                <span className="text-2xl md:text-4xl font-black text-white group-hover:text-gold transition-colors">{indicator.value}</span>
                                                 {indicator.change && (
                                                     <span className={`text-xs font-bold px-2 py-1 rounded flex items-center gap-1 ${indicator.trend === "up" ? "bg-green-500/10 text-green-500" :
                                                         indicator.trend === "down" ? "bg-red-500/10 text-red-500" :

@@ -120,8 +120,8 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Insights & Analysis */}
-      <div className="grid gap-4 md:grid-cols-2">
+      {/* Insights & Analysis & Economics */}
+      <div className="grid gap-4 md:grid-cols-3">
         <Card className="border-gold/20 bg-background hover:bg-muted/50 transition-colors">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-lg font-bold">
@@ -129,14 +129,14 @@ export default function DashboardPage() {
               Research & Insights
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Deep dive into market research, analysis, and reports.
+              Market research and analysis reports.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full sm:w-auto mt-2">
+            <Button asChild variant="outline" className="w-full mt-2">
               <Link href="/research">
                 <Search className="mr-2 h-4 w-4" />
-                Access Research
+                Research
               </Link>
             </Button>
           </CardContent>
@@ -149,14 +149,34 @@ export default function DashboardPage() {
               Latest Articles
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Stay updated with the latest news and educational articles.
+              News and educational articles.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full sm:w-auto mt-2">
+            <Button asChild variant="outline" className="w-full mt-2">
               <Link href="/articles">
                 <Newspaper className="mr-2 h-4 w-4" />
-                Read Articles
+                Read
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-red-500/20 bg-background hover:bg-muted/50 transition-colors">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <Globe className="h-5 w-5 text-red-500" />
+              Economic Indicators
+            </CardTitle>
+            <CardDescription className="text-muted-foreground">
+              Inflation, GDP, and CBR rates.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline" className="w-full mt-2">
+              <Link href="/economics">
+                <Globe className="mr-2 h-4 w-4" />
+                View Stats
               </Link>
             </Button>
           </CardContent>
