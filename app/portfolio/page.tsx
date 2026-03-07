@@ -117,13 +117,11 @@ const sectorColor = (s: string) => SECTOR_COLORS[s] || "#E2E8F0";
 const STORAGE_PREFIX = "dse_portfolios_v2_";
 const getUserKey = (userId: string) => STORAGE_PREFIX + userId;
 const loadData = (userId: string) => {
+    if (typeof window === "undefined") return [];
     try {
         const r = localStorage.getItem(getUserKey(userId));
         return r ? JSON.parse(r) : [];
     } catch { return []; }
-};
-const saveData = (userId: string, data: any) => {
-    try { localStorage.setItem(getUserKey(userId), JSON.stringify(data)); } catch { }
 };
 
 /* ─── chart helpers ─── */
@@ -336,10 +334,39 @@ export default function PortfolioPage() {
 
     useEffect(() => {
         if (!user) { setLoading(false); return; }
-        const d = loadData(user.id);
-        setPortfolios(d);
-        if (d.length > 0) setActiveId(d[0].id);
-        setLoading(false);
+
+        const initPortfolios = async () => {
+            try {
+                const res = await fetch("/api/v1/portfolios");
+                const result = await res.json();
+                let cloudData = result.success ? result.data : [];
+
+                // Simple Migration: If cloud is empty but local has data, push local to cloud
+                const local = loadData(user.id);
+                if (local.length > 0 && cloudData.length === 0) {
+                    for (const p of local) {
+                        await fetch("/api/v1/portfolios", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(p)
+                        });
+                    }
+                    const refreshRes = await fetch("/api/v1/portfolios");
+                    const refreshResult = await refreshRes.json();
+                    cloudData = refreshResult.success ? refreshResult.data : [];
+                    localStorage.removeItem(getUserKey(user.id));
+                }
+
+                setPortfolios(cloudData);
+                if (cloudData.length > 0) setActiveId(cloudData[0].id);
+            } catch (err) {
+                console.error("Failed to load portfolios", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        initPortfolios();
     }, [user]);
 
     useEffect(() => {
@@ -360,22 +387,51 @@ export default function PortfolioPage() {
         return () => clearInterval(interval);
     }, []);
 
-    const persist = (updated: any[]) => { setPortfolios(updated); if (user) saveData(user.id, updated); };
+    const syncToCloud = async (p: any) => {
+        try {
+            await fetch("/api/v1/portfolios", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(p)
+            });
+        } catch (err) {
+            console.error("Cloud sync failed", err);
+        }
+    };
+
+    const persist = (updated: any[]) => {
+        setPortfolios(updated);
+        // We rely on individual action handlers to call syncToCloud for specific portfolios
+    };
     const activePortfolio = portfolios.find((p: any) => p.id === activeId);
 
-    const createPortfolio = () => {
+    const createPortfolio = async () => {
         if (!pName.trim()) return;
         const np = { id: uid(), name: pName.trim(), desc: pDesc.trim(), createdAt: Date.now(), stocks: [], funds: [] };
         const updated = [...portfolios, np];
-        persist(updated); setActiveId(np.id); setPName(""); setPDesc(""); setShowCreatePortfolio(false); setTab("overview");
+        setPortfolios(updated);
+        setActiveId(np.id);
+        setPName("");
+        setPDesc("");
+        setShowCreatePortfolio(false);
+        setTab("overview");
+        await syncToCloud(np);
     };
-    const deletePortfolio = (id: string) => {
+
+    const deletePortfolio = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this portfolio?")) return;
         const updated = portfolios.filter((p: any) => p.id !== id);
-        persist(updated); setActiveId(updated[0]?.id || null);
+        setPortfolios(updated);
+        setActiveId(updated[0]?.id || null);
+        try {
+            await fetch(`/api/v1/portfolios?id=${id}`, { method: "DELETE" });
+        } catch (err) {
+            console.error("Delete sync failed", err);
+        }
     };
 
     const resetStockForm = () => { setSTicker(""); setSQty(""); setSBuyPrice(""); setSCurPrice(""); setSDividend(""); setSBuyDate(""); };
-    const addStock = () => {
+    const addStock = async () => {
         if (!sTicker || !sQty || !sBuyPrice || !sCurPrice) return;
         const cat = liveStocks.find(s => s.symbol === sTicker.toUpperCase());
         const stock = {
@@ -390,35 +446,65 @@ export default function PortfolioPage() {
             name: cat?.name || sTicker,
             sector: cat?.sector || "Other"
         };
-        const updated = portfolios.map((p: any) => p.id === activeId ? { ...p, stocks: [...p.stocks, stock] } : p);
-        persist(updated); resetStockForm(); setShowAddStock(false);
+        const updatedPortfolio = { ...activePortfolio, stocks: [...activePortfolio.stocks, stock] };
+        const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
+        setPortfolios(updatedList);
+        resetStockForm();
+        setShowAddStock(false);
+        await syncToCloud(updatedPortfolio);
     };
-    const updateStock = () => {
+    const deleteStock = async (sid: string) => {
+        const updatedPortfolio = { ...activePortfolio, stocks: activePortfolio.stocks.filter((s: any) => s.id !== sid) };
+        const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
+        setPortfolios(updatedList);
+        await syncToCloud(updatedPortfolio);
+    };
+    const updateStock = async () => {
         if (!showEditStock) return;
-        const updated = portfolios.map((p: any) => p.id === activeId ? { ...p, stocks: p.stocks.map((s: any) => s.id === showEditStock.id ? { ...s, qty: +sQty, buyPrice: +sBuyPrice, currentPrice: +sCurPrice, dividend: +sDividend || 0, buyDate: sBuyDate } : s) } : p);
-        persist(updated); resetStockForm(); setShowEditStock(null);
-    };
-    const deleteStock = (sid: string) => {
-        const updated = portfolios.map((p: any) => p.id === activeId ? { ...p, stocks: p.stocks.filter((s: any) => s.id !== sid) } : p);
-        persist(updated);
+        const updatedPortfolio = {
+            ...activePortfolio,
+            stocks: activePortfolio.stocks.map((s: any) =>
+                s.id === showEditStock.id ? { ...s, qty: +sQty, buyPrice: +sBuyPrice, currentPrice: +sCurPrice, dividend: +sDividend || 0, buyDate: sBuyDate } : s
+            )
+        };
+        const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
+        setPortfolios(updatedList);
+        resetStockForm();
+        setShowEditStock(null);
+        await syncToCloud(updatedPortfolio);
     };
     const openEditStock = (s: any) => { setSTicker(s.ticker); setSQty(String(s.qty)); setSBuyPrice(String(s.buyPrice)); setSCurPrice(String(s.currentPrice)); setSDividend(String(s.dividend)); setSBuyDate(s.buyDate || ""); setShowEditStock(s); };
 
     const resetFundForm = () => { setFName(""); setFType(""); setFInvested(""); setFCurrent(""); setFRate(""); setFStartDate(""); setFMaturityDate(""); };
-    const addFund = () => {
+    const addFund = async () => {
         if (!fName || !fInvested || !fCurrent) return;
         const fund = { id: uid(), name: fName, type: fType || "Unit Trust", invested: +fInvested, currentValue: +fCurrent, rate: +fRate || 0, startDate: fStartDate, maturityDate: fMaturityDate, addedAt: Date.now() };
-        const updated = portfolios.map((p: any) => p.id === activeId ? { ...p, funds: [...p.funds, fund] } : p);
-        persist(updated); resetFundForm(); setShowAddFund(false);
+        const updatedPortfolio = { ...activePortfolio, funds: [...activePortfolio.funds, fund] };
+        const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
+        setPortfolios(updatedList);
+        resetFundForm();
+        setShowAddFund(false);
+        await syncToCloud(updatedPortfolio);
     };
-    const updateFund = () => {
+    const updateFund = async () => {
         if (!showEditFund) return;
-        const updated = portfolios.map((p: any) => p.id === activeId ? { ...p, funds: p.funds.map((f: any) => f.id === showEditFund.id ? { ...f, name: fName, type: fType, invested: +fInvested, currentValue: +fCurrent, rate: +fRate || 0, startDate: fStartDate, maturityDate: fMaturityDate } : f) } : p);
-        persist(updated); resetFundForm(); setShowEditFund(null);
+        const updatedPortfolio = {
+            ...activePortfolio,
+            funds: activePortfolio.funds.map((f: any) =>
+                f.id === showEditFund.id ? { ...f, name: fName, type: fType, invested: +fInvested, currentValue: +fCurrent, rate: +fRate || 0, startDate: fStartDate, maturityDate: fMaturityDate } : f
+            )
+        };
+        const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
+        setPortfolios(updatedList);
+        resetFundForm();
+        setShowEditFund(null);
+        await syncToCloud(updatedPortfolio);
     };
-    const deleteFund = (fid: string) => {
-        const updated = portfolios.map((p: any) => p.id === activeId ? { ...p, funds: p.funds.filter((f: any) => f.id !== fid) } : p);
-        persist(updated);
+    const deleteFund = async (fid: string) => {
+        const updatedPortfolio = { ...activePortfolio, funds: activePortfolio.funds.filter((f: any) => f.id !== fid) };
+        const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
+        setPortfolios(updatedList);
+        await syncToCloud(updatedPortfolio);
     };
     const openEditFund = (f: any) => { setFName(f.name); setFType(f.type); setFInvested(String(f.invested)); setFCurrent(String(f.currentValue)); setFRate(String(f.rate || "")); setFStartDate(f.startDate || ""); setFMaturityDate(f.maturityDate || ""); setShowEditFund(f); };
 

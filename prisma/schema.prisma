@@ -22,6 +22,7 @@ model User {
   accessTokens AccessToken[]
   enrollments  Enrollment[]
   payments     Payment[]
+  portfolios   Portfolio[]
 }
 
 model Enrollment {
@@ -610,4 +611,60 @@ model EconomicIndicator {
   label     String   // e.g., "January 2026"
   sortOrder Int      @default(0)
   updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// PORTFOLIO MODELS
+// ============================================
+
+model Portfolio {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id])
+  stocks      PortfolioStock[]
+  funds       PortfolioFund[]
+
+  @@index([userId])
+}
+
+model PortfolioStock {
+  id           String    @id @default(uuid())
+  portfolioId  String
+  ticker       String
+  name         String
+  sector       String?
+  qty          Float
+  buyPrice     Float
+  currentPrice Float?
+  dividend     Float?    @default(0)
+  buyDate      DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  portfolio    Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
+}
+
+model PortfolioFund {
+  id           String    @id @default(uuid())
+  portfolioId  String
+  name         String
+  type         String?
+  invested     Float
+  currentValue Float
+  rate         Float?    @default(0)
+  startDate    DateTime?
+  maturityDate DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  portfolio    Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
 }
