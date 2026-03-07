@@ -602,3 +602,12 @@ model DseStock {
   @@index([symbol])
   @@index([scrapedAt])
 }
+
+model EconomicIndicator {
+  id        String   @id @default(uuid())
+  title     String   @unique // e.g., "Inflation Rate"
+  value     String   // e.g., "3.3%"
+  label     String   // e.g., "January 2026"
+  sortOrder Int      @default(0)
+  updatedAt DateTime @updatedAt
+}

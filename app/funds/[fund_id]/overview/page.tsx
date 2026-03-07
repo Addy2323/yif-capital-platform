@@ -94,8 +94,8 @@ export default function OverviewPage() {
     if (!overview?.nav_history) return []
     return overview.nav_history.map(item => ({
       date: item.date,
-      fund: item.nav_per_unit,
-      benchmark: item.nav_per_unit * (1 + (Math.random() * 0.04 - 0.02)) // Mock benchmark data
+      fund: item.nav,
+      benchmark: item.nav * (1 + (Math.random() * 0.04 - 0.02)) // Mock benchmark data
     }))
   }, [overview])
 

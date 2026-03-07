@@ -17,6 +17,8 @@ import {
   Globe,
   Target,
   Layers,
+  Search,
+  Newspaper,
 } from "lucide-react"
 import Link from "next/link"
 import { MarketTable } from "@/components/dashboard/market-table"
@@ -117,6 +119,49 @@ export default function DashboardPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Insights & Analysis */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card className="border-gold/20 bg-background hover:bg-muted/50 transition-colors">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <Search className="h-5 w-5 text-emerald-500" />
+              Research & Insights
+            </CardTitle>
+            <CardDescription className="text-muted-foreground">
+              Deep dive into market research, analysis, and reports.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline" className="w-full sm:w-auto mt-2">
+              <Link href="/research">
+                <Search className="mr-2 h-4 w-4" />
+                Access Research
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-blue-500/20 bg-background hover:bg-muted/50 transition-colors">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold">
+              <Newspaper className="h-5 w-5 text-blue-500" />
+              Latest Articles
+            </CardTitle>
+            <CardDescription className="text-muted-foreground">
+              Stay updated with the latest news and educational articles.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline" className="w-full sm:w-auto mt-2">
+              <Link href="/articles">
+                <Newspaper className="mr-2 h-4 w-4" />
+                Read Articles
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Indices */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

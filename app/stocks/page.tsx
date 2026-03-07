@@ -18,6 +18,36 @@ import {
 } from "@/components/ui/table"
 import { Search, SlidersHorizontal, Database, TrendingUp, TrendingDown, Info, ArrowUpDown } from "lucide-react"
 
+const STOCK_LOGOS: Record<string, string> = {
+    'CRDB': '/LOGO/CRDB2.jpg',
+    'DCB': '/LOGO/DCB.jpg',
+    'DSE': '/LOGO/DSE NEW1.jpg',
+    'JATU': '/LOGO/JATU.jpg',
+    'JHL': '/LOGO/JHL.jpg',
+    'KA': '/LOGO/KA.jpg',
+    'KCB': '/LOGO/KCB.jpg',
+    'MBP': '/LOGO/MAENDELEO.jpg',
+    'MCB': '/LOGO/MCB.jpg',
+    'MKCB': '/LOGO/MKOMBOZI.jpg',
+    'MUCOBA': '/LOGO/MUCOBA.jpg',
+    'NICO': '/LOGO/NICOL3.jpg',
+    'NMB': '/LOGO/NMB.jpg',
+    'NMG': '/LOGO/NMG.jpg',
+    'PAL': '/LOGO/PAL.jpg',
+    'SWIS': '/LOGO/Swisport.jpg',
+    'TBL': '/LOGO/TBL LOGO.jpg',
+    'TCC': '/LOGO/TCC3.jpg',
+    'TCCL': '/LOGO/tccl.jpg',
+    'TOL': '/LOGO/TOL.jpg',
+    'TPCC': '/LOGO/tpcc.jpg',
+    'TTP': '/LOGO/TTP.jpg',
+    'USL': '/LOGO/USL.jpg',
+    'VODA': '/LOGO/VODA.jpg',
+    'YETU': '/LOGO/YETU.jpg',
+    'EABL': '/LOGO/eabl.jpg',
+    'TICL': '/LOGO/AFRIPRISE.jpg',
+};
+
 export interface StockData {
     symbol: string
     name: string
@@ -434,8 +464,12 @@ export default function StocksPage() {
                                                         >
                                                             <TableCell className="py-4">
                                                                 <div className="flex items-center gap-3">
-                                                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 border border-border shadow-sm flex items-center justify-center font-bold text-sm text-foreground shrink-0">
-                                                                        {stock.symbol.substring(0, 2)}
+                                                                    <div className={`w-10 h-10 rounded-xl border border-border shadow-sm flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden ${STOCK_LOGOS[stock.symbol] ? 'bg-white' : 'bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 text-foreground'}`}>
+                                                                        {STOCK_LOGOS[stock.symbol] ? (
+                                                                            <img src={STOCK_LOGOS[stock.symbol]} alt={stock.symbol} className="w-full h-full object-contain p-1" />
+                                                                        ) : (
+                                                                            stock.symbol.substring(0, 2)
+                                                                        )}
                                                                     </div>
                                                                     <div className="flex-1 min-w-0">
                                                                         <div className="font-bold text-foreground text-sm truncate flex items-center gap-2">

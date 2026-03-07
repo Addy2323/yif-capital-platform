@@ -7,7 +7,8 @@ import {
   Newspaper,
   ArrowRight,
   Plus,
-  Search
+  Search,
+  Globe
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -51,6 +52,15 @@ export default function AdminContentPage() {
       href: "/admin/content/news",
       color: "text-green-500",
       bgColor: "bg-green-500/10"
+    },
+    {
+      title: "Economics",
+      description: "Manage national economic indicators",
+      icon: Globe,
+      count: 5,
+      href: "/admin/content/economics",
+      color: "text-red-500",
+      bgColor: "bg-red-500/10"
     },
     {
       title: "Pricing",

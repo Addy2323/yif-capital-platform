@@ -1,13 +1,12 @@
 "use client"
 
 import { AuthProvider } from "@/lib/auth-context"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { FileText, Download, Lock, Clock, TrendingUp, Building2, Landmark, Globe } from "lucide-react"
+import { FileText, Download, Lock, Clock, TrendingUp, Building2, Landmark, Globe, Search } from "lucide-react"
+import { motion } from "framer-motion"
 
 const reports = [
   {
@@ -74,22 +73,33 @@ const reports = [
 
 function ResearchContent() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-navy py-16 lg:py-24">
-          <div className="mx-auto max-w-7xl px-4 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-white lg:text-5xl text-balance">
-                Research & Insights
-              </h1>
-              <p className="mt-4 text-lg text-white/70 max-w-2xl mx-auto text-pretty">
-                Access professional-grade research reports, market analysis, and investment insights from our team of experts.
-              </p>
-            </div>
-          </div>
-        </section>
+    <div className="min-h-screen bg-background/95">
+      {/* Hero Header Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative overflow-hidden bg-slate-950 py-20 mb-12"
+      >
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+          <div className="absolute -top-1/2 -left-1/4 w-full h-full bg-gold/20 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute -bottom-1/2 -right-1/4 w-full h-full bg-emerald-500/10 blur-[100px] rounded-full" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10 max-w-7xl text-center">
+          <Badge variant="outline" className="mb-4 border-gold/30 text-gold bg-gold/10 px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">
+            Market Analysis
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-white flex items-center justify-center gap-3">
+            Research & <span className="text-gold italic">Insights</span>
+          </h1>
+          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
+            Access professional-grade research reports, market analysis, and investment insights from our team of experts.
+          </p>
+        </div>
+      </motion.div>
+
+      <div className="container mx-auto py-4 px-4 max-w-7xl">
 
         {/* Featured Report */}
         <section className="py-12">
@@ -211,8 +221,7 @@ function ResearchContent() {
             </Button>
           </div>
         </section>
-      </main>
-      <Footer />
+      </div>
     </div>
   )
 }

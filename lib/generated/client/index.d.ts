@@ -118,6 +118,11 @@ export type FundAttribution = $Result.DefaultSelection<Prisma.$FundAttributionPa
  * 
  */
 export type DseStock = $Result.DefaultSelection<Prisma.$DseStockPayload>
+/**
+ * Model EconomicIndicator
+ * 
+ */
+export type EconomicIndicator = $Result.DefaultSelection<Prisma.$EconomicIndicatorPayload>
 
 /**
  * Enums
@@ -521,6 +526,16 @@ export class PrismaClient<
     * ```
     */
   get dseStock(): Prisma.DseStockDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.economicIndicator`: Exposes CRUD operations for the **EconomicIndicator** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EconomicIndicators
+    * const economicIndicators = await prisma.economicIndicator.findMany()
+    * ```
+    */
+  get economicIndicator(): Prisma.EconomicIndicatorDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -982,7 +997,8 @@ export namespace Prisma {
     FundBenchmarking: 'FundBenchmarking',
     FundCompliance: 'FundCompliance',
     FundAttribution: 'FundAttribution',
-    DseStock: 'DseStock'
+    DseStock: 'DseStock',
+    EconomicIndicator: 'EconomicIndicator'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1001,7 +1017,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "dseStock"
+      modelProps: "user" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "dseStock" | "economicIndicator"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2559,6 +2575,80 @@ export namespace Prisma {
           }
         }
       }
+      EconomicIndicator: {
+        payload: Prisma.$EconomicIndicatorPayload<ExtArgs>
+        fields: Prisma.EconomicIndicatorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EconomicIndicatorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EconomicIndicatorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>
+          }
+          findFirst: {
+            args: Prisma.EconomicIndicatorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EconomicIndicatorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>
+          }
+          findMany: {
+            args: Prisma.EconomicIndicatorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>[]
+          }
+          create: {
+            args: Prisma.EconomicIndicatorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>
+          }
+          createMany: {
+            args: Prisma.EconomicIndicatorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EconomicIndicatorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>[]
+          }
+          delete: {
+            args: Prisma.EconomicIndicatorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>
+          }
+          update: {
+            args: Prisma.EconomicIndicatorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>
+          }
+          deleteMany: {
+            args: Prisma.EconomicIndicatorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EconomicIndicatorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EconomicIndicatorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>[]
+          }
+          upsert: {
+            args: Prisma.EconomicIndicatorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EconomicIndicatorPayload>
+          }
+          aggregate: {
+            args: Prisma.EconomicIndicatorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEconomicIndicator>
+          }
+          groupBy: {
+            args: Prisma.EconomicIndicatorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EconomicIndicatorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EconomicIndicatorCountArgs<ExtArgs>
+            result: $Utils.Optional<EconomicIndicatorCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2676,6 +2766,7 @@ export namespace Prisma {
     fundCompliance?: FundComplianceOmit
     fundAttribution?: FundAttributionOmit
     dseStock?: DseStockOmit
+    economicIndicator?: EconomicIndicatorOmit
   }
 
   /* Types for Logging */
@@ -28528,6 +28619,1048 @@ export namespace Prisma {
 
 
   /**
+   * Model EconomicIndicator
+   */
+
+  export type AggregateEconomicIndicator = {
+    _count: EconomicIndicatorCountAggregateOutputType | null
+    _avg: EconomicIndicatorAvgAggregateOutputType | null
+    _sum: EconomicIndicatorSumAggregateOutputType | null
+    _min: EconomicIndicatorMinAggregateOutputType | null
+    _max: EconomicIndicatorMaxAggregateOutputType | null
+  }
+
+  export type EconomicIndicatorAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type EconomicIndicatorSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type EconomicIndicatorMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    value: string | null
+    label: string | null
+    sortOrder: number | null
+    updatedAt: Date | null
+  }
+
+  export type EconomicIndicatorMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    value: string | null
+    label: string | null
+    sortOrder: number | null
+    updatedAt: Date | null
+  }
+
+  export type EconomicIndicatorCountAggregateOutputType = {
+    id: number
+    title: number
+    value: number
+    label: number
+    sortOrder: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EconomicIndicatorAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type EconomicIndicatorSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type EconomicIndicatorMinAggregateInputType = {
+    id?: true
+    title?: true
+    value?: true
+    label?: true
+    sortOrder?: true
+    updatedAt?: true
+  }
+
+  export type EconomicIndicatorMaxAggregateInputType = {
+    id?: true
+    title?: true
+    value?: true
+    label?: true
+    sortOrder?: true
+    updatedAt?: true
+  }
+
+  export type EconomicIndicatorCountAggregateInputType = {
+    id?: true
+    title?: true
+    value?: true
+    label?: true
+    sortOrder?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EconomicIndicatorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EconomicIndicator to aggregate.
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EconomicIndicators to fetch.
+     */
+    orderBy?: EconomicIndicatorOrderByWithRelationInput | EconomicIndicatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EconomicIndicatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EconomicIndicators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EconomicIndicators.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EconomicIndicators
+    **/
+    _count?: true | EconomicIndicatorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EconomicIndicatorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EconomicIndicatorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EconomicIndicatorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EconomicIndicatorMaxAggregateInputType
+  }
+
+  export type GetEconomicIndicatorAggregateType<T extends EconomicIndicatorAggregateArgs> = {
+        [P in keyof T & keyof AggregateEconomicIndicator]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEconomicIndicator[P]>
+      : GetScalarType<T[P], AggregateEconomicIndicator[P]>
+  }
+
+
+
+
+  export type EconomicIndicatorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EconomicIndicatorWhereInput
+    orderBy?: EconomicIndicatorOrderByWithAggregationInput | EconomicIndicatorOrderByWithAggregationInput[]
+    by: EconomicIndicatorScalarFieldEnum[] | EconomicIndicatorScalarFieldEnum
+    having?: EconomicIndicatorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EconomicIndicatorCountAggregateInputType | true
+    _avg?: EconomicIndicatorAvgAggregateInputType
+    _sum?: EconomicIndicatorSumAggregateInputType
+    _min?: EconomicIndicatorMinAggregateInputType
+    _max?: EconomicIndicatorMaxAggregateInputType
+  }
+
+  export type EconomicIndicatorGroupByOutputType = {
+    id: string
+    title: string
+    value: string
+    label: string
+    sortOrder: number
+    updatedAt: Date
+    _count: EconomicIndicatorCountAggregateOutputType | null
+    _avg: EconomicIndicatorAvgAggregateOutputType | null
+    _sum: EconomicIndicatorSumAggregateOutputType | null
+    _min: EconomicIndicatorMinAggregateOutputType | null
+    _max: EconomicIndicatorMaxAggregateOutputType | null
+  }
+
+  type GetEconomicIndicatorGroupByPayload<T extends EconomicIndicatorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EconomicIndicatorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EconomicIndicatorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EconomicIndicatorGroupByOutputType[P]>
+            : GetScalarType<T[P], EconomicIndicatorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EconomicIndicatorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    value?: boolean
+    label?: boolean
+    sortOrder?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["economicIndicator"]>
+
+  export type EconomicIndicatorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    value?: boolean
+    label?: boolean
+    sortOrder?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["economicIndicator"]>
+
+  export type EconomicIndicatorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    value?: boolean
+    label?: boolean
+    sortOrder?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["economicIndicator"]>
+
+  export type EconomicIndicatorSelectScalar = {
+    id?: boolean
+    title?: boolean
+    value?: boolean
+    label?: boolean
+    sortOrder?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EconomicIndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "value" | "label" | "sortOrder" | "updatedAt", ExtArgs["result"]["economicIndicator"]>
+
+  export type $EconomicIndicatorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EconomicIndicator"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      value: string
+      label: string
+      sortOrder: number
+      updatedAt: Date
+    }, ExtArgs["result"]["economicIndicator"]>
+    composites: {}
+  }
+
+  type EconomicIndicatorGetPayload<S extends boolean | null | undefined | EconomicIndicatorDefaultArgs> = $Result.GetResult<Prisma.$EconomicIndicatorPayload, S>
+
+  type EconomicIndicatorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EconomicIndicatorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EconomicIndicatorCountAggregateInputType | true
+    }
+
+  export interface EconomicIndicatorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EconomicIndicator'], meta: { name: 'EconomicIndicator' } }
+    /**
+     * Find zero or one EconomicIndicator that matches the filter.
+     * @param {EconomicIndicatorFindUniqueArgs} args - Arguments to find a EconomicIndicator
+     * @example
+     * // Get one EconomicIndicator
+     * const economicIndicator = await prisma.economicIndicator.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EconomicIndicatorFindUniqueArgs>(args: SelectSubset<T, EconomicIndicatorFindUniqueArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EconomicIndicator that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EconomicIndicatorFindUniqueOrThrowArgs} args - Arguments to find a EconomicIndicator
+     * @example
+     * // Get one EconomicIndicator
+     * const economicIndicator = await prisma.economicIndicator.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EconomicIndicatorFindUniqueOrThrowArgs>(args: SelectSubset<T, EconomicIndicatorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EconomicIndicator that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorFindFirstArgs} args - Arguments to find a EconomicIndicator
+     * @example
+     * // Get one EconomicIndicator
+     * const economicIndicator = await prisma.economicIndicator.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EconomicIndicatorFindFirstArgs>(args?: SelectSubset<T, EconomicIndicatorFindFirstArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EconomicIndicator that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorFindFirstOrThrowArgs} args - Arguments to find a EconomicIndicator
+     * @example
+     * // Get one EconomicIndicator
+     * const economicIndicator = await prisma.economicIndicator.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EconomicIndicatorFindFirstOrThrowArgs>(args?: SelectSubset<T, EconomicIndicatorFindFirstOrThrowArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EconomicIndicators that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EconomicIndicators
+     * const economicIndicators = await prisma.economicIndicator.findMany()
+     * 
+     * // Get first 10 EconomicIndicators
+     * const economicIndicators = await prisma.economicIndicator.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const economicIndicatorWithIdOnly = await prisma.economicIndicator.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EconomicIndicatorFindManyArgs>(args?: SelectSubset<T, EconomicIndicatorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EconomicIndicator.
+     * @param {EconomicIndicatorCreateArgs} args - Arguments to create a EconomicIndicator.
+     * @example
+     * // Create one EconomicIndicator
+     * const EconomicIndicator = await prisma.economicIndicator.create({
+     *   data: {
+     *     // ... data to create a EconomicIndicator
+     *   }
+     * })
+     * 
+     */
+    create<T extends EconomicIndicatorCreateArgs>(args: SelectSubset<T, EconomicIndicatorCreateArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EconomicIndicators.
+     * @param {EconomicIndicatorCreateManyArgs} args - Arguments to create many EconomicIndicators.
+     * @example
+     * // Create many EconomicIndicators
+     * const economicIndicator = await prisma.economicIndicator.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EconomicIndicatorCreateManyArgs>(args?: SelectSubset<T, EconomicIndicatorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EconomicIndicators and returns the data saved in the database.
+     * @param {EconomicIndicatorCreateManyAndReturnArgs} args - Arguments to create many EconomicIndicators.
+     * @example
+     * // Create many EconomicIndicators
+     * const economicIndicator = await prisma.economicIndicator.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EconomicIndicators and only return the `id`
+     * const economicIndicatorWithIdOnly = await prisma.economicIndicator.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EconomicIndicatorCreateManyAndReturnArgs>(args?: SelectSubset<T, EconomicIndicatorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EconomicIndicator.
+     * @param {EconomicIndicatorDeleteArgs} args - Arguments to delete one EconomicIndicator.
+     * @example
+     * // Delete one EconomicIndicator
+     * const EconomicIndicator = await prisma.economicIndicator.delete({
+     *   where: {
+     *     // ... filter to delete one EconomicIndicator
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EconomicIndicatorDeleteArgs>(args: SelectSubset<T, EconomicIndicatorDeleteArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EconomicIndicator.
+     * @param {EconomicIndicatorUpdateArgs} args - Arguments to update one EconomicIndicator.
+     * @example
+     * // Update one EconomicIndicator
+     * const economicIndicator = await prisma.economicIndicator.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EconomicIndicatorUpdateArgs>(args: SelectSubset<T, EconomicIndicatorUpdateArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EconomicIndicators.
+     * @param {EconomicIndicatorDeleteManyArgs} args - Arguments to filter EconomicIndicators to delete.
+     * @example
+     * // Delete a few EconomicIndicators
+     * const { count } = await prisma.economicIndicator.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EconomicIndicatorDeleteManyArgs>(args?: SelectSubset<T, EconomicIndicatorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EconomicIndicators.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EconomicIndicators
+     * const economicIndicator = await prisma.economicIndicator.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EconomicIndicatorUpdateManyArgs>(args: SelectSubset<T, EconomicIndicatorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EconomicIndicators and returns the data updated in the database.
+     * @param {EconomicIndicatorUpdateManyAndReturnArgs} args - Arguments to update many EconomicIndicators.
+     * @example
+     * // Update many EconomicIndicators
+     * const economicIndicator = await prisma.economicIndicator.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EconomicIndicators and only return the `id`
+     * const economicIndicatorWithIdOnly = await prisma.economicIndicator.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EconomicIndicatorUpdateManyAndReturnArgs>(args: SelectSubset<T, EconomicIndicatorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EconomicIndicator.
+     * @param {EconomicIndicatorUpsertArgs} args - Arguments to update or create a EconomicIndicator.
+     * @example
+     * // Update or create a EconomicIndicator
+     * const economicIndicator = await prisma.economicIndicator.upsert({
+     *   create: {
+     *     // ... data to create a EconomicIndicator
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EconomicIndicator we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EconomicIndicatorUpsertArgs>(args: SelectSubset<T, EconomicIndicatorUpsertArgs<ExtArgs>>): Prisma__EconomicIndicatorClient<$Result.GetResult<Prisma.$EconomicIndicatorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EconomicIndicators.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorCountArgs} args - Arguments to filter EconomicIndicators to count.
+     * @example
+     * // Count the number of EconomicIndicators
+     * const count = await prisma.economicIndicator.count({
+     *   where: {
+     *     // ... the filter for the EconomicIndicators we want to count
+     *   }
+     * })
+    **/
+    count<T extends EconomicIndicatorCountArgs>(
+      args?: Subset<T, EconomicIndicatorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EconomicIndicatorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EconomicIndicator.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EconomicIndicatorAggregateArgs>(args: Subset<T, EconomicIndicatorAggregateArgs>): Prisma.PrismaPromise<GetEconomicIndicatorAggregateType<T>>
+
+    /**
+     * Group by EconomicIndicator.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EconomicIndicatorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EconomicIndicatorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EconomicIndicatorGroupByArgs['orderBy'] }
+        : { orderBy?: EconomicIndicatorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EconomicIndicatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEconomicIndicatorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EconomicIndicator model
+   */
+  readonly fields: EconomicIndicatorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EconomicIndicator.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EconomicIndicatorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EconomicIndicator model
+   */
+  interface EconomicIndicatorFieldRefs {
+    readonly id: FieldRef<"EconomicIndicator", 'String'>
+    readonly title: FieldRef<"EconomicIndicator", 'String'>
+    readonly value: FieldRef<"EconomicIndicator", 'String'>
+    readonly label: FieldRef<"EconomicIndicator", 'String'>
+    readonly sortOrder: FieldRef<"EconomicIndicator", 'Int'>
+    readonly updatedAt: FieldRef<"EconomicIndicator", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EconomicIndicator findUnique
+   */
+  export type EconomicIndicatorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * Filter, which EconomicIndicator to fetch.
+     */
+    where: EconomicIndicatorWhereUniqueInput
+  }
+
+  /**
+   * EconomicIndicator findUniqueOrThrow
+   */
+  export type EconomicIndicatorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * Filter, which EconomicIndicator to fetch.
+     */
+    where: EconomicIndicatorWhereUniqueInput
+  }
+
+  /**
+   * EconomicIndicator findFirst
+   */
+  export type EconomicIndicatorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * Filter, which EconomicIndicator to fetch.
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EconomicIndicators to fetch.
+     */
+    orderBy?: EconomicIndicatorOrderByWithRelationInput | EconomicIndicatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EconomicIndicators.
+     */
+    cursor?: EconomicIndicatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EconomicIndicators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EconomicIndicators.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EconomicIndicators.
+     */
+    distinct?: EconomicIndicatorScalarFieldEnum | EconomicIndicatorScalarFieldEnum[]
+  }
+
+  /**
+   * EconomicIndicator findFirstOrThrow
+   */
+  export type EconomicIndicatorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * Filter, which EconomicIndicator to fetch.
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EconomicIndicators to fetch.
+     */
+    orderBy?: EconomicIndicatorOrderByWithRelationInput | EconomicIndicatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EconomicIndicators.
+     */
+    cursor?: EconomicIndicatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EconomicIndicators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EconomicIndicators.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EconomicIndicators.
+     */
+    distinct?: EconomicIndicatorScalarFieldEnum | EconomicIndicatorScalarFieldEnum[]
+  }
+
+  /**
+   * EconomicIndicator findMany
+   */
+  export type EconomicIndicatorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * Filter, which EconomicIndicators to fetch.
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EconomicIndicators to fetch.
+     */
+    orderBy?: EconomicIndicatorOrderByWithRelationInput | EconomicIndicatorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EconomicIndicators.
+     */
+    cursor?: EconomicIndicatorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EconomicIndicators from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EconomicIndicators.
+     */
+    skip?: number
+    distinct?: EconomicIndicatorScalarFieldEnum | EconomicIndicatorScalarFieldEnum[]
+  }
+
+  /**
+   * EconomicIndicator create
+   */
+  export type EconomicIndicatorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EconomicIndicator.
+     */
+    data: XOR<EconomicIndicatorCreateInput, EconomicIndicatorUncheckedCreateInput>
+  }
+
+  /**
+   * EconomicIndicator createMany
+   */
+  export type EconomicIndicatorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EconomicIndicators.
+     */
+    data: EconomicIndicatorCreateManyInput | EconomicIndicatorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EconomicIndicator createManyAndReturn
+   */
+  export type EconomicIndicatorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * The data used to create many EconomicIndicators.
+     */
+    data: EconomicIndicatorCreateManyInput | EconomicIndicatorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EconomicIndicator update
+   */
+  export type EconomicIndicatorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EconomicIndicator.
+     */
+    data: XOR<EconomicIndicatorUpdateInput, EconomicIndicatorUncheckedUpdateInput>
+    /**
+     * Choose, which EconomicIndicator to update.
+     */
+    where: EconomicIndicatorWhereUniqueInput
+  }
+
+  /**
+   * EconomicIndicator updateMany
+   */
+  export type EconomicIndicatorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EconomicIndicators.
+     */
+    data: XOR<EconomicIndicatorUpdateManyMutationInput, EconomicIndicatorUncheckedUpdateManyInput>
+    /**
+     * Filter which EconomicIndicators to update
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * Limit how many EconomicIndicators to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EconomicIndicator updateManyAndReturn
+   */
+  export type EconomicIndicatorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * The data used to update EconomicIndicators.
+     */
+    data: XOR<EconomicIndicatorUpdateManyMutationInput, EconomicIndicatorUncheckedUpdateManyInput>
+    /**
+     * Filter which EconomicIndicators to update
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * Limit how many EconomicIndicators to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EconomicIndicator upsert
+   */
+  export type EconomicIndicatorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EconomicIndicator to update in case it exists.
+     */
+    where: EconomicIndicatorWhereUniqueInput
+    /**
+     * In case the EconomicIndicator found by the `where` argument doesn't exist, create a new EconomicIndicator with this data.
+     */
+    create: XOR<EconomicIndicatorCreateInput, EconomicIndicatorUncheckedCreateInput>
+    /**
+     * In case the EconomicIndicator was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EconomicIndicatorUpdateInput, EconomicIndicatorUncheckedUpdateInput>
+  }
+
+  /**
+   * EconomicIndicator delete
+   */
+  export type EconomicIndicatorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+    /**
+     * Filter which EconomicIndicator to delete.
+     */
+    where: EconomicIndicatorWhereUniqueInput
+  }
+
+  /**
+   * EconomicIndicator deleteMany
+   */
+  export type EconomicIndicatorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EconomicIndicators to delete
+     */
+    where?: EconomicIndicatorWhereInput
+    /**
+     * Limit how many EconomicIndicators to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EconomicIndicator without action
+   */
+  export type EconomicIndicatorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EconomicIndicator
+     */
+    select?: EconomicIndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EconomicIndicator
+     */
+    omit?: EconomicIndicatorOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -28938,6 +30071,18 @@ export namespace Prisma {
   };
 
   export type DseStockScalarFieldEnum = (typeof DseStockScalarFieldEnum)[keyof typeof DseStockScalarFieldEnum]
+
+
+  export const EconomicIndicatorScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    value: 'value',
+    label: 'label',
+    sortOrder: 'sortOrder',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EconomicIndicatorScalarFieldEnum = (typeof EconomicIndicatorScalarFieldEnum)[keyof typeof EconomicIndicatorScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -31226,6 +32371,65 @@ export namespace Prisma {
     industry?: StringNullableWithAggregatesFilter<"DseStock"> | string | null
     scrapedAt?: DateTimeWithAggregatesFilter<"DseStock"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"DseStock"> | Date | string
+  }
+
+  export type EconomicIndicatorWhereInput = {
+    AND?: EconomicIndicatorWhereInput | EconomicIndicatorWhereInput[]
+    OR?: EconomicIndicatorWhereInput[]
+    NOT?: EconomicIndicatorWhereInput | EconomicIndicatorWhereInput[]
+    id?: StringFilter<"EconomicIndicator"> | string
+    title?: StringFilter<"EconomicIndicator"> | string
+    value?: StringFilter<"EconomicIndicator"> | string
+    label?: StringFilter<"EconomicIndicator"> | string
+    sortOrder?: IntFilter<"EconomicIndicator"> | number
+    updatedAt?: DateTimeFilter<"EconomicIndicator"> | Date | string
+  }
+
+  export type EconomicIndicatorOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    value?: SortOrder
+    label?: SortOrder
+    sortOrder?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EconomicIndicatorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    title?: string
+    AND?: EconomicIndicatorWhereInput | EconomicIndicatorWhereInput[]
+    OR?: EconomicIndicatorWhereInput[]
+    NOT?: EconomicIndicatorWhereInput | EconomicIndicatorWhereInput[]
+    value?: StringFilter<"EconomicIndicator"> | string
+    label?: StringFilter<"EconomicIndicator"> | string
+    sortOrder?: IntFilter<"EconomicIndicator"> | number
+    updatedAt?: DateTimeFilter<"EconomicIndicator"> | Date | string
+  }, "id" | "title">
+
+  export type EconomicIndicatorOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    value?: SortOrder
+    label?: SortOrder
+    sortOrder?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EconomicIndicatorCountOrderByAggregateInput
+    _avg?: EconomicIndicatorAvgOrderByAggregateInput
+    _max?: EconomicIndicatorMaxOrderByAggregateInput
+    _min?: EconomicIndicatorMinOrderByAggregateInput
+    _sum?: EconomicIndicatorSumOrderByAggregateInput
+  }
+
+  export type EconomicIndicatorScalarWhereWithAggregatesInput = {
+    AND?: EconomicIndicatorScalarWhereWithAggregatesInput | EconomicIndicatorScalarWhereWithAggregatesInput[]
+    OR?: EconomicIndicatorScalarWhereWithAggregatesInput[]
+    NOT?: EconomicIndicatorScalarWhereWithAggregatesInput | EconomicIndicatorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EconomicIndicator"> | string
+    title?: StringWithAggregatesFilter<"EconomicIndicator"> | string
+    value?: StringWithAggregatesFilter<"EconomicIndicator"> | string
+    label?: StringWithAggregatesFilter<"EconomicIndicator"> | string
+    sortOrder?: IntWithAggregatesFilter<"EconomicIndicator"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"EconomicIndicator"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -33637,6 +34841,69 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EconomicIndicatorCreateInput = {
+    id?: string
+    title: string
+    value: string
+    label: string
+    sortOrder?: number
+    updatedAt?: Date | string
+  }
+
+  export type EconomicIndicatorUncheckedCreateInput = {
+    id?: string
+    title: string
+    value: string
+    label: string
+    sortOrder?: number
+    updatedAt?: Date | string
+  }
+
+  export type EconomicIndicatorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EconomicIndicatorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EconomicIndicatorCreateManyInput = {
+    id?: string
+    title: string
+    value: string
+    label: string
+    sortOrder?: number
+    updatedAt?: Date | string
+  }
+
+  export type EconomicIndicatorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EconomicIndicatorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -35561,6 +36828,41 @@ export namespace Prisma {
     averageVolume?: SortOrder
     beta?: SortOrder
     rsi?: SortOrder
+  }
+
+  export type EconomicIndicatorCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    value?: SortOrder
+    label?: SortOrder
+    sortOrder?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EconomicIndicatorAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type EconomicIndicatorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    value?: SortOrder
+    label?: SortOrder
+    sortOrder?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EconomicIndicatorMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    value?: SortOrder
+    label?: SortOrder
+    sortOrder?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EconomicIndicatorSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
   }
 
   export type AccessAttemptLogCreateNestedManyWithoutUserInput = {

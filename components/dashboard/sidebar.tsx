@@ -50,11 +50,16 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
+  { name: "Economic Indicators", href: "/economics", icon: Globe },
   { name: "Portfolio", href: "/portfolio", icon: Briefcase },
   { name: "Funds", href: "/funds", icon: Activity },
   // { name: "Home", href: "/dashboard", icon: Home },
   // { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },
   { name: "Stocks", href: "/stocks", icon: BarChart3 },
+  { name: "Bonds", href: "/bonds", icon: FileText },
+  { name: "ETFs", href: "/etfs", icon: Layers },
+  { name: "Research and Insights", href: "/research", icon: Search },
+  { name: "Articles", href: "/articles", icon: Newspaper },
   /* {
     name: "IPOs",
     icon: Target,
