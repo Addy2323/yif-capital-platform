@@ -25,6 +25,7 @@ import {
     ArrowLeft,
     Video,
     ShieldAlert,
+    Globe,
 } from "lucide-react"
 
 interface NavItem {
@@ -52,6 +53,7 @@ const navigation: NavItem[] = [
             { name: "ETFs", href: "/admin/content/etfs", icon: Layers },
             { name: "IPOs", href: "/admin/content/ipos", icon: Target },
             { name: "News", href: "/admin/content/news", icon: Newspaper },
+            { name: "Economics", href: "/admin/content/economics", icon: Globe },
         ],
     },
     { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
