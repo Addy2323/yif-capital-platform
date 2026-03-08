@@ -62,14 +62,14 @@ export default function AdminDashboardPage() {
                     <h1 className="text-2xl font-bold text-white">Admin Overview</h1>
                     <p className="text-white/60">Welcome back to the YIF Capital control panel.</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Button variant="outline" className="border-white/10 text-white hover:bg-white/5" onClick={exportUsersToCSV}>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                    <Button variant="outline" size="sm" className="border-white/10 text-white hover:bg-white/5" onClick={exportUsersToCSV}>
                         <Download className="mr-2 h-4 w-4" />
-                        Export Data
+                        Export
                     </Button>
-                    <Button className="bg-gold text-navy hover:bg-gold/90">
+                    <Button size="sm" className="bg-gold text-navy hover:bg-gold/90">
                         <Calendar className="mr-2 h-4 w-4" />
-                        Schedule Report
+                        Report
                     </Button>
                 </div>
             </div>
@@ -224,16 +224,16 @@ export default function AdminDashboardPage() {
                             { user: "Bob Wilson", action: "cancelled institutional trial", time: "3 hours ago", icon: CreditCard },
                         ].map((item, i) => (
                             <div key={i} className="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors">
-                                <div className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center">
+                                <div className="h-10 w-10 shrink-0 rounded-full bg-white/5 flex items-center justify-center">
                                     <item.icon className="h-5 w-5 text-gold" />
                                 </div>
-                                <div className="flex-1">
-                                    <p className="text-sm text-white">
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm text-white truncate">
                                         <span className="font-semibold">{item.user}</span> {item.action}
                                     </p>
                                     <p className="text-xs text-white/40">{item.time}</p>
                                 </div>
-                                <Button variant="ghost" size="sm" className="text-white/40 hover:text-white">View</Button>
+                                <Button variant="ghost" size="sm" className="text-white/40 hover:text-white shrink-0">View</Button>
                             </div>
                         ))}
                     </div>
