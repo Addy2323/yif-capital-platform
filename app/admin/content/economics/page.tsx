@@ -104,15 +104,15 @@ export default function AdminEconomicsPage() {
     return (
         <div className="space-y-6 pb-20">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon" asChild className="text-white/60">
+                <div className="flex items-start sm:items-center gap-4 min-w-0">
+                    <Button variant="ghost" size="icon" asChild className="text-white/60 shrink-0">
                         <Link href="/admin/content">
                             <ArrowLeft className="h-4 w-4" />
                         </Link>
                     </Button>
-                    <div>
-                        <h1 className="text-xl md:text-2xl font-bold text-white">Economic Indicators</h1>
-                        <p className="text-xs md:text-sm text-white/60">Manually update macroeconomic data for the platform.</p>
+                    <div className="min-w-0 flex-1">
+                        <h1 className="text-xl md:text-2xl font-bold text-white truncate">Economic Indicators</h1>
+                        <p className="text-xs md:text-sm text-white/60 break-words line-clamp-2">Manually update macroeconomic data for the platform.</p>
                     </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 md:gap-3">
@@ -154,8 +154,8 @@ export default function AdminEconomicsPage() {
 
                                     <div className="flex-1 space-y-4 min-w-0">
                                         {/* Row 1: Title, Value, Period */}
-                                        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                                            <div className="space-y-2">
+                                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+                                            <div className="space-y-2 min-w-0">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Indicator Title</label>
                                                 <input
                                                     value={indicator.title}
@@ -165,7 +165,7 @@ export default function AdminEconomicsPage() {
                                                 />
                                             </div>
 
-                                            <div className="space-y-2">
+                                            <div className="space-y-2 min-w-0">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Value</label>
                                                 <input
                                                     value={indicator.value}
@@ -175,7 +175,7 @@ export default function AdminEconomicsPage() {
                                                 />
                                             </div>
 
-                                            <div className="space-y-2">
+                                            <div className="space-y-2 min-w-0">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Period / Label</label>
                                                 <input
                                                     value={indicator.label}
@@ -187,8 +187,8 @@ export default function AdminEconomicsPage() {
                                         </div>
 
                                         {/* Row 2: Change, Previous Value, Delete */}
-                                        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                                            <div className="space-y-2">
+                                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+                                            <div className="space-y-2 min-w-0">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Change</label>
                                                 <input
                                                     value={indicator.change || ""}
@@ -198,9 +198,9 @@ export default function AdminEconomicsPage() {
                                                 />
                                             </div>
 
-                                            <div className="space-y-2">
+                                            <div className="space-y-2 min-w-0">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Previous Value</label>
-                                                <div className="flex gap-2">
+                                                <div className="flex gap-2 min-w-0">
                                                     <input
                                                         value={indicator.previousValue || ""}
                                                         onChange={(e) => handleUpdate(index, "previousValue", e.target.value)}
