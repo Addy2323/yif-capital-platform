@@ -115,12 +115,12 @@ export default function AdminEconomicsPage() {
                         <p className="text-xs md:text-sm text-white/60">Manually update macroeconomic data for the platform.</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 md:gap-3">
+                <div className="flex flex-wrap items-center gap-2 md:gap-3">
                     <Button variant="outline" size="sm" onClick={fetchIndicators} className="border-white/10 text-white hover:bg-white/5 h-9 md:h-10 px-3 md:px-4">
                         <RefreshCcw className={`mr-2 h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
                         <span className="hidden xs:inline">Refresh</span>
                     </Button>
-                    <Button size="sm" onClick={saveAll} disabled={saving} className="bg-gold text-navy hover:bg-gold/90 h-9 md:h-10 px-3 md:px-4">
+                    <Button size="sm" onClick={saveAll} disabled={saving} className="bg-gold text-navy hover:bg-gold/90 h-9 md:h-10 px-3 md:px-4 w-full sm:w-auto mt-2 sm:mt-0">
                         <Save className="mr-2 h-4 w-4" />
                         {saving ? "Saving..." : "Save Changes"}
                     </Button>
@@ -129,9 +129,9 @@ export default function AdminEconomicsPage() {
 
             <Card className="bg-white/5 border-white/10 overflow-hidden">
                 <CardHeader className="border-b border-white/10 bg-white/[0.02]">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <CardTitle className="text-sm font-bold uppercase tracking-widest text-white/40">Indicator List</CardTitle>
-                        <Button size="sm" onClick={addIndicator} className="bg-white/5 hover:bg-white/10 text-white border-white/10 border h-8">
+                        <Button size="sm" onClick={addIndicator} className="bg-white/5 hover:bg-white/10 text-white border-white/10 border h-8 w-full sm:w-auto">
                             <Plus className="mr-1.5 h-3.5 w-3.5" />
                             Add New Indicator
                         </Button>
@@ -152,9 +152,9 @@ export default function AdminEconomicsPage() {
                                         <GripVertical className="h-5 w-5" />
                                     </div>
 
-                                    <div className="flex-1 space-y-4">
+                                    <div className="flex-1 space-y-4 min-w-0">
                                         {/* Row 1: Title, Value, Period */}
-                                        <div className="grid gap-4 md:grid-cols-3">
+                                        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                                             <div className="space-y-2">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Indicator Title</label>
                                                 <input
@@ -187,7 +187,7 @@ export default function AdminEconomicsPage() {
                                         </div>
 
                                         {/* Row 2: Change, Previous Value, Delete */}
-                                        <div className="grid gap-4 md:grid-cols-3">
+                                        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                                             <div className="space-y-2">
                                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Change</label>
                                                 <input
