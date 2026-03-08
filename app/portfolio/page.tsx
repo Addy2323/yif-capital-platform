@@ -635,9 +635,9 @@ export default function PortfolioPage() {
             .pf-card-hover:hover { border-color: #D4A01799 !important; transform: translateY(-1px); }
           `}</style>
 
-                <div className="pf-wrap">
+                <div className="pf-wrap mx-auto max-w-7xl pt-4">
                     {/* ─── TOP NAV ─── */}
-                    <div className="flex flex-wrap items-center justify-between gap-y-3 gap-x-2 sticky z-50 rounded-xl" style={{ background: "#051430", border: "1px solid #24427E", padding: "12px 16px", top: 16, margin: "0 16px" }}>
+                    <div className="flex flex-wrap items-center justify-between gap-y-3 gap-x-2 sticky z-20 rounded-xl" style={{ background: "#051430", border: "1px solid #24427E", padding: "12px 16px", top: 16, margin: "0 16px" }}>
                         <span className="flex items-center gap-2 shrink-0 whitespace-nowrap" style={{ fontFamily: "'Syne', sans-serif", fontSize: 18, fontWeight: 800 }}>
                             <IconFlag /> <span style={{ color: "#D4A017" }}>YIF Capital</span> <span className="hidden sm:inline">Portfolio</span>
                         </span>
