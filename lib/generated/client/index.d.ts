@@ -124,6 +124,11 @@ export type DseStock = $Result.DefaultSelection<Prisma.$DseStockPayload>
  */
 export type EconomicIndicator = $Result.DefaultSelection<Prisma.$EconomicIndicatorPayload>
 /**
+ * Model DseMarketSummary
+ * 
+ */
+export type DseMarketSummary = $Result.DefaultSelection<Prisma.$DseMarketSummaryPayload>
+/**
  * Model Portfolio
  * 
  */
@@ -551,6 +556,16 @@ export class PrismaClient<
     * ```
     */
   get economicIndicator(): Prisma.EconomicIndicatorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.dseMarketSummary`: Exposes CRUD operations for the **DseMarketSummary** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DseMarketSummaries
+    * const dseMarketSummaries = await prisma.dseMarketSummary.findMany()
+    * ```
+    */
+  get dseMarketSummary(): Prisma.DseMarketSummaryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.portfolio`: Exposes CRUD operations for the **Portfolio** model.
@@ -1044,6 +1059,7 @@ export namespace Prisma {
     FundAttribution: 'FundAttribution',
     DseStock: 'DseStock',
     EconomicIndicator: 'EconomicIndicator',
+    DseMarketSummary: 'DseMarketSummary',
     Portfolio: 'Portfolio',
     PortfolioStock: 'PortfolioStock',
     PortfolioFund: 'PortfolioFund'
@@ -1065,7 +1081,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "dseStock" | "economicIndicator" | "portfolio" | "portfolioStock" | "portfolioFund"
+      modelProps: "user" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "dseStock" | "economicIndicator" | "dseMarketSummary" | "portfolio" | "portfolioStock" | "portfolioFund"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2697,6 +2713,80 @@ export namespace Prisma {
           }
         }
       }
+      DseMarketSummary: {
+        payload: Prisma.$DseMarketSummaryPayload<ExtArgs>
+        fields: Prisma.DseMarketSummaryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DseMarketSummaryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DseMarketSummaryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>
+          }
+          findFirst: {
+            args: Prisma.DseMarketSummaryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DseMarketSummaryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>
+          }
+          findMany: {
+            args: Prisma.DseMarketSummaryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>[]
+          }
+          create: {
+            args: Prisma.DseMarketSummaryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>
+          }
+          createMany: {
+            args: Prisma.DseMarketSummaryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DseMarketSummaryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>[]
+          }
+          delete: {
+            args: Prisma.DseMarketSummaryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>
+          }
+          update: {
+            args: Prisma.DseMarketSummaryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>
+          }
+          deleteMany: {
+            args: Prisma.DseMarketSummaryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DseMarketSummaryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DseMarketSummaryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>[]
+          }
+          upsert: {
+            args: Prisma.DseMarketSummaryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseMarketSummaryPayload>
+          }
+          aggregate: {
+            args: Prisma.DseMarketSummaryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDseMarketSummary>
+          }
+          groupBy: {
+            args: Prisma.DseMarketSummaryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DseMarketSummaryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DseMarketSummaryCountArgs<ExtArgs>
+            result: $Utils.Optional<DseMarketSummaryCountAggregateOutputType> | number
+          }
+        }
+      }
       Portfolio: {
         payload: Prisma.$PortfolioPayload<ExtArgs>
         fields: Prisma.PortfolioFieldRefs
@@ -3037,6 +3127,7 @@ export namespace Prisma {
     fundAttribution?: FundAttributionOmit
     dseStock?: DseStockOmit
     economicIndicator?: EconomicIndicatorOmit
+    dseMarketSummary?: DseMarketSummaryOmit
     portfolio?: PortfolioOmit
     portfolioStock?: PortfolioStockOmit
     portfolioFund?: PortfolioFundOmit
@@ -30037,6 +30128,1173 @@ export namespace Prisma {
 
 
   /**
+   * Model DseMarketSummary
+   */
+
+  export type AggregateDseMarketSummary = {
+    _count: DseMarketSummaryCountAggregateOutputType | null
+    _avg: DseMarketSummaryAvgAggregateOutputType | null
+    _sum: DseMarketSummarySumAggregateOutputType | null
+    _min: DseMarketSummaryMinAggregateOutputType | null
+    _max: DseMarketSummaryMaxAggregateOutputType | null
+  }
+
+  export type DseMarketSummaryAvgAggregateOutputType = {
+    indexValue: number | null
+    change: number | null
+    changePercent: number | null
+  }
+
+  export type DseMarketSummarySumAggregateOutputType = {
+    indexValue: number | null
+    change: number | null
+    changePercent: number | null
+  }
+
+  export type DseMarketSummaryMinAggregateOutputType = {
+    id: string | null
+    indexValue: number | null
+    change: number | null
+    changePercent: number | null
+    perf1M: string | null
+    perf3M: string | null
+    perfYTD: string | null
+    perf1Y: string | null
+    perf2Y: string | null
+    valueTraded: string | null
+    volume: string | null
+    transactions: string | null
+    marketCap: string | null
+    date: string | null
+    updatedAt: Date | null
+  }
+
+  export type DseMarketSummaryMaxAggregateOutputType = {
+    id: string | null
+    indexValue: number | null
+    change: number | null
+    changePercent: number | null
+    perf1M: string | null
+    perf3M: string | null
+    perfYTD: string | null
+    perf1Y: string | null
+    perf2Y: string | null
+    valueTraded: string | null
+    volume: string | null
+    transactions: string | null
+    marketCap: string | null
+    date: string | null
+    updatedAt: Date | null
+  }
+
+  export type DseMarketSummaryCountAggregateOutputType = {
+    id: number
+    indexValue: number
+    change: number
+    changePercent: number
+    perf1M: number
+    perf3M: number
+    perfYTD: number
+    perf1Y: number
+    perf2Y: number
+    valueTraded: number
+    volume: number
+    transactions: number
+    marketCap: number
+    date: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DseMarketSummaryAvgAggregateInputType = {
+    indexValue?: true
+    change?: true
+    changePercent?: true
+  }
+
+  export type DseMarketSummarySumAggregateInputType = {
+    indexValue?: true
+    change?: true
+    changePercent?: true
+  }
+
+  export type DseMarketSummaryMinAggregateInputType = {
+    id?: true
+    indexValue?: true
+    change?: true
+    changePercent?: true
+    perf1M?: true
+    perf3M?: true
+    perfYTD?: true
+    perf1Y?: true
+    perf2Y?: true
+    valueTraded?: true
+    volume?: true
+    transactions?: true
+    marketCap?: true
+    date?: true
+    updatedAt?: true
+  }
+
+  export type DseMarketSummaryMaxAggregateInputType = {
+    id?: true
+    indexValue?: true
+    change?: true
+    changePercent?: true
+    perf1M?: true
+    perf3M?: true
+    perfYTD?: true
+    perf1Y?: true
+    perf2Y?: true
+    valueTraded?: true
+    volume?: true
+    transactions?: true
+    marketCap?: true
+    date?: true
+    updatedAt?: true
+  }
+
+  export type DseMarketSummaryCountAggregateInputType = {
+    id?: true
+    indexValue?: true
+    change?: true
+    changePercent?: true
+    perf1M?: true
+    perf3M?: true
+    perfYTD?: true
+    perf1Y?: true
+    perf2Y?: true
+    valueTraded?: true
+    volume?: true
+    transactions?: true
+    marketCap?: true
+    date?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DseMarketSummaryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DseMarketSummary to aggregate.
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseMarketSummaries to fetch.
+     */
+    orderBy?: DseMarketSummaryOrderByWithRelationInput | DseMarketSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DseMarketSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseMarketSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseMarketSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DseMarketSummaries
+    **/
+    _count?: true | DseMarketSummaryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DseMarketSummaryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DseMarketSummarySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DseMarketSummaryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DseMarketSummaryMaxAggregateInputType
+  }
+
+  export type GetDseMarketSummaryAggregateType<T extends DseMarketSummaryAggregateArgs> = {
+        [P in keyof T & keyof AggregateDseMarketSummary]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDseMarketSummary[P]>
+      : GetScalarType<T[P], AggregateDseMarketSummary[P]>
+  }
+
+
+
+
+  export type DseMarketSummaryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DseMarketSummaryWhereInput
+    orderBy?: DseMarketSummaryOrderByWithAggregationInput | DseMarketSummaryOrderByWithAggregationInput[]
+    by: DseMarketSummaryScalarFieldEnum[] | DseMarketSummaryScalarFieldEnum
+    having?: DseMarketSummaryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DseMarketSummaryCountAggregateInputType | true
+    _avg?: DseMarketSummaryAvgAggregateInputType
+    _sum?: DseMarketSummarySumAggregateInputType
+    _min?: DseMarketSummaryMinAggregateInputType
+    _max?: DseMarketSummaryMaxAggregateInputType
+  }
+
+  export type DseMarketSummaryGroupByOutputType = {
+    id: string
+    indexValue: number
+    change: number
+    changePercent: number
+    perf1M: string | null
+    perf3M: string | null
+    perfYTD: string | null
+    perf1Y: string | null
+    perf2Y: string | null
+    valueTraded: string | null
+    volume: string | null
+    transactions: string | null
+    marketCap: string | null
+    date: string | null
+    updatedAt: Date
+    _count: DseMarketSummaryCountAggregateOutputType | null
+    _avg: DseMarketSummaryAvgAggregateOutputType | null
+    _sum: DseMarketSummarySumAggregateOutputType | null
+    _min: DseMarketSummaryMinAggregateOutputType | null
+    _max: DseMarketSummaryMaxAggregateOutputType | null
+  }
+
+  type GetDseMarketSummaryGroupByPayload<T extends DseMarketSummaryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DseMarketSummaryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DseMarketSummaryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DseMarketSummaryGroupByOutputType[P]>
+            : GetScalarType<T[P], DseMarketSummaryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DseMarketSummarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    indexValue?: boolean
+    change?: boolean
+    changePercent?: boolean
+    perf1M?: boolean
+    perf3M?: boolean
+    perfYTD?: boolean
+    perf1Y?: boolean
+    perf2Y?: boolean
+    valueTraded?: boolean
+    volume?: boolean
+    transactions?: boolean
+    marketCap?: boolean
+    date?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dseMarketSummary"]>
+
+  export type DseMarketSummarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    indexValue?: boolean
+    change?: boolean
+    changePercent?: boolean
+    perf1M?: boolean
+    perf3M?: boolean
+    perfYTD?: boolean
+    perf1Y?: boolean
+    perf2Y?: boolean
+    valueTraded?: boolean
+    volume?: boolean
+    transactions?: boolean
+    marketCap?: boolean
+    date?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dseMarketSummary"]>
+
+  export type DseMarketSummarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    indexValue?: boolean
+    change?: boolean
+    changePercent?: boolean
+    perf1M?: boolean
+    perf3M?: boolean
+    perfYTD?: boolean
+    perf1Y?: boolean
+    perf2Y?: boolean
+    valueTraded?: boolean
+    volume?: boolean
+    transactions?: boolean
+    marketCap?: boolean
+    date?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dseMarketSummary"]>
+
+  export type DseMarketSummarySelectScalar = {
+    id?: boolean
+    indexValue?: boolean
+    change?: boolean
+    changePercent?: boolean
+    perf1M?: boolean
+    perf3M?: boolean
+    perfYTD?: boolean
+    perf1Y?: boolean
+    perf2Y?: boolean
+    valueTraded?: boolean
+    volume?: boolean
+    transactions?: boolean
+    marketCap?: boolean
+    date?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DseMarketSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "indexValue" | "change" | "changePercent" | "perf1M" | "perf3M" | "perfYTD" | "perf1Y" | "perf2Y" | "valueTraded" | "volume" | "transactions" | "marketCap" | "date" | "updatedAt", ExtArgs["result"]["dseMarketSummary"]>
+
+  export type $DseMarketSummaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DseMarketSummary"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      indexValue: number
+      change: number
+      changePercent: number
+      perf1M: string | null
+      perf3M: string | null
+      perfYTD: string | null
+      perf1Y: string | null
+      perf2Y: string | null
+      valueTraded: string | null
+      volume: string | null
+      transactions: string | null
+      marketCap: string | null
+      date: string | null
+      updatedAt: Date
+    }, ExtArgs["result"]["dseMarketSummary"]>
+    composites: {}
+  }
+
+  type DseMarketSummaryGetPayload<S extends boolean | null | undefined | DseMarketSummaryDefaultArgs> = $Result.GetResult<Prisma.$DseMarketSummaryPayload, S>
+
+  type DseMarketSummaryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DseMarketSummaryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DseMarketSummaryCountAggregateInputType | true
+    }
+
+  export interface DseMarketSummaryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DseMarketSummary'], meta: { name: 'DseMarketSummary' } }
+    /**
+     * Find zero or one DseMarketSummary that matches the filter.
+     * @param {DseMarketSummaryFindUniqueArgs} args - Arguments to find a DseMarketSummary
+     * @example
+     * // Get one DseMarketSummary
+     * const dseMarketSummary = await prisma.dseMarketSummary.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DseMarketSummaryFindUniqueArgs>(args: SelectSubset<T, DseMarketSummaryFindUniqueArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DseMarketSummary that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DseMarketSummaryFindUniqueOrThrowArgs} args - Arguments to find a DseMarketSummary
+     * @example
+     * // Get one DseMarketSummary
+     * const dseMarketSummary = await prisma.dseMarketSummary.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DseMarketSummaryFindUniqueOrThrowArgs>(args: SelectSubset<T, DseMarketSummaryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DseMarketSummary that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryFindFirstArgs} args - Arguments to find a DseMarketSummary
+     * @example
+     * // Get one DseMarketSummary
+     * const dseMarketSummary = await prisma.dseMarketSummary.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DseMarketSummaryFindFirstArgs>(args?: SelectSubset<T, DseMarketSummaryFindFirstArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DseMarketSummary that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryFindFirstOrThrowArgs} args - Arguments to find a DseMarketSummary
+     * @example
+     * // Get one DseMarketSummary
+     * const dseMarketSummary = await prisma.dseMarketSummary.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DseMarketSummaryFindFirstOrThrowArgs>(args?: SelectSubset<T, DseMarketSummaryFindFirstOrThrowArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DseMarketSummaries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DseMarketSummaries
+     * const dseMarketSummaries = await prisma.dseMarketSummary.findMany()
+     * 
+     * // Get first 10 DseMarketSummaries
+     * const dseMarketSummaries = await prisma.dseMarketSummary.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dseMarketSummaryWithIdOnly = await prisma.dseMarketSummary.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DseMarketSummaryFindManyArgs>(args?: SelectSubset<T, DseMarketSummaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DseMarketSummary.
+     * @param {DseMarketSummaryCreateArgs} args - Arguments to create a DseMarketSummary.
+     * @example
+     * // Create one DseMarketSummary
+     * const DseMarketSummary = await prisma.dseMarketSummary.create({
+     *   data: {
+     *     // ... data to create a DseMarketSummary
+     *   }
+     * })
+     * 
+     */
+    create<T extends DseMarketSummaryCreateArgs>(args: SelectSubset<T, DseMarketSummaryCreateArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DseMarketSummaries.
+     * @param {DseMarketSummaryCreateManyArgs} args - Arguments to create many DseMarketSummaries.
+     * @example
+     * // Create many DseMarketSummaries
+     * const dseMarketSummary = await prisma.dseMarketSummary.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DseMarketSummaryCreateManyArgs>(args?: SelectSubset<T, DseMarketSummaryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DseMarketSummaries and returns the data saved in the database.
+     * @param {DseMarketSummaryCreateManyAndReturnArgs} args - Arguments to create many DseMarketSummaries.
+     * @example
+     * // Create many DseMarketSummaries
+     * const dseMarketSummary = await prisma.dseMarketSummary.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DseMarketSummaries and only return the `id`
+     * const dseMarketSummaryWithIdOnly = await prisma.dseMarketSummary.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DseMarketSummaryCreateManyAndReturnArgs>(args?: SelectSubset<T, DseMarketSummaryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DseMarketSummary.
+     * @param {DseMarketSummaryDeleteArgs} args - Arguments to delete one DseMarketSummary.
+     * @example
+     * // Delete one DseMarketSummary
+     * const DseMarketSummary = await prisma.dseMarketSummary.delete({
+     *   where: {
+     *     // ... filter to delete one DseMarketSummary
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DseMarketSummaryDeleteArgs>(args: SelectSubset<T, DseMarketSummaryDeleteArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DseMarketSummary.
+     * @param {DseMarketSummaryUpdateArgs} args - Arguments to update one DseMarketSummary.
+     * @example
+     * // Update one DseMarketSummary
+     * const dseMarketSummary = await prisma.dseMarketSummary.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DseMarketSummaryUpdateArgs>(args: SelectSubset<T, DseMarketSummaryUpdateArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DseMarketSummaries.
+     * @param {DseMarketSummaryDeleteManyArgs} args - Arguments to filter DseMarketSummaries to delete.
+     * @example
+     * // Delete a few DseMarketSummaries
+     * const { count } = await prisma.dseMarketSummary.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DseMarketSummaryDeleteManyArgs>(args?: SelectSubset<T, DseMarketSummaryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DseMarketSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DseMarketSummaries
+     * const dseMarketSummary = await prisma.dseMarketSummary.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DseMarketSummaryUpdateManyArgs>(args: SelectSubset<T, DseMarketSummaryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DseMarketSummaries and returns the data updated in the database.
+     * @param {DseMarketSummaryUpdateManyAndReturnArgs} args - Arguments to update many DseMarketSummaries.
+     * @example
+     * // Update many DseMarketSummaries
+     * const dseMarketSummary = await prisma.dseMarketSummary.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DseMarketSummaries and only return the `id`
+     * const dseMarketSummaryWithIdOnly = await prisma.dseMarketSummary.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DseMarketSummaryUpdateManyAndReturnArgs>(args: SelectSubset<T, DseMarketSummaryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DseMarketSummary.
+     * @param {DseMarketSummaryUpsertArgs} args - Arguments to update or create a DseMarketSummary.
+     * @example
+     * // Update or create a DseMarketSummary
+     * const dseMarketSummary = await prisma.dseMarketSummary.upsert({
+     *   create: {
+     *     // ... data to create a DseMarketSummary
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DseMarketSummary we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DseMarketSummaryUpsertArgs>(args: SelectSubset<T, DseMarketSummaryUpsertArgs<ExtArgs>>): Prisma__DseMarketSummaryClient<$Result.GetResult<Prisma.$DseMarketSummaryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DseMarketSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryCountArgs} args - Arguments to filter DseMarketSummaries to count.
+     * @example
+     * // Count the number of DseMarketSummaries
+     * const count = await prisma.dseMarketSummary.count({
+     *   where: {
+     *     // ... the filter for the DseMarketSummaries we want to count
+     *   }
+     * })
+    **/
+    count<T extends DseMarketSummaryCountArgs>(
+      args?: Subset<T, DseMarketSummaryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DseMarketSummaryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DseMarketSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DseMarketSummaryAggregateArgs>(args: Subset<T, DseMarketSummaryAggregateArgs>): Prisma.PrismaPromise<GetDseMarketSummaryAggregateType<T>>
+
+    /**
+     * Group by DseMarketSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseMarketSummaryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DseMarketSummaryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DseMarketSummaryGroupByArgs['orderBy'] }
+        : { orderBy?: DseMarketSummaryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DseMarketSummaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDseMarketSummaryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DseMarketSummary model
+   */
+  readonly fields: DseMarketSummaryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DseMarketSummary.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DseMarketSummaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DseMarketSummary model
+   */
+  interface DseMarketSummaryFieldRefs {
+    readonly id: FieldRef<"DseMarketSummary", 'String'>
+    readonly indexValue: FieldRef<"DseMarketSummary", 'Float'>
+    readonly change: FieldRef<"DseMarketSummary", 'Float'>
+    readonly changePercent: FieldRef<"DseMarketSummary", 'Float'>
+    readonly perf1M: FieldRef<"DseMarketSummary", 'String'>
+    readonly perf3M: FieldRef<"DseMarketSummary", 'String'>
+    readonly perfYTD: FieldRef<"DseMarketSummary", 'String'>
+    readonly perf1Y: FieldRef<"DseMarketSummary", 'String'>
+    readonly perf2Y: FieldRef<"DseMarketSummary", 'String'>
+    readonly valueTraded: FieldRef<"DseMarketSummary", 'String'>
+    readonly volume: FieldRef<"DseMarketSummary", 'String'>
+    readonly transactions: FieldRef<"DseMarketSummary", 'String'>
+    readonly marketCap: FieldRef<"DseMarketSummary", 'String'>
+    readonly date: FieldRef<"DseMarketSummary", 'String'>
+    readonly updatedAt: FieldRef<"DseMarketSummary", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DseMarketSummary findUnique
+   */
+  export type DseMarketSummaryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * Filter, which DseMarketSummary to fetch.
+     */
+    where: DseMarketSummaryWhereUniqueInput
+  }
+
+  /**
+   * DseMarketSummary findUniqueOrThrow
+   */
+  export type DseMarketSummaryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * Filter, which DseMarketSummary to fetch.
+     */
+    where: DseMarketSummaryWhereUniqueInput
+  }
+
+  /**
+   * DseMarketSummary findFirst
+   */
+  export type DseMarketSummaryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * Filter, which DseMarketSummary to fetch.
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseMarketSummaries to fetch.
+     */
+    orderBy?: DseMarketSummaryOrderByWithRelationInput | DseMarketSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DseMarketSummaries.
+     */
+    cursor?: DseMarketSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseMarketSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseMarketSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DseMarketSummaries.
+     */
+    distinct?: DseMarketSummaryScalarFieldEnum | DseMarketSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * DseMarketSummary findFirstOrThrow
+   */
+  export type DseMarketSummaryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * Filter, which DseMarketSummary to fetch.
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseMarketSummaries to fetch.
+     */
+    orderBy?: DseMarketSummaryOrderByWithRelationInput | DseMarketSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DseMarketSummaries.
+     */
+    cursor?: DseMarketSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseMarketSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseMarketSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DseMarketSummaries.
+     */
+    distinct?: DseMarketSummaryScalarFieldEnum | DseMarketSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * DseMarketSummary findMany
+   */
+  export type DseMarketSummaryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * Filter, which DseMarketSummaries to fetch.
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseMarketSummaries to fetch.
+     */
+    orderBy?: DseMarketSummaryOrderByWithRelationInput | DseMarketSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DseMarketSummaries.
+     */
+    cursor?: DseMarketSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseMarketSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseMarketSummaries.
+     */
+    skip?: number
+    distinct?: DseMarketSummaryScalarFieldEnum | DseMarketSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * DseMarketSummary create
+   */
+  export type DseMarketSummaryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DseMarketSummary.
+     */
+    data: XOR<DseMarketSummaryCreateInput, DseMarketSummaryUncheckedCreateInput>
+  }
+
+  /**
+   * DseMarketSummary createMany
+   */
+  export type DseMarketSummaryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DseMarketSummaries.
+     */
+    data: DseMarketSummaryCreateManyInput | DseMarketSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DseMarketSummary createManyAndReturn
+   */
+  export type DseMarketSummaryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to create many DseMarketSummaries.
+     */
+    data: DseMarketSummaryCreateManyInput | DseMarketSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DseMarketSummary update
+   */
+  export type DseMarketSummaryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DseMarketSummary.
+     */
+    data: XOR<DseMarketSummaryUpdateInput, DseMarketSummaryUncheckedUpdateInput>
+    /**
+     * Choose, which DseMarketSummary to update.
+     */
+    where: DseMarketSummaryWhereUniqueInput
+  }
+
+  /**
+   * DseMarketSummary updateMany
+   */
+  export type DseMarketSummaryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DseMarketSummaries.
+     */
+    data: XOR<DseMarketSummaryUpdateManyMutationInput, DseMarketSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which DseMarketSummaries to update
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * Limit how many DseMarketSummaries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DseMarketSummary updateManyAndReturn
+   */
+  export type DseMarketSummaryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to update DseMarketSummaries.
+     */
+    data: XOR<DseMarketSummaryUpdateManyMutationInput, DseMarketSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which DseMarketSummaries to update
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * Limit how many DseMarketSummaries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DseMarketSummary upsert
+   */
+  export type DseMarketSummaryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DseMarketSummary to update in case it exists.
+     */
+    where: DseMarketSummaryWhereUniqueInput
+    /**
+     * In case the DseMarketSummary found by the `where` argument doesn't exist, create a new DseMarketSummary with this data.
+     */
+    create: XOR<DseMarketSummaryCreateInput, DseMarketSummaryUncheckedCreateInput>
+    /**
+     * In case the DseMarketSummary was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DseMarketSummaryUpdateInput, DseMarketSummaryUncheckedUpdateInput>
+  }
+
+  /**
+   * DseMarketSummary delete
+   */
+  export type DseMarketSummaryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+    /**
+     * Filter which DseMarketSummary to delete.
+     */
+    where: DseMarketSummaryWhereUniqueInput
+  }
+
+  /**
+   * DseMarketSummary deleteMany
+   */
+  export type DseMarketSummaryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DseMarketSummaries to delete
+     */
+    where?: DseMarketSummaryWhereInput
+    /**
+     * Limit how many DseMarketSummaries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DseMarketSummary without action
+   */
+  export type DseMarketSummaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseMarketSummary
+     */
+    select?: DseMarketSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseMarketSummary
+     */
+    omit?: DseMarketSummaryOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Portfolio
    */
 
@@ -33965,6 +35223,27 @@ export namespace Prisma {
   export type EconomicIndicatorScalarFieldEnum = (typeof EconomicIndicatorScalarFieldEnum)[keyof typeof EconomicIndicatorScalarFieldEnum]
 
 
+  export const DseMarketSummaryScalarFieldEnum: {
+    id: 'id',
+    indexValue: 'indexValue',
+    change: 'change',
+    changePercent: 'changePercent',
+    perf1M: 'perf1M',
+    perf3M: 'perf3M',
+    perfYTD: 'perfYTD',
+    perf1Y: 'perf1Y',
+    perf2Y: 'perf2Y',
+    valueTraded: 'valueTraded',
+    volume: 'volume',
+    transactions: 'transactions',
+    marketCap: 'marketCap',
+    date: 'date',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DseMarketSummaryScalarFieldEnum = (typeof DseMarketSummaryScalarFieldEnum)[keyof typeof DseMarketSummaryScalarFieldEnum]
+
+
   export const PortfolioScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -36370,6 +37649,110 @@ export namespace Prisma {
     previousValue?: StringNullableWithAggregatesFilter<"EconomicIndicator"> | string | null
     sortOrder?: IntWithAggregatesFilter<"EconomicIndicator"> | number
     updatedAt?: DateTimeWithAggregatesFilter<"EconomicIndicator"> | Date | string
+  }
+
+  export type DseMarketSummaryWhereInput = {
+    AND?: DseMarketSummaryWhereInput | DseMarketSummaryWhereInput[]
+    OR?: DseMarketSummaryWhereInput[]
+    NOT?: DseMarketSummaryWhereInput | DseMarketSummaryWhereInput[]
+    id?: StringFilter<"DseMarketSummary"> | string
+    indexValue?: FloatFilter<"DseMarketSummary"> | number
+    change?: FloatFilter<"DseMarketSummary"> | number
+    changePercent?: FloatFilter<"DseMarketSummary"> | number
+    perf1M?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perf3M?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perfYTD?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perf1Y?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perf2Y?: StringNullableFilter<"DseMarketSummary"> | string | null
+    valueTraded?: StringNullableFilter<"DseMarketSummary"> | string | null
+    volume?: StringNullableFilter<"DseMarketSummary"> | string | null
+    transactions?: StringNullableFilter<"DseMarketSummary"> | string | null
+    marketCap?: StringNullableFilter<"DseMarketSummary"> | string | null
+    date?: StringNullableFilter<"DseMarketSummary"> | string | null
+    updatedAt?: DateTimeFilter<"DseMarketSummary"> | Date | string
+  }
+
+  export type DseMarketSummaryOrderByWithRelationInput = {
+    id?: SortOrder
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
+    perf1M?: SortOrderInput | SortOrder
+    perf3M?: SortOrderInput | SortOrder
+    perfYTD?: SortOrderInput | SortOrder
+    perf1Y?: SortOrderInput | SortOrder
+    perf2Y?: SortOrderInput | SortOrder
+    valueTraded?: SortOrderInput | SortOrder
+    volume?: SortOrderInput | SortOrder
+    transactions?: SortOrderInput | SortOrder
+    marketCap?: SortOrderInput | SortOrder
+    date?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DseMarketSummaryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DseMarketSummaryWhereInput | DseMarketSummaryWhereInput[]
+    OR?: DseMarketSummaryWhereInput[]
+    NOT?: DseMarketSummaryWhereInput | DseMarketSummaryWhereInput[]
+    indexValue?: FloatFilter<"DseMarketSummary"> | number
+    change?: FloatFilter<"DseMarketSummary"> | number
+    changePercent?: FloatFilter<"DseMarketSummary"> | number
+    perf1M?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perf3M?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perfYTD?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perf1Y?: StringNullableFilter<"DseMarketSummary"> | string | null
+    perf2Y?: StringNullableFilter<"DseMarketSummary"> | string | null
+    valueTraded?: StringNullableFilter<"DseMarketSummary"> | string | null
+    volume?: StringNullableFilter<"DseMarketSummary"> | string | null
+    transactions?: StringNullableFilter<"DseMarketSummary"> | string | null
+    marketCap?: StringNullableFilter<"DseMarketSummary"> | string | null
+    date?: StringNullableFilter<"DseMarketSummary"> | string | null
+    updatedAt?: DateTimeFilter<"DseMarketSummary"> | Date | string
+  }, "id">
+
+  export type DseMarketSummaryOrderByWithAggregationInput = {
+    id?: SortOrder
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
+    perf1M?: SortOrderInput | SortOrder
+    perf3M?: SortOrderInput | SortOrder
+    perfYTD?: SortOrderInput | SortOrder
+    perf1Y?: SortOrderInput | SortOrder
+    perf2Y?: SortOrderInput | SortOrder
+    valueTraded?: SortOrderInput | SortOrder
+    volume?: SortOrderInput | SortOrder
+    transactions?: SortOrderInput | SortOrder
+    marketCap?: SortOrderInput | SortOrder
+    date?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: DseMarketSummaryCountOrderByAggregateInput
+    _avg?: DseMarketSummaryAvgOrderByAggregateInput
+    _max?: DseMarketSummaryMaxOrderByAggregateInput
+    _min?: DseMarketSummaryMinOrderByAggregateInput
+    _sum?: DseMarketSummarySumOrderByAggregateInput
+  }
+
+  export type DseMarketSummaryScalarWhereWithAggregatesInput = {
+    AND?: DseMarketSummaryScalarWhereWithAggregatesInput | DseMarketSummaryScalarWhereWithAggregatesInput[]
+    OR?: DseMarketSummaryScalarWhereWithAggregatesInput[]
+    NOT?: DseMarketSummaryScalarWhereWithAggregatesInput | DseMarketSummaryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DseMarketSummary"> | string
+    indexValue?: FloatWithAggregatesFilter<"DseMarketSummary"> | number
+    change?: FloatWithAggregatesFilter<"DseMarketSummary"> | number
+    changePercent?: FloatWithAggregatesFilter<"DseMarketSummary"> | number
+    perf1M?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    perf3M?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    perfYTD?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    perf1Y?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    perf2Y?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    valueTraded?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    volume?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    transactions?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    marketCap?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    date?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"DseMarketSummary"> | Date | string
   }
 
   export type PortfolioWhereInput = {
@@ -39107,6 +40490,132 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DseMarketSummaryCreateInput = {
+    id?: string
+    indexValue: number
+    change: number
+    changePercent: number
+    perf1M?: string | null
+    perf3M?: string | null
+    perfYTD?: string | null
+    perf1Y?: string | null
+    perf2Y?: string | null
+    valueTraded?: string | null
+    volume?: string | null
+    transactions?: string | null
+    marketCap?: string | null
+    date?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type DseMarketSummaryUncheckedCreateInput = {
+    id?: string
+    indexValue: number
+    change: number
+    changePercent: number
+    perf1M?: string | null
+    perf3M?: string | null
+    perfYTD?: string | null
+    perf1Y?: string | null
+    perf2Y?: string | null
+    valueTraded?: string | null
+    volume?: string | null
+    transactions?: string | null
+    marketCap?: string | null
+    date?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type DseMarketSummaryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    indexValue?: FloatFieldUpdateOperationsInput | number
+    change?: FloatFieldUpdateOperationsInput | number
+    changePercent?: FloatFieldUpdateOperationsInput | number
+    perf1M?: NullableStringFieldUpdateOperationsInput | string | null
+    perf3M?: NullableStringFieldUpdateOperationsInput | string | null
+    perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
+    perf1Y?: NullableStringFieldUpdateOperationsInput | string | null
+    perf2Y?: NullableStringFieldUpdateOperationsInput | string | null
+    valueTraded?: NullableStringFieldUpdateOperationsInput | string | null
+    volume?: NullableStringFieldUpdateOperationsInput | string | null
+    transactions?: NullableStringFieldUpdateOperationsInput | string | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DseMarketSummaryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    indexValue?: FloatFieldUpdateOperationsInput | number
+    change?: FloatFieldUpdateOperationsInput | number
+    changePercent?: FloatFieldUpdateOperationsInput | number
+    perf1M?: NullableStringFieldUpdateOperationsInput | string | null
+    perf3M?: NullableStringFieldUpdateOperationsInput | string | null
+    perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
+    perf1Y?: NullableStringFieldUpdateOperationsInput | string | null
+    perf2Y?: NullableStringFieldUpdateOperationsInput | string | null
+    valueTraded?: NullableStringFieldUpdateOperationsInput | string | null
+    volume?: NullableStringFieldUpdateOperationsInput | string | null
+    transactions?: NullableStringFieldUpdateOperationsInput | string | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DseMarketSummaryCreateManyInput = {
+    id?: string
+    indexValue: number
+    change: number
+    changePercent: number
+    perf1M?: string | null
+    perf3M?: string | null
+    perfYTD?: string | null
+    perf1Y?: string | null
+    perf2Y?: string | null
+    valueTraded?: string | null
+    volume?: string | null
+    transactions?: string | null
+    marketCap?: string | null
+    date?: string | null
+    updatedAt?: Date | string
+  }
+
+  export type DseMarketSummaryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    indexValue?: FloatFieldUpdateOperationsInput | number
+    change?: FloatFieldUpdateOperationsInput | number
+    changePercent?: FloatFieldUpdateOperationsInput | number
+    perf1M?: NullableStringFieldUpdateOperationsInput | string | null
+    perf3M?: NullableStringFieldUpdateOperationsInput | string | null
+    perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
+    perf1Y?: NullableStringFieldUpdateOperationsInput | string | null
+    perf2Y?: NullableStringFieldUpdateOperationsInput | string | null
+    valueTraded?: NullableStringFieldUpdateOperationsInput | string | null
+    volume?: NullableStringFieldUpdateOperationsInput | string | null
+    transactions?: NullableStringFieldUpdateOperationsInput | string | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DseMarketSummaryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    indexValue?: FloatFieldUpdateOperationsInput | number
+    change?: FloatFieldUpdateOperationsInput | number
+    changePercent?: FloatFieldUpdateOperationsInput | number
+    perf1M?: NullableStringFieldUpdateOperationsInput | string | null
+    perf3M?: NullableStringFieldUpdateOperationsInput | string | null
+    perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
+    perf1Y?: NullableStringFieldUpdateOperationsInput | string | null
+    perf2Y?: NullableStringFieldUpdateOperationsInput | string | null
+    valueTraded?: NullableStringFieldUpdateOperationsInput | string | null
+    volume?: NullableStringFieldUpdateOperationsInput | string | null
+    transactions?: NullableStringFieldUpdateOperationsInput | string | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PortfolioCreateInput = {
     id?: string
     name: string
@@ -41353,6 +42862,72 @@ export namespace Prisma {
 
   export type EconomicIndicatorSumOrderByAggregateInput = {
     sortOrder?: SortOrder
+  }
+
+  export type DseMarketSummaryCountOrderByAggregateInput = {
+    id?: SortOrder
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
+    perf1M?: SortOrder
+    perf3M?: SortOrder
+    perfYTD?: SortOrder
+    perf1Y?: SortOrder
+    perf2Y?: SortOrder
+    valueTraded?: SortOrder
+    volume?: SortOrder
+    transactions?: SortOrder
+    marketCap?: SortOrder
+    date?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DseMarketSummaryAvgOrderByAggregateInput = {
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
+  }
+
+  export type DseMarketSummaryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
+    perf1M?: SortOrder
+    perf3M?: SortOrder
+    perfYTD?: SortOrder
+    perf1Y?: SortOrder
+    perf2Y?: SortOrder
+    valueTraded?: SortOrder
+    volume?: SortOrder
+    transactions?: SortOrder
+    marketCap?: SortOrder
+    date?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DseMarketSummaryMinOrderByAggregateInput = {
+    id?: SortOrder
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
+    perf1M?: SortOrder
+    perf3M?: SortOrder
+    perfYTD?: SortOrder
+    perf1Y?: SortOrder
+    perf2Y?: SortOrder
+    valueTraded?: SortOrder
+    volume?: SortOrder
+    transactions?: SortOrder
+    marketCap?: SortOrder
+    date?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DseMarketSummarySumOrderByAggregateInput = {
+    indexValue?: SortOrder
+    change?: SortOrder
+    changePercent?: SortOrder
   }
 
   export type PortfolioStockListRelationFilter = {

@@ -12,6 +12,22 @@ const STORAGE_KEYS = {
     FUNDS: "yif_admin_funds",
 }
 
+export interface DseMarketSummary {
+  indexValue: number
+  change: number
+  changePercent: number
+  perf1M: string | null
+  perf3M: string | null
+  perfYTD: string | null
+  perf1Y: string | null
+  perf2Y: string | null
+  valueTraded: string | null
+  volume: string | null
+  transactions: string | null
+  marketCap: string | null
+  date: string | null
+}
+
 interface AdminDataContextType {
     // Stocks
     stocks: Stock[]
@@ -48,6 +64,9 @@ interface AdminDataContextType {
     getEtfBySymbol: (symbol: string) => ETF | undefined
     getIpoBySymbol: (symbol: string) => IPO | undefined
     getFundById: (id: string) => Fund | undefined
+
+    // Market Summary
+    marketSummary: DseMarketSummary | null
 }
 
 const AdminDataContext = createContext<AdminDataContextType | undefined>(undefined)
@@ -58,6 +77,7 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
     const [ipoList, setIpoList] = useState<IPO[]>([])
     const [newsList, setNewsList] = useState<MarketNews[]>([])
     const [fundList, setFundList] = useState<Fund[]>([])
+    const [marketSummary, setMarketSummary] = useState<DseMarketSummary | null>(null)
     const [isInitialized, setIsInitialized] = useState(false)
 
     // Load data from localStorage on mount
@@ -125,8 +145,22 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
             }
         }
 
+        // Fetch DSE Market Summary
+        const fetchMarketSummary = async () => {
+            try {
+                const response = await fetch("/api/v1/market-summary/update") // Get method
+                const result = await response.json()
+                if (result.success && result.data) {
+                    setMarketSummary(result.data)
+                }
+            } catch (error) {
+                console.error("Failed to fetch market summary:", error)
+            }
+        }
+
         fetchFunds()
         fetchStocks()
+        fetchMarketSummary()
         setIsInitialized(true)
     }, [])
 
@@ -203,7 +237,8 @@ export function AdminDataProvider({ children }: { children: React.ReactNode }) {
             addIpo, updateIpo, deleteIpo,
             addNews, updateNews, deleteNews,
             addFund, updateFund, deleteFund,
-            getStockBySymbol, getEtfBySymbol, getIpoBySymbol, getFundById
+            getStockBySymbol, getEtfBySymbol, getIpoBySymbol, getFundById,
+            marketSummary
         }}>
             {children}
         </AdminDataContext.Provider>
@@ -233,6 +268,7 @@ export function useMarketData() {
             getEtfBySymbol: (symbol: string) => etfs.find(e => e.symbol.toUpperCase() === symbol.toUpperCase()),
             getIpoBySymbol: (symbol: string) => ipos.find(i => i.symbol.toUpperCase() === symbol.toUpperCase()),
             getFundById: (id: string) => tanzanianFunds.find(f => f.id === id),
+            marketSummary: null as DseMarketSummary | null,
         }
     }
     return {
@@ -245,5 +281,6 @@ export function useMarketData() {
         getEtfBySymbol: context.getEtfBySymbol,
         getIpoBySymbol: context.getIpoBySymbol,
         getFundById: context.getFundById,
+        marketSummary: context.marketSummary,
     }
 }

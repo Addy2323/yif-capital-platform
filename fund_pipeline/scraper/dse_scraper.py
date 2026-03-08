@@ -38,6 +38,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 DSE_URL = "https://stockanalysis.com/list/tanzania-stock-exchange/"
+AFRICAN_MARKETS_DSE_URL = "https://www.african-markets.com/en/stock-markets/dse"
 
 # Headers to avoid being blocked
 HEADERS = {
@@ -209,6 +210,89 @@ def scrape_dse_stocks() -> list:
     logger.info(f"Successfully processed {len(stocks)} stocks")
     return stocks
 
+def scrape_market_summary() -> dict:
+    """Scrape the overall DSE market summary and performance from african-markets.com."""
+    logger.info(f"Fetching market summary from {AFRICAN_MARKETS_DSE_URL}")
+    try:
+        response = requests.get(AFRICAN_MARKETS_DSE_URL, headers=HEADERS, timeout=15)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "html.parser")
+        
+        summary = {
+            "indexValue": 0.0,
+            "change": 0.0,
+            "changePercent": 0.0,
+            "perf1M": None,
+            "perf3M": None,
+            "perfYTD": None,
+            "perf1Y": None,
+            "perf2Y": None,
+            "valueTraded": None,
+            "volume": None,
+            "transactions": None,
+            "marketCap": None,
+            "date": None
+        }
+
+        # Date extract
+        for elem in soup.find_all(string=lambda t: t and "As of" in t):
+            summary["date"] = elem.strip().replace("|", "").strip()
+            break
+
+        # Extract Index and Change from parent span logic found from tests
+        for span in soup.find_all("span", limit=200):
+            text = span.get_text(strip=True)
+            if "%" in text and ("+" in text or "-" in text):
+                parent_text = span.parent.parent.get_text(separator=' ', strip=True)
+                # Example: '3,815.04 -28.83 ( -0.75% ) DSE ALL SHARE INDEX ...'
+                parts = parent_text.split()
+                if len(parts) >= 3:
+                    try:
+                        summary["indexValue"] = float(parts[0].replace(",", ""))
+                        summary["change"] = float(parts[1].replace(",", ""))
+                        # Change percent is usually in parens, e.g. '(-0.75%)' or '-0.75%'
+                        pct_str = parts[3] if parts[2] == "(" else parts[2]
+                        summary["changePercent"] = float(pct_str.replace("(", "").replace(")", "").replace("%", ""))
+                    except ValueError:
+                        pass
+                break
+                
+        # Tables Extraction
+        tables = soup.find_all("table")
+        if len(tables) >= 2:
+            # Table 0: Performance
+            perf_rows = tables[0].find_all("tr")
+            if len(perf_rows) >= 2:
+                cells = [td.get_text(strip=True) for td in perf_rows[1].find_all(["th", "td"])]
+                if len(cells) >= 5:
+                    summary["perf1M"] = cells[0]
+                    summary["perf3M"] = cells[1]
+                    summary["perfYTD"] = cells[2]
+                    summary["perf1Y"] = cells[3]
+                    summary["perf2Y"] = cells[4]
+                    
+            # Table 1: Market Summary
+            ms_rows = tables[1].find_all("tr")
+            if len(ms_rows) >= 2:
+                row1 = [td.get_text(separator=' ', strip=True) for td in ms_rows[0].find_all(["th", "td"])]
+                row2 = [td.get_text(separator=' ', strip=True) for td in ms_rows[1].find_all(["th", "td"])]
+                
+                # Cleanup: output is 'Value Traded (TZS) 5,037,936,870.00'
+                def extract_val(raw_str, prefix):
+                    return raw_str.replace(prefix, "").strip() if raw_str else ""
+                    
+                if len(row1) >= 2:
+                    summary["valueTraded"] = extract_val(row1[0], "Value Traded (TZS)")
+                    summary["volume"] = extract_val(row1[1], "Volume")
+                if len(row2) >= 2:
+                    summary["transactions"] = extract_val(row2[0], "Transactions")
+                    summary["marketCap"] = extract_val(row2[1], "Market Cap. (Bln TZS)")
+                    
+        return summary
+    except Exception as e:
+        logger.error(f"Failed to scrape market summary: {e}")
+        return {}
+
 
 def save_local(stocks: list):
     """Save scraped data to local JSON file."""
@@ -262,6 +346,26 @@ def push_to_api(stocks: list):
         logger.error(f"API push failed: {e}")
         return False
 
+def push_summary_to_api(summary: dict):
+    if not summary: return False
+    api_url = os.getenv("STOCK_API_URL", os.getenv("FUND_API_URL", "http://localhost:3000").rstrip("/api/funds/update"))
+    if "/api/" in api_url:
+        api_url = api_url.split("/api/")[0]
+    api_url = f"{api_url}/api/v1/market-summary/update"
+
+    logger.info(f"Pushing market summary to {api_url}")
+    try:
+        response = requests.post(
+            api_url,
+            json={"summary": summary},
+            timeout=15,
+            headers={"Content-Type": "application/json"},
+        )
+        return response.status_code == 200
+    except Exception as e:
+        logger.error(f"Summary push failed: {e}")
+        return False
+
 
 def main():
     import argparse
@@ -274,12 +378,15 @@ def main():
     logger.info("=" * 60)
 
     stocks = scrape_dse_stocks()
+    summary = scrape_market_summary()
 
     if stocks:
         save_local(stocks)
 
         if args.push:
             push_to_api(stocks)
+            if summary:
+                push_summary_to_api(summary)
     else:
         logger.warning("No stocks scraped, skipping save/push")
 

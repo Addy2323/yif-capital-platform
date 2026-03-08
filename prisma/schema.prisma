@@ -615,6 +615,24 @@ model EconomicIndicator {
   updatedAt     DateTime @updatedAt
 }
 
+model DseMarketSummary {
+  id             String   @id @default("1")
+  indexValue     Float
+  change         Float
+  changePercent  Float
+  perf1M         String?
+  perf3M         String?
+  perfYTD        String?
+  perf1Y         String?
+  perf2Y         String?
+  valueTraded    String?
+  volume         String?
+  transactions   String?
+  marketCap      String?
+  date           String?
+  updatedAt      DateTime @updatedAt
+}
+
 // ============================================
 // PORTFOLIO MODELS
 // ============================================
