@@ -133,20 +133,20 @@ export default function AdminIposPage() {
     return (
         <div className="space-y-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div>
-                    <h1 className="text-2xl font-bold text-white">IPO Management</h1>
-                    <p className="text-white/60">Manage upcoming and recent Initial Public Offerings.</p>
+                <div className="min-w-0">
+                    <h1 className="text-2xl font-bold text-white truncate">IPO Management</h1>
+                    <p className="text-white/60 text-sm break-words line-clamp-2">Manage upcoming and recent Initial Public Offerings.</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <Button variant="outline" className="border-gold/50 bg-gold/10 text-gold hover:bg-gold/20">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                    <Button variant="outline" className="border-gold/50 bg-gold/10 text-gold hover:bg-gold/20 flex-1 sm:flex-none">
                         <Download className="mr-2 h-4 w-4" />
-                        Export CSV
+                        Export
                     </Button>
                     <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
                         <DialogTrigger asChild>
-                            <Button className="bg-gold text-navy hover:bg-gold/90">
+                            <Button className="bg-gold text-navy hover:bg-gold/90 flex-1 sm:flex-none">
                                 <Plus className="mr-2 h-4 w-4" />
-                                Add New IPO
+                                Add IPO
                             </Button>
                         </DialogTrigger>
                         <DialogContent className="bg-slate-900 border-white/10 text-white max-h-[90vh] overflow-y-auto">
@@ -157,43 +157,43 @@ export default function AdminIposPage() {
                                 </DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="symbol" className="text-right text-white/80">Symbol</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="symbol" className="sm:text-right text-white/80">Symbol</Label>
                                     <Input
                                         id="symbol"
                                         value={formData.symbol}
                                         onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                         placeholder="e.g., TICL"
                                     />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="name" className="text-right text-white/80">Name</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="name" className="sm:text-right text-white/80">Name</Label>
                                     <Input
                                         id="name"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                         placeholder="e.g., TICL Investment Co"
                                     />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="price" className="text-right text-white/80">Price (TZS)</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="price" className="sm:text-right text-white/80">Price (TZS)</Label>
                                     <Input
                                         id="price"
                                         type="number"
                                         value={formData.price}
                                         onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                     />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="status" className="text-right text-white/80">Status</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="status" className="sm:text-right text-white/80">Status</Label>
                                     <Select
                                         value={formData.status}
                                         onValueChange={(value: "upcoming" | "recent") => setFormData({ ...formData, status: value })}
                                     >
-                                        <SelectTrigger className="col-span-3 bg-white/5 border-white/10 text-white">
+                                        <SelectTrigger className="sm:col-span-3 bg-white/5 border-white/10 text-white">
                                             <SelectValue placeholder="Select status" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/10 text-white">
@@ -202,44 +202,44 @@ export default function AdminIposPage() {
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="date" className="text-right text-white/80">Date</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="date" className="sm:text-right text-white/80">Date</Label>
                                     <Input
                                         id="date"
                                         type="date"
                                         value={formData.date}
                                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                     />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="exchange" className="text-right text-white/80">Exchange</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="exchange" className="sm:text-right text-white/80">Exchange</Label>
                                     <Input
                                         id="exchange"
                                         value={formData.exchange}
                                         onChange={(e) => setFormData({ ...formData, exchange: e.target.value })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                         placeholder="e.g., DSE"
                                     />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="shares" className="text-right text-white/80">Shares</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="shares" className="sm:text-right text-white/80">Shares</Label>
                                     <Input
                                         id="shares"
                                         type="number"
                                         value={formData.shares}
                                         onChange={(e) => setFormData({ ...formData, shares: Number(e.target.value) })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                     />
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="marketCap" className="text-right text-white/80">Market Cap</Label>
+                                <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                                    <Label htmlFor="marketCap" className="sm:text-right text-white/80">Market Cap</Label>
                                     <Input
                                         id="marketCap"
                                         type="number"
                                         value={formData.marketCap}
                                         onChange={(e) => setFormData({ ...formData, marketCap: Number(e.target.value) })}
-                                        className="col-span-3 bg-white/5 border-white/10 text-white"
+                                        className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                     />
                                 </div>
                             </div>
@@ -344,41 +344,41 @@ export default function AdminIposPage() {
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="edit-symbol" className="text-right text-white/80">Symbol</Label>
+                        <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                            <Label htmlFor="edit-symbol" className="sm:text-right text-white/80">Symbol</Label>
                             <Input
                                 id="edit-symbol"
                                 value={formData.symbol}
-                                className="col-span-3 bg-white/5 border-white/10 text-white"
+                                className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                                 disabled
                             />
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="edit-name" className="text-right text-white/80">Name</Label>
+                        <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                            <Label htmlFor="edit-name" className="sm:text-right text-white/80">Name</Label>
                             <Input
                                 id="edit-name"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="col-span-3 bg-white/5 border-white/10 text-white"
+                                className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                             />
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="edit-price" className="text-right text-white/80">Price (TZS)</Label>
+                        <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                            <Label htmlFor="edit-price" className="sm:text-right text-white/80">Price (TZS)</Label>
                             <Input
                                 id="edit-price"
                                 type="number"
                                 value={formData.price}
                                 onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                                className="col-span-3 bg-white/5 border-white/10 text-white"
+                                className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                             />
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="edit-status" className="text-right text-white/80">Status</Label>
+                        <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                            <Label htmlFor="edit-status" className="sm:text-right text-white/80">Status</Label>
                             <Select
                                 value={formData.status}
                                 onValueChange={(value: "upcoming" | "recent") => setFormData({ ...formData, status: value })}
                             >
-                                <SelectTrigger className="col-span-3 bg-white/5 border-white/10 text-white">
+                                <SelectTrigger className="sm:col-span-3 bg-white/5 border-white/10 text-white">
                                     <SelectValue placeholder="Select status" />
                                 </SelectTrigger>
                                 <SelectContent className="bg-slate-800 border-white/10 text-white">
@@ -387,23 +387,23 @@ export default function AdminIposPage() {
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="edit-date" className="text-right text-white/80">Date</Label>
+                        <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                            <Label htmlFor="edit-date" className="sm:text-right text-white/80">Date</Label>
                             <Input
                                 id="edit-date"
                                 type="date"
                                 value={formData.date}
                                 onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                className="col-span-3 bg-white/5 border-white/10 text-white"
+                                className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                             />
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="edit-exchange" className="text-right text-white/80">Exchange</Label>
+                        <div className="grid gap-2 sm:grid-cols-4 sm:items-center sm:gap-4">
+                            <Label htmlFor="edit-exchange" className="sm:text-right text-white/80">Exchange</Label>
                             <Input
                                 id="edit-exchange"
                                 value={formData.exchange}
                                 onChange={(e) => setFormData({ ...formData, exchange: e.target.value })}
-                                className="col-span-3 bg-white/5 border-white/10 text-white"
+                                className="sm:col-span-3 bg-white/5 border-white/10 text-white"
                             />
                         </div>
                     </div>
