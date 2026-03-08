@@ -605,12 +605,14 @@ model DseStock {
 }
 
 model EconomicIndicator {
-  id        String   @id @default(uuid())
-  title     String   @unique // e.g., "Inflation Rate"
-  value     String   // e.g., "3.3%"
-  label     String   // e.g., "January 2026"
-  sortOrder Int      @default(0)
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid())
+  title         String   @unique // e.g., "Inflation Rate"
+  value         String   // e.g., "3.3%"
+  label         String   // e.g., "January 2026"
+  change        String?  // e.g., "▲+0.12%"
+  previousValue String?  // e.g., "Prev: 3.3%"
+  sortOrder     Int      @default(0)
+  updatedAt     DateTime @updatedAt
 }
 
 // ============================================

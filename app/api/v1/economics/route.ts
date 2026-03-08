@@ -25,7 +25,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
-        const { id, title, value, label, sortOrder } = body
+        const { id, title, value, label, change, previousValue, sortOrder } = body
 
         if (!title || !value) {
             return NextResponse.json(
@@ -39,14 +39,14 @@ export async function POST(request: NextRequest) {
             // Update existing
             indicator = await prisma.economicIndicator.update({
                 where: { id },
-                data: { title, value, label, sortOrder: sortOrder || 0 },
+                data: { title, value, label, change, previousValue, sortOrder: sortOrder || 0 },
             })
         } else {
             // Create new
             indicator = await prisma.economicIndicator.upsert({
                 where: { title },
-                update: { value, label, sortOrder: sortOrder || 0 },
-                create: { title, value, label, sortOrder: sortOrder || 0 },
+                update: { value, label, change, previousValue, sortOrder: sortOrder || 0 },
+                create: { title, value, label, change, previousValue, sortOrder: sortOrder || 0 },
             })
         }
 

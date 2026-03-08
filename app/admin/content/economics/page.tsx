@@ -19,6 +19,8 @@ interface EconomicIndicator {
     title: string
     value: string
     label: string
+    change?: string
+    previousValue?: string
     sortOrder: number
 }
 
@@ -50,7 +52,7 @@ export default function AdminEconomicsPage() {
     const addIndicator = () => {
         setIndicators([
             ...indicators,
-            { title: "", value: "", label: "", sortOrder: indicators.length }
+            { title: "", value: "", label: "", change: "", previousValue: "", sortOrder: indicators.length }
         ])
     }
 
@@ -82,7 +84,6 @@ export default function AdminEconomicsPage() {
     const saveAll = async () => {
         setSaving(true)
         try {
-            // Save indicators sequentially or parallel (sequentially is safer for order if needed)
             for (const indicator of indicators) {
                 await fetch("/api/v1/economics", {
                     method: "POST",
@@ -124,7 +125,9 @@ export default function AdminEconomicsPage() {
                         {saving ? "Saving..." : "Save Changes"}
                     </Button>
                 </div>
-            </div>            <Card className="bg-white/5 border-white/10 overflow-hidden">
+            </div>
+
+            <Card className="bg-white/5 border-white/10 overflow-hidden">
                 <CardHeader className="border-b border-white/10 bg-white/[0.02]">
                     <div className="flex items-center justify-between">
                         <CardTitle className="text-sm font-bold uppercase tracking-widest text-white/40">Indicator List</CardTitle>
@@ -138,54 +141,82 @@ export default function AdminEconomicsPage() {
                     <div className="divide-y divide-white/10">
                         {indicators.length === 0 && !loading && (
                             <div className="p-12 text-center text-white/40 italic">
-                                No indicators added yet. Click "Add New Indicator" to get started.
+                                No indicators added yet. Click &quot;Add New Indicator&quot; to get started.
                             </div>
                         )}
 
                         {indicators.map((indicator, index) => (
-                            <div key={indicator.id || index} className="p-6 group flex items-start gap-4 hover:bg-white/[0.02] transition-colors">
-                                <div className="mt-2 text-white/20">
-                                    <GripVertical className="h-5 w-5" />
-                                </div>
-
-                                <div className="flex-1 grid gap-6 md:grid-cols-3">
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Indicator Title</label>
-                                        <input
-                                            value={indicator.title}
-                                            onChange={(e) => handleUpdate(index, "title", e.target.value)}
-                                            placeholder="e.g. Inflation Rate"
-                                            className="w-full bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
-                                        />
+                            <div key={indicator.id || index} className="p-6 group hover:bg-white/[0.02] transition-colors">
+                                <div className="flex items-start gap-4">
+                                    <div className="mt-2 text-white/20">
+                                        <GripVertical className="h-5 w-5" />
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Value</label>
-                                        <input
-                                            value={indicator.value}
-                                            onChange={(e) => handleUpdate(index, "value", e.target.value)}
-                                            placeholder="e.g. 3.3%"
-                                            className="w-full bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
-                                        />
-                                    </div>
+                                    <div className="flex-1 space-y-4">
+                                        {/* Row 1: Title, Value, Period */}
+                                        <div className="grid gap-4 md:grid-cols-3">
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Indicator Title</label>
+                                                <input
+                                                    value={indicator.title}
+                                                    onChange={(e) => handleUpdate(index, "title", e.target.value)}
+                                                    placeholder="e.g. Inflation Rate"
+                                                    className="w-full bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
+                                                />
+                                            </div>
 
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Period / Label</label>
-                                        <div className="flex gap-2">
-                                            <input
-                                                value={indicator.label}
-                                                onChange={(e) => handleUpdate(index, "label", e.target.value)}
-                                                placeholder="e.g. January 2026"
-                                                className="flex-1 bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
-                                            />
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                onClick={() => removeIndicator(indicator.id, index)}
-                                                className="text-red-500 hover:text-red-400 hover:bg-red-500/10 shrink-0 h-10 w-10"
-                                            >
-                                                <Trash2 className="h-4 w-4" />
-                                            </Button>
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Value</label>
+                                                <input
+                                                    value={indicator.value}
+                                                    onChange={(e) => handleUpdate(index, "value", e.target.value)}
+                                                    placeholder="e.g. 3.5%"
+                                                    className="w-full bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
+                                                />
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Period / Label</label>
+                                                <input
+                                                    value={indicator.label}
+                                                    onChange={(e) => handleUpdate(index, "label", e.target.value)}
+                                                    placeholder="e.g. January 2026"
+                                                    className="w-full bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Row 2: Change, Previous Value, Delete */}
+                                        <div className="grid gap-4 md:grid-cols-3">
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Change</label>
+                                                <input
+                                                    value={indicator.change || ""}
+                                                    onChange={(e) => handleUpdate(index, "change", e.target.value)}
+                                                    placeholder="e.g. ▲+0.12%"
+                                                    className="w-full bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
+                                                />
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Previous Value</label>
+                                                <div className="flex gap-2">
+                                                    <input
+                                                        value={indicator.previousValue || ""}
+                                                        onChange={(e) => handleUpdate(index, "previousValue", e.target.value)}
+                                                        placeholder="e.g. Prev: 3.3%"
+                                                        className="flex-1 bg-[#051430] border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-gold transition-all"
+                                                    />
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        onClick={() => removeIndicator(indicator.id, index)}
+                                                        className="text-red-500 hover:text-red-400 hover:bg-red-500/10 shrink-0 h-10 w-10"
+                                                    >
+                                                        <Trash2 className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +229,7 @@ export default function AdminEconomicsPage() {
             <div className="flex justify-end pt-4">
                 <p className="text-xs text-white/40 italic flex items-center gap-1.5">
                     <Info className="h-3 w-3" />
-                    Note: Changes are only applied when you click "Save All Changes"
+                    Note: Changes are only applied when you click &quot;Save All Changes&quot;
                 </p>
             </div>
         </div>

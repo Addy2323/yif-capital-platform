@@ -28993,6 +28993,8 @@ export namespace Prisma {
     title: string | null
     value: string | null
     label: string | null
+    change: string | null
+    previousValue: string | null
     sortOrder: number | null
     updatedAt: Date | null
   }
@@ -29002,6 +29004,8 @@ export namespace Prisma {
     title: string | null
     value: string | null
     label: string | null
+    change: string | null
+    previousValue: string | null
     sortOrder: number | null
     updatedAt: Date | null
   }
@@ -29011,6 +29015,8 @@ export namespace Prisma {
     title: number
     value: number
     label: number
+    change: number
+    previousValue: number
     sortOrder: number
     updatedAt: number
     _all: number
@@ -29030,6 +29036,8 @@ export namespace Prisma {
     title?: true
     value?: true
     label?: true
+    change?: true
+    previousValue?: true
     sortOrder?: true
     updatedAt?: true
   }
@@ -29039,6 +29047,8 @@ export namespace Prisma {
     title?: true
     value?: true
     label?: true
+    change?: true
+    previousValue?: true
     sortOrder?: true
     updatedAt?: true
   }
@@ -29048,6 +29058,8 @@ export namespace Prisma {
     title?: true
     value?: true
     label?: true
+    change?: true
+    previousValue?: true
     sortOrder?: true
     updatedAt?: true
     _all?: true
@@ -29144,6 +29156,8 @@ export namespace Prisma {
     title: string
     value: string
     label: string
+    change: string | null
+    previousValue: string | null
     sortOrder: number
     updatedAt: Date
     _count: EconomicIndicatorCountAggregateOutputType | null
@@ -29172,6 +29186,8 @@ export namespace Prisma {
     title?: boolean
     value?: boolean
     label?: boolean
+    change?: boolean
+    previousValue?: boolean
     sortOrder?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["economicIndicator"]>
@@ -29181,6 +29197,8 @@ export namespace Prisma {
     title?: boolean
     value?: boolean
     label?: boolean
+    change?: boolean
+    previousValue?: boolean
     sortOrder?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["economicIndicator"]>
@@ -29190,6 +29208,8 @@ export namespace Prisma {
     title?: boolean
     value?: boolean
     label?: boolean
+    change?: boolean
+    previousValue?: boolean
     sortOrder?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["economicIndicator"]>
@@ -29199,11 +29219,13 @@ export namespace Prisma {
     title?: boolean
     value?: boolean
     label?: boolean
+    change?: boolean
+    previousValue?: boolean
     sortOrder?: boolean
     updatedAt?: boolean
   }
 
-  export type EconomicIndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "value" | "label" | "sortOrder" | "updatedAt", ExtArgs["result"]["economicIndicator"]>
+  export type EconomicIndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "value" | "label" | "change" | "previousValue" | "sortOrder" | "updatedAt", ExtArgs["result"]["economicIndicator"]>
 
   export type $EconomicIndicatorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EconomicIndicator"
@@ -29213,6 +29235,8 @@ export namespace Prisma {
       title: string
       value: string
       label: string
+      change: string | null
+      previousValue: string | null
       sortOrder: number
       updatedAt: Date
     }, ExtArgs["result"]["economicIndicator"]>
@@ -29642,6 +29666,8 @@ export namespace Prisma {
     readonly title: FieldRef<"EconomicIndicator", 'String'>
     readonly value: FieldRef<"EconomicIndicator", 'String'>
     readonly label: FieldRef<"EconomicIndicator", 'String'>
+    readonly change: FieldRef<"EconomicIndicator", 'String'>
+    readonly previousValue: FieldRef<"EconomicIndicator", 'String'>
     readonly sortOrder: FieldRef<"EconomicIndicator", 'Int'>
     readonly updatedAt: FieldRef<"EconomicIndicator", 'DateTime'>
   }
@@ -33930,6 +33956,8 @@ export namespace Prisma {
     title: 'title',
     value: 'value',
     label: 'label',
+    change: 'change',
+    previousValue: 'previousValue',
     sortOrder: 'sortOrder',
     updatedAt: 'updatedAt'
   };
@@ -36283,6 +36311,8 @@ export namespace Prisma {
     title?: StringFilter<"EconomicIndicator"> | string
     value?: StringFilter<"EconomicIndicator"> | string
     label?: StringFilter<"EconomicIndicator"> | string
+    change?: StringNullableFilter<"EconomicIndicator"> | string | null
+    previousValue?: StringNullableFilter<"EconomicIndicator"> | string | null
     sortOrder?: IntFilter<"EconomicIndicator"> | number
     updatedAt?: DateTimeFilter<"EconomicIndicator"> | Date | string
   }
@@ -36292,6 +36322,8 @@ export namespace Prisma {
     title?: SortOrder
     value?: SortOrder
     label?: SortOrder
+    change?: SortOrderInput | SortOrder
+    previousValue?: SortOrderInput | SortOrder
     sortOrder?: SortOrder
     updatedAt?: SortOrder
   }
@@ -36304,6 +36336,8 @@ export namespace Prisma {
     NOT?: EconomicIndicatorWhereInput | EconomicIndicatorWhereInput[]
     value?: StringFilter<"EconomicIndicator"> | string
     label?: StringFilter<"EconomicIndicator"> | string
+    change?: StringNullableFilter<"EconomicIndicator"> | string | null
+    previousValue?: StringNullableFilter<"EconomicIndicator"> | string | null
     sortOrder?: IntFilter<"EconomicIndicator"> | number
     updatedAt?: DateTimeFilter<"EconomicIndicator"> | Date | string
   }, "id" | "title">
@@ -36313,6 +36347,8 @@ export namespace Prisma {
     title?: SortOrder
     value?: SortOrder
     label?: SortOrder
+    change?: SortOrderInput | SortOrder
+    previousValue?: SortOrderInput | SortOrder
     sortOrder?: SortOrder
     updatedAt?: SortOrder
     _count?: EconomicIndicatorCountOrderByAggregateInput
@@ -36330,6 +36366,8 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"EconomicIndicator"> | string
     value?: StringWithAggregatesFilter<"EconomicIndicator"> | string
     label?: StringWithAggregatesFilter<"EconomicIndicator"> | string
+    change?: StringNullableWithAggregatesFilter<"EconomicIndicator"> | string | null
+    previousValue?: StringNullableWithAggregatesFilter<"EconomicIndicator"> | string | null
     sortOrder?: IntWithAggregatesFilter<"EconomicIndicator"> | number
     updatedAt?: DateTimeWithAggregatesFilter<"EconomicIndicator"> | Date | string
   }
@@ -38997,6 +39035,8 @@ export namespace Prisma {
     title: string
     value: string
     label: string
+    change?: string | null
+    previousValue?: string | null
     sortOrder?: number
     updatedAt?: Date | string
   }
@@ -39006,6 +39046,8 @@ export namespace Prisma {
     title: string
     value: string
     label: string
+    change?: string | null
+    previousValue?: string | null
     sortOrder?: number
     updatedAt?: Date | string
   }
@@ -39015,6 +39057,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    change?: NullableStringFieldUpdateOperationsInput | string | null
+    previousValue?: NullableStringFieldUpdateOperationsInput | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39024,6 +39068,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    change?: NullableStringFieldUpdateOperationsInput | string | null
+    previousValue?: NullableStringFieldUpdateOperationsInput | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39033,6 +39079,8 @@ export namespace Prisma {
     title: string
     value: string
     label: string
+    change?: string | null
+    previousValue?: string | null
     sortOrder?: number
     updatedAt?: Date | string
   }
@@ -39042,6 +39090,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    change?: NullableStringFieldUpdateOperationsInput | string | null
+    previousValue?: NullableStringFieldUpdateOperationsInput | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39051,6 +39101,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     value?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    change?: NullableStringFieldUpdateOperationsInput | string | null
+    previousValue?: NullableStringFieldUpdateOperationsInput | string | null
     sortOrder?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41267,6 +41319,8 @@ export namespace Prisma {
     title?: SortOrder
     value?: SortOrder
     label?: SortOrder
+    change?: SortOrder
+    previousValue?: SortOrder
     sortOrder?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41280,6 +41334,8 @@ export namespace Prisma {
     title?: SortOrder
     value?: SortOrder
     label?: SortOrder
+    change?: SortOrder
+    previousValue?: SortOrder
     sortOrder?: SortOrder
     updatedAt?: SortOrder
   }
@@ -41289,6 +41345,8 @@ export namespace Prisma {
     title?: SortOrder
     value?: SortOrder
     label?: SortOrder
+    change?: SortOrder
+    previousValue?: SortOrder
     sortOrder?: SortOrder
     updatedAt?: SortOrder
   }
