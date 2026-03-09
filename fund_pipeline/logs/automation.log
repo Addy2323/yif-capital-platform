@@ -106,3 +106,288 @@
 [Thu 02/26/2026  2:54:18.74] Starting Fund Data Scraper... 
 [Thu 02/26/2026  4:32:22.81] Starting Fund Data Scraper... 
 [Thu 02/26/2026  4:49:18.73] Starting Fund Data Scraper... 
+
+================================================================
+[Mon Mar  9 19:10:29 CET 2026] Starting Daily Data Sync...
+================================================================
+[Mon Mar  9 19:10:29 CET 2026] [1/2] Running Fund Scraper...
+2026-03-09 19:10:30,025 [INFO] ============================================================
+2026-03-09 19:10:30,046 [INFO] Fund Data Scraper — Starting
+2026-03-09 19:10:30,046 [INFO] ============================================================
+2026-03-09 19:10:30,055 [INFO] Running in --latest-only mode (max 2 pages per source)
+2026-03-09 19:10:30,055 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-03-09 19:10:30,151 [INFO] ====== WebDriver manager ======
+2026-03-09 19:10:30,666 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:10:46,101 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:10:46,178 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:10:47,477 [INFO] [utt-amis] Starting scrape with max_pages=2
+2026-03-09 19:11:16,739 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-03-09 19:11:28,711 [INFO] [utt-amis] Successfully scraped 51 unique rows
+2026-03-09 19:11:28,713 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-03-09.json
+2026-03-09 19:11:29,310 [INFO] [utt-amis] Updated consolidated data -> /var/www/yif-capital-platform/fund_pipeline/data/utt-amis.json
+2026-03-09 19:11:29,718 [INFO] [utt-amis] Saved structured data -> data/processed/utt-amis_processed_2026-03-09.json and data/processed/utt-amis_data_2026-03-09.csv
+2026-03-09 19:11:29,719 [INFO] [utt-amis] Pushing chunk 1/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:29,776 [INFO] [utt-amis] Chunk 1 → upserted=10, errors=0
+2026-03-09 19:11:29,776 [INFO] [utt-amis] Pushing chunk 2/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:29,822 [INFO] [utt-amis] Chunk 2 → upserted=10, errors=0
+2026-03-09 19:11:29,822 [INFO] [utt-amis] Pushing chunk 3/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:29,881 [INFO] [utt-amis] Chunk 3 → upserted=10, errors=0
+2026-03-09 19:11:29,882 [INFO] [utt-amis] Pushing chunk 4/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:29,957 [INFO] [utt-amis] Chunk 4 → upserted=10, errors=0
+2026-03-09 19:11:29,957 [INFO] [utt-amis] Pushing chunk 5/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,001 [INFO] [utt-amis] Chunk 5 → upserted=10, errors=0
+2026-03-09 19:11:30,001 [INFO] [utt-amis] Pushing chunk 6/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,056 [INFO] [utt-amis] Chunk 6 → upserted=10, errors=0
+2026-03-09 19:11:30,056 [INFO] [utt-amis] Pushing chunk 7/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,121 [INFO] [utt-amis] Chunk 7 → upserted=10, errors=0
+2026-03-09 19:11:30,121 [INFO] [utt-amis] Pushing chunk 8/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,706 [INFO] [utt-amis] Chunk 8 → upserted=10, errors=0
+2026-03-09 19:11:30,706 [INFO] [utt-amis] Pushing chunk 9/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,805 [INFO] [utt-amis] Chunk 9 → upserted=10, errors=0
+2026-03-09 19:11:30,805 [INFO] [utt-amis] Pushing chunk 10/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,869 [INFO] [utt-amis] Chunk 10 → upserted=10, errors=0
+2026-03-09 19:11:30,869 [INFO] [utt-amis] Pushing chunk 11/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,913 [INFO] [utt-amis] Chunk 11 → upserted=10, errors=0
+2026-03-09 19:11:30,914 [INFO] [utt-amis] Pushing chunk 12/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:30,986 [INFO] [utt-amis] Chunk 12 → upserted=10, errors=0
+2026-03-09 19:11:30,987 [INFO] [utt-amis] Pushing chunk 13/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,183 [INFO] [utt-amis] Chunk 13 → upserted=10, errors=0
+2026-03-09 19:11:31,183 [INFO] [utt-amis] Pushing chunk 14/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,239 [INFO] [utt-amis] Chunk 14 → upserted=10, errors=0
+2026-03-09 19:11:31,240 [INFO] [utt-amis] Pushing chunk 15/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,278 [INFO] [utt-amis] Chunk 15 → upserted=10, errors=0
+2026-03-09 19:11:31,278 [INFO] [utt-amis] Pushing chunk 16/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,321 [INFO] [utt-amis] Chunk 16 → upserted=10, errors=0
+2026-03-09 19:11:31,321 [INFO] [utt-amis] Pushing chunk 17/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,358 [INFO] [utt-amis] Chunk 17 → upserted=10, errors=0
+2026-03-09 19:11:31,358 [INFO] [utt-amis] Pushing chunk 18/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,405 [INFO] [utt-amis] Chunk 18 → upserted=10, errors=0
+2026-03-09 19:11:31,405 [INFO] [utt-amis] Pushing chunk 19/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,456 [INFO] [utt-amis] Chunk 19 → upserted=10, errors=0
+2026-03-09 19:11:31,456 [INFO] [utt-amis] Pushing chunk 20/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,509 [INFO] [utt-amis] Chunk 20 → upserted=10, errors=0
+2026-03-09 19:11:31,509 [INFO] [utt-amis] Pushing chunk 21/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,554 [INFO] [utt-amis] Chunk 21 → upserted=10, errors=0
+2026-03-09 19:11:31,554 [INFO] [utt-amis] Pushing chunk 22/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,618 [INFO] [utt-amis] Chunk 22 → upserted=10, errors=0
+2026-03-09 19:11:31,618 [INFO] [utt-amis] Pushing chunk 23/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,668 [INFO] [utt-amis] Chunk 23 → upserted=10, errors=0
+2026-03-09 19:11:31,668 [INFO] [utt-amis] Pushing chunk 24/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,737 [INFO] [utt-amis] Chunk 24 → upserted=10, errors=0
+2026-03-09 19:11:31,738 [INFO] [utt-amis] Pushing chunk 25/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,808 [INFO] [utt-amis] Chunk 25 → upserted=10, errors=0
+2026-03-09 19:11:31,808 [INFO] [utt-amis] Pushing chunk 26/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,841 [INFO] [utt-amis] Chunk 26 → upserted=10, errors=0
+2026-03-09 19:11:31,841 [INFO] [utt-amis] Pushing chunk 27/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,881 [INFO] [utt-amis] Chunk 27 → upserted=10, errors=0
+2026-03-09 19:11:31,881 [INFO] [utt-amis] Pushing chunk 28/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,926 [INFO] [utt-amis] Chunk 28 → upserted=10, errors=0
+2026-03-09 19:11:31,927 [INFO] [utt-amis] Pushing chunk 29/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:31,988 [INFO] [utt-amis] Chunk 29 → upserted=10, errors=0
+2026-03-09 19:11:31,988 [INFO] [utt-amis] Pushing chunk 30/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,142 [INFO] [utt-amis] Chunk 30 → upserted=10, errors=0
+2026-03-09 19:11:32,142 [INFO] [utt-amis] Pushing chunk 31/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,199 [INFO] [utt-amis] Chunk 31 → upserted=10, errors=0
+2026-03-09 19:11:32,200 [INFO] [utt-amis] Pushing chunk 32/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,239 [INFO] [utt-amis] Chunk 32 → upserted=10, errors=0
+2026-03-09 19:11:32,239 [INFO] [utt-amis] Pushing chunk 33/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,287 [INFO] [utt-amis] Chunk 33 → upserted=10, errors=0
+2026-03-09 19:11:32,287 [INFO] [utt-amis] Pushing chunk 34/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,329 [INFO] [utt-amis] Chunk 34 → upserted=10, errors=0
+2026-03-09 19:11:32,329 [INFO] [utt-amis] Pushing chunk 35/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,374 [INFO] [utt-amis] Chunk 35 → upserted=10, errors=0
+2026-03-09 19:11:32,375 [INFO] [utt-amis] Pushing chunk 36/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,418 [INFO] [utt-amis] Chunk 36 → upserted=10, errors=0
+2026-03-09 19:11:32,418 [INFO] [utt-amis] Pushing chunk 37/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,480 [INFO] [utt-amis] Chunk 37 → upserted=10, errors=0
+2026-03-09 19:11:32,481 [INFO] [utt-amis] Pushing chunk 38/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,561 [INFO] [utt-amis] Chunk 38 → upserted=10, errors=0
+2026-03-09 19:11:32,561 [INFO] [utt-amis] Pushing chunk 39/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,605 [INFO] [utt-amis] Chunk 39 → upserted=10, errors=0
+2026-03-09 19:11:32,605 [INFO] [utt-amis] Pushing chunk 40/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,648 [INFO] [utt-amis] Chunk 40 → upserted=10, errors=0
+2026-03-09 19:11:32,648 [INFO] [utt-amis] Pushing chunk 41/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,698 [INFO] [utt-amis] Chunk 41 → upserted=10, errors=0
+2026-03-09 19:11:32,698 [INFO] [utt-amis] Pushing chunk 42/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,735 [INFO] [utt-amis] Chunk 42 → upserted=10, errors=0
+2026-03-09 19:11:32,735 [INFO] [utt-amis] Pushing chunk 43/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,771 [INFO] [utt-amis] Chunk 43 → upserted=10, errors=0
+2026-03-09 19:11:32,772 [INFO] [utt-amis] Pushing chunk 44/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,829 [INFO] [utt-amis] Chunk 44 → upserted=10, errors=0
+2026-03-09 19:11:32,830 [INFO] [utt-amis] Pushing chunk 45/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,888 [INFO] [utt-amis] Chunk 45 → upserted=10, errors=0
+2026-03-09 19:11:32,888 [INFO] [utt-amis] Pushing chunk 46/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:32,938 [INFO] [utt-amis] Chunk 46 → upserted=10, errors=0
+2026-03-09 19:11:32,939 [INFO] [utt-amis] Pushing chunk 47/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,067 [INFO] [utt-amis] Chunk 47 → upserted=10, errors=0
+2026-03-09 19:11:33,068 [INFO] [utt-amis] Pushing chunk 48/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,137 [INFO] [utt-amis] Chunk 48 → upserted=10, errors=0
+2026-03-09 19:11:33,137 [INFO] [utt-amis] Pushing chunk 49/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,181 [INFO] [utt-amis] Chunk 49 → upserted=10, errors=0
+2026-03-09 19:11:33,181 [INFO] [utt-amis] Pushing chunk 50/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,238 [INFO] [utt-amis] Chunk 50 → upserted=10, errors=0
+2026-03-09 19:11:33,239 [INFO] [utt-amis] Pushing chunk 51/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,297 [INFO] [utt-amis] Chunk 51 → upserted=10, errors=0
+2026-03-09 19:11:33,297 [INFO] [utt-amis] Pushing chunk 52/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,348 [INFO] [utt-amis] Chunk 52 → upserted=10, errors=0
+2026-03-09 19:11:33,348 [INFO] [utt-amis] Pushing chunk 53/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,420 [INFO] [utt-amis] Chunk 53 → upserted=10, errors=0
+2026-03-09 19:11:33,422 [INFO] [utt-amis] Pushing chunk 54/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,482 [INFO] [utt-amis] Chunk 54 → upserted=10, errors=0
+2026-03-09 19:11:33,483 [INFO] [utt-amis] Pushing chunk 55/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,532 [INFO] [utt-amis] Chunk 55 → upserted=10, errors=0
+2026-03-09 19:11:33,533 [INFO] [utt-amis] Pushing chunk 56/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,580 [INFO] [utt-amis] Chunk 56 → upserted=10, errors=0
+2026-03-09 19:11:33,580 [INFO] [utt-amis] Pushing chunk 57/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,630 [INFO] [utt-amis] Chunk 57 → upserted=10, errors=0
+2026-03-09 19:11:33,630 [INFO] [utt-amis] Pushing chunk 58/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,667 [INFO] [utt-amis] Chunk 58 → upserted=10, errors=0
+2026-03-09 19:11:33,668 [INFO] [utt-amis] Pushing chunk 59/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,719 [INFO] [utt-amis] Chunk 59 → upserted=10, errors=0
+2026-03-09 19:11:33,719 [INFO] [utt-amis] Pushing chunk 60/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,765 [INFO] [utt-amis] Chunk 60 → upserted=10, errors=0
+2026-03-09 19:11:33,766 [INFO] [utt-amis] Pushing chunk 61/2115 (10 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:11:33,815 [INFO] [utt-amis] Chunk 61 → upserted=10, errors=0
+2026-03-09 19:11:33,816 [INFO] [utt-amis] Pushing chunk 62/2115 (10 records) to http://localhost:3000/api/funds/update
+Traceback (most recent call last):
+  File "/var/www/yif-capital-platform/fund_pipeline/scraper/selenium_scraper.py", line 639, in <module>
+    main()
+  File "/var/www/yif-capital-platform/fund_pipeline/scraper/selenium_scraper.py", line 611, in main
+    api_pushed = push_to_api(structured_data, name)
+  File "/var/www/yif-capital-platform/fund_pipeline/scraper/selenium_scraper.py", line 374, in push_to_api
+    response = requests.post(api_url, json={"source": name, "data": chunk}, timeout=60)
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/var/www/yif-capital-platform/fund_pipeline/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 284, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.10/socket.py", line 705, in readinto
+    return self._sock.recv_into(b)
+KeyboardInterrupt
+
+================================================================
+[Mon Mar  9 19:18:49 CET 2026] Starting Daily Data Sync...
+================================================================
+[Mon Mar  9 19:18:49 CET 2026] [1/2] Running Fund Scraper...
+2026-03-09 19:18:49,931 [INFO] ============================================================
+2026-03-09 19:18:49,931 [INFO] Fund Data Scraper — Starting
+2026-03-09 19:18:49,931 [INFO] ============================================================
+2026-03-09 19:18:49,934 [INFO] Running in --latest-only mode (max 2 pages per source)
+2026-03-09 19:18:49,934 [INFO] [utt-amis] Attempt 1/5 — https://uttamis.co.tz/fund-performance
+2026-03-09 19:18:49,938 [INFO] ====== WebDriver manager ======
+2026-03-09 19:18:50,213 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:18:50,275 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:18:50,366 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:18:51,404 [INFO] [utt-amis] Starting scrape with max_pages=2
+2026-03-09 19:19:20,742 [INFO] [utt-amis] Page 1: Found 51 rows
+2026-03-09 19:19:37,301 [INFO] [utt-amis] Page 2: Found 51 rows
+2026-03-09 19:19:43,539 [INFO] [utt-amis] Successfully scraped 101 unique rows
+2026-03-09 19:19:43,540 [INFO] [utt-amis] Saved raw data -> data/raw/utt-amis_2026-03-09.json
+2026-03-09 19:19:43,883 [INFO] [utt-amis] Updated consolidated data -> /var/www/yif-capital-platform/fund_pipeline/data/utt-amis.json
+2026-03-09 19:19:44,307 [INFO] [utt-amis] Saved structured data -> data/processed/utt-amis_processed_2026-03-09.json and data/processed/utt-amis_data_2026-03-09.csv
+2026-03-09 19:19:44,308 [INFO] [utt-amis] --latest-only: pushing 100 new records (not 21142 total)
+2026-03-09 19:19:44,309 [INFO] [utt-amis] Pushing chunk 1/2 (50 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:19:44,452 [INFO] [utt-amis] Chunk 1 → upserted=50, errors=0
+2026-03-09 19:19:44,452 [INFO] [utt-amis] Pushing chunk 2/2 (50 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:19:44,565 [INFO] [utt-amis] Chunk 2 → upserted=50, errors=0
+2026-03-09 19:19:44,565 [INFO] [vertex] Attempt 1/3 — https://vertex.co.tz/vertex-bond-fund/
+2026-03-09 19:19:44,565 [INFO] ====== WebDriver manager ======
+2026-03-09 19:19:44,632 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:19:44,681 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:19:44,743 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:19:45,052 [INFO] [vertex] Starting scrape with max_pages=1
+2026-03-09 19:20:01,838 [INFO] [vertex] Page 1: Found 11 rows
+2026-03-09 19:20:03,824 [INFO] [vertex] Successfully scraped 11 unique rows
+2026-03-09 19:20:03,826 [INFO] [vertex] Saved raw data -> data/raw/vertex_2026-03-09.json
+2026-03-09 19:20:03,839 [INFO] [vertex] Updated consolidated data -> /var/www/yif-capital-platform/fund_pipeline/data/vertex.json
+2026-03-09 19:20:03,867 [INFO] [vertex] Saved structured data -> data/processed/vertex_processed_2026-03-09.json and data/processed/vertex_data_2026-03-09.csv
+2026-03-09 19:20:03,867 [INFO] [vertex] --latest-only: pushing 0 new records (not 282 total)
+2026-03-09 19:20:03,867 [INFO] [sanlam-pesa] Attempt 1/3 — https://invest-tz.sanlamallianzinvestments.com/en
+2026-03-09 19:20:03,868 [INFO] ====== WebDriver manager ======
+2026-03-09 19:20:04,079 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:20:05,040 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:20:05,099 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:20:05,760 [INFO] [sanlam-pesa] Starting scrape with max_pages=2
+2026-03-09 19:20:19,884 [INFO] [sanlam-pesa] Page 1: Found 11 rows
+2026-03-09 19:20:30,062 [INFO] [sanlam-pesa] Page 2: Found 11 rows
+2026-03-09 19:20:32,309 [INFO] [sanlam-pesa] Successfully scraped 21 unique rows
+2026-03-09 19:20:32,310 [INFO] [sanlam-pesa] Saved raw data -> data/raw/sanlam-pesa_2026-03-09.json
+2026-03-09 19:20:32,397 [INFO] [sanlam-pesa] Updated consolidated data -> /var/www/yif-capital-platform/fund_pipeline/data/sanlam-pesa.json
+2026-03-09 19:20:32,428 [INFO] [sanlam-pesa] Saved structured data -> data/processed/sanlam-pesa_processed_2026-03-09.json and data/processed/sanlam-pesa_data_2026-03-09.csv
+2026-03-09 19:20:32,429 [INFO] [sanlam-pesa] --latest-only: pushing 20 new records (not 1164 total)
+2026-03-09 19:20:32,429 [INFO] [sanlam-pesa] Pushing chunk 1/1 (20 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:20:32,500 [INFO] [sanlam-pesa] Chunk 1 → upserted=20, errors=0
+2026-03-09 19:20:32,500 [INFO] [zansec] Attempt 1/3 — https://zansec.co.tz/nav.php
+2026-03-09 19:20:32,500 [INFO] ====== WebDriver manager ======
+2026-03-09 19:20:32,591 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:20:32,691 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:20:32,748 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:20:33,078 [INFO] [zansec] Starting scrape with max_pages=2
+2026-03-09 19:20:46,334 [INFO] [zansec] Page 1: Found 11 rows
+2026-03-09 19:20:55,564 [INFO] [zansec] Page 2: Found 11 rows
+2026-03-09 19:20:56,939 [INFO] [zansec] Successfully scraped 21 unique rows
+2026-03-09 19:20:56,939 [INFO] [zansec] Saved raw data -> data/raw/zansec_2026-03-09.json
+2026-03-09 19:20:57,035 [INFO] [zansec] Updated consolidated data -> /var/www/yif-capital-platform/fund_pipeline/data/zansec.json
+2026-03-09 19:20:57,068 [INFO] [zansec] Saved structured data -> data/processed/zansec_processed_2026-03-09.json and data/processed/zansec_data_2026-03-09.csv
+2026-03-09 19:20:57,068 [INFO] [zansec] --latest-only: pushing 20 new records (not 1587 total)
+2026-03-09 19:20:57,068 [INFO] [zansec] Pushing chunk 1/1 (20 records) to http://localhost:3000/api/funds/update
+2026-03-09 19:20:57,141 [INFO] [zansec] Chunk 1 → upserted=20, errors=0
+2026-03-09 19:20:57,141 [INFO] [whi] Attempt 1/3 — https://fas.whi.go.tz/
+2026-03-09 19:20:57,141 [INFO] ====== WebDriver manager ======
+2026-03-09 19:20:57,220 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:20:57,306 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:20:57,410 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:20:57,712 [INFO] [whi] Starting scrape with max_pages=2
+2026-03-09 19:21:42,437 [INFO] [whi] Table not found in main content, checking iframes...
+2026-03-09 19:21:42,482 [ERROR] [whi] Attempt 1 failed: No table found in main content or any iframe
+2026-03-09 19:21:42,482 [ERROR] [whi] Page Title: WHI - FAS
+2026-03-09 19:21:42,559 [INFO] [whi] Attempt 2/3 — https://fas.whi.go.tz/
+2026-03-09 19:21:42,559 [INFO] ====== WebDriver manager ======
+2026-03-09 19:21:42,647 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:21:42,707 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:21:42,814 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:21:43,221 [INFO] [whi] Starting scrape with max_pages=2
+2026-03-09 19:22:50,351 [INFO] [whi] Table not found in main content, checking iframes...
+2026-03-09 19:22:50,380 [ERROR] [whi] Attempt 2 failed: No table found in main content or any iframe
+2026-03-09 19:22:50,380 [ERROR] [whi] Page Title: WHI - FAS
+2026-03-09 19:22:50,474 [INFO] [whi] Attempt 3/3 — https://fas.whi.go.tz/
+2026-03-09 19:22:50,475 [INFO] ====== WebDriver manager ======
+2026-03-09 19:22:50,563 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:22:50,643 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:22:50,697 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:22:51,011 [INFO] [whi] Starting scrape with max_pages=2
+2026-03-09 19:23:35,440 [INFO] [whi] Table not found in main content, checking iframes...
+2026-03-09 19:23:35,472 [ERROR] [whi] Attempt 3 failed: No table found in main content or any iframe
+2026-03-09 19:23:35,472 [ERROR] [whi] Page Title: WHI - FAS
+2026-03-09 19:23:35,548 [ERROR] [whi] All 3 attempts exhausted
+2026-03-09 19:23:35,548 [INFO] [itrust] Attempt 1/3 — https://itrust.co.tz/itrust-funds/
+2026-03-09 19:23:35,549 [INFO] ====== WebDriver manager ======
+2026-03-09 19:23:35,643 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:23:35,709 [INFO] Get LATEST chromedriver version for google-chrome
+2026-03-09 19:23:35,765 [INFO] Driver [/root/.wdm/drivers/chromedriver/linux64/145.0.7632.117/chromedriver-linux64/chromedriver] found in cache
+2026-03-09 19:23:36,091 [INFO] [itrust] Starting scrape with max_pages=1
+Traceback (most recent call last):
+  File "/var/www/yif-capital-platform/fund_pipeline/scraper/selenium_scraper.py", line 647, in <module>
+    main()
+  File "/var/www/yif-capital-platform/fund_pipeline/scraper/selenium_scraper.py", line 573, in main
+    data = scrape_site(
+  File "/var/www/yif-capital-platform/fund_pipeline/scraper/selenium_scraper.py", line 95, in scrape_site
+    time.sleep(wait_seconds)
+KeyboardInterrupt
