@@ -363,7 +363,7 @@ def save_processed(data: list, name: str, output_path: str):
 def push_to_api(data: list, name: str):
     """Send data to API (Sending to API)."""
     api_url = os.getenv("FUND_API_URL", "http://localhost:3000/api/funds/update")
-    chunk_size = 10
+    chunk_size = 50  # Larger chunks = fewer API calls = faster & more reliable
     total_chunks = max(1, (len(data) - 1) // chunk_size + 1)
     
     try:
@@ -608,7 +608,15 @@ def main():
                         )
                         
                         # 5. Push to API
-                        api_pushed = push_to_api(structured_data, name)
+                        # In --latest-only mode, only push the newly scraped data
+                        # (not the entire historical dataset which can be 21,000+ records)
+                        if args.latest_only:
+                            push_data = map_data(data, name)
+                            logger.info(f"[{name}] --latest-only: pushing {len(push_data)} new records (not {len(structured_data)} total)")
+                        else:
+                            push_data = structured_data
+                        
+                        api_pushed = push_to_api(push_data, name)
                         status = "success"
                     else:
                         status = "mapping failed"
