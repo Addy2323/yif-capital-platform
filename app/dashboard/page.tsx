@@ -40,88 +40,97 @@ export default function DashboardPage() {
         <Card className="border border-white/10 bg-[#f8f6f0] dark:bg-[#1a1c23] shadow-lg rounded-none">
           <CardHeader className="pb-4 pt-4 px-4 md:pt-6 md:px-6 border-b border-gray-200 dark:border-white/10 flex flex-row items-center justify-between">
             <div className="flex items-center gap-2">
-               <span className="text-2xl md:text-3xl rounded shadow-sm border border-gray-100 overflow-hidden" aria-label="Tanzania Flag">🇹🇿</span>
+              <span className="text-2xl md:text-3xl rounded shadow-sm border border-gray-100 overflow-hidden" aria-label="Tanzania Flag">🇹🇿</span>
               <CardTitle className="text-lg md:text-2xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">
                 Dar es Salaam Stock Exchange
               </CardTitle>
             </div>
           </CardHeader>
-          <CardContent className="p-4 md:p-6">
-            {/* Index Value Row */}
-            <div className="flex flex-col md:flex-row md:items-baseline gap-4 mb-6">
-              <div className="flex items-center gap-3">
-                {marketSummary.changePercent >= 0 ? (
-                  <TrendingUp className="h-10 w-10 text-emerald-600 dark:text-emerald-500" />
-                ) : (
-                  <div className="w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-t-[24px] border-t-red-600 dark:border-t-red-500" />
-                )}
-                <span className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 tabular-nums tracking-tight">
-                  {marketSummary.indexValue.toLocaleString()}
-                </span>
+          <CardContent className="p-0">
+            {/* Indices Summary Bar — Trend (matching dse.co.tz) */}
+            <div className="border-b border-gray-200 dark:border-white/10">
+              <div className="flex items-center justify-between px-4 md:px-6 pt-3 pb-2">
+                <span className="text-xs font-bold text-emerald-700 dark:text-emerald-500 uppercase tracking-widest border-b-2 border-emerald-600 dark:border-emerald-500 pb-1">Trend</span>
+                <span className="text-[11px] text-gray-500 dark:text-gray-400">Market Summary : {marketSummary.date || "—"}</span>
               </div>
-              <div className="flex items-baseline gap-2 mt-1 md:mt-0">
-                <span className={`text-lg md:text-xl font-medium ${marketSummary.changePercent >= 0 ? "text-emerald-600 dark:text-emerald-500" : "text-red-600 dark:text-red-500"}`}>
-                  {marketSummary.changePercent >= 0 ? "+" : ""}{marketSummary.change} ({marketSummary.changePercent >= 0 ? "+" : ""}{marketSummary.changePercent}%)
-                </span>
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200 dark:divide-white/10">
+                {/* Tanzania Share Index */}
+                <div className="px-3 md:px-4 py-3">
+                  <div className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Tanzania Share Index</div>
+                  <div className="text-base md:text-xl font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
+                    {marketSummary.tsiValue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || "—"}
+                  </div>
+                  {marketSummary.tsiChange != null && (
+                    <div className={`text-xs md:text-sm font-medium mt-0.5 flex items-center gap-1 ${marketSummary.tsiChange >= 0 ? "text-emerald-600 dark:text-emerald-500" : "text-red-600 dark:text-red-500"}`}>
+                      {marketSummary.tsiChange >= 0 ? "↑" : "↓"} {Math.abs(marketSummary.tsiChange).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </div>
+                  )}
+                </div>
+
+                {/* DSE All Share Index */}
+                <div className="px-3 md:px-4 py-3">
+                  <div className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">DSE All Share Index</div>
+                  <div className="text-base md:text-xl font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
+                    {marketSummary.indexValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </div>
+                  <div className={`text-xs md:text-sm font-medium mt-0.5 flex items-center gap-1 ${marketSummary.change >= 0 ? "text-emerald-600 dark:text-emerald-500" : "text-red-600 dark:text-red-500"}`}>
+                    {marketSummary.change >= 0 ? "↑" : "↓"} {Math.abs(marketSummary.change).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  </div>
+                </div>
+
+                {/* Banks, Finance & Investments Index */}
+                <div className="px-3 md:px-4 py-3">
+                  <div className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Banks, Finance & Investments</div>
+                  <div className="text-base md:text-xl font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
+                    {marketSummary.bfiValue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || "—"}
+                  </div>
+                  {marketSummary.bfiChange != null && (
+                    <div className={`text-xs md:text-sm font-medium mt-0.5 flex items-center gap-1 ${marketSummary.bfiChange >= 0 ? "text-emerald-600 dark:text-emerald-500" : "text-red-600 dark:text-red-500"}`}>
+                      {marketSummary.bfiChange >= 0 ? "↑" : "↓"} {Math.abs(marketSummary.bfiChange).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </div>
+                  )}
+                </div>
+
+                {/* Industrial & Allied Index */}
+                <div className="px-3 md:px-4 py-3">
+                  <div className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">Industrial & Allied Index</div>
+                  <div className="text-base md:text-xl font-semibold text-gray-800 dark:text-gray-100 tabular-nums">
+                    {marketSummary.iaValue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || "—"}
+                  </div>
+                  {marketSummary.iaChange != null && (
+                    <div className={`text-xs md:text-sm font-medium mt-0.5 flex items-center gap-1 ${marketSummary.iaChange >= 0 ? "text-emerald-600 dark:text-emerald-500" : "text-red-600 dark:text-red-500"}`}>
+                      {marketSummary.iaChange >= 0 ? "↑" : "↓"} {Math.abs(marketSummary.iaChange).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="text-xs font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest mb-1 flex items-center justify-between">
-               <span>DSE ALL SHARE INDEX <span className="text-gray-400 dark:text-gray-500 font-normal capitalize">| {marketSummary.date}</span></span>
-            </div>
-
-            {/* Performance Grid */}
-            <div className="bg-[#e4ecec] dark:bg-[#202938] rounded flex w-full mb-6 divide-x divide-white/50 dark:divide-black/20 overflow-hidden shadow-sm">
-                <div className="flex-1 py-1.5 px-1 md:px-2 text-center">
-                    <div className="font-bold text-gray-600 dark:text-gray-300 uppercase text-[10px] md:text-xs mb-0.5 md:mb-1">1M</div>
-                    <div className="text-emerald-600 dark:text-emerald-400 font-medium text-xs md:text-sm">{marketSummary.perf1M}</div>
-                </div>
-                <div className="flex-1 py-1.5 px-1 md:px-2 text-center">
-                    <div className="font-bold text-gray-600 dark:text-gray-300 uppercase text-[10px] md:text-xs mb-0.5 md:mb-1">3M</div>
-                    <div className="text-emerald-600 dark:text-emerald-400 font-medium text-xs md:text-sm">{marketSummary.perf3M}</div>
-                </div>
-                <div className="flex-1 py-1.5 px-1 md:px-2 text-center bg-[#dbdbdb] dark:bg-[#1f2937]/50">
-                    <div className="font-bold text-gray-700 dark:text-gray-200 uppercase text-[10px] md:text-xs mb-0.5 md:mb-1">YTD</div>
-                    <div className="text-emerald-600 dark:text-emerald-400 font-medium text-xs md:text-sm">{marketSummary.perfYTD}</div>
-                </div>
-                <div className="flex-1 py-1.5 px-1 md:px-2 text-center">
-                    <div className="font-bold text-gray-600 dark:text-gray-300 uppercase text-[10px] md:text-xs mb-0.5 md:mb-1">1Y</div>
-                    <div className="text-emerald-600 dark:text-emerald-400 font-medium text-xs md:text-sm">{marketSummary.perf1Y}</div>
-                </div>
-                <div className="flex-1 py-1.5 px-1 md:px-2 text-center">
-                    <div className="font-bold text-gray-600 dark:text-gray-300 uppercase text-[10px] md:text-xs mb-0.5 md:mb-1">2Y</div>
-                    <div className="text-emerald-600 dark:text-emerald-400 font-medium text-xs md:text-sm">{marketSummary.perf2Y}</div>
-                </div>
-            </div>
-
-            <h3 className="text-lg font-bold text-gray-700 dark:text-gray-200 mb-4 border-b border-gray-200 dark:border-white/10 pb-2">Market Summary</h3>
-            
-            {/* Market Stats Grid */}
-            <div className="grid grid-cols-2 gap-y-4 gap-x-4 md:gap-x-8 text-sm md:text-base">
+            {/* Market Summary Stats */}
+            <div className="p-4 md:p-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4 md:gap-x-8 text-sm md:text-base">
                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
-                    <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Value Traded (TZS)</div>
-                    <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.valueTraded}</div>
+                  <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Market Cap</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.marketCap || "—"}</div>
                 </div>
                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
-                     <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Volume</div>
-                    <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.volume}</div>
+                  <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Volume</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.volume || "—"}</div>
                 </div>
-                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
-                    <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Transactions</div>
-                    <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.transactions}</div>
+                <div className="border-b border-gray-200 dark:border-white/10 pb-2">
+                  <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Deals</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.deals || marketSummary.transactions || "—"}</div>
                 </div>
-                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
-                     <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Market Cap. (Bln TZS)</div>
-                    <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.marketCap}</div>
+                <div className="border-b border-gray-200 dark:border-white/10 pb-2">
+                  <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Turn Over</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.turnOver || marketSummary.valueTraded || "—"}</div>
                 </div>
-            </div>
-             <div className="text-right mt-2 text-xs text-gray-400 dark:text-gray-500">
-                {marketSummary.date}
+              </div>
             </div>
           </CardContent>
         </Card>
       ) : (
-          <div className="animate-pulse h-64 bg-muted rounded-xl" />
+        <div className="animate-pulse h-64 bg-muted rounded-xl" />
       )}
 
       {/* Market Summary Tiles - Hidden as per request */}

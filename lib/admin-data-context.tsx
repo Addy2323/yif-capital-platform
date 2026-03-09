@@ -13,19 +13,28 @@ const STORAGE_KEYS = {
 }
 
 export interface DseMarketSummary {
-  indexValue: number
-  change: number
-  changePercent: number
-  perf1M: string | null
-  perf3M: string | null
-  perfYTD: string | null
-  perf1Y: string | null
-  perf2Y: string | null
-  valueTraded: string | null
-  volume: string | null
-  transactions: string | null
-  marketCap: string | null
-  date: string | null
+    indexValue: number
+    change: number
+    changePercent: number
+    // Additional DSE indices from dse.co.tz
+    tsiValue: number | null       // Tanzania Share Index
+    tsiChange: number | null
+    bfiValue: number | null       // Banks, Finance & Investments Index
+    bfiChange: number | null
+    iaValue: number | null        // Industrial & Allied Index
+    iaChange: number | null
+    perf1M: string | null
+    perf3M: string | null
+    perfYTD: string | null
+    perf1Y: string | null
+    perf2Y: string | null
+    valueTraded: string | null
+    volume: string | null
+    transactions: string | null
+    marketCap: string | null
+    turnOver: string | null
+    deals: string | null
+    date: string | null
 }
 
 interface AdminDataContextType {
