@@ -33,6 +33,14 @@ export default function DashboardPage() {
   const topGainers = [...stocks].sort((a, b) => b.changePercent - a.changePercent).slice(0, 5)
   const topLosers = [...stocks].sort((a, b) => a.changePercent - b.changePercent).slice(0, 5)
 
+  /** Format a raw number string (e.g. "15645210895.0") into "15,645,210,895.00" */
+  const fmtNum = (val: string | null | undefined): string => {
+    if (!val) return "—"
+    const n = parseFloat(val.replace(/,/g, ""))
+    if (isNaN(n)) return val
+    return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  }
+
   return (
     <div className="space-y-8">
       {/* African Markets DSE Redesign */}
@@ -111,19 +119,19 @@ export default function DashboardPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-4 md:gap-x-8 text-sm md:text-base">
                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
                   <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Market Cap</div>
-                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.marketCap || "—"}</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{fmtNum(marketSummary.marketCap)}</div>
                 </div>
                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
                   <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Volume</div>
-                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.volume || "—"}</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{fmtNum(marketSummary.volume)}</div>
                 </div>
                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
                   <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Deals</div>
-                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.deals || marketSummary.transactions || "—"}</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{fmtNum(marketSummary.deals || marketSummary.transactions)}</div>
                 </div>
                 <div className="border-b border-gray-200 dark:border-white/10 pb-2">
                   <div className="text-gray-500 dark:text-gray-400 text-xs mb-1">Turn Over</div>
-                  <div className="font-semibold text-gray-800 dark:text-gray-100">{marketSummary.turnOver || marketSummary.valueTraded || "—"}</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{fmtNum(marketSummary.turnOver || marketSummary.valueTraded)}</div>
                 </div>
               </div>
             </div>
