@@ -30143,12 +30143,24 @@ export namespace Prisma {
     indexValue: number | null
     change: number | null
     changePercent: number | null
+    tsiValue: number | null
+    tsiChange: number | null
+    bfiValue: number | null
+    bfiChange: number | null
+    iaValue: number | null
+    iaChange: number | null
   }
 
   export type DseMarketSummarySumAggregateOutputType = {
     indexValue: number | null
     change: number | null
     changePercent: number | null
+    tsiValue: number | null
+    tsiChange: number | null
+    bfiValue: number | null
+    bfiChange: number | null
+    iaValue: number | null
+    iaChange: number | null
   }
 
   export type DseMarketSummaryMinAggregateOutputType = {
@@ -30156,6 +30168,12 @@ export namespace Prisma {
     indexValue: number | null
     change: number | null
     changePercent: number | null
+    tsiValue: number | null
+    tsiChange: number | null
+    bfiValue: number | null
+    bfiChange: number | null
+    iaValue: number | null
+    iaChange: number | null
     perf1M: string | null
     perf3M: string | null
     perfYTD: string | null
@@ -30165,6 +30183,8 @@ export namespace Prisma {
     volume: string | null
     transactions: string | null
     marketCap: string | null
+    turnOver: string | null
+    deals: string | null
     date: string | null
     updatedAt: Date | null
   }
@@ -30174,6 +30194,12 @@ export namespace Prisma {
     indexValue: number | null
     change: number | null
     changePercent: number | null
+    tsiValue: number | null
+    tsiChange: number | null
+    bfiValue: number | null
+    bfiChange: number | null
+    iaValue: number | null
+    iaChange: number | null
     perf1M: string | null
     perf3M: string | null
     perfYTD: string | null
@@ -30183,6 +30209,8 @@ export namespace Prisma {
     volume: string | null
     transactions: string | null
     marketCap: string | null
+    turnOver: string | null
+    deals: string | null
     date: string | null
     updatedAt: Date | null
   }
@@ -30192,6 +30220,12 @@ export namespace Prisma {
     indexValue: number
     change: number
     changePercent: number
+    tsiValue: number
+    tsiChange: number
+    bfiValue: number
+    bfiChange: number
+    iaValue: number
+    iaChange: number
     perf1M: number
     perf3M: number
     perfYTD: number
@@ -30201,6 +30235,8 @@ export namespace Prisma {
     volume: number
     transactions: number
     marketCap: number
+    turnOver: number
+    deals: number
     date: number
     updatedAt: number
     _all: number
@@ -30211,12 +30247,24 @@ export namespace Prisma {
     indexValue?: true
     change?: true
     changePercent?: true
+    tsiValue?: true
+    tsiChange?: true
+    bfiValue?: true
+    bfiChange?: true
+    iaValue?: true
+    iaChange?: true
   }
 
   export type DseMarketSummarySumAggregateInputType = {
     indexValue?: true
     change?: true
     changePercent?: true
+    tsiValue?: true
+    tsiChange?: true
+    bfiValue?: true
+    bfiChange?: true
+    iaValue?: true
+    iaChange?: true
   }
 
   export type DseMarketSummaryMinAggregateInputType = {
@@ -30224,6 +30272,12 @@ export namespace Prisma {
     indexValue?: true
     change?: true
     changePercent?: true
+    tsiValue?: true
+    tsiChange?: true
+    bfiValue?: true
+    bfiChange?: true
+    iaValue?: true
+    iaChange?: true
     perf1M?: true
     perf3M?: true
     perfYTD?: true
@@ -30233,6 +30287,8 @@ export namespace Prisma {
     volume?: true
     transactions?: true
     marketCap?: true
+    turnOver?: true
+    deals?: true
     date?: true
     updatedAt?: true
   }
@@ -30242,6 +30298,12 @@ export namespace Prisma {
     indexValue?: true
     change?: true
     changePercent?: true
+    tsiValue?: true
+    tsiChange?: true
+    bfiValue?: true
+    bfiChange?: true
+    iaValue?: true
+    iaChange?: true
     perf1M?: true
     perf3M?: true
     perfYTD?: true
@@ -30251,6 +30313,8 @@ export namespace Prisma {
     volume?: true
     transactions?: true
     marketCap?: true
+    turnOver?: true
+    deals?: true
     date?: true
     updatedAt?: true
   }
@@ -30260,6 +30324,12 @@ export namespace Prisma {
     indexValue?: true
     change?: true
     changePercent?: true
+    tsiValue?: true
+    tsiChange?: true
+    bfiValue?: true
+    bfiChange?: true
+    iaValue?: true
+    iaChange?: true
     perf1M?: true
     perf3M?: true
     perfYTD?: true
@@ -30269,6 +30339,8 @@ export namespace Prisma {
     volume?: true
     transactions?: true
     marketCap?: true
+    turnOver?: true
+    deals?: true
     date?: true
     updatedAt?: true
     _all?: true
@@ -30365,6 +30437,12 @@ export namespace Prisma {
     indexValue: number
     change: number
     changePercent: number
+    tsiValue: number | null
+    tsiChange: number | null
+    bfiValue: number | null
+    bfiChange: number | null
+    iaValue: number | null
+    iaChange: number | null
     perf1M: string | null
     perf3M: string | null
     perfYTD: string | null
@@ -30374,6 +30452,8 @@ export namespace Prisma {
     volume: string | null
     transactions: string | null
     marketCap: string | null
+    turnOver: string | null
+    deals: string | null
     date: string | null
     updatedAt: Date
     _count: DseMarketSummaryCountAggregateOutputType | null
@@ -30402,6 +30482,12 @@ export namespace Prisma {
     indexValue?: boolean
     change?: boolean
     changePercent?: boolean
+    tsiValue?: boolean
+    tsiChange?: boolean
+    bfiValue?: boolean
+    bfiChange?: boolean
+    iaValue?: boolean
+    iaChange?: boolean
     perf1M?: boolean
     perf3M?: boolean
     perfYTD?: boolean
@@ -30411,6 +30497,8 @@ export namespace Prisma {
     volume?: boolean
     transactions?: boolean
     marketCap?: boolean
+    turnOver?: boolean
+    deals?: boolean
     date?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["dseMarketSummary"]>
@@ -30420,6 +30508,12 @@ export namespace Prisma {
     indexValue?: boolean
     change?: boolean
     changePercent?: boolean
+    tsiValue?: boolean
+    tsiChange?: boolean
+    bfiValue?: boolean
+    bfiChange?: boolean
+    iaValue?: boolean
+    iaChange?: boolean
     perf1M?: boolean
     perf3M?: boolean
     perfYTD?: boolean
@@ -30429,6 +30523,8 @@ export namespace Prisma {
     volume?: boolean
     transactions?: boolean
     marketCap?: boolean
+    turnOver?: boolean
+    deals?: boolean
     date?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["dseMarketSummary"]>
@@ -30438,6 +30534,12 @@ export namespace Prisma {
     indexValue?: boolean
     change?: boolean
     changePercent?: boolean
+    tsiValue?: boolean
+    tsiChange?: boolean
+    bfiValue?: boolean
+    bfiChange?: boolean
+    iaValue?: boolean
+    iaChange?: boolean
     perf1M?: boolean
     perf3M?: boolean
     perfYTD?: boolean
@@ -30447,6 +30549,8 @@ export namespace Prisma {
     volume?: boolean
     transactions?: boolean
     marketCap?: boolean
+    turnOver?: boolean
+    deals?: boolean
     date?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["dseMarketSummary"]>
@@ -30456,6 +30560,12 @@ export namespace Prisma {
     indexValue?: boolean
     change?: boolean
     changePercent?: boolean
+    tsiValue?: boolean
+    tsiChange?: boolean
+    bfiValue?: boolean
+    bfiChange?: boolean
+    iaValue?: boolean
+    iaChange?: boolean
     perf1M?: boolean
     perf3M?: boolean
     perfYTD?: boolean
@@ -30465,11 +30575,13 @@ export namespace Prisma {
     volume?: boolean
     transactions?: boolean
     marketCap?: boolean
+    turnOver?: boolean
+    deals?: boolean
     date?: boolean
     updatedAt?: boolean
   }
 
-  export type DseMarketSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "indexValue" | "change" | "changePercent" | "perf1M" | "perf3M" | "perfYTD" | "perf1Y" | "perf2Y" | "valueTraded" | "volume" | "transactions" | "marketCap" | "date" | "updatedAt", ExtArgs["result"]["dseMarketSummary"]>
+  export type DseMarketSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "indexValue" | "change" | "changePercent" | "tsiValue" | "tsiChange" | "bfiValue" | "bfiChange" | "iaValue" | "iaChange" | "perf1M" | "perf3M" | "perfYTD" | "perf1Y" | "perf2Y" | "valueTraded" | "volume" | "transactions" | "marketCap" | "turnOver" | "deals" | "date" | "updatedAt", ExtArgs["result"]["dseMarketSummary"]>
 
   export type $DseMarketSummaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DseMarketSummary"
@@ -30479,6 +30591,12 @@ export namespace Prisma {
       indexValue: number
       change: number
       changePercent: number
+      tsiValue: number | null
+      tsiChange: number | null
+      bfiValue: number | null
+      bfiChange: number | null
+      iaValue: number | null
+      iaChange: number | null
       perf1M: string | null
       perf3M: string | null
       perfYTD: string | null
@@ -30488,6 +30606,8 @@ export namespace Prisma {
       volume: string | null
       transactions: string | null
       marketCap: string | null
+      turnOver: string | null
+      deals: string | null
       date: string | null
       updatedAt: Date
     }, ExtArgs["result"]["dseMarketSummary"]>
@@ -30917,6 +31037,12 @@ export namespace Prisma {
     readonly indexValue: FieldRef<"DseMarketSummary", 'Float'>
     readonly change: FieldRef<"DseMarketSummary", 'Float'>
     readonly changePercent: FieldRef<"DseMarketSummary", 'Float'>
+    readonly tsiValue: FieldRef<"DseMarketSummary", 'Float'>
+    readonly tsiChange: FieldRef<"DseMarketSummary", 'Float'>
+    readonly bfiValue: FieldRef<"DseMarketSummary", 'Float'>
+    readonly bfiChange: FieldRef<"DseMarketSummary", 'Float'>
+    readonly iaValue: FieldRef<"DseMarketSummary", 'Float'>
+    readonly iaChange: FieldRef<"DseMarketSummary", 'Float'>
     readonly perf1M: FieldRef<"DseMarketSummary", 'String'>
     readonly perf3M: FieldRef<"DseMarketSummary", 'String'>
     readonly perfYTD: FieldRef<"DseMarketSummary", 'String'>
@@ -30926,6 +31052,8 @@ export namespace Prisma {
     readonly volume: FieldRef<"DseMarketSummary", 'String'>
     readonly transactions: FieldRef<"DseMarketSummary", 'String'>
     readonly marketCap: FieldRef<"DseMarketSummary", 'String'>
+    readonly turnOver: FieldRef<"DseMarketSummary", 'String'>
+    readonly deals: FieldRef<"DseMarketSummary", 'String'>
     readonly date: FieldRef<"DseMarketSummary", 'String'>
     readonly updatedAt: FieldRef<"DseMarketSummary", 'DateTime'>
   }
@@ -35228,6 +35356,12 @@ export namespace Prisma {
     indexValue: 'indexValue',
     change: 'change',
     changePercent: 'changePercent',
+    tsiValue: 'tsiValue',
+    tsiChange: 'tsiChange',
+    bfiValue: 'bfiValue',
+    bfiChange: 'bfiChange',
+    iaValue: 'iaValue',
+    iaChange: 'iaChange',
     perf1M: 'perf1M',
     perf3M: 'perf3M',
     perfYTD: 'perfYTD',
@@ -35237,6 +35371,8 @@ export namespace Prisma {
     volume: 'volume',
     transactions: 'transactions',
     marketCap: 'marketCap',
+    turnOver: 'turnOver',
+    deals: 'deals',
     date: 'date',
     updatedAt: 'updatedAt'
   };
@@ -37659,6 +37795,12 @@ export namespace Prisma {
     indexValue?: FloatFilter<"DseMarketSummary"> | number
     change?: FloatFilter<"DseMarketSummary"> | number
     changePercent?: FloatFilter<"DseMarketSummary"> | number
+    tsiValue?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    tsiChange?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    bfiValue?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    bfiChange?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    iaValue?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    iaChange?: FloatNullableFilter<"DseMarketSummary"> | number | null
     perf1M?: StringNullableFilter<"DseMarketSummary"> | string | null
     perf3M?: StringNullableFilter<"DseMarketSummary"> | string | null
     perfYTD?: StringNullableFilter<"DseMarketSummary"> | string | null
@@ -37668,6 +37810,8 @@ export namespace Prisma {
     volume?: StringNullableFilter<"DseMarketSummary"> | string | null
     transactions?: StringNullableFilter<"DseMarketSummary"> | string | null
     marketCap?: StringNullableFilter<"DseMarketSummary"> | string | null
+    turnOver?: StringNullableFilter<"DseMarketSummary"> | string | null
+    deals?: StringNullableFilter<"DseMarketSummary"> | string | null
     date?: StringNullableFilter<"DseMarketSummary"> | string | null
     updatedAt?: DateTimeFilter<"DseMarketSummary"> | Date | string
   }
@@ -37677,6 +37821,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrderInput | SortOrder
+    tsiChange?: SortOrderInput | SortOrder
+    bfiValue?: SortOrderInput | SortOrder
+    bfiChange?: SortOrderInput | SortOrder
+    iaValue?: SortOrderInput | SortOrder
+    iaChange?: SortOrderInput | SortOrder
     perf1M?: SortOrderInput | SortOrder
     perf3M?: SortOrderInput | SortOrder
     perfYTD?: SortOrderInput | SortOrder
@@ -37686,6 +37836,8 @@ export namespace Prisma {
     volume?: SortOrderInput | SortOrder
     transactions?: SortOrderInput | SortOrder
     marketCap?: SortOrderInput | SortOrder
+    turnOver?: SortOrderInput | SortOrder
+    deals?: SortOrderInput | SortOrder
     date?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
   }
@@ -37698,6 +37850,12 @@ export namespace Prisma {
     indexValue?: FloatFilter<"DseMarketSummary"> | number
     change?: FloatFilter<"DseMarketSummary"> | number
     changePercent?: FloatFilter<"DseMarketSummary"> | number
+    tsiValue?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    tsiChange?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    bfiValue?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    bfiChange?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    iaValue?: FloatNullableFilter<"DseMarketSummary"> | number | null
+    iaChange?: FloatNullableFilter<"DseMarketSummary"> | number | null
     perf1M?: StringNullableFilter<"DseMarketSummary"> | string | null
     perf3M?: StringNullableFilter<"DseMarketSummary"> | string | null
     perfYTD?: StringNullableFilter<"DseMarketSummary"> | string | null
@@ -37707,6 +37865,8 @@ export namespace Prisma {
     volume?: StringNullableFilter<"DseMarketSummary"> | string | null
     transactions?: StringNullableFilter<"DseMarketSummary"> | string | null
     marketCap?: StringNullableFilter<"DseMarketSummary"> | string | null
+    turnOver?: StringNullableFilter<"DseMarketSummary"> | string | null
+    deals?: StringNullableFilter<"DseMarketSummary"> | string | null
     date?: StringNullableFilter<"DseMarketSummary"> | string | null
     updatedAt?: DateTimeFilter<"DseMarketSummary"> | Date | string
   }, "id">
@@ -37716,6 +37876,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrderInput | SortOrder
+    tsiChange?: SortOrderInput | SortOrder
+    bfiValue?: SortOrderInput | SortOrder
+    bfiChange?: SortOrderInput | SortOrder
+    iaValue?: SortOrderInput | SortOrder
+    iaChange?: SortOrderInput | SortOrder
     perf1M?: SortOrderInput | SortOrder
     perf3M?: SortOrderInput | SortOrder
     perfYTD?: SortOrderInput | SortOrder
@@ -37725,6 +37891,8 @@ export namespace Prisma {
     volume?: SortOrderInput | SortOrder
     transactions?: SortOrderInput | SortOrder
     marketCap?: SortOrderInput | SortOrder
+    turnOver?: SortOrderInput | SortOrder
+    deals?: SortOrderInput | SortOrder
     date?: SortOrderInput | SortOrder
     updatedAt?: SortOrder
     _count?: DseMarketSummaryCountOrderByAggregateInput
@@ -37742,6 +37910,12 @@ export namespace Prisma {
     indexValue?: FloatWithAggregatesFilter<"DseMarketSummary"> | number
     change?: FloatWithAggregatesFilter<"DseMarketSummary"> | number
     changePercent?: FloatWithAggregatesFilter<"DseMarketSummary"> | number
+    tsiValue?: FloatNullableWithAggregatesFilter<"DseMarketSummary"> | number | null
+    tsiChange?: FloatNullableWithAggregatesFilter<"DseMarketSummary"> | number | null
+    bfiValue?: FloatNullableWithAggregatesFilter<"DseMarketSummary"> | number | null
+    bfiChange?: FloatNullableWithAggregatesFilter<"DseMarketSummary"> | number | null
+    iaValue?: FloatNullableWithAggregatesFilter<"DseMarketSummary"> | number | null
+    iaChange?: FloatNullableWithAggregatesFilter<"DseMarketSummary"> | number | null
     perf1M?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
     perf3M?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
     perfYTD?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
@@ -37751,6 +37925,8 @@ export namespace Prisma {
     volume?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
     transactions?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
     marketCap?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    turnOver?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
+    deals?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
     date?: StringNullableWithAggregatesFilter<"DseMarketSummary"> | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"DseMarketSummary"> | Date | string
   }
@@ -40495,6 +40671,12 @@ export namespace Prisma {
     indexValue: number
     change: number
     changePercent: number
+    tsiValue?: number | null
+    tsiChange?: number | null
+    bfiValue?: number | null
+    bfiChange?: number | null
+    iaValue?: number | null
+    iaChange?: number | null
     perf1M?: string | null
     perf3M?: string | null
     perfYTD?: string | null
@@ -40504,6 +40686,8 @@ export namespace Prisma {
     volume?: string | null
     transactions?: string | null
     marketCap?: string | null
+    turnOver?: string | null
+    deals?: string | null
     date?: string | null
     updatedAt?: Date | string
   }
@@ -40513,6 +40697,12 @@ export namespace Prisma {
     indexValue: number
     change: number
     changePercent: number
+    tsiValue?: number | null
+    tsiChange?: number | null
+    bfiValue?: number | null
+    bfiChange?: number | null
+    iaValue?: number | null
+    iaChange?: number | null
     perf1M?: string | null
     perf3M?: string | null
     perfYTD?: string | null
@@ -40522,6 +40712,8 @@ export namespace Prisma {
     volume?: string | null
     transactions?: string | null
     marketCap?: string | null
+    turnOver?: string | null
+    deals?: string | null
     date?: string | null
     updatedAt?: Date | string
   }
@@ -40531,6 +40723,12 @@ export namespace Prisma {
     indexValue?: FloatFieldUpdateOperationsInput | number
     change?: FloatFieldUpdateOperationsInput | number
     changePercent?: FloatFieldUpdateOperationsInput | number
+    tsiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    tsiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaChange?: NullableFloatFieldUpdateOperationsInput | number | null
     perf1M?: NullableStringFieldUpdateOperationsInput | string | null
     perf3M?: NullableStringFieldUpdateOperationsInput | string | null
     perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40540,6 +40738,8 @@ export namespace Prisma {
     volume?: NullableStringFieldUpdateOperationsInput | string | null
     transactions?: NullableStringFieldUpdateOperationsInput | string | null
     marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    turnOver?: NullableStringFieldUpdateOperationsInput | string | null
+    deals?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40549,6 +40749,12 @@ export namespace Prisma {
     indexValue?: FloatFieldUpdateOperationsInput | number
     change?: FloatFieldUpdateOperationsInput | number
     changePercent?: FloatFieldUpdateOperationsInput | number
+    tsiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    tsiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaChange?: NullableFloatFieldUpdateOperationsInput | number | null
     perf1M?: NullableStringFieldUpdateOperationsInput | string | null
     perf3M?: NullableStringFieldUpdateOperationsInput | string | null
     perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40558,6 +40764,8 @@ export namespace Prisma {
     volume?: NullableStringFieldUpdateOperationsInput | string | null
     transactions?: NullableStringFieldUpdateOperationsInput | string | null
     marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    turnOver?: NullableStringFieldUpdateOperationsInput | string | null
+    deals?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40567,6 +40775,12 @@ export namespace Prisma {
     indexValue: number
     change: number
     changePercent: number
+    tsiValue?: number | null
+    tsiChange?: number | null
+    bfiValue?: number | null
+    bfiChange?: number | null
+    iaValue?: number | null
+    iaChange?: number | null
     perf1M?: string | null
     perf3M?: string | null
     perfYTD?: string | null
@@ -40576,6 +40790,8 @@ export namespace Prisma {
     volume?: string | null
     transactions?: string | null
     marketCap?: string | null
+    turnOver?: string | null
+    deals?: string | null
     date?: string | null
     updatedAt?: Date | string
   }
@@ -40585,6 +40801,12 @@ export namespace Prisma {
     indexValue?: FloatFieldUpdateOperationsInput | number
     change?: FloatFieldUpdateOperationsInput | number
     changePercent?: FloatFieldUpdateOperationsInput | number
+    tsiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    tsiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaChange?: NullableFloatFieldUpdateOperationsInput | number | null
     perf1M?: NullableStringFieldUpdateOperationsInput | string | null
     perf3M?: NullableStringFieldUpdateOperationsInput | string | null
     perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40594,6 +40816,8 @@ export namespace Prisma {
     volume?: NullableStringFieldUpdateOperationsInput | string | null
     transactions?: NullableStringFieldUpdateOperationsInput | string | null
     marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    turnOver?: NullableStringFieldUpdateOperationsInput | string | null
+    deals?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40603,6 +40827,12 @@ export namespace Prisma {
     indexValue?: FloatFieldUpdateOperationsInput | number
     change?: FloatFieldUpdateOperationsInput | number
     changePercent?: FloatFieldUpdateOperationsInput | number
+    tsiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    tsiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    bfiChange?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaValue?: NullableFloatFieldUpdateOperationsInput | number | null
+    iaChange?: NullableFloatFieldUpdateOperationsInput | number | null
     perf1M?: NullableStringFieldUpdateOperationsInput | string | null
     perf3M?: NullableStringFieldUpdateOperationsInput | string | null
     perfYTD?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40612,6 +40842,8 @@ export namespace Prisma {
     volume?: NullableStringFieldUpdateOperationsInput | string | null
     transactions?: NullableStringFieldUpdateOperationsInput | string | null
     marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    turnOver?: NullableStringFieldUpdateOperationsInput | string | null
+    deals?: NullableStringFieldUpdateOperationsInput | string | null
     date?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42869,6 +43101,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrder
+    tsiChange?: SortOrder
+    bfiValue?: SortOrder
+    bfiChange?: SortOrder
+    iaValue?: SortOrder
+    iaChange?: SortOrder
     perf1M?: SortOrder
     perf3M?: SortOrder
     perfYTD?: SortOrder
@@ -42878,6 +43116,8 @@ export namespace Prisma {
     volume?: SortOrder
     transactions?: SortOrder
     marketCap?: SortOrder
+    turnOver?: SortOrder
+    deals?: SortOrder
     date?: SortOrder
     updatedAt?: SortOrder
   }
@@ -42886,6 +43126,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrder
+    tsiChange?: SortOrder
+    bfiValue?: SortOrder
+    bfiChange?: SortOrder
+    iaValue?: SortOrder
+    iaChange?: SortOrder
   }
 
   export type DseMarketSummaryMaxOrderByAggregateInput = {
@@ -42893,6 +43139,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrder
+    tsiChange?: SortOrder
+    bfiValue?: SortOrder
+    bfiChange?: SortOrder
+    iaValue?: SortOrder
+    iaChange?: SortOrder
     perf1M?: SortOrder
     perf3M?: SortOrder
     perfYTD?: SortOrder
@@ -42902,6 +43154,8 @@ export namespace Prisma {
     volume?: SortOrder
     transactions?: SortOrder
     marketCap?: SortOrder
+    turnOver?: SortOrder
+    deals?: SortOrder
     date?: SortOrder
     updatedAt?: SortOrder
   }
@@ -42911,6 +43165,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrder
+    tsiChange?: SortOrder
+    bfiValue?: SortOrder
+    bfiChange?: SortOrder
+    iaValue?: SortOrder
+    iaChange?: SortOrder
     perf1M?: SortOrder
     perf3M?: SortOrder
     perfYTD?: SortOrder
@@ -42920,6 +43180,8 @@ export namespace Prisma {
     volume?: SortOrder
     transactions?: SortOrder
     marketCap?: SortOrder
+    turnOver?: SortOrder
+    deals?: SortOrder
     date?: SortOrder
     updatedAt?: SortOrder
   }
@@ -42928,6 +43190,12 @@ export namespace Prisma {
     indexValue?: SortOrder
     change?: SortOrder
     changePercent?: SortOrder
+    tsiValue?: SortOrder
+    tsiChange?: SortOrder
+    bfiValue?: SortOrder
+    bfiChange?: SortOrder
+    iaValue?: SortOrder
+    iaChange?: SortOrder
   }
 
   export type PortfolioStockListRelationFilter = {

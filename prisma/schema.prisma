@@ -617,9 +617,16 @@ model EconomicIndicator {
 
 model DseMarketSummary {
   id             String   @id @default("1")
-  indexValue     Float
+  indexValue     Float       // DSE All Share Index value
   change         Float
   changePercent  Float
+  // Additional DSE indices
+  tsiValue       Float?      // Tanzania Share Index
+  tsiChange      Float?
+  bfiValue       Float?      // Banks, Finance & Investments Index
+  bfiChange      Float?
+  iaValue        Float?      // Industrial & Allied Index
+  iaChange       Float?
   perf1M         String?
   perf3M         String?
   perfYTD        String?
@@ -629,6 +636,8 @@ model DseMarketSummary {
   volume         String?
   transactions   String?
   marketCap      String?
+  turnOver       String?
+  deals          String?
   date           String?
   updatedAt      DateTime @updatedAt
 }

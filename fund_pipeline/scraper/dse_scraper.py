@@ -12,11 +12,24 @@ Usage:
 import os
 import sys
 import json
+import re
+import time
 import logging
 import requests
 from datetime import datetime
 from pathlib import Path
 from bs4 import BeautifulSoup
+
+try:
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from webdriver_manager.chrome import ChromeDriverManager
+    HAS_SELENIUM = True
+except ImportError:
+    HAS_SELENIUM = False
 
 # ---------------------------------------------------------------------------
 # Config
@@ -210,6 +223,188 @@ def scrape_dse_stocks() -> list:
     logger.info(f"Successfully processed {len(stocks)} stocks")
     return stocks
 
+def _init_driver():
+    """Create a headless Chrome driver (reuses selenium_scraper pattern)."""
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+    options.add_argument("--ignore-certificate-errors")
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=options,
+    )
+    return driver
+
+
+def _parse_number(text: str) -> float:
+    """Parse a number string like '8,566.49' or '15,645,210,895.00' into a float."""
+    if not text:
+        return 0.0
+    cleaned = text.strip().replace(",", "").replace(" ", "")
+    try:
+        return float(cleaned)
+    except ValueError:
+        return 0.0
+
+
+def scrape_dse_homepage() -> dict:
+    """
+    Scrape market indices and summary from the official DSE website (dse.co.tz).
+    Uses Selenium because the page is JavaScript-rendered.
+    
+    Returns a dict with:
+        - indices: list of {name, value, change}
+        - market_summary: {market_cap, volume, deals, turn_over}
+        - date: str
+    """
+    if not HAS_SELENIUM:
+        logger.warning("Selenium not available — skipping dse.co.tz scrape")
+        return {}
+
+    logger.info("Fetching market data from https://dse.co.tz/ (Selenium)")
+    driver = None
+    try:
+        driver = _init_driver()
+        driver.get("https://dse.co.tz/")
+        time.sleep(8)  # Wait for JS to render market data
+
+        page_source = driver.page_source
+        soup = BeautifulSoup(page_source, "html.parser")
+
+        result = {
+            "indices": [],
+            "market_summary": {},
+            "date": None,
+        }
+
+        # ---------------------------------------------------------------
+        # Extract Market Indices
+        # The DSE homepage shows indices in a summary bar/section:
+        # TANZANIA SHARE INDEX  8,566.49  ↑ 89.06
+        # DSE ALL SHARE INDEX   3,841.86  ↑ 26.82
+        # BANKS, FINANCE & INVESTMENTS INDEX  18,932.56  ↑ 292.75
+        # INDUSTRIAL & ALLIED INDEX  4,930.55  ↓ -10.94
+        # ---------------------------------------------------------------
+
+        # Strategy: Find text content that matches known index names
+        index_names = [
+            "TANZANIA SHARE INDEX",
+            "DSE ALL SHARE INDEX",
+            "BANKS, FINANCE & INVESTMENTS INDEX",
+            "BANKS,FINANCE & INVESTMENTS INDEX",
+            "INDUSTRIAL & ALLIED INDEX",
+        ]
+
+        # Look for elements that contain index data
+        # Try finding by searching all text on the page
+        all_text = soup.get_text(separator="\n")
+        lines = [l.strip() for l in all_text.split("\n") if l.strip()]
+
+        for i, line in enumerate(lines):
+            line_upper = line.upper()
+            for idx_name in index_names:
+                if idx_name in line_upper:
+                    # Look at surrounding lines for values
+                    nearby = lines[max(0, i-3):i+5]
+                    nearby_text = " ".join(nearby)
+                    
+                    # Find numbers near the index name
+                    numbers = re.findall(r'[+-]?[\d,]+\.?\d*', nearby_text)
+                    float_nums = []
+                    for n in numbers:
+                        try:
+                            float_nums.append(float(n.replace(",", "")))
+                        except ValueError:
+                            continue
+                    
+                    if len(float_nums) >= 2:
+                        # Normalize index name
+                        normalized = idx_name.replace(",", ", ")
+                        if "BANKS" in normalized and "FINANCE" in normalized:
+                            normalized = "BANKS, FINANCE & INVESTMENTS INDEX"
+                        
+                        # First large number is the value, second is the change
+                        value = max(float_nums[:3])  # Index values are large
+                        change_candidates = [n for n in float_nums if abs(n) < value * 0.1]
+                        change = change_candidates[0] if change_candidates else float_nums[1] if len(float_nums) > 1 else 0.0
+                        
+                        # Check for negative indicator
+                        if "↓" in nearby_text or "▼" in nearby_text:
+                            change = -abs(change)
+                        
+                        # Avoid duplicates
+                        existing = [idx["name"] for idx in result["indices"]]
+                        if normalized not in existing:
+                            result["indices"].append({
+                                "name": normalized,
+                                "value": value,
+                                "change": change,
+                            })
+                            logger.info(f"  Index: {normalized} = {value:,.2f} ({change:+,.2f})")
+                    break
+
+        # ---------------------------------------------------------------
+        # Extract Market Summary
+        # Market Cap, Volume, Deals, Turn Over
+        # ---------------------------------------------------------------
+        summary_keywords = {
+            "market_cap": ["Market Cap", "Market Capitalization"],
+            "volume": ["Volume"],
+            "deals": ["Deals", "Transactions"],
+            "turn_over": ["Turn Over", "Turnover", "Value Traded"],
+        }
+
+        for key, keywords in summary_keywords.items():
+            for kw in keywords:
+                for i, line in enumerate(lines):
+                    if kw.lower() in line.lower():
+                        # Look at the next few lines for a number
+                        search_range = lines[i:i+3]
+                        for sline in search_range:
+                            nums = re.findall(r'[\d,]+\.?\d*', sline)
+                            for n in nums:
+                                parsed = _parse_number(n)
+                                if parsed > 0:
+                                    result["market_summary"][key] = str(parsed)
+                                    logger.info(f"  {key}: {parsed:,.2f}")
+                                    break
+                            if key in result["market_summary"]:
+                                break
+                        if key in result["market_summary"]:
+                            break
+
+        # ---------------------------------------------------------------
+        # Extract Date
+        # ---------------------------------------------------------------
+        for line in lines:
+            if "market summary" in line.lower() and ("march" in line.lower() or "20" in line):
+                # e.g. "Market Summary :  March 09, 2026"
+                date_match = re.search(r'(\w+ \d{1,2},?\s*\d{4})', line)
+                if date_match:
+                    result["date"] = date_match.group(1)
+                    break
+            if "as of" in line.lower():
+                result["date"] = line.strip()
+                break
+
+        logger.info(f"DSE homepage: {len(result['indices'])} indices, {len(result['market_summary'])} summary fields scraped")
+        return result
+
+    except Exception as e:
+        logger.error(f"Failed to scrape dse.co.tz: {e}")
+        return {}
+    finally:
+        if driver:
+            try:
+                driver.quit()
+            except:
+                pass
+
+
 def scrape_market_summary() -> dict:
     """Scrape the overall DSE market summary and performance from african-markets.com."""
     logger.info(f"Fetching market summary from {AFRICAN_MARKETS_DSE_URL}")
@@ -354,6 +549,7 @@ def push_summary_to_api(summary: dict):
     api_url = f"{api_url}/api/v1/market-summary/update"
 
     logger.info(f"Pushing market summary to {api_url}")
+    logger.info(f"  Data keys: {list(summary.keys())}")
     try:
         response = requests.post(
             api_url,
@@ -361,6 +557,10 @@ def push_summary_to_api(summary: dict):
             timeout=15,
             headers={"Content-Type": "application/json"},
         )
+        if response.status_code == 200:
+            logger.info("Market summary pushed successfully")
+        else:
+            logger.error(f"Market summary push failed: {response.status_code} — {response.text[:300]}")
         return response.status_code == 200
     except Exception as e:
         logger.error(f"Summary push failed: {e}")
@@ -380,6 +580,42 @@ def main():
     stocks = scrape_dse_stocks()
     summary = scrape_market_summary()
 
+    # Scrape DSE homepage for indices and enhanced market summary
+    dse_homepage = scrape_dse_homepage()
+    if dse_homepage:
+        # Merge DSE homepage data into the market summary
+        indices = dse_homepage.get("indices", [])
+        for idx in indices:
+            name = idx["name"]
+            if "DSE ALL SHARE" in name:
+                summary["indexValue"] = idx["value"]
+                summary["change"] = idx["change"]
+                if idx["value"] > 0:
+                    summary["changePercent"] = round(idx["change"] / idx["value"] * 100, 2)
+            elif "TANZANIA SHARE" in name:
+                summary["tsiValue"] = idx["value"]
+                summary["tsiChange"] = idx["change"]
+            elif "BANKS" in name:
+                summary["bfiValue"] = idx["value"]
+                summary["bfiChange"] = idx["change"]
+            elif "INDUSTRIAL" in name:
+                summary["iaValue"] = idx["value"]
+                summary["iaChange"] = idx["change"]
+
+        ms = dse_homepage.get("market_summary", {})
+        if ms.get("market_cap"):
+            summary["marketCap"] = ms["market_cap"]
+        if ms.get("volume"):
+            summary["volume"] = ms["volume"]
+        if ms.get("deals"):
+            summary["deals"] = ms["deals"]
+        if ms.get("turn_over"):
+            summary["turnOver"] = ms["turn_over"]
+        if dse_homepage.get("date"):
+            summary["date"] = dse_homepage["date"]
+
+        logger.info(f"Merged DSE homepage data into market summary")
+
     if stocks:
         save_local(stocks)
 
@@ -389,6 +625,9 @@ def main():
                 push_summary_to_api(summary)
     else:
         logger.warning("No stocks scraped, skipping save/push")
+        # Still push market summary even if stocks failed
+        if args.push and summary:
+            push_summary_to_api(summary)
 
     logger.info("=" * 60)
     logger.info("DSE Stock Scraper — Complete")

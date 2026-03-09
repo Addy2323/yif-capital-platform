@@ -14,6 +14,13 @@ export async function POST(request: NextRequest) {
             indexValue: summary.indexValue,
             change: summary.change,
             changePercent: summary.changePercent,
+            // Additional DSE indices from dse.co.tz
+            tsiValue: summary.tsiValue ?? undefined,
+            tsiChange: summary.tsiChange ?? undefined,
+            bfiValue: summary.bfiValue ?? undefined,
+            bfiChange: summary.bfiChange ?? undefined,
+            iaValue: summary.iaValue ?? undefined,
+            iaChange: summary.iaChange ?? undefined,
             perf1M: summary.perf1M,
             perf3M: summary.perf3M,
             perfYTD: summary.perfYTD,
@@ -23,6 +30,8 @@ export async function POST(request: NextRequest) {
             volume: summary.volume,
             transactions: summary.transactions,
             marketCap: summary.marketCap,
+            turnOver: summary.turnOver,
+            deals: summary.deals,
             date: summary.date,
         }
 
