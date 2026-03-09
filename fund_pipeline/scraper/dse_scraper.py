@@ -270,10 +270,18 @@ def scrape_dse_homepage() -> dict:
     try:
         driver = _init_driver()
         driver.get("https://dse.co.tz/")
-        time.sleep(8)  # Wait for JS to render market data
+        time.sleep(10)  # Wait for JS to render market data
 
         page_source = driver.page_source
-        soup = BeautifulSoup(page_source, "html.parser")
+
+        # Save page source for debugging
+        debug_file = LOG_DIR / "dse_homepage_debug.html"
+        try:
+            with open(debug_file, "w", encoding="utf-8") as f:
+                f.write(page_source)
+            logger.info(f"Saved page source to {debug_file}")
+        except:
+            pass
 
         result = {
             "indices": [],
@@ -282,113 +290,176 @@ def scrape_dse_homepage() -> dict:
         }
 
         # ---------------------------------------------------------------
-        # Extract Market Indices
-        # The DSE homepage shows indices in a summary bar/section:
-        # TANZANIA SHARE INDEX  8,566.49  ↑ 89.06
-        # DSE ALL SHARE INDEX   3,841.86  ↑ 26.82
-        # BANKS, FINANCE & INVESTMENTS INDEX  18,932.56  ↑ 292.75
-        # INDUSTRIAL & ALLIED INDEX  4,930.55  ↓ -10.94
+        # Strategy 1: Use JavaScript to extract data from DOM directly
         # ---------------------------------------------------------------
+        try:
+            js_data = driver.execute_script("""
+                var result = {indices: [], summary: {}};
+                
+                // Get all text content from the page body
+                var body = document.body.innerText;
+                result.bodyText = body;
+                
+                return result;
+            """)
+            body_text = js_data.get("bodyText", "")
+        except:
+            body_text = ""
 
-        # Strategy: Find text content that matches known index names
-        index_names = [
-            "TANZANIA SHARE INDEX",
-            "DSE ALL SHARE INDEX",
-            "BANKS, FINANCE & INVESTMENTS INDEX",
-            "BANKS,FINANCE & INVESTMENTS INDEX",
-            "INDUSTRIAL & ALLIED INDEX",
+        if not body_text:
+            soup = BeautifulSoup(page_source, "html.parser")
+            body_text = soup.get_text(separator="\n")
+
+        # ---------------------------------------------------------------
+        # Parse indices using BOUNDED text segments
+        # Find each index name's position, then extract numbers ONLY
+        # from the text between this index and the next one.
+        # ---------------------------------------------------------------
+        index_search = [
+            ("TANZANIA SHARE INDEX", "TANZANIA SHARE INDEX"),
+            ("DSE ALL SHARE INDEX", "DSE ALL SHARE INDEX"),
+            ("BANKS, FINANCE & INVESTMENTS INDEX", "BANKS, FINANCE & INVESTMENTS INDEX"),
+            ("BANKS,FINANCE & INVESTMENTS INDEX", "BANKS, FINANCE & INVESTMENTS INDEX"),
+            ("BANKS, FINANCE &\nINVESTMENTS INDEX", "BANKS, FINANCE & INVESTMENTS INDEX"),
+            ("BANKS, FINANCE\n& INVESTMENTS INDEX", "BANKS, FINANCE & INVESTMENTS INDEX"),
+            ("INDUSTRIAL & ALLIED INDEX", "INDUSTRIAL & ALLIED INDEX"),
+            ("INDUSTRIAL &\nALLIED INDEX", "INDUSTRIAL & ALLIED INDEX"),
         ]
 
-        # Look for elements that contain index data
-        # Try finding by searching all text on the page
-        all_text = soup.get_text(separator="\n")
-        lines = [l.strip() for l in all_text.split("\n") if l.strip()]
+        body_upper = body_text.upper()
+        
+        # Find all index positions
+        found_indices = []  # (position, search_name, normalized_name)
+        seen_normalized = set()
+        for search, normalized in index_search:
+            pos = body_upper.find(search.upper())
+            if pos >= 0 and normalized not in seen_normalized:
+                found_indices.append((pos, search, normalized))
+                seen_normalized.add(normalized)
+        
+        # Sort by position in text
+        found_indices.sort(key=lambda x: x[0])
+        logger.info(f"Found {len(found_indices)} index names in page text")
 
-        for i, line in enumerate(lines):
-            line_upper = line.upper()
-            for idx_name in index_names:
-                if idx_name in line_upper:
-                    # Look at surrounding lines for values
-                    nearby = lines[max(0, i-3):i+5]
-                    nearby_text = " ".join(nearby)
-                    
-                    # Find numbers near the index name
-                    numbers = re.findall(r'[+-]?[\d,]+\.?\d*', nearby_text)
-                    float_nums = []
-                    for n in numbers:
-                        try:
-                            float_nums.append(float(n.replace(",", "")))
-                        except ValueError:
-                            continue
-                    
-                    if len(float_nums) >= 2:
-                        # Normalize index name
-                        normalized = idx_name.replace(",", ", ")
-                        if "BANKS" in normalized and "FINANCE" in normalized:
-                            normalized = "BANKS, FINANCE & INVESTMENTS INDEX"
-                        
-                        # First large number is the value, second is the change
-                        value = max(float_nums[:3])  # Index values are large
-                        change_candidates = [n for n in float_nums if abs(n) < value * 0.1]
-                        change = change_candidates[0] if change_candidates else float_nums[1] if len(float_nums) > 1 else 0.0
-                        
-                        # Check for negative indicator
-                        if "↓" in nearby_text or "▼" in nearby_text:
-                            change = -abs(change)
-                        
-                        # Avoid duplicates
-                        existing = [idx["name"] for idx in result["indices"]]
-                        if normalized not in existing:
-                            result["indices"].append({
-                                "name": normalized,
-                                "value": value,
-                                "change": change,
-                            })
-                            logger.info(f"  Index: {normalized} = {value:,.2f} ({change:+,.2f})")
-                    break
+        for i, (pos, search, normalized) in enumerate(found_indices):
+            # Get text segment from THIS index name to the NEXT index name
+            start = pos + len(search)
+            if i + 1 < len(found_indices):
+                end = found_indices[i + 1][0]
+            else:
+                # For the last index, take next 200 chars
+                end = min(start + 200, len(body_text))
+            
+            segment = body_text[start:end]
+            logger.info(f"  [{normalized}] segment: {repr(segment[:100])}")
+            
+            # Extract ALL numbers from this bounded segment
+            numbers = re.findall(r'[\d,]+\.?\d*', segment)
+            float_nums = []
+            for n in numbers:
+                try:
+                    val = float(n.replace(",", ""))
+                    if val > 0:  # Skip zeros
+                        float_nums.append(val)
+                except ValueError:
+                    continue
+            
+            if len(float_nums) >= 2:
+                # First number is the value, second is the change
+                value = float_nums[0]
+                change = float_nums[1]
+                
+                # Check for negative change indicator
+                change_text = segment[:segment.find(str(int(change))) + 20] if str(int(change)) in segment else segment
+                if "↓" in change_text or "▼" in change_text or "down" in change_text.lower():
+                    change = -abs(change)
+                # Also check for negative sign before the change number
+                change_str = f"{change:g}"
+                idx_in_segment = segment.find(change_str.replace(".0", "").split(".")[0])
+                if idx_in_segment > 0 and segment[idx_in_segment-1] == '-':
+                    change = -abs(change)
+                
+                result["indices"].append({
+                    "name": normalized,
+                    "value": value,
+                    "change": change,
+                })
+                logger.info(f"  Index: {normalized} = {value:,.2f} (change: {change:+,.2f})")
+            elif len(float_nums) == 1:
+                result["indices"].append({
+                    "name": normalized,
+                    "value": float_nums[0],
+                    "change": 0.0,
+                })
+                logger.info(f"  Index: {normalized} = {float_nums[0]:,.2f} (change: unknown)")
 
         # ---------------------------------------------------------------
-        # Extract Market Summary
-        # Market Cap, Volume, Deals, Turn Over
+        # Extract Market Summary using bounded segments
+        # Look for the "Market Summary" section specifically
         # ---------------------------------------------------------------
-        summary_keywords = {
-            "market_cap": ["Market Cap", "Market Capitalization"],
-            "volume": ["Volume"],
-            "deals": ["Deals", "Transactions"],
-            "turn_over": ["Turn Over", "Turnover", "Value Traded"],
-        }
-
-        for key, keywords in summary_keywords.items():
-            for kw in keywords:
-                for i, line in enumerate(lines):
-                    if kw.lower() in line.lower():
-                        # Look at the next few lines for a number
-                        search_range = lines[i:i+3]
-                        for sline in search_range:
-                            nums = re.findall(r'[\d,]+\.?\d*', sline)
-                            for n in nums:
-                                parsed = _parse_number(n)
+        summary_section_start = body_upper.find("MARKET SUMMARY")
+        if summary_section_start < 0:
+            summary_section_start = body_upper.find("MARKET CAP")
+        
+        if summary_section_start >= 0:
+            summary_text = body_text[summary_section_start:summary_section_start + 500]
+            lines = [l.strip() for l in summary_text.split("\n") if l.strip()]
+            logger.info(f"Market summary section: {repr(summary_text[:200])}")
+            
+            # Parse key-value pairs from the summary section
+            summary_fields = {
+                "market_cap": ["market cap", "market capitalization"],
+                "volume": ["volume"],
+                "deals": ["deals"],
+                "turn_over": ["turn over", "turnover"],
+            }
+            
+            for key, keywords in summary_fields.items():
+                for j, line in enumerate(lines):
+                    line_lower = line.lower()
+                    for kw in keywords:
+                        if kw in line_lower:
+                            # The value is usually on the next line or same line after the label
+                            # Check same line first (after the keyword)
+                            after_kw = line[line.lower().find(kw) + len(kw):]
+                            nums_in_line = re.findall(r'[\d,]+\.?\d*', after_kw)
+                            
+                            if nums_in_line:
+                                parsed = _parse_number(nums_in_line[0])
                                 if parsed > 0:
                                     result["market_summary"][key] = str(parsed)
-                                    logger.info(f"  {key}: {parsed:,.2f}")
+                                    logger.info(f"  {key}: {parsed:,.2f} (same line)")
                                     break
-                            if key in result["market_summary"]:
-                                break
-                        if key in result["market_summary"]:
+                            
+                            # Check next line(s)
+                            for k in range(j + 1, min(j + 3, len(lines))):
+                                next_line = lines[k]
+                                nums = re.findall(r'[\d,]+\.?\d*', next_line)
+                                if nums:
+                                    parsed = _parse_number(nums[0])
+                                    if parsed > 0:
+                                        result["market_summary"][key] = str(parsed)
+                                        logger.info(f"  {key}: {parsed:,.2f} (next line)")
+                                        break
                             break
+                    if key in result["market_summary"]:
+                        break
 
         # ---------------------------------------------------------------
         # Extract Date
         # ---------------------------------------------------------------
-        for line in lines:
-            if "market summary" in line.lower() and ("march" in line.lower() or "20" in line):
-                # e.g. "Market Summary :  March 09, 2026"
-                date_match = re.search(r'(\w+ \d{1,2},?\s*\d{4})', line)
-                if date_match:
-                    result["date"] = date_match.group(1)
-                    break
-            if "as of" in line.lower():
-                result["date"] = line.strip()
+        # Look for date near "Market Summary" text
+        date_patterns = [
+            r'Market Summary\s*:?\s*(\w+\s+\d{1,2},?\s*\d{4})',
+            r'As [Oo]f\s+(\d{1,2}[-/]\w+[-/]\d{4})',
+            r'As [Oo]f\s+(\w+\s+\d{1,2},?\s*\d{4})',
+            r'(\d{1,2}\s+\w+\s+\d{4})',
+        ]
+        for pat in date_patterns:
+            match = re.search(pat, body_text, re.IGNORECASE)
+            if match:
+                result["date"] = match.group(1).strip()
+                logger.info(f"  Date: {result['date']}")
                 break
 
         logger.info(f"DSE homepage: {len(result['indices'])} indices, {len(result['market_summary'])} summary fields scraped")
