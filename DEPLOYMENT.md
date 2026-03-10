@@ -55,7 +55,10 @@ pip install -r requirements.txt
 
 ### Scheduling Automated Updates
 
-**Option A — Cron API (recommended for Vercel or when app is always running):**  
+**Option A — In-app scheduler (easiest — no cron to remember):**  
+If `CRON_SECRET` is set in `.env`, the app runs the full scrape (funds + DSE) **automatically** at **7:00, 18:00, 20:00, 23:00** in the **server’s local time**. No system cron or scripts needed; as long as the app is running (e.g. under PM2), scrapes happen on their own. Just deploy and keep the app up.
+
+**Option B — Cron API (when you want external control):**  
 Set `CRON_SECRET` in `.env`, then call the API on a schedule (e.g. cron job or Vercel Cron):
 
 - **Full sync (funds + DSE):** `GET https://yifcapital.co.tz/api/cron/scrape-funds`  
@@ -71,7 +74,7 @@ Example crontab — scrape at **7 AM, 6 PM, 8 PM, 11 PM** (EAT). Use **one** of:
 0 7,18,20,23 * * * curl -s -H "Authorization: Bearer $CRON_SECRET" https://yifcapital.co.tz/api/cron/scrape-dse >> /var/log/dse-scraper.log 2>&1
 ```
 
-**Option B — Shell script (VPS with Python + Chrome):**
+**Option C — Shell script (VPS with Python + Chrome):**
 1. Make the script executable: `chmod +x scripts/prod-sync.sh`
 2. Open crontab: `crontab -e`
 3. Add (7 AM, 6 PM, 8 PM, 11 PM):
