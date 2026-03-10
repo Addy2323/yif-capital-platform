@@ -270,7 +270,15 @@ def scrape_dse_homepage() -> dict:
     try:
         driver = _init_driver()
         driver.get("https://dse.co.tz/")
-        time.sleep(10)  # Wait for JS to render market data
+        # Wait for market data to render (up to 20s); avoids fixed 10s when page is fast
+        try:
+            WebDriverWait(driver, 20).until(
+                lambda d: "Market Summary" in d.page_source or "TANZANIA SHARE" in d.page_source or "DSE ALL SHARE" in d.page_source
+            )
+            time.sleep(2)  # Brief extra for any late-rendering numbers
+        except Exception as wait_err:
+            logger.warning(f"Wait for market data timed out or failed: {wait_err}; using current page")
+            time.sleep(3)
 
         page_source = driver.page_source
 
@@ -446,11 +454,12 @@ def scrape_dse_homepage() -> dict:
                         break
 
         # ---------------------------------------------------------------
-        # Extract Date
+        # Extract Date (DSE shows "Market Summary : March 10, 2026" or "Current Trading Date : 2026-03-10")
         # ---------------------------------------------------------------
-        # Look for date near "Market Summary" text
         date_patterns = [
             r'Market Summary\s*:?\s*(\w+\s+\d{1,2},?\s*\d{4})',
+            r'Current Trading Date\s*:?\s*(\d{4}-\d{1,2}-\d{1,2})',
+            r'Current Trading Date\s*:?\s*(\d{1,2}[-/]\d{1,2}[-/]\d{4})',
             r'As [Oo]f\s+(\d{1,2}[-/]\w+[-/]\d{4})',
             r'As [Oo]f\s+(\w+\s+\d{1,2},?\s*\d{4})',
             r'(\d{1,2}\s+\w+\s+\d{4})',
@@ -458,7 +467,16 @@ def scrape_dse_homepage() -> dict:
         for pat in date_patterns:
             match = re.search(pat, body_text, re.IGNORECASE)
             if match:
-                result["date"] = match.group(1).strip()
+                raw = match.group(1).strip()
+                # Normalize 2026-03-10 to "March 10, 2026" for dashboard display
+                if re.match(r"^\d{4}-\d{1,2}-\d{1,2}$", raw):
+                    try:
+                        dt = datetime.strptime(raw, "%Y-%m-%d")
+                        result["date"] = dt.strftime("%B %d, %Y")
+                    except ValueError:
+                        result["date"] = raw
+                else:
+                    result["date"] = raw
                 logger.info(f"  Date: {result['date']}")
                 break
 

@@ -19,8 +19,8 @@
 #
 #   3. Add ONE of these lines (pick a schedule):
 #
-#      # Option A: Run TWICE daily (recommended) — 7 AM and 6 PM EAT
-#      0 7,18 * * * /var/www/yif-capital-platform/scripts/prod-sync.sh >> /var/www/yif-capital-platform/fund_pipeline/logs/cron.log 2>&1
+#      # Option A: Run at 7 AM, 6 PM, 8 PM, 11 PM EAT (recommended)
+#      0 7,18,20,23 * * * /var/www/yif-capital-platform/scripts/prod-sync.sh >> /var/www/yif-capital-platform/fund_pipeline/logs/cron.log 2>&1
 #
 #      # Option B: Run ONCE daily at 6 PM EAT (after market close)
 #      0 18 * * * /var/www/yif-capital-platform/scripts/prod-sync.sh >> /var/www/yif-capital-platform/fund_pipeline/logs/cron.log 2>&1

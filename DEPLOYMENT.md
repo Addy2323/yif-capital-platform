@@ -54,19 +54,34 @@ pip install -r requirements.txt
 ```
 
 ### Scheduling Automated Updates
-To run the sync every day at 1:00 AM:
 
-**Linux (Cron):**
+**Option A — Cron API (recommended for Vercel or when app is always running):**  
+Set `CRON_SECRET` in `.env`, then call the API on a schedule (e.g. cron job or Vercel Cron):
+
+- **Full sync (funds + DSE):** `GET https://yifcapital.co.tz/api/cron/scrape-funds`  
+  Header: `Authorization: Bearer YOUR_CRON_SECRET`
+- **DSE only (market summary + stocks from dse.co.tz):** `GET https://yifcapital.co.tz/api/cron/scrape-dse`  
+  Use this to refresh dashboard data without running the fund scraper (faster).
+
+Example crontab — scrape at **7 AM, 6 PM, 8 PM, 11 PM** (EAT). Use **one** of:
+```bash
+# Full sync (funds + DSE) at 7 AM, 6 PM, 8 PM, 11 PM
+0 7,18,20,23 * * * curl -s -H "Authorization: Bearer $CRON_SECRET" https://yifcapital.co.tz/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1
+# Or DSE-only (faster, market summary + stocks only):
+0 7,18,20,23 * * * curl -s -H "Authorization: Bearer $CRON_SECRET" https://yifcapital.co.tz/api/cron/scrape-dse >> /var/log/dse-scraper.log 2>&1
+```
+
+**Option B — Shell script (VPS with Python + Chrome):**
 1. Make the script executable: `chmod +x scripts/prod-sync.sh`
 2. Open crontab: `crontab -e`
-3. Add this line:
+3. Add (7 AM, 6 PM, 8 PM, 11 PM):
    ```bash
-   0 1 * * * /path/to/yif-capital-platform/scripts/prod-sync.sh
+   0 7,18,20,23 * * * /path/to/yif-capital-platform/scripts/prod-sync.sh >> /path/to/fund_pipeline/logs/cron.log 2>&1
    ```
 
 **Windows (Task Scheduler):**
 1. Create a "Basic Task".
-2. Set Trigger to "Daily".
+2. Set Trigger to "Daily" (or at desired times).
 3. Set Action to "Start a Program" and point to `scripts/prod-sync.bat`.
 
 ---

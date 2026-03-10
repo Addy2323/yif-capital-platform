@@ -118,13 +118,13 @@ CRON_SECRET=$(grep "CRON_SECRET" "$ENV_FILE" | cut -d'=' -f2)
 # Remove any existing fund scraper cron entries
 crontab -l 2>/dev/null | grep -v "scrape-funds" > /tmp/crontab_clean || true
 
-# Add new cron job (runs at 7:00 AM and 6:00 PM EAT daily)
-echo "0 7,18 * * * curl -s -H \"Authorization: Bearer $CRON_SECRET\" http://localhost:3000/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1" >> /tmp/crontab_clean
+# Add new cron job (runs at 7 AM, 6 PM, 8 PM, 11 PM EAT daily)
+echo "0 7,18,20,23 * * * curl -s -H \"Authorization: Bearer $CRON_SECRET\" http://localhost:3000/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1" >> /tmp/crontab_clean
 
 crontab /tmp/crontab_clean
 rm /tmp/crontab_clean
 
-echo "  ✓ Cron job installed (7 AM & 6 PM daily)"
+echo "  ✓ Cron job installed (7 AM, 6 PM, 8 PM, 11 PM daily)"
 echo ""
 echo "============================================================"
 echo "  Setup Complete!"
