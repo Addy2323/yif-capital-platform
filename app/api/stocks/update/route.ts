@@ -16,8 +16,9 @@ export async function POST(req: NextRequest) {
 
         console.log(`[STOCKS API] Receiving ${stocks.length} stock records`)
 
-        const today = new Date()
-        today.setHours(0, 0, 0, 0)
+        // Use UTC date so "sync date" is consistent regardless of server timezone (fixes LIVE SYNC showing wrong day)
+        const now = new Date()
+        const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0))
 
         let successCount = 0
         let errorCount = 0

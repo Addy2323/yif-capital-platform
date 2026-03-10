@@ -38,7 +38,8 @@ export async function GET(request: NextRequest) {
                 distinct: ["sector"],
             })
 
-            return NextResponse.json({
+            return NextResponse.json(
+                {
                 success: true,
                 data: stocks.map((s) => ({
                     symbol: s.symbol,
@@ -85,7 +86,13 @@ export async function GET(request: NextRequest) {
                     sectors: sectors.map((s) => s.sector).filter(Boolean),
                     source: "database",
                 },
-            })
+            },
+                {
+                    headers: {
+                        "Cache-Control": "no-store, max-age=0",
+                    },
+                }
+            )
         }
 
         // Fallback to mock data if no DB records
