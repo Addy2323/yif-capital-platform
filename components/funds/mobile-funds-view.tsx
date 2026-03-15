@@ -1,11 +1,11 @@
 "use client"
 
-import { Search, ChevronRight, TrendingUp, X, ArrowLeft } from "lucide-react"
+import { ChevronRight, Bell } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { Fund, FundType } from "@/lib/types/funds"
-import { FUND_TYPE_CONFIG } from "@/lib/types/funds"
-import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { TANZANIAN_SUMMARY, getManagerSlug } from "@/lib/data/tanzanian-funds"
+import { useState } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -15,392 +15,292 @@ interface MobileFundsViewProps {
   error: string | null
 }
 
-type StatsTab = "total" | "manager" | "market"
+// Category filter tabs (screenshot: Money Market, Equity, Bond Funds, Specialty Funds)
+export type FundCategoryFilter = "money_market" | "equity" | "bond" | "specialty" | "all"
 
-// Group funds by manager
+const CATEGORY_TABS: { key: FundCategoryFilter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "money_market", label: "Money Market" },
+  { key: "equity", label: "Equity Funds" },
+  { key: "bond", label: "Bond Funds" },
+  { key: "specialty", label: "Specialty Funds" },
+]
+
+function getCategoryLabel(fundType: FundType): string {
+  if (fundType === "money_market") return "Money Market"
+  if (fundType === "equity") return "Equity"
+  if (fundType === "bond" || fundType === "fixed_income") return "Bond Funds"
+  if (fundType === "balanced") return "Balanced"
+  return "Specialty Funds"
+}
+
+function matchesCategoryFilter(fund: Fund, filter: FundCategoryFilter): boolean {
+  if (filter === "all") return true
+  if (filter === "money_market") return fund.fund_type === "money_market"
+  if (filter === "equity") return fund.fund_type === "equity"
+  if (filter === "bond") return fund.fund_type === "bond" || fund.fund_type === "fixed_income"
+  if (filter === "specialty") return ["balanced", "income", "fund_family"].includes(fund.fund_type)
+  return true
+}
+
+// Display name for Fund Managers list (e.g. "iTrust Finance" not "iTrust Finance Limited")
+function getManagerDisplayName(name: string): string {
+  if (name === "iTrust Finance Limited") return "iTrust Finance"
+  return name
+}
+
+// Group funds by manager (same fund count: Orbit Securities before Tanzania Securities)
 function groupByManager(funds: Fund[]) {
-  const managers: Record<string, { managerName: string, logoUrl?: string, funds: Fund[] }> = {}
-
-  funds.forEach(fund => {
+  const managers: Record<string, { managerName: string; logoUrl?: string; funds: Fund[] }> = {}
+  funds.forEach((fund) => {
     if (!managers[fund.manager_name]) {
       managers[fund.manager_name] = {
         managerName: fund.manager_name,
         logoUrl: fund.logo_url,
-        funds: []
+        funds: [],
       }
     }
     managers[fund.manager_name].funds.push(fund)
   })
-
-  return Object.values(managers).sort((a, b) => b.funds.length - a.funds.length)
-}
-
-function getStats(funds: Fund[]) {
-  const managers = groupByManager(funds)
-  const topManager = managers[0]
-
-  return {
-    totalFunds: funds.length,
-    topManagerName: topManager?.managerName || "N/A",
-    topManagerCount: topManager?.funds.length || 0,
-    quarterlyGrowth: "+12.4%" // Mock growth data or calculate if possible
-  }
+  return Object.values(managers).sort((a, b) => {
+    if (b.funds.length !== a.funds.length) return b.funds.length - a.funds.length
+    // When tied (e.g. both 2 funds), show Orbit Securities before Tanzania Securities Limited
+    if (a.managerName === "Orbit Securities") return -1
+    if (b.managerName === "Orbit Securities") return 1
+    return a.managerName.localeCompare(b.managerName)
+  })
 }
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
+    transition: { staggerChildren: 0.06 },
+  },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15
-    }
-  }
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0 },
 }
 
 export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProps) {
-  const [activeTab, setActiveTab] = useState<StatsTab>("total")
-  const [searchOpen, setSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const searchInputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (searchOpen && searchInputRef.current) {
-      searchInputRef.current.focus()
-    }
-  }, [searchOpen])
+  const [categoryFilter, setCategoryFilter] = useState<FundCategoryFilter>("all")
+  const [sortBy, setSortBy] = useState<"name" | "nav" | "return">("name")
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0a1628] px-4 py-8 md:hidden">
-        <p className="text-white/60 text-center">{error}</p>
+      <div className="min-h-screen bg-white px-4 py-8 md:hidden">
+        <p className="text-gray-600 text-center">{error}</p>
       </div>
     )
   }
 
-  const query = searchQuery.toLowerCase().trim()
+  const categoryFiltered = categoryFilter === "all" ? funds : funds.filter((f) => matchesCategoryFilter(f, categoryFilter))
+  const sortedFunds = [...categoryFiltered].sort((a, b) => {
+    if (sortBy === "return") return (b.return_1y ?? -999) - (a.return_1y ?? -999)
+    if (sortBy === "nav") return (b.current_nav ?? 0) - (a.current_nav ?? 0)
+    return a.fund_name.localeCompare(b.fund_name)
+  })
 
-  // Filter funds by search
-  const filteredFunds = query
-    ? funds.filter(
-      (f) =>
-        f.fund_name.toLowerCase().includes(query) ||
-        f.manager_name.toLowerCase().includes(query) ||
-        (FUND_TYPE_CONFIG[f.fund_type]?.label || "").toLowerCase().includes(query)
-    )
-    : funds
-
-  const stats = getStats(funds)
-  const managers = groupByManager(filteredFunds)
-  const topFunds = [...filteredFunds]
+  const managers = groupByManager(funds)
+  const topPerforming = [...funds]
     .filter((f) => f.return_1y != null)
-    .sort((a, b) => (b.return_1y || 0) - (a.return_1y || 0))
-    .slice(0, 5)
+    .sort((a, b) => (b.return_1y ?? 0) - (a.return_1y ?? 0))
+    .slice(0, 3)
+
+  const totalManagers = managers.length
+  const totalFunds = funds.length
+  const activeFundsCount = funds.filter((f) => f.is_active).length
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a1628] via-[#0d1f3c] to-[#0a1628] md:hidden">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="px-4 pt-6 pb-2"
-      >
-        <div className="flex items-center justify-between mb-1">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/dashboard"
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-white/70"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
-            <h1 className="text-lg font-bold text-emerald-400 tracking-tight">
-              Tanzania Funds Insight
-            </h1>
+    <div className="min-h-screen bg-[#f5f5f5] md:hidden pb-24">
+      {/* Header: YIF CAPITAL logo | Tanzanian Mutual Funds (static) | Bell */}
+      <header className="bg-[#0a1628] text-white px-4 pt-5 pb-3">
+        <div className="flex items-center justify-between gap-2">
+          <Link href="/dashboard" className="flex items-center gap-1.5 shrink-0">
+            <div className="w-8 h-8 rounded-md bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center">
+              <span className="text-white font-black text-xs">YIF</span>
+            </div>
+            <span className="text-sm font-bold tracking-tight text-white">CAPITAL</span>
+          </Link>
+          <div className="flex-1 min-w-0 flex items-center justify-center px-2">
+            <span className="text-sm font-medium text-white text-center">
+              Tanzanian Mutual Funds
+            </span>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                setSearchOpen(!searchOpen)
-                if (searchOpen) setSearchQuery("")
-              }}
-              className="text-white/70 hover:text-white transition-colors"
-            >
-              {searchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
-            </button>
+          <button type="button" className="relative p-2 rounded-full hover:bg-white/10 shrink-0">
+            <Bell className="w-5 h-5" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
+          </button>
+        </div>
+
+        {/* Four white metric cards - grid so last card is never cut off */}
+        <div className="grid grid-cols-4 gap-2 mt-4">
+          <div className="bg-white rounded-xl px-2 py-3 shadow-sm min-w-0">
+            <p className="text-xl font-bold text-[#0a1628] truncate">{totalManagers}</p>
+            <p className="text-[9px] text-gray-500 font-medium mt-0.5">Fund Managers</p>
+          </div>
+          <div className="bg-white rounded-xl px-2 py-3 shadow-sm min-w-0">
+            <p className="text-xl font-bold text-[#0a1628] truncate">{totalFunds}</p>
+            <p className="text-[9px] text-gray-500 font-medium mt-0.5">Mutual Funds</p>
+          </div>
+          <div className="bg-white rounded-xl px-2 py-3 shadow-sm min-w-0">
+            <p className="text-sm font-bold text-[#0a1628] leading-tight">{TANZANIAN_SUMMARY.totalAumFormatted}</p>
+            <p className="text-[9px] text-gray-500 font-medium mt-0.5">Total AUM</p>
+          </div>
+          <div className="bg-white rounded-xl px-2 py-3 shadow-sm min-w-0">
+            <p className="text-xl font-bold text-emerald-600">{activeFundsCount}</p>
+            <p className="text-[9px] text-gray-500 font-medium mt-0.5">Active Funds</p>
           </div>
         </div>
-        <p className="text-white/50 text-xs font-medium ml-11">
-          Your Guide to Investment Funds in Tanzania
-        </p>
-
-        {/* Expandable Search Bar */}
-        <AnimatePresence>
-          {searchOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0, marginTop: 0 }}
-              animate={{ height: "auto", opacity: 1, marginTop: 12 }}
-              exit={{ height: 0, opacity: 0, marginTop: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search funds, managers..."
-                  className="w-full h-10 pl-10 pr-4 bg-white/[0.06] border border-white/10 rounded-xl text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-blue-500/40 focus:bg-white/[0.08] transition-all"
-                />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+      </header>
 
       {isLoading ? (
-        <div className="px-4 py-4">
+        <div className="px-4 py-6">
           <MobileSkeleton />
         </div>
       ) : (
-        <>
-          {/* Stats Tabs Strip */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="px-4 py-4"
-          >
-            <div className="grid grid-cols-3 gap-2">
-              {/* Total Funds Tab */}
-              <motion.button
-                variants={itemVariants}
-                onClick={() => setActiveTab("total")}
-                className={cn(
-                  "rounded-xl p-3 text-left transition-all duration-200 border shadow-sm",
-                  activeTab === "total"
-                    ? "bg-white border-blue-400 shadow-md scale-[1.02]"
-                    : "bg-white border-gray-200 hover:shadow-md"
-                )}
-                whileTap={{ scale: 0.95 }}
-              >
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
-                  Total Funds
-                </p>
-                <p className="text-2xl font-black text-gray-900">{stats.totalFunds}</p>
-                <p className="text-[10px] text-gray-400 font-medium mt-0.5">Licensed Funds</p>
-              </motion.button>
-
-              {/* Top Fund Manager Tab */}
-              <motion.button
-                variants={itemVariants}
-                onClick={() => setActiveTab("manager")}
-                className={cn(
-                  "rounded-xl p-3 text-left transition-all duration-200 border shadow-sm",
-                  activeTab === "manager"
-                    ? "bg-white border-blue-400 shadow-md scale-[1.02]"
-                    : "bg-white border-gray-200 hover:shadow-md"
-                )}
-                whileTap={{ scale: 0.95 }}
-              >
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
-                  Top Fund Manager
-                </p>
-                <div className="flex items-center gap-1.5">
-                  {managers[0]?.logoUrl && (
-                    <div className="w-5 h-5 rounded-full overflow-hidden bg-gray-100 shrink-0">
-                      <Image
-                        src={managers[0].logoUrl}
-                        alt={stats.topManagerName}
-                        width={20}
-                        height={20}
-                        className="object-contain w-full h-full"
-                      />
-                    </div>
-                  )}
-                  <p className="text-xs font-bold text-gray-900 truncate">{stats.topManagerName.split(' ')[0]}</p>
-                </div>
-                <p className="text-[10px] text-gray-400 font-medium mt-0.5">
-                  {stats.topManagerCount} Funds
-                </p>
-              </motion.button>
-
-              {/* Market Updates Tab */}
-              <motion.button
-                variants={itemVariants}
-                onClick={() => setActiveTab("market")}
-                className={cn(
-                  "rounded-xl p-3 text-left transition-all duration-200 border shadow-sm",
-                  activeTab === "market"
-                    ? "bg-white border-blue-400 shadow-md scale-[1.02]"
-                    : "bg-white border-gray-200 hover:shadow-md"
-                )}
-                whileTap={{ scale: 0.95 }}
-              >
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
-                  Market Updates
-                </p>
-                <div className="flex items-center gap-1">
-                  <TrendingUp className="w-4 h-4 text-emerald-500" />
-                  <p className="text-base font-black text-gray-900">{stats.quarterlyGrowth}</p>
-                </div>
-                <p className="text-[10px] text-gray-400 font-medium mt-0.5">Quarterly Growth</p>
-              </motion.button>
+        <div className="px-4 -mt-2 space-y-5">
+          {/* Fund Managers */}
+          <section className="bg-white rounded-xl shadow-sm p-4">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-bold text-gray-900">Fund Managers</h2>
+              <Link href="/funds/managers" className="text-xs font-semibold text-blue-600 flex items-center gap-0.5">
+                View All <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
-          </motion.div>
-
-          {/* Featured Fund Managers */}
-          <div className="px-4 pb-4">
-            <motion.h2
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-sm font-bold text-white mb-3 tracking-tight"
-            >
-              Featured Fund Managers
-            </motion.h2>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="space-y-2"
-            >
-              {managers.slice(0, 4).map((manager) => (
+            <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-2">
+              {managers.slice(0, 3).map((manager) => (
                 <motion.div key={manager.managerName} variants={itemVariants}>
                   <Link
-                    href={`/funds?manager=${encodeURIComponent(manager.managerName)}`}
-                    className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 transition-all duration-200 shadow-sm hover:shadow-md group"
+                    href={`/funds/managers/${getManagerSlug(manager.managerName)}`}
+                    className="flex items-center gap-3 py-2.5 rounded-lg hover:bg-gray-50 group"
                   >
-                    {/* Manager Logo */}
                     <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden shrink-0 border border-gray-200">
                       {manager.logoUrl ? (
-                        <Image
-                          src={manager.logoUrl}
-                          alt={manager.managerName}
-                          width={40}
-                          height={40}
-                          className="object-contain w-full h-full p-1"
-                        />
+                        <Image src={manager.logoUrl} alt={manager.managerName} width={40} height={40} className="object-contain w-full h-full p-1" />
                       ) : (
                         <span className="text-xs font-bold text-gray-400">
-                          {manager.managerName.split(" ").map(w => w[0]).join("").slice(0, 2)}
+                          {manager.managerName.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                         </span>
                       )}
                     </div>
-
-                    {/* Manager Info */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-gray-900 truncate">
-                        {manager.managerName}
-                      </p>
-                      <p className="text-xs text-gray-400 font-medium">
-                        {manager.funds.length} Fund{manager.funds.length !== 1 ? "s" : ""}
-                      </p>
+                      <p className="text-sm font-bold text-gray-900 truncate">{getManagerDisplayName(manager.managerName)}</p>
+                      <p className="text-xs text-gray-500">{manager.funds.length} Funds</p>
                     </div>
-
-                    {/* Chevron */}
-                    <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-gray-500 transition-colors shrink-0" />
+                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 shrink-0" />
                   </Link>
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </section>
 
-          {/* Top Investment Funds */}
-          <div className="px-4 pb-6">
-            <motion.h2
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-sm font-bold text-white mb-3 tracking-tight"
-            >
-              Top Investment Funds
-            </motion.h2>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="space-y-2.5"
-            >
-              {topFunds.map((fund) => {
-                const typeConfig = FUND_TYPE_CONFIG[fund.fund_type]
-                const returnVal = fund.return_1y || 0
+          {/* Fund Categories - wrap so all visible without horizontal scroll */}
+          <section>
+            <h2 className="text-sm font-bold text-gray-900 mb-2">Fund Categories</h2>
+            <div className="flex flex-wrap gap-2">
+              {CATEGORY_TABS.map((tab) => (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setCategoryFilter(tab.key)}
+                  className={cn(
+                    "px-3 py-2 rounded-full text-xs font-medium transition-colors",
+                    categoryFilter === tab.key ? "bg-blue-600 text-white" : "bg-white text-gray-600 border border-gray-200"
+                  )}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </section>
 
+          {/* Top Performing Funds - vertical bar chart */}
+          <section className="bg-white rounded-xl shadow-sm p-4">
+            <h2 className="text-sm font-bold text-gray-900 mb-3">Top Performing Funds</h2>
+            <div className="flex items-end justify-between gap-3 h-32">
+              {topPerforming.map((fund, i) => {
+                const pct = fund.return_1y ?? 0
+                const maxPct = Math.max(...topPerforming.map((f) => f.return_1y ?? 0), 1)
+                const heightPct = maxPct ? (pct / maxPct) * 100 : 0
+                const barColor = i === 0 ? "bg-blue-500" : i === 1 ? "bg-amber-500" : "bg-emerald-500"
+                const shortLabel = fund.manager_name.includes("Zan") ? "ZanSec" : fund.manager_name.split(" ")[0]
+                return (
+                  <div key={fund.fund_id} className="flex-1 flex flex-col items-center gap-1">
+                    <span className={cn("text-xs font-bold", pct >= 0 ? "text-green-600" : "text-red-600")}>+{pct.toFixed(1)}%</span>
+                    <motion.div
+                      initial={{ height: 0 }}
+                      animate={{ height: `${heightPct}%` }}
+                      className={cn("w-full max-w-[48px] min-h-[20px] rounded-t-md", barColor)}
+                    />
+                    <p className="text-[10px] font-medium text-gray-600 text-center leading-tight">
+                      {fund.fund_name} / {shortLabel}
+                    </p>
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+
+          {/* Mutual Fund Performance - card list, no dropdowns; filter via categories above, sort via chips */}
+          <section className="bg-white rounded-xl shadow-sm p-4">
+            <h2 className="text-sm font-bold text-gray-900 mb-2">Mutual Fund Performance</h2>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {[
+                { key: "name" as const, label: "Name" },
+                { key: "nav" as const, label: "NAV" },
+                { key: "return" as const, label: "YTD Return" },
+              ].map((opt) => (
+                <button
+                  key={opt.key}
+                  type="button"
+                  onClick={() => setSortBy(opt.key)}
+                  className={cn(
+                    "px-3 py-1.5 rounded-full text-xs font-medium transition-colors",
+                    sortBy === opt.key ? "bg-[#0a1628] text-white" : "bg-gray-100 text-gray-600 border border-gray-200"
+                  )}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-2">
+              {sortedFunds.map((fund) => {
+                const initials = fund.fund_name
+                  .split(/\s+/)
+                  .map((w) => w[0])
+                  .join("")
+                  .slice(0, 2)
+                  .toUpperCase()
+                const subtitle = [
+                  getCategoryLabel(fund.fund_type),
+                  fund.return_1y != null ? `${fund.return_1y >= 0 ? "+" : ""}${fund.return_1y.toFixed(1)}% YTD` : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")
                 return (
                   <motion.div key={fund.fund_id} variants={itemVariants}>
                     <Link
                       href={`/funds/${fund.fund_id}/overview`}
-                      className="block bg-white rounded-xl px-4 py-3.5 transition-all duration-200 shadow-sm hover:shadow-md"
+                      className="flex items-center gap-3 py-2.5 rounded-lg hover:bg-gray-50 group"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex items-start gap-2.5 min-w-0 flex-1">
-                          {/* Color square indicator */}
-                          <div className={cn("w-3 h-3 rounded-[3px] mt-1 shrink-0", typeConfig?.color || "bg-blue-500")} />
-                          <div className="min-w-0">
-                            <p className="text-sm font-bold text-gray-900 truncate">
-                              {fund.fund_name}
-                            </p>
-                            <p className="text-[11px] text-gray-400 font-medium">
-                              {typeConfig?.label || fund.fund_type} Fund
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Return Value */}
-                        <div className="text-right shrink-0">
-                          <p
-                            className={cn(
-                              "text-base font-black tracking-tight",
-                              returnVal >= 0 ? "text-emerald-600" : "text-rose-500"
-                            )}
-                          >
-                            {returnVal >= 0 ? "↑" : "↓"}{Math.abs(returnVal).toFixed(1)}%
-                            <span className="text-[10px] font-bold text-gray-400 ml-1">YTD</span>
-                          </p>
-                          {fund.current_nav != null && (
-                            <p className="text-[10px] text-gray-400 font-medium">
-                              {fund.base_currency} {fund.current_nav.toLocaleString("en-TZ", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                            </p>
-                          )}
-                        </div>
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border border-gray-200">
+                        <span className="text-xs font-bold text-gray-600">{initials}</span>
                       </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-gray-900 truncate">{fund.fund_name}</p>
+                        <p className="text-xs text-gray-500 truncate">{subtitle || (fund.current_nav != null ? `${fund.base_currency} ${fund.current_nav.toLocaleString("en-TZ", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "")}</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 shrink-0" />
                     </Link>
                   </motion.div>
                 )
               })}
             </motion.div>
-
-            {/* View All Button */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="mt-5 flex justify-center"
-            >
-              <Link
-                href="/funds"
-                className="px-8 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-bold rounded-full transition-all duration-200 shadow-lg shadow-blue-500/20 flex items-center gap-2"
-              >
-                View All
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </motion.div>
-          </div>
-        </>
+          </section>
+        </div>
       )}
     </div>
   )

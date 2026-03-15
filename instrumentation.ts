@@ -12,12 +12,13 @@ export async function register() {
         return
     }
 
-    const cron = await import("node-cron")
+    // Use require() so Next doesn't bundle node-cron (avoids "Can't resolve 'path'" from Node built-ins)
+    const cron = require("node-cron")
     const port = process.env.PORT || "3000"
     const baseUrl = `http://localhost:${port}`
 
     // 7:00, 18:00, 20:00, 23:00 every day (server local time)
-    cron.default.schedule("0 7,18,20,23 * * *", () => {
+    cron.schedule("0 7,18,20,23 * * *", () => {
         const url = `${baseUrl}/api/cron/scrape-funds`
         fetch(url, { headers: { Authorization: `Bearer ${secret}` } }).catch((err) => {
             console.error("[scheduler] scrape-funds trigger failed:", err?.message || err)

@@ -42,39 +42,53 @@ export async function GET(request: NextRequest) {
       orderBy: { date: "desc" },
     })
 
-    // Get summaries from ~1 year ago for each specific scheme found in latestSummaries
+    // Get summaries from ~1 year ago (single batched query to avoid exhausting DB connections)
     const oneYearAgo = new Date()
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
 
-    const yearAgoSummaries = await Promise.all(
-      latestSummaries.map(latest =>
-        prisma.fundDailySummary.findFirst({
-          where: {
-            fundId: latest.fundId,
-            schemeName: latest.schemeName,
-            date: { lte: oneYearAgo }
-          },
-          orderBy: { date: "desc" }
-        })
-      )
-    ).then(res => res.filter((s): s is NonNullable<typeof s> => s !== null))
+    const fundIds = latestSummaries.map((s) => s.fundId)
+    const yearAgoRows = await prisma.fundDailySummary.findMany({
+      where: {
+        fundId: { in: fundIds },
+        date: { lte: oneYearAgo }
+      },
+      orderBy: [{ fundId: "asc" }, { schemeName: "asc" }, { date: "desc" }],
+    })
+    // Keep latest per (fundId, schemeName)
+    const yearAgoByKey = new Map<string, (typeof yearAgoRows)[0]>()
+    for (const row of yearAgoRows) {
+      const key = `${row.fundId}:${row.schemeName ?? ""}`
+      if (!yearAgoByKey.has(key)) yearAgoByKey.set(key, row)
+    }
+    const yearAgoSummaries = latestSummaries
+      .map((latest) => yearAgoByKey.get(`${latest.fundId}:${latest.schemeName ?? ""}`))
+      .filter((s): s is NonNullable<typeof s> => s != null)
 
-    // Fallback: for funds without 1-year-ago data, get the earliest available record
-    const fundIdsWithYearAgo = new Set(yearAgoSummaries.map(s => s.fundId))
-    const fundsMissingYearAgo = latestSummaries.filter(s => !fundIdsWithYearAgo.has(s.fundId))
-
-    const earliestSummaries = await Promise.all(
-      fundsMissingYearAgo.map(latest =>
-        prisma.fundDailySummary.findFirst({
-          where: {
-            fundId: latest.fundId,
-            schemeName: latest.schemeName,
-            date: { lt: latest.date }  // any earlier record
-          },
-          orderBy: { date: "asc" }
-        })
-      )
-    ).then(res => res.filter((s): s is NonNullable<typeof s> => s !== null))
+    // Fallback: earliest available record per fund/scheme (single batched query)
+    const fundIdsWithYearAgo = new Set(yearAgoSummaries.map((s) => s.fundId))
+    const fundsMissingYearAgo = latestSummaries.filter((s) => !fundIdsWithYearAgo.has(s.fundId))
+    const latestDateByKey = new Map<string, Date>()
+    for (const s of fundsMissingYearAgo) {
+      latestDateByKey.set(`${s.fundId}:${s.schemeName ?? ""}`, s.date)
+    }
+    let earliestSummaries: typeof yearAgoRows = []
+    if (fundsMissingYearAgo.length > 0) {
+      const missingIds = [...new Set(fundsMissingYearAgo.map((s) => s.fundId))]
+      const earlierRows = await prisma.fundDailySummary.findMany({
+        where: { fundId: { in: missingIds } },
+        orderBy: [{ fundId: "asc" }, { schemeName: "asc" }, { date: "asc" }],
+      })
+      const seen = new Set<string>()
+      for (const row of earlierRows) {
+        const key = `${row.fundId}:${row.schemeName ?? ""}`
+        if (seen.has(key)) continue
+        const latestDate = latestDateByKey.get(key)
+        if (latestDate && row.date < latestDate) {
+          seen.add(key)
+          earliestSummaries.push(row)
+        }
+      }
+    }
 
     // Map to response format
     const mappedFunds: Fund[] = funds.map((fund) => {

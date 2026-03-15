@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, SlidersHorizontal, Database } from "lucide-react"
 import type { Fund, FundType } from "@/lib/types/funds"
 import { FUND_TYPE_CONFIG } from "@/lib/types/funds"
+import { mergeWithStaticFunds } from "@/lib/data/tanzanian-funds"
 
 export default function FundsPage() {
   const [funds, setFunds] = useState<Fund[]>([])
@@ -29,7 +30,7 @@ export default function FundsPage() {
         const result = await response.json()
 
         if (result.success) {
-          setFunds(result.data)
+          setFunds(mergeWithStaticFunds(result.data || []))
           setLastUpdated(result.metadata.last_updated_at)
         } else {
           setError(result.error || "Failed to load funds")
