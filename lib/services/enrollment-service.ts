@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Enrollment } from "@prisma/client";
+import type { Enrollment } from "@/lib/generated/client";
 
 export const EnrollmentService = {
     /**

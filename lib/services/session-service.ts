@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { LiveSession } from "@prisma/client";
+import type { LiveSession } from "@/lib/generated/client";
 
 export const SessionService = {
     /**
