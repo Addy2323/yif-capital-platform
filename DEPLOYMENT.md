@@ -92,11 +92,11 @@ Example crontab — scrape at **7 AM, 6 PM, 8 PM, 11 PM** (EAT). Use **one** of:
 When the app and scraper run on the same VPS (e.g. Contabo), the cron job starts the Python scraper **on the server**; the scraper then POSTs fund performance data to your **live site** so the Funds → Performance tab and Historical Performance Log stay up to date.
 
 1. **Set the API URL the scraper will use**  
-   In `.env` on the VPS, set:
+   In `.env` on the VPS, set your **real** production URL (do **not** use `your-domain.com` or a placeholder):
    ```env
    FUND_API_URL="https://yifcapital.co.tz/api/funds/update"
    ```
-   Replace `yifcapital.co.tz` with your real production domain. The scraper sends scraped data to this URL.
+   Replace `yifcapital.co.tz` with your actual domain. If this is wrong, the scraper will log "push successful" but data will not appear on your site.
 
 2. **Cron job that triggers the scrape**  
    Use this URL in your cron (same server or external). Replace with your domain and `YOUR_CRON_SECRET`:

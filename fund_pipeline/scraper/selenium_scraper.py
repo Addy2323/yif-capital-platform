@@ -381,6 +381,8 @@ def save_processed(data: list, name: str, output_path: str):
 def push_to_api(data: list, name: str):
     """Send data to API (Sending to API)."""
     api_url = os.getenv("FUND_API_URL", "http://localhost:3000/api/funds/update")
+    if "your-domain" in api_url:
+        logger.warning("[%s] FUND_API_URL contains 'your-domain' - set it to your real site URL (e.g. https://yifcapital.co.tz/api/funds/update) so data reaches your app", name)
     chunk_size = 50  # Larger chunks = fewer API calls = faster & more reliable
     total_chunks = max(1, (len(data) - 1) // chunk_size + 1)
     
@@ -539,36 +541,62 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "status": "extracted"
                 }
             elif source_name in ("itrust", "orbit", "tsl", "apef"):
-                # Generic table: date (often col0 or last), fund_name (col1/2), nav, total_nav, units
-                raw_date = (row[0] if len(row) > 0 else "") or (row[-1] if row else "")
-                formatted_date = raw_date
-                if raw_date:
-                    for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%b %d, %Y", "%d %B %Y"):
+                # Try to find a date in any column (many table layouts)
+                date_formats = (
+                    "%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%m/%d/%Y",
+                    "%b %d, %Y", "%d %b %Y", "%d %B %Y", "%B %d, %Y",
+                    "%Y/%m/%d", "%d-%b-%Y", "%d %b %Y", "%Y-%m-%d",
+                )
+                formatted_date = None
+                for col_idx in (0, 1, 2, -1, -2):
+                    raw_date = row[col_idx] if len(row) > abs(col_idx) and row[col_idx] else ""
+                    if not raw_date or not str(raw_date).strip():
+                        continue
+                    raw_date = str(raw_date).strip()
+                    for fmt in date_formats:
                         try:
-                            dt = datetime.strptime(str(raw_date).strip(), fmt)
+                            dt = datetime.strptime(raw_date, fmt)
                             formatted_date = dt.strftime("%Y-%m-%d")
                             break
                         except ValueError:
                             continue
-                fund_name = (row[1] if len(row) > 1 else "") or (row[2] if len(row) > 2 else "")
-                if not fund_name or fund_name.replace(".", "").replace(",", "").isdigit():
+                    if formatted_date:
+                        break
+                if not formatted_date:
+                    continue
+                fund_name = (row[1] if len(row) > 1 else "") or (row[2] if len(row) > 2 else "") or (row[0] if len(row) > 0 else "")
+                if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(str(fund_name)) < 2:
                     fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
+                fund_name = str(fund_name).strip()
+                # Common layouts: [date, name, aum, nav, ...] or [name, aum, nav, date] or [date, nav, aum, units]
+                nav = clean_num(row[3]) if len(row) > 3 else (clean_num(row[4]) if len(row) > 4 else 0.0)
+                aum = clean_num(row[2]) if len(row) > 2 else (clean_num(row[1]) if len(row) > 1 else 0.0)
+                units = clean_num(row[4]) if len(row) > 4 else (clean_num(row[5]) if len(row) > 5 else 0.0)
+                if nav == 0 and len(row) > 2:
+                    for idx in (2, 3, 4, 1):
+                        if idx < len(row):
+                            v = clean_num(row[idx])
+                            if 0 < v < 1e7:
+                                nav = v
+                                break
+                if aum == 0 and nav > 0 and len(row) > 1:
+                    for idx in (1, 2, 0):
+                        if idx < len(row):
+                            v = clean_num(row[idx])
+                            if v >= 1e5:
+                                aum = v
+                                break
                 record = {
                     "source": source_name,
-                    "fund_name": fund_name.strip(),
+                    "fund_name": fund_name or "Fund",
                     "date": formatted_date,
-                    "nav_per_unit": clean_num(row[3]) if len(row) > 3 else (clean_num(row[4]) if len(row) > 4 else 0.0),
-                    "total_nav": clean_num(row[2]) if len(row) > 2 else (clean_num(row[3]) if len(row) > 3 else 0.0),
-                    "units": clean_num(row[4]) if len(row) > 4 else (clean_num(row[5]) if len(row) > 5 else 0.0),
+                    "nav_per_unit": nav,
+                    "total_nav": aum,
+                    "units": units if units > 0 else (aum / nav if nav else 0),
                     "sale_price": 0.0,
                     "repurchase_price": 0.0,
                     "status": "extracted"
                 }
-                if not formatted_date or formatted_date == raw_date:
-                    try:
-                        datetime.strptime(formatted_date, "%Y-%m-%d")
-                    except (ValueError, TypeError):
-                        continue
             else:
                 record = {
                     "source": source_name,
