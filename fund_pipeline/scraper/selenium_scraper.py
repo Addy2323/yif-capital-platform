@@ -12,6 +12,7 @@ Design Rules:
 
 import os
 import sys
+import re
 import json
 import time
 import logging
@@ -436,10 +437,11 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 structured.append(record)
                 continue
 
-            # Basic validation: check if raw row has enough columns
-            if len(row) < 5:
+            # Basic validation: need at least 3 columns (relaxed for itrust/orbit/apef)
+            min_cols = 3 if source_name in ("itrust", "orbit", "tsl", "apef") else 5
+            if len(row) < min_cols:
                 continue
-                
+
             def clean_num(val):
                 if not val: return 0.0
                 if isinstance(val, (int, float)): return float(val)
@@ -541,18 +543,21 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "status": "extracted"
                 }
             elif source_name in ("itrust", "orbit", "tsl", "apef"):
-                # Try to find a date in any column (many table layouts)
+                # Try to find a date in ANY column (scan all)
                 date_formats = (
                     "%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%m/%d/%Y",
                     "%b %d, %Y", "%d %b %Y", "%d %B %Y", "%B %d, %Y",
-                    "%Y/%m/%d", "%d-%b-%Y", "%d %b %Y", "%Y-%m-%d",
+                    "%Y/%m/%d", "%d-%b-%Y", "%d %b %Y",
+                    "%d %b %y", "%d %B %y", "%b %d %Y", "%B %d %Y",
                 )
                 formatted_date = None
-                for col_idx in (0, 1, 2, -1, -2):
-                    raw_date = row[col_idx] if len(row) > abs(col_idx) and row[col_idx] else ""
+                for col_idx in range(len(row)):
+                    raw_date = row[col_idx] if row[col_idx] else ""
                     if not raw_date or not str(raw_date).strip():
                         continue
                     raw_date = str(raw_date).strip()
+                    if raw_date.lower() in ("date", "valuation date", ""):
+                        continue
                     for fmt in date_formats:
                         try:
                             dt = datetime.strptime(raw_date, fmt)
@@ -563,11 +568,32 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     if formatted_date:
                         break
                 if not formatted_date:
-                    continue
+                    # Regex fallback: YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY
+                    for col_idx in range(len(row)):
+                        s = str(row[col_idx] or "").strip()
+                        m = re.match(r"(\d{4})-(\d{1,2})-(\d{1,2})", s)
+                        if m:
+                            formatted_date = f"{m.group(1)}-{m.group(2).zfill(2)}-{m.group(3).zfill(2)}"
+                            break
+                        m = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})", s)
+                        if m:
+                            formatted_date = f"{m.group(3)}-{m.group(2).zfill(2)}-{m.group(1).zfill(2)}"
+                            break
+                        m = re.match(r"(\d{1,2})-(\d{1,2})-(\d{4})", s)
+                        if m:
+                            formatted_date = f"{m.group(3)}-{m.group(2).zfill(2)}-{m.group(1).zfill(2)}"
+                            break
+                if not formatted_date:
+                    formatted_date = datetime.today().strftime("%Y-%m-%d")
+                    if not getattr(map_data, "_warned_fallback_date", False):
+                        logger.warning("[%s] Using today as date fallback for some rows (no parseable date)", source_name)
+                        map_data._warned_fallback_date = True
                 fund_name = (row[1] if len(row) > 1 else "") or (row[2] if len(row) > 2 else "") or (row[0] if len(row) > 0 else "")
                 if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(str(fund_name)) < 2:
                     fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
                 fund_name = str(fund_name).strip()
+                if fund_name.upper() in ("DATE", "NAV", "FUND", "SCHEME", "VALUATION DATE", "TOTAL NAV", "UNITS"):
+                    continue
                 # Common layouts: [date, name, aum, nav, ...] or [name, aum, nav, date] or [date, nav, aum, units]
                 nav = clean_num(row[3]) if len(row) > 3 else (clean_num(row[4]) if len(row) > 4 else 0.0)
                 aum = clean_num(row[2]) if len(row) > 2 else (clean_num(row[1]) if len(row) > 1 else 0.0)
