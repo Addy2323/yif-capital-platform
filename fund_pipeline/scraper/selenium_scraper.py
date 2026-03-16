@@ -443,9 +443,14 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 continue
 
             def clean_num(val):
-                if not val: return 0.0
+                if val is None: return 0.0
                 if isinstance(val, (int, float)): return float(val)
-                return float(str(val).replace(",", "").replace("-", "0").strip())
+                try:
+                    s = str(val).replace(",", "").replace(" ", "").strip()
+                    if not s or s in ("-", "."): return 0.0
+                    return float(s)
+                except (ValueError, TypeError):
+                    return 0.0
 
             # Specific mapping:
             if source_name == "zansec":
@@ -552,11 +557,10 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 )
                 formatted_date = None
                 for col_idx in range(len(row)):
-                    raw_date = row[col_idx] if row[col_idx] else ""
-                    if not raw_date or not str(raw_date).strip():
-                        continue
+                    raw_date = row[col_idx]
+                    if raw_date is None: continue
                     raw_date = str(raw_date).strip()
-                    if raw_date.lower() in ("date", "valuation date", ""):
+                    if not raw_date or raw_date.lower() in ("date", "valuation date"):
                         continue
                     for fmt in date_formats:
                         try:
@@ -570,7 +574,7 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 if not formatted_date:
                     # Regex fallback: YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY
                     for col_idx in range(len(row)):
-                        s = str(row[col_idx] or "").strip()
+                        s = str(row[col_idx] if row[col_idx] is not None else "").strip()
                         m = re.match(r"(\d{4})-(\d{1,2})-(\d{1,2})", s)
                         if m:
                             formatted_date = f"{m.group(1)}-{m.group(2).zfill(2)}-{m.group(3).zfill(2)}"
@@ -588,8 +592,8 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     if not getattr(map_data, "_warned_fallback_date", False):
                         logger.warning("[%s] Using today as date fallback for some rows (no parseable date)", source_name)
                         map_data._warned_fallback_date = True
-                fund_name = (row[1] if len(row) > 1 else "") or (row[2] if len(row) > 2 else "") or (row[0] if len(row) > 0 else "")
-                if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(str(fund_name)) < 2:
+                fund_name = str(row[1] if len(row) > 1 else "") or str(row[2] if len(row) > 2 else "") or str(row[0] if len(row) > 0 else "")
+                if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(fund_name) < 2:
                     fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
                 fund_name = str(fund_name).strip()
                 if fund_name.upper() in ("DATE", "NAV", "FUND", "SCHEME", "VALUATION DATE", "TOTAL NAV", "UNITS"):
@@ -634,6 +638,8 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 }
             structured.append(record)
         except Exception as e:
+            if source_name in ("itrust", "orbit", "apef") and len(structured) == 0:
+                logger.warning("[%s] Map row failed (sample): %s -> %s", source_name, str(row)[:150], e)
             logger.debug(f"Failed to map row {row}: {e}")
             
     return structured
@@ -701,6 +707,14 @@ def main():
                         all_historical = json.load(f)
                     
                     structured_data = map_data(all_historical, name)
+                    if not structured_data and name in ("itrust", "orbit", "apef"):
+                        if all_historical:
+                            first = all_historical[0]
+                            sample = first if isinstance(first, list) else list(first.keys()) if isinstance(first, dict) else type(first).__name__
+                            logger.info("[%s] Consolidated mapping returned 0 rows; sample row: %s", name, str(sample)[:200])
+                        structured_data = map_data(data, name)
+                        if structured_data:
+                            logger.info("[%s] Mapped fresh scrape instead (%s records)", name, len(structured_data))
                     
                     if structured_data:
                         # 4. Save Processed
