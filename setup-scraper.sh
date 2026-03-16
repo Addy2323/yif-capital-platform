@@ -72,9 +72,9 @@ ENV_FILE="$PROJECT_DIR/.env"
 
 if ! grep -q "FUND_API_URL" "$ENV_FILE" 2>/dev/null; then
     echo "" >> "$ENV_FILE"
-    echo "# Fund Scraper Pipeline" >> "$ENV_FILE"
-    echo 'FUND_API_URL=http://localhost:3000/api/funds/update' >> "$ENV_FILE"
-    echo "  ✓ Added FUND_API_URL to .env"
+    echo "# Fund Scraper Pipeline — scraper POSTs data to this URL (use production URL on VPS)" >> "$ENV_FILE"
+    echo 'FUND_API_URL=https://yifcapital.co.tz/api/funds/update' >> "$ENV_FILE"
+    echo "  ✓ Added FUND_API_URL to .env (update domain if different)"
 else
     echo "  ✓ FUND_API_URL already in .env"
 fi
@@ -118,8 +118,10 @@ CRON_SECRET=$(grep "CRON_SECRET" "$ENV_FILE" | cut -d'=' -f2)
 # Remove any existing fund scraper cron entries
 crontab -l 2>/dev/null | grep -v "scrape-funds" > /tmp/crontab_clean || true
 
-# Add new cron job (runs at 7 AM, 6 PM, 8 PM, 11 PM EAT daily)
-echo "0 7,18,20,23 * * * curl -s -H \"Authorization: Bearer $CRON_SECRET\" http://localhost:3000/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1" >> /tmp/crontab_clean
+# Add new cron job (runs at 7 AM, 6 PM, 8 PM, 11 PM EAT daily) — use production URL so scrape pushes to live site
+APP_URL="https://yifcapital.co.tz"
+[ -f "$ENV_FILE" ] && grep -q "NEXT_PUBLIC_APP_URL" "$ENV_FILE" && APP_URL=$(grep "NEXT_PUBLIC_APP_URL" "$ENV_FILE" | cut -d'=' -f2- | tr -d '"' | tr -d "'")
+echo "0 7,18,20,23 * * * curl -s -H \"Authorization: Bearer $CRON_SECRET\" $APP_URL/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1" >> /tmp/crontab_clean
 
 crontab /tmp/crontab_clean
 rm /tmp/crontab_clean

@@ -40,7 +40,7 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler(LOG_DIR / f"scraper_{datetime.today().strftime('%Y-%m-%d')}.log"),
+        logging.FileHandler(LOG_DIR / f"scraper_{datetime.today().strftime('%Y-%m-%d')}.log", encoding="utf-8"),
     ],
 )
 logger = logging.getLogger(__name__)
@@ -55,23 +55,25 @@ def load_config():
 # Browser
 # ---------------------------------------------------------------------------
 def init_driver():
-    """Create a headless Chrome driver."""
+    """Create a headless Chrome driver. One driver per source, always quit after use."""
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    options.add_argument("--headless=new")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-software-rasterizer")
+    options.add_argument("--disable-extensions")
     options.add_argument("--window-size=1920,1080")
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36")
     options.add_argument("--ignore-certificate-errors")
     options.add_argument("--allow-running-insecure-content")
     options.add_argument("--ignore-ssl-errors=yes")
-    options.add_argument("--remote-debugging-port=9222")
 
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options,
     )
+    driver.set_page_load_timeout(90)
     return driver
 
 
@@ -86,7 +88,7 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
     for attempt in range(1, retry_count + 1):
         driver = None
         try:
-            logger.info(f"[{name}] Attempt {attempt}/{retry_count} — {url}")
+            logger.info(f"[{name}] Attempt {attempt}/{retry_count} - {url}")
             driver = init_driver()
             logger.info(f"[{name}] Starting scrape with max_pages={max_pages}")
             driver.get(url)
@@ -124,8 +126,8 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
 
             rows_data = []
             
-            # Helper to parse date
-            STOP_DATE = datetime(2024, 7, 9)
+            # Helper to parse date — only keep data from 2025 onwards
+            STOP_DATE = datetime(2024, 12, 31)
             
             def parse_row_date(cols, source_name):
                 try:
@@ -151,7 +153,18 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                         raw_date = cols[6] if len(cols) > 6 else ""
                         if raw_date:
                             return datetime.strptime(raw_date, "%Y-%m-%d")
-                except:
+                    elif source_name in ("itrust", "orbit", "tsl", "apef"):
+                        # Generic: try first column then last
+                        for idx in (0, -1):
+                            raw_date = cols[idx] if cols else ""
+                            if not raw_date:
+                                continue
+                            for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%b %d, %Y", "%d %B %Y"):
+                                try:
+                                    return datetime.strptime(str(raw_date).strip(), fmt)
+                                except ValueError:
+                                    continue
+                except Exception:
                     pass
                 return None
 
@@ -223,17 +236,22 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
             return dedup_rows
 
         except Exception as e:
-            # Capture failure details for easier debugging on server
-            page_title = driver.title if driver else "Unknown"
-            page_snippet = driver.page_source[:500] if driver else "No source"
+            try:
+                page_title = driver.title if driver else "Unknown"
+            except Exception:
+                page_title = "Unknown"
             logger.error(f"[{name}] Attempt {attempt} failed: {e}")
             logger.error(f"[{name}] Page Title: {page_title}")
-            logger.debug(f"[{name}] Page Snippet: {page_snippet}")
-            
-            if driver:
-                driver.quit()
             if attempt == retry_count:
                 logger.error(f"[{name}] All {retry_count} attempts exhausted")
+        finally:
+            if driver is not None:
+                try:
+                    driver.quit()
+                except Exception as qe:
+                    logger.debug(f"[{name}] Driver quit: {qe}")
+            if attempt < retry_count and driver is not None:
+                time.sleep(3)
     return []
 
 
@@ -262,8 +280,8 @@ def save_consolidated(data: list, name: str, output_path: str):
     seen = set()
     unique_data = []
     
-    # Funds that need name + date for uniqueness
-    needs_name_key = ["utt-amis"]
+    # Funds that need name + date for uniqueness (multi-scheme per source)
+    needs_name_key = ["utt-amis", "itrust", "orbit", "sanlam-pesa", "tsl"]
     
     for item in combined:
         if name in needs_name_key:
@@ -382,7 +400,7 @@ def push_to_api(data: list, name: str):
                 resp_json = response.json()
                 upserted = resp_json.get('upserted', '?')
                 errors = resp_json.get('errors', '?')
-                logger.info(f"[{name}] Chunk {chunk_num} → upserted={upserted}, errors={errors}")
+                logger.info(f"[{name}] Chunk {chunk_num} -> upserted={upserted}, errors={errors}")
             except:
                 logger.info(f"[{name}] Chunk {chunk_num} push successful")
         
@@ -429,7 +447,7 @@ def map_data(raw_rows: list, source_name: str) -> list:
             if source_name == "zansec":
                 record = {
                     "source": source_name,
-                    "fund_name": "Zansec Bond Fund",
+                    "fund_name": "Timiza Fund",
                     "date": row[6] if len(row) > 6 else (row[-1] if row else ""),
                     "nav_per_unit": clean_num(row[3]) if len(row) > 3 else 0.0,
                     "sale_price": clean_num(row[4]) if len(row) > 4 else 0.0,
@@ -489,7 +507,7 @@ def map_data(raw_rows: list, source_name: str) -> list:
             elif source_name == "whi":
                 record = {
                     "source": source_name,
-                    "fund_name": "WHI Income Fund",
+                    "fund_name": "Faida Fund",
                     "date": row[0] if len(row) > 0 else "",
                     "nav_per_unit": clean_num(row[3]) if len(row) > 3 else 0.0,
                     "sale_price": clean_num(row[4]) if len(row) > 4 else 0.0,
@@ -520,6 +538,37 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "repurchase_price": clean_num(row[8]) if len(row) > 8 else 0.0,
                     "status": "extracted"
                 }
+            elif source_name in ("itrust", "orbit", "tsl", "apef"):
+                # Generic table: date (often col0 or last), fund_name (col1/2), nav, total_nav, units
+                raw_date = (row[0] if len(row) > 0 else "") or (row[-1] if row else "")
+                formatted_date = raw_date
+                if raw_date:
+                    for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%b %d, %Y", "%d %B %Y"):
+                        try:
+                            dt = datetime.strptime(str(raw_date).strip(), fmt)
+                            formatted_date = dt.strftime("%Y-%m-%d")
+                            break
+                        except ValueError:
+                            continue
+                fund_name = (row[1] if len(row) > 1 else "") or (row[2] if len(row) > 2 else "")
+                if not fund_name or fund_name.replace(".", "").replace(",", "").isdigit():
+                    fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
+                record = {
+                    "source": source_name,
+                    "fund_name": fund_name.strip(),
+                    "date": formatted_date,
+                    "nav_per_unit": clean_num(row[3]) if len(row) > 3 else (clean_num(row[4]) if len(row) > 4 else 0.0),
+                    "total_nav": clean_num(row[2]) if len(row) > 2 else (clean_num(row[3]) if len(row) > 3 else 0.0),
+                    "units": clean_num(row[4]) if len(row) > 4 else (clean_num(row[5]) if len(row) > 5 else 0.0),
+                    "sale_price": 0.0,
+                    "repurchase_price": 0.0,
+                    "status": "extracted"
+                }
+                if not formatted_date or formatted_date == raw_date:
+                    try:
+                        datetime.strptime(formatted_date, "%Y-%m-%d")
+                    except (ValueError, TypeError):
+                        continue
             else:
                 record = {
                     "source": source_name,
@@ -634,6 +683,10 @@ def main():
             "status": status,
             "api_pushed": api_pushed
         })
+
+        # Give Chrome/OS time to release resources before next source (avoids session/renderer errors)
+        if source != sources[-1]:
+            time.sleep(5)
 
     logger.info("-" * 60)
     for r in results:

@@ -2,7 +2,7 @@
     "sources": [
         {
             "name": "utt-amis",
-            "url": "https://uttamis.co.tz/fund-performance",
+            "url": "https://www.uttamis.co.tz/fund-performance",
             "provider": "UTT AMIS",
             "type": "selenium",
             "wait_seconds": 25,
@@ -10,49 +10,76 @@
             "max_pages": 300
         },
         {
-            "name": "vertex",
-            "url": "https://vertex.co.tz/vertex-bond-fund/",
-            "provider": "Vertex International",
+            "name": "itrust",
+            "url": "https://www.itrust.co.tz/services/i-invest",
+            "provider": "iTrust Finance Limited",
             "type": "selenium",
             "wait_seconds": 15,
             "retry_count": 3,
-            "max_pages": 1
+            "max_pages": 15
         },
         {
-            "name": "sanlam-pesa",
-            "url": "https://invest-tz.sanlamallianzinvestments.com/en",
-            "provider": "Sanlam Allianz Investments",
+            "name": "orbit",
+            "url": "https://orbit.co.tz/inuka-fund",
+            "provider": "Orbit Securities Limited",
             "type": "selenium",
-            "wait_seconds": 10,
+            "wait_seconds": 15,
             "retry_count": 3,
             "max_pages": 15
         },
         {
             "name": "zansec",
             "url": "https://zansec.co.tz/nav.php",
-            "provider": "ZANSEC",
+            "provider": "Zan Securities Limited",
             "type": "selenium",
             "wait_seconds": 12,
             "retry_count": 3,
             "max_pages": 45
         },
         {
+            "name": "tsl",
+            "url": "https://www.tsl.co.tz/fund-management",
+            "provider": "Tanzania Securities Limited",
+            "type": "selenium",
+            "wait_seconds": 15,
+            "retry_count": 3,
+            "max_pages": 15
+        },
+        {
+            "name": "vertex",
+            "url": "https://vertex.co.tz/vertex-bond-fund/",
+            "provider": "Vertex International Securities Limited",
+            "type": "selenium",
+            "wait_seconds": 15,
+            "retry_count": 3,
+            "max_pages": 1
+        },
+        {
+            "name": "apef",
+            "url": "https://apef.co.tz/ziada-fund/",
+            "provider": "African Pension Fund",
+            "type": "selenium",
+            "wait_seconds": 15,
+            "retry_count": 3,
+            "max_pages": 15
+        },
+        {
             "name": "whi",
-            "url": "https://fas.whi.go.tz/",
-            "provider": "WHI",
+            "url": "https://www.whi.go.tz/NavData/NavEnglish.php",
+            "provider": "Watumishi Housing Investment",
             "type": "selenium",
             "wait_seconds": 30,
             "retry_count": 3,
             "max_pages": 10
         },
         {
-            "name": "itrust",
-            "url": "https://itrust.co.tz/itrust-funds/",
-            "provider": "iTrust Finance",
+            "name": "sanlam-pesa",
+            "url": "https://invest-tz.sanlamallianzinvestments.com/en",
+            "provider": "SanlamAllianz East Africa Investment",
             "type": "selenium",
-            "wait_seconds": 15,
+            "wait_seconds": 10,
             "retry_count": 3,
-            "max_pages": 1
+            "max_pages": 15
         }
     ],
     "output": {

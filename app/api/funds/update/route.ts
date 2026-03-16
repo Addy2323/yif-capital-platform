@@ -11,6 +11,9 @@ const FUND_MAP: Record<string, string> = {
     "vertex": "vertex-bond",
     "sanlam-pesa": "sanlam-pesa",
     "itrust": "itrust",
+    "orbit": "orbit",
+    "tsl": "tsl",
+    "apef": "apef",
 }
 
 const FUND_DEFAULTS: Record<string, {
@@ -68,6 +71,30 @@ const FUND_DEFAULTS: Record<string, {
         managerName: "Sanlam Allianz Investments",
         description: "Earn compounded interest. Invest from as low as TZS 10,000.",
         inceptionDate: "2017-07-01",
+    },
+    "orbit": {
+        fundSlug: "orbit",
+        fundName: "Orbit Securities Funds",
+        fundType: "MONEY_MARKET",
+        managerName: "Orbit Securities Limited",
+        description: "Inuka Money Market Fund and Inuka Dozen Index Fund.",
+        inceptionDate: "2020-01-01",
+    },
+    "tsl": {
+        fundSlug: "tsl",
+        fundName: "TSL Fund Management",
+        fundType: "BALANCED",
+        managerName: "Tanzania Securities Limited",
+        description: "Imara Fund and Kesho Tulivu Fund. Data scraped when published.",
+        inceptionDate: "2020-01-01",
+    },
+    "apef": {
+        fundSlug: "apef",
+        fundName: "Ziada Fund",
+        fundType: "BALANCED",
+        managerName: "African Pension Fund",
+        description: "Ziada Fund. Data scraped when published.",
+        inceptionDate: "2020-01-01",
     },
 }
 

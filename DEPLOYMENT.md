@@ -87,6 +87,66 @@ Example crontab — scrape at **7 AM, 6 PM, 8 PM, 11 PM** (EAT). Use **one** of:
 2. Set Trigger to "Daily" (or at desired times).
 3. Set Action to "Start a Program" and point to `scripts/prod-sync.bat`.
 
+### Contabo VPS — Auto-scrape to your live site
+
+When the app and scraper run on the same VPS (e.g. Contabo), the cron job starts the Python scraper **on the server**; the scraper then POSTs fund performance data to your **live site** so the Funds → Performance tab and Historical Performance Log stay up to date.
+
+1. **Set the API URL the scraper will use**  
+   In `.env` on the VPS, set:
+   ```env
+   FUND_API_URL="https://yifcapital.co.tz/api/funds/update"
+   ```
+   Replace `yifcapital.co.tz` with your real production domain. The scraper sends scraped data to this URL.
+
+2. **Cron job that triggers the scrape**  
+   Use this URL in your cron (same server or external). Replace with your domain and `YOUR_CRON_SECRET`:
+   ```bash
+   # Full sync (all funds + DSE) — 7 AM, 6 PM, 8 PM, 11 PM
+   0 7,18,20,23 * * * curl -s -H "Authorization: Bearer YOUR_CRON_SECRET" https://yifcapital.co.tz/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1
+   ```
+   When this runs, the app spawns the Python scraper with `FUND_API_URL` above, so data is pushed to your site automatically.
+
+3. **Sources covered**  
+   The scraper is configured for: UTT AMIS (6), iTrust (6), Orbit (2), Zan (Timiza), TSL (2), Vertex (1), APEF (Ziada), WHI (Faida), SanlamAllianz (2).  
+   **TSL and APEF:** Their pages are in the config; when they publish NAV data, the same cron run will scrape and push it—no code change needed.
+
+4. **Optional: run scraper only (no DSE)**  
+   To refresh only fund NAV/performance and not DSE, call the same cron endpoint; the script still runs both. For DSE-only, use `/api/cron/scrape-dse` instead.
+
+### After git pull: get old-to-latest data for all funds
+
+The **cron job runs with `--latest-only`** (only a few pages per source), so it adds **new** data each day but does **not** backfill history. To have **full history from 2025 to latest** for all funds on the server, do this **once** after you pull (or on a fresh deploy):
+
+1. **Pull and build**
+   ```bash
+   cd /path/to/yif-capital-platform   # or your project path
+   git pull
+   npm install
+   npm run build
+   ```
+
+2. **Ensure app and env are ready**
+   - `.env` has `DATABASE_URL`, `FUND_API_URL` (e.g. `https://yifcapital.co.tz/api/funds/update`), and `CRON_SECRET`.
+   - App is running (e.g. `pm2 restart all` or `npm run start`).
+
+3. **Run a one-time full scrape (all funds, 2025 → latest)**
+   ```bash
+   cd fund_pipeline
+   source .venv/bin/activate
+   export FUND_API_URL="https://yifcapital.co.tz/api/funds/update"   # use your real domain
+   python3 scraper/selenium_scraper.py
+   ```
+   **Do not** use `--latest-only` here. This run scrapes many pages per source (until it reaches end of 2024) and pushes all records to your API. It can take **30–90+ minutes** depending on the number of sources and pages.
+
+4. **Set up cron for daily updates**
+   - Either rely on **in-app scheduler** (if `CRON_SECRET` is set, the app triggers scrape at 7:00, 18:00, 20:00, 23:00), or
+   - Add a **cron entry** that calls your scrape endpoint:
+     ```bash
+     0 7,18,20,23 * * * curl -s -H "Authorization: Bearer YOUR_CRON_SECRET" https://yifcapital.co.tz/api/cron/scrape-funds >> /var/log/fund-scraper.log 2>&1
+     ```
+
+After step 3, your server DB will have fund data from 2025 to latest. Step 4 keeps it updated every day.
+
 ---
 
 ## 4. Launching the Platform
