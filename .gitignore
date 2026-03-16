@@ -33,8 +33,6 @@ next-env.d.ts
 __pycache__/
 *.pyc
 fund_pipeline/.venv/
-fund_pipeline/data/raw/
-fund_pipeline/data/processed/
-fund_pipeline/data/archive/
+fund_pipeline/data/
 fund_pipeline/logs/
 fund_pipeline/scraper/__pycache__/
