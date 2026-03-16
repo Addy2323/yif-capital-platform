@@ -492,7 +492,6 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 raw_date = row[5]
                 formatted_date = raw_date
                 try:
-                    from datetime import datetime
                     dt = datetime.strptime(raw_date.strip(), "%d %B %Y")
                     formatted_date = dt.strftime("%Y-%m-%d")
                 except:
@@ -530,7 +529,6 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 formatted_date = raw_date
                 if raw_date:
                     try:
-                        from datetime import datetime
                         dt = datetime.strptime(raw_date, "%b %d, %Y")
                         formatted_date = dt.strftime("%Y-%m-%d")
                     except:
