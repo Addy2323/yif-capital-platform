@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { resolveFundId } from "@/lib/fund-utils"
 import type { AttributionData, ApiResponse, Timeframe } from "@/lib/types/funds"
 
 // GET /api/v1/funds/[fund_id]/attribution - Module 9: Attribution Analysis
@@ -8,7 +9,8 @@ export async function GET(
   { params }: { params: Promise<{ fund_id: string }> }
 ) {
   try {
-    const { fund_id } = await params
+    const { fund_id: raw_fund_id } = await params
+    const fund_id = resolveFundId(raw_fund_id)
     const { searchParams } = new URL(request.url)
     const timeframe = (searchParams.get("timeframe") || "1Y") as Timeframe
 

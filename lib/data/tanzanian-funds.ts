@@ -3,6 +3,7 @@
  * Used to ensure the mobile Funds view always shows the full list with correct counts.
  */
 import type { Fund, FundType } from "@/lib/types/funds"
+import { resolveFundId } from "@/lib/fund-utils"
 
 const baseDate = "2020-01-01"
 const currency = "Tsh"
@@ -50,20 +51,25 @@ export const TANZANIAN_SUMMARY = {
 
 const STATIC_FUND_IDS = new Set(TANZANIAN_FUNDS_STATIC.map((f) => f.fund_id))
 
-/** Merge API funds with static list. Returns exactly the 22 static funds (9 managers); API data overwrites when fund_id matches. API-only funds are not included so the total stays 22. */
+/** Merge API funds with static list. Returns exactly the 22 static funds (9 managers). API data is applied to static funds when fund_id matches or when the static fund_id resolves to the API fund_id (e.g. orbit-inuka-dozen → orbit). */
 export function mergeWithStaticFunds(apiFunds: Fund[]): Fund[] {
   const byId = new Map<string, Fund>()
   for (const f of TANZANIAN_FUNDS_STATIC) {
     byId.set(f.fund_id, { ...f })
   }
-  for (const f of apiFunds) {
-    if (!f.fund_id || !STATIC_FUND_IDS.has(f.fund_id)) continue
-    const staticFund = TANZANIAN_FUNDS_STATIC.find((s) => s.fund_id === f.fund_id)!
-    byId.set(f.fund_id, {
-      ...f,
-      manager_name: staticFund.manager_name,
-      fund_name: staticFund.fund_name,
-    })
+  for (const apiFund of apiFunds) {
+    if (!apiFund.fund_id) continue
+    // Apply this API fund to every static fund whose URL id resolves to this API fund_id
+    for (const staticFund of TANZANIAN_FUNDS_STATIC) {
+      const resolved = resolveFundId(staticFund.fund_id)
+      if (resolved !== apiFund.fund_id) continue
+      byId.set(staticFund.fund_id, {
+        ...apiFund,
+        fund_id: staticFund.fund_id,
+        fund_name: staticFund.fund_name,
+        manager_name: staticFund.manager_name,
+      })
+    }
   }
   return Array.from(byId.values()).sort((a, b) => a.fund_name.localeCompare(b.fund_name))
 }
