@@ -546,7 +546,8 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "status": "extracted"
                 }
             elif source_name in ("itrust", "orbit", "tsl", "apef"):
-                # Try to find a date in ANY column (scan all)
+                # Try to find a date in ANY column. Prefer DD/MM/YYYY (Tanzania). No "today" fallback for itrust.
+                # Order: ISO, then DD-MM/DD/MM (East Africa), then MM/DD (US), then text formats
                 date_formats = (
                     "%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%m/%d/%Y",
                     "%b %d, %Y", "%d %b %Y", "%d %B %Y", "%B %d, %Y",
@@ -560,6 +561,9 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     raw_date = str(raw_date).strip()
                     if not raw_date or raw_date.lower() in ("date", "valuation date"):
                         continue
+                    # Skip single digits / very short numbers that are not full dates
+                    if len(raw_date) < 8 and raw_date.replace("/", "").replace("-", "").isdigit():
+                        continue
                     for fmt in date_formats:
                         try:
                             dt = datetime.strptime(raw_date, fmt)
@@ -570,7 +574,7 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     if formatted_date:
                         break
                 if not formatted_date:
-                    # Regex fallback: YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY
+                    # Regex: YYYY-MM-DD, then DD/MM/YYYY and DD-MM-YYYY (day first = Tanzania)
                     for col_idx in range(len(row)):
                         s = str(row[col_idx] if row[col_idx] is not None else "").strip()
                         m = re.match(r"(\d{4})-(\d{1,2})-(\d{1,2})", s)
@@ -579,13 +583,26 @@ def map_data(raw_rows: list, source_name: str) -> list:
                             break
                         m = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})", s)
                         if m:
-                            formatted_date = f"{m.group(3)}-{m.group(2).zfill(2)}-{m.group(1).zfill(2)}"
+                            # Tanzania: assume DD/MM/YYYY
+                            d, mo, y = m.group(1).zfill(2), m.group(2).zfill(2), m.group(3)
+                            formatted_date = f"{y}-{mo}-{d}"
                             break
                         m = re.match(r"(\d{1,2})-(\d{1,2})-(\d{4})", s)
                         if m:
                             formatted_date = f"{m.group(3)}-{m.group(2).zfill(2)}-{m.group(1).zfill(2)}"
                             break
+                # Reject future dates (misparsed or wrong source)
+                if formatted_date:
+                    try:
+                        dt = datetime.strptime(formatted_date, "%Y-%m-%d")
+                        if dt.date() > datetime.today().date():
+                            formatted_date = None
+                    except Exception:
+                        pass
+                # For itrust: never use "today" as fallback — skip row so we don't store wrong dates
                 if not formatted_date:
+                    if source_name == "itrust":
+                        continue
                     formatted_date = datetime.today().strftime("%Y-%m-%d")
                     if not getattr(map_data, "_warned_fallback_date", False):
                         logger.warning("[%s] Using today as date fallback for some rows (no parseable date)", source_name)
