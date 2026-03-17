@@ -126,6 +126,67 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                 raise Exception("No table found in main content or any iframe")
 
             rows_data = []
+
+            # iTrust has multiple fund tabs (iCash, iGrowth, iSave, iIncome, Imaan, iDollar).
+            # We must scrape each tab separately; otherwise the default tab data (usually iCash)
+            # gets parsed and pushed for the entire iTrust source, overwriting other schemes.
+            itrust_tabs = []
+            if name == "itrust":
+                itrust_tabs = ["iCash Fund", "iGrowth Fund", "iSave Fund", "iIncome Fund", "Imaan Fund", "iDollar Fund"]
+
+            if itrust_tabs:
+                tab_rows = []
+                for tab_label in itrust_tabs:
+                    try:
+                        # Click tab by visible text; site markup can vary, so try multiple strategies.
+                        clicked = False
+                        candidates = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(.), '{tab_label}')]")
+                        for c in candidates:
+                            try:
+                                if not c.is_displayed():
+                                    continue
+                                driver.execute_script("arguments[0].scrollIntoView({block:'center'});", c)
+                                c.click()
+                                clicked = True
+                                break
+                            except:
+                                continue
+
+                        if not clicked:
+                            logger.warning("[itrust] Could not click tab: %s (will attempt scraping current tab)", tab_label)
+
+                        time.sleep(wait_seconds)
+
+                        # Find table and scrape current view once (latest-only runs should be enough here).
+                        tables = driver.find_elements(By.TAG_NAME, "table")
+                        if not tables:
+                            logger.warning("[itrust] No table found after switching to tab: %s", tab_label)
+                            continue
+
+                        main_table = max(tables, key=lambda t: len(t.find_elements(By.TAG_NAME, "tr")))
+                        rows = main_table.find_elements(By.TAG_NAME, "tr")
+                        for row in rows:
+                            cols = [c.text.strip() for c in row.find_elements(By.TAG_NAME, "td")]
+                            if not cols:
+                                cols = [c.text.strip() for c in row.find_elements(By.TAG_NAME, "th")]
+                            if cols and len(cols) > 3:
+                                # Append tab label so we can recover scheme name during mapping.
+                                cols = cols + [tab_label]
+                                tab_rows.append(cols)
+                    except Exception as e:
+                        logger.error("[itrust] Failed tab scrape for %s: %s", tab_label, e)
+
+                # Deduplicate and return
+                dedup_rows = []
+                seen = set()
+                for r in tab_rows:
+                    r_tuple = tuple(r)
+                    if r_tuple in seen:
+                        continue
+                    seen.add(r_tuple)
+                    dedup_rows.append(r)
+                logger.info("[itrust] Successfully scraped %s unique rows across all tabs", len(dedup_rows))
+                return dedup_rows
             
             # Helper to parse date — only keep data from 2025 onwards
             STOP_DATE = datetime(2024, 12, 31)
@@ -611,6 +672,23 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(fund_name) < 2:
                     fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
                 fund_name = str(fund_name).strip()
+
+                # If scrape_site appended the tab label as the last column, prefer it for itrust schemes.
+                if source_name == "itrust":
+                    joined = " ".join([str(x) for x in row if x is not None])
+                    tab_to_scheme = {
+                        "iCash Fund": "iCash Fund",
+                        "iGrowth Fund": "iGrowth Fund",
+                        "iSave Fund": "iSave Fund",
+                        "iIncome Fund": "iIncome Fund",
+                        "Imaan Fund": "Imaan Fund",
+                        "iDollar Fund": "iDollar Fund",
+                    }
+                    for k, v in tab_to_scheme.items():
+                        if k in joined:
+                            fund_name = v
+                            break
+
                 if fund_name.upper() in ("DATE", "NAV", "FUND", "SCHEME", "VALUATION DATE", "TOTAL NAV", "UNITS"):
                     continue
                 # Common layouts: [date, name, aum, nav, ...] or [name, aum, nav, date] or [date, nav, aum, units]
