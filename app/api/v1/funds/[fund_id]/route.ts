@@ -90,7 +90,9 @@ export async function GET(
       },
     }
 
-    return NextResponse.json(response)
+    return NextResponse.json(response, {
+      headers: { "Cache-Control": "no-store, max-age=0" },
+    })
   } catch (error: any) {
     console.error(`Error fetching fund:`, error)
     return NextResponse.json(

@@ -147,6 +147,18 @@ The **cron job runs with `--latest-only`** (only a few pages per source), so it 
 
 After step 3, your server DB will have fund data from 2025 to latest. Step 4 keeps it updated every day.
 
+### Troubleshooting: wrong dates / Vertex not updating
+
+- **iTrust (or any fund) showing wrong or future dates (e.g. 2026):**  
+  Deploy the latest code (it skips bad dates and rejects future dates in the scraper; the update API deletes future-dated rows when it receives new data). Then run a **one-time full scrape** (step 3 above, without `--latest-only`) so valid data is pushed. The API will remove future-dated rows for that fund when it receives the next batch.
+
+- **Vertex (or one fund) “still holds former data” / fails to get latest:**  
+  1. Ensure `FUND_API_URL` in `.env` is your production URL (e.g. `https://yifcapital.co.tz/api/funds/update`) with no trailing space.  
+  2. Check `fund_pipeline/logs/cron-scrape-funds.log` and `fund_pipeline/logs/automation.log` for errors (e.g. “No table found” for Vertex, or push failures).  
+  3. Run the scraper for a single source to test:  
+     `cd fund_pipeline && source .venv/bin/activate && FUND_API_URL="https://yifcapital.co.tz/api/funds/update" python3 scraper/selenium_scraper.py --fund vertex --latest-only`  
+  If Vertex’s website changed layout or is slow, the scraper may need a longer wait or selector update.
+
 ---
 
 ## 4. Launching the Platform

@@ -196,6 +196,17 @@ export async function POST(req: NextRequest) {
             }
         }
 
+        // Remove any future-dated rows for this fund (fixes bad scraper dates e.g. iTrust 2026)
+        const startOfTomorrow = new Date()
+        startOfTomorrow.setDate(startOfTomorrow.getDate() + 1)
+        startOfTomorrow.setHours(0, 0, 0, 0)
+        const deleted = await prisma.fundDailySummary.deleteMany({
+            where: { fundId, date: { gte: startOfTomorrow } },
+        })
+        if (deleted.count > 0) {
+            console.log(`[API] Removed ${deleted.count} future-dated rows for ${fundId}`)
+        }
+
         console.log(
             `[API] Done: ${successCount} upserted, ${skipCount} skipped, ${errorCount} errors for ${fundId}`,
         )
