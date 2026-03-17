@@ -685,11 +685,16 @@ def main():
             return
         logger.info(f"Filtering to single fund: {args.fund}")
     
-    # In latest-only mode, cap max_pages to 2 so daily runs are fast
+    # In latest-only mode, cap max_pages so daily runs stay fast,
+    # but allow more pages for sources that paginate and need a few extra pages
     if args.latest_only:
-        logger.info("Running in --latest-only mode (max 2 pages per source)")
+        logger.info("Running in --latest-only mode (capped pages per source)")
         for s in sources:
-            s["max_pages"] = min(s.get("max_pages", 1), 2)
+            name = s.get("name")
+            cap = 2
+            if name in ("itrust", "vertex"):
+                cap = 6
+            s["max_pages"] = min(s.get("max_pages", 1), cap)
 
     results = []
     for source in sources:
