@@ -139,13 +139,17 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                 prev_first_date = None
                 for tab_label in itrust_tabs:
                     try:
-                        # Click the fund card using the stable <img alt="..."> shown on the page.
-                        # Then click its closest parent with cursor-pointer (the whole card).
-                        img_xpath = f"//img[@alt='{tab_label}']"
-                        img = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, img_xpath)))
-                        card = img.find_element(By.XPATH, "./ancestor::div[contains(@class,'cursor-pointer')][1]")
+                        # Click the iTrust fund card.
+                        # From your HTML: each card contains an <h3> with the exact fund name and is wrapped
+                        # by a div having class "cursor-pointer".
+                        #
+                        # Clicking by <h3> text is more stable than relying on the <img> + ancestor chain.
+                        h3_xpath = f"//h3[normalize-space(.)='{tab_label}']"
+                        card_xpath = f"{h3_xpath}/ancestor::div[contains(@class,'cursor-pointer')][1]"
+                        card = WebDriverWait(driver, 20).until(
+                            EC.element_to_be_clickable((By.XPATH, card_xpath))
+                        )
                         driver.execute_script("arguments[0].scrollIntoView({block:'center'});", card)
-                        WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, f"{img_xpath}/ancestor::div[contains(@class,'cursor-pointer')][1]")))
                         card.click()
 
                         # Wait until the first table row date changes (prevents scraping the previous tab again).
@@ -180,7 +184,7 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                                 cols = cols + [tab_label]
                                 tab_rows.append(cols)
                     except Exception as e:
-                        logger.error("[itrust] Failed tab scrape for %s: %s", tab_label, e)
+                        logger.error("[itrust] Failed tab scrape for %s: %s (%s)", tab_label, e, type(e).__name__)
 
                 # Deduplicate and return
                 dedup_rows = []
