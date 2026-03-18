@@ -136,26 +136,32 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
 
             if itrust_tabs:
                 tab_rows = []
+                prev_first_date = None
                 for tab_label in itrust_tabs:
                     try:
-                        # Click tab by visible text; site markup can vary, so try multiple strategies.
-                        clicked = False
-                        candidates = driver.find_elements(By.XPATH, f"//*[contains(normalize-space(.), '{tab_label}')]")
-                        for c in candidates:
+                        # Click the fund card using the stable <img alt="..."> shown on the page.
+                        # Then click its closest parent with cursor-pointer (the whole card).
+                        img_xpath = f"//img[@alt='{tab_label}']"
+                        img = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, img_xpath)))
+                        card = img.find_element(By.XPATH, "./ancestor::div[contains(@class,'cursor-pointer')][1]")
+                        driver.execute_script("arguments[0].scrollIntoView({block:'center'});", card)
+                        WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, f"{img_xpath}/ancestor::div[contains(@class,'cursor-pointer')][1]")))
+                        card.click()
+
+                        # Wait until the first table row date changes (prevents scraping the previous tab again).
+                        def first_row_date():
                             try:
-                                if not c.is_displayed():
-                                    continue
-                                driver.execute_script("arguments[0].scrollIntoView({block:'center'});", c)
-                                c.click()
-                                clicked = True
-                                break
+                                el = driver.find_element(By.CSS_SELECTOR, "table tbody tr td")
+                                return el.text.strip()
                             except:
-                                continue
+                                return None
 
-                        if not clicked:
-                            logger.warning("[itrust] Could not click tab: %s (will attempt scraping current tab)", tab_label)
+                        # Small settle time first
+                        time.sleep(1)
+                        if prev_first_date is not None:
+                            WebDriverWait(driver, 20).until(lambda d: first_row_date() and first_row_date() != prev_first_date)
 
-                        time.sleep(wait_seconds)
+                        prev_first_date = first_row_date()
 
                         # Find table and scrape current view once (latest-only runs should be enough here).
                         tables = driver.find_elements(By.TAG_NAME, "table")
@@ -644,9 +650,19 @@ def map_data(raw_rows: list, source_name: str) -> list:
                             break
                         m = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})", s)
                         if m:
-                            # Tanzania: assume DD/MM/YYYY
-                            d, mo, y = m.group(1).zfill(2), m.group(2).zfill(2), m.group(3)
-                            formatted_date = f"{y}-{mo}-{d}"
+                            # iTrust uses M/D/YYYY (e.g. 3/16/2026) while Tanzania tables sometimes use DD/MM/YYYY.
+                            a = int(m.group(1))
+                            b = int(m.group(2))
+                            y = m.group(3)
+                            if source_name == "itrust":
+                                # a=month, b=day
+                                mo = a
+                                d = b
+                            else:
+                                # day first
+                                d = a
+                                mo = b
+                            formatted_date = f"{y}-{str(mo).zfill(2)}-{str(d).zfill(2)}"
                             break
                         m = re.match(r"(\d{1,2})-(\d{1,2})-(\d{4})", s)
                         if m:
