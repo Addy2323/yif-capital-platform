@@ -107,8 +107,12 @@ When the app and scraper run on the same VPS (e.g. Contabo), the cron job starts
    When this runs, the app spawns the Python scraper with `FUND_API_URL` above, so data is pushed to your site automatically.
 
 3. **Sources covered**  
-   The scraper is configured for: UTT AMIS (6), iTrust (6), Orbit (2), Zan (Timiza), TSL (2), Vertex (1), APEF (Ziada), WHI (Faida), SanlamAllianz (2).  
-   **TSL and APEF:** Their pages are in the config; when they publish NAV data, the same cron run will scrape and push it—no code change needed.
+   The scraper is configured for: UTT AMIS (6), iTrust (6), Orbit (2), Zan (Timiza), **TSL (2)**, **Vertex (1)**, APEF (Ziada), WHI (Faida), SanlamAllianz (2).  
+   **Automatic scrape when data is added (no code change needed):**
+   - **Orbit Securities Limited** — Inuka Money Market Fund, Inuka Dozen Index Fund. Source: https://orbit.co.tz/inuka-fund . When Orbit publish NAV data on that page, the next cron run will scrape and push to your site.
+   - **Tanzania Securities Limited (TSL)** — Imara Fund, Kesho Tulivu Fund. Source: https://www.tsl.co.tz/fund-management . When TSL publish NAV data on that page, the next cron run (7:00, 18:00, 20:00, 23:00) will scrape and push to your site.
+   - **Vertex International Securities** — Vertex Bond Fund. Source: https://vertex.co.tz/vertex-bond-fund/ . The scraper waits for the AJAX-loaded table; when Vertex update the data, cron will pick it up and push to your site.
+   APEF (Ziada) works the same way when their page has data.
 
 4. **Optional: run scraper only (no DSE)**  
    To refresh only fund NAV/performance and not DSE, call the same cron endpoint; the script still runs both. For DSE-only, use `/api/cron/scrape-dse` instead.
@@ -146,6 +150,29 @@ The **cron job runs with `--latest-only`** (only a few pages per source), so it 
      ```
 
 After step 3, your server DB will have fund data from 2025 to latest. Step 4 keeps it updated every day.
+
+### Scrape only specific fund(s) after making changes
+
+When you’ve changed scraper logic or config for one or a few funds, run the scraper only for those:
+
+**From repo root (requires Python in PATH):**
+```bash
+npm run scrape:fund:latest -- orbit
+npm run scrape:fund:latest -- orbit,tsl,vertex
+```
+
+**From `fund_pipeline` with venv:**
+```bash
+cd fund_pipeline
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+set FUND_API_URL=https://yifcapital.co.tz/api/funds/update   # Windows
+export FUND_API_URL=https://yifcapital.co.tz/api/funds/update   # Linux/Mac
+
+python3 scraper/selenium_scraper.py --fund orbit --latest-only
+python3 scraper/selenium_scraper.py --fund orbit,tsl,vertex --latest-only
+```
+
+Valid fund names (from `fund_pipeline/config/sources.json`): `utt-amis`, `itrust`, `orbit`, `zansec`, `tsl`, `vertex`, `apef`, `whi`, `sanlam-pesa`.
 
 ### Troubleshooting: wrong dates / Vertex not updating
 

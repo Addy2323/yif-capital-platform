@@ -23,9 +23,10 @@
             "url": "https://orbit.co.tz/inuka-fund",
             "provider": "Orbit Securities Limited",
             "type": "selenium",
-            "wait_seconds": 15,
-            "retry_count": 3,
-            "max_pages": 15
+            "wait_seconds": 20,
+            "retry_count": 5,
+            "max_pages": 15,
+            "_comment": "Funds: Inuka Money Market Fund, Inuka Dozen Index Fund. When Orbit add NAV data to this page, cron will auto-scrape and push to site."
         },
         {
             "name": "zansec",
@@ -41,18 +42,20 @@
             "url": "https://www.tsl.co.tz/fund-management",
             "provider": "Tanzania Securities Limited",
             "type": "selenium",
-            "wait_seconds": 15,
-            "retry_count": 3,
-            "max_pages": 15
+            "wait_seconds": 20,
+            "retry_count": 5,
+            "max_pages": 15,
+            "_comment": "Funds: Imara Fund, Kesho Tulivu Fund. When TSL add NAV data to this page, cron will auto-scrape and push to site."
         },
         {
             "name": "vertex",
             "url": "https://vertex.co.tz/vertex-bond-fund/",
             "provider": "Vertex International Securities Limited",
             "type": "selenium",
-            "wait_seconds": 15,
-            "retry_count": 3,
-            "max_pages": 1
+            "wait_seconds": 25,
+            "retry_count": 5,
+            "max_pages": 1,
+            "_comment": "Vertex Bond Fund. Table loads via AJAX; scraper waits for #table_2. When new data is published, cron auto-scrapes and pushes to site."
         },
         {
             "name": "apef",

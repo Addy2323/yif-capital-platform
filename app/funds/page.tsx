@@ -7,7 +7,8 @@ import { MobileFundsView } from "@/components/funds/mobile-funds-view"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Search, SlidersHorizontal, Database } from "lucide-react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Search, SlidersHorizontal, Database, Building2 } from "lucide-react"
 import type { Fund, FundType } from "@/lib/types/funds"
 import { FUND_TYPE_CONFIG } from "@/lib/types/funds"
 import { mergeWithStaticFunds } from "@/lib/data/tanzanian-funds"
@@ -80,6 +81,17 @@ export default function FundsPage() {
 
   // Get unique fund types for filter
   const fundTypes = [...new Set(funds.map((f) => f.fund_type))]
+
+  // Group filtered funds by manager for desktop/laptop view
+  const fundsByManager = filteredFunds.reduce<{ managerName: string; funds: Fund[] }[]>((acc, fund) => {
+    const name = fund.manager_name?.trim() || "Other"
+    const existing = acc.find((g) => g.managerName === name)
+    if (existing) existing.funds.push(fund)
+    else acc.push({ managerName: name, funds: [fund] })
+    return acc
+  }, [])
+  // Sort manager groups alphabetically
+  fundsByManager.sort((a, b) => a.managerName.localeCompare(b.managerName))
 
   return (
     <>
@@ -220,15 +232,42 @@ export default function FundsPage() {
               </motion.div>
             ) : (
               <motion.div
-                key="grid"
+                key="accordion"
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
-                className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-20"
+                className="pb-20"
               >
-                {filteredFunds.map((fund) => (
-                  <FundCard key={fund.fund_id} fund={fund} />
-                ))}
+                <Accordion type="single" collapsible className="space-y-2">
+                  {fundsByManager.map(({ managerName, funds: managerFunds }) => (
+                    <AccordionItem
+                      key={managerName}
+                      value={managerName}
+                      className="border border-border/50 rounded-xl bg-card/40 px-4 data-[state=open]:bg-card/60 transition-colors overflow-hidden"
+                    >
+                      <AccordionTrigger className="py-5 hover:no-underline hover:bg-muted/30 -mx-4 px-4 rounded-lg [&[data-state=open]]:rounded-b-none">
+                        <div className="flex items-center gap-3 text-left">
+                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                            <Building2 className="w-5 h-5 text-primary" />
+                          </div>
+                          <div>
+                            <span className="font-bold text-foreground">{managerName}</span>
+                            <span className="text-muted-foreground text-sm font-normal ml-2">
+                              — {managerFunds.length} {managerFunds.length === 1 ? "fund" : "funds"}
+                            </span>
+                          </div>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="pt-2 pb-6">
+                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                          {managerFunds.map((fund) => (
+                            <FundCard key={fund.fund_id} fund={fund} />
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </motion.div>
             )}
           </AnimatePresence>

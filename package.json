@@ -7,7 +7,9 @@
     "dev": "next dev --webpack",
     "lint": "eslint .",
     "start": "next start",
-    "prisma:push": "prisma db push"
+    "prisma:push": "prisma db push",
+    "scrape:fund": "cd fund_pipeline && python3 scraper/selenium_scraper.py --fund",
+    "scrape:fund:latest": "cd fund_pipeline && python3 scraper/selenium_scraper.py --latest-only --fund"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

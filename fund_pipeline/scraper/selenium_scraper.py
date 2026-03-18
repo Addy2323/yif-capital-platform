@@ -96,6 +96,17 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
 
             # 1. Wait for page to settle
             time.sleep(wait_seconds)
+
+            # Vertex: table is filled via AJAX (wpdatatables serverSide). Wait for data rows.
+            if name == "vertex":
+                try:
+                    WebDriverWait(driver, 30).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, "#table_2 tbody tr td"))
+                    )
+                    time.sleep(2)
+                    logger.info("[vertex] Data table loaded (AJAX)")
+                except Exception as ve:
+                    logger.warning("[vertex] Timeout waiting for #table_2 data: %s", ve)
             
             # 2. Try to find table in main content or iframes
             table_found = False
@@ -246,9 +257,14 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                 tables = driver.find_elements(By.TAG_NAME, "table")
                 if not tables:
                     break
-                    
-                # Find the main data table (usually the one with most rows)
-                main_table = max(tables, key=lambda t: len(t.find_elements(By.TAG_NAME, "tr")))
+                # Vertex: use WP Data Table by id (AJAX-filled)
+                if name == "vertex":
+                    try:
+                        main_table = driver.find_element(By.ID, "table_2")
+                    except Exception:
+                        main_table = max(tables, key=lambda t: len(t.find_elements(By.TAG_NAME, "tr")))
+                else:
+                    main_table = max(tables, key=lambda t: len(t.find_elements(By.TAG_NAME, "tr")))
                 rows = main_table.find_elements(By.TAG_NAME, "tr")
                 logger.info(f"[{name}] Page {page}: Found {len(rows)} rows")
                 
@@ -769,20 +785,25 @@ def main():
 
     import argparse
     parser = argparse.ArgumentParser(description="Fund Data Scraper")
-    parser.add_argument("--fund", help="Specific fund name to scrape (e.g. 'whi' or 'utt-amis')")
+    parser.add_argument(
+        "--fund",
+        help="Fund(s) to scrape: one name or comma-separated (e.g. 'orbit', 'orbit,tsl,vertex'). Omit to run all."
+    )
     parser.add_argument("--latest-only", action="store_true",
                         help="Only scrape the first 2 pages (latest data) — use for daily cron runs")
     args = parser.parse_args()
 
     config = load_config()
     sources = config.get("sources", [])
-    
+
     if args.fund:
-        sources = [s for s in sources if s["name"] == args.fund]
-        if not sources:
-            logger.error(f"Fund '{args.fund}' not found in configuration.")
+        fund_names = [n.strip() for n in args.fund.split(",") if n.strip()]
+        sources = [s for s in sources if s["name"] in fund_names]
+        missing = set(fund_names) - {s["name"] for s in sources}
+        if missing:
+            logger.error("Fund(s) not found in config: %s. Valid names: %s", missing, [s["name"] for s in config.get("sources", [])])
             return
-        logger.info(f"Filtering to single fund: {args.fund}")
+        logger.info("Scraping only: %s", fund_names)
     
     # In latest-only mode, cap max_pages so daily runs stay fast,
     # but allow more pages for sources that paginate and need a few extra pages
@@ -826,7 +847,7 @@ def main():
                         all_historical = json.load(f)
                     
                     structured_data = map_data(all_historical, name)
-                    if not structured_data and name in ("itrust", "orbit", "apef"):
+                    if not structured_data and name in ("itrust", "orbit", "apef", "tsl"):
                         if all_historical:
                             first = all_historical[0]
                             sample = first if isinstance(first, list) else list(first.keys()) if isinstance(first, dict) else type(first).__name__
