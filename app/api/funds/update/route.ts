@@ -222,6 +222,29 @@ export async function POST(req: NextRequest) {
             console.log(`[API] Removed ${deletedZero.count} zero NAV/AUM rows for ${fundId} (today)`)
         }
 
+        // Cleanup: also remove invalid zero rows for the most recent date we have.
+        // This prevents stale header-parsed rows (NAV/AUM = 0) from dominating the UI.
+        const latest = await prisma.fundDailySummary.findFirst({
+            where: { fundId },
+            orderBy: { date: "desc" },
+            select: { date: true },
+        })
+
+        if (latest?.date) {
+            const deletedLatestInvalid = await prisma.fundDailySummary.deleteMany({
+                where: {
+                    fundId,
+                    date: latest.date,
+                    OR: [{ nav: { lte: 0 } }, { aum: { lte: 0 } }],
+                },
+            })
+            if (deletedLatestInvalid.count > 0) {
+                console.log(
+                    `[API] Removed ${deletedLatestInvalid.count} invalid (nav<=0/aum<=0) rows for ${fundId} at latest date`,
+                )
+            }
+        }
+
         console.log(
             `[API] Done: ${successCount} upserted, ${skipCount} skipped, ${errorCount} errors for ${fundId}`,
         )

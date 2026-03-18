@@ -47,10 +47,18 @@ export async function GET(
             take: limit * 5, // Take more to account for multiple schemes per day
         })
 
+        // Some providers/scrapers may occasionally insert header/junk rows with 0 NAV/AUM.
+        // Those can dominate the "latest" selection in the UI, so filter them out.
+        const validSummaries = summaries.filter((s) => {
+            const nav = typeof s.nav === "number" ? s.nav : Number(s.nav)
+            const aum = typeof s.aum === "number" ? s.aum : Number(s.aum)
+            return nav > 0 && aum > 0
+        })
+
         // Map to NavRecord format
         // Note: The UI expects fields date, nav_per_unit, total_nav, units
         // Since our DB stores 'nav' as price and 'aum' as total_nav, we map accordingly
-        const navRecords: NavRecord[] = summaries.map((s) => ({
+        const navRecords: NavRecord[] = validSummaries.map((s) => ({
             date: s.date.toISOString().split("T")[0],
             nav_per_unit: s.nav,
             total_nav: s.aum,
@@ -68,7 +76,7 @@ export async function GET(
             metadata: {
                 fund_id: fund.fundId,
                 timeframe: "1Y",
-                last_updated_at: summaries[0]?.date.toISOString() || new Date().toISOString(),
+                last_updated_at: validSummaries[0]?.date.toISOString() || new Date().toISOString(),
                 data_source: "cached",
                 currency: fund.baseCurrency,
             },
