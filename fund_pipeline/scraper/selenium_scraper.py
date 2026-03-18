@@ -673,21 +673,20 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
                 fund_name = str(fund_name).strip()
 
-                # If scrape_site appended the tab label as the last column, prefer it for itrust schemes.
-                if source_name == "itrust":
-                    joined = " ".join([str(x) for x in row if x is not None])
-                    tab_to_scheme = {
-                        "iCash Fund": "iCash Fund",
-                        "iGrowth Fund": "iGrowth Fund",
-                        "iSave Fund": "iSave Fund",
-                        "iIncome Fund": "iIncome Fund",
-                        "Imaan Fund": "Imaan Fund",
-                        "iDollar Fund": "iDollar Fund",
+                # iTrust: scrape_site appends the tab label as the last column.
+                # Use it directly to prevent pushing iCash table rows into other iTrust schemes.
+                if source_name == "itrust" and len(row) >= 1:
+                    tab_label = str(row[-1]).strip()
+                    tab_scheme_set = {
+                        "iCash Fund",
+                        "iGrowth Fund",
+                        "iSave Fund",
+                        "iIncome Fund",
+                        "Imaan Fund",
+                        "iDollar Fund",
                     }
-                    for k, v in tab_to_scheme.items():
-                        if k in joined:
-                            fund_name = v
-                            break
+                    if tab_label in tab_scheme_set:
+                        fund_name = tab_label
 
                 if fund_name.upper() in ("DATE", "NAV", "FUND", "SCHEME", "VALUATION DATE", "TOTAL NAV", "UNITS"):
                     continue
