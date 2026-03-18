@@ -223,9 +223,14 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                             if len(parts) == 3 and len(parts[2]) == 4:
                                 return datetime.strptime(f"{parts[2]}-{parts[1]}-{parts[0]}", "%Y-%m-%d")
                     elif source_name == "vertex":
-                        raw_date = cols[5] if len(cols) > 5 else ""
-                        if raw_date:
-                            return datetime.strptime(raw_date.strip(), "%d %B %Y")
+                        raw_date = (cols[0] if len(cols) >= 7 else cols[5]) if cols else ""
+                        if raw_date and str(raw_date).strip():
+                            s = str(raw_date).strip()
+                            for fmt in ("%d %B %Y", "%Y-%m-%d"):
+                                try:
+                                    return datetime.strptime(s, fmt)
+                                except ValueError:
+                                    continue
                     elif source_name == "sanlam-pesa":
                         raw_date = cols[0] if len(cols) > 0 else ""
                         if raw_date:
@@ -576,20 +581,29 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "status": "extracted"
                 }
             elif source_name == "vertex":
-                if len(row) < 12:
+                # Vertex table: 12 columns when full HTML (incl. hidden), or 7 visible columns (Date, Redeemed, Initial, Added, Fund Net Value, Total Units, NAV)
+                if len(row) >= 12:
+                    date_col, nav_col, total_nav_col, units_col = 5, 11, 9, 10
+                elif len(row) >= 7:
+                    date_col, nav_col, total_nav_col, units_col = 0, 6, 4, 5
+                else:
                     continue
-                raw_date = row[5]
+                raw_date = row[date_col]
                 formatted_date = raw_date
                 try:
-                    dt = datetime.strptime(raw_date.strip(), "%d %B %Y")
+                    dt = datetime.strptime(str(raw_date).strip(), "%d %B %Y")
                     formatted_date = dt.strftime("%Y-%m-%d")
-                except:
-                    pass
+                except Exception:
+                    try:
+                        dt = datetime.strptime(str(raw_date).strip(), "%Y-%m-%d")
+                        formatted_date = dt.strftime("%Y-%m-%d")
+                    except Exception:
+                        pass
 
-                if not formatted_date or any(x.lower() in formatted_date.lower() for x in ["date", "redeemed"]):
+                if not formatted_date or any(x in str(raw_date).lower() for x in ["date", "redeemed"]):
                     continue
 
-                nav = clean_num(row[11])
+                nav = clean_num(row[nav_col])
                 record = {
                     "source": source_name,
                     "fund_name": "Vertex Bond Fund",
@@ -597,8 +611,8 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "nav_per_unit": nav,
                     "sale_price": nav,
                     "repurchase_price": nav,
-                    "total_nav": clean_num(row[9]),
-                    "units": clean_num(row[10]),
+                    "total_nav": clean_num(row[total_nav_col]),
+                    "units": clean_num(row[units_col]),
                     "status": "extracted"
                 }
             elif source_name == "whi":

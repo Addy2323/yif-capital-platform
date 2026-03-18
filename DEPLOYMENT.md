@@ -161,16 +161,16 @@ npm run scrape:fund:latest -- orbit
 npm run scrape:fund:latest -- orbit,tsl,vertex
 ```
 
-**From `fund_pipeline` with venv:**
+**From `fund_pipeline` with venv (Linux server):**
 ```bash
 cd fund_pipeline
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-set FUND_API_URL=https://yifcapital.co.tz/api/funds/update   # Windows
-export FUND_API_URL=https://yifcapital.co.tz/api/funds/update   # Linux/Mac
-
+source .venv/bin/activate
+export FUND_API_URL=https://yifcapital.co.tz/api/funds/update   # required so data pushes to live site, not localhost
 python3 scraper/selenium_scraper.py --fund orbit --latest-only
 python3 scraper/selenium_scraper.py --fund orbit,tsl,vertex --latest-only
 ```
+
+**Windows:** use `.venv\Scripts\activate` and `set FUND_API_URL=https://yifcapital.co.tz/api/funds/update`.
 
 Valid fund names (from `fund_pipeline/config/sources.json`): `utt-amis`, `itrust`, `orbit`, `zansec`, `tsl`, `vertex`, `apef`, `whi`, `sanlam-pesa`.
 
@@ -180,7 +180,7 @@ Valid fund names (from `fund_pipeline/config/sources.json`): `utt-amis`, `itrust
   Deploy the latest code (it skips bad dates and rejects future dates in the scraper; the update API deletes future-dated rows when it receives new data). Then run a **one-time full scrape** (step 3 above, without `--latest-only`) so valid data is pushed. The API will remove future-dated rows for that fund when it receives the next batch.
 
 - **Vertex (or one fund) “still holds former data” / fails to get latest:**  
-  1. Ensure `FUND_API_URL` in `.env` is your production URL (e.g. `https://yifcapital.co.tz/api/funds/update`) with no trailing space.  
+  1. Ensure `FUND_API_URL` is set when running the scraper. On the server, **export it** before running (e.g. `export FUND_API_URL=https://yifcapital.co.tz/api/funds/update`). If unset, the scraper pushes to `http://localhost:3000` and your live site won’t get the data.  
   2. Check `fund_pipeline/logs/cron-scrape-funds.log` and `fund_pipeline/logs/automation.log` for errors (e.g. “No table found” for Vertex, or push failures).  
   3. Run the scraper for a single source to test:  
      `cd fund_pipeline && source .venv/bin/activate && FUND_API_URL="https://yifcapital.co.tz/api/funds/update" python3 scraper/selenium_scraper.py --fund vertex --latest-only`  

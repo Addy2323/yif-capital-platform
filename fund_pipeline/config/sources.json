@@ -54,7 +54,7 @@
             "type": "selenium",
             "wait_seconds": 25,
             "retry_count": 5,
-            "max_pages": 1,
+            "max_pages": 5,
             "_comment": "Vertex Bond Fund. Table loads via AJAX; scraper waits for #table_2. When new data is published, cron auto-scrapes and pushes to site."
         },
         {
