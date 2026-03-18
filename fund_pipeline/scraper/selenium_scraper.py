@@ -140,17 +140,17 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                 for tab_label in itrust_tabs:
                     try:
                         # Click the iTrust fund card.
-                        # From your HTML: each card contains an <h3> with the exact fund name and is wrapped
-                        # by a div having class "cursor-pointer".
-                        #
-                        # Clicking by <h3> text is more stable than relying on the <img> + ancestor chain.
-                        h3_xpath = f"//h3[normalize-space(.)='{tab_label}']"
-                        card_xpath = f"{h3_xpath}/ancestor::div[contains(@class,'cursor-pointer')][1]"
+                        # Your markup shows an <h3> with the fund name inside a container with "cursor-pointer".
+                        # Use contains() instead of exact match because the DOM text can include extra whitespace.
+                        card_xpath = (
+                            f"//h3[contains(normalize-space(.), '{tab_label}')]/ancestor::div[contains(@class,'cursor-pointer')][1]"
+                        )
                         card = WebDriverWait(driver, 20).until(
-                            EC.element_to_be_clickable((By.XPATH, card_xpath))
+                            EC.presence_of_element_located((By.XPATH, card_xpath))
                         )
                         driver.execute_script("arguments[0].scrollIntoView({block:'center'});", card)
-                        card.click()
+                        # Use JS click to avoid overlay/clickability issues
+                        driver.execute_script("arguments[0].click();", card)
 
                         # Wait until the first table row date changes (prevents scraping the previous tab again).
                         def first_row_date():
@@ -160,11 +160,13 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                             except:
                                 return None
 
-                        # Small settle time first
+                        # Small settle time first, then wait for date change.
                         time.sleep(1)
+                        new_first = first_row_date()
                         if prev_first_date is not None:
-                            WebDriverWait(driver, 20).until(lambda d: first_row_date() and first_row_date() != prev_first_date)
-
+                            WebDriverWait(driver, 20).until(
+                                lambda d: first_row_date() and first_row_date() != prev_first_date
+                            )
                         prev_first_date = first_row_date()
 
                         # Find table and scrape current view once (latest-only runs should be enough here).
