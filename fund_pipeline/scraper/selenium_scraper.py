@@ -211,6 +211,64 @@ def scrape_site(url: str, name: str, wait_seconds: int = 5, retry_count: int = 3
                 logger.info("[itrust] Successfully scraped %s unique rows across all tabs", len(dedup_rows))
                 return dedup_rows
             
+            # Orbit has two separate fund NAV tables on the same page.
+            # Scrape each table and append the fund label so mapping stores correct schemeName.
+            if name == "orbit":
+                orbit_tabs = ["INUKA MONEY MARKET FUND", "INUKA DOZEN INDEX FUND"]
+                tab_rows = []
+
+                for orbit_label in orbit_tabs:
+                    try:
+                        heading_xpath = (
+                            f"//*[contains(translate(normalize-space(.),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), '{orbit_label}')]"
+                        )
+                        headings = driver.find_elements(By.XPATH, heading_xpath)
+                        if not headings:
+                            continue
+
+                        # Prefer a visible heading
+                        heading = None
+                        for h in headings:
+                            try:
+                                if h.is_displayed():
+                                    heading = h
+                                    break
+                            except:
+                                continue
+                        if heading is None:
+                            heading = headings[0]
+
+                        tables_after = heading.find_elements(By.XPATH, "following::table[1]")
+                        if not tables_after:
+                            continue
+
+                        table = tables_after[0]
+                        rows = table.find_elements(By.XPATH, ".//tbody/tr")
+                        if not rows:
+                            rows = table.find_elements(By.XPATH, ".//tr")
+
+                        for row in rows:
+                            cols = [c.text.strip() for c in row.find_elements(By.TAG_NAME, "td")]
+                            if not cols:
+                                cols = [c.text.strip() for c in row.find_elements(By.TAG_NAME, "th")]
+                            # Orbit rows should be: Date + 5 numeric columns
+                            if cols and len(cols) >= 6:
+                                tab_rows.append(cols[:6] + [orbit_label])
+                    except Exception as e:
+                        logger.error("[orbit] Failed scraping table for %s: %s (%s)", orbit_label, e, type(e).__name__)
+
+                if tab_rows:
+                    dedup_rows = []
+                    seen = set()
+                    for r in tab_rows:
+                        r_tuple = tuple(r)
+                        if r_tuple in seen:
+                            continue
+                        seen.add(r_tuple)
+                        dedup_rows.append(r)
+                    logger.info("[orbit] Successfully scraped %s unique rows across inuka tables", len(dedup_rows))
+                    return dedup_rows
+
             # Helper to parse date — only keep data from 2025 onwards
             STOP_DATE = datetime(2024, 12, 31)
             
@@ -714,16 +772,30 @@ def map_data(raw_rows: list, source_name: str) -> list:
                         pass
                 # For itrust: never use "today" as fallback — skip row so we don't store wrong dates
                 if not formatted_date:
-                    if source_name == "itrust":
+                    if source_name in ("itrust", "orbit"):
                         continue
                     formatted_date = datetime.today().strftime("%Y-%m-%d")
                     if not getattr(map_data, "_warned_fallback_date", False):
                         logger.warning("[%s] Using today as date fallback for some rows (no parseable date)", source_name)
                         map_data._warned_fallback_date = True
-                fund_name = str(row[1] if len(row) > 1 else "") or str(row[2] if len(row) > 2 else "") or str(row[0] if len(row) > 0 else "")
-                if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(fund_name) < 2:
-                    fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
-                fund_name = str(fund_name).strip()
+
+                # Orbit: table rows are [Date, NAV(TZS), Units, NAV/Unit, Sale/Unit, Repurchase/Unit]
+                # When scrape_site could find headings, it appends the fund label as the last column.
+                base = row
+                sale_price = 0.0
+                repurchase_price = 0.0
+                if source_name == "orbit":
+                    fund_name = "Orbit Fund"
+                    if len(row) >= 7 and "INUKA" in str(row[-1]).upper():
+                        fund_name = str(row[-1]).strip()
+                        base = row[:-1]
+                    else:
+                        base = row
+                else:
+                    fund_name = str(row[1] if len(row) > 1 else "") or str(row[2] if len(row) > 2 else "") or str(row[0] if len(row) > 0 else "")
+                    if not fund_name or fund_name.replace(".", "").replace(",", "").replace(" ", "").isdigit() or len(fund_name) < 2:
+                        fund_name = {"itrust": "iTrust Fund", "orbit": "Orbit Fund", "tsl": "TSL Fund", "apef": "Ziada Fund"}.get(source_name, "Fund")
+                    fund_name = str(fund_name).strip()
 
                 # iTrust: scrape_site appends the tab label as the last column.
                 # Use it directly to prevent pushing iCash table rows into other iTrust schemes.
@@ -743,23 +815,32 @@ def map_data(raw_rows: list, source_name: str) -> list:
                 if fund_name.upper() in ("DATE", "NAV", "FUND", "SCHEME", "VALUATION DATE", "TOTAL NAV", "UNITS"):
                     continue
                 # Common layouts: [date, name, aum, nav, ...] or [name, aum, nav, date] or [date, nav, aum, units]
-                nav = clean_num(row[3]) if len(row) > 3 else (clean_num(row[4]) if len(row) > 4 else 0.0)
-                aum = clean_num(row[2]) if len(row) > 2 else (clean_num(row[1]) if len(row) > 1 else 0.0)
-                units = clean_num(row[4]) if len(row) > 4 else (clean_num(row[5]) if len(row) > 5 else 0.0)
-                if nav == 0 and len(row) > 2:
-                    for idx in (2, 3, 4, 1):
-                        if idx < len(row):
-                            v = clean_num(row[idx])
-                            if 0 < v < 1e7:
-                                nav = v
-                                break
-                if aum == 0 and nav > 0 and len(row) > 1:
-                    for idx in (1, 2, 0):
-                        if idx < len(row):
-                            v = clean_num(row[idx])
-                            if v >= 1e5:
-                                aum = v
-                                break
+
+                if source_name == "orbit":
+                    # base should be the 6-column orbit table
+                    nav = clean_num(base[3]) if len(base) > 3 else 0.0
+                    aum = clean_num(base[1]) if len(base) > 1 else 0.0
+                    units = clean_num(base[2]) if len(base) > 2 else 0.0
+                    sale_price = clean_num(base[4]) if len(base) > 4 else nav
+                    repurchase_price = clean_num(base[5]) if len(base) > 5 else nav
+                else:
+                    nav = clean_num(row[3]) if len(row) > 3 else (clean_num(row[4]) if len(row) > 4 else 0.0)
+                    aum = clean_num(row[2]) if len(row) > 2 else (clean_num(row[1]) if len(row) > 1 else 0.0)
+                    units = clean_num(row[4]) if len(row) > 4 else (clean_num(row[5]) if len(row) > 5 else 0.0)
+                    if nav == 0 and len(row) > 2:
+                        for idx in (2, 3, 4, 1):
+                            if idx < len(row):
+                                v = clean_num(row[idx])
+                                if 0 < v < 1e7:
+                                    nav = v
+                                    break
+                    if aum == 0 and nav > 0 and len(row) > 1:
+                        for idx in (1, 2, 0):
+                            if idx < len(row):
+                                v = clean_num(row[idx])
+                                if v >= 1e5:
+                                    aum = v
+                                    break
                 record = {
                     "source": source_name,
                     "fund_name": fund_name or "Fund",
@@ -767,8 +848,8 @@ def map_data(raw_rows: list, source_name: str) -> list:
                     "nav_per_unit": nav,
                     "total_nav": aum,
                     "units": units if units > 0 else (aum / nav if nav else 0),
-                    "sale_price": 0.0,
-                    "repurchase_price": 0.0,
+                    "sale_price": sale_price,
+                    "repurchase_price": repurchase_price,
                     "status": "extracted"
                 }
             else:

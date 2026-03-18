@@ -207,6 +207,21 @@ export async function POST(req: NextRequest) {
             console.log(`[API] Removed ${deleted.count} future-dated rows for ${fundId}`)
         }
 
+        // Cleanup: remove invalid zero NAV/AUM rows for today (common when scraper reads table headers)
+        const startOfToday = new Date()
+        startOfToday.setHours(0, 0, 0, 0)
+        const deletedZero = await prisma.fundDailySummary.deleteMany({
+            where: {
+                fundId,
+                date: { gte: startOfToday },
+                nav: 0,
+                aum: 0,
+            },
+        })
+        if (deletedZero.count > 0) {
+            console.log(`[API] Removed ${deletedZero.count} zero NAV/AUM rows for ${fundId} (today)`)
+        }
+
         console.log(
             `[API] Done: ${successCount} upserted, ${skipCount} skipped, ${errorCount} errors for ${fundId}`,
         )
