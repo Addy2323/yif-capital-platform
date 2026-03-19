@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   verification: {
-    // Add when you have them: google: "your-google-verification-code",
+    google: "6422a9cd98c76333",
   },
   category: "finance",
 }
