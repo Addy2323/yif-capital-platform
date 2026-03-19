@@ -70,7 +70,7 @@ function ContactContent() {
           <div className="absolute inset-0 z-0">
             <img
               src="/logo%20payment/background/contact.png"
-              alt="Background"
+              alt="YIF Capital contact page — office and team collaboration"
               className="h-full w-full object-cover opacity-40"
             />
             <div className="absolute inset-0 bg-navy/60" />

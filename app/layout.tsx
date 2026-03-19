@@ -11,14 +11,59 @@ import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yifcapital.co.tz"
+
 export const metadata: Metadata = {
-  title: 'YIF Capital - Investment & Analytics Platform',
-  description: 'YIF Capital is a unified digital investment ecosystem designed to empower individuals and institutions through data, learning, and investing tools.',
-  generator: 'YIF Capital',
-  icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "YIF Capital | Tanzania Digital Investment & Fund Analytics Platform",
+    template: "%s | YIF Capital",
   },
+  description:
+    "YIF Capital is Tanzania's trusted digital investment platform. Access real-time fund NAV, mutual fund analytics, DSE stocks, and passive income tools. Regulated, secure, and built for Tanzanian investors.",
+  keywords: [
+    "investment Tanzania",
+    "mutual funds Tanzania",
+    "DSE stocks",
+    "fund NAV",
+    "passive income Tanzania",
+    "capital markets Tanzania",
+    "yif capital",
+  ],
+  generator: "YIF Capital",
+  authors: [{ name: "YIF Capital", url: SITE_URL }],
+  creator: "YIF Capital",
+  publisher: "YIF Capital",
+  formatDetection: { email: false, address: false, telephone: false },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_TZ",
+    url: SITE_URL,
+    siteName: "YIF Capital",
+    title: "YIF Capital | Tanzania Digital Investment & Fund Analytics Platform",
+    description:
+      "Tanzania's trusted digital investment platform. Real-time fund NAV, mutual fund analytics, DSE stocks, and passive income tools for Tanzanian investors.",
+    images: [{ url: "/logo.png", width: 512, height: 512, alt: "YIF Capital Logo" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "YIF Capital | Tanzania Digital Investment Platform",
+    description: "Real-time fund analytics, DSE stocks & passive income tools for Tanzanian investors.",
+    images: ["/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  verification: {
+    // Add when you have them: google: "your-google-verification-code",
+  },
+  category: "finance",
 }
 
 export const viewport: Viewport = {
@@ -32,9 +77,41 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "YIF Capital",
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
+    description:
+      "Tanzania's digital investment and fund analytics platform. Real-time NAV, mutual funds, DSE stocks, and passive income tools.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Ohio Street",
+      addressLocality: "Dar es Salaam",
+      addressCountry: "TZ",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "info@yifcapital.co.tz",
+      contactType: "customer service",
+      areaServed: "TZ",
+      availableLanguage: "English, Swahili",
+    },
+    sameAs: [
+      "https://twitter.com/yifcapital",
+      "https://www.facebook.com/yifcapital",
+      "https://www.linkedin.com/company/yif-capital",
+    ],
+  }
+
   return (
     <html lang="en">
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <StartupLoader />
         <AuthProvider>
           <AdminDataProvider>
