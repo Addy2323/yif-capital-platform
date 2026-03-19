@@ -3,6 +3,7 @@
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowLeft, ChevronRight } from "lucide-react"
 import { getManagerNameFromSlug, mergeWithStaticFunds } from "@/lib/data/tanzanian-funds"
 import { FUND_TYPE_CONFIG } from "@/lib/types/funds"
@@ -12,7 +13,7 @@ export default function ManagerPage() {
   const params = useParams()
   const router = useRouter()
   const slug = params.slug as string
-  const [funds, setFunds] = useState<{ fund_id: string; fund_name: string; fund_type: FundType; manager_name: string; return_1y?: number | null; current_nav?: number | null; base_currency: string }[]>([])
+  const [funds, setFunds] = useState<{ fund_id: string; fund_name: string; fund_type: FundType; manager_name: string; return_1y?: number | null; current_nav?: number | null; base_currency: string; logo_url?: string | null }[]>([])
   const [loading, setLoading] = useState(true)
 
   const managerName = slug ? getManagerNameFromSlug(slug) : null
@@ -84,10 +85,22 @@ export default function ManagerPage() {
                 href={`/funds/${fund.fund_id}/overview`}
                 className="flex items-center gap-3 px-4 py-4 bg-white rounded-xl shadow-sm hover:bg-gray-50/80 group"
               >
-                <div
-                  className={`w-3 h-3 rounded-full shrink-0 ${typeConfig?.color ?? "bg-gray-400"}`}
-                  title={typeConfig?.label}
-                />
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border border-gray-200 overflow-hidden">
+                  {fund.logo_url ? (
+                    <Image
+                      src={fund.logo_url}
+                      alt={fund.fund_name}
+                      width={40}
+                      height={40}
+                      className="object-contain w-full h-full p-1"
+                    />
+                  ) : (
+                    <div
+                      className={`w-3 h-3 rounded-full ${typeConfig?.color ?? "bg-gray-400"}`}
+                      title={typeConfig?.label}
+                    />
+                  )}
+                </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-gray-900">{fund.fund_name}</p>
                   <p className="text-xs text-gray-500 mt-0.5">

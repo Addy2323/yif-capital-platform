@@ -286,8 +286,18 @@ export function MobileFundsView({ funds, isLoading, error }: MobileFundsViewProp
                       href={`/funds/${fund.fund_id}/overview`}
                       className="flex items-center gap-3 py-2.5 rounded-lg hover:bg-gray-50 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border border-gray-200">
-                        <span className="text-xs font-bold text-gray-600">{initials}</span>
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0 border border-gray-200 overflow-hidden">
+                        {fund.logo_url ? (
+                          <Image
+                            src={fund.logo_url}
+                            alt={fund.fund_name}
+                            width={40}
+                            height={40}
+                            className="object-contain w-full h-full p-1"
+                          />
+                        ) : (
+                          <span className="text-xs font-bold text-gray-600">{initials}</span>
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-bold text-gray-900 truncate">{fund.fund_name}</p>

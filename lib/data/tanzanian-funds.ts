@@ -19,7 +19,7 @@ export const TANZANIAN_FUNDS_STATIC: Fund[] = [
   // 2. UTT AMIS - 6 funds
   { fund_id: "utt-umoja", fund_slug: "umoja-fund", fund_name: "Umoja Fund", fund_type: "balanced", manager_name: "UTT AMIS", description: "Balanced fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 945.30, return_1y: 12.8 },
   { fund_id: "utt-watoto", fund_slug: "watoto-fund", fund_name: "Watoto Fund", fund_type: "balanced", manager_name: "UTT AMIS", description: "Children's education fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 980, return_1y: 11.0 },
-  { fund_id: "utt-jikiku", fund_slug: "jikiku-fund", fund_name: "Jikiku Fund", fund_type: "money_market", manager_name: "UTT AMIS", description: "Money market fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 1050, return_1y: 8.5 },
+  { fund_id: "utt-jikiku", fund_slug: "jikimu-fund", fund_name: "Jikimu Fund", fund_type: "money_market", manager_name: "UTT AMIS", description: "Money market fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 1050, return_1y: 8.5 },
   { fund_id: "utt-wekeza-maisha", fund_slug: "wekeza-maisha-fund", fund_name: "Wekeza Maisha Fund", fund_type: "balanced", manager_name: "UTT AMIS", description: "Life savings fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 920, return_1y: 10.2 },
   { fund_id: "utt-bond", fund_slug: "utt-bond-fund", fund_name: "Bond Fund", fund_type: "bond", manager_name: "UTT AMIS", description: "Bond fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 1100, return_1y: 9.5 },
   { fund_id: "utt-liquid", fund_slug: "liquid-fund", fund_name: "Liquid Fund", fund_type: "money_market", manager_name: "UTT AMIS", description: "Liquid money market fund.", inception_date: baseDate, base_currency: currency, is_active: true, current_nav: 1005, return_1y: 7.8 },
@@ -51,11 +51,43 @@ export const TANZANIAN_SUMMARY = {
 
 const STATIC_FUND_IDS = new Set(TANZANIAN_FUNDS_STATIC.map((f) => f.fund_id))
 
+const FUND_LOGO_URLS: Record<string, string> = {
+  "itrust-icash": "/funds/FUND_LOGO/iTrust/iCash.png",
+  "itrust-igrowth": "/funds/FUND_LOGO/iTrust/iGrowth.png",
+  "itrust-iincome": "/funds/FUND_LOGO/iTrust/iIncome.png",
+  "itrust-idollar": "/funds/FUND_LOGO/iTrust/iDollar.png",
+  "itrust-iimaan": "/funds/FUND_LOGO/iTrust/Imaan.png",
+  "itrust-isave": "/funds/FUND_LOGO/iTrust/iSave.png",
+  "utt-umoja": "/funds/FUND_LOGO/UTT/Umoja.png",
+  "utt-watoto": "/funds/FUND_LOGO/UTT/Watoto.png",
+  "utt-jikiku": "/funds/FUND_LOGO/UTT/Jikimu.png",
+  "utt-wekeza-maisha": "/funds/FUND_LOGO/UTT/Wekeza Maisha.png",
+  "utt-bond": "/funds/FUND_LOGO/UTT/Bond.png",
+  "utt-liquid": "/funds/FUND_LOGO/UTT/Liquid.png",
+  "orbit-inuka-mm": "/funds/FUND_LOGO/Inuka/Inuka.png",
+  "orbit-inuka-dozen": "/funds/FUND_LOGO/Inuka/Inuka_Dozen_Fund.png",
+  "zan-timiza": "/funds/FUND_LOGO/Zan Securities/TIMIZA FUND.jpg",
+  "tsl-imara": "/funds/FUND_LOGO/TSL/Imara Fund.png",
+  "tsl-kesho": "/funds/FUND_LOGO/TSL/Kesho Tulivu Fund.png",
+  "vertex-bond": "/funds/FUND_LOGO/Vertex/Vertex Bond Fund.png",
+  "apef-ziada": "/funds/FUND_LOGO/APEF/Ziada Fund.png",
+  "whi-faida": "/funds/FUND_LOGO/Watumishi Housing/Faida Fund.jpg",
+  "sanlam-pesa": "/funds/FUND_LOGO/Sanlam Allianz/SanlamAllianz Fund.png",
+  "sanlam-usd": "/funds/FUND_LOGO/Sanlam Allianz/SanlamAllianz Dollar Fund.png",
+}
+
+function withFundLogo(fund: Fund): Fund {
+  return {
+    ...fund,
+    logo_url: fund.logo_url || FUND_LOGO_URLS[fund.fund_id] || null,
+  }
+}
+
 /** Merge API funds with static list. Returns exactly the 22 static funds (9 managers). API data is applied to static funds when fund_id matches or when the static fund_id resolves to the API fund_id (e.g. orbit-inuka-dozen → orbit). */
 export function mergeWithStaticFunds(apiFunds: Fund[]): Fund[] {
   const byId = new Map<string, Fund>()
   for (const f of TANZANIAN_FUNDS_STATIC) {
-    byId.set(f.fund_id, { ...f })
+    byId.set(f.fund_id, withFundLogo({ ...f }))
   }
   for (const apiFund of apiFunds) {
     if (!apiFund.fund_id) continue
@@ -63,12 +95,12 @@ export function mergeWithStaticFunds(apiFunds: Fund[]): Fund[] {
     for (const staticFund of TANZANIAN_FUNDS_STATIC) {
       const resolved = resolveFundId(staticFund.fund_id)
       if (resolved !== apiFund.fund_id) continue
-      byId.set(staticFund.fund_id, {
+      byId.set(staticFund.fund_id, withFundLogo({
         ...apiFund,
         fund_id: staticFund.fund_id,
         fund_name: staticFund.fund_name,
         manager_name: staticFund.manager_name,
-      })
+      }))
     }
   }
   return Array.from(byId.values()).sort((a, b) => a.fund_name.localeCompare(b.fund_name))

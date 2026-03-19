@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowLeft, ChevronRight } from "lucide-react"
 import {
   TANZANIAN_FUNDS_STATIC,
@@ -86,11 +87,33 @@ export default function AllFundManagersPage() {
               <Link
                 key={managerName}
                 href={`/funds/managers/${getManagerSlug(managerName)}`}
-                className="flex items-center justify-between w-full px-4 py-4 bg-white rounded-xl shadow-sm hover:bg-gray-50 group text-left"
+                className="flex items-center justify-between gap-3 w-full px-4 py-4 bg-white rounded-xl shadow-sm hover:bg-gray-50 group text-left"
               >
-                <h2 className="font-bold text-gray-900">
-                  {index + 1}. {displayName} ({funds.length} Fund{funds.length !== 1 ? "s" : ""})
-                </h2>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden shrink-0 border border-gray-200">
+                    {funds[0]?.logo_url ? (
+                      <Image
+                        src={funds[0].logo_url}
+                        alt={displayName}
+                        width={40}
+                        height={40}
+                        className="object-contain w-full h-full p-1"
+                      />
+                    ) : (
+                      <span className="text-xs font-bold text-gray-500">
+                        {displayName
+                          .split(/\s+/)
+                          .map((w) => w[0])
+                          .join("")
+                          .slice(0, 2)
+                          .toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="font-bold text-gray-900 truncate">
+                    {index + 1}. {displayName} ({funds.length} Fund{funds.length !== 1 ? "s" : ""})
+                  </h2>
+                </div>
                 <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 shrink-0" />
               </Link>
             ))}
