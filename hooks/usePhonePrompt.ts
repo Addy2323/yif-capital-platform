@@ -3,12 +3,12 @@
 import { useMemo } from "react"
 import type { User } from "@/lib/auth-context"
 
-/** Same default as server `PHONE_COLLECTION_CUTOFF_DATE` — set NEXT_PUBLIC_PHONE_COLLECTION_CUTOFF_DATE to match server if you override. */
+/** Fallback only if API omits `shouldPromptPhone` — keep aligned with `lib/phone-prompt-config` default. */
 function getCutoffDate(): Date {
   const raw =
     typeof process !== "undefined" && process.env.NEXT_PUBLIC_PHONE_COLLECTION_CUTOFF_DATE
       ? process.env.NEXT_PUBLIC_PHONE_COLLECTION_CUTOFF_DATE
-      : "2025-03-25T00:00:00.000Z"
+      : "2026-03-25T00:00:00.000Z"
   return new Date(raw)
 }
 
@@ -20,6 +20,9 @@ function getCutoffDate(): Date {
 export function useShouldShowPhonePrompt(user: User | null): boolean {
   return useMemo(() => {
     if (!user) return false
+    if (typeof user.shouldPromptPhone === "boolean") {
+      return user.shouldPromptPhone
+    }
     if (user.role === "admin") return false
     const phone = user.phoneNumber?.trim()
     if (phone) return false

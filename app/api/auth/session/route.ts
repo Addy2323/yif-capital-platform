@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
+import { computeShouldShowPhonePrompt } from "@/lib/phone-prompt-config";
 
 export async function GET(req: NextRequest) {
     try {
@@ -19,6 +20,13 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ user: null });
         }
 
+        const shouldPromptPhone = computeShouldShowPhonePrompt({
+            role: user.role,
+            phoneNumber: user.phoneNumber,
+            createdAt: user.createdAt,
+            lastPhonePromptDate: user.lastPhonePromptDate,
+        });
+
         return NextResponse.json({
             user: {
                 id: user.id,
@@ -30,7 +38,8 @@ export async function GET(req: NextRequest) {
                 lastPhonePromptDate: user.lastPhonePromptDate
                     ? user.lastPhonePromptDate.toISOString().slice(0, 10)
                     : null,
-                createdAt: user.createdAt.toISOString()
+                createdAt: user.createdAt.toISOString(),
+                shouldPromptPhone,
             }
         });
 

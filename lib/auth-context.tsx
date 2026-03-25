@@ -15,6 +15,8 @@ export interface User {
   phoneNumber?: string | null
   /** YYYY-MM-DD when user last tapped "Remind me later" */
   lastPhonePromptDate?: string | null
+  /** Set by API from server rules; avoids client/server cutoff mismatch */
+  shouldPromptPhone?: boolean
   subscription?: {
     plan: "free" | "pro" | "institutional"
     status: "active" | "cancelled" | "expired"
@@ -68,6 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           isVerified: data.user.isVerified,
           phoneNumber: data.user.phoneNumber,
           lastPhonePromptDate: data.user.lastPhonePromptDate ?? null,
+          shouldPromptPhone: data.user.shouldPromptPhone,
           subscription: {
             plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
             status: "active"
@@ -114,6 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isVerified: data.isVerified,
         phoneNumber: data.phoneNumber,
         lastPhonePromptDate: data.lastPhonePromptDate ?? null,
+        shouldPromptPhone: data.shouldPromptPhone,
         subscription: {
           plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
           status: "active"

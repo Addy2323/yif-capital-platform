@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { setAuthCookies } from "@/lib/auth-cookies";
+import { computeShouldShowPhonePrompt } from "@/lib/phone-prompt-config";
 
 export async function POST(req: NextRequest) {
     try {
@@ -38,6 +39,13 @@ export async function POST(req: NextRequest) {
 
         await setAuthCookies(user.id);
 
+        const shouldPromptPhone = computeShouldShowPhonePrompt({
+            role: user.role,
+            phoneNumber: user.phoneNumber,
+            createdAt: user.createdAt,
+            lastPhonePromptDate: user.lastPhonePromptDate,
+        });
+
         return NextResponse.json({
             id: user.id,
             email: user.email,
@@ -48,7 +56,8 @@ export async function POST(req: NextRequest) {
             lastPhonePromptDate: user.lastPhonePromptDate
                 ? user.lastPhonePromptDate.toISOString().slice(0, 10)
                 : null,
-            createdAt: user.createdAt.toISOString()
+            createdAt: user.createdAt.toISOString(),
+            shouldPromptPhone,
         });
 
     } catch (error) {
