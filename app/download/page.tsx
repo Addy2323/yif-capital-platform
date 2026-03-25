@@ -1,14 +1,14 @@
 "use client"
 
 /**
- * Public /download — Android APK link, iOS steps, desktop install.
+ * Public /download — Android (Chrome install), iOS (Add to Home Screen).
  * Highlights the card matching the current device; QR links to this page for mobile.
  */
 
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
-import { Download, Monitor, Smartphone } from "lucide-react"
+import { Download, Smartphone } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -21,8 +21,6 @@ import { usePwaInstall } from "@/components/pwa-install-provider"
 import { IOSInstallGuide } from "@/components/IOSInstallGuide"
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yifcapital.co.tz"
-const APK_URL =
-  process.env.NEXT_PUBLIC_ANDROID_APK_URL || "/downloads/yif-capital.apk"
 
 export default function DownloadPage() {
   const { deferredPrompt, installPwa } = usePwaInstall()
@@ -43,11 +41,10 @@ export default function DownloadPage() {
 
   const qrSrc = `${"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="}${encodeURIComponent(`${origin}/download`)}`
 
-  const highlight = (kind: "android" | "ios" | "desktop") => {
+  const highlight = (kind: "android" | "ios") => {
     if (!mounted || installed) return false
     if (kind === "android") return device === "android"
-    if (kind === "ios") return device === "ios"
-    return device === "desktop"
+    return device === "ios"
   }
 
   return (
@@ -68,7 +65,7 @@ export default function DownloadPage() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight text-navy md:text-4xl">Download the YIF Capital app</h1>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Install once — get the same platform with an app icon on your home screen or desktop. No app store account required for Android APK.
+              Install once — get the same platform with an app icon on your phone&apos;s home screen.
             </p>
             {installed && (
               <p className="text-sm font-medium text-green-600">
@@ -77,7 +74,7 @@ export default function DownloadPage() {
             )}
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2">
             {/* Android */}
             <section
               className={cn(
@@ -89,22 +86,24 @@ export default function DownloadPage() {
                 <Smartphone className="h-8 w-8 text-gold" />
                 <span>Android</span>
               </div>
-              <h2 className="text-lg font-semibold text-navy">Download APK</h2>
+              <h2 className="text-lg font-semibold text-navy">Install from browser</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Install the packaged app (from PWABuilder) or use Chrome&apos;s install prompt on this site.
+                Open this site in <strong className="font-medium text-foreground">Chrome</strong> on your phone. When
+                your browser offers it, tap to add YIF Capital to your home screen — same account, app-style icon.
               </p>
-              <div className="mt-6 flex flex-col gap-2">
-                <Button className="bg-gold text-navy hover:bg-gold/90" asChild>
-                  <a href={APK_URL} download>
-                    Download APK
-                  </a>
-                </Button>
-                {device === "android" && deferredPrompt && (
-                  <Button type="button" variant="outline" onClick={() => void installPwa()}>
-                    Install from browser
-                  </Button>
-                )}
-              </div>
+              <Button
+                type="button"
+                className="mt-6 w-full bg-gold text-navy hover:bg-gold/90"
+                onClick={() => void installPwa()}
+              >
+                Install from browser
+              </Button>
+              {!deferredPrompt && device === "android" && (
+                <p className="mt-3 text-xs text-muted-foreground">
+                  If you don&apos;t see a prompt yet, use Chrome&apos;s menu (⋮) and look for <strong>Install app</strong> or{" "}
+                  <strong>Add to Home screen</strong>.
+                </p>
+              )}
             </section>
 
             {/* iOS */}
@@ -124,31 +123,6 @@ export default function DownloadPage() {
               </p>
               <Button type="button" className="mt-6 w-full bg-navy text-white hover:bg-navy/90" onClick={() => setIosOpen(true)}>
                 Show step-by-step guide
-              </Button>
-            </section>
-
-            {/* Desktop */}
-            <section
-              className={cn(
-                "rounded-2xl border bg-card p-6 shadow-sm transition-shadow",
-                highlight("desktop") && "ring-2 ring-gold shadow-md",
-              )}
-            >
-              <div className="mb-4 flex items-center gap-2 text-2xl" aria-hidden>
-                <Monitor className="h-8 w-8 text-gold" />
-                <span>Desktop</span>
-              </div>
-              <h2 className="text-lg font-semibold text-navy">Install desktop app</h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Chrome or Edge can install this site as a windowed app with the YIF Capital icon.
-              </p>
-              <Button
-                type="button"
-                className="mt-6 w-full bg-gold text-navy hover:bg-gold/90"
-                disabled={!deferredPrompt}
-                onClick={() => void installPwa()}
-              >
-                {deferredPrompt ? "Install app" : "Open in Chrome / Edge"}
               </Button>
             </section>
           </div>

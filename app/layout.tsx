@@ -39,8 +39,11 @@ export const metadata: Metadata = {
   publisher: "YIF Capital",
   formatDetection: { email: false, address: false, telephone: false },
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/icon-180.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     type: "website",
@@ -91,7 +94,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "YIF Capital",
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
+    logo: `${SITE_URL}/icons/icon-512.png`,
     description:
       "Tanzania's digital investment and fund analytics platform. Real-time NAV, mutual funds, DSE stocks, and passive income tools.",
     address: {
