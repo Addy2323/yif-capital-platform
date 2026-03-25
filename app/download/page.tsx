@@ -104,6 +104,12 @@ export default function DownloadPage() {
                   <strong>Add to Home screen</strong>.
                 </p>
               )}
+              <p className="mt-4 rounded-lg bg-muted/50 p-3 text-left text-xs text-muted-foreground leading-relaxed">
+                <strong className="text-foreground">Can&apos;t find the app after installing?</strong> On Android, new apps often
+                appear in the <strong className="text-foreground">app drawer</strong> first (swipe up from the bottom of the home
+                screen). Open the drawer, find <strong className="text-foreground">YIF Capital</strong>, then long-press the icon
+                and choose <strong>Add to Home</strong> or drag it to your home screen.
+              </p>
             </section>
 
             {/* iOS */}

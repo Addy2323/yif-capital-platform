@@ -70,7 +70,6 @@ export const metadata: Metadata = {
     google: "6422a9cd98c76333",
   },
   category: "finance",
-  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
