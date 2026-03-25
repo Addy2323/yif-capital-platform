@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { registerUser } from "@/lib/register-handler"
 
-/** Backwards-compatible alias for POST /api/register */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -16,8 +15,8 @@ export async function POST(req: NextRequest) {
       maskedPhone: result.maskedPhone,
       expiresAt: result.expiresAt,
     })
-  } catch (error) {
-    console.error("Registration error:", error)
+  } catch (e) {
+    console.error("POST /api/register:", e)
     return NextResponse.json({ error: "Registration failed" }, { status: 500 })
   }
 }

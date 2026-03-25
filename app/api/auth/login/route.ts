@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { cookies } from "next/headers";
+import { setAuthCookies } from "@/lib/auth-cookies";
 
 export async function POST(req: NextRequest) {
     try {
@@ -26,34 +26,25 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
 
-        // Create a simple session token (in production, use JWT or a proper session library)
-        const sessionToken = crypto.randomUUID();
+        if (!user.isVerified) {
+            return NextResponse.json(
+                {
+                    error: "Please verify your phone number before signing in. Complete registration on the verification page.",
+                    code: "PHONE_NOT_VERIFIED",
+                },
+                { status: 403 }
+            );
+        }
 
-        // Store session in a cookie
-        const cookieStore = await cookies();
-        cookieStore.set("session_token", sessionToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 60 * 60 * 24 * 7, // 1 week
-            path: "/"
-        });
-
-        // Store session in database (we'll use a simple approach for now)
-        // In production, you'd want a proper sessions table
-        cookieStore.set("user_id", user.id, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 60 * 60 * 24 * 7,
-            path: "/"
-        });
+        await setAuthCookies(user.id);
 
         return NextResponse.json({
             id: user.id,
             email: user.email,
             name: user.name,
             role: user.role.toLowerCase(),
+            isVerified: user.isVerified,
+            phoneNumber: user.phoneNumber,
             createdAt: user.createdAt.toISOString()
         });
 

@@ -14,6 +14,9 @@ model User {
   email        String             @unique
   name         String
   password     String
+  /// E.164 format, e.g. +255712345678
+  phoneNumber  String?            @unique @map("phone_number")
+  isVerified   Boolean            @default(false) @map("is_verified")
   role         UserRole           @default(FREE)
   avatar       String?
   createdAt    DateTime           @default(now())
@@ -156,6 +159,36 @@ model PasswordReset {
 
   @@index([email])
   @@index([token])
+}
+
+/// One-time passwords for phone verification (hashed at rest)
+model Otp {
+  id          String   @id @default(uuid())
+  phoneNumber String   @map("phone_number")
+  otpHash     String   @map("otp_code")
+  expiresAt   DateTime @map("expires_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([phoneNumber])
+}
+
+/// Admin bulk SMS campaigns (Beem Africa)
+model BulkSmsCampaign {
+  id               String    @id @default(uuid())
+  message          String
+  groupsTargeted   String[]
+  recipientCount   Int
+  deliveredCount   Int       @default(0)
+  failedCount      Int       @default(0)
+  status           String
+  scheduledAt      DateTime?
+  sentAt           DateTime?
+  estimatedCostTzs Int?
+  errorMessage     String?
+  createdAt        DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([status])
 }
 
 // ============================================

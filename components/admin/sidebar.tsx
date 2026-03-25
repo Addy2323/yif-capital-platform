@@ -26,6 +26,7 @@ import {
     Video,
     ShieldAlert,
     Globe,
+    MessageSquare,
 } from "lucide-react"
 
 interface NavItem {
@@ -45,6 +46,7 @@ const navigation: NavItem[] = [
     { name: "Live Sessions", href: "/admin/sessions", icon: Video },
     { name: "Access Logs", href: "/admin/access-logs", icon: ShieldAlert },
     { name: "Subscriptions", href: "/admin/subscriptions", icon: CreditCard },
+    { name: "Bulk SMS", href: "/admin/bulk-sms", icon: MessageSquare },
     {
         name: "Content",
         icon: FileText,

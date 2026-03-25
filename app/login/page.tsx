@@ -6,7 +6,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import { AuthProvider, useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -37,6 +37,14 @@ function LoginForm() {
         window.location.href = "/"
       }
     } else {
+      if (result.code === "PHONE_NOT_VERIFIED" && typeof window !== "undefined") {
+        const pending = sessionStorage.getItem("otp_verify_phone")
+        if (pending) {
+          router.push("/verify-otp")
+          setIsLoading(false)
+          return
+        }
+      }
       setError(result.error || "An error occurred")
     }
 

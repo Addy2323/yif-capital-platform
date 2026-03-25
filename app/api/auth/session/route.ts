@@ -25,6 +25,8 @@ export async function GET(req: NextRequest) {
                 email: user.email,
                 name: user.name,
                 role: user.role.toLowerCase(),
+                isVerified: user.isVerified,
+                phoneNumber: user.phoneNumber,
                 createdAt: user.createdAt.toISOString()
             }
         });

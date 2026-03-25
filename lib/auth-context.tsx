@@ -11,6 +11,8 @@ export interface User {
   role: UserRole
   avatar?: string
   createdAt: string
+  isVerified?: boolean
+  phoneNumber?: string | null
   subscription?: {
     plan: "free" | "pro" | "institutional"
     status: "active" | "cancelled" | "expired"
@@ -18,11 +20,28 @@ export interface User {
   }
 }
 
+export type RegisterSuccess = {
+  success: true
+  needsVerification: true
+  maskedPhone: string
+  expiresAt: string
+}
+
+export type RegisterFailure = { success: false; error?: string }
+
 interface AuthContextType {
   user: User | null
   isLoading: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
-  register: (email: string, password: string, name: string) => Promise<{ success: boolean; error?: string }>
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; error?: string; code?: string }>
+  register: (
+    email: string,
+    password: string,
+    name: string,
+    phone: string
+  ) => Promise<RegisterSuccess | RegisterFailure>
   logout: () => void
   updateUser: (updates: Partial<User>) => void
   upgradeSubscription: (plan: "pro" | "institutional") => void
@@ -44,6 +63,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser({
           ...data.user,
           role: userRole,
+          isVerified: data.user.isVerified,
+          phoneNumber: data.user.phoneNumber,
           subscription: {
             plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
             status: "active"
@@ -62,7 +83,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     refreshSession().finally(() => setIsLoading(false))
   }, [])
 
-  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+  const login = async (
+    email: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string; code?: string }> => {
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -73,13 +97,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = await res.json()
 
       if (!res.ok) {
-        return { success: false, error: data.error || "Login failed" }
+        return {
+          success: false,
+          error: data.error || "Login failed",
+          code: data.code,
+        }
       }
 
       const userRole = data.role.toLowerCase() as UserRole
       setUser({
         ...data,
         role: userRole,
+        isVerified: data.isVerified,
+        phoneNumber: data.phoneNumber,
         subscription: {
           plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
           status: "active"
@@ -94,13 +124,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (
     email: string,
     password: string,
-    name: string
-  ): Promise<{ success: boolean; error?: string }> => {
+    name: string,
+    phone: string
+  ): Promise<RegisterSuccess | RegisterFailure> => {
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, name })
+        body: JSON.stringify({ email, password, name, phone }),
       })
 
       const data = await res.json()
@@ -109,9 +140,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { success: false, error: data.error || "Registration failed" }
       }
 
-      // Auto-login after registration
-      return await login(email, password)
-    } catch (error) {
+      return {
+        success: true,
+        needsVerification: true,
+        maskedPhone: data.maskedPhone,
+        expiresAt: data.expiresAt,
+      }
+    } catch {
       return { success: false, error: "Network error" }
     }
   }

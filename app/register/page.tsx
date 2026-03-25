@@ -6,12 +6,13 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import { AuthProvider, useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Eye, EyeOff, ArrowRight, Loader2, Check } from "lucide-react"
+import { e164FromTzLocalDigits, normalizePhoneInputToE164, tzLocalDigitsFromPasteOrInput } from "@/lib/phone"
 
 function RegisterForm() {
   const router = useRouter()
@@ -20,6 +21,10 @@ function RegisterForm() {
   const { register } = useAuth()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  /** 9 digits after +255 (Tanzania mobile) */
+  const [phoneLocal, setPhoneLocal] = useState("")
+  const [useIntlPhone, setUseIntlPhone] = useState(false)
+  const [phoneIntl, setPhoneIntl] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -31,6 +36,7 @@ function RegisterForm() {
     { label: "At least 8 characters", met: password.length >= 8 },
     { label: "Contains a number", met: /\d/.test(password) },
     { label: "Contains uppercase letter", met: /[A-Z]/.test(password) },
+    { label: "Contains lowercase letter", met: /[a-z]/.test(password) },
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,12 +58,32 @@ function RegisterForm() {
       return
     }
 
+    let phoneE164: string
+    if (useIntlPhone) {
+      const parsed = normalizePhoneInputToE164(phoneIntl)
+      if (!parsed.ok) {
+        setError(parsed.error)
+        return
+      }
+      phoneE164 = parsed.e164
+    } else {
+      const e164 = e164FromTzLocalDigits(phoneLocal)
+      if (!e164) {
+        setError("Enter all 9 digits of your Tanzania mobile number (e.g. 712 345 678).")
+        return
+      }
+      phoneE164 = e164
+    }
+
     setIsLoading(true)
 
-    const result = await register(email, password, name)
+    const result = await register(email, password, name, phoneE164)
 
     if (result.success) {
-      window.location.href = "/"
+      sessionStorage.setItem("otp_verify_phone", phoneE164)
+      sessionStorage.setItem("otp_verify_expires", result.expiresAt)
+      sessionStorage.setItem("otp_verify_masked", result.maskedPhone)
+      router.push("/verify-otp")
     } else {
       setError(result.error || "An error occurred")
     }
@@ -169,6 +195,83 @@ function RegisterForm() {
                   autoComplete="email"
                   suppressHydrationWarning
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone number</Label>
+                {!useIntlPhone ? (
+                  <>
+                    <div className="flex h-12 overflow-hidden rounded-md border border-input bg-background shadow-xs ring-offset-background focus-within:ring-2 focus-within:ring-ring/50 focus-within:ring-offset-2">
+                      <span
+                        className="inline-flex shrink-0 items-center border-r border-input bg-muted/70 px-3 text-sm font-medium text-foreground tabular-nums select-none"
+                        aria-hidden
+                      >
+                        +255
+                      </span>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        inputMode="numeric"
+                        autoComplete="tel-national"
+                        placeholder="712 345 678"
+                        value={phoneLocal}
+                        onChange={(e) =>
+                          setPhoneLocal(tzLocalDigitsFromPasteOrInput(e.target.value))
+                        }
+                        required
+                        className="h-12 flex-1 min-w-0 border-0 rounded-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                        suppressHydrationWarning
+                        aria-describedby="phone-hint"
+                      />
+                    </div>
+                    <p id="phone-hint" className="text-xs text-muted-foreground leading-relaxed">
+                      Enter your Tanzanian mobile number only — the <strong className="text-foreground/90">255</strong>{" "}
+                      country code is added for you. You can paste formats like{" "}
+                      <span className="whitespace-nowrap">0712…</span> or{" "}
+                      <span className="whitespace-nowrap">712…</span>. We&apos;ll send a verification SMS.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setUseIntlPhone(true)
+                        setPhoneLocal("")
+                      }}
+                      className="text-xs font-medium text-gold hover:text-gold/80 underline-offset-2 hover:underline"
+                    >
+                      My number is not in Tanzania
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      id="phone-intl"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      placeholder="+256 7… or +44 7…"
+                      value={phoneIntl}
+                      onChange={(e) => setPhoneIntl(e.target.value)}
+                      required
+                      className="h-12"
+                      suppressHydrationWarning
+                      aria-describedby="phone-intl-hint"
+                    />
+                    <p id="phone-intl-hint" className="text-xs text-muted-foreground">
+                      Include country code with <strong className="text-foreground/90">+</strong> (international
+                      format). SMS is sent via our gateway the same way.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setUseIntlPhone(false)
+                        setPhoneIntl("")
+                      }}
+                      className="text-xs font-medium text-gold hover:text-gold/80 underline-offset-2 hover:underline"
+                    >
+                      Use Tanzania (+255) instead
+                    </button>
+                  </>
+                )}
               </div>
 
               <div className="space-y-2">
