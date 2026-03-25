@@ -15,8 +15,9 @@ model User {
   name         String
   password     String
   /// E.164 format, e.g. +255712345678
-  phoneNumber  String?            @unique @map("phone_number")
-  isVerified   Boolean            @default(false) @map("is_verified")
+  phoneNumber          String?   @unique @map("phone_number")
+  lastPhonePromptDate  DateTime? @db.Date @map("last_phone_prompt_date")
+  isVerified           Boolean   @default(false) @map("is_verified")
   role         UserRole           @default(FREE)
   avatar       String?
   createdAt    DateTime           @default(now())

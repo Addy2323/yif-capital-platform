@@ -13,6 +13,8 @@ export interface User {
   createdAt: string
   isVerified?: boolean
   phoneNumber?: string | null
+  /** YYYY-MM-DD when user last tapped "Remind me later" */
+  lastPhonePromptDate?: string | null
   subscription?: {
     plan: "free" | "pro" | "institutional"
     status: "active" | "cancelled" | "expired"
@@ -65,6 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           role: userRole,
           isVerified: data.user.isVerified,
           phoneNumber: data.user.phoneNumber,
+          lastPhonePromptDate: data.user.lastPhonePromptDate ?? null,
           subscription: {
             plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
             status: "active"
@@ -110,6 +113,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         role: userRole,
         isVerified: data.isVerified,
         phoneNumber: data.phoneNumber,
+        lastPhonePromptDate: data.lastPhonePromptDate ?? null,
         subscription: {
           plan: (userRole === "admin" ? "pro" : userRole) as "free" | "pro" | "institutional",
           status: "active"

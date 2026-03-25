@@ -27,6 +27,9 @@ export async function GET(req: NextRequest) {
                 role: user.role.toLowerCase(),
                 isVerified: user.isVerified,
                 phoneNumber: user.phoneNumber,
+                lastPhonePromptDate: user.lastPhonePromptDate
+                    ? user.lastPhonePromptDate.toISOString().slice(0, 10)
+                    : null,
                 createdAt: user.createdAt.toISOString()
             }
         });

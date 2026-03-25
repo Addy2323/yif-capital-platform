@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { StartupLoader } from '@/components/startup-loader'
 import { AdminDataProvider } from '@/lib/admin-data-context'
 import { AuthProvider } from '@/lib/auth-context'
+import { PhonePromptGate } from '@/components/phone-prompt-gate'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -114,6 +115,7 @@ export default function RootLayout({
         />
         <StartupLoader />
         <AuthProvider>
+          <PhonePromptGate />
           <AdminDataProvider>
             <SweetAlertProvider>
               {children}

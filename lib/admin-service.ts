@@ -236,6 +236,7 @@ export async function exportUsersToCSV(): Promise<void> {
         id: u.id,
         name: u.name,
         email: u.email,
+        phone: u.phoneNumber ?? "",
         role: u.role,
         plan: u.subscription?.plan || "free",
         status: u.subscription?.status || "active",

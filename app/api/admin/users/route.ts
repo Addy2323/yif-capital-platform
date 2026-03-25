@@ -40,6 +40,7 @@ export async function GET(req: NextRequest) {
                 id: user.id,
                 email: user.email,
                 name: user.name,
+                phoneNumber: user.phoneNumber,
                 role: user.role.toLowerCase(),
                 createdAt: user.createdAt.toISOString(),
                 subscription: user.role === 'FREE' ? undefined : {

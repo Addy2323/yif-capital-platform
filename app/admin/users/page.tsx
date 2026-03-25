@@ -53,12 +53,16 @@ import {
 } from "@/components/ui/select"
 
 import { toast } from "sonner"
+import { cn } from "@/lib/utils"
+import { formatTzPhoneDisplay } from "@/lib/format-phone-display"
+import { e164FromTzLocalDigits } from "@/lib/phone"
 
 interface UserFormData {
     name: string
     email: string
     password: string
     role: "free" | "pro" | "institutional" | "admin"
+    phoneLocal: string
 }
 
 const emptyFormData: UserFormData = {
@@ -66,6 +70,14 @@ const emptyFormData: UserFormData = {
     email: "",
     password: "",
     role: "free",
+    phoneLocal: "",
+}
+
+function tzDigitsFromStored(phone: string | null | undefined): string {
+    if (!phone) return ""
+    const d = phone.replace(/\D/g, "")
+    if (d.length >= 12 && d.startsWith("255")) return d.slice(3, 12)
+    return d.slice(0, 9)
 }
 
 export default function AdminUsersPage() {
@@ -96,10 +108,19 @@ export default function AdminUsersPage() {
         fetchUsers()
     }, [])
 
+    useEffect(() => {
+        const id = window.setInterval(() => {
+            void fetchUsers()
+        }, 30_000)
+        return () => window.clearInterval(id)
+    }, [])
+
     const filteredUsers = users.filter(user => {
+        const q = searchQuery.toLowerCase()
         const matchesSearch =
-            user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQuery.toLowerCase())
+            user.name.toLowerCase().includes(q) ||
+            user.email.toLowerCase().includes(q) ||
+            (user.phoneNumber?.toLowerCase().includes(q) ?? false)
 
         const matchesRole = roleFilter === "all" || user.role === roleFilter
 
@@ -128,9 +149,22 @@ export default function AdminUsersPage() {
     const handleEditUser = async () => {
         if (!selectedUser) return
         setIsLoading(true)
+        let phoneNumber: string | undefined
+        if (!formData.phoneLocal.trim()) {
+            phoneNumber = ""
+        } else {
+            const e164 = e164FromTzLocalDigits(formData.phoneLocal)
+            if (!e164) {
+                toast.error("Enter a valid Tanzania phone number (9 digits after +255).")
+                setIsLoading(false)
+                return
+            }
+            phoneNumber = e164
+        }
         const success = await updateUser(selectedUser.id, {
             name: formData.name,
-            role: formData.role as any
+            role: formData.role as "free" | "pro" | "institutional" | "admin",
+            phoneNumber,
         })
         if (success) {
             await fetchUsers()
@@ -177,7 +211,8 @@ export default function AdminUsersPage() {
             name: user.name,
             email: user.email,
             password: "",
-            role: user.role as any,
+            role: user.role as "free" | "pro" | "institutional" | "admin",
+            phoneLocal: tzDigitsFromStored(user.phoneNumber),
         })
         setIsEditDialogOpen(true)
     }
@@ -316,6 +351,7 @@ export default function AdminUsersPage() {
                         <thead>
                             <tr className="border-b border-white/10 bg-white/5">
                                 <th className="p-4 text-sm font-medium text-white/60">User</th>
+                                <th className="p-4 text-sm font-medium text-white/60">Phone</th>
                                 <th className="p-4 text-sm font-medium text-white/60">Role</th>
                                 <th className="p-4 text-sm font-medium text-white/60">Subscription</th>
                                 <th className="p-4 text-sm font-medium text-white/60">Joined</th>
@@ -335,6 +371,20 @@ export default function AdminUsersPage() {
                                                 <p className="text-xs text-white/40">{user.email}</p>
                                             </div>
                                         </div>
+                                    </td>
+                                    <td className="p-4">
+                                        {user.phoneNumber ? (
+                                            <span className="text-sm text-white/90 tabular-nums">
+                                                {formatTzPhoneDisplay(user.phoneNumber)}
+                                            </span>
+                                        ) : (
+                                            <Badge
+                                                variant="outline"
+                                                className="border-amber-500/40 bg-amber-500/10 text-amber-200/90"
+                                            >
+                                                No Phone
+                                            </Badge>
+                                        )}
                                     </td>
                                     <td className="p-4">
                                         <Badge
@@ -436,6 +486,28 @@ export default function AdminUsersPage() {
                                 disabled
                             />
                         </div>
+                        <div className="grid grid-cols-4 items-start gap-4">
+                            <Label htmlFor="edit-phone" className="pt-2 text-right text-white/80">Phone</Label>
+                            <div className="col-span-3 flex h-10 overflow-hidden rounded-md border border-white/10 bg-white/5">
+                                <span className="inline-flex shrink-0 items-center border-r border-white/10 px-2 text-xs font-medium text-white/60 tabular-nums">
+                                    +255
+                                </span>
+                                <Input
+                                    id="edit-phone"
+                                    type="tel"
+                                    inputMode="numeric"
+                                    value={formData.phoneLocal}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            phoneLocal: e.target.value.replace(/\D/g, "").slice(0, 9),
+                                        })
+                                    }
+                                    className="h-10 flex-1 min-w-0 border-0 bg-transparent text-white focus-visible:ring-0"
+                                    placeholder="712345678"
+                                />
+                            </div>
+                        </div>
                         <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="edit-role" className="text-right text-white/80">Role</Label>
                             <Select
@@ -486,8 +558,4 @@ export default function AdminUsersPage() {
             </Dialog>
         </div>
     )
-}
-
-function cn(...inputs: any[]) {
-    return inputs.filter(Boolean).join(" ")
 }
