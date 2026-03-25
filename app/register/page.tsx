@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Eye, EyeOff, ArrowRight, Loader2, Check } from "lucide-react"
 import { e164FromTzLocalDigits, normalizePhoneInputToE164, tzLocalDigitsFromPasteOrInput } from "@/lib/phone"
+import { toast } from "sonner"
 
 function RegisterForm() {
   const router = useRouter()
@@ -83,8 +84,10 @@ function RegisterForm() {
       sessionStorage.setItem("otp_verify_phone", phoneE164)
       sessionStorage.setItem("otp_verify_expires", result.expiresAt)
       sessionStorage.setItem("otp_verify_masked", result.maskedPhone)
+      toast.success("Account created. Check your phone for the verification code.")
       router.push("/verify-otp")
     } else {
+      toast.error(result.error || "Registration failed.")
       setError(result.error || "An error occurred")
     }
 

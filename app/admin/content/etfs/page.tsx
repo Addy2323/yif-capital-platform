@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { useAdminData } from "@/lib/admin-data-context"
+import { toast } from "sonner"
 
 interface ETFFormData {
     symbol: string
@@ -87,6 +88,7 @@ export default function AdminEtfsPage() {
         addEtf(newEtf)
         setFormData(emptyFormData)
         setIsAddDialogOpen(false)
+        toast.success("ETF added.")
     }
 
     const handleEditEtf = () => {
@@ -95,6 +97,7 @@ export default function AdminEtfsPage() {
         setFormData(emptyFormData)
         setSelectedEtf(null)
         setIsEditDialogOpen(false)
+        toast.success("ETF updated.")
     }
 
     const handleDeleteEtf = () => {
@@ -102,6 +105,7 @@ export default function AdminEtfsPage() {
         deleteEtf(selectedEtf.symbol)
         setSelectedEtf(null)
         setIsDeleteDialogOpen(false)
+        toast.success("ETF removed.")
     }
 
     const openEditDialog = (etf: ETF) => {

@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 interface EconomicIndicator {
     id?: string
@@ -64,9 +65,13 @@ export default function AdminEconomicsPage() {
                 const result = await res.json()
                 if (result.success) {
                     setIndicators(indicators.filter(ind => ind.id !== id))
+                    toast.success("Indicator removed.")
+                } else {
+                    toast.error("Could not delete indicator.")
                 }
             } catch (error) {
                 console.error("Delete failed", error)
+                toast.error("Could not delete indicator.")
             }
         } else if (index !== undefined) {
             const newIndicators = [...indicators]
@@ -91,11 +96,11 @@ export default function AdminEconomicsPage() {
                     body: JSON.stringify(indicator)
                 })
             }
-            alert("All indicators saved successfully!")
+            toast.success("All indicators saved.")
             fetchIndicators()
         } catch (error) {
             console.error("Save failed", error)
-            alert("Error saving indicators")
+            toast.error("Could not save indicators.")
         } finally {
             setSaving(false)
         }

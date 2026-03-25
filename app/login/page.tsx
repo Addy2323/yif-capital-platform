@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react"
+import { toast } from "sonner"
 
 function LoginForm() {
   const router = useRouter()
@@ -31,6 +32,7 @@ function LoginForm() {
     const result = await login(email, password)
 
     if (result.success) {
+      toast.success("Signed in successfully.")
       if (redirect) {
         router.push(redirect)
       } else {
@@ -40,11 +42,13 @@ function LoginForm() {
       if (result.code === "PHONE_NOT_VERIFIED" && typeof window !== "undefined") {
         const pending = sessionStorage.getItem("otp_verify_phone")
         if (pending) {
+          toast.message("Complete phone verification to continue.")
           router.push("/verify-otp")
           setIsLoading(false)
           return
         }
       }
+      toast.error(result.error || "Sign in failed.")
       setError(result.error || "An error occurred")
     }
 

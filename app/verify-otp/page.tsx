@@ -93,18 +93,21 @@ export default function VerifyOtpPage() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error || "Verification failed")
+        const msg = data.error || "Verification failed"
+        setError(msg)
+        toast.error(msg)
         setOtp("")
         return
       }
       sessionStorage.removeItem(STORAGE_PHONE)
       sessionStorage.removeItem(STORAGE_EXPIRES)
       sessionStorage.removeItem(STORAGE_MASKED)
-      toast.success("Phone verified. Welcome!")
+      toast.success("Phone verified! You're signed in.")
       await refreshSession()
       router.push("/")
     } catch {
       setError("Network error. Try again.")
+      toast.error("Network error. Try again.")
     } finally {
       setIsVerifying(false)
     }
@@ -133,7 +136,9 @@ export default function VerifyOtpPage() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error || "Could not resend code")
+        const msg = data.error || "Could not resend code"
+        setError(msg)
+        toast.error(msg)
         return
       }
       if (data.expiresAt) {
@@ -148,6 +153,7 @@ export default function VerifyOtpPage() {
       }
     } catch {
       setError("Network error. Try again.")
+      toast.error("Network error. Try again.")
     } finally {
       setIsResending(false)
     }

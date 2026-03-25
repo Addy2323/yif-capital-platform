@@ -230,7 +230,8 @@ export function exportToCSV(data: Record<string, unknown>[], filename: string): 
     link.click()
 }
 
-export async function exportUsersToCSV(): Promise<void> {
+/** @returns true if a file was downloaded, false if there were no rows */
+export async function exportUsersToCSV(): Promise<boolean> {
     const users = await getAllUsers()
     const data = users.map((u) => ({
         id: u.id,
@@ -242,5 +243,7 @@ export async function exportUsersToCSV(): Promise<void> {
         status: u.subscription?.status || "active",
         createdAt: u.createdAt,
     }))
+    if (data.length === 0) return false
     exportToCSV(data, "users_export")
+    return true
 }

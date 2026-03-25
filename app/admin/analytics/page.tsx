@@ -2,59 +2,108 @@
 
 import { useState, useEffect } from "react"
 import {
-    BarChart3,
     TrendingUp,
     Users,
     CreditCard,
     Download,
-    Calendar,
-    ArrowUpRight,
-    PieChart,
-    Activity,
     Newspaper,
-    Layers
+    Layers,
+    Activity,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
     getAnalyticsData,
-    getSubscriptionStats,
     getAllUsers,
+    exportToCSV,
     type AnalyticsData,
-    type SubscriptionStats
+    type SubscriptionStats,
 } from "@/lib/admin-service"
 import { fetchPricingPlans } from "@/lib/pricing-data"
 import { formatCurrency } from "@/lib/payment-service"
+import { toast } from "sonner"
 
 export default function AdminAnalyticsPage() {
     const [analytics, setAnalytics] = useState<AnalyticsData | null>(null)
     const [stats, setStats] = useState<SubscriptionStats | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        let cancelled = false
+
         const loadData = async () => {
-            const fetchedPlans = await fetchPricingPlans()
-            const allUsers = getAllUsers()
+            setIsLoading(true)
+            try {
+                const [fetchedPlans, allUsers, analyticsData] = await Promise.all([
+                    fetchPricingPlans(),
+                    getAllUsers(),
+                    getAnalyticsData(),
+                ])
+                if (cancelled) return
 
-            const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
-            const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
-            const proPrice = fetchedPlans.find(p => p.id === "pro")?.price || 49000
-            const institutionalPrice = fetchedPlans.find(p => p.id === "institutional")?.price || 299000
+                const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
+                const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
+                const proPrice = fetchedPlans.find((p) => p.id === "pro")?.price || 49000
+                const institutionalPrice = fetchedPlans.find((p) => p.id === "institutional")?.price || 299000
 
-            setStats({
-                totalUsers: allUsers.length,
-                freeUsers: allUsers.length - proUsers - institutionalUsers,
-                proUsers,
-                institutionalUsers,
-                monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
-                totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
-            })
-            setAnalytics(getAnalyticsData())
+                setStats({
+                    totalUsers: allUsers.length,
+                    freeUsers: allUsers.length - proUsers - institutionalUsers,
+                    proUsers,
+                    institutionalUsers,
+                    monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
+                    totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
+                })
+                setAnalytics(analyticsData)
+            } catch {
+                toast.error("Could not load analytics.")
+            } finally {
+                if (!cancelled) setIsLoading(false)
+            }
         }
 
-        loadData()
+        void loadData()
+        return () => {
+            cancelled = true
+        }
     }, [])
 
-    if (!analytics || !stats) return null
+    const handleExportSummary = () => {
+        if (!analytics || !stats) {
+            toast.message("Nothing to export yet.")
+            return
+        }
+        const rows: Record<string, unknown>[] = [
+            { metric: "Total Users", value: stats.totalUsers },
+            { metric: "Free Users", value: stats.freeUsers },
+            { metric: "Pro Users", value: stats.proUsers },
+            { metric: "Institutional Users", value: stats.institutionalUsers },
+            { metric: "Monthly Revenue (TZS)", value: stats.monthlyRevenue },
+            { metric: "Total Revenue est. (TZS)", value: stats.totalRevenue },
+            ...analytics.revenueByMonth.map((m) => ({
+                metric: `Revenue ${m.month} (TZS)`,
+                value: m.revenue,
+            })),
+        ]
+        exportToCSV(rows, "analytics_summary")
+        toast.success("Analytics summary exported (CSV).")
+    }
+
+    if (isLoading) {
+        return (
+            <div className="flex min-h-[40vh] items-center justify-center">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-gold border-t-transparent" aria-label="Loading" />
+            </div>
+        )
+    }
+
+    if (!analytics || !stats) {
+        return (
+            <div className="rounded-lg border border-white/10 bg-white/5 p-8 text-center text-white/60">
+                No analytics data available. Try refreshing the page.
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-8">
@@ -64,9 +113,9 @@ export default function AdminAnalyticsPage() {
                     <p className="text-white/60">Detailed insights into platform performance and user behavior.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Button variant="outline" className="border-white/10 text-white hover:bg-white/5">
+                    <Button variant="outline" className="border-white/10 text-white hover:bg-white/5" onClick={handleExportSummary}>
                         <Download className="mr-2 h-4 w-4" />
-                        Download PDF Report
+                        Export summary (CSV)
                     </Button>
                 </div>
             </div>
@@ -89,7 +138,7 @@ export default function AdminAnalyticsPage() {
                     <div className="h-[300px] w-full flex items-end justify-between gap-4 pt-12 px-2 sm:px-6">
                         {analytics.revenueByMonth.length > 0 ? (
                             analytics.revenueByMonth.map((item, i) => {
-                                const max = Math.max(...analytics.revenueByMonth.map(d => d.revenue), 1)
+                                const max = Math.max(...analytics.revenueByMonth.map((d) => d.revenue), 1)
                                 const height = (item.revenue / max) * 100
                                 return (
                                     <div key={i} className="flex-1 flex flex-col items-center gap-4 group h-full justify-end">
@@ -135,10 +184,7 @@ export default function AdminAnalyticsPage() {
                                         <span className="text-white font-medium">{item.value}%</span>
                                     </div>
                                     <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                                        <div
-                                            className={`h-full rounded-full ${item.color}`}
-                                            style={{ width: `${item.value}%` }}
-                                        />
+                                        <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.value}%` }} />
                                     </div>
                                 </div>
                             ))}

@@ -21,6 +21,7 @@ import {
     updateSettings,
     type AdminSettings
 } from "@/lib/admin-service"
+import { toast } from "sonner"
 
 export default function AdminSettingsPage() {
     const [settings, setSettings] = useState<AdminSettings | null>(null)
@@ -38,6 +39,7 @@ export default function AdminSettingsPage() {
             updateSettings(settings)
             setIsSaving(false)
             setShowSuccess(true)
+            toast.success("Settings saved.")
             setTimeout(() => setShowSuccess(false), 3000)
         }, 800)
     }

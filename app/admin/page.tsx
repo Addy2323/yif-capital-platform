@@ -9,50 +9,97 @@ import {
     ArrowDownRight,
     Activity,
     Download,
-    Calendar
+    Calendar,
+    Crown,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
-    getSubscriptionStats,
     getAnalyticsData,
     exportUsersToCSV,
     getAllUsers,
     type SubscriptionStats,
-    type AnalyticsData
+    type AnalyticsData,
 } from "@/lib/admin-service"
 import { fetchPricingPlans } from "@/lib/pricing-data"
 import { formatCurrency } from "@/lib/payment-service"
+import { cn } from "@/lib/utils"
+import { toast } from "sonner"
 
 export default function AdminDashboardPage() {
     const [stats, setStats] = useState<SubscriptionStats | null>(null)
     const [analytics, setAnalytics] = useState<AnalyticsData | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        let cancelled = false
+
         const loadStats = async () => {
-            const fetchedPlans = await fetchPricingPlans()
-            const allUsers = getAllUsers()
+            setIsLoading(true)
+            try {
+                const [fetchedPlans, allUsers, analyticsData] = await Promise.all([
+                    fetchPricingPlans(),
+                    getAllUsers(),
+                    getAnalyticsData(),
+                ])
+                if (cancelled) return
 
-            const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
-            const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
-            const proPrice = fetchedPlans.find(p => p.id === "pro")?.price || 49000
-            const institutionalPrice = fetchedPlans.find(p => p.id === "institutional")?.price || 299000
+                const proUsers = allUsers.filter((u) => u.subscription?.plan === "pro").length
+                const institutionalUsers = allUsers.filter((u) => u.subscription?.plan === "institutional").length
+                const proPrice = fetchedPlans.find((p) => p.id === "pro")?.price || 49000
+                const institutionalPrice = fetchedPlans.find((p) => p.id === "institutional")?.price || 299000
 
-            setStats({
-                totalUsers: allUsers.length,
-                freeUsers: allUsers.length - proUsers - institutionalUsers,
-                proUsers,
-                institutionalUsers,
-                monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
-                totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
-            })
-            setAnalytics(getAnalyticsData())
+                setStats({
+                    totalUsers: allUsers.length,
+                    freeUsers: allUsers.length - proUsers - institutionalUsers,
+                    proUsers,
+                    institutionalUsers,
+                    monthlyRevenue: proUsers * proPrice + institutionalUsers * institutionalPrice,
+                    totalRevenue: (proUsers * proPrice + institutionalUsers * institutionalPrice) * 6,
+                })
+                setAnalytics(analyticsData)
+            } catch {
+                toast.error("Could not load dashboard data.")
+            } finally {
+                if (!cancelled) setIsLoading(false)
+            }
         }
 
-        loadStats()
+        void loadStats()
+        return () => {
+            cancelled = true
+        }
     }, [])
 
-    if (!stats || !analytics) return null
+    const handleExportUsers = async () => {
+        try {
+            const ok = await exportUsersToCSV()
+            if (ok) toast.success("Users exported to CSV.")
+            else toast.message("No users to export.")
+        } catch {
+            toast.error("Export failed.")
+        }
+    }
+
+    const handleReport = () => {
+        toast.message("Scheduled reports are coming soon.")
+    }
+
+    if (isLoading) {
+        return (
+            <div className="flex min-h-[40vh] items-center justify-center">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-gold border-t-transparent" aria-label="Loading" />
+            </div>
+        )
+    }
+
+    if (!stats || !analytics) {
+        return (
+            <div className="rounded-lg border border-white/10 bg-white/5 p-8 text-center text-white/60">
+                No dashboard data available. Try refreshing the page.
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-8">
@@ -63,11 +110,16 @@ export default function AdminDashboardPage() {
                     <p className="text-white/60">Welcome back to the YIF Capital control panel.</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                    <Button variant="outline" size="sm" className="border-white/10 text-white hover:bg-white/5" onClick={exportUsersToCSV}>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-white/10 text-white hover:bg-white/5"
+                        onClick={() => void handleExportUsers()}
+                    >
                         <Download className="mr-2 h-4 w-4" />
                         Export
                     </Button>
-                    <Button size="sm" className="bg-gold text-navy hover:bg-gold/90">
+                    <Button size="sm" className="bg-gold text-navy hover:bg-gold/90" onClick={handleReport}>
                         <Calendar className="mr-2 h-4 w-4" />
                         Report
                     </Button>
@@ -152,7 +204,7 @@ export default function AdminDashboardPage() {
                         <div className="h-[300px] w-full flex items-end justify-between gap-2 pt-10 px-2 sm:px-4">
                             {analytics.userGrowth.length > 0 ? (
                                 analytics.userGrowth.map((day, i) => {
-                                    const max = Math.max(...analytics.userGrowth.map(d => d.count), 1)
+                                    const max = Math.max(...analytics.userGrowth.map((d) => d.count), 1)
                                     const height = (day.count / max) * 100
                                     return (
                                         <div key={i} className="flex-1 flex flex-col items-center gap-3 group h-full justify-end">
@@ -165,7 +217,7 @@ export default function AdminDashboardPage() {
                                                 </div>
                                             </div>
                                             <span className="text-[10px] font-medium text-white/40 rotate-45 sm:rotate-0 whitespace-nowrap">
-                                                {day.date.split('-').slice(1).join('/')}
+                                                {day.date.split("-").slice(1).join("/")}
                                             </span>
                                         </div>
                                     )
@@ -196,8 +248,11 @@ export default function AdminDashboardPage() {
                                     <div
                                         className={cn(
                                             "h-full rounded-full",
-                                            item.plan === "Free" ? "bg-white/20" :
-                                                item.plan === "Pro" ? "bg-gold" : "bg-blue-500"
+                                            item.plan === "Free"
+                                                ? "bg-white/20"
+                                                : item.plan === "Pro"
+                                                  ? "bg-gold"
+                                                  : "bg-blue-500"
                                         )}
                                         style={{ width: `${item.percentage}%` }}
                                     />
@@ -233,7 +288,9 @@ export default function AdminDashboardPage() {
                                     </p>
                                     <p className="text-xs text-white/40">{item.time}</p>
                                 </div>
-                                <Button variant="ghost" size="sm" className="text-white/40 hover:text-white shrink-0">View</Button>
+                                <Button variant="ghost" size="sm" className="text-white/40 hover:text-white shrink-0">
+                                    View
+                                </Button>
                             </div>
                         ))}
                     </div>
@@ -242,9 +299,3 @@ export default function AdminDashboardPage() {
         </div>
     )
 }
-
-function cn(...inputs: any[]) {
-    return inputs.filter(Boolean).join(" ")
-}
-
-import { Crown } from "lucide-react"

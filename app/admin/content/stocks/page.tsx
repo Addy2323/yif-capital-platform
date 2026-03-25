@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { useAdminData } from "@/lib/admin-data-context"
+import { toast } from "sonner"
 
 interface StockFormData {
     symbol: string
@@ -94,6 +95,7 @@ export default function AdminStocksPage() {
         addStock(newStock)
         setFormData(emptyFormData)
         setIsAddDialogOpen(false)
+        toast.success("Stock added.")
     }
 
     const handleEditStock = () => {
@@ -102,6 +104,7 @@ export default function AdminStocksPage() {
         setFormData(emptyFormData)
         setSelectedStock(null)
         setIsEditDialogOpen(false)
+        toast.success("Stock updated.")
     }
 
     const handleDeleteStock = () => {
@@ -109,6 +112,7 @@ export default function AdminStocksPage() {
         deleteStock(selectedStock.symbol)
         setSelectedStock(null)
         setIsDeleteDialogOpen(false)
+        toast.success("Stock removed.")
     }
 
     const openEditDialog = (stock: Stock) => {

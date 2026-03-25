@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { AreaChart, Area, XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, CartesianGrid } from 'recharts';
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 /* ─── SVG Icon Components ─── */
 const IconChart = () => (
@@ -355,12 +356,14 @@ export default function PortfolioPage() {
                     const refreshResult = await refreshRes.json();
                     cloudData = refreshResult.success ? refreshResult.data : [];
                     localStorage.removeItem(getUserKey(user.id));
+                    toast.success("Local portfolios synced to your account.");
                 }
 
                 setPortfolios(cloudData);
                 if (cloudData.length > 0) setActiveId(cloudData[0].id);
             } catch (err) {
                 console.error("Failed to load portfolios", err);
+                toast.error("Could not load portfolios.");
             } finally {
                 setLoading(false);
             }
@@ -387,15 +390,22 @@ export default function PortfolioPage() {
         return () => clearInterval(interval);
     }, []);
 
-    const syncToCloud = async (p: any) => {
+    const syncToCloud = async (p: any): Promise<boolean> => {
         try {
-            await fetch("/api/v1/portfolios", {
+            const res = await fetch("/api/v1/portfolios", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(p)
             });
+            if (!res.ok) {
+                toast.error("Could not save changes to the server.");
+                return false;
+            }
+            return true;
         } catch (err) {
             console.error("Cloud sync failed", err);
+            toast.error("Network error while saving.");
+            return false;
         }
     };
 
@@ -415,7 +425,8 @@ export default function PortfolioPage() {
         setPDesc("");
         setShowCreatePortfolio(false);
         setTab("overview");
-        await syncToCloud(np);
+        const ok = await syncToCloud(np);
+        if (ok) toast.success("Portfolio created.");
     };
 
     const deletePortfolio = async (id: string) => {
@@ -424,9 +435,15 @@ export default function PortfolioPage() {
         setPortfolios(updated);
         setActiveId(updated[0]?.id || null);
         try {
-            await fetch(`/api/v1/portfolios?id=${id}`, { method: "DELETE" });
+            const res = await fetch(`/api/v1/portfolios?id=${id}`, { method: "DELETE" });
+            if (!res.ok) {
+                toast.error("Could not delete portfolio on the server.");
+                return;
+            }
+            toast.success("Portfolio deleted.");
         } catch (err) {
             console.error("Delete sync failed", err);
+            toast.error("Could not delete portfolio.");
         }
     };
 
@@ -451,13 +468,15 @@ export default function PortfolioPage() {
         setPortfolios(updatedList);
         resetStockForm();
         setShowAddStock(false);
-        await syncToCloud(updatedPortfolio);
+        const ok = await syncToCloud(updatedPortfolio);
+        if (ok) toast.success("Stock added to portfolio.");
     };
     const deleteStock = async (sid: string) => {
         const updatedPortfolio = { ...activePortfolio, stocks: activePortfolio.stocks.filter((s: any) => s.id !== sid) };
         const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
         setPortfolios(updatedList);
-        await syncToCloud(updatedPortfolio);
+        const ok = await syncToCloud(updatedPortfolio);
+        if (ok) toast.success("Stock removed.");
     };
     const updateStock = async () => {
         if (!showEditStock) return;
@@ -471,7 +490,8 @@ export default function PortfolioPage() {
         setPortfolios(updatedList);
         resetStockForm();
         setShowEditStock(null);
-        await syncToCloud(updatedPortfolio);
+        const ok = await syncToCloud(updatedPortfolio);
+        if (ok) toast.success("Stock updated.");
     };
     const openEditStock = (s: any) => { setSTicker(s.ticker); setSQty(String(s.qty)); setSBuyPrice(String(s.buyPrice)); setSCurPrice(String(s.currentPrice)); setSDividend(String(s.dividend)); setSBuyDate(s.buyDate || ""); setShowEditStock(s); };
 
@@ -484,7 +504,8 @@ export default function PortfolioPage() {
         setPortfolios(updatedList);
         resetFundForm();
         setShowAddFund(false);
-        await syncToCloud(updatedPortfolio);
+        const ok = await syncToCloud(updatedPortfolio);
+        if (ok) toast.success("Fund added.");
     };
     const updateFund = async () => {
         if (!showEditFund) return;
@@ -498,13 +519,15 @@ export default function PortfolioPage() {
         setPortfolios(updatedList);
         resetFundForm();
         setShowEditFund(null);
-        await syncToCloud(updatedPortfolio);
+        const ok = await syncToCloud(updatedPortfolio);
+        if (ok) toast.success("Fund updated.");
     };
     const deleteFund = async (fid: string) => {
         const updatedPortfolio = { ...activePortfolio, funds: activePortfolio.funds.filter((f: any) => f.id !== fid) };
         const updatedList = portfolios.map((p: any) => p.id === activeId ? updatedPortfolio : p);
         setPortfolios(updatedList);
-        await syncToCloud(updatedPortfolio);
+        const ok = await syncToCloud(updatedPortfolio);
+        if (ok) toast.success("Fund removed.");
     };
     const openEditFund = (f: any) => { setFName(f.name); setFType(f.type); setFInvested(String(f.invested)); setFCurrent(String(f.currentValue)); setFRate(String(f.rate || "")); setFStartDate(f.startDate || ""); setFMaturityDate(f.maturityDate || ""); setShowEditFund(f); };
 

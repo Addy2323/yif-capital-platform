@@ -43,6 +43,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { useAdminData } from "@/lib/admin-data-context"
+import { toast } from "sonner"
 
 interface NewsFormData {
     id: string
@@ -88,6 +89,7 @@ export default function AdminNewsPage() {
         addNews(newArticle)
         setFormData(emptyFormData)
         setIsAddDialogOpen(false)
+        toast.success("News article added.")
     }
 
     const handleEditNews = () => {
@@ -96,6 +98,7 @@ export default function AdminNewsPage() {
         setFormData(emptyFormData)
         setSelectedNews(null)
         setIsEditDialogOpen(false)
+        toast.success("News article updated.")
     }
 
     const handleDeleteNews = () => {
@@ -103,6 +106,7 @@ export default function AdminNewsPage() {
         deleteNews(selectedNews.id)
         setSelectedNews(null)
         setIsDeleteDialogOpen(false)
+        toast.success("News article removed.")
     }
 
     const openEditDialog = (news: MarketNews) => {

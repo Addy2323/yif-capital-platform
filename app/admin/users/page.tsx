@@ -234,7 +234,11 @@ export default function AdminUsersPage() {
                     <Button
                         variant="outline"
                         className="border-gold/50 bg-gold/10 text-gold hover:bg-gold/20"
-                        onClick={exportUsersToCSV}
+                        onClick={async () => {
+                            const ok = await exportUsersToCSV()
+                            if (ok) toast.success("Users exported to CSV.")
+                            else toast.message("No users to export.")
+                        }}
                     >
                         <Download className="mr-2 h-4 w-4" />
                         Export CSV

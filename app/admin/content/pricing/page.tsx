@@ -25,6 +25,7 @@ import {
     updatePricingPlanAPI,
     initialPlans
 } from "@/lib/pricing-data"
+import { toast } from "sonner"
 
 export default function AdminPricingPage() {
     const [plans, setPlans] = useState<PricingPlan[]>(initialPlans)
@@ -54,14 +55,14 @@ export default function AdminPricingPage() {
             })
 
             if (success) {
-                // Refresh plans from API
                 const updatedPlans = await fetchPricingPlans()
                 setPlans(updatedPlans)
+                toast.success("Pricing plan saved.")
             } else {
-                alert("Failed to save changes")
+                toast.error("Failed to save pricing plan.")
             }
         } catch (error) {
-            alert("Failed to save changes")
+            toast.error("Failed to save pricing plan.")
         } finally {
             setIsSaving(false)
             setEditingId(null)
@@ -72,7 +73,7 @@ export default function AdminPricingPage() {
     const handleDelete = (id: string) => {
         // Note: Delete functionality would need a separate API endpoint
         // For now, just show a message
-        alert("Deleting plans is not supported. Contact developer.")
+        toast.message("Deleting plans is not supported. Contact the developer.")
     }
 
     const startEdit = (plan: PricingPlan) => {

@@ -42,6 +42,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { useAdminData } from "@/lib/admin-data-context"
+import { toast } from "sonner"
 
 interface IPOFormData {
     symbol: string
@@ -93,6 +94,7 @@ export default function AdminIposPage() {
         addIpo(newIpo)
         setFormData(emptyFormData)
         setIsAddDialogOpen(false)
+        toast.success("IPO added.")
     }
 
     const handleEditIpo = () => {
@@ -101,6 +103,7 @@ export default function AdminIposPage() {
         setFormData(emptyFormData)
         setSelectedIpo(null)
         setIsEditDialogOpen(false)
+        toast.success("IPO updated.")
     }
 
     const handleDeleteIpo = () => {
@@ -108,6 +111,7 @@ export default function AdminIposPage() {
         deleteIpo(selectedIpo.symbol)
         setSelectedIpo(null)
         setIsDeleteDialogOpen(false)
+        toast.success("IPO removed.")
     }
 
     const openEditDialog = (ipo: IPO) => {

@@ -35,6 +35,7 @@ import {
   Trash2
 } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 interface PortfolioHolding {
   symbol: string
@@ -96,10 +97,12 @@ export default function PortfolioPage() {
     saveHoldings([...holdings, holding])
     setNewHolding({ symbol: "", shares: "", avgPrice: "" })
     setIsDialogOpen(false)
+    toast.success("Holding added to your portfolio.")
   }
 
   const removeHolding = (symbol: string) => {
     saveHoldings(holdings.filter((h) => h.symbol !== symbol))
+    toast.success("Holding removed.")
   }
 
   // Calculate portfolio metrics
