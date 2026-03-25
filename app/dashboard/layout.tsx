@@ -2,7 +2,8 @@
 
 import React from "react"
 
-import { AuthProvider, useAuth } from "@/lib/auth-context"
+import { InstallAppBanner } from "@/components/InstallAppBanner"
+import { useAuth } from "@/lib/auth-context"
 import { DashboardSidebar } from "@/components/dashboard/sidebar"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { useRouter } from "next/navigation"
@@ -36,6 +37,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
       <div className="flex flex-1 flex-col lg:ml-64">
         <DashboardHeader />
         <main className="flex-1 bg-muted/30 p-4 lg:p-8">{children}</main>
+        <InstallAppBanner />
       </div>
     </div>
   )

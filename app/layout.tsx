@@ -8,6 +8,8 @@ import { StartupLoader } from '@/components/startup-loader'
 import { AdminDataProvider } from '@/lib/admin-data-context'
 import { AuthProvider } from '@/lib/auth-context'
 import { PhonePromptGate } from '@/components/phone-prompt-gate'
+import { PwaInstallProvider } from '@/components/pwa-install-provider'
+import { PostLoginInstallPrompt } from '@/components/PostLoginInstallPrompt'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -65,6 +67,12 @@ export const metadata: Metadata = {
     google: "6422a9cd98c76333",
   },
   category: "finance",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "YIF Capital",
+  },
 }
 
 export const viewport: Viewport = {
@@ -115,22 +123,25 @@ export default function RootLayout({
         />
         <StartupLoader />
         <AuthProvider>
-          <PhonePromptGate />
-          <AdminDataProvider>
-            <SweetAlertProvider>
-              {children}
-              <Toaster
-                position="top-right"
-                toastOptions={{
-                  style: {
-                    background: 'var(--card)',
-                    color: 'var(--card-foreground)',
-                    border: '1px solid var(--border)',
-                  },
-                }}
-              />
-            </SweetAlertProvider>
-          </AdminDataProvider>
+          <PwaInstallProvider>
+            <PhonePromptGate />
+            <PostLoginInstallPrompt />
+            <AdminDataProvider>
+              <SweetAlertProvider>
+                {children}
+                <Toaster
+                  position="top-right"
+                  toastOptions={{
+                    style: {
+                      background: 'var(--card)',
+                      color: 'var(--card-foreground)',
+                      border: '1px solid var(--border)',
+                    },
+                  }}
+                />
+              </SweetAlertProvider>
+            </AdminDataProvider>
+          </PwaInstallProvider>
         </AuthProvider>
         <Analytics />
       </body>

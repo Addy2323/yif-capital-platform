@@ -74,6 +74,7 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/crypto-js": "^4.2.2",
     "@types/jsonwebtoken": "^9.0.10",

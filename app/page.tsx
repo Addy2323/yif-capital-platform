@@ -1,3 +1,4 @@
+import { InstallAppBanner } from "@/components/InstallAppBanner"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/landing/hero-section"
 import { ProductsSection } from "@/components/landing/products-section"
@@ -17,6 +18,7 @@ export default function HomePage() {
         <Footer />
       </div>
       <MobileNav />
+      <InstallAppBanner />
     </div>
   )
 }

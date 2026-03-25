@@ -58,6 +58,7 @@ const navLinks = [
       },
     ]
   },
+  { name: "Install", href: "/download" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -256,6 +257,16 @@ export function Header() {
                     )}
                   >
                     Contact
+                  </Link>
+                  <Link
+                    href="/download"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "text-lg font-medium transition-colors",
+                      pathname === "/download" ? "text-gold" : "text-white/80 hover:text-white"
+                    )}
+                  >
+                    Install app
                   </Link>
                 </div>
 

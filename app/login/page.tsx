@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import { setLoginInstallFlag } from "@/lib/pwa-utils"
 
 function LoginForm() {
   const router = useRouter()
@@ -32,6 +33,7 @@ function LoginForm() {
     const result = await login(email, password)
 
     if (result.success) {
+      setLoginInstallFlag()
       toast.success("Signed in successfully.")
       if (redirect) {
         router.push(redirect)

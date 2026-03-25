@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { BarChart3, GraduationCap, MessageSquare, Activity, Briefcase, Home, GitCompare, Wrench, Search } from "lucide-react"
+import { BarChart3, GraduationCap, MessageSquare, Activity, Briefcase, Home, GitCompare, Wrench, Search, Download } from "lucide-react"
 
 const defaultNavItems = [
     { name: "LMS", href: "/academy", icon: GraduationCap },
@@ -11,6 +11,7 @@ const defaultNavItems = [
     { name: "Funds", href: "/funds", icon: Activity },
     { name: "Stocks", href: "/stocks", icon: BarChart3 },
     { name: "Portfolio", href: "/portfolio", icon: Briefcase },
+    { name: "Install", href: "/download", icon: Download },
 ]
 
 // Funds page bottom nav (screenshot: Dashboard, Funds, Compare, Tools, Find Fund)
