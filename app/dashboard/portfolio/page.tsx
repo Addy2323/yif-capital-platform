@@ -36,6 +36,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
+import { PortfolioAISection } from "@/components/portfolio/PortfolioAISection"
 
 interface PortfolioHolding {
   symbol: string
@@ -258,6 +259,8 @@ export default function PortfolioPage() {
           </CardContent>
         </Card>
       </div>
+
+      <PortfolioAISection symbols={holdings.map((h) => h.symbol)} />
 
       {/* Holdings Table */}
       <Card>
