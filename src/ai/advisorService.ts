@@ -217,11 +217,12 @@ export async function getAIAdvice(
       process.env.NEXT_PUBLIC_APP_URL?.trim() ||
       "https://yif.capital"
 
+    // Header values must be ASCII (ByteString); Unicode e.g. em dash (U+2014) throws in fetch().
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
       "HTTP-Referer": referer,
-      "X-Title": "YIF Capital — Portfolio AI",
+      "X-Title": "YIF Capital - Portfolio AI",
     }
 
     const res = await fetch(apiUrl, {
