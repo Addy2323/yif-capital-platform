@@ -7,6 +7,7 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContaine
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { PortfolioAISection } from "@/components/portfolio/PortfolioAISection";
+import { AdvisorChatSection } from "@/components/portfolio/AdvisorChatSection";
 
 /* ─── SVG Icon Components ─── */
 const IconChart = () => (
@@ -926,6 +927,13 @@ export default function PortfolioPage() {
                                         )}
                                         <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid #24427E" }}>
                                             <PortfolioAISection symbols={activePortfolio.stocks.map((s: any) => s.ticker)} />
+                                        </div>
+                                        <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid #24427E" }}>
+                                            <AdvisorChatSection
+                                                holdingsSummary={activePortfolio.stocks
+                                                    .map((s: any) => `${s.ticker} ${s.qty} sh @ ${fmt(s.buyPrice)} TZS`)
+                                                    .join(" · ")}
+                                            />
                                         </div>
                                     </>
                                 )}

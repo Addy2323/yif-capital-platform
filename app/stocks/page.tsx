@@ -17,6 +17,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Search, SlidersHorizontal, Database, TrendingUp, TrendingDown, Info, ArrowUpDown } from "lucide-react"
+import { AdvisorChatSection } from "@/components/portfolio/AdvisorChatSection"
 
 const STOCK_LOGOS: Record<string, string> = {
     'CRDB': '/LOGO/CRDB2.jpg',
@@ -263,6 +264,15 @@ export default function StocksPage() {
                             Live Sync: {new Date(lastUpdated).toLocaleDateString()}
                         </div>
                     )}
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35, duration: 0.4 }}
+                    className="mb-8"
+                >
+                    <AdvisorChatSection />
                 </motion.div>
 
                 {/* Data Table */}

@@ -37,6 +37,7 @@ import {
 import Link from "next/link"
 import { toast } from "sonner"
 import { PortfolioAISection } from "@/components/portfolio/PortfolioAISection"
+import { AdvisorChatSection } from "@/components/portfolio/AdvisorChatSection"
 
 interface PortfolioHolding {
   symbol: string
@@ -261,6 +262,12 @@ export default function PortfolioPage() {
       </div>
 
       <PortfolioAISection symbols={holdings.map((h) => h.symbol)} />
+
+      <AdvisorChatSection
+        holdingsSummary={holdings
+          .map((h) => `${h.symbol} ${h.shares} sh @ ${h.avgPrice} TZS`)
+          .join(" · ")}
+      />
 
       {/* Holdings Table */}
       <Card>
