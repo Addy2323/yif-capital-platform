@@ -1,9 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import {
-  geminiGenerateContent,
-  getGeminiApiKey,
-  resolveGeminiModelChain,
-} from "@/src/ai/geminiGenerate"
+import { generateLlmContent, getAnyLlmApiKey } from "@/src/ai/llmGenerate"
 
 const MOVE_PCT = (() => {
   const n = Number(process.env.INSIGHT_MOVE_PCT ?? "2.5")
@@ -31,7 +27,7 @@ export type InsightPayload =
       title: string
       body: string
       items: InsightItem[]
-      source: "gemini" | "template"
+      source: "gemini" | "openai" | "template"
     }
   | { show: false; scrapeId?: string }
 
@@ -65,21 +61,17 @@ function templateProspect(items: InsightItem[]): string {
   ].join("\n")
 }
 
-async function generateAiText(prompt: string): Promise<string | null> {
-  const apiKey = getGeminiApiKey()
-  if (!apiKey) return null
-  const models = resolveGeminiModelChain()
-  for (const model of models) {
-    const r = await geminiGenerateContent({
-      apiKey,
-      model,
-      userText: prompt,
-      maxOutputTokens: 600,
-      signal: AbortSignal.timeout(20_000),
-    })
-    if (r.ok && r.text.trim()) return r.text.trim()
-  }
-  return null
+async function generateAiText(
+  prompt: string
+): Promise<{ text: string; provider: "gemini" | "openai" } | null> {
+  if (!getAnyLlmApiKey()) return null
+  const r = await generateLlmContent({
+    userText: prompt,
+    maxOutputTokens: 600,
+    signal: AbortSignal.timeout(20_000),
+  })
+  if (!r.ok) return null
+  return { text: r.text, provider: r.provider }
 }
 
 async function buildStockMovesForHoldings(
@@ -278,15 +270,15 @@ Write 4–7 short sentences in plain English (or Swahili mix if natural):
 No bullet labels like "1)". No markdown. Max 130 words.`
 
     let body: string
-    let source: "gemini" | "template"
+    let source: "gemini" | "openai" | "template"
     if (skipAi) {
       body = templateHolding(items)
       source = "template"
     } else {
       const ai = await generateAiText(prompt)
       if (ai) {
-        body = ai
-        source = "gemini"
+        body = ai.text
+        source = ai.provider
       } else {
         body = templateHolding(items)
         source = "template"
@@ -352,15 +344,15 @@ No bullet labels like "1)". No markdown. Max 130 words.`
 Write 4–6 sentences: encourage research and diversification, mention risks, that this is NOT a buy recommendation. Suggest creating a portfolio to track ideas. Plain text, max 100 words, no markdown.`
 
   let body: string
-  let source: "gemini" | "template"
+  let source: "gemini" | "openai" | "template"
   if (skipAi) {
     body = templateProspect(items)
     source = "template"
   } else {
     const ai = await generateAiText(prompt)
     if (ai) {
-      body = ai
-      source = "gemini"
+      body = ai.text
+      source = ai.provider
     } else {
       body = templateProspect(items)
       source = "template"

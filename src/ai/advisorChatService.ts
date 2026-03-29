@@ -1,36 +1,32 @@
 /**
  * Open-ended Q&A with the YIF advisor (DSE / Tanzania context).
- * Uses GEMINI_API_KEY (or GOOGLE_GENERATIVE_AI_API_KEY) like advisorService.ts.
+ * Uses Gemini and/or OpenAI (see llmGenerate.ts, AI_PROVIDER_ORDER).
  */
 
 import { prisma } from "@/lib/prisma"
-import {
-  geminiGenerateContent,
-  getGeminiApiKey,
-  resolveGeminiModelChain,
-} from "./geminiGenerate"
+import { generateLlmContent, getAnyLlmApiKey } from "./llmGenerate"
 
 /** Trim snapshot so the request is unlikely to exceed model context limits */
 const MAX_SNAPSHOT_CHARS = 12_000
 
-function buildGeminiFailureReply(status: number, providerMessage: string): string {
+function buildLlmFailureReply(status: number, providerMessage: string): string {
   const msg = providerMessage.replace(/\s+/g, " ").trim()
   const short = msg.slice(0, 220)
 
   let hint = ""
   if (status === 400 || status === 401 || status === 403) {
     hint =
-      "The Gemini API rejected the request: check GEMINI_API_KEY is valid, billing/API access is enabled for Generative Language API, and the key is not restricted incorrectly."
+      "The AI provider rejected the request: check GEMINI_API_KEY and/or OPENAI_API_KEY, billing/API access, and key restrictions."
   } else if (status === 429) {
     hint =
-      "Google Gemini rate-limited this key (HTTP 429): free-tier quotas are tight. Wait 1–2 minutes, avoid rapid back-to-back questions, or enable billing / a higher tier in Google AI Studio. You can set GEMINI_429_RETRIES=4 for more automatic retries."
+      "Rate limited (HTTP 429). Wait 1–2 minutes or use a higher tier. You can set GEMINI_429_RETRIES=4 or OPENAI_429_RETRIES=3."
   } else if (status === 404) {
     hint =
-      "No working Gemini model was found (HTTP 404). Set GEMINI_MODEL to a current id (e.g. gemini-2.5-flash or gemini-2.0-flash-001) and optionally GEMINI_MODEL_FALLBACK; see https://ai.google.dev/gemini-api/docs/models"
+      "No working Gemini model was found (HTTP 404). Set GEMINI_MODEL to a current id; see https://ai.google.dev/gemini-api/docs/models — or rely on OPENAI_API_KEY with AI_PROVIDER_ORDER=openai_first."
   } else if (status >= 500 || status === 503) {
-    hint = "Google’s API had a server error; retry shortly."
+    hint = "The AI provider had a server error; retry shortly."
   } else if (status === 0) {
-    hint = short ? `Network error: ${short}` : "Network error reaching Google’s API."
+    hint = short ? `Network error: ${short}` : "Network error reaching the AI API."
   } else if (short) {
     hint = `API said: ${short}`
   }
@@ -101,7 +97,7 @@ export async function buildMarketSnapshotText(maxRows = 40): Promise<string> {
 
 export type AdvisorChatResult = {
   reply: string
-  source: "gemini" | "fallback"
+  source: "gemini" | "openai" | "fallback"
   apiError?: boolean
 }
 
@@ -109,9 +105,6 @@ export async function getAdvisorChatReply(
   userMessage: string,
   options: { userRisk?: string; holdingsSummary?: string }
 ): Promise<AdvisorChatResult> {
-  const apiKey = getGeminiApiKey()
-  const modelChain = resolveGeminiModelChain()
-
   let snapshot = ""
   try {
     snapshot = await buildMarketSnapshotText()
@@ -132,96 +125,54 @@ ${snapshot}
 User question:
 ${userMessage.trim()}`
 
-  if (!apiKey) {
+  if (!getAnyLlmApiKey()) {
     return {
       reply:
-        "The AI advisor needs GEMINI_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
+        "The AI advisor needs GEMINI_API_KEY or OPENAI_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
       source: "fallback",
     }
   }
 
-  let lastStatus = 0
-  let lastMessage = ""
+  try {
+    const result = await generateLlmContent({
+      userText: userBlock,
+      systemInstruction: SYSTEM_PROMPT,
+      maxOutputTokens: 2048,
+      signal: AbortSignal.timeout(90_000),
+    })
 
-  for (const tryModel of modelChain) {
-    try {
-      const result = await geminiGenerateContent({
-        apiKey,
-        model: tryModel,
-        systemInstruction: SYSTEM_PROMPT,
-        userText: userBlock,
-        maxOutputTokens: 2048,
-        signal: AbortSignal.timeout(90_000),
-      })
-
-      if (!result.ok) {
-        lastStatus = result.status
-        lastMessage = result.message
-        console.error(
-          "[advisorChatService] Gemini",
-          tryModel,
-          result.status,
-          result.message.slice(0, 800)
-        )
-
-        const stopRetry = result.status === 401 || result.status === 403
-
-        const tryNextModel =
-          !stopRetry &&
-          tryModel !== modelChain[modelChain.length - 1] &&
-          (result.status === 429 ||
-            result.status === 404 ||
-            result.status === 400 ||
-            result.status === 502 ||
-            result.status === 503)
-
-        if (tryNextModel) continue
-
-        return {
-          reply: buildGeminiFailureReply(lastStatus, lastMessage),
-          source: "fallback",
-          apiError: true,
-        }
-      }
-
-      const text = result.text.trim()
-      if (!text) {
-        if (tryModel !== modelChain[modelChain.length - 1]) continue
-        return {
-          reply:
-            "The model returned an empty reply. Please rephrase your question or try again.",
-          source: "fallback",
-          apiError: true,
-        }
-      }
-
-      return { reply: text, source: "gemini" }
-    } catch (e) {
-      console.error("[advisorChatService]", e)
-      const isAbort =
-        e instanceof Error &&
-        (e.name === "AbortError" || e.name === "TimeoutError")
-      if (isAbort) {
-        return {
-          reply:
-            "The AI request timed out (90s). Try a shorter question or retry. Meanwhile, use the Stocks page for live DSE data.",
-          source: "fallback",
-          apiError: true,
-        }
-      }
-      lastMessage = e instanceof Error ? e.message : String(e)
-      if (tryModel !== modelChain[modelChain.length - 1]) continue
+    if (!result.ok) {
+      console.error(
+        "[advisorChatService] LLM",
+        result.status,
+        result.message.slice(0, 800)
+      )
       return {
-        reply: buildGeminiFailureReply(0, lastMessage),
+        reply: buildLlmFailureReply(result.status, result.message),
         source: "fallback",
         apiError: true,
       }
     }
-  }
 
-  return {
-    reply: buildGeminiFailureReply(lastStatus, lastMessage),
-    source: "fallback",
-    apiError: true,
+    return { reply: result.text, source: result.provider }
+  } catch (e) {
+    console.error("[advisorChatService]", e)
+    const isAbort =
+      e instanceof Error &&
+      (e.name === "AbortError" || e.name === "TimeoutError")
+    if (isAbort) {
+      return {
+        reply:
+          "The AI request timed out (90s). Try a shorter question or retry. Meanwhile, use the Stocks page for live DSE data.",
+        source: "fallback",
+        apiError: true,
+      }
+    }
+    const lastMessage = e instanceof Error ? e.message : String(e)
+    return {
+      reply: buildLlmFailureReply(0, lastMessage),
+      source: "fallback",
+      apiError: true,
+    }
   }
 }
