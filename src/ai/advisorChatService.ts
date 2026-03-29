@@ -5,10 +5,9 @@
 
 import { prisma } from "@/lib/prisma"
 import {
-  BUILTIN_GEMINI_FALLBACK_MODEL,
-  DEFAULT_GEMINI_MODEL,
   geminiGenerateContent,
   getGeminiApiKey,
+  resolveGeminiModelChain,
 } from "./geminiGenerate"
 
 /** Trim snapshot so the request is unlikely to exceed model context limits */
@@ -27,7 +26,7 @@ function buildGeminiFailureReply(status: number, providerMessage: string): strin
       "Google Gemini rate-limited this key (HTTP 429): free-tier quotas are tight. Wait 1–2 minutes, avoid rapid back-to-back questions, or enable billing / a higher tier in Google AI Studio. You can set GEMINI_429_RETRIES=4 for more automatic retries."
   } else if (status === 404) {
     hint =
-      "The configured model may be invalid. Set GEMINI_MODEL to a current name (e.g. gemini-2.0-flash) or GEMINI_MODEL_FALLBACK."
+      "No working Gemini model was found (HTTP 404). Set GEMINI_MODEL to a current id (e.g. gemini-2.5-flash or gemini-2.0-flash-001) and optionally GEMINI_MODEL_FALLBACK; see https://ai.google.dev/gemini-api/docs/models"
   } else if (status >= 500 || status === 503) {
     hint = "Google’s API had a server error; retry shortly."
   } else if (status === 0) {
@@ -111,14 +110,7 @@ export async function getAdvisorChatReply(
   options: { userRisk?: string; holdingsSummary?: string }
 ): Promise<AdvisorChatResult> {
   const apiKey = getGeminiApiKey()
-  const primary =
-    process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
-  const fallbackEnv = process.env.GEMINI_MODEL_FALLBACK?.trim()
-  const modelChain = [
-    primary,
-    ...(fallbackEnv ? [fallbackEnv] : []),
-    BUILTIN_GEMINI_FALLBACK_MODEL,
-  ].filter((m, i, a) => m && a.indexOf(m) === i)
+  const modelChain = resolveGeminiModelChain()
 
   let snapshot = ""
   try {

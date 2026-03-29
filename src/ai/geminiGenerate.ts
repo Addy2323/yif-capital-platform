@@ -3,8 +3,30 @@
  * @see https://ai.google.dev/api/rest/v1beta/models/generateContent
  */
 
-export const DEFAULT_GEMINI_MODEL = "gemini-2.0-flash"
-export const BUILTIN_GEMINI_FALLBACK_MODEL = "gemini-1.5-flash"
+/** Prefer current stable IDs; unversioned slugs often return 404 on the REST API. */
+export const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+
+/**
+ * Tried after primary (and optional GEMINI_MODEL_FALLBACK), in order.
+ * @see https://ai.google.dev/gemini-api/docs/models
+ */
+export const GEMINI_BUILTIN_FALLBACKS: readonly string[] = [
+  "gemini-2.0-flash-001",
+  "gemini-1.5-flash-002",
+  "gemini-1.5-flash",
+]
+
+export function resolveGeminiModelChain(): string[] {
+  const primary =
+    process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
+  const envFallback = process.env.GEMINI_MODEL_FALLBACK?.trim()
+  const chain = [
+    primary,
+    ...(envFallback ? [envFallback] : []),
+    ...GEMINI_BUILTIN_FALLBACKS,
+  ]
+  return chain.filter((m, i, a) => m.length > 0 && a.indexOf(m) === i)
+}
 
 const API_ROOT =
   "https://generativelanguage.googleapis.com/v1beta/models"

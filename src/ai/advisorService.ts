@@ -5,10 +5,9 @@
 
 import type { StockMetrics } from "./regression"
 import {
-  BUILTIN_GEMINI_FALLBACK_MODEL,
-  DEFAULT_GEMINI_MODEL,
   geminiGenerateContent,
   getGeminiApiKey,
+  resolveGeminiModelChain,
 } from "./geminiGenerate"
 
 export type ParsedAiBlock = {
@@ -198,14 +197,7 @@ export async function getAIAdvice(
   context: AdvisorContext
 ): Promise<AiAdviceResult> {
   const apiKey = getGeminiApiKey()
-  const primary =
-    process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
-  const fallbackEnv = process.env.GEMINI_MODEL_FALLBACK?.trim()
-  const modelChain = [
-    primary,
-    ...(fallbackEnv ? [fallbackEnv] : []),
-    BUILTIN_GEMINI_FALLBACK_MODEL,
-  ].filter((m, i, a) => m && a.indexOf(m) === i)
+  const modelChain = resolveGeminiModelChain()
 
   if (!apiKey) {
     return getFallbackAdvice(stock, metrics, context)
