@@ -10,6 +10,7 @@ import { AuthProvider } from '@/lib/auth-context'
 import { PhonePromptGate } from '@/components/phone-prompt-gate'
 import { PwaInstallProvider } from '@/components/pwa-install-provider'
 import { PostLoginInstallPrompt } from '@/components/PostLoginInstallPrompt'
+import { PortfolioInsightPopup } from '@/components/insights/PortfolioInsightPopup'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -128,6 +129,7 @@ export default function RootLayout({
           <PwaInstallProvider>
             <PhonePromptGate />
             <PostLoginInstallPrompt />
+            <PortfolioInsightPopup />
             <AdminDataProvider>
               <SweetAlertProvider>
                 {children}
