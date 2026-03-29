@@ -224,7 +224,8 @@ export async function getAIAdvice(
 
       if (!result.ok) {
         const retry =
-          (result.status === 404 ||
+          (result.status === 429 ||
+            result.status === 404 ||
             result.status === 400 ||
             result.status === 503) &&
           model !== modelChain[modelChain.length - 1]

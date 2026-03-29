@@ -16,6 +16,18 @@ export function getGeminiApiKey(): string | undefined {
   return k || undefined
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+/** Retries after HTTP 429 (Gemini quota / burst limits). Override with GEMINI_429_RETRIES (1–6). */
+function max429Attempts(): number {
+  const raw = process.env.GEMINI_429_RETRIES?.trim()
+  const n = raw ? parseInt(raw, 10) : 3
+  if (!Number.isFinite(n)) return 3
+  return Math.min(6, Math.max(1, n))
+}
+
 export type GeminiGenerateOptions = {
   apiKey: string
   model: string
@@ -75,21 +87,33 @@ export async function geminiGenerateContent(
     body.systemInstruction = { parts: [{ text: sys }] }
   }
 
+  const payload = JSON.stringify(body)
+  const attempts = max429Attempts()
   let res: Response
-  try {
-    res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      signal: opts.signal,
-    })
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e)
-    return { ok: false, status: 0, message: msg }
-  }
+  let raw = ""
 
-  const raw = await res.text().catch(() => "")
-  if (!res.ok) {
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    try {
+      res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        signal: opts.signal,
+      })
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
+      return { ok: false, status: 0, message: msg }
+    }
+
+    raw = await res.text().catch(() => "")
+    if (res.ok) break
+
+    if (res.status === 429 && attempt < attempts - 1) {
+      const delayMs = Math.min(12_000, 1800 * 2 ** attempt)
+      await sleep(delayMs)
+      continue
+    }
+
     const parsed = parseGeminiErrorBody(raw)
     return {
       ok: false,

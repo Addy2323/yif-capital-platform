@@ -23,7 +23,8 @@ function buildGeminiFailureReply(status: number, providerMessage: string): strin
     hint =
       "The Gemini API rejected the request: check GEMINI_API_KEY is valid, billing/API access is enabled for Generative Language API, and the key is not restricted incorrectly."
   } else if (status === 429) {
-    hint = "Rate limited (HTTP 429): wait a minute and try again."
+    hint =
+      "Google Gemini rate-limited this key (HTTP 429): free-tier quotas are tight. Wait 1–2 minutes, avoid rapid back-to-back questions, or enable billing / a higher tier in Google AI Studio. You can set GEMINI_429_RETRIES=4 for more automatic retries."
   } else if (status === 404) {
     hint =
       "The configured model may be invalid. Set GEMINI_MODEL to a current name (e.g. gemini-2.0-flash) or GEMINI_MODEL_FALLBACK."
@@ -171,15 +172,13 @@ ${userMessage.trim()}`
           result.message.slice(0, 800)
         )
 
-        const stopRetry =
-          result.status === 401 ||
-          result.status === 403 ||
-          result.status === 429
+        const stopRetry = result.status === 401 || result.status === 403
 
         const tryNextModel =
           !stopRetry &&
           tryModel !== modelChain[modelChain.length - 1] &&
-          (result.status === 404 ||
+          (result.status === 429 ||
+            result.status === 404 ||
             result.status === 400 ||
             result.status === 502 ||
             result.status === 503)

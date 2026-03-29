@@ -136,6 +136,7 @@ export function AdvisorChatSection({
         toast.error("Type a question first.")
         return
       }
+      if (loading) return
       setLoading(true)
       setTurns((t) => [...t, { role: "user", content: q }])
       setInput("")
@@ -170,7 +171,7 @@ export function AdvisorChatSection({
         setLoading(false)
       }
     },
-    [userRisk, holdingsSummary]
+    [userRisk, holdingsSummary, loading]
   )
 
   const launcher = (
