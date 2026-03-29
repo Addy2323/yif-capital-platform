@@ -207,7 +207,7 @@ export default function StocksPage() {
                 </div>
             </motion.div>
 
-            <div className="container mx-auto py-4 px-4 max-w-7xl">
+            <div className="container mx-auto max-w-7xl px-4 py-4 pb-24 md:pb-8">
                 {/* Filters Bar */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.98 }}
@@ -266,14 +266,7 @@ export default function StocksPage() {
                     )}
                 </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35, duration: 0.4 }}
-                    className="mb-8"
-                >
-                    <AdvisorChatSection />
-                </motion.div>
+                <AdvisorChatSection launchVariant="fab" />
 
                 {/* Data Table */}
                 <motion.div

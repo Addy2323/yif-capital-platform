@@ -930,6 +930,7 @@ export default function PortfolioPage() {
                                         </div>
                                         <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid #24427E" }}>
                                             <AdvisorChatSection
+                                                tone="portfolio"
                                                 holdingsSummary={activePortfolio.stocks
                                                     .map((s: any) => `${s.ticker} ${s.qty} sh @ ${fmt(s.buyPrice)} TZS`)
                                                     .join(" · ")}
