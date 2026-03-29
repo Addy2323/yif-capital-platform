@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useId, useMemo, useState } from "react"
 import {
   Area,
   AreaChart,
@@ -26,14 +26,41 @@ const RANGES: { key: RangeKey; label: string }[] = [
   { key: "MAX", label: "Max" },
 ]
 
+/** UTC noon for stable day bucketing */
+function dateStrToUtcMs(dateStr: string): number {
+  const t = new Date(dateStr.trim() + "T12:00:00.000Z").getTime()
+  return Number.isNaN(t) ? NaN : t
+}
+
+/**
+ * Window end: latest quote date, or today (UTC) if that is earlier (no future dates).
+ * Range lengths (1M, 3M, …) count back from this anchor so they move with the calendar.
+ */
+function rangeEndMs(points: { date: string }[]): number {
+  const now = new Date()
+  const todayUtc = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    12,
+    0,
+    0,
+    0
+  )
+  if (points.length === 0) return todayUtc
+  const last = dateStrToUtcMs(points[points.length - 1].date)
+  if (!Number.isFinite(last)) return todayUtc
+  return Math.min(last, todayUtc)
+}
+
 function filterByRange<T extends { date: string }>(
   points: T[],
   range: RangeKey
 ): T[] {
   if (points.length === 0 || range === "MAX") return points
-  const last = points[points.length - 1]
-  const end = new Date(last.date + "T12:00:00Z")
-  let start = new Date(end)
+  const endMs = rangeEndMs(points)
+  const end = new Date(endMs)
+  let start = new Date(endMs)
   switch (range) {
     case "1M":
       start.setUTCMonth(end.getUTCMonth() - 1)
@@ -51,18 +78,61 @@ function filterByRange<T extends { date: string }>(
       start.setUTCFullYear(end.getUTCFullYear() - 5)
       break
     case "YTD":
-      start = new Date(Date.UTC(end.getUTCFullYear(), 0, 1))
+      start = new Date(Date.UTC(end.getUTCFullYear(), 0, 1, 12, 0, 0, 0))
       break
     default:
       return points
   }
-  return points.filter((p) => new Date(p.date + "T12:00:00Z") >= start)
+  const startMs = start.getTime()
+  return points.filter((p) => {
+    const t = dateStrToUtcMs(p.date)
+    return Number.isFinite(t) && t >= startMs && t <= endMs
+  })
 }
 
-function formatAxisDate(dateStr: string): string {
-  const d = new Date(dateStr + "T12:00:00Z")
-  if (Number.isNaN(d.getTime())) return dateStr
+const DAY_MS = 86400000
+
+/** Evenly spaced tick timestamps between first/last point (adapts to any range). */
+function buildDynamicXTicks(startMs: number, endMs: number, maxTicks = 11): number[] {
+  if (!Number.isFinite(startMs) || !Number.isFinite(endMs) || endMs <= startMs) {
+    return Number.isFinite(startMs) ? [startMs] : []
+  }
+  const spanDays = Math.max(1, (endMs - startMs) / DAY_MS)
+  let intervalDays = Math.max(1, Math.ceil(spanDays / Math.max(2, maxTicks - 1)))
+  const nice = [1, 2, 3, 5, 7, 10, 14, 21, 30, 60, 90, 120, 180, 365]
+  intervalDays = nice.find((n) => n >= intervalDays) ?? intervalDays
+
+  const ticks: number[] = [startMs]
+  let t = startMs + intervalDays * DAY_MS
+  while (t < endMs - DAY_MS / 2 && ticks.length < maxTicks - 1) {
+    ticks.push(t)
+    t += intervalDays * DAY_MS
+  }
+  if (ticks[ticks.length - 1] !== endMs) ticks.push(endMs)
+  return ticks
+}
+
+function formatTickLabel(ts: number, spanDays: number): string {
+  const d = new Date(ts)
+  if (Number.isNaN(d.getTime())) return ""
+  if (spanDays > 550) {
+    return d.toLocaleDateString("en-GB", { month: "short", year: "numeric" })
+  }
+  if (spanDays > 120) {
+    return d.toLocaleDateString("en-GB", { month: "short", day: "numeric" })
+  }
   return d.toLocaleDateString("en-GB", { month: "short", day: "numeric" })
+}
+
+function formatTooltipDate(dateStr: string): string {
+  const t = dateStrToUtcMs(dateStr)
+  if (!Number.isFinite(t)) return dateStr
+  return new Date(t).toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  })
 }
 
 function formatY(v: number): string {
@@ -93,6 +163,7 @@ export function PortfolioPerformanceChart({
   const [label, setLabel] = useState("")
   const [warning, setWarning] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const chartGradId = useId().replace(/:/g, "")
 
   const stockKey = useMemo(
     () =>
@@ -177,14 +248,31 @@ export function PortfolioPerformanceChart({
     [rawPoints, range]
   )
 
-  const displayData = useMemo(
-    () =>
-      chartData.map((p) => ({
-        ...p,
-        xLabel: formatAxisDate(p.date),
-      })),
-    [chartData]
-  )
+  const displayData = useMemo(() => {
+    const rows = chartData
+      .map((p) => {
+        const time = dateStrToUtcMs(p.date)
+        return Number.isFinite(time) ? { ...p, time } : null
+      })
+      .filter(Boolean) as (Point & { time: number })[]
+    rows.sort((a, b) => a.time - b.time)
+    return rows
+  }, [chartData])
+
+  const xTicks = useMemo(() => {
+    if (displayData.length < 2) return [] as number[]
+    const start = displayData[0].time
+    const end = displayData[displayData.length - 1].time
+    return buildDynamicXTicks(start, end, 12)
+  }, [displayData])
+
+  const spanDays = useMemo(() => {
+    if (displayData.length < 2) return 0
+    return Math.max(
+      1,
+      (displayData[displayData.length - 1].time - displayData[0].time) / DAY_MS
+    )
+  }, [displayData])
 
   const pctStr = useMemo(() => {
     if (chartData.length < 2) return null
@@ -380,10 +468,16 @@ export function PortfolioPerformanceChart({
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
               data={displayData}
-              margin={{ top: 8, right: 16, left: 4, bottom: 4 }}
+              margin={{ top: 8, right: 16, left: 4, bottom: 8 }}
             >
               <defs>
-                <linearGradient id="pfPerfGreen" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient
+                  id={`pfPerfGreen-${chartGradId}`}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
                   <stop offset="5%" stopColor="#16a34a" stopOpacity={0.35} />
                   <stop offset="95%" stopColor="#16a34a" stopOpacity={0} />
                 </linearGradient>
@@ -394,12 +488,17 @@ export function PortfolioPerformanceChart({
                 vertical={false}
               />
               <XAxis
-                dataKey="xLabel"
+                type="number"
+                dataKey="time"
+                domain={["dataMin", "dataMax"]}
+                scale="time"
+                ticks={xTicks.length >= 2 ? xTicks : undefined}
                 stroke="#64748b"
                 fontSize={11}
                 tickLine={false}
                 axisLine={false}
-                interval="preserveStartEnd"
+                tickFormatter={(ts: number) => formatTickLabel(ts, spanDays)}
+                allowDataOverflow={false}
               />
               <YAxis
                 stroke="#64748b"
@@ -422,7 +521,9 @@ export function PortfolioPerformanceChart({
                   label || "Value",
                 ]}
                 labelFormatter={(_, payload) =>
-                  payload?.[0]?.payload?.date ?? ""
+                  formatTooltipDate(
+                    String(payload?.[0]?.payload?.date ?? "")
+                  )
                 }
               />
               <Area
@@ -431,7 +532,7 @@ export function PortfolioPerformanceChart({
                 stroke="#15803d"
                 strokeWidth={2}
                 fillOpacity={1}
-                fill="url(#pfPerfGreen)"
+                fill={`url(#pfPerfGreen-${chartGradId})`}
                 dot={false}
                 activeDot={{ r: 4, fill: "#15803d" }}
               />
