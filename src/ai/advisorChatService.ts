@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/prisma"
+import { getOpenAiApiKey } from "./openaiGenerate"
 import { generateLlmContent, getAnyLlmApiKey } from "./llmGenerate"
 
 /** Trim snapshot so the request is unlikely to exceed model context limits */
@@ -21,8 +22,9 @@ function buildLlmFailureReply(status: number, providerMessage: string): string {
     hint =
       "Rate limited (HTTP 429). Wait 1–2 minutes or use a higher tier. You can set GEMINI_429_RETRIES=4 or OPENAI_429_RETRIES=3."
   } else if (status === 404) {
-    hint =
-      "No working Gemini model was found (HTTP 404). Set GEMINI_MODEL to a current id; see https://ai.google.dev/gemini-api/docs/models — or rely on OPENAI_API_KEY with AI_PROVIDER_ORDER=openai_first."
+    hint = getOpenAiApiKey()
+      ? "Gemini returned HTTP 404 for every model we tried, and OpenAI also failed or returned no text. Set GEMINI_MODEL=gemini-2.0-flash or gemini-2.0-flash-001, restart the app, and check https://ai.google.dev/gemini-api/docs/models — or set OPENAI_MODEL=gpt-4o-mini and verify OPENAI_API_KEY."
+      : "Gemini returned HTTP 404 (model id not available for this key). Try GEMINI_MODEL=gemini-2.0-flash in .env, restart the server, or add OPENAI_API_KEY so the assistant can use OpenAI when Gemini is unavailable."
   } else if (status >= 500 || status === 503) {
     hint = "The AI provider had a server error; retry shortly."
   } else if (status === 0) {

@@ -1,5 +1,8 @@
+import "server-only"
+
 /**
- * OpenAI Chat Completions API (REST). Set OPENAI_API_KEY.
+ * OpenAI Chat Completions API (REST). Set OPENAI_API_KEY in server env only.
+ * Never expose keys in browsers or mobile clients — route calls through this backend.
  * @see https://platform.openai.com/docs/api-reference/chat/create
  */
 

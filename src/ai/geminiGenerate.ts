@@ -1,17 +1,24 @@
+import "server-only"
+
 /**
  * Google Gemini (Generative Language API) — generateContent via REST.
+ * API keys must stay server-side only; never use NEXT_PUBLIC_* for secrets.
  * @see https://ai.google.dev/api/rest/v1beta/models/generateContent
  */
 
-/** Prefer current stable IDs; unversioned slugs often return 404 on the REST API. */
-export const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+/**
+ * Default model id for `generativelanguage.googleapis.com` generateContent.
+ * `gemini-2.5-flash` may 404 for some keys/regions; `gemini-2.0-flash` is widely available.
+ * @see https://ai.google.dev/gemini-api/docs/models
+ */
+export const DEFAULT_GEMINI_MODEL = "gemini-2.0-flash"
 
 /**
  * Tried after primary (and optional GEMINI_MODEL_FALLBACK), in order.
- * @see https://ai.google.dev/gemini-api/docs/models
  */
 export const GEMINI_BUILTIN_FALLBACKS: readonly string[] = [
   "gemini-2.0-flash-001",
+  "gemini-2.5-flash",
   "gemini-1.5-flash-002",
   "gemini-1.5-flash",
 ]

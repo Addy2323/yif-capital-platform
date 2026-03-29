@@ -1,6 +1,9 @@
+import "server-only"
+
 /**
  * Unified LLM text generation: Gemini and/or OpenAI with configurable order.
  * Env: AI_PROVIDER_ORDER = gemini_first (default) | openai_first
+ * Loads secrets only on the server — do not import from client components.
  */
 
 import {
@@ -57,6 +60,7 @@ function shouldRetryModel(
     status === 429 ||
     status === 404 ||
     status === 400 ||
+    status === 500 ||
     status === 502 ||
     status === 503
   )
