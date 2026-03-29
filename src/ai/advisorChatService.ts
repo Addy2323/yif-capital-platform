@@ -1,10 +1,9 @@
 /**
  * Open-ended Q&A with the YIF advisor (DSE / Tanzania context).
- * Uses Gemini and/or OpenAI (see llmGenerate.ts, AI_PROVIDER_ORDER).
+ * Uses OpenAI only (see llmGenerate.ts, openaiGenerate.ts).
  */
 
 import { prisma } from "@/lib/prisma"
-import { getOpenAiApiKey } from "./openaiGenerate"
 import { generateLlmContent, getAnyLlmApiKey } from "./llmGenerate"
 
 /** Trim snapshot so the request is unlikely to exceed model context limits */
@@ -17,14 +16,13 @@ function buildLlmFailureReply(status: number, providerMessage: string): string {
   let hint = ""
   if (status === 400 || status === 401 || status === 403) {
     hint =
-      "The AI provider rejected the request: check GEMINI_API_KEY and/or OPENAI_API_KEY, billing/API access, and key restrictions."
+      "OpenAI rejected the request: check OPENAI_API_KEY is valid, billing is enabled, and the key isn’t restricted incorrectly."
   } else if (status === 429) {
     hint =
-      "Rate limited (HTTP 429). Wait 1–2 minutes or use a higher tier. You can set GEMINI_429_RETRIES=4 or OPENAI_429_RETRIES=3."
+      "OpenAI rate-limited this key (HTTP 429). Wait 1–2 minutes or raise limits; you can set OPENAI_429_RETRIES=3."
   } else if (status === 404) {
-    hint = getOpenAiApiKey()
-      ? "Gemini returned HTTP 404 for every model we tried, and OpenAI also failed or returned no text. Set GEMINI_MODEL=gemini-2.0-flash or gemini-2.0-flash-001, restart the app, and check https://ai.google.dev/gemini-api/docs/models — or set OPENAI_MODEL=gpt-4o-mini and verify OPENAI_API_KEY."
-      : "Gemini returned HTTP 404 (model id not available for this key). Try GEMINI_MODEL=gemini-2.0-flash in .env, restart the server, or add OPENAI_API_KEY so the assistant can use OpenAI when Gemini is unavailable."
+    hint =
+      "No matching OpenAI model (HTTP 404). Set OPENAI_MODEL=gpt-4o-mini (or another valid id), restart the server, and see https://platform.openai.com/docs/models"
   } else if (status >= 500 || status === 503) {
     hint = "The AI provider had a server error; retry shortly."
   } else if (status === 0) {
@@ -99,7 +97,7 @@ export async function buildMarketSnapshotText(maxRows = 40): Promise<string> {
 
 export type AdvisorChatResult = {
   reply: string
-  source: "gemini" | "openai" | "fallback"
+  source: "openai" | "fallback"
   apiError?: boolean
 }
 
@@ -130,7 +128,7 @@ ${userMessage.trim()}`
   if (!getAnyLlmApiKey()) {
     return {
       reply:
-        "The AI advisor needs GEMINI_API_KEY or OPENAI_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
+        "The AI advisor needs OPENAI_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
       source: "fallback",
     }
   }

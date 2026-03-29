@@ -56,7 +56,7 @@ type InsightPayload =
       title: string
       body: string
       items: InsightItem[]
-      source: "gemini" | "openai" | "template"
+      source: "openai" | "template"
     }
   | { show: false; scrapeId?: string }
 

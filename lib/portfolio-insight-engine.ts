@@ -29,7 +29,7 @@ export type InsightPayload =
       title: string
       body: string
       items: InsightItem[]
-      source: "gemini" | "openai" | "template"
+      source: "openai" | "template"
     }
   | { show: false; scrapeId?: string }
 
@@ -65,7 +65,7 @@ function templateProspect(items: InsightItem[]): string {
 
 async function generateAiText(
   prompt: string
-): Promise<{ text: string; provider: "gemini" | "openai" } | null> {
+): Promise<{ text: string; provider: "openai" } | null> {
   if (!getAnyLlmApiKey()) return null
   const r = await generateLlmContent({
     userText: prompt,
@@ -272,7 +272,7 @@ Write 4–7 short sentences in plain English (or Swahili mix if natural):
 No bullet labels like "1)". No markdown. Max 130 words.`
 
     let body: string
-    let source: "gemini" | "openai" | "template"
+    let source: "openai" | "template"
     if (skipAi) {
       body = templateHolding(items)
       source = "template"
@@ -280,7 +280,7 @@ No bullet labels like "1)". No markdown. Max 130 words.`
       const ai = await generateAiText(prompt)
       if (ai) {
         body = ai.text
-        source = ai.provider
+        source = "openai"
       } else {
         body = templateHolding(items)
         source = "template"
@@ -346,7 +346,7 @@ No bullet labels like "1)". No markdown. Max 130 words.`
 Write 4–6 sentences: encourage research and diversification, mention risks, that this is NOT a buy recommendation. Suggest creating a portfolio to track ideas. Plain text, max 100 words, no markdown.`
 
   let body: string
-  let source: "gemini" | "openai" | "template"
+  let source: "openai" | "template"
   if (skipAi) {
     body = templateProspect(items)
     source = "template"
@@ -354,7 +354,7 @@ Write 4–6 sentences: encourage research and diversification, mention risks, th
     const ai = await generateAiText(prompt)
     if (ai) {
       body = ai.text
-      source = ai.provider
+      source = "openai"
     } else {
       body = templateProspect(items)
       source = "template"

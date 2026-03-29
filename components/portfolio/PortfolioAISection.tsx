@@ -139,7 +139,7 @@ export function PortfolioAISection({
             Portfolio intelligence
           </h2>
           <p className="text-sm text-muted-foreground">
-            Pro: regression on daily history + Gemini advisory.{" "}
+            Pro: regression on daily history + OpenAI advisory.{" "}
             {!hasPremium && (
               <span className="text-amber-700 dark:text-amber-400">
                 Subscribe to unlock analysis.
