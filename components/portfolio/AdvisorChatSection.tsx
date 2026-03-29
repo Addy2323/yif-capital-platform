@@ -1,6 +1,13 @@
 "use client"
 
 import { useCallback, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { useAuth } from "@/lib/auth-context"
+import {
+  authUserHasPremiumFeatures,
+  loginRedirectUrl,
+  SUBSCRIBE_PLAN_URL,
+} from "@/lib/subscription-tier"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -11,11 +18,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Sheet,
@@ -28,76 +30,12 @@ import { cn } from "@/lib/utils"
 import {
   Loader2,
   Send,
-  ChevronDown,
   LineChart,
   Sparkles,
   ArrowRight,
+  Lock,
 } from "lucide-react"
 import { toast } from "sonner"
-
-export type AdvisorQuestionGroup = { label: string; items: string[] }
-
-export const ADVISOR_QUESTION_GROUPS: AdvisorQuestionGroup[] = [
-  {
-    label: "Ideas & research",
-    items: [
-      "What are five DSE stocks worth researching this quarter, and why?",
-      "How would I build a watchlist from today's market snapshot?",
-      "Which sectors on the DSE look more defensive vs more cyclical right now?",
-      "Compare large-cap vs smaller listings on the DSE — what trade-offs should I know?",
-      "What should I check before buying a bank stock versus an industrial stock?",
-      "Give me a simple checklist for screening a DSE company before I invest.",
-    ],
-  },
-  {
-    label: "Portfolio & risk",
-    items: [
-      "How should I diversify a small portfolio on the DSE?",
-      "What share of my savings is reasonable in equities versus keeping cash?",
-      "How should a low-risk investor think about volatility on the DSE?",
-      "What is a simple rebalancing rule for a casual long-term investor?",
-      "Explain correlation in plain terms for a two-stock portfolio.",
-      "I can only buy one stock a month — how do I phase in over a year?",
-    ],
-  },
-  {
-    label: "Reading the market",
-    items: [
-      "How do I interpret daily price change % and volume on the YIF stocks table?",
-      "What does P/E ratio roughly mean, and when can it mislead me?",
-      "What is market cap, and why does liquidity matter for small investors?",
-      "What is the difference between dividend, DPS, and dividend yield?",
-      "What sections of an annual report matter most for a retail investor?",
-      "How do I read momentum or trend from recent price history (high level)?",
-    ],
-  },
-  {
-    label: "Tanzania & DSE",
-    items: [
-      "What mistakes do first-time DSE retail investors often make?",
-      "How is investing on the DSE different from US or global markets?",
-      "Outline the high-level steps from CDS account to placing my first trade.",
-      "Ninawezaje kuanza kuwekeza kwenye soko la hisa la DSE? (Jibu kwa Kiswahili.)",
-      "What should I know about mobile money, brokers, and fees in Tanzania?",
-    ],
-  },
-  {
-    label: "Funds, bonds & balance",
-    items: [
-      "When might unit trusts or government bonds fit better than single stocks?",
-      "How can I compare stock dividends to bond or T-bill yields in TZS terms?",
-      "Stocks vs bonds on the DSE — how do I mix them by age or goal?",
-      "What is dollar-cost averaging and does it apply to monthly DSE buys?",
-      "Explain inflation and interest rates in simple terms for an equity investor.",
-    ],
-  },
-]
-
-export const SUGGESTED_ADVISOR_QUESTIONS = ADVISOR_QUESTION_GROUPS.flatMap(
-  (g) => g.items
-)
-
-const VISIBLE_GROUP_COUNT = 2
 
 export interface AdvisorChatSectionProps {
   holdingsSummary?: string
@@ -122,12 +60,29 @@ export function AdvisorChatSection({
   tone = "default",
   launcherClassName,
 }: AdvisorChatSectionProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const { user, isLoading: authLoading } = useAuth()
+  const hasPremium = authUserHasPremiumFeatures(user)
+
   const [open, setOpen] = useState(false)
   const [userRisk, setUserRisk] = useState<"low" | "medium" | "high">(defaultRisk)
   const [input, setInput] = useState("")
   const [loading, setLoading] = useState(false)
   const [turns, setTurns] = useState<ChatTurn[]>([])
-  const [moreOpen, setMoreOpen] = useState(false)
+
+  const openChatIfAllowed = useCallback(() => {
+    if (authLoading) return
+    if (!user) {
+      router.push(loginRedirectUrl(pathname || "/"))
+      return
+    }
+    if (!hasPremium) {
+      router.push(SUBSCRIBE_PLAN_URL)
+      return
+    }
+    setOpen(true)
+  }, [authLoading, user, hasPremium, router, pathname])
 
   const send = useCallback(
     async (text: string) => {
@@ -150,7 +105,26 @@ export function AdvisorChatSection({
             holdingsSummary: holdingsSummary || undefined,
           }),
         })
-        const json = await res.json()
+        const json = (await res.json()) as {
+          success?: boolean
+          error?: string
+          code?: string
+          subscribeUrl?: string
+        }
+        if (res.status === 401 || res.status === 403) {
+          if (json.code === "SUBSCRIPTION_REQUIRED" && json.subscribeUrl) {
+            setTurns((t) => (t.length ? t.slice(0, -1) : t))
+            router.push(json.subscribeUrl)
+            toast.message("Subscribe to use the AI advisor.")
+            return
+          }
+          if (json.code === "AUTH_REQUIRED" && json.subscribeUrl) {
+            setTurns((t) => (t.length ? t.slice(0, -1) : t))
+            router.push(json.subscribeUrl)
+            toast.message("Log in to use the AI advisor.")
+            return
+          }
+        }
         if (!res.ok || !json.success) {
           throw new Error(json.error || "Request failed")
         }
@@ -171,7 +145,7 @@ export function AdvisorChatSection({
         setLoading(false)
       }
     },
-    [userRisk, holdingsSummary, loading]
+    [userRisk, holdingsSummary, loading, router]
   )
 
   const launcher = (
@@ -179,28 +153,43 @@ export function AdvisorChatSection({
       {launchVariant === "fab" ? (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => openChatIfAllowed()}
+          disabled={authLoading}
           className={cn(
             "fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-500/40 bg-gradient-to-br from-amber-400 to-amber-600 text-navy shadow-xl shadow-amber-900/30 transition hover:scale-105 hover:shadow-2xl hover:shadow-amber-900/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             "md:bottom-8 md:right-8 md:h-16 md:w-16",
-            open && "pointer-events-none scale-90 opacity-0"
+            open && "pointer-events-none scale-90 opacity-0",
+            (!hasPremium || !user) &&
+              !authLoading &&
+              "ring-2 ring-navy/30 dark:ring-white/20",
+            authLoading && "opacity-70"
           )}
-          aria-label="Open AI advisor chat"
+          aria-label={
+            hasPremium && user
+              ? "Open AI advisor chat"
+              : "AI advisor — subscribe to unlock"
+          }
         >
           <div className="relative">
             <LineChart className="h-7 w-7 md:h-8 md:w-8" strokeWidth={2.25} />
-            <Sparkles className="absolute -right-1 -top-1 h-3.5 w-3.5 text-navy/90 md:h-4 md:w-4" />
+            {hasPremium && user ? (
+              <Sparkles className="absolute -right-1 -top-1 h-3.5 w-3.5 text-navy/90 md:h-4 md:w-4" />
+            ) : (
+              <Lock className="absolute -right-1 -top-1 h-3 w-3 text-navy md:h-3.5 md:w-3.5" />
+            )}
           </div>
         </button>
       ) : (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => openChatIfAllowed()}
+          disabled={authLoading}
           className={cn(
             "group relative w-full overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card via-card to-muted/30 p-1 text-left shadow-md transition hover:border-amber-500/35 hover:shadow-lg",
             tone === "portfolio" &&
               "border-[#24427E] bg-gradient-to-br from-[#0a1f44]/40 to-[#1A3A6E]/30 shadow-lg shadow-black/30 hover:border-[#D4A017]/50",
-            launcherClassName
+            launcherClassName,
+            authLoading && "pointer-events-none opacity-70"
           )}
         >
           <div
@@ -239,7 +228,7 @@ export function AdvisorChatSection({
                       "bg-[#D4A017]/20 text-[#D4A017]"
                   )}
                 >
-                  DSE
+                  {hasPremium && user ? "DSE" : "Pro"}
                 </span>
               </div>
               <p
@@ -248,8 +237,11 @@ export function AdvisorChatSection({
                   tone === "portfolio" && "text-[#B0B8C1]"
                 )}
               >
-                Market ideas, portfolio risk, Kiswahili questions — tap to open a
-                full conversation. Educational only.
+                {hasPremium && user
+                  ? "Market ideas, portfolio risk, Kiswahili questions — tap to open a full conversation. Educational only."
+                  : user
+                    ? "Subscribe to chat with the AI market advisor. Educational only."
+                    : "Log in and subscribe to unlock the AI market advisor."}
               </p>
             </div>
             <div
@@ -330,91 +322,13 @@ export function AdvisorChatSection({
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col gap-0">
-            <div className="shrink-0 border-b border-border/50 px-4 py-3">
-              <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                Quick prompts
-              </p>
-              <div className="space-y-3">
-                {ADVISOR_QUESTION_GROUPS.slice(0, VISIBLE_GROUP_COUNT).map(
-                  (group) => (
-                    <div key={group.label}>
-                      <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground/90">
-                        {group.label}
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {group.items.map((q, i) => (
-                          <button
-                            key={`${group.label}-${i}`}
-                            type="button"
-                            disabled={loading}
-                            onClick={() => void send(q)}
-                            className="rounded-full border border-border/70 bg-muted/30 px-2.5 py-1 text-left text-[11px] leading-snug text-muted-foreground transition hover:border-amber-500/30 hover:bg-amber-500/5 hover:text-foreground disabled:opacity-50"
-                          >
-                            {q.length > 70 ? `${q.slice(0, 70)}…` : q}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                )}
-                <Collapsible open={moreOpen} onOpenChange={setMoreOpen}>
-                  <CollapsibleTrigger asChild>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 gap-1 px-2 text-xs text-muted-foreground"
-                      disabled={loading}
-                    >
-                      <ChevronDown
-                        className={cn(
-                          "h-3.5 w-3.5 transition-transform",
-                          moreOpen && "rotate-180"
-                        )}
-                      />
-                      More ideas (
-                      {ADVISOR_QUESTION_GROUPS.slice(VISIBLE_GROUP_COUNT).reduce(
-                        (n, g) => n + g.items.length,
-                        0
-                      )}
-                      )
-                    </Button>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="space-y-3 pt-2">
-                    {ADVISOR_QUESTION_GROUPS.slice(VISIBLE_GROUP_COUNT).map(
-                      (group) => (
-                        <div key={group.label}>
-                          <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground/90">
-                            {group.label}
-                          </div>
-                          <div className="flex flex-wrap gap-1.5">
-                            {group.items.map((q, i) => (
-                              <button
-                                key={`${group.label}-${i}`}
-                                type="button"
-                                disabled={loading}
-                                onClick={() => void send(q)}
-                                className="rounded-full border border-border/70 bg-muted/30 px-2.5 py-1 text-left text-[11px] leading-snug text-muted-foreground transition hover:border-amber-500/30 hover:bg-amber-500/5 hover:text-foreground disabled:opacity-50"
-                              >
-                                {q.length > 70 ? `${q.slice(0, 70)}…` : q}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )
-                    )}
-                  </CollapsibleContent>
-                </Collapsible>
-              </div>
-            </div>
-
             <ScrollArea className="min-h-0 flex-1 px-4">
               <div className="space-y-3 py-4 pr-2">
                 {turns.length === 0 ? (
                   <div className="rounded-xl border border-dashed border-border/70 bg-muted/20 px-4 py-8 text-center">
                     <Sparkles className="mx-auto mb-2 h-8 w-8 text-amber-500/60" />
                     <p className="text-sm text-muted-foreground">
-                      Choose a quick prompt or type your own question below.
+                      Type your question below to get started.
                     </p>
                   </div>
                 ) : (

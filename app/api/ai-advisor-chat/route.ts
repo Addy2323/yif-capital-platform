@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getAdvisorChatReply } from "@/src/ai/advisorChatService"
+import { requirePremiumForApi } from "@/lib/premium-access-server"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -8,6 +9,11 @@ const MAX_LEN = 2500
 
 export async function POST(request: NextRequest) {
   try {
+    const access = await requirePremiumForApi()
+    if (!access.ok) {
+      return NextResponse.json(access.body, { status: access.status })
+    }
+
     const body = await request.json().catch(() => ({}))
     const message =
       typeof body.message === "string" ? body.message.trim() : ""

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { processStockAnalysis } from "@/src/ai/pipeline"
+import { requirePremiumForApi } from "@/lib/premium-access-server"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -14,6 +15,11 @@ function cacheKey(stock: string, userRisk: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    const access = await requirePremiumForApi()
+    if (!access.ok) {
+      return NextResponse.json(access.body, { status: access.status })
+    }
+
     const body = await request.json().catch(() => ({}))
     const stock = typeof body.stock === "string" ? body.stock.trim() : ""
     const userRiskRaw = typeof body.userRisk === "string" ? body.userRisk : "medium"

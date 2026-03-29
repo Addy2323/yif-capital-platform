@@ -1,6 +1,13 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { useAuth } from "@/lib/auth-context"
+import {
+  authUserHasPremiumFeatures,
+  loginRedirectUrl,
+  SUBSCRIBE_PLAN_URL,
+} from "@/lib/subscription-tier"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import {
@@ -38,6 +45,11 @@ export function PortfolioAISection({
   symbols,
   defaultRisk = "medium",
 }: PortfolioAISectionProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const { user, isLoading: authLoading } = useAuth()
+  const hasPremium = authUserHasPremiumFeatures(user)
+
   const unique = useMemo(
     () => Array.from(new Set(symbols.map((s) => s.toUpperCase()))),
     [symbols]
@@ -52,6 +64,16 @@ export function PortfolioAISection({
       toast.error("Select a stock symbol.")
       return
     }
+    if (authLoading) return
+    if (!user) {
+      router.push(loginRedirectUrl(pathname || "/portfolio"))
+      return
+    }
+    if (!hasPremium) {
+      router.push(SUBSCRIBE_PLAN_URL)
+      toast.message("Subscribe to run portfolio AI analysis.")
+      return
+    }
     setLoading(true)
     try {
       const res = await fetch("/api/ai-advice", {
@@ -59,7 +81,23 @@ export function PortfolioAISection({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stock: symbol, userRisk }),
       })
-      const json = await res.json()
+      const json = (await res.json()) as {
+        success?: boolean
+        error?: string
+        code?: string
+        subscribeUrl?: string
+      }
+      if (res.status === 401 || res.status === 403) {
+        if (json.code === "SUBSCRIPTION_REQUIRED" && json.subscribeUrl) {
+          router.push(json.subscribeUrl)
+          toast.message("Subscribe to run portfolio AI analysis.")
+          return
+        }
+        if (json.code === "AUTH_REQUIRED" && json.subscribeUrl) {
+          router.push(json.subscribeUrl)
+          return
+        }
+      }
       if (!res.ok || !json.success) {
         throw new Error(json.error || "Request failed")
       }
@@ -74,7 +112,15 @@ export function PortfolioAISection({
     } finally {
       setLoading(false)
     }
-  }, [symbol, userRisk])
+  }, [
+    symbol,
+    userRisk,
+    authLoading,
+    user,
+    hasPremium,
+    router,
+    pathname,
+  ])
 
   useEffect(() => {
     if (unique.length && !unique.includes(symbol)) {
@@ -93,7 +139,12 @@ export function PortfolioAISection({
             Portfolio intelligence
           </h2>
           <p className="text-sm text-muted-foreground">
-            Regression on daily JSON history + Gemini advisory (fallback if API key unset)
+            Pro: regression on daily history + Gemini advisory.{" "}
+            {!hasPremium && (
+              <span className="text-amber-700 dark:text-amber-400">
+                Subscribe to unlock analysis.
+              </span>
+            )}
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -132,7 +183,7 @@ export function PortfolioAISection({
             type="button"
             className="bg-gold text-navy hover:bg-gold/90 sm:mb-0.5"
             onClick={() => void runAnalysis()}
-            disabled={loading}
+            disabled={loading || authLoading}
           >
             {loading ? (
               <>

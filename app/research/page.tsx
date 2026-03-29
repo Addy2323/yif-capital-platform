@@ -1,10 +1,15 @@
 "use client"
 
-import { AuthProvider } from "@/lib/auth-context"
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/lib/auth-context"
+import {
+  authUserHasPremiumFeatures,
+  loginRedirectUrl,
+  SUBSCRIBE_PLAN_URL,
+} from "@/lib/subscription-tier"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
 import { FileText, Download, Lock, Clock, TrendingUp, Building2, Landmark, Globe, Search } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -72,6 +77,26 @@ const reports = [
 ]
 
 function ResearchContent() {
+  const router = useRouter()
+  const { user, isLoading: authLoading } = useAuth()
+  const canPremium = authUserHasPremiumFeatures(user)
+
+  const requirePremiumOrSubscribe = (action: "download" | "summary") => {
+    if (authLoading) return
+    if (!user) {
+      router.push(loginRedirectUrl("/research"))
+      return
+    }
+    if (!canPremium) {
+      router.push(SUBSCRIBE_PLAN_URL)
+      return
+    }
+    if (action === "download") {
+      // Placeholder until real file delivery exists
+      return
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background/95">
       {/* Hero Header Section */}
@@ -125,12 +150,23 @@ function ResearchContent() {
                       45 pages
                     </span>
                   </div>
-                  <div className="mt-8 flex gap-4">
-                    <Button className="bg-gold text-navy hover:bg-gold/90">
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <Button
+                      type="button"
+                      disabled={authLoading}
+                      className="bg-gold text-navy hover:bg-gold/90"
+                      onClick={() => requirePremiumOrSubscribe("download")}
+                    >
                       <Download className="mr-2 h-4 w-4" />
-                      Download Report
+                      {canPremium ? "Download Report" : "Unlock with Pro"}
                     </Button>
-                    <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-transparent">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={authLoading}
+                      className="border-white/20 text-white hover:bg-white/10 bg-transparent"
+                      onClick={() => requirePremiumOrSubscribe("summary")}
+                    >
                       View Summary
                     </Button>
                   </div>
@@ -189,8 +225,23 @@ function ResearchContent() {
                     </div>
                     <div className="mt-4 flex gap-2">
                       {report.premium ? (
-                        <Button asChild className="w-full bg-gold text-navy hover:bg-gold/90">
-                          <Link href="/contact">Inquire About Access</Link>
+                        <Button
+                          type="button"
+                          disabled={authLoading}
+                          className="w-full bg-gold text-navy hover:bg-gold/90"
+                          onClick={() => {
+                            if (authLoading) return
+                            if (!user) {
+                              router.push(loginRedirectUrl("/research"))
+                              return
+                            }
+                            if (!canPremium) {
+                              router.push(SUBSCRIBE_PLAN_URL)
+                              return
+                            }
+                          }}
+                        >
+                          {canPremium ? "Download" : "Subscribe to unlock"}
                         </Button>
                       ) : (
                         <Button variant="outline" className="w-full bg-transparent">
@@ -216,8 +267,20 @@ function ResearchContent() {
               Upgrade to YIF Pro and get unlimited access to all research reports,
               real-time market data, and advanced analytics tools.
             </p>
-            <Button asChild className="mt-8 bg-gold text-navy hover:bg-gold/90">
-              <Link href="/contact">Inquire About Pro</Link>
+            <Button
+              type="button"
+              disabled={authLoading}
+              className="mt-8 bg-gold text-navy hover:bg-gold/90"
+              onClick={() => {
+                if (authLoading) return
+                if (!user) {
+                  router.push(loginRedirectUrl("/research"))
+                  return
+                }
+                router.push(SUBSCRIBE_PLAN_URL)
+              }}
+            >
+              {canPremium ? "Manage subscription" : "View plans & subscribe"}
             </Button>
           </div>
         </section>
