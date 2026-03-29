@@ -1,6 +1,6 @@
 /**
- * YIF Capital — AI advisor via Google Gemini (Generative Language API).
- * Set GEMINI_API_KEY (or GOOGLE_GENERATIVE_AI_API_KEY). Optional: GEMINI_MODEL.
+ * YIF Capital — AI advisor via Gemini and/or OpenAI (fallback chain).
+ * Set GEMINI_API_KEY and/or OPENAI_API_KEY. Optional: AI_PROVIDER_ORDER=gemini_first|openai_first
  */
 
 import type { StockMetrics } from "./regression"
@@ -9,6 +9,12 @@ import {
   getGeminiApiKey,
   resolveGeminiModelChain,
 } from "./geminiGenerate"
+import {
+  getOpenAiApiKey,
+  openaiChatGenerateContent,
+  resolveOpenAiModelChain,
+} from "./openaiGenerate"
+import { getAnyLlmApiKey, resolveProviderOrder } from "./llmGenerate"
 
 export type ParsedAiBlock = {
   trend: string
@@ -186,9 +192,23 @@ Reason: <max 2 sentences>
 }
 
 export type AiAdviceResult = NormalizedAdvice & {
-  source: "gemini" | "fallback"
+  source: "gemini" | "openai" | "fallback"
   apiError?: boolean
   parseFailed?: boolean
+}
+
+function shouldRetryAdvisorModel(
+  status: number,
+  hasMoreModels: boolean
+): boolean {
+  if (!hasMoreModels) return false
+  return (
+    status === 429 ||
+    status === 404 ||
+    status === 400 ||
+    status === 502 ||
+    status === 503
+  )
 }
 
 export async function getAIAdvice(
@@ -196,73 +216,113 @@ export async function getAIAdvice(
   metrics: StockMetrics,
   context: AdvisorContext
 ): Promise<AiAdviceResult> {
-  const apiKey = getGeminiApiKey()
-  const modelChain = resolveGeminiModelChain()
-
-  if (!apiKey) {
+  if (!getAnyLlmApiKey()) {
     return getFallbackAdvice(stock, metrics, context)
   }
 
   const prompt = buildPrompt(stock, metrics, context)
+  let hadOkResponseButBadParse = false
 
-  for (const model of modelChain) {
-    try {
-      const result = await geminiGenerateContent({
-        apiKey,
-        model,
-        userText: prompt,
-        maxOutputTokens: 1024,
-      })
-
-      if (!result.ok) {
-        const retry =
-          (result.status === 429 ||
-            result.status === 404 ||
-            result.status === 400 ||
-            result.status === 503) &&
-          model !== modelChain[modelChain.length - 1]
-        if (retry) {
-          console.error(
-            "[advisorService] Gemini model retry",
+  for (const provider of resolveProviderOrder()) {
+    if (provider === "gemini") {
+      const apiKey = getGeminiApiKey()
+      if (!apiKey) continue
+      const modelChain = resolveGeminiModelChain()
+      for (let mi = 0; mi < modelChain.length; mi++) {
+        const model = modelChain[mi]
+        const hasMore = mi < modelChain.length - 1
+        try {
+          const result = await geminiGenerateContent({
+            apiKey,
             model,
-            result.status,
-            result.message
-          )
-          continue
+            userText: prompt,
+            maxOutputTokens: 1024,
+          })
+
+          if (!result.ok) {
+            if (shouldRetryAdvisorModel(result.status, hasMore)) {
+              console.error(
+                "[advisorService] Gemini model retry",
+                model,
+                result.status,
+                result.message
+              )
+              continue
+            }
+            console.error(
+              "[advisorService] Gemini error",
+              result.status,
+              result.message
+            )
+            break
+          }
+
+          const parsed = parseYielAiResponse(result.text)
+          const normalized = normalizeAdvice(parsed)
+
+          if (normalized) {
+            return { ...normalized, source: "gemini" }
+          }
+
+          hadOkResponseButBadParse = true
+          if (hasMore) continue
+
+          break
+        } catch (e) {
+          console.error("[advisorService]", e)
+          if (hasMore) continue
+          break
         }
-        console.error(
-          "[advisorService] Gemini error",
-          result.status,
-          result.message
-        )
-        return {
-          ...getFallbackAdvice(stock, metrics, context),
-          source: "fallback",
-          apiError: true,
+      }
+    } else {
+      const apiKey = getOpenAiApiKey()
+      if (!apiKey) continue
+      const modelChain = resolveOpenAiModelChain()
+      for (let mi = 0; mi < modelChain.length; mi++) {
+        const model = modelChain[mi]
+        const hasMore = mi < modelChain.length - 1
+        try {
+          const result = await openaiChatGenerateContent({
+            apiKey,
+            model,
+            userText: prompt,
+            maxOutputTokens: 1024,
+          })
+
+          if (!result.ok) {
+            if (shouldRetryAdvisorModel(result.status, hasMore)) {
+              console.error(
+                "[advisorService] OpenAI model retry",
+                model,
+                result.status,
+                result.message
+              )
+              continue
+            }
+            console.error(
+              "[advisorService] OpenAI error",
+              result.status,
+              result.message
+            )
+            break
+          }
+
+          const parsed = parseYielAiResponse(result.text)
+          const normalized = normalizeAdvice(parsed)
+
+          if (normalized) {
+            return { ...normalized, source: "openai" }
+          }
+
+          hadOkResponseButBadParse = true
+          if (hasMore) continue
+
+          break
+        } catch (e) {
+          console.error("[advisorService] OpenAI", e)
+          if (hasMore) continue
+          break
         }
-      }
-
-      const parsed = parseYielAiResponse(result.text)
-      const normalized = normalizeAdvice(parsed)
-
-      if (normalized) {
-        return { ...normalized, source: "gemini" }
-      }
-
-      if (model !== modelChain[modelChain.length - 1]) continue
-
-      return {
-        ...getFallbackAdvice(stock, metrics, context),
-        source: "fallback",
-        parseFailed: true,
-      }
-    } catch (e) {
-      console.error("[advisorService]", e)
-      if (model !== modelChain[modelChain.length - 1]) continue
-      return {
-        ...getFallbackAdvice(stock, metrics, context),
-        source: "fallback",
-        apiError: true,
       }
     }
   }
@@ -270,6 +330,8 @@ export async function getAIAdvice(
   return {
     ...getFallbackAdvice(stock, metrics, context),
     source: "fallback",
-    apiError: true,
+    ...(hadOkResponseButBadParse
+      ? { parseFailed: true }
+      : { apiError: true }),
   }
 }

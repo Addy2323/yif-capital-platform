@@ -111,7 +111,7 @@ export async function geminiGenerateContent(
 
   const payload = JSON.stringify(body)
   const attempts = max429Attempts()
-  let res: Response
+  let res: Response | undefined
   let raw = ""
 
   for (let attempt = 0; attempt < attempts; attempt++) {
@@ -142,6 +142,10 @@ export async function geminiGenerateContent(
       status: res.status,
       message: parsed || raw.replace(/\s+/g, " ").trim().slice(0, 280),
     }
+  }
+
+  if (!res) {
+    return { ok: false, status: 0, message: "No response from Gemini" }
   }
 
   let data: unknown
