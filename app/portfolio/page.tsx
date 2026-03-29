@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/auth-context";
 import { AreaChart, Area, XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, CartesianGrid } from 'recharts';
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { PortfolioAISection } from "@/components/portfolio/PortfolioAISection";
 
 /* ─── SVG Icon Components ─── */
 const IconChart = () => (
@@ -538,10 +539,13 @@ export default function PortfolioPage() {
 
         // Use live prices for valuation if available
         const processedStocks = stocks.map((s: any) => {
-            const live = liveStocks.find(ls => ls.symbol === s.ticker);
+            const tk = String(s.ticker ?? "").trim().toUpperCase();
+            const live = liveStocks.find(
+                (ls) => String(ls.symbol ?? "").trim().toUpperCase() === tk
+            );
             return {
                 ...s,
-                currentPrice: live ? live.price : s.currentPrice
+                currentPrice: live != null && Number.isFinite(live.price) ? live.price : s.currentPrice,
             };
         });
 
@@ -808,8 +812,8 @@ export default function PortfolioPage() {
                                                         <div style={{ height: 200, flexShrink: 0 }}>
                                                             <ResponsiveContainer width="100%" height="100%">
                                                                 <PieChart>
-                                                                    <Pie data={Object.entries(activePortfolio.stocks.reduce((acc: any, s: any) => ({ ...acc, [s.sector]: (acc[s.sector] || 0) + s.qty * s.currentPrice }), {})).map(([name, value]) => ({ name, value }))} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={2} dataKey="value" stroke="none">
-                                                                        {Object.entries(activePortfolio.stocks.reduce((acc: any, s: any) => ({ ...acc, [s.sector]: (acc[s.sector] || 0) + s.qty * s.currentPrice }), {})).map(([name, _], i) => (
+                                                                    <Pie data={Object.entries(metrics.processedStocks.reduce((acc: any, s: any) => ({ ...acc, [s.sector]: (acc[s.sector] || 0) + s.qty * s.currentPrice }), {})).map(([name, value]) => ({ name, value }))} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={2} dataKey="value" stroke="none">
+                                                                        {Object.entries(metrics.processedStocks.reduce((acc: any, s: any) => ({ ...acc, [s.sector]: (acc[s.sector] || 0) + s.qty * s.currentPrice }), {})).map(([name, _], i) => (
                                                                             <Cell key={`cell-${i}`} fill={sectorColor(name)} />
                                                                         ))}
                                                                     </Pie>
@@ -818,7 +822,7 @@ export default function PortfolioPage() {
                                                             </ResponsiveContainer>
                                                         </div>
                                                         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginTop: "auto", maxHeight: 60, overflowY: "auto", scrollbarWidth: "none" }}>
-                                                            {Object.entries(activePortfolio.stocks.reduce((acc: any, s: any) => ({ ...acc, [s.sector]: (acc[s.sector] || 0) + s.qty * s.currentPrice }), {})).map(([name, value]: any) => (
+                                                            {Object.entries(metrics.processedStocks.reduce((acc: any, s: any) => ({ ...acc, [s.sector]: (acc[s.sector] || 0) + s.qty * s.currentPrice }), {})).map(([name, value]: any) => (
                                                                 <div key={name} style={{ display: "flex", alignItems: "center", gap: 6 }}><div style={{ width: 8, height: 8, borderRadius: 2, background: sectorColor(name) }} /><span style={{ color: "#B0B8C1", fontSize: 11 }}>{name}</span></div>
                                                             ))}
                                                         </div>
@@ -871,7 +875,7 @@ export default function PortfolioPage() {
                                             </div>
                                         ) : (
                                             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                                                {activePortfolio.stocks.map((s: any, i: number) => {
+                                                {(metrics?.processedStocks ?? activePortfolio.stocks).map((s: any, i: number) => {
                                                     const val = s.qty * s.currentPrice; const cost = s.qty * s.buyPrice;
                                                     const g = val - cost; const gp = +pctChange(s.currentPrice, s.buyPrice); const up = gp >= 0;
                                                     return (
@@ -920,6 +924,9 @@ export default function PortfolioPage() {
                                                 })}
                                             </div>
                                         )}
+                                        <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid #24427E" }}>
+                                            <PortfolioAISection symbols={activePortfolio.stocks.map((s: any) => s.ticker)} />
+                                        </div>
                                     </>
                                 )}
 
@@ -1006,7 +1013,7 @@ export default function PortfolioPage() {
                                                 <div style={{ background: "#1A3A6E", border: "1px solid #24427E", borderRadius: 16, padding: "20px 24px", height: 320, animation: "pf-slideUp 0.3s 0.1s both" }}>
                                                     <div style={{ fontWeight: 700, marginBottom: 16, fontSize: 16 }}>Cost vs Current Value</div>
                                                     <ResponsiveContainer width="100%" height="85%">
-                                                        <BarChart data={activePortfolio.stocks.map((s: any) => ({ name: s.ticker, Cost: s.qty * s.buyPrice, Value: s.qty * s.currentPrice }))} margin={{ top: 10, right: 0, left: 0, bottom: 0 }} barGap={2} barCategoryGap="20%">
+                                                        <BarChart data={metrics.processedStocks.map((s: any) => ({ name: s.ticker, Cost: s.qty * s.buyPrice, Value: s.qty * s.currentPrice }))} margin={{ top: 10, right: 0, left: 0, bottom: 0 }} barGap={2} barCategoryGap="20%">
                                                             <CartesianGrid strokeDasharray="3 3" stroke="#24427E" vertical={false} />
                                                             <XAxis dataKey="name" stroke="#B0B8C1" fontSize={11} tickLine={false} axisLine={false} dy={10} />
                                                             <YAxis stroke="#B0B8C1" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(val) => `Tsh ${(val / 1000).toFixed(0)}k`} dx={-10} width={60} />
@@ -1021,13 +1028,13 @@ export default function PortfolioPage() {
                                                 <div style={{ background: "#1A3A6E", border: "1px solid #24427E", borderRadius: 16, padding: "20px 24px", height: 320, animation: "pf-slideUp 0.3s 0.2s both" }}>
                                                     <div style={{ fontWeight: 700, marginBottom: 16, fontSize: 16 }}>Stock Return %</div>
                                                     <ResponsiveContainer width="100%" height="85%">
-                                                        <BarChart data={[...activePortfolio.stocks].map((s: any) => ({ name: s.ticker, Return: +(pctChange(s.currentPrice, s.buyPrice)) })).sort((a, b) => b.Return - a.Return)} margin={{ top: 10, right: 0, left: 0, bottom: 0 }} barCategoryGap="20%">
+                                                        <BarChart data={[...metrics.processedStocks].map((s: any) => ({ name: s.ticker, Return: +(pctChange(s.currentPrice, s.buyPrice)) })).sort((a, b) => b.Return - a.Return)} margin={{ top: 10, right: 0, left: 0, bottom: 0 }} barCategoryGap="20%">
                                                             <CartesianGrid strokeDasharray="3 3" stroke="#24427E" vertical={false} />
                                                             <XAxis dataKey="name" stroke="#B0B8C1" fontSize={11} tickLine={false} axisLine={false} dy={10} />
                                                             <YAxis stroke="#B0B8C1" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(val) => `${val}%`} dx={-10} width={40} />
                                                             <ReTooltip contentStyle={{ background: "#051430", border: "1px solid #24427E", borderRadius: 12, padding: "12px 16px" }} itemStyle={{ fontSize: 13, fontWeight: 500 }} labelStyle={{ color: "#B0B8C1", fontSize: 12, marginBottom: 4 }} formatter={(val: number) => `${val}%`} cursor={{ fill: "#24427E", opacity: 0.4 }} />
                                                             <Bar dataKey="Return" radius={[4, 4, 0, 0]}>
-                                                                {[...activePortfolio.stocks].sort((a: any, b: any) => +pctChange(b.currentPrice, b.buyPrice) - +pctChange(a.currentPrice, a.buyPrice)).map((entry: any, index: number) => (
+                                                                {[...metrics.processedStocks].sort((a: any, b: any) => +pctChange(b.currentPrice, b.buyPrice) - +pctChange(a.currentPrice, a.buyPrice)).map((entry: any, index: number) => (
                                                                     <Cell key={`cell-${index}`} fill={+pctChange(entry.currentPrice, entry.buyPrice) >= 0 ? "#D4A017" : "#ff5c5c"} />
                                                                 ))}
                                                             </Bar>
