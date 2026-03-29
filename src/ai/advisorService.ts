@@ -1,13 +1,15 @@
 /**
- * YIF Capital — AI advisor via OpenRouter (OpenAI-compatible chat completions).
- * Uses OPENROUTER_API_KEY, optional OPENROUTER_API_URL / OPENROUTER_MODEL.
+ * YIF Capital — AI advisor via Google Gemini (Generative Language API).
+ * Set GEMINI_API_KEY (or GOOGLE_GENERATIVE_AI_API_KEY). Optional: GEMINI_MODEL.
  */
 
 import type { StockMetrics } from "./regression"
-
-const DEFAULT_OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-/** OpenRouter model slug — override with OPENROUTER_MODEL */
-const DEFAULT_OPENROUTER_MODEL = "anthropic/claude-3.5-sonnet"
+import {
+  BUILTIN_GEMINI_FALLBACK_MODEL,
+  DEFAULT_GEMINI_MODEL,
+  geminiGenerateContent,
+  getGeminiApiKey,
+} from "./geminiGenerate"
 
 export type ParsedAiBlock = {
   trend: string
@@ -185,13 +187,9 @@ Reason: <max 2 sentences>
 }
 
 export type AiAdviceResult = NormalizedAdvice & {
-  source: "openrouter" | "fallback"
+  source: "gemini" | "fallback"
   apiError?: boolean
   parseFailed?: boolean
-}
-
-type OpenRouterChatResponse = {
-  choices?: Array<{ message?: { content?: string | null } }>
 }
 
 export async function getAIAdvice(
@@ -199,11 +197,15 @@ export async function getAIAdvice(
   metrics: StockMetrics,
   context: AdvisorContext
 ): Promise<AiAdviceResult> {
-  const apiKey = process.env.OPENROUTER_API_KEY?.trim()
-  const apiUrl =
-    process.env.OPENROUTER_API_URL?.trim() || DEFAULT_OPENROUTER_URL
-  const model =
-    process.env.OPENROUTER_MODEL?.trim() || DEFAULT_OPENROUTER_MODEL
+  const apiKey = getGeminiApiKey()
+  const primary =
+    process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
+  const fallbackEnv = process.env.GEMINI_MODEL_FALLBACK?.trim()
+  const modelChain = [
+    primary,
+    ...(fallbackEnv ? [fallbackEnv] : []),
+    BUILTIN_GEMINI_FALLBACK_MODEL,
+  ].filter((m, i, a) => m && a.indexOf(m) === i)
 
   if (!apiKey) {
     return getFallbackAdvice(stock, metrics, context)
@@ -211,62 +213,70 @@ export async function getAIAdvice(
 
   const prompt = buildPrompt(stock, metrics, context)
 
-  try {
-    const referer =
-      process.env.OPENROUTER_HTTP_REFERER?.trim() ||
-      process.env.NEXT_PUBLIC_APP_URL?.trim() ||
-      "https://yif.capital"
-
-    // Header values must be ASCII (ByteString); Unicode e.g. em dash (U+2014) throws in fetch().
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-      "HTTP-Referer": referer,
-      "X-Title": "YIF Capital - Portfolio AI",
-    }
-
-    const res = await fetch(apiUrl, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
+  for (const model of modelChain) {
+    try {
+      const result = await geminiGenerateContent({
+        apiKey,
         model,
-        max_tokens: 1024,
-        messages: [{ role: "user", content: prompt }],
-      }),
-    })
+        userText: prompt,
+        maxOutputTokens: 1024,
+      })
 
-    if (!res.ok) {
-      const errText = await res.text().catch(() => "")
-      console.error("[advisorService] OpenRouter error", res.status, errText)
+      if (!result.ok) {
+        const retry =
+          (result.status === 404 ||
+            result.status === 400 ||
+            result.status === 503) &&
+          model !== modelChain[modelChain.length - 1]
+        if (retry) {
+          console.error(
+            "[advisorService] Gemini model retry",
+            model,
+            result.status,
+            result.message
+          )
+          continue
+        }
+        console.error(
+          "[advisorService] Gemini error",
+          result.status,
+          result.message
+        )
+        return {
+          ...getFallbackAdvice(stock, metrics, context),
+          source: "fallback",
+          apiError: true,
+        }
+      }
+
+      const parsed = parseYielAiResponse(result.text)
+      const normalized = normalizeAdvice(parsed)
+
+      if (normalized) {
+        return { ...normalized, source: "gemini" }
+      }
+
+      if (model !== modelChain[modelChain.length - 1]) continue
+
+      return {
+        ...getFallbackAdvice(stock, metrics, context),
+        source: "fallback",
+        parseFailed: true,
+      }
+    } catch (e) {
+      console.error("[advisorService]", e)
+      if (model !== modelChain[modelChain.length - 1]) continue
       return {
         ...getFallbackAdvice(stock, metrics, context),
         source: "fallback",
         apiError: true,
       }
     }
+  }
 
-    const data = (await res.json()) as OpenRouterChatResponse
-    const raw = data?.choices?.[0]?.message?.content
-    const text = typeof raw === "string" ? raw : ""
-
-    const parsed = parseYielAiResponse(text)
-    const normalized = normalizeAdvice(parsed)
-
-    if (normalized) {
-      return { ...normalized, source: "openrouter" }
-    }
-
-    return {
-      ...getFallbackAdvice(stock, metrics, context),
-      source: "fallback",
-      parseFailed: true,
-    }
-  } catch (e) {
-    console.error("[advisorService]", e)
-    return {
-      ...getFallbackAdvice(stock, metrics, context),
-      source: "fallback",
-      apiError: true,
-    }
+  return {
+    ...getFallbackAdvice(stock, metrics, context),
+    source: "fallback",
+    apiError: true,
   }
 }

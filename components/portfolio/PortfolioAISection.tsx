@@ -93,7 +93,7 @@ export function PortfolioAISection({
             Portfolio intelligence
           </h2>
           <p className="text-sm text-muted-foreground">
-            Regression on daily JSON history + OpenRouter advisory (fallback if API key unset)
+            Regression on daily JSON history + Gemini advisory (fallback if API key unset)
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">

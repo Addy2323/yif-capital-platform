@@ -1,59 +1,38 @@
 /**
  * Open-ended Q&A with the YIF advisor (DSE / Tanzania context).
- * Uses the same OpenRouter env vars as advisorService.ts.
+ * Uses GEMINI_API_KEY (or GOOGLE_GENERATIVE_AI_API_KEY) like advisorService.ts.
  */
 
 import { prisma } from "@/lib/prisma"
+import {
+  BUILTIN_GEMINI_FALLBACK_MODEL,
+  DEFAULT_GEMINI_MODEL,
+  geminiGenerateContent,
+  getGeminiApiKey,
+} from "./geminiGenerate"
 
-const DEFAULT_OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-const DEFAULT_OPENROUTER_MODEL = "anthropic/claude-3.5-sonnet"
-/** Used if primary model returns 400/404 (deprecated slug, etc.) */
-const BUILTIN_FALLBACK_MODEL = "openai/gpt-4o-mini"
-/** Trim snapshot so the request is unlikely to exceed model context / gateway limits */
+/** Trim snapshot so the request is unlikely to exceed model context limits */
 const MAX_SNAPSHOT_CHARS = 12_000
 
-function normalizeOpenRouterChatUrl(raw: string | undefined): string {
-  let u = (raw || "").trim()
-  if (!u) return DEFAULT_OPENROUTER_URL
-  if (u.includes("/chat/completions")) return u
-  u = u.replace(/\/$/, "")
-  if (u.endsWith("/v1")) return `${u}/chat/completions`
-  return DEFAULT_OPENROUTER_URL
-}
-
-function parseOpenRouterErrorBody(body: string): string {
-  try {
-    const j = JSON.parse(body) as { error?: { message?: string } }
-    const m = j?.error?.message
-    return typeof m === "string" ? m : ""
-  } catch {
-    return body.replace(/\s+/g, " ").trim().slice(0, 280)
-  }
-}
-
-function buildOpenRouterFailureReply(
-  status: number,
-  providerMessage: string
-): string {
+function buildGeminiFailureReply(status: number, providerMessage: string): string {
   const msg = providerMessage.replace(/\s+/g, " ").trim()
   const short = msg.slice(0, 220)
 
   let hint = ""
-  if (status === 401) {
+  if (status === 400 || status === 401 || status === 403) {
     hint =
-      "Your server rejected the request (HTTP 401): check OPENROUTER_API_KEY is set correctly and not expired."
-  } else if (status === 402) {
-    hint =
-      "OpenRouter returned payment required (HTTP 402): add credits or billing on your OpenRouter account."
+      "The Gemini API rejected the request: check GEMINI_API_KEY is valid, billing/API access is enabled for Generative Language API, and the key is not restricted incorrectly."
   } else if (status === 429) {
     hint = "Rate limited (HTTP 429): wait a minute and try again."
-  } else if (status === 404 || (status === 400 && /model|not found/i.test(msg))) {
+  } else if (status === 404) {
     hint =
-      "The configured model may be invalid or renamed. Set OPENROUTER_MODEL to a current slug (e.g. openai/gpt-4o-mini) or set OPENROUTER_MODEL_FALLBACK."
-  } else if (status >= 500) {
-    hint = "OpenRouter or upstream had a server error; retry shortly."
+      "The configured model may be invalid. Set GEMINI_MODEL to a current name (e.g. gemini-2.0-flash) or GEMINI_MODEL_FALLBACK."
+  } else if (status >= 500 || status === 503) {
+    hint = "Google’s API had a server error; retry shortly."
+  } else if (status === 0) {
+    hint = short ? `Network error: ${short}` : "Network error reaching Google’s API."
   } else if (short) {
-    hint = `Provider said: ${short}`
+    hint = `API said: ${short}`
   }
 
   return [
@@ -122,7 +101,7 @@ export async function buildMarketSnapshotText(maxRows = 40): Promise<string> {
 
 export type AdvisorChatResult = {
   reply: string
-  source: "openrouter" | "fallback"
+  source: "gemini" | "fallback"
   apiError?: boolean
 }
 
@@ -130,11 +109,15 @@ export async function getAdvisorChatReply(
   userMessage: string,
   options: { userRisk?: string; holdingsSummary?: string }
 ): Promise<AdvisorChatResult> {
-  const apiKey = process.env.OPENROUTER_API_KEY?.trim()
-  const apiUrl =
-    process.env.OPENROUTER_API_URL?.trim() || DEFAULT_OPENROUTER_URL
-  const model =
-    process.env.OPENROUTER_MODEL?.trim() || DEFAULT_OPENROUTER_MODEL
+  const apiKey = getGeminiApiKey()
+  const primary =
+    process.env.GEMINI_MODEL?.trim() || DEFAULT_GEMINI_MODEL
+  const fallbackEnv = process.env.GEMINI_MODEL_FALLBACK?.trim()
+  const modelChain = [
+    primary,
+    ...(fallbackEnv ? [fallbackEnv] : []),
+    BUILTIN_GEMINI_FALLBACK_MODEL,
+  ].filter((m, i, a) => m && a.indexOf(m) === i)
 
   let snapshot = ""
   try {
@@ -159,97 +142,58 @@ ${userMessage.trim()}`
   if (!apiKey) {
     return {
       reply:
-        "The AI advisor needs OPENROUTER_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
+        "The AI advisor needs GEMINI_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
       source: "fallback",
     }
   }
 
-  const chatUrl = normalizeOpenRouterChatUrl(apiUrl)
-  if (chatUrl !== apiUrl.trim()) {
-    console.warn(
-      "[advisorChatService] Normalized OPENROUTER_API_URL to",
-      chatUrl
-    )
-  }
+  let lastStatus = 0
+  let lastMessage = ""
 
-  const fallbackModel = process.env.OPENROUTER_MODEL_FALLBACK?.trim()
-  const modelChain = [
-    model,
-    ...(fallbackModel ? [fallbackModel] : []),
-    BUILTIN_FALLBACK_MODEL,
-  ].filter((m, i, a) => m && a.indexOf(m) === i)
-
-  try {
-    const referer =
-      process.env.OPENROUTER_HTTP_REFERER?.trim() ||
-      process.env.NEXT_PUBLIC_APP_URL?.trim() ||
-      "https://yif.capital"
-
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-      "HTTP-Referer": referer,
-      "X-Title": "YIF Capital - Advisor Q&A",
-    }
-
-    let lastStatus = 0
-    let lastProviderMessage = ""
-
-    for (const tryModel of modelChain) {
-      const res = await fetch(chatUrl, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          model: tryModel,
-          max_tokens: 2048,
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: userBlock },
-          ],
-        }),
+  for (const tryModel of modelChain) {
+    try {
+      const result = await geminiGenerateContent({
+        apiKey,
+        model: tryModel,
+        systemInstruction: SYSTEM_PROMPT,
+        userText: userBlock,
+        maxOutputTokens: 2048,
         signal: AbortSignal.timeout(90_000),
       })
 
-      if (!res.ok) {
-        const errText = await res.text().catch(() => "")
-        lastStatus = res.status
-        lastProviderMessage = parseOpenRouterErrorBody(errText)
+      if (!result.ok) {
+        lastStatus = result.status
+        lastMessage = result.message
         console.error(
-          "[advisorChatService] OpenRouter",
+          "[advisorChatService] Gemini",
           tryModel,
-          res.status,
-          errText.slice(0, 800)
+          result.status,
+          result.message.slice(0, 800)
         )
-        const authOrPayment =
-          res.status === 401 || res.status === 402 || res.status === 429
-        const retryWithNextModel =
-          !authOrPayment &&
-          (res.status === 400 ||
-            res.status === 404 ||
-            res.status === 502 ||
-            res.status === 503 ||
-            (res.status === 403 && /model/i.test(lastProviderMessage)))
-        if (
-          retryWithNextModel &&
-          tryModel !== modelChain[modelChain.length - 1]
-        ) {
-          continue
-        }
+
+        const stopRetry =
+          result.status === 401 ||
+          result.status === 403 ||
+          result.status === 429
+
+        const tryNextModel =
+          !stopRetry &&
+          tryModel !== modelChain[modelChain.length - 1] &&
+          (result.status === 404 ||
+            result.status === 400 ||
+            result.status === 502 ||
+            result.status === 503)
+
+        if (tryNextModel) continue
+
         return {
-          reply: buildOpenRouterFailureReply(
-            lastStatus,
-            lastProviderMessage
-          ),
+          reply: buildGeminiFailureReply(lastStatus, lastMessage),
           source: "fallback",
           apiError: true,
         }
       }
 
-      const data = (await res.json()) as {
-        choices?: Array<{ message?: { content?: string | null } }>
-      }
-      const raw = data?.choices?.[0]?.message?.content
-      const text = typeof raw === "string" ? raw.trim() : ""
+      const text = result.text.trim()
       if (!text) {
         if (tryModel !== modelChain[modelChain.length - 1]) continue
         return {
@@ -260,25 +204,33 @@ ${userMessage.trim()}`
         }
       }
 
-      return { reply: text, source: "openrouter" }
+      return { reply: text, source: "gemini" }
+    } catch (e) {
+      console.error("[advisorChatService]", e)
+      const isAbort =
+        e instanceof Error &&
+        (e.name === "AbortError" || e.name === "TimeoutError")
+      if (isAbort) {
+        return {
+          reply:
+            "The AI request timed out (90s). Try a shorter question or retry. Meanwhile, use the Stocks page for live DSE data.",
+          source: "fallback",
+          apiError: true,
+        }
+      }
+      lastMessage = e instanceof Error ? e.message : String(e)
+      if (tryModel !== modelChain[modelChain.length - 1]) continue
+      return {
+        reply: buildGeminiFailureReply(0, lastMessage),
+        source: "fallback",
+        apiError: true,
+      }
     }
+  }
 
-    return {
-      reply: buildOpenRouterFailureReply(lastStatus, lastProviderMessage),
-      source: "fallback",
-      apiError: true,
-    }
-  } catch (e) {
-    console.error("[advisorChatService]", e)
-    const isAbort =
-      e instanceof Error &&
-      (e.name === "AbortError" || e.name === "TimeoutError")
-    return {
-      reply: isAbort
-        ? "The AI request timed out (90s). Try a shorter question or retry. Meanwhile, use the Stocks page for live DSE data."
-        : "Something went wrong while contacting the advisor. If the server cannot reach openrouter.ai, check firewall/DNS. Otherwise verify OPENROUTER_API_KEY and OPENROUTER_API_URL.",
-      source: "fallback",
-      apiError: true,
-    }
+  return {
+    reply: buildGeminiFailureReply(lastStatus, lastMessage),
+    source: "fallback",
+    apiError: true,
   }
 }
