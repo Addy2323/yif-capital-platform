@@ -6,18 +6,29 @@ import "server-only"
  * @see https://platform.openai.com/docs/api-reference/chat/create
  */
 
-export const DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
+/** Widely available on standard OpenAI API keys (api.openai.com Chat Completions). */
+export const DEFAULT_OPENAI_MODEL = "gpt-3.5-turbo"
 
+/**
+ * Tried after OPENAI_MODEL / OPENAI_MODEL_FALLBACK. Avoid deprecated ids (e.g. some `gpt-4-turbo` aliases 404).
+ * Order: most broadly available first.
+ */
 export const OPENAI_BUILTIN_FALLBACKS: readonly string[] = [
+  "gpt-3.5-turbo",
   "gpt-4o-mini",
   "gpt-4o",
-  "gpt-4-turbo",
 ]
 
 export function resolveOpenAiModelChain(): string[] {
-  const primary = process.env.OPENAI_MODEL?.trim() || DEFAULT_OPENAI_MODEL
+  const rawPrimary = process.env.OPENAI_MODEL?.trim()
+  const primary =
+    rawPrimary && rawPrimary.length > 0 ? rawPrimary : DEFAULT_OPENAI_MODEL
   const envFallback = process.env.OPENAI_MODEL_FALLBACK?.trim()
-  const chain = [primary, ...(envFallback ? [envFallback] : []), ...OPENAI_BUILTIN_FALLBACKS]
+  const chain = [
+    primary,
+    ...(envFallback ? [envFallback] : []),
+    ...OPENAI_BUILTIN_FALLBACKS,
+  ]
   return chain.filter((m, i, a) => m.length > 0 && a.indexOf(m) === i)
 }
 

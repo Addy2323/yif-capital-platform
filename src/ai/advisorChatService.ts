@@ -12,17 +12,22 @@ const MAX_SNAPSHOT_CHARS = 12_000
 function buildLlmFailureReply(status: number, providerMessage: string): string {
   const msg = providerMessage.replace(/\s+/g, " ").trim()
   const short = msg.slice(0, 220)
+  const looksLikeModelError =
+    /model|does not exist|not found|invalid_model/i.test(short) ||
+    status === 404
+
+  const modelHint =
+    "Use a key from https://platform.openai.com/api-keys (not Azure). Remove OPENAI_MODEL from .env to use the default, or set OPENAI_MODEL=gpt-3.5-turbo, restart the server, and confirm your account can access that model: https://platform.openai.com/docs/models"
 
   let hint = ""
-  if (status === 400 || status === 401 || status === 403) {
+  if (status === 404 || (status === 400 && looksLikeModelError)) {
+    hint = `OpenAI model or endpoint issue (${status}). ${modelHint}`
+  } else if (status === 400 || status === 401 || status === 403) {
     hint =
       "OpenAI rejected the request: check OPENAI_API_KEY is valid, billing is enabled, and the key isn’t restricted incorrectly."
   } else if (status === 429) {
     hint =
       "OpenAI rate-limited this key (HTTP 429). Wait 1–2 minutes or raise limits; you can set OPENAI_429_RETRIES=3."
-  } else if (status === 404) {
-    hint =
-      "No matching OpenAI model (HTTP 404). Set OPENAI_MODEL=gpt-4o-mini (or another valid id), restart the server, and see https://platform.openai.com/docs/models"
   } else if (status >= 500 || status === 503) {
     hint = "The AI provider had a server error; retry shortly."
   } else if (status === 0) {
