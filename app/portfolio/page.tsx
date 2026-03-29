@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
-import { AreaChart, Area, XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, CartesianGrid } from 'recharts';
+import { XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, CartesianGrid } from 'recharts';
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { PortfolioAISection } from "@/components/portfolio/PortfolioAISection";
 import { AdvisorChatSection } from "@/components/portfolio/AdvisorChatSection";
+import { PortfolioPerformanceChart } from "@/components/portfolio/PortfolioPerformanceChart";
 
 /* ─── SVG Icon Components ─── */
 const IconChart = () => (
@@ -125,37 +126,6 @@ const loadData = (userId: string) => {
         const r = localStorage.getItem(getUserKey(userId));
         return r ? JSON.parse(r) : [];
     } catch { return []; }
-};
-
-/* ─── chart helpers ─── */
-const generateHistory = (currentSc: number, investedSc: number) => {
-    const data = [];
-    const now = new Date();
-    // Simulate 12 months of data trailing up to current
-    for (let i = 11; i >= 0; i--) {
-        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-        const month = d.toLocaleString('default', { month: 'short' });
-
-        // Add some noise to make a realistic looking chart
-        // Early months are closer to invested amount, later months drift towards current value
-        const progress = (11 - i) / 11;
-        const randomFluctuation = 1 + (Math.random() * 0.08 - 0.04);
-
-        const pointVal = investedSc + ((currentSc - investedSc) * progress) * randomFluctuation;
-        const pointInv = investedSc * (0.8 + (progress * 0.2)); // Simulate gradually investing
-
-        data.push({
-            month,
-            value: Math.round(pointVal),
-            cost: Math.round(pointInv)
-        });
-    }
-    // Ensure the last point matches exact current reality
-    if (data.length > 0) {
-        data[data.length - 1].value = currentSc;
-        data[data.length - 1].cost = investedSc;
-    }
-    return data;
 };
 
 /* ─── investment calculators ─── */
@@ -756,33 +726,21 @@ export default function PortfolioPage() {
                                             ))}
                                         </div>
 
-                                        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, marginBottom: 24 }}>
-                                            {/* ── 12-Month Trend Chart ── */}
-                                            <div style={{ background: "#1A3A6E", border: "1px solid #24427E", borderRadius: 16, padding: "20px 24px", height: 320, animation: "pf-slideUp 0.3s 0.1s both" }}>
-                                                <div style={{ fontWeight: 700, marginBottom: 16, fontSize: 16 }}>Portfolio Value Trend</div>
-                                                <ResponsiveContainer width="100%" height="85%">
-                                                    <AreaChart data={generateHistory(metrics.total, metrics.invested)} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
-                                                        <defs>
-                                                            <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                                                                <stop offset="5%" stopColor="#D4A017" stopOpacity={0.3} />
-                                                                <stop offset="95%" stopColor="#D4A017" stopOpacity={0} />
-                                                            </linearGradient>
-                                                        </defs>
-                                                        <CartesianGrid strokeDasharray="3 3" stroke="#24427E" vertical={false} />
-                                                        <XAxis dataKey="month" stroke="#B0B8C1" fontSize={11} tickLine={false} axisLine={false} dy={10} />
-                                                        <YAxis stroke="#B0B8C1" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(val) => `Tsh ${val >= 1000000 ? (val / 1000000).toFixed(1) + 'M' : val >= 1000 ? (val / 1000).toFixed(1) + 'k' : val}`} dx={-10} width={60} />
-                                                        <ReTooltip
-                                                            contentStyle={{ background: "#051430", border: "1px solid #24427E", borderRadius: 12, padding: "12px 16px" }}
-                                                            itemStyle={{ color: "#e8f0fe", fontSize: 13, fontWeight: 500 }}
-                                                            labelStyle={{ color: "#B0B8C1", fontSize: 12, marginBottom: 4 }}
-                                                            formatter={(val: number, name: string) => [fmtTZS(val), name === 'value' ? 'Portfolio Value' : 'Cost Basis']}
-                                                        />
-                                                        <Area type="monotone" dataKey="value" stroke="#D4A017" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
-                                                        <Area type="monotone" dataKey="cost" stroke="#38bdf8" strokeWidth={2} strokeDasharray="5 5" fill="none" />
-                                                    </AreaChart>
-                                                </ResponsiveContainer>
+                                        {(activePortfolio.stocks.length > 0 || activePortfolio.funds.length > 0) && metrics && (
+                                            <div style={{ marginBottom: 24 }}>
+                                                <PortfolioPerformanceChart
+                                                    key={activePortfolio.id}
+                                                    portfolioId={activePortfolio.id}
+                                                    stocks={metrics.processedStocks.map((s: any) => ({
+                                                        ticker: s.ticker,
+                                                        qty: s.qty,
+                                                    }))}
+                                                    funds={activePortfolio.funds.map((f: any) => ({
+                                                        name: f.name,
+                                                    }))}
+                                                />
                                             </div>
-                                        </div>
+                                        )}
 
                                         {(activePortfolio.stocks.length > 0 || activePortfolio.funds.length > 0) && (
                                             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, marginBottom: 20, animation: "pf-slideUp 0.3s 0.2s both" }}>
@@ -999,6 +957,19 @@ export default function PortfolioPage() {
                                 {/* ── PERFORMANCE TAB ── */}
                                 {tab === "performance" && metrics && (
                                     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                                        {(activePortfolio.stocks.length > 0 || activePortfolio.funds.length > 0) && (
+                                            <PortfolioPerformanceChart
+                                                key={`perf-${activePortfolio.id}`}
+                                                portfolioId={activePortfolio.id}
+                                                stocks={metrics.processedStocks.map((s: any) => ({
+                                                    ticker: s.ticker,
+                                                    qty: s.qty,
+                                                }))}
+                                                funds={activePortfolio.funds.map((f: any) => ({
+                                                    name: f.name,
+                                                }))}
+                                            />
+                                        )}
                                         <div style={{ background: "#1A3A6E", border: "1px solid #24427E", borderRadius: 16, overflow: "hidden" }}>
                                             <div style={{ padding: "16px 20px", borderBottom: "1px solid #24427E", fontWeight: 700 }}>Performance Summary</div>
                                             {[
