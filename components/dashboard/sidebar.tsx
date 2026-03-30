@@ -60,6 +60,7 @@ const navigation: NavItem[] = [
   { name: "ETFs", href: "/etfs", icon: Layers },
   { name: "Research and Insights", href: "/research", icon: Search },
   { name: "Articles", href: "/articles", icon: Newspaper },
+  { name: "Dividend Snowball", href: "/tools/dividend-snowball", icon: TrendingUp },
   /* {
     name: "IPOs",
     icon: Target,

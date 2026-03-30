@@ -1,13 +1,13 @@
 /**
- * YIF Capital — AI advisor via OpenAI (Chat Completions). Set OPENAI_API_KEY on the server.
+ * YIF Capital — AI advisor via Google Gemini. Set GEMINI_API_KEY on the server.
  */
 
 import type { StockMetrics } from "./regression"
 import {
-  getOpenAiApiKey,
-  openaiChatGenerateContent,
-  resolveOpenAiModelChain,
-} from "./openaiGenerate"
+  getGeminiApiKey,
+  geminiGenerateContent,
+  resolveGeminiModelChain,
+} from "./geminiGenerate"
 import { getAnyLlmApiKey } from "./llmGenerate"
 
 export type ParsedAiBlock = {
@@ -186,7 +186,7 @@ Reason: <max 2 sentences>
 }
 
 export type AiAdviceResult = NormalizedAdvice & {
-  source: "openai" | "fallback"
+  source: "gemini" | "fallback"
   apiError?: boolean
   parseFailed?: boolean
 }
@@ -211,11 +211,7 @@ export async function getAIAdvice(
   metrics: StockMetrics,
   context: AdvisorContext
 ): Promise<AiAdviceResult> {
-  if (!getAnyLlmApiKey()) {
-    return getFallbackAdvice(stock, metrics, context)
-  }
-
-  const apiKey = getOpenAiApiKey()
+  const apiKey = getGeminiApiKey()
   if (!apiKey) {
     return getFallbackAdvice(stock, metrics, context)
   }
@@ -223,12 +219,12 @@ export async function getAIAdvice(
   const prompt = buildPrompt(stock, metrics, context)
   let hadOkResponseButBadParse = false
 
-  const modelChain = resolveOpenAiModelChain()
+  const modelChain = resolveGeminiModelChain()
   for (let mi = 0; mi < modelChain.length; mi++) {
     const model = modelChain[mi]
     const hasMore = mi < modelChain.length - 1
     try {
-      const result = await openaiChatGenerateContent({
+      const result = await geminiGenerateContent({
         apiKey,
         model,
         userText: prompt,
@@ -238,7 +234,7 @@ export async function getAIAdvice(
       if (!result.ok) {
         if (shouldRetryAdvisorModel(result.status, hasMore)) {
           console.error(
-            "[advisorService] OpenAI model retry",
+            "[advisorService] Gemini model retry",
             model,
             result.status,
             result.message
@@ -246,7 +242,7 @@ export async function getAIAdvice(
           continue
         }
         console.error(
-          "[advisorService] OpenAI error",
+          "[advisorService] Gemini error",
           result.status,
           result.message
         )
@@ -257,7 +253,7 @@ export async function getAIAdvice(
       const normalized = normalizeAdvice(parsed)
 
       if (normalized) {
-        return { ...normalized, source: "openai" }
+        return { ...normalized, source: "gemini" }
       }
 
       hadOkResponseButBadParse = true
@@ -265,7 +261,7 @@ export async function getAIAdvice(
 
       break
     } catch (e) {
-      console.error("[advisorService] OpenAI", e)
+      console.error("[advisorService] Gemini", e)
       if (hasMore) continue
       break
     }
