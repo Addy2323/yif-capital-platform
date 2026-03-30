@@ -6,14 +6,14 @@ import "server-only"
  * @see https://ai.google.dev/api/generate-content
  */
 
-const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
+const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1/models"
 
 export const DEFAULT_GEMINI_MODEL = "gemini-1.5-flash"
 
 export const GEMINI_FALLBACK_MODELS: readonly string[] = [
   "gemini-1.5-flash",
-  "gemini-2.0-flash",
   "gemini-1.5-pro",
+  "gemini-2.0-flash",
 ]
 
 export function resolveGeminiModelChain(): string[] {

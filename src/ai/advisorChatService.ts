@@ -17,7 +17,7 @@ function buildLlmFailureReply(status: number, providerMessage: string): string {
     status === 404
 
   const modelHint =
-    "Get a key from https://aistudio.google.com/apikey. Remove GEMINI_MODEL from .env to use the default (gemini-2.0-flash), restart the server, and confirm your key is active."
+    "Get a key from https://aistudio.google.com/apikey. Remove GEMINI_MODEL from .env to use the default (gemini-1.5-flash), restart the server, and confirm your key is active."
 
   let hint = ""
   if (status === 404 || (status === 400 && looksLikeModelError)) {
