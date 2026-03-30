@@ -8,13 +8,12 @@ import "server-only"
 
 const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
-export const DEFAULT_GEMINI_MODEL = "gemini-3-flash-preview"
+export const DEFAULT_GEMINI_MODEL = "gemini-2.0-flash"
 
 export const GEMINI_FALLBACK_MODELS: readonly string[] = [
-  "gemini-3-flash-preview",
-  "gemini-2.5-flash",
   "gemini-2.0-flash",
-  "gemini-1.5-flash",
+  "gemini-2.5-flash",
+  "gemini-3-flash-preview",
 ]
 
 export function resolveGeminiModelChain(): string[] {
@@ -36,8 +35,8 @@ function sleep(ms: number): Promise<void> {
 
 function maxRetries(): number {
   const raw = process.env.GEMINI_RETRIES?.trim() ?? process.env.OPENAI_429_RETRIES?.trim()
-  const n = raw ? parseInt(raw, 10) : 2
-  if (!Number.isFinite(n)) return 2
+  const n = raw ? parseInt(raw, 10) : 3
+  if (!Number.isFinite(n)) return 3
   return Math.min(5, Math.max(1, n))
 }
 
