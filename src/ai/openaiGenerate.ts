@@ -6,19 +6,19 @@ import "server-only"
  * Set OPENAI_API_KEY and optionally OPENAI_BASE_URL in server env.
  */
 
-/** Default model — DeepSeek-V3.2 non-thinking mode (128K context). */
-export const DEFAULT_OPENAI_MODEL = "deepseek-chat"
+/** Default model — Gemini 2.0 Flash via OpenAI-compatible endpoint. */
+export const DEFAULT_OPENAI_MODEL = "gemini-2.0-flash"
 
-/** Default base URL — DeepSeek (OpenAI-compatible). Override with OPENAI_BASE_URL. */
-export const DEFAULT_BASE_URL = "https://api.deepseek.com/v1"
+/** Default base URL — Gemini (OpenAI-compatible). Override with OPENAI_BASE_URL. */
+export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
 
 /**
  * Tried after OPENAI_MODEL / OPENAI_MODEL_FALLBACK.
  * Order: most broadly available first.
  */
 export const OPENAI_BUILTIN_FALLBACKS: readonly string[] = [
-  "deepseek-chat",
-  "deepseek-reasoner",
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
 ]
 
 export function resolveOpenAiModelChain(): string[] {

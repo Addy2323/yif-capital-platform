@@ -17,21 +17,21 @@ function buildLlmFailureReply(status: number, providerMessage: string): string {
     status === 404
 
   const modelHint =
-    "Use a key from https://platform.deepseek.com/api_keys. Remove OPENAI_MODEL from .env to use the default (deepseek-chat), restart the server, and confirm your account has API credits."
+    "Get a key from https://aistudio.google.com/apikey. Remove OPENAI_MODEL from .env to use the default (gemini-2.0-flash), restart the server, and confirm your key is active."
 
   let hint = ""
   if (status === 404 || (status === 400 && looksLikeModelError)) {
     hint = `Model or endpoint issue (${status}). ${modelHint}`
   } else if (status === 400 || status === 401 || status === 403) {
     hint =
-      "OpenAI rejected the request: check OPENAI_API_KEY is valid, billing is enabled, and the key isn’t restricted incorrectly."
+      "API rejected the request: check OPENAI_API_KEY is a valid Gemini key and is not restricted."
   } else if (status === 429) {
     hint =
       "API rate-limited this key (HTTP 429). Wait 1–2 minutes or add credits; you can set OPENAI_429_RETRIES=3."
   } else if (status >= 500 || status === 503) {
     hint = "The AI provider had a server error; retry shortly."
   } else if (status === 0) {
-    hint = short ? `Network error: ${short}` : "Network error reaching the AI API (DeepSeek)."
+    hint = short ? `Network error: ${short}` : "Network error reaching the Gemini API."
   } else if (short) {
     hint = `API said: ${short}`
   }
