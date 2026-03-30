@@ -1,15 +1,15 @@
 import "server-only"
 
 /**
- * OpenAI-only LLM text generation (Chat Completions). Server-side only.
- * Set OPENAI_API_KEY — never use NEXT_PUBLIC_* for secrets.
+ * Gemini-only LLM text generation. Server-side only.
+ * Set GEMINI_API_KEY in server env.
  */
 
 import {
-  getOpenAiApiKey,
-  openaiChatGenerateContent,
-  resolveOpenAiModelChain,
-} from "./openaiGenerate"
+  getGeminiApiKey,
+  geminiGenerateContent,
+  resolveGeminiModelChain,
+} from "./geminiGenerate"
 
 export type LlmGenerateOptions = {
   userText: string
@@ -21,7 +21,7 @@ export type LlmGenerateOptions = {
 export type LlmGenerateSuccess = {
   ok: true
   text: string
-  provider: "openai"
+  provider: "gemini"
 }
 
 export type LlmGenerateFailure = {
@@ -32,9 +32,9 @@ export type LlmGenerateFailure = {
 
 export type LlmGenerateResult = LlmGenerateSuccess | LlmGenerateFailure
 
-/** True if OPENAI_API_KEY is set. */
+/** True if GEMINI_API_KEY is set. */
 export function getAnyLlmApiKey(): boolean {
-  return Boolean(getOpenAiApiKey())
+  return Boolean(getGeminiApiKey())
 }
 
 function shouldRetryModel(
@@ -53,28 +53,28 @@ function shouldRetryModel(
 }
 
 /**
- * Tries each model in OPENAI_MODEL chain until one returns non-empty text.
+ * Tries each model in the Gemini chain until one returns non-empty text.
  */
 export async function generateLlmContent(
   opts: LlmGenerateOptions
 ): Promise<LlmGenerateResult> {
-  const apiKey = getOpenAiApiKey()
+  const apiKey = getGeminiApiKey()
   if (!apiKey) {
     return {
       ok: false,
       status: 0,
-      message: "OPENAI_API_KEY is not set.",
+      message: "GEMINI_API_KEY is not set.",
     }
   }
 
   let lastStatus = 0
   let lastMessage = ""
-  const chain = resolveOpenAiModelChain()
+  const chain = resolveGeminiModelChain()
 
   for (let i = 0; i < chain.length; i++) {
     const model = chain[i]
     const hasMore = i < chain.length - 1
-    const result = await openaiChatGenerateContent({
+    const result = await geminiGenerateContent({
       apiKey,
       model,
       userText: opts.userText,
@@ -85,7 +85,7 @@ export async function generateLlmContent(
     if (result.ok) {
       const t = result.text.trim()
       if (t) {
-        return { ok: true, text: t, provider: "openai" }
+        return { ok: true, text: t, provider: "gemini" }
       }
       if (hasMore) continue
       break
@@ -101,6 +101,6 @@ export async function generateLlmContent(
     status: lastStatus,
     message:
       lastMessage ||
-      "OpenAI request failed for every model in the chain. Check OPENAI_API_KEY and OPENAI_MODEL.",
+      "Gemini request failed for every model in the chain. Check GEMINI_API_KEY.",
   }
 }

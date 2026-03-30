@@ -17,14 +17,14 @@ function buildLlmFailureReply(status: number, providerMessage: string): string {
     status === 404
 
   const modelHint =
-    "Get a key from https://aistudio.google.com/apikey. Remove OPENAI_MODEL from .env to use the default (gemini-2.0-flash), restart the server, and confirm your key is active."
+    "Get a key from https://aistudio.google.com/apikey. Remove GEMINI_MODEL from .env to use the default (gemini-2.0-flash), restart the server, and confirm your key is active."
 
   let hint = ""
   if (status === 404 || (status === 400 && looksLikeModelError)) {
     hint = `Model or endpoint issue (${status}). ${modelHint}`
   } else if (status === 400 || status === 401 || status === 403) {
     hint =
-      "API rejected the request: check OPENAI_API_KEY is a valid Gemini key and is not restricted."
+      "API rejected the request: check GEMINI_API_KEY is a valid Gemini key and is not restricted."
   } else if (status === 429) {
     hint =
       "API rate-limited this key (HTTP 429). Wait 1–2 minutes or add credits; you can set OPENAI_429_RETRIES=3."
@@ -102,7 +102,7 @@ export async function buildMarketSnapshotText(maxRows = 40): Promise<string> {
 
 export type AdvisorChatResult = {
   reply: string
-  source: "openai" | "fallback"
+  source: "gemini" | "fallback"
   apiError?: boolean
 }
 
@@ -133,7 +133,7 @@ ${userMessage.trim()}`
   if (!getAnyLlmApiKey()) {
     return {
       reply:
-        "The AI advisor needs OPENAI_API_KEY on the server. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read each issuer’s annual reports, and consider consulting a licensed financial advisor in Tanzania. Browse live listings on the Stocks page.",
+        "The AI advisor needs a Gemini API key. Get one at https://aistudio.google.com/apikey and set GEMINI_API_KEY in your .env. Until then, here are general tips: diversify across sectors on the DSE, invest only what you can hold long term, read annual reports, and consult a licensed advisor in Tanzania.",
       source: "fallback",
     }
   }
