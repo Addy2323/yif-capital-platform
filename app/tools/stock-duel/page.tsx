@@ -3,7 +3,6 @@ import { DashboardSidebar } from "@/components/dashboard/sidebar"
 import { 
   Swords, 
   Sparkles, 
-  Zodiac,
   Skull,
   Zap,
   ShieldCheck,
@@ -39,7 +38,7 @@ export default function StockClashPage() {
               </h1>
               <p className="text-slate-400 text-xl leading-relaxed font-medium">
                 The ultimate head-to-head comparison tool for Tanzanian investors. 
-                Pick your fighters and let our <span className="text-white font-bold">Gemini AI Referee</span> 
+                Pick your fighters and let our <span className="text-white font-bold">YIF AI Referee</span> 
                 declare the winner based on current market strength.
               </p>
               
@@ -76,7 +75,7 @@ export default function StockClashPage() {
               </div>
               <h4 className="font-bold text-white uppercase text-sm tracking-widest">Phase 2: Context</h4>
               <p className="text-slate-500 text-xs leading-relaxed">
-                The Gemini AI analyzes market sentiment and sector volatility to find the hidden winner.
+                Our custom AI model analyzes market sentiment and sector volatility to find the hidden winner.
               </p>
             </div>
             <div className="bg-slate-900/50 p-6 rounded-3xl border border-white/5 space-y-3">

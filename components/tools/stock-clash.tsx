@@ -247,7 +247,7 @@ export function StockClash() {
                   </div>
                   <div>
                     <h4 className="font-black text-white uppercase tracking-tight">The Referee's Match Report</h4>
-                    <p className="text-[10px] text-emerald-400 font-bold tracking-widest uppercase opacity-70">Gemini AI Verdict</p>
+                    <p className="text-[10px] text-emerald-400 font-bold tracking-widest uppercase opacity-70">YIF AI Verdict</p>
                   </div>
                 </div>
                 <Sparkles className="h-6 w-6 text-emerald-400/50" />

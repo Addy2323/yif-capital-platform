@@ -321,7 +321,7 @@ export function DividendSnowballCalculator() {
                   <Sparkles className="h-5 w-5 text-emerald-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white leading-none">Gemini AI Strategist</h4>
+                  <h4 className="font-semibold text-white leading-none">YIF AI Strategist</h4>
                   <p className="text-[10px] text-emerald-400/70 font-medium tracking-widest uppercase mt-1">DSE Power Projections</p>
                 </div>
               </div>
@@ -391,7 +391,7 @@ export function DividendSnowballCalculator() {
                   <PieChart className="h-12 w-12 text-slate-700 mx-auto" />
                   <div>
                     <p className="text-slate-400 text-sm">Need a custom DSE strategy?</p>
-                    <p className="text-xs text-slate-500 mt-1">Adjust your inputs and let Gemini analyze the potential.</p>
+                    <p className="text-xs text-slate-500 mt-1">Adjust your inputs and let the AI analyze the potential.</p>
                   </div>
                 </div>
               )}

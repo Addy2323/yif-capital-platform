@@ -4,8 +4,7 @@ import {
   TrendingUp, 
   Sparkles, 
   ShieldCheck, 
-  Globe2,
-  GeminiIcon
+  Globe2
 } from "lucide-react"
 
 export const metadata = {
@@ -37,7 +36,7 @@ export default function DividendSnowballPage() {
               </h1>
               <p className="text-slate-400 text-lg leading-relaxed">
                 Unlock the power of compounding on the Dar es Salaam Stock Exchange. 
-                Visualize your path to financial freedom and let <span className="text-white font-semibold">Gemini AI</span> 
+                Visualize your path to financial freedom and let <span className="text-white font-semibold">YIF AI</span> 
                 craft a custom reinvestment strategy based on real-time DSE data.
               </p>
               
@@ -74,7 +73,7 @@ export default function DividendSnowballPage() {
                  AI-Driven Insights
                </h3>
                <p className="text-slate-400 text-sm leading-relaxed relative z-10">
-                 Our native Gemini integration analyzes dividend yields, payout ratios, 
+                 Our specialized AI model analyzes dividend yields, payout ratios, 
                  and historical growth from our daily web-scrapes to identify the 
                  best "Snowball Stocks" for your specific investment horizon.
                </p>

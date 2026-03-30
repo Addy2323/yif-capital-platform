@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       totalDividends 
     } = await req.json()
 
-    // 1. Load the latest scraped stock data to provide context to Gemini
+    // 1. Load the latest scraped stock data to provide context to the AI
     let stockData = []
     try {
       const dataPath = path.join(process.cwd(), "fund_pipeline", "data", "stocks", "dse_stocks_latest.json")
