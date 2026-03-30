@@ -61,6 +61,7 @@ const navigation: NavItem[] = [
   { name: "Research and Insights", href: "/research", icon: Search },
   { name: "Articles", href: "/articles", icon: Newspaper },
   { name: "Dividend Snowball", href: "/tools/dividend-snowball", icon: TrendingUp },
+  { name: "Stock Duel", href: "/tools/stock-duel", icon: Zap },
   /* {
     name: "IPOs",
     icon: Target,

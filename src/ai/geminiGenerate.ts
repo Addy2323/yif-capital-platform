@@ -8,11 +8,11 @@ import "server-only"
 
 const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
 
-export const DEFAULT_GEMINI_MODEL = "gemini-2.0-flash"
+export const DEFAULT_GEMINI_MODEL = "gemini-1.5-flash"
 
 export const GEMINI_FALLBACK_MODELS: readonly string[] = [
-  "gemini-2.0-flash",
   "gemini-1.5-flash",
+  "gemini-2.0-flash",
   "gemini-1.5-pro",
 ]
 
