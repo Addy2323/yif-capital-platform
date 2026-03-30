@@ -1,22 +1,24 @@
 import "server-only"
 
 /**
- * OpenAI Chat Completions API (REST). Set OPENAI_API_KEY in server env only.
- * Never expose keys in browsers or mobile clients — route calls through this backend.
- * @see https://platform.openai.com/docs/api-reference/chat/create
+ * OpenAI-compatible Chat Completions API (REST).
+ * Works with OpenAI, DeepSeek, and any provider that follows the same format.
+ * Set OPENAI_API_KEY and optionally OPENAI_BASE_URL in server env.
  */
 
-/** Widely available on standard OpenAI API keys (api.openai.com Chat Completions). */
-export const DEFAULT_OPENAI_MODEL = "gpt-3.5-turbo"
+/** Default model — DeepSeek-V3.2 non-thinking mode (128K context). */
+export const DEFAULT_OPENAI_MODEL = "deepseek-chat"
+
+/** Default base URL — DeepSeek (OpenAI-compatible). Override with OPENAI_BASE_URL. */
+export const DEFAULT_BASE_URL = "https://api.deepseek.com/v1"
 
 /**
- * Tried after OPENAI_MODEL / OPENAI_MODEL_FALLBACK. Avoid deprecated ids (e.g. some `gpt-4-turbo` aliases 404).
+ * Tried after OPENAI_MODEL / OPENAI_MODEL_FALLBACK.
  * Order: most broadly available first.
  */
 export const OPENAI_BUILTIN_FALLBACKS: readonly string[] = [
-  "gpt-3.5-turbo",
-  "gpt-4o-mini",
-  "gpt-4o",
+  "deepseek-chat",
+  "deepseek-reasoner",
 ]
 
 export function resolveOpenAiModelChain(): string[] {
@@ -37,7 +39,10 @@ export function getOpenAiApiKey(): string | undefined {
   return k || undefined
 }
 
-const API_URL = "https://api.openai.com/v1/chat/completions"
+function resolveApiUrl(): string {
+  const base = (process.env.OPENAI_BASE_URL?.trim() || DEFAULT_BASE_URL).replace(/\/+$/, "")
+  return `${base}/chat/completions`
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -104,7 +109,7 @@ export async function openaiChatGenerateContent(
 
   for (let attempt = 0; attempt < attempts; attempt++) {
     try {
-      res = await fetch(API_URL, {
+      res = await fetch(resolveApiUrl(), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
