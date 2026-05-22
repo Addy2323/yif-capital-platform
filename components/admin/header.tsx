@@ -9,7 +9,7 @@ export function AdminHeader() {
     const { user } = useAuth()
 
     return (
-        <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-900/80 backdrop-blur-xl w-full">
+        <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-900/80 backdrop-blur-xl w-full max-w-full">
             <div className="flex h-16 items-center justify-between pl-14 pr-4 lg:pl-8 lg:pr-8">
                 {/* Search */}
                 <div className="hidden md:flex flex-1 max-w-md">

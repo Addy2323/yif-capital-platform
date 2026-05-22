@@ -39,7 +39,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex min-h-screen bg-slate-900">
             <AdminSidebar />
-            <div className="flex flex-1 flex-col lg:ml-64">
+            <div className="flex flex-1 flex-col min-w-0 max-w-full overflow-x-hidden lg:ml-64">
                 <AdminHeader />
                 <main className="flex-1 p-4 lg:p-8">{children}</main>
             </div>
