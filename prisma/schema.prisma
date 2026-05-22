@@ -274,6 +274,7 @@ model Fund {
   fundType        FundType
   managerId       String?
   manager         Manager?    @relation(fields: [managerId], references: [id])
+  managerName     String?     // [MIGRATION] Restored for data transition
   description     String
   logoUrl         String?
   inceptionDate   DateTime
@@ -737,6 +738,21 @@ model DseMarketSummary {
   deals          String?
   date           String?
   updatedAt      DateTime @updatedAt
+}
+
+// [MIGRATION] Restored temporarily to prevent data loss on production server
+model DseStock {
+  id            String   @id @default(uuid())
+  symbol        String
+  name          String?
+  price         Float?
+  change        Float?
+  changePct     Float?
+  marketCap     String?
+  scrapedAt     DateTime @default(now())
+  
+  @@index([symbol])
+  @@index([scrapedAt])
 }
 
 // ============================================
