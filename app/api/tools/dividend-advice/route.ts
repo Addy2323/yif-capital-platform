@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
-import fs from "fs/promises"
-import path from "path"
 import { generateLlmContent } from "@/src/ai/llmGenerate"
+import { PrismaClient } from "@/lib/generated/client"
+
+const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,28 +16,41 @@ export async function POST(req: NextRequest) {
       totalDividends 
     } = await req.json()
 
-    // 1. Load the latest scraped stock data to provide context to the AI
-    let stockData = []
+    // 1. Fetch the latest stock data from the database
+    let topDividendStocks: any[] = []
     try {
-      const dataPath = path.join(process.cwd(), "fund_pipeline", "data", "stocks", "dse_stocks_latest.json")
-      const fileContent = await fs.readFile(dataPath, "utf-8")
-      stockData = JSON.parse(fileContent)
-    } catch (err) {
-      console.error("Failed to load stock data for AI advice:", err)
-    }
+      const stocks = await prisma.stock.findMany({
+        include: {
+          prices: {
+            orderBy: { timestamp: 'desc' },
+            take: 1
+          }
+        },
+        where: {
+          prices: {
+            some: {
+              dividendYield: { gt: 0 }
+            }
+          }
+        }
+      })
 
-    // 2. Filter for high-yield dividend stocks to recommend
-    const topDividendStocks = stockData
-      .filter((s: any) => s.dividend_yield && s.dividend_yield > 0)
-      .sort((a: any, b: any) => (b.dividend_yield || 0) - (a.dividend_yield || 0))
-      .slice(0, 8)
-      .map((s: any) => ({
-        symbol: s.symbol,
-        name: s.name,
-        yield: s.dividend_yield,
-        growth: s.dividend_growth,
-        price: s.price
-      }))
+      topDividendStocks = stocks
+        .map(s => {
+          const latestPrice = s.prices[0]
+          return {
+            symbol: s.symbol,
+            name: s.name,
+            yield: latestPrice?.dividendYield || 0,
+            growth: latestPrice?.dividendGrowth || 0,
+            price: latestPrice?.price || 0
+          }
+        })
+        .sort((a, b) => b.yield - a.yield)
+        .slice(0, 8)
+    } catch (err) {
+      console.error("Failed to fetch stock data from DB for AI advice:", err)
+    }
 
     // 3. Build the prompt
     const systemInstruction = `You are the YIF Capital AI Strategist, an expert on the Dar es Salaam Stock Exchange (DSE). 

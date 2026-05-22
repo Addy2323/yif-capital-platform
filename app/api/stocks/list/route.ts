@@ -1,21 +1,23 @@
 import { NextResponse } from "next/server"
-import fs from "fs/promises"
-import path from "path"
+import { PrismaClient } from "@/lib/generated/client"
+
+const prisma = new PrismaClient()
 
 export async function GET() {
   try {
-    const dataPath = path.join(process.cwd(), "fund_pipeline", "data", "stocks", "dse_stocks_latest.json")
-    const fileContent = await fs.readFile(dataPath, "utf-8")
-    const stockData = JSON.parse(fileContent)
+    const stocks = await prisma.stock.findMany({
+      select: {
+        symbol: true,
+        name: true,
+      },
+      orderBy: {
+        symbol: 'asc',
+      },
+    })
 
-    const list = stockData.map((s: any) => ({
-      symbol: s.symbol,
-      name: s.name,
-    })).sort((a: any, b: any) => a.symbol.localeCompare(b.symbol))
-
-    return NextResponse.json(list)
+    return NextResponse.json(stocks)
   } catch (error) {
-    console.error("Failed to load stock list:", error)
+    console.error("Failed to load stock list from database:", error)
     return NextResponse.json({ error: "Stock list unavailable" }, { status: 500 })
   }
 }
