@@ -246,7 +246,7 @@ export default function AdminStocksPage() {
                                 </div>
                             </div>
                             <DialogFooter>
-                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                                     Cancel
                                 </Button>
                                 <Button onClick={handleAddStock} className="bg-gold text-navy hover:bg-gold/90">
@@ -425,7 +425,7 @@ export default function AdminStocksPage() {
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             Cancel
                         </Button>
                         <Button onClick={handleEditStock} className="bg-gold text-navy hover:bg-gold/90">
@@ -445,7 +445,7 @@ export default function AdminStocksPage() {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             Cancel
                         </Button>
                         <Button onClick={handleDeleteStock} className="bg-red-600 text-white hover:bg-red-700">

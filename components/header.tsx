@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { ChevronDown, BarChart2, GraduationCap, MessageSquare, Menu, ArrowLeft, Briefcase } from "lucide-react"
+import { ChevronDown, BarChart2, GraduationCap, MessageSquare, Menu, ArrowLeft, Briefcase, Users, BookOpen } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/lib/auth-context"
@@ -55,6 +55,18 @@ const navLinks = [
         description: "Track your investments",
         href: "/portfolio",
         icon: Briefcase
+      },
+      {
+        name: "Expert Hub",
+        description: "Book investment experts",
+        href: "/experts",
+        icon: Users
+      },
+      {
+        name: "Courses",
+        description: "Expert-led investment courses",
+        href: "/courses",
+        icon: BookOpen
       },
     ]
   },
@@ -247,6 +259,26 @@ export function Header() {
                     className="text-lg font-medium text-white/80 hover:text-white transition-colors"
                   >
                     YIF Forum
+                  </Link>
+                  <Link
+                    href="/experts"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "text-lg font-medium transition-colors",
+                      pathname === "/experts" ? "text-gold" : "text-white/80 hover:text-white"
+                    )}
+                  >
+                    Expert Hub
+                  </Link>
+                  <Link
+                    href="/courses"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "text-lg font-medium transition-colors",
+                      pathname === "/courses" ? "text-gold" : "text-white/80 hover:text-white"
+                    )}
+                  >
+                    Courses
                   </Link>
                   <Link
                     href="/contact"

@@ -248,7 +248,7 @@ export default function AdminIposPage() {
                                 </div>
                             </div>
                             <DialogFooter>
-                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                                     Cancel
                                 </Button>
                                 <Button onClick={handleAddIpo} className="bg-gold text-navy hover:bg-gold/90">
@@ -412,7 +412,7 @@ export default function AdminIposPage() {
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             Cancel
                         </Button>
                         <Button onClick={handleEditIpo} className="bg-gold text-navy hover:bg-gold/90">
@@ -432,7 +432,7 @@ export default function AdminIposPage() {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             Cancel
                         </Button>
                         <Button onClick={handleDeleteIpo} className="bg-red-600 text-white hover:bg-red-700">

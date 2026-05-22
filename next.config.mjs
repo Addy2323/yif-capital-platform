@@ -10,6 +10,35 @@ const nextConfig = {
   },
   // Do not bundle node-cron (uses Node built-ins: path, child_process, etc.)
   serverExternalPackages: ["node-cron"],
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; frame-src 'self' https:; connect-src 'self' https:;",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geoloc=(), interest-cohort=()",
+          },
+        ],
+      },
+    ]
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       const nodeBuiltins = ["path", "fs", "child_process", "events", "util", "os"]

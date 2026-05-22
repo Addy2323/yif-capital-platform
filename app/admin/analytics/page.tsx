@@ -113,7 +113,7 @@ export default function AdminAnalyticsPage() {
                     <p className="text-white/60">Detailed insights into platform performance and user behavior.</p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <Button variant="outline" className="border-white/10 text-white hover:bg-white/5" onClick={handleExportSummary}>
+                    <Button variant="outline" className="border-white/10 bg-transparent text-white hover:bg-white/5" onClick={handleExportSummary}>
                         <Download className="mr-2 h-4 w-4" />
                         Export summary (CSV)
                     </Button>

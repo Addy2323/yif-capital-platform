@@ -24,7 +24,7 @@ import {
     exportUsersToCSV,
     createUser
 } from "@/lib/admin-service"
-import { type User } from "@/lib/auth-context"
+import { type User, type UserRole } from "@/lib/auth-context"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -61,7 +61,7 @@ interface UserFormData {
     name: string
     email: string
     password: string
-    role: "free" | "pro" | "institutional" | "admin"
+    role: "free" | "pro" | "institutional" | "admin" | "expert"
     phoneLocal: string
 }
 
@@ -163,7 +163,7 @@ export default function AdminUsersPage() {
         }
         const success = await updateUser(selectedUser.id, {
             name: formData.name,
-            role: formData.role as "free" | "pro" | "institutional" | "admin",
+            role: formData.role as UserRole,
             phoneNumber,
         })
         if (success) {
@@ -211,7 +211,7 @@ export default function AdminUsersPage() {
             name: user.name,
             email: user.email,
             password: "",
-            role: user.role as "free" | "pro" | "institutional" | "admin",
+            role: user.role as UserRole,
             phoneLocal: tzDigitsFromStored(user.phoneNumber),
         })
         setIsEditDialogOpen(true)
@@ -294,7 +294,7 @@ export default function AdminUsersPage() {
                                     <Label htmlFor="role" className="text-right text-white/80">Role</Label>
                                     <Select
                                         value={formData.role}
-                                        onValueChange={(value: "free" | "pro" | "institutional" | "admin") => setFormData({ ...formData, role: value })}
+                                        onValueChange={(value: "free" | "pro" | "institutional" | "admin" | "expert") => setFormData({ ...formData, role: value })}
                                     >
                                         <SelectTrigger className="col-span-3 bg-white/5 border-white/10 text-white">
                                             <SelectValue placeholder="Select role" />
@@ -304,12 +304,13 @@ export default function AdminUsersPage() {
                                             <SelectItem value="pro">Pro</SelectItem>
                                             <SelectItem value="institutional">Institutional</SelectItem>
                                             <SelectItem value="admin">Admin</SelectItem>
+                                            <SelectItem value="expert">Expert</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
                             </div>
                             <DialogFooter>
-                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                                     Cancel
                                 </Button>
                                 <Button onClick={handleAddUser} className="bg-gold text-navy hover:bg-gold/90">
@@ -344,6 +345,7 @@ export default function AdminUsersPage() {
                         <option value="pro">Pro</option>
                         <option value="institutional">Institutional</option>
                         <option value="admin">Admin</option>
+                        <option value="expert">Expert</option>
                     </select>
                 </div>
             </div>
@@ -396,9 +398,10 @@ export default function AdminUsersPage() {
                                             className={cn(
                                                 "capitalize",
                                                 user.role === "admin" ? "border-red-500/50 text-red-400" :
-                                                    user.role === "institutional" ? "border-blue-500/50 text-blue-400" :
-                                                        user.role === "pro" ? "border-gold/50 text-gold" :
-                                                            "border-white/20 text-white/60"
+                                                    user.role === "expert" ? "border-emerald-500/50 text-emerald-400" :
+                                                        user.role === "institutional" ? "border-blue-500/50 text-blue-400" :
+                                                            user.role === "pro" ? "border-gold/50 text-gold" :
+                                                                "border-white/20 text-white/60"
                                             )}
                                         >
                                             {user.role}
@@ -440,6 +443,7 @@ export default function AdminUsersPage() {
                                                 <DropdownMenuItem onClick={() => handleRoleChange(user.id, "pro")} className="hover:bg-white/5 cursor-pointer text-gold">Pro</DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleRoleChange(user.id, "institutional")} className="hover:bg-white/5 cursor-pointer text-blue-400">Institutional</DropdownMenuItem>
                                                 <DropdownMenuItem onClick={() => handleRoleChange(user.id, "admin")} className="hover:bg-white/5 cursor-pointer text-red-400">Admin</DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => handleRoleChange(user.id, "expert")} className="hover:bg-white/5 cursor-pointer text-emerald-400 font-semibold">Expert</DropdownMenuItem>
                                                 <DropdownMenuSeparator className="bg-white/10" />
                                                 <DropdownMenuItem
                                                     onClick={() => openDeleteDialog(user)}
@@ -516,7 +520,7 @@ export default function AdminUsersPage() {
                             <Label htmlFor="edit-role" className="text-right text-white/80">Role</Label>
                             <Select
                                 value={formData.role}
-                                onValueChange={(value: "free" | "pro" | "institutional" | "admin") => setFormData({ ...formData, role: value })}
+                                onValueChange={(value: "free" | "pro" | "institutional" | "admin" | "expert") => setFormData({ ...formData, role: value })}
                             >
                                 <SelectTrigger className="col-span-3 bg-white/5 border-white/10 text-white">
                                     <SelectValue placeholder="Select role" />
@@ -526,12 +530,13 @@ export default function AdminUsersPage() {
                                     <SelectItem value="pro">Pro</SelectItem>
                                     <SelectItem value="institutional">Institutional</SelectItem>
                                     <SelectItem value="admin">Admin</SelectItem>
+                                    <SelectItem value="expert">Expert</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             Cancel
                         </Button>
                         <Button onClick={handleEditUser} className="bg-gold text-navy hover:bg-gold/90">
@@ -551,7 +556,7 @@ export default function AdminUsersPage() {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="border-white/10 text-white hover:bg-white/5">
+                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             Cancel
                         </Button>
                         <Button onClick={handleDeleteUser} className="bg-red-600 text-white hover:bg-red-700">

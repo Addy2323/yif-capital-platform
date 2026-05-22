@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 
-export type UserRole = "free" | "pro" | "institutional" | "admin"
+export type UserRole = "free" | "pro" | "institutional" | "admin" | "expert"
 
 export interface User {
   id: string

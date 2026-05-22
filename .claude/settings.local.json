@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(mkdir \"c:\\\\Users\\\\DevStromer\\\\Downloads\\\\yif-capital-platform-main\\\\app\\\\courses\\\\[courseId]\\\\checkout\")",
+      "Bash(npx prisma *)",
+      "Bash(mkdir -p \"c:\\\\Users\\\\DevStromer\\\\Downloads\\\\yif-capital-platform-main\\\\app\\\\expert\\\\courses\\\\[courseId]\\\\curriculum\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\DevStromer\\Downloads\\yif-capital-platform-main\\app\\courses\\[courseId]",
+      "c:\\Users\\DevStromer\\Downloads\\yif-capital-platform-main\\app\\expert\\courses\\[courseId]"
+    ]
+  }
+}

@@ -110,6 +110,7 @@ export function AdvisorChatSection({
           error?: string
           code?: string
           subscribeUrl?: string
+          data?: { reply?: string }
         }
         if (res.status === 401 || res.status === 403) {
           if (json.code === "SUBSCRIPTION_REQUIRED" && json.subscribeUrl) {

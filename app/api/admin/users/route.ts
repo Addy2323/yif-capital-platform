@@ -3,6 +3,15 @@ import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
 
+import { z } from "zod";
+
+const UserSchema = z.object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    password: z.string().min(6),
+    role: z.string(),
+});
+
 async function isAdmin(req: NextRequest) {
     const cookieStore = await cookies();
     const userId = cookieStore.get("user_id")?.value;
@@ -25,10 +34,19 @@ export async function GET(req: NextRequest) {
 
         const users = await prisma.user.findMany({
             orderBy: { createdAt: 'desc' },
-            include: {
+            select: {
+                id: true,
+                email: true,
+                name: true,
+                phoneNumber: true,
+                role: true,
+                createdAt: true,
                 payments: {
                     orderBy: { createdAt: 'desc' },
-                    take: 1
+                    take: 1,
+                    select: {
+                        completedAt: true
+                    }
                 }
             }
         });
@@ -45,7 +63,7 @@ export async function GET(req: NextRequest) {
                 createdAt: user.createdAt.toISOString(),
                 subscription: user.role === 'FREE' ? undefined : {
                     plan: user.role.toLowerCase() as "pro" | "institutional",
-                    status: "active", // In a real app, this would be determined by payment status and expiry
+                    status: "active",
                     expiresAt: lastPayment?.completedAt?.toISOString() || undefined
                 }
             };
@@ -64,11 +82,14 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const { name, email, password, role } = await req.json();
+        const body = await req.json();
+        const result = UserSchema.safeParse(body);
 
-        if (!name || !email || !password || !role) {
-            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        if (!result.success) {
+            return NextResponse.json({ error: "Invalid input", details: result.error.format() }, { status: 400 });
         }
+
+        const { name, email, password, role } = result.data;
 
         const existingUser = await prisma.user.findUnique({
             where: { email: email.toLowerCase() }
@@ -85,7 +106,7 @@ export async function POST(req: NextRequest) {
                 name,
                 email: email.toLowerCase(),
                 password: hashedPassword,
-                role: role.toUpperCase(),
+                role: role.toUpperCase() as any,
                 isVerified: true,
             }
         });

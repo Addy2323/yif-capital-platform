@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -11,6 +11,7 @@ import { PhonePromptGate } from '@/components/phone-prompt-gate'
 import { PwaInstallProvider } from '@/components/pwa-install-provider'
 import { PostLoginInstallPrompt } from '@/components/PostLoginInstallPrompt'
 import { PortfolioInsightPopup } from '@/components/insights/PortfolioInsightPopup'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"] });
@@ -118,18 +119,19 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
         <StartupLoader />
         <AuthProvider>
           <PwaInstallProvider>
             <PhonePromptGate />
             <PostLoginInstallPrompt />
-            <PortfolioInsightPopup />
+            <Suspense><PortfolioInsightPopup /></Suspense>
             <AdminDataProvider>
               <SweetAlertProvider>
                 {children}
@@ -147,6 +149,7 @@ export default function RootLayout({
             </AdminDataProvider>
           </PwaInstallProvider>
         </AuthProvider>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

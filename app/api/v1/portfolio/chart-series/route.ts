@@ -58,14 +58,16 @@ export async function GET(req: NextRequest) {
       }
       try {
         const rows = await loadStockHistory(symbol)
-        const points: Point[] = rows.map((r) => {
-          const price = Number(r.price)
-          return {
-            date: r.date,
-            price,
-            value: price * qty,
-          }
-        })
+        const points: Point[] = rows
+          .filter((r) => r.date !== undefined)
+          .map((r) => {
+            const price = Number(r.price)
+            return {
+              date: r.date as string,
+              price,
+              value: price * qty,
+            }
+          })
         return NextResponse.json({
           success: true,
           label: `${symbol} · ${qty.toLocaleString()} sh`,
@@ -191,7 +193,7 @@ export async function POST(req: NextRequest) {
         const m = new Map<string, number>()
         for (const r of rows) {
           const p = Number(r.price)
-          if (Number.isFinite(p)) m.set(r.date, p * qty)
+          if (Number.isFinite(p) && r.date) m.set(r.date, p * qty)
         }
         if (m.size > 0) maps.push(m)
       } catch {

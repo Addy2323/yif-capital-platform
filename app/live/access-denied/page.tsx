@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -16,7 +17,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
-export default function AccessDeniedPage() {
+function AccessDeniedContent() {
     const searchParams = useSearchParams()
     const reason = searchParams.get("reason") || "unauthorized"
     const sessionId = searchParams.get("sessionId")
@@ -144,5 +145,13 @@ export default function AccessDeniedPage() {
             </main>
             <Footer />
         </div>
+    )
+}
+
+export default function AccessDeniedPage() {
+    return (
+        <Suspense>
+            <AccessDeniedContent />
+        </Suspense>
     )
 }

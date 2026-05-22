@@ -1,8 +1,6 @@
 "use client"
 
-import React from "react"
-
-import { useState } from "react"
+import React, { Suspense, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -380,6 +378,8 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <RegisterForm />
+    <Suspense>
+      <RegisterForm />
+    </Suspense>
   )
 }

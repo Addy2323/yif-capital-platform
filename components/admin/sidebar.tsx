@@ -27,6 +27,8 @@ import {
     ShieldAlert,
     Globe,
     MessageSquare,
+    Award,
+    Banknote,
 } from "lucide-react"
 
 interface NavItem {
@@ -43,6 +45,8 @@ interface NavItem {
 const navigation: NavItem[] = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Users", href: "/admin/users", icon: Users },
+    { name: "Experts", href: "/admin/experts", icon: Award },
+    { name: "Payout Requests", href: "/admin/payout-requests", icon: Banknote },
     { name: "Live Sessions", href: "/admin/sessions", icon: Video },
     { name: "Access Logs", href: "/admin/access-logs", icon: ShieldAlert },
     { name: "Subscriptions", href: "/admin/subscriptions", icon: CreditCard },

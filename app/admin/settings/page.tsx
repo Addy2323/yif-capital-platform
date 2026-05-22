@@ -150,7 +150,7 @@ export default function AdminSettingsPage() {
                 </Card>
 
                 <div className="flex justify-end gap-4">
-                    <Button variant="outline" className="border-white/10 text-white hover:bg-white/5">
+                    <Button variant="outline" className="border-white/10 bg-transparent text-white hover:bg-white/5">
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Reset Defaults
                     </Button>

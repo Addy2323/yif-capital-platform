@@ -236,7 +236,7 @@ export default function AdminPricingPage() {
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between">
                                     <Label className="text-white">Features</Label>
-                                    <Button variant="outline" size="sm" onClick={addFeature} className="border-white/10 text-white hover:bg-white/5">
+                                    <Button variant="outline" size="sm" onClick={addFeature} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                                         <Plus className="mr-2 h-3 w-3" /> Add Feature
                                     </Button>
                                 </div>

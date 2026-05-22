@@ -121,7 +121,7 @@ export default function AdminEconomicsPage() {
                     </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 md:gap-3">
-                    <Button variant="outline" size="sm" onClick={fetchIndicators} className="border-white/10 text-white hover:bg-white/5 h-9 md:h-10 px-3 md:px-4">
+                    <Button variant="outline" size="sm" onClick={fetchIndicators} className="border-white/10 bg-transparent text-white hover:bg-white/5 h-9 md:h-10 px-3 md:px-4">
                         <RefreshCcw className={`mr-2 h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
                         <span className="hidden xs:inline">Refresh</span>
                     </Button>

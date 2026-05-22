@@ -342,7 +342,7 @@ export default function AdminSubscriptionsPage() {
                                         <Button className="flex-1 bg-gold text-slate-950 hover:bg-gold/90" onClick={handleUpdatePlan}>
                                             Save Changes
                                         </Button>
-                                        <Button variant="outline" className="flex-1 border-white/10" onClick={() => {
+                                        <Button variant="outline" className="flex-1 border-white/10 bg-transparent text-white hover:bg-white/5" onClick={() => {
                                             setEditingPlan(null)
                                             setPlanForm(null)
                                         }}>
@@ -555,7 +555,7 @@ export default function AdminSubscriptionsPage() {
                     </div>
 
                     <DialogFooter>
-                        <Button variant="outline" className="border-white/10" onClick={() => setEditingUser(null)}>
+                        <Button variant="outline" className="border-white/10 bg-transparent text-white hover:bg-white/5" onClick={() => setEditingUser(null)}>
                             Cancel
                         </Button>
                         <Button className="bg-gold text-slate-950 hover:bg-gold/90" onClick={handleUpdateUser}>

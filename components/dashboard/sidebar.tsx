@@ -36,6 +36,7 @@ import {
   Map,
   Shield,
   Briefcase,
+  GraduationCap,
 } from "lucide-react"
 
 interface NavItem {
@@ -53,8 +54,6 @@ const navigation: NavItem[] = [
   { name: "Economic Indicators", href: "/economics", icon: Globe },
   { name: "Portfolio", href: "/portfolio", icon: Briefcase },
   { name: "Funds", href: "/funds", icon: Activity },
-  // { name: "Home", href: "/dashboard", icon: Home },
-  // { name: "Watchlist", href: "/dashboard/watchlist", icon: Star },
   { name: "Stocks", href: "/stocks", icon: BarChart3 },
   { name: "Bonds", href: "/bonds", icon: FileText },
   { name: "ETFs", href: "/etfs", icon: Layers },
@@ -62,44 +61,15 @@ const navigation: NavItem[] = [
   { name: "Articles", href: "/articles", icon: Newspaper },
   { name: "Dividend Snowball", href: "/tools/dividend-snowball", icon: TrendingUp },
   { name: "Stock Duel", href: "/tools/stock-duel", icon: Zap },
-  /* {
-    name: "IPOs",
-    icon: Target,
-    children: [
-      { name: "Recent IPOs", href: "/dashboard/ipos/recent" },
-      { name: "IPO Calendar", href: "/dashboard/ipos/calendar" },
-      { name: "IPO Statistics", href: "/dashboard/ipos/statistics" },
-      { name: "IPO News", href: "/dashboard/ipos/news" },
-      { name: "IPO Screener", href: "/dashboard/ipos/screener" },
-    ],
-  },
-  {
-    name: "ETFs",
-    icon: Layers,
-    children: [
-      { name: "ETF Screener", href: "/dashboard/etfs/screener" },
-      { name: "Comparison Tool", href: "/dashboard/etfs/comparison" },
-      { name: "New Launches", href: "/dashboard/etfs/new-launches" },
-      { name: "ETF Providers", href: "/dashboard/etfs/providers" },
-    ],
-  },
-  { name: "News", href: "/dashboard/news", icon: Newspaper },
-  { name: "Trending", href: "/dashboard/trending", icon: TrendingUp },
-  { name: "Articles", href: "/dashboard/articles", icon: FileText }, */
-  // { name: "Technical Chart", href: "/dashboard/charts", icon: LineChart },
-  /* {
-    name: "Market Movers",
-    icon: ArrowUpDown,
-    children: [
-      { name: "Top Gainers", href: "/dashboard/market-movers/gainers" },
-      { name: "Top Losers", href: "/dashboard/market-movers/losers" },
-      { name: "Most Active", href: "/dashboard/market-movers/active" },
-      { name: "Premarket", href: "/dashboard/market-movers/premarket" },
-      { name: "After Hours", href: "/dashboard/market-movers/after-hours" },
-      { name: "Market Heatmap", href: "/dashboard/market-movers/heatmap" },
-    ],
-  }, */
-  // { name: "Stock Analysis Pro", href: "/dashboard/analysis-pro", icon: Search, pro: true },
+]
+
+
+const expertPortalNav = [
+  { name: "Expert Portal", href: "/expert", icon: Star },
+]
+
+const lmsPortalNav = [
+  { name: "LMS Portal", href: "/lms", icon: GraduationCap },
 ]
 
 const bottomNav = [
@@ -116,6 +86,7 @@ export function DashboardSidebar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState<string[]>([])
   const isPro = user?.subscription?.plan === "pro" || user?.subscription?.plan === "institutional" || user?.role === "admin"
+  const isExpert = user?.role?.toLowerCase() === "expert"
 
   const toggleExpanded = (name: string) => {
     setExpandedItems((prev) =>
@@ -250,10 +221,50 @@ export function DashboardSidebar() {
             )
           })}
         </div>
+
       </nav>
 
       {/* Bottom Navigation */}
       <div className="border-t border-sidebar-border p-3 space-y-1">
+        {!isExpert && lmsPortalNav.map((item) => {
+          const isActive = pathname.startsWith(item.href!)
+          return (
+            <Link
+              key={item.name}
+              href={item.href!}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-blue-600/10 text-blue-400"
+                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+              )}
+              onClick={() => setMobileOpen(false)}
+            >
+              <item.icon className="h-4 w-4" />
+              {item.name}
+            </Link>
+          )
+        })}
+        {(user?.role?.toLowerCase() === "expert") && expertPortalNav.map((item) => {
+          const isActive = pathname.startsWith(item.href!)
+
+          return (
+            <Link
+              key={item.name}
+              href={item.href!}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-emerald-500/10 text-emerald-500"
+                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+              )}
+              onClick={() => setMobileOpen(false)}
+            >
+              <item.icon className="h-4 w-4" />
+              {item.name}
+            </Link>
+          )
+        })}
         {(user?.role?.toLowerCase() === "admin") && adminNav.map((item) => {
           const isActive = pathname.startsWith(item.href!)
 

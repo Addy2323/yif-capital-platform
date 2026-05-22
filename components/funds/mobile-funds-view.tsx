@@ -56,7 +56,7 @@ function groupByManager(funds: Fund[]) {
     if (!managers[fund.manager_name]) {
       managers[fund.manager_name] = {
         managerName: fund.manager_name,
-        logoUrl: fund.logo_url,
+        logoUrl: fund.logo_url ?? undefined,
         funds: [],
       }
     }

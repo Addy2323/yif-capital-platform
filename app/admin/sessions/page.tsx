@@ -263,7 +263,7 @@ export default function AdminSessionsPage() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
-                        <Button variant="outline">
+                        <Button variant="outline" className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             <Calendar className="mr-2 h-4 w-4" />
                             Filter by Date
                         </Button>
@@ -428,7 +428,7 @@ export default function AdminSessionsPage() {
                                     onChange={e => setFormData({ ...formData, meetingUrl: e.target.value })}
                                     required
                                 />
-                                <Button type="button" variant="outline" size="icon">
+                                <Button type="button" variant="outline" size="icon" className="border-white/10 bg-transparent text-white/60 hover:bg-white/5">
                                     <Settings className="h-4 w-4" />
                                 </Button>
                             </div>
@@ -537,7 +537,7 @@ export default function AdminSessionsPage() {
                         </div>
 
                         <DialogFooter>
-                            <Button type="button" variant="outline" onClick={() => { setIsAddingSession(false); resetForm() }}>Cancel</Button>
+                            <Button type="button" variant="outline" onClick={() => { setIsAddingSession(false); resetForm() }} className="border-white/10 bg-transparent text-white hover:bg-white/5">Cancel</Button>
                             <Button type="submit" className="bg-gold text-navy hover:bg-gold/90">
                                 {editingSession ? "Update Session" : "Create & Secure Session"}
                             </Button>
@@ -556,7 +556,7 @@ export default function AdminSessionsPage() {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsDeletingSession(false)}>Cancel</Button>
+                        <Button variant="outline" onClick={() => setIsDeletingSession(false)} className="border-white/10 bg-transparent text-white hover:bg-white/5">Cancel</Button>
                         <Button variant="destructive" onClick={handleDeleteSession}>Delete Permanently</Button>
                     </DialogFooter>
                 </DialogContent>

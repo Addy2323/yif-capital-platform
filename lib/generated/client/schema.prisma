@@ -10,22 +10,53 @@ datasource db {
 }
 
 model User {
-  id           String             @id @default(uuid())
-  email        String             @unique
-  name         String
-  password     String
+  id                  String             @id @default(uuid())
+  email               String             @unique
+  name                String
+  password            String
   /// E.164 format, e.g. +255712345678
-  phoneNumber  String?            @unique @map("phone_number")
-  isVerified   Boolean            @default(false) @map("is_verified")
-  role         UserRole           @default(FREE)
-  avatar       String?
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-  accessLogs   AccessAttemptLog[]
-  accessTokens AccessToken[]
-  enrollments  Enrollment[]
-  payments     Payment[]
-  portfolios   Portfolio[]
+  phoneNumber         String?            @unique @map("phone_number")
+  lastPhonePromptDate DateTime?          @map("last_phone_prompt_date") @db.Date
+  isVerified          Boolean            @default(false) @map("is_verified")
+  role                UserRole           @default(FREE)
+  avatar              String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  failedLoginAttempts Int                @default(0) @map("failed_login_attempts")
+  lockoutUntil        DateTime?          @map("lockout_until")
+  accessLogs          AccessAttemptLog[]
+  accessTokens        AccessToken[]
+  enrollments         Enrollment[]
+  payments            Payment[]
+  portfolios          Portfolio[]
+
+  // LMS Expert Platform Relations
+  expertProfile    ExpertProfile?
+  lmsEnrollments   LmsCourseEnrollment[]
+  lessonProgress   LessonProgress[]
+  quizAttempts     QuizAttempt[]
+  bookingsAsUser   ExpertBooking[]       @relation("BookingUser")
+  certificates     Certificate[]
+  notifications    Notification[]
+  readinessResults ReadinessResult[]
+  lmsPayments      LmsPayment[]
+  sessions         UserSession[]
+}
+
+model UserSession {
+  id           String   @id @default(uuid())
+  userId       String
+  sessionToken String   @unique
+  expiresAt    DateTime
+  userAgent    String?
+  ipAddress    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionToken])
 }
 
 model Enrollment {
@@ -41,6 +72,7 @@ model Enrollment {
 
   @@index([userId])
   @@index([courseId])
+  @@index([status])
 }
 
 model LiveSession {
@@ -124,6 +156,7 @@ enum UserRole {
   PRO
   INSTITUTIONAL
   ADMIN
+  EXPERT
 }
 
 enum SubscriptionStatus {
@@ -171,6 +204,25 @@ model Otp {
   @@index([phoneNumber])
 }
 
+/// Admin bulk SMS campaigns (Beem Africa)
+model BulkSmsCampaign {
+  id               String    @id @default(uuid())
+  message          String
+  groupsTargeted   String[]
+  recipientCount   Int
+  deliveredCount   Int       @default(0)
+  failedCount      Int       @default(0)
+  status           String
+  scheduledAt      DateTime?
+  sentAt           DateTime?
+  estimatedCostTzs Int?
+  errorMessage     String?
+  createdAt        DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([status])
+}
+
 // ============================================
 // FUND ANALYTICS PLATFORM - CORE MODELS
 // ============================================
@@ -200,6 +252,18 @@ enum ComplianceStatus {
   BREACH
 }
 
+// Fund Manager Information
+model Manager {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  logoUrl     String?
+  description String?
+  website     String?
+  funds       Fund[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 // Fund Registry - Core fund information
 model Fund {
   id            String   @id @default(uuid())
@@ -207,8 +271,8 @@ model Fund {
   fundSlug      String   @unique // Alternative slug
   fundName      String
   fundType      FundType
-  managerName   String
   managerId     String?
+  manager       Manager? @relation(fields: [managerId], references: [id])
   description   String
   logoUrl       String?
   inceptionDate DateTime
@@ -546,10 +610,31 @@ model FundAttribution {
 // DSE STOCK MARKET DATA
 // ============================================
 
-model DseStock {
+model Stock {
+  id            String   @id @default(uuid())
+  symbol        String   @unique
+  name          String
+  description   String?
+  sector        String?
+  industry      String?
+  website       String?
+  logoUrl       String?
+  marketCap     Float?
+  dividendYield Float?
+  peRatio       Float?
+  eps           Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  prices     StockPriceHistory[]
+  portfolios PortfolioStock[]
+
+  @@index([symbol])
+}
+
+model StockPriceHistory {
   id              String   @id @default(uuid())
-  symbol          String
-  name            String
+  stockId         String
   price           Float
   change          Float    @default(0)
   changePct       Float    @default(0)
@@ -583,15 +668,13 @@ model DseStock {
   averageVolume   Float?
   beta            Float?
   rsi             Float?
-  description     String?
-  sector          String?
-  industry        String?
-  scrapedAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  timestamp       DateTime @default(now())
 
-  @@unique([symbol, scrapedAt])
-  @@index([symbol])
-  @@index([scrapedAt])
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([stockId, timestamp])
+  @@index([stockId])
+  @@index([timestamp])
 }
 
 model EconomicIndicator {
@@ -652,22 +735,20 @@ model Portfolio {
 }
 
 model PortfolioStock {
-  id           String    @id @default(uuid())
-  portfolioId  String
-  ticker       String
-  name         String
-  sector       String?
-  qty          Float
-  buyPrice     Float
-  currentPrice Float?
-  dividend     Float?    @default(0)
-  buyDate      DateTime?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id          String    @id @default(uuid())
+  portfolioId String
+  stockId     String
+  qty         Float
+  buyPrice    Float
+  buyDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  stock     Stock     @relation(fields: [stockId], references: [id])
 
   @@index([portfolioId])
+  @@index([stockId])
 }
 
 model PortfolioFund {
@@ -686,4 +767,460 @@ model PortfolioFund {
   portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   @@index([portfolioId])
+}
+
+// ============================================
+// LMS INVESTMENT EXPERT PLATFORM
+// ============================================
+
+// Expert Approval Status
+enum ExpertApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+// Expert Specialization Categories
+enum ExpertCategory {
+  STOCK_MARKET
+  REAL_ESTATE
+  BONDS_TREASURY
+  SACCO_INVESTMENT
+  FOREX_EDUCATION
+  MUTUAL_FUNDS
+  STARTUP_INVESTMENT
+  PERSONAL_FINANCE
+  SME_INVESTMENT
+}
+
+// Session Type for Bookings
+enum SessionType {
+  ONLINE
+  PHYSICAL
+  GROUP
+  VIP_PRIVATE
+}
+
+// Booking Status
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+// Payout Request Status
+enum PayoutStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// Course Status
+enum CourseStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// Course Level
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+// Investor Readiness Level
+enum InvestorLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+// Notification Type
+enum NotificationType {
+  BOOKING
+  PAYMENT
+  SESSION_REMINDER
+  CERTIFICATE
+  COURSE_UPDATE
+  EXPERT_RESPONSE
+  SYSTEM
+}
+
+// Expert Profile — Full expert information
+model ExpertProfile {
+  id                  String               @id @default(uuid())
+  userId              String               @unique
+  bio                 String?
+  headline            String?
+  experienceYears     Int                  @default(0)
+  cvUrl               String?
+  certificationsUrl   String?
+  nationalIdUrl       String?
+  nationalIdVerified  Boolean              @default(false)
+  approvalStatus      ExpertApprovalStatus @default(PENDING)
+  approvalNote        String?
+  rating              Float                @default(0)
+  totalReviews        Int                  @default(0)
+  totalStudents       Int                  @default(0)
+  totalEarnings       Float                @default(0)
+  hourlyRate          Float                @default(0)
+  currency            String               @default("TZS")
+  location            String?
+  languages           String[]             @default(["English", "Swahili"])
+  specializations     ExpertCategory[]
+  isAvailableOnline   Boolean              @default(true)
+  isAvailablePhysical Boolean              @default(false)
+  physicalAddress     String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courses        LmsCourse[]
+  availability   ExpertAvailability[]
+  bookings       ExpertBooking[]
+  payoutRequests PayoutRequest[]
+
+  @@index([approvalStatus])
+  @@index([userId])
+}
+
+// LMS Course
+model LmsCourse {
+  id                 String         @id @default(uuid())
+  expertId           String
+  title              String
+  slug               String         @unique
+  description        String
+  shortDescription   String?
+  thumbnailUrl       String?
+  instructorPhotoUrl String?
+  category           ExpertCategory
+  level              CourseLevel    @default(BEGINNER)
+  price              Float          @default(0)
+  currency           String         @default("TZS")
+  isFree             Boolean        @default(false)
+  status             CourseStatus   @default(DRAFT)
+  totalDuration      Int            @default(0) // minutes
+  totalLessons       Int            @default(0)
+  rating             Float          @default(0)
+  totalEnrollments   Int            @default(0)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  expert       ExpertProfile         @relation(fields: [expertId], references: [id], onDelete: Cascade)
+  modules      CourseModule[]
+  enrollments  LmsCourseEnrollment[]
+  certificates Certificate[]
+  lmsPayments  LmsPayment[]
+
+  @@index([expertId])
+  @@index([category])
+  @@index([status])
+  @@index([slug])
+}
+
+// Course Module — Section within a course
+model CourseModule {
+  id          String   @id @default(uuid())
+  courseId    String
+  title       String
+  description String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  course  LmsCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+  quizzes Quiz[]
+
+  @@index([courseId])
+}
+
+// Lesson — Individual content unit
+model Lesson {
+  id          String   @id @default(uuid())
+  moduleId    String
+  title       String
+  description String?
+  videoUrl    String?
+  pdfUrl      String?
+  content     String? // Rich text content
+  duration    Int      @default(0) // minutes
+  sortOrder   Int      @default(0)
+  isFree      Boolean  @default(false) // Preview lesson
+  createdAt   DateTime @default(now())
+
+  module   CourseModule     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progress LessonProgress[]
+
+  @@index([moduleId])
+}
+
+// LMS Course Enrollment
+model LmsCourseEnrollment {
+  id               String    @id @default(uuid())
+  userId           String
+  courseId         String
+  progress         Float     @default(0) // 0-100 percentage
+  completedLessons Int       @default(0)
+  totalLessons     Int       @default(0)
+  isCompleted      Boolean   @default(false)
+  completedAt      DateTime?
+  paymentId        String?   @unique
+  enrolledAt       DateTime  @default(now())
+
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course  LmsCourse   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  payment LmsPayment? @relation(fields: [paymentId], references: [id])
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+// Lesson Progress — Per-lesson tracking
+model LessonProgress {
+  id          String    @id @default(uuid())
+  userId      String
+  lessonId    String
+  isCompleted Boolean   @default(false)
+  watchedPct  Float     @default(0) // 0-100
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@index([lessonId])
+  @@index([isCompleted])
+}
+
+// Quiz
+model Quiz {
+  id           String   @id @default(uuid())
+  moduleId     String
+  title        String
+  description  String?
+  passingScore Int      @default(70)
+  createdAt    DateTime @default(now())
+
+  module    CourseModule   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+
+  @@index([moduleId])
+}
+
+// Quiz Question — MCQ
+model QuizQuestion {
+  id           String  @id @default(uuid())
+  quizId       String
+  question     String
+  options      Json // ["Option A", "Option B", "Option C", "Option D"]
+  correctIndex Int // 0-3
+  explanation  String?
+  sortOrder    Int     @default(0)
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+}
+
+// Quiz Attempt
+model QuizAttempt {
+  id          String   @id @default(uuid())
+  userId      String
+  quizId      String
+  score       Float // Percentage 0-100
+  passed      Boolean  @default(false)
+  answers     Json // [{ questionId, selectedIndex, correct }]
+  completedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([quizId])
+}
+
+// Expert Availability — Weekly time slots
+model ExpertAvailability {
+  id        String   @id @default(uuid())
+  expertId  String
+  dayOfWeek Int // 0=Sunday, 6=Saturday
+  startTime String // "09:00"
+  endTime   String // "17:00"
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  expert ExpertProfile @relation(fields: [expertId], references: [id], onDelete: Cascade)
+
+  @@index([expertId])
+  @@index([dayOfWeek])
+}
+
+// Expert Booking — Session booking
+model ExpertBooking {
+  id            String         @id @default(uuid())
+  userId        String
+  expertId      String
+  sessionType   SessionType
+  category      ExpertCategory
+  topic         String?
+  scheduledDate DateTime
+  startTime     String // "10:00"
+  endTime       String // "11:00"
+  status        BookingStatus  @default(PENDING)
+  price         Float          @default(0)
+  currency      String         @default("TZS")
+  meetingUrl    String? // meet.yifcapital.co.tz link
+  location      String? // For physical meetings
+  notes         String?
+  paymentId     String?        @unique
+  cancelReason  String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  user    User          @relation("BookingUser", fields: [userId], references: [id], onDelete: Cascade)
+  expert  ExpertProfile @relation(fields: [expertId], references: [id], onDelete: Cascade)
+  payment LmsPayment?   @relation(fields: [paymentId], references: [id])
+
+  @@index([userId])
+  @@index([expertId])
+  @@index([scheduledDate])
+  @@index([status])
+}
+
+// Certificate — Auto-generated on course completion
+model Certificate {
+  id              String   @id @default(uuid())
+  userId          String
+  courseId        String
+  certificateCode String   @unique // e.g. "YIF-CERT-2026-XXXXX"
+  qrCodeData      String? // QR verification URL
+  issuedAt        DateTime @default(now())
+
+  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course LmsCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([certificateCode])
+}
+
+// Notification — In-app notifications
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  actionUrl String?
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+// LMS Payment — Course/Booking payments (reuses Snippe)
+model LmsPayment {
+  id                String    @id @default(uuid())
+  userId            String
+  amount            Float
+  currency          String    @default("TZS")
+  provider          String    @default("snippe")
+  providerReference String?   @unique
+  status            String    @default("pending") // pending, success, failed
+  paymentType       String // "course" or "booking"
+  courseId          String?
+  description       String?
+  createdAt         DateTime  @default(now())
+  completedAt       DateTime?
+
+  user       User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course     LmsCourse?           @relation(fields: [courseId], references: [id])
+  enrollment LmsCourseEnrollment?
+  booking    ExpertBooking?
+
+  @@index([userId])
+  @@index([status])
+  @@index([providerReference])
+}
+
+// Expert Payout Request
+model PayoutRequest {
+  id             String       @id @default(uuid())
+  expertId       String
+  amount         Float // gross amount requested (100%)
+  expertAmount   Float // 80% to expert
+  platformFee    Float // 20% to platform
+  status         PayoutStatus @default(PENDING)
+  payoutMethod   String // MOBILE_MONEY | BANK_TRANSFER
+  mobileProvider String?
+  mobileNumber   String?
+  bankName       String?
+  accountNumber  String?
+  accountName    String?
+  branchName     String?
+  adminNote      String?
+  requestedAt    DateTime     @default(now())
+  processedAt    DateTime?
+  processedBy    String?
+
+  expert ExpertProfile @relation(fields: [expertId], references: [id], onDelete: Cascade)
+
+  @@index([expertId])
+  @@index([status])
+  @@index([requestedAt])
+}
+
+// Investment Readiness Quiz
+model ReadinessQuiz {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  questions ReadinessQuestion[]
+  results   ReadinessResult[]
+}
+
+// Readiness Quiz Question
+model ReadinessQuestion {
+  id        String @id @default(uuid())
+  quizId    String
+  question  String
+  options   Json // [{ text, points }]
+  sortOrder Int    @default(0)
+
+  quiz ReadinessQuiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+}
+
+// User Readiness Result
+model ReadinessResult {
+  id          String        @id @default(uuid())
+  userId      String
+  quizId      String
+  totalScore  Int
+  level       InvestorLevel
+  answers     Json // [{ questionId, selectedIndex, points }]
+  completedAt DateTime      @default(now())
+
+  user User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz ReadinessQuiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([quizId])
 }

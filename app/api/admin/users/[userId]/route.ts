@@ -28,13 +28,13 @@ export async function PATCH(
 
     const data: {
       name?: string
-      role?: "FREE" | "PRO" | "INSTITUTIONAL" | "ADMIN"
+      role?: "FREE" | "PRO" | "INSTITUTIONAL" | "ADMIN" | "EXPERT"
       phoneNumber?: string | null
       lastPhonePromptDate?: null
     } = {}
 
     if (updates.name) data.name = updates.name
-    if (updates.role) data.role = updates.role.toUpperCase() as "FREE" | "PRO" | "INSTITUTIONAL" | "ADMIN"
+    if (updates.role) data.role = updates.role.toUpperCase() as "FREE" | "PRO" | "INSTITUTIONAL" | "ADMIN" | "EXPERT"
 
     if (updates.phoneNumber !== undefined && updates.phoneNumber !== null) {
       const raw = String(updates.phoneNumber).trim()

@@ -1,8 +1,6 @@
 "use client"
 
-import React from "react"
-
-import { useState } from "react"
+import React, { Suspense, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -211,6 +209,8 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <LoginForm />
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }

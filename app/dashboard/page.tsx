@@ -12,7 +12,6 @@ import {
   BarChart3,
   Briefcase,
   GraduationCap,
-  Crown,
   Lightbulb,
   Globe,
   Target,
@@ -20,7 +19,8 @@ import {
   Search,
   Newspaper,
   Calendar,
-  Activity
+  Activity,
+  BookOpen
 } from "lucide-react"
 import Link from "next/link"
 import { MarketTable } from "@/components/dashboard/market-table"
@@ -146,34 +146,68 @@ export default function DashboardPage() {
         ...
       </div> */}
 
-      {/* Portfolio Quick Access */}
-      <Card className="border-gold/20 bg-gradient-to-r from-navy/80 to-navy/60">
-        <CardHeader className="pb-2">
-          <CardTitle className="flex items-center gap-2 text-lg font-bold text-gold">
-            <Briefcase className="h-5 w-5" />
-            My Portfolio
-          </CardTitle>
-          <CardDescription className="text-muted-foreground">
-            Track your stocks, funds, and bonds — all in one place.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap gap-3">
-            <Button asChild className="bg-gold text-navy hover:bg-gold/90">
-              <Link href="/portfolio">
-                <Briefcase className="mr-2 h-4 w-4" />
-                View Portfolio
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="border-gold/30 text-gold hover:bg-gold/10">
-              <Link href="/portfolio">
-                <TrendingUp className="mr-2 h-4 w-4" />
-                Track Performance
-              </Link>
-            </Button>
+      {/* Portfolio & Learning Quick Access */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card className="border-gold/20 bg-gradient-to-br from-navy/90 to-navy/70 shadow-xl overflow-hidden relative group">
+          <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Briefcase className="h-24 w-24 text-gold" />
           </div>
-        </CardContent>
-      </Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold text-gold">
+              <Briefcase className="h-5 w-5" />
+              My Portfolio
+            </CardTitle>
+            <CardDescription className="text-white/60">
+              Track your stocks, funds, and bonds in real-time.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild className="bg-gold text-navy hover:bg-gold/90 font-bold">
+                <Link href="/portfolio">
+                  View Portfolio
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="bg-transparent border-gold/50 text-gold hover:bg-gold/10 dark:bg-transparent">
+                <Link href="/portfolio">
+                  <TrendingUp className="mr-2 h-4 w-4" />
+                  Analytics
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-emerald-500/20 bg-gradient-to-br from-slate-900 to-navy shadow-xl overflow-hidden relative group">
+          <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+            <GraduationCap className="h-24 w-24 text-emerald-500" />
+          </div>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-lg font-bold text-emerald-500">
+              <GraduationCap className="h-5 w-5" />
+              Learning Journey
+            </CardTitle>
+            <CardDescription className="text-white/60">
+              Continue your courses and manage consultations.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild className="bg-emerald-600 text-white hover:bg-emerald-700 font-bold">
+                <Link href="/lms">
+                  LMS Dashboard
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="bg-transparent border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 dark:bg-transparent">
+                <Link href="/courses">
+                  <BookOpen className="mr-2 h-4 w-4" />
+                  Academy
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Insights & Analysis & Economics */}
       <div className="grid gap-4 md:grid-cols-3">
@@ -188,7 +222,7 @@ export default function DashboardPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full mt-2">
+            <Button asChild className="w-full mt-2 bg-emerald-600 text-white hover:bg-emerald-700 font-semibold">
               <Link href="/research">
                 <Search className="mr-2 h-4 w-4" />
                 Research
@@ -208,7 +242,7 @@ export default function DashboardPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full mt-2">
+            <Button asChild className="w-full mt-2 bg-blue-600 text-white hover:bg-blue-700 font-semibold">
               <Link href="/articles">
                 <Newspaper className="mr-2 h-4 w-4" />
                 Read
@@ -228,7 +262,7 @@ export default function DashboardPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full mt-2">
+            <Button asChild className="w-full mt-2 bg-red-600 text-white hover:bg-red-700 font-semibold">
               <Link href="/economics">
                 <Globe className="mr-2 h-4 w-4" />
                 View Stats

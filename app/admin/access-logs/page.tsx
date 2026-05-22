@@ -106,11 +106,11 @@ export default function AdminAccessLogsPage() {
                     <p className="text-muted-foreground">Monitor live session access attempts and detect link sharing abuse.</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="outline" onClick={fetchLogs}>
+                    <Button variant="outline" onClick={fetchLogs} className="border-white/10 bg-transparent text-white hover:bg-white/5">
                         <RefreshCcw className="mr-2 h-4 w-4" />
                         Refresh
                     </Button>
-                    <Button variant="outline">
+                    <Button variant="outline" className="border-white/10 bg-transparent text-white hover:bg-white/5">
                         <Download className="mr-2 h-4 w-4" />
                         Export CSV
                     </Button>
@@ -136,7 +136,7 @@ export default function AdminAccessLogsPage() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
-                        <Button variant="outline">
+                        <Button variant="outline" className="border-white/10 bg-transparent text-white hover:bg-white/5">
                             <Filter className="mr-2 h-4 w-4" />
                             Filter
                         </Button>

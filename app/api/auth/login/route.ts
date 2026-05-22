@@ -4,13 +4,23 @@ import bcrypt from "bcryptjs";
 import { setAuthCookies } from "@/lib/auth-cookies";
 import { computeShouldShowPhonePrompt } from "@/lib/phone-prompt-config";
 
+import { z } from "zod";
+
+const LoginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+});
+
 export async function POST(req: NextRequest) {
     try {
-        const { email, password } = await req.json();
+        const body = await req.json();
+        const result = LoginSchema.safeParse(body);
 
-        if (!email || !password) {
-            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        if (!result.success) {
+            return NextResponse.json({ error: "Invalid input", details: result.error.format() }, { status: 400 });
         }
+
+        const { email, password } = result.data;
 
         // Find user
         const user = await prisma.user.findUnique({
@@ -21,9 +31,30 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
 
+        // Check for account lockout
+        if (user.lockoutUntil && user.lockoutUntil > new Date()) {
+            const timeLeft = Math.ceil((user.lockoutUntil.getTime() - Date.now()) / 1000 / 60);
+            return NextResponse.json({ 
+                error: `Account is temporarily locked due to multiple failed login attempts. Please try again in ${timeLeft} minutes.`,
+                code: "ACCOUNT_LOCKED"
+            }, { status: 403 });
+        }
+
         // Verify password
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) {
+            // Increment failed attempts
+            const newFailedAttempts = user.failedLoginAttempts + 1;
+            const lockoutUntil = newFailedAttempts >= 5 ? new Date(Date.now() + 15 * 60 * 1000) : null;
+            
+            await prisma.user.update({
+                where: { id: user.id },
+                data: {
+                    failedLoginAttempts: newFailedAttempts,
+                    lockoutUntil: lockoutUntil
+                }
+            });
+
             return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
         }
 
@@ -36,6 +67,15 @@ export async function POST(req: NextRequest) {
                 { status: 403 }
             );
         }
+
+        // Reset failed attempts on success
+        await prisma.user.update({
+            where: { id: user.id },
+            data: {
+                failedLoginAttempts: 0,
+                lockoutUntil: null
+            }
+        });
 
         await setAuthCookies(user.id);
 

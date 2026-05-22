@@ -113,7 +113,7 @@ export default function AdminDashboardPage() {
                     <Button
                         variant="outline"
                         size="sm"
-                        className="border-white/10 text-white hover:bg-white/5"
+                        className="border-white/10 bg-transparent text-white hover:bg-white/5"
                         onClick={() => void handleExportUsers()}
                     >
                         <Download className="mr-2 h-4 w-4" />

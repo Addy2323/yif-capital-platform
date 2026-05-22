@@ -86,6 +86,8 @@ export function PortfolioAISection({
         error?: string
         code?: string
         subscribeUrl?: string
+        data?: unknown
+        cached?: boolean
       }
       if (res.status === 401 || res.status === 403) {
         if (json.code === "SUBSCRIPTION_REQUIRED" && json.subscribeUrl) {
