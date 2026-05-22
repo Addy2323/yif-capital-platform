@@ -761,15 +761,20 @@ model Portfolio {
 model PortfolioStock {
   id           String    @id @default(uuid())
   portfolioId  String
-  stockId      String
+  stockId      String?   // [MIGRATION] Made optional for data preservation
+  ticker       String?   // [MIGRATION] Restored for data transition
+  name         String?   // [MIGRATION] Restored for data transition
+  sector       String?   // [MIGRATION] Restored for data transition
   qty          Float
   buyPrice     Float
+  currentPrice Float?    // [MIGRATION] Restored for data transition
+  dividend     Float?    // [MIGRATION] Restored for data transition
   buyDate      DateTime?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
   portfolio    Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
-  stock        Stock     @relation(fields: [stockId], references: [id])
+  stock        Stock?    @relation(fields: [stockId], references: [id])
 
   @@index([portfolioId])
   @@index([stockId])
