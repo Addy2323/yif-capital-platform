@@ -751,6 +751,39 @@ model DseStock {
   marketCap     String?
   scrapedAt     DateTime @default(now())
   
+  // [MIGRATION] Restored columns to prevent data loss on production server
+  averageVolume   Float?
+  beta            Float?
+  change1m        Float?
+  change1w        Float?
+  change1y        Float?
+  change3y        Float?
+  change5y        Float?
+  change6m        Float?
+  dividendGrowth  Float?
+  dividendYield   Float?
+  dps             Float?
+  eps             Float?
+  fcf             Float?
+  fcfPerShare     Float?
+  industry        String?
+  netIncome       Float?
+  operatingIncome Float?
+  payoutFrequency String?
+  payoutRatio     Float?
+  pbRatio         Float?
+  peRatio         Float?
+  psRatio         Float?
+  revenue         Float?
+  roa             Float?
+  roe             Float?
+  rsi             Float?
+  sector          String?
+  sharesOut       Float?
+  updatedAt       DateTime @updatedAt
+  volume          Int?
+  ytdChange       Float?
+
   @@index([symbol])
   @@index([scrapedAt])
 }
