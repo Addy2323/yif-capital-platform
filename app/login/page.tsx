@@ -107,7 +107,7 @@ function LoginForm() {
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-24 bg-card/50 backdrop-blur-sm">
+      <div className="flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-24 bg-white">
         <div className="mx-auto w-full max-w-md space-y-10">
           {/* Mobile Logo */}
           <div className="lg:hidden">
@@ -118,8 +118,8 @@ function LoginForm() {
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-3xl font-bold text-foreground tracking-tight">Welcome back</h2>
-            <p className="text-muted-foreground text-lg">Sign in to your professional account</p>
+            <h2 className="text-3xl font-bold text-navy tracking-tight">Welcome back</h2>
+            <p className="text-slate-500 text-lg">Sign in to your professional account</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -131,7 +131,7 @@ function LoginForm() {
 
             <div className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-semibold text-foreground/80 ml-1">Email address</Label>
+                <Label htmlFor="email" className="text-sm font-semibold text-slate-700 ml-1">Email address</Label>
                 <Input
                   id="email"
                   type="email"
@@ -139,7 +139,7 @@ function LoginForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="h-14 bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 transition-all text-base px-4 rounded-xl"
+                  className="h-14 bg-slate-50 border-slate-200 focus:border-gold/50 focus:ring-gold/20 transition-all text-base px-4 rounded-xl text-slate-900 placeholder:text-slate-400"
                   autoComplete="email"
                   suppressHydrationWarning
                 />
@@ -147,7 +147,7 @@ function LoginForm() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between ml-1">
-                  <Label htmlFor="password" className="text-sm font-semibold text-foreground/80">Password</Label>
+                  <Label htmlFor="password" className="text-sm font-semibold text-slate-700">Password</Label>
                   <Link href="/forgot-password" className="text-xs font-semibold text-gold hover:text-gold/80 transition-colors uppercase tracking-wider">
                     Forgot password?
                   </Link>
@@ -160,7 +160,7 @@ function LoginForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="h-14 bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 transition-all text-base px-4 pr-14 rounded-xl"
+                    className="h-14 bg-slate-50 border-slate-200 focus:border-gold/50 focus:ring-gold/20 transition-all text-base px-4 pr-14 rounded-xl text-slate-900 placeholder:text-slate-400"
                     autoComplete="current-password"
                     suppressHydrationWarning
                   />
@@ -194,7 +194,7 @@ function LoginForm() {
           </form>
 
           <div className="pt-4 text-center">
-            <p className="text-muted-foreground font-medium">
+            <p className="text-slate-500 font-medium">
               New to YIF Capital?{" "}
               <Link href="/register" className="text-gold hover:text-gold/80 hover:underline underline-offset-4 transition-all">
                 Create account

@@ -149,7 +149,7 @@ export default function ForgotPasswordPage() {
             </div>
 
             {/* Right Panel - Form */}
-            <div className="flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-24 bg-card/50 backdrop-blur-sm">
+            <div className="flex w-full flex-col justify-center px-8 lg:w-1/2 lg:px-24 bg-white">
                 <div className="mx-auto w-full max-w-md space-y-10">
                     {/* Mobile Logo */}
                     <div className="lg:hidden">
@@ -173,8 +173,8 @@ export default function ForgotPasswordPage() {
                             </div>
 
                             <div className="space-y-3 text-center">
-                                <h2 className="text-3xl font-bold text-foreground tracking-tight">Forgot your password?</h2>
-                                <p className="text-muted-foreground text-lg">
+                                <h2 className="text-3xl font-bold text-navy tracking-tight">Forgot your password?</h2>
+                                <p className="text-slate-500 text-lg">
                                     Enter the email address associated with your account and we&apos;ll send you a reset link.
                                 </p>
                             </div>
@@ -187,9 +187,9 @@ export default function ForgotPasswordPage() {
                                 )}
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="email" className="text-sm font-semibold text-foreground/80 ml-1">Email address</Label>
+                                    <Label htmlFor="email" className="text-sm font-semibold text-slate-700 ml-1">Email address</Label>
                                     <div className="relative group">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/50 group-focus-within:text-gold transition-colors" />
+                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 group-focus-within:text-gold transition-colors" />
                                         <Input
                                             id="email"
                                             type="email"
@@ -197,7 +197,7 @@ export default function ForgotPasswordPage() {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
-                                            className="h-14 bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 transition-all text-base pl-12 pr-4 rounded-xl"
+                                            className="h-14 bg-slate-50 border-slate-200 focus:border-gold/50 focus:ring-gold/20 transition-all text-base pl-12 pr-4 rounded-xl text-slate-900 placeholder:text-slate-400"
                                             autoComplete="email"
                                             suppressHydrationWarning
                                         />
@@ -222,7 +222,7 @@ export default function ForgotPasswordPage() {
                             </form>
 
                             <div className="pt-6 text-center">
-                                <Link href="/login" className="inline-flex items-center gap-2 text-muted-foreground hover:text-gold transition-colors font-medium group">
+                                <Link href="/login" className="inline-flex items-center gap-2 text-slate-500 hover:text-gold transition-colors font-medium group">
                                     <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
                                     Back to Sign In
                                 </Link>
@@ -246,22 +246,22 @@ export default function ForgotPasswordPage() {
                                 </div>
                             </div>
 
-                            <div className="space-y-3">
-                                <h2 className="text-3xl font-bold text-foreground tracking-tight">Check your email</h2>
-                                <p className="text-muted-foreground text-lg leading-relaxed">
+                             <div className="space-y-3">
+                                <h2 className="text-3xl font-bold text-navy tracking-tight">Check your email</h2>
+                                <p className="text-slate-500 text-lg leading-relaxed">
                                     We&apos;ve sent a password reset link to
                                 </p>
                                 <p className="text-gold font-semibold text-lg">{email}</p>
-                                <p className="text-muted-foreground text-sm mt-4">
+                                 <p className="text-slate-500 text-sm mt-4">
                                     The link will expire in 1 hour. Check your spam folder if you don&apos;t see the email.
                                 </p>
                             </div>
 
-                            {/* Divider */}
+                             {/* Divider */}
                             <div className="flex items-center gap-4 my-8">
-                                <div className="flex-1 h-px bg-border" />
-                                <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider">Didn&apos;t receive it?</span>
-                                <div className="flex-1 h-px bg-border" />
+                                <div className="flex-1 h-px bg-slate-100" />
+                                <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Didn&apos;t receive it?</span>
+                                <div className="flex-1 h-px bg-slate-100" />
                             </div>
 
                             <Button

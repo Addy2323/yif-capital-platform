@@ -145,7 +145,7 @@ function RegisterForm() {
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex w-full flex-col justify-center px-8 py-12 lg:w-1/2 lg:px-16">
+      <div className="flex w-full flex-col justify-center px-8 py-12 lg:w-1/2 lg:px-16 bg-white">
         <div className="mx-auto w-full max-w-md">
           {/* Mobile Logo */}
           <div className="mb-8 lg:hidden">
@@ -156,8 +156,8 @@ function RegisterForm() {
           </div>
 
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-foreground">Create your account</h2>
-            <p className="text-muted-foreground">Get started with a free account</p>
+            <h2 className="text-2xl font-bold text-navy">Create your account</h2>
+            <p className="text-slate-500">Get started with a free account</p>
           </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -169,7 +169,7 @@ function RegisterForm() {
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Full name</Label>
+                <Label htmlFor="name" className="text-slate-700">Full name</Label>
                 <Input
                   id="name"
                   type="text"
@@ -177,14 +177,14 @@ function RegisterForm() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="h-12"
+                  className="h-12 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
                   autoComplete="name"
                   suppressHydrationWarning
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email address</Label>
+                <Label htmlFor="email" className="text-slate-700">Email address</Label>
                 <Input
                   id="email"
                   type="email"
@@ -192,7 +192,7 @@ function RegisterForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="h-12"
+                  className="h-12 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
                   autoComplete="email"
                   suppressHydrationWarning
                 />
@@ -202,9 +202,9 @@ function RegisterForm() {
                 <Label htmlFor="phone">Phone number</Label>
                 {!useIntlPhone ? (
                   <>
-                    <div className="flex h-12 overflow-hidden rounded-md border border-input bg-background shadow-xs ring-offset-background focus-within:ring-2 focus-within:ring-ring/50 focus-within:ring-offset-2">
+                 <div className="flex h-12 overflow-hidden rounded-md border border-slate-200 bg-white shadow-xs ring-offset-background focus-within:ring-2 focus-within:ring-ring/50 focus-within:ring-offset-2">
                       <span
-                        className="inline-flex shrink-0 items-center border-r border-input bg-muted/70 px-3 text-sm font-medium text-foreground tabular-nums select-none"
+                        className="inline-flex shrink-0 items-center border-r border-slate-200 bg-slate-50 px-3 text-sm font-medium text-slate-700 tabular-nums select-none"
                         aria-hidden
                       >
                         +255
@@ -220,7 +220,7 @@ function RegisterForm() {
                           setPhoneLocal(tzLocalDigitsFromPasteOrInput(e.target.value))
                         }
                         required
-                        className="h-12 flex-1 min-w-0 border-0 rounded-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="h-12 flex-1 min-w-0 border-0 rounded-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-white text-slate-900 placeholder:text-slate-400"
                         suppressHydrationWarning
                         aria-describedby="phone-hint"
                       />
@@ -253,7 +253,7 @@ function RegisterForm() {
                       value={phoneIntl}
                       onChange={(e) => setPhoneIntl(e.target.value)}
                       required
-                      className="h-12"
+                      className="h-12 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
                       suppressHydrationWarning
                       aria-describedby="phone-intl-hint"
                     />
@@ -285,7 +285,7 @@ function RegisterForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="h-12 pr-12"
+                    className="h-12 pr-12 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
                     autoComplete="new-password"
                     suppressHydrationWarning
                   />
@@ -315,7 +315,7 @@ function RegisterForm() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm password</Label>
+                <Label htmlFor="confirmPassword" className="text-slate-700">Confirm password</Label>
                 <Input
                   id="confirmPassword"
                   type="password"
@@ -323,7 +323,7 @@ function RegisterForm() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="h-12"
+                  className="h-12 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400"
                   autoComplete="new-password"
                   suppressHydrationWarning
                 />
@@ -364,7 +364,7 @@ function RegisterForm() {
             </Button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-muted-foreground">
+          <p className="mt-8 text-center text-sm text-slate-500">
             Already have an account?{" "}
             <Link href="/login" className="font-medium text-gold hover:text-gold/80">
               Sign in
