@@ -154,6 +154,11 @@ export type EconomicIndicator = $Result.DefaultSelection<Prisma.$EconomicIndicat
  */
 export type DseMarketSummary = $Result.DefaultSelection<Prisma.$DseMarketSummaryPayload>
 /**
+ * Model DseStock
+ * 
+ */
+export type DseStock = $Result.DefaultSelection<Prisma.$DseStockPayload>
+/**
  * Model Portfolio
  * 
  */
@@ -865,6 +870,16 @@ export class PrismaClient<
   get dseMarketSummary(): Prisma.DseMarketSummaryDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.dseStock`: Exposes CRUD operations for the **DseStock** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DseStocks
+    * const dseStocks = await prisma.dseStock.findMany()
+    * ```
+    */
+  get dseStock(): Prisma.DseStockDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.portfolio`: Exposes CRUD operations for the **Portfolio** model.
     * Example usage:
     * ```ts
@@ -1542,6 +1557,7 @@ export namespace Prisma {
     StockPriceHistory: 'StockPriceHistory',
     EconomicIndicator: 'EconomicIndicator',
     DseMarketSummary: 'DseMarketSummary',
+    DseStock: 'DseStock',
     Portfolio: 'Portfolio',
     PortfolioStock: 'PortfolioStock',
     PortfolioFund: 'PortfolioFund',
@@ -1581,7 +1597,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userSession" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "otp" | "bulkSmsCampaign" | "manager" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "stock" | "stockPriceHistory" | "economicIndicator" | "dseMarketSummary" | "portfolio" | "portfolioStock" | "portfolioFund" | "expertProfile" | "lmsCourse" | "courseModule" | "lesson" | "lmsCourseEnrollment" | "lessonProgress" | "quiz" | "quizQuestion" | "quizAttempt" | "expertAvailability" | "expertBooking" | "certificate" | "notification" | "lmsPayment" | "payoutRequest" | "readinessQuiz" | "readinessQuestion" | "readinessResult"
+      modelProps: "user" | "userSession" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "otp" | "bulkSmsCampaign" | "manager" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "stock" | "stockPriceHistory" | "economicIndicator" | "dseMarketSummary" | "dseStock" | "portfolio" | "portfolioStock" | "portfolioFund" | "expertProfile" | "lmsCourse" | "courseModule" | "lesson" | "lmsCourseEnrollment" | "lessonProgress" | "quiz" | "quizQuestion" | "quizAttempt" | "expertAvailability" | "expertBooking" | "certificate" | "notification" | "lmsPayment" | "payoutRequest" | "readinessQuiz" | "readinessQuestion" | "readinessResult"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3657,6 +3673,80 @@ export namespace Prisma {
           }
         }
       }
+      DseStock: {
+        payload: Prisma.$DseStockPayload<ExtArgs>
+        fields: Prisma.DseStockFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DseStockFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DseStockFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>
+          }
+          findFirst: {
+            args: Prisma.DseStockFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DseStockFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>
+          }
+          findMany: {
+            args: Prisma.DseStockFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>[]
+          }
+          create: {
+            args: Prisma.DseStockCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>
+          }
+          createMany: {
+            args: Prisma.DseStockCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DseStockCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>[]
+          }
+          delete: {
+            args: Prisma.DseStockDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>
+          }
+          update: {
+            args: Prisma.DseStockUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>
+          }
+          deleteMany: {
+            args: Prisma.DseStockDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DseStockUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DseStockUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>[]
+          }
+          upsert: {
+            args: Prisma.DseStockUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DseStockPayload>
+          }
+          aggregate: {
+            args: Prisma.DseStockAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDseStock>
+          }
+          groupBy: {
+            args: Prisma.DseStockGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DseStockGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DseStockCountArgs<ExtArgs>
+            result: $Utils.Optional<DseStockCountAggregateOutputType> | number
+          }
+        }
+      }
       Portfolio: {
         payload: Prisma.$PortfolioPayload<ExtArgs>
         fields: Prisma.PortfolioFieldRefs
@@ -5335,6 +5425,7 @@ export namespace Prisma {
     stockPriceHistory?: StockPriceHistoryOmit
     economicIndicator?: EconomicIndicatorOmit
     dseMarketSummary?: DseMarketSummaryOmit
+    dseStock?: DseStockOmit
     portfolio?: PortfolioOmit
     portfolioStock?: PortfolioStockOmit
     portfolioFund?: PortfolioFundOmit
@@ -20055,6 +20146,7 @@ export namespace Prisma {
     fundName: string | null
     fundType: $Enums.FundType | null
     managerId: string | null
+    managerName: string | null
     description: string | null
     logoUrl: string | null
     inceptionDate: Date | null
@@ -20073,6 +20165,7 @@ export namespace Prisma {
     fundName: string | null
     fundType: $Enums.FundType | null
     managerId: string | null
+    managerName: string | null
     description: string | null
     logoUrl: string | null
     inceptionDate: Date | null
@@ -20091,6 +20184,7 @@ export namespace Prisma {
     fundName: number
     fundType: number
     managerId: number
+    managerName: number
     description: number
     logoUrl: number
     inceptionDate: number
@@ -20111,6 +20205,7 @@ export namespace Prisma {
     fundName?: true
     fundType?: true
     managerId?: true
+    managerName?: true
     description?: true
     logoUrl?: true
     inceptionDate?: true
@@ -20129,6 +20224,7 @@ export namespace Prisma {
     fundName?: true
     fundType?: true
     managerId?: true
+    managerName?: true
     description?: true
     logoUrl?: true
     inceptionDate?: true
@@ -20147,6 +20243,7 @@ export namespace Prisma {
     fundName?: true
     fundType?: true
     managerId?: true
+    managerName?: true
     description?: true
     logoUrl?: true
     inceptionDate?: true
@@ -20238,6 +20335,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId: string | null
+    managerName: string | null
     description: string
     logoUrl: string | null
     inceptionDate: Date
@@ -20273,6 +20371,7 @@ export namespace Prisma {
     fundName?: boolean
     fundType?: boolean
     managerId?: boolean
+    managerName?: boolean
     description?: boolean
     logoUrl?: boolean
     inceptionDate?: boolean
@@ -20304,6 +20403,7 @@ export namespace Prisma {
     fundName?: boolean
     fundType?: boolean
     managerId?: boolean
+    managerName?: boolean
     description?: boolean
     logoUrl?: boolean
     inceptionDate?: boolean
@@ -20323,6 +20423,7 @@ export namespace Prisma {
     fundName?: boolean
     fundType?: boolean
     managerId?: boolean
+    managerName?: boolean
     description?: boolean
     logoUrl?: boolean
     inceptionDate?: boolean
@@ -20342,6 +20443,7 @@ export namespace Prisma {
     fundName?: boolean
     fundType?: boolean
     managerId?: boolean
+    managerName?: boolean
     description?: boolean
     logoUrl?: boolean
     inceptionDate?: boolean
@@ -20353,7 +20455,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type FundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fundId" | "fundSlug" | "fundName" | "fundType" | "managerId" | "description" | "logoUrl" | "inceptionDate" | "baseCurrency" | "benchmarkId" | "benchmarkName" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["fund"]>
+  export type FundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fundId" | "fundSlug" | "fundName" | "fundType" | "managerId" | "managerName" | "description" | "logoUrl" | "inceptionDate" | "baseCurrency" | "benchmarkId" | "benchmarkName" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["fund"]>
   export type FundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     manager?: boolean | Fund$managerArgs<ExtArgs>
     dailySummaries?: boolean | Fund$dailySummariesArgs<ExtArgs>
@@ -20399,6 +20501,7 @@ export namespace Prisma {
       fundName: string
       fundType: $Enums.FundType
       managerId: string | null
+      managerName: string | null
       description: string
       logoUrl: string | null
       inceptionDate: Date
@@ -20849,6 +20952,7 @@ export namespace Prisma {
     readonly fundName: FieldRef<"Fund", 'String'>
     readonly fundType: FieldRef<"Fund", 'FundType'>
     readonly managerId: FieldRef<"Fund", 'String'>
+    readonly managerName: FieldRef<"Fund", 'String'>
     readonly description: FieldRef<"Fund", 'String'>
     readonly logoUrl: FieldRef<"Fund", 'String'>
     readonly inceptionDate: FieldRef<"Fund", 'DateTime'>
@@ -40043,6 +40147,1593 @@ export namespace Prisma {
 
 
   /**
+   * Model DseStock
+   */
+
+  export type AggregateDseStock = {
+    _count: DseStockCountAggregateOutputType | null
+    _avg: DseStockAvgAggregateOutputType | null
+    _sum: DseStockSumAggregateOutputType | null
+    _min: DseStockMinAggregateOutputType | null
+    _max: DseStockMaxAggregateOutputType | null
+  }
+
+  export type DseStockAvgAggregateOutputType = {
+    price: number | null
+    change: number | null
+    changePct: number | null
+    averageVolume: number | null
+    beta: number | null
+    change1m: number | null
+    change1w: number | null
+    change1y: number | null
+    change3y: number | null
+    change5y: number | null
+    change6m: number | null
+    dividendGrowth: number | null
+    dividendYield: number | null
+    dps: number | null
+    eps: number | null
+    fcf: number | null
+    fcfPerShare: number | null
+    netIncome: number | null
+    operatingIncome: number | null
+    payoutRatio: number | null
+    pbRatio: number | null
+    peRatio: number | null
+    psRatio: number | null
+    revenue: number | null
+    roa: number | null
+    roe: number | null
+    rsi: number | null
+    sharesOut: number | null
+    volume: number | null
+    ytdChange: number | null
+  }
+
+  export type DseStockSumAggregateOutputType = {
+    price: number | null
+    change: number | null
+    changePct: number | null
+    averageVolume: number | null
+    beta: number | null
+    change1m: number | null
+    change1w: number | null
+    change1y: number | null
+    change3y: number | null
+    change5y: number | null
+    change6m: number | null
+    dividendGrowth: number | null
+    dividendYield: number | null
+    dps: number | null
+    eps: number | null
+    fcf: number | null
+    fcfPerShare: number | null
+    netIncome: number | null
+    operatingIncome: number | null
+    payoutRatio: number | null
+    pbRatio: number | null
+    peRatio: number | null
+    psRatio: number | null
+    revenue: number | null
+    roa: number | null
+    roe: number | null
+    rsi: number | null
+    sharesOut: number | null
+    volume: number | null
+    ytdChange: number | null
+  }
+
+  export type DseStockMinAggregateOutputType = {
+    id: string | null
+    symbol: string | null
+    name: string | null
+    price: number | null
+    change: number | null
+    changePct: number | null
+    marketCap: string | null
+    scrapedAt: Date | null
+    averageVolume: number | null
+    beta: number | null
+    change1m: number | null
+    change1w: number | null
+    change1y: number | null
+    change3y: number | null
+    change5y: number | null
+    change6m: number | null
+    dividendGrowth: number | null
+    dividendYield: number | null
+    dps: number | null
+    eps: number | null
+    fcf: number | null
+    fcfPerShare: number | null
+    industry: string | null
+    netIncome: number | null
+    operatingIncome: number | null
+    payoutFrequency: string | null
+    payoutRatio: number | null
+    pbRatio: number | null
+    peRatio: number | null
+    psRatio: number | null
+    revenue: number | null
+    roa: number | null
+    roe: number | null
+    rsi: number | null
+    sector: string | null
+    sharesOut: number | null
+    updatedAt: Date | null
+    volume: number | null
+    ytdChange: number | null
+  }
+
+  export type DseStockMaxAggregateOutputType = {
+    id: string | null
+    symbol: string | null
+    name: string | null
+    price: number | null
+    change: number | null
+    changePct: number | null
+    marketCap: string | null
+    scrapedAt: Date | null
+    averageVolume: number | null
+    beta: number | null
+    change1m: number | null
+    change1w: number | null
+    change1y: number | null
+    change3y: number | null
+    change5y: number | null
+    change6m: number | null
+    dividendGrowth: number | null
+    dividendYield: number | null
+    dps: number | null
+    eps: number | null
+    fcf: number | null
+    fcfPerShare: number | null
+    industry: string | null
+    netIncome: number | null
+    operatingIncome: number | null
+    payoutFrequency: string | null
+    payoutRatio: number | null
+    pbRatio: number | null
+    peRatio: number | null
+    psRatio: number | null
+    revenue: number | null
+    roa: number | null
+    roe: number | null
+    rsi: number | null
+    sector: string | null
+    sharesOut: number | null
+    updatedAt: Date | null
+    volume: number | null
+    ytdChange: number | null
+  }
+
+  export type DseStockCountAggregateOutputType = {
+    id: number
+    symbol: number
+    name: number
+    price: number
+    change: number
+    changePct: number
+    marketCap: number
+    scrapedAt: number
+    averageVolume: number
+    beta: number
+    change1m: number
+    change1w: number
+    change1y: number
+    change3y: number
+    change5y: number
+    change6m: number
+    dividendGrowth: number
+    dividendYield: number
+    dps: number
+    eps: number
+    fcf: number
+    fcfPerShare: number
+    industry: number
+    netIncome: number
+    operatingIncome: number
+    payoutFrequency: number
+    payoutRatio: number
+    pbRatio: number
+    peRatio: number
+    psRatio: number
+    revenue: number
+    roa: number
+    roe: number
+    rsi: number
+    sector: number
+    sharesOut: number
+    updatedAt: number
+    volume: number
+    ytdChange: number
+    _all: number
+  }
+
+
+  export type DseStockAvgAggregateInputType = {
+    price?: true
+    change?: true
+    changePct?: true
+    averageVolume?: true
+    beta?: true
+    change1m?: true
+    change1w?: true
+    change1y?: true
+    change3y?: true
+    change5y?: true
+    change6m?: true
+    dividendGrowth?: true
+    dividendYield?: true
+    dps?: true
+    eps?: true
+    fcf?: true
+    fcfPerShare?: true
+    netIncome?: true
+    operatingIncome?: true
+    payoutRatio?: true
+    pbRatio?: true
+    peRatio?: true
+    psRatio?: true
+    revenue?: true
+    roa?: true
+    roe?: true
+    rsi?: true
+    sharesOut?: true
+    volume?: true
+    ytdChange?: true
+  }
+
+  export type DseStockSumAggregateInputType = {
+    price?: true
+    change?: true
+    changePct?: true
+    averageVolume?: true
+    beta?: true
+    change1m?: true
+    change1w?: true
+    change1y?: true
+    change3y?: true
+    change5y?: true
+    change6m?: true
+    dividendGrowth?: true
+    dividendYield?: true
+    dps?: true
+    eps?: true
+    fcf?: true
+    fcfPerShare?: true
+    netIncome?: true
+    operatingIncome?: true
+    payoutRatio?: true
+    pbRatio?: true
+    peRatio?: true
+    psRatio?: true
+    revenue?: true
+    roa?: true
+    roe?: true
+    rsi?: true
+    sharesOut?: true
+    volume?: true
+    ytdChange?: true
+  }
+
+  export type DseStockMinAggregateInputType = {
+    id?: true
+    symbol?: true
+    name?: true
+    price?: true
+    change?: true
+    changePct?: true
+    marketCap?: true
+    scrapedAt?: true
+    averageVolume?: true
+    beta?: true
+    change1m?: true
+    change1w?: true
+    change1y?: true
+    change3y?: true
+    change5y?: true
+    change6m?: true
+    dividendGrowth?: true
+    dividendYield?: true
+    dps?: true
+    eps?: true
+    fcf?: true
+    fcfPerShare?: true
+    industry?: true
+    netIncome?: true
+    operatingIncome?: true
+    payoutFrequency?: true
+    payoutRatio?: true
+    pbRatio?: true
+    peRatio?: true
+    psRatio?: true
+    revenue?: true
+    roa?: true
+    roe?: true
+    rsi?: true
+    sector?: true
+    sharesOut?: true
+    updatedAt?: true
+    volume?: true
+    ytdChange?: true
+  }
+
+  export type DseStockMaxAggregateInputType = {
+    id?: true
+    symbol?: true
+    name?: true
+    price?: true
+    change?: true
+    changePct?: true
+    marketCap?: true
+    scrapedAt?: true
+    averageVolume?: true
+    beta?: true
+    change1m?: true
+    change1w?: true
+    change1y?: true
+    change3y?: true
+    change5y?: true
+    change6m?: true
+    dividendGrowth?: true
+    dividendYield?: true
+    dps?: true
+    eps?: true
+    fcf?: true
+    fcfPerShare?: true
+    industry?: true
+    netIncome?: true
+    operatingIncome?: true
+    payoutFrequency?: true
+    payoutRatio?: true
+    pbRatio?: true
+    peRatio?: true
+    psRatio?: true
+    revenue?: true
+    roa?: true
+    roe?: true
+    rsi?: true
+    sector?: true
+    sharesOut?: true
+    updatedAt?: true
+    volume?: true
+    ytdChange?: true
+  }
+
+  export type DseStockCountAggregateInputType = {
+    id?: true
+    symbol?: true
+    name?: true
+    price?: true
+    change?: true
+    changePct?: true
+    marketCap?: true
+    scrapedAt?: true
+    averageVolume?: true
+    beta?: true
+    change1m?: true
+    change1w?: true
+    change1y?: true
+    change3y?: true
+    change5y?: true
+    change6m?: true
+    dividendGrowth?: true
+    dividendYield?: true
+    dps?: true
+    eps?: true
+    fcf?: true
+    fcfPerShare?: true
+    industry?: true
+    netIncome?: true
+    operatingIncome?: true
+    payoutFrequency?: true
+    payoutRatio?: true
+    pbRatio?: true
+    peRatio?: true
+    psRatio?: true
+    revenue?: true
+    roa?: true
+    roe?: true
+    rsi?: true
+    sector?: true
+    sharesOut?: true
+    updatedAt?: true
+    volume?: true
+    ytdChange?: true
+    _all?: true
+  }
+
+  export type DseStockAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DseStock to aggregate.
+     */
+    where?: DseStockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseStocks to fetch.
+     */
+    orderBy?: DseStockOrderByWithRelationInput | DseStockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DseStockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseStocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseStocks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DseStocks
+    **/
+    _count?: true | DseStockCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DseStockAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DseStockSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DseStockMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DseStockMaxAggregateInputType
+  }
+
+  export type GetDseStockAggregateType<T extends DseStockAggregateArgs> = {
+        [P in keyof T & keyof AggregateDseStock]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDseStock[P]>
+      : GetScalarType<T[P], AggregateDseStock[P]>
+  }
+
+
+
+
+  export type DseStockGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DseStockWhereInput
+    orderBy?: DseStockOrderByWithAggregationInput | DseStockOrderByWithAggregationInput[]
+    by: DseStockScalarFieldEnum[] | DseStockScalarFieldEnum
+    having?: DseStockScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DseStockCountAggregateInputType | true
+    _avg?: DseStockAvgAggregateInputType
+    _sum?: DseStockSumAggregateInputType
+    _min?: DseStockMinAggregateInputType
+    _max?: DseStockMaxAggregateInputType
+  }
+
+  export type DseStockGroupByOutputType = {
+    id: string
+    symbol: string
+    name: string | null
+    price: number | null
+    change: number | null
+    changePct: number | null
+    marketCap: string | null
+    scrapedAt: Date
+    averageVolume: number | null
+    beta: number | null
+    change1m: number | null
+    change1w: number | null
+    change1y: number | null
+    change3y: number | null
+    change5y: number | null
+    change6m: number | null
+    dividendGrowth: number | null
+    dividendYield: number | null
+    dps: number | null
+    eps: number | null
+    fcf: number | null
+    fcfPerShare: number | null
+    industry: string | null
+    netIncome: number | null
+    operatingIncome: number | null
+    payoutFrequency: string | null
+    payoutRatio: number | null
+    pbRatio: number | null
+    peRatio: number | null
+    psRatio: number | null
+    revenue: number | null
+    roa: number | null
+    roe: number | null
+    rsi: number | null
+    sector: string | null
+    sharesOut: number | null
+    updatedAt: Date
+    volume: number | null
+    ytdChange: number | null
+    _count: DseStockCountAggregateOutputType | null
+    _avg: DseStockAvgAggregateOutputType | null
+    _sum: DseStockSumAggregateOutputType | null
+    _min: DseStockMinAggregateOutputType | null
+    _max: DseStockMaxAggregateOutputType | null
+  }
+
+  type GetDseStockGroupByPayload<T extends DseStockGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DseStockGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DseStockGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DseStockGroupByOutputType[P]>
+            : GetScalarType<T[P], DseStockGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DseStockSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    symbol?: boolean
+    name?: boolean
+    price?: boolean
+    change?: boolean
+    changePct?: boolean
+    marketCap?: boolean
+    scrapedAt?: boolean
+    averageVolume?: boolean
+    beta?: boolean
+    change1m?: boolean
+    change1w?: boolean
+    change1y?: boolean
+    change3y?: boolean
+    change5y?: boolean
+    change6m?: boolean
+    dividendGrowth?: boolean
+    dividendYield?: boolean
+    dps?: boolean
+    eps?: boolean
+    fcf?: boolean
+    fcfPerShare?: boolean
+    industry?: boolean
+    netIncome?: boolean
+    operatingIncome?: boolean
+    payoutFrequency?: boolean
+    payoutRatio?: boolean
+    pbRatio?: boolean
+    peRatio?: boolean
+    psRatio?: boolean
+    revenue?: boolean
+    roa?: boolean
+    roe?: boolean
+    rsi?: boolean
+    sector?: boolean
+    sharesOut?: boolean
+    updatedAt?: boolean
+    volume?: boolean
+    ytdChange?: boolean
+  }, ExtArgs["result"]["dseStock"]>
+
+  export type DseStockSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    symbol?: boolean
+    name?: boolean
+    price?: boolean
+    change?: boolean
+    changePct?: boolean
+    marketCap?: boolean
+    scrapedAt?: boolean
+    averageVolume?: boolean
+    beta?: boolean
+    change1m?: boolean
+    change1w?: boolean
+    change1y?: boolean
+    change3y?: boolean
+    change5y?: boolean
+    change6m?: boolean
+    dividendGrowth?: boolean
+    dividendYield?: boolean
+    dps?: boolean
+    eps?: boolean
+    fcf?: boolean
+    fcfPerShare?: boolean
+    industry?: boolean
+    netIncome?: boolean
+    operatingIncome?: boolean
+    payoutFrequency?: boolean
+    payoutRatio?: boolean
+    pbRatio?: boolean
+    peRatio?: boolean
+    psRatio?: boolean
+    revenue?: boolean
+    roa?: boolean
+    roe?: boolean
+    rsi?: boolean
+    sector?: boolean
+    sharesOut?: boolean
+    updatedAt?: boolean
+    volume?: boolean
+    ytdChange?: boolean
+  }, ExtArgs["result"]["dseStock"]>
+
+  export type DseStockSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    symbol?: boolean
+    name?: boolean
+    price?: boolean
+    change?: boolean
+    changePct?: boolean
+    marketCap?: boolean
+    scrapedAt?: boolean
+    averageVolume?: boolean
+    beta?: boolean
+    change1m?: boolean
+    change1w?: boolean
+    change1y?: boolean
+    change3y?: boolean
+    change5y?: boolean
+    change6m?: boolean
+    dividendGrowth?: boolean
+    dividendYield?: boolean
+    dps?: boolean
+    eps?: boolean
+    fcf?: boolean
+    fcfPerShare?: boolean
+    industry?: boolean
+    netIncome?: boolean
+    operatingIncome?: boolean
+    payoutFrequency?: boolean
+    payoutRatio?: boolean
+    pbRatio?: boolean
+    peRatio?: boolean
+    psRatio?: boolean
+    revenue?: boolean
+    roa?: boolean
+    roe?: boolean
+    rsi?: boolean
+    sector?: boolean
+    sharesOut?: boolean
+    updatedAt?: boolean
+    volume?: boolean
+    ytdChange?: boolean
+  }, ExtArgs["result"]["dseStock"]>
+
+  export type DseStockSelectScalar = {
+    id?: boolean
+    symbol?: boolean
+    name?: boolean
+    price?: boolean
+    change?: boolean
+    changePct?: boolean
+    marketCap?: boolean
+    scrapedAt?: boolean
+    averageVolume?: boolean
+    beta?: boolean
+    change1m?: boolean
+    change1w?: boolean
+    change1y?: boolean
+    change3y?: boolean
+    change5y?: boolean
+    change6m?: boolean
+    dividendGrowth?: boolean
+    dividendYield?: boolean
+    dps?: boolean
+    eps?: boolean
+    fcf?: boolean
+    fcfPerShare?: boolean
+    industry?: boolean
+    netIncome?: boolean
+    operatingIncome?: boolean
+    payoutFrequency?: boolean
+    payoutRatio?: boolean
+    pbRatio?: boolean
+    peRatio?: boolean
+    psRatio?: boolean
+    revenue?: boolean
+    roa?: boolean
+    roe?: boolean
+    rsi?: boolean
+    sector?: boolean
+    sharesOut?: boolean
+    updatedAt?: boolean
+    volume?: boolean
+    ytdChange?: boolean
+  }
+
+  export type DseStockOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "symbol" | "name" | "price" | "change" | "changePct" | "marketCap" | "scrapedAt" | "averageVolume" | "beta" | "change1m" | "change1w" | "change1y" | "change3y" | "change5y" | "change6m" | "dividendGrowth" | "dividendYield" | "dps" | "eps" | "fcf" | "fcfPerShare" | "industry" | "netIncome" | "operatingIncome" | "payoutFrequency" | "payoutRatio" | "pbRatio" | "peRatio" | "psRatio" | "revenue" | "roa" | "roe" | "rsi" | "sector" | "sharesOut" | "updatedAt" | "volume" | "ytdChange", ExtArgs["result"]["dseStock"]>
+
+  export type $DseStockPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DseStock"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      symbol: string
+      name: string | null
+      price: number | null
+      change: number | null
+      changePct: number | null
+      marketCap: string | null
+      scrapedAt: Date
+      averageVolume: number | null
+      beta: number | null
+      change1m: number | null
+      change1w: number | null
+      change1y: number | null
+      change3y: number | null
+      change5y: number | null
+      change6m: number | null
+      dividendGrowth: number | null
+      dividendYield: number | null
+      dps: number | null
+      eps: number | null
+      fcf: number | null
+      fcfPerShare: number | null
+      industry: string | null
+      netIncome: number | null
+      operatingIncome: number | null
+      payoutFrequency: string | null
+      payoutRatio: number | null
+      pbRatio: number | null
+      peRatio: number | null
+      psRatio: number | null
+      revenue: number | null
+      roa: number | null
+      roe: number | null
+      rsi: number | null
+      sector: string | null
+      sharesOut: number | null
+      updatedAt: Date
+      volume: number | null
+      ytdChange: number | null
+    }, ExtArgs["result"]["dseStock"]>
+    composites: {}
+  }
+
+  type DseStockGetPayload<S extends boolean | null | undefined | DseStockDefaultArgs> = $Result.GetResult<Prisma.$DseStockPayload, S>
+
+  type DseStockCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DseStockFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DseStockCountAggregateInputType | true
+    }
+
+  export interface DseStockDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DseStock'], meta: { name: 'DseStock' } }
+    /**
+     * Find zero or one DseStock that matches the filter.
+     * @param {DseStockFindUniqueArgs} args - Arguments to find a DseStock
+     * @example
+     * // Get one DseStock
+     * const dseStock = await prisma.dseStock.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DseStockFindUniqueArgs>(args: SelectSubset<T, DseStockFindUniqueArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DseStock that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DseStockFindUniqueOrThrowArgs} args - Arguments to find a DseStock
+     * @example
+     * // Get one DseStock
+     * const dseStock = await prisma.dseStock.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DseStockFindUniqueOrThrowArgs>(args: SelectSubset<T, DseStockFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DseStock that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockFindFirstArgs} args - Arguments to find a DseStock
+     * @example
+     * // Get one DseStock
+     * const dseStock = await prisma.dseStock.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DseStockFindFirstArgs>(args?: SelectSubset<T, DseStockFindFirstArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DseStock that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockFindFirstOrThrowArgs} args - Arguments to find a DseStock
+     * @example
+     * // Get one DseStock
+     * const dseStock = await prisma.dseStock.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DseStockFindFirstOrThrowArgs>(args?: SelectSubset<T, DseStockFindFirstOrThrowArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DseStocks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DseStocks
+     * const dseStocks = await prisma.dseStock.findMany()
+     * 
+     * // Get first 10 DseStocks
+     * const dseStocks = await prisma.dseStock.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const dseStockWithIdOnly = await prisma.dseStock.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DseStockFindManyArgs>(args?: SelectSubset<T, DseStockFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DseStock.
+     * @param {DseStockCreateArgs} args - Arguments to create a DseStock.
+     * @example
+     * // Create one DseStock
+     * const DseStock = await prisma.dseStock.create({
+     *   data: {
+     *     // ... data to create a DseStock
+     *   }
+     * })
+     * 
+     */
+    create<T extends DseStockCreateArgs>(args: SelectSubset<T, DseStockCreateArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DseStocks.
+     * @param {DseStockCreateManyArgs} args - Arguments to create many DseStocks.
+     * @example
+     * // Create many DseStocks
+     * const dseStock = await prisma.dseStock.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DseStockCreateManyArgs>(args?: SelectSubset<T, DseStockCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DseStocks and returns the data saved in the database.
+     * @param {DseStockCreateManyAndReturnArgs} args - Arguments to create many DseStocks.
+     * @example
+     * // Create many DseStocks
+     * const dseStock = await prisma.dseStock.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DseStocks and only return the `id`
+     * const dseStockWithIdOnly = await prisma.dseStock.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DseStockCreateManyAndReturnArgs>(args?: SelectSubset<T, DseStockCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DseStock.
+     * @param {DseStockDeleteArgs} args - Arguments to delete one DseStock.
+     * @example
+     * // Delete one DseStock
+     * const DseStock = await prisma.dseStock.delete({
+     *   where: {
+     *     // ... filter to delete one DseStock
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DseStockDeleteArgs>(args: SelectSubset<T, DseStockDeleteArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DseStock.
+     * @param {DseStockUpdateArgs} args - Arguments to update one DseStock.
+     * @example
+     * // Update one DseStock
+     * const dseStock = await prisma.dseStock.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DseStockUpdateArgs>(args: SelectSubset<T, DseStockUpdateArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DseStocks.
+     * @param {DseStockDeleteManyArgs} args - Arguments to filter DseStocks to delete.
+     * @example
+     * // Delete a few DseStocks
+     * const { count } = await prisma.dseStock.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DseStockDeleteManyArgs>(args?: SelectSubset<T, DseStockDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DseStocks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DseStocks
+     * const dseStock = await prisma.dseStock.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DseStockUpdateManyArgs>(args: SelectSubset<T, DseStockUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DseStocks and returns the data updated in the database.
+     * @param {DseStockUpdateManyAndReturnArgs} args - Arguments to update many DseStocks.
+     * @example
+     * // Update many DseStocks
+     * const dseStock = await prisma.dseStock.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DseStocks and only return the `id`
+     * const dseStockWithIdOnly = await prisma.dseStock.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DseStockUpdateManyAndReturnArgs>(args: SelectSubset<T, DseStockUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DseStock.
+     * @param {DseStockUpsertArgs} args - Arguments to update or create a DseStock.
+     * @example
+     * // Update or create a DseStock
+     * const dseStock = await prisma.dseStock.upsert({
+     *   create: {
+     *     // ... data to create a DseStock
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DseStock we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DseStockUpsertArgs>(args: SelectSubset<T, DseStockUpsertArgs<ExtArgs>>): Prisma__DseStockClient<$Result.GetResult<Prisma.$DseStockPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DseStocks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockCountArgs} args - Arguments to filter DseStocks to count.
+     * @example
+     * // Count the number of DseStocks
+     * const count = await prisma.dseStock.count({
+     *   where: {
+     *     // ... the filter for the DseStocks we want to count
+     *   }
+     * })
+    **/
+    count<T extends DseStockCountArgs>(
+      args?: Subset<T, DseStockCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DseStockCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DseStock.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DseStockAggregateArgs>(args: Subset<T, DseStockAggregateArgs>): Prisma.PrismaPromise<GetDseStockAggregateType<T>>
+
+    /**
+     * Group by DseStock.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DseStockGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DseStockGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DseStockGroupByArgs['orderBy'] }
+        : { orderBy?: DseStockGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DseStockGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDseStockGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DseStock model
+   */
+  readonly fields: DseStockFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DseStock.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DseStockClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DseStock model
+   */
+  interface DseStockFieldRefs {
+    readonly id: FieldRef<"DseStock", 'String'>
+    readonly symbol: FieldRef<"DseStock", 'String'>
+    readonly name: FieldRef<"DseStock", 'String'>
+    readonly price: FieldRef<"DseStock", 'Float'>
+    readonly change: FieldRef<"DseStock", 'Float'>
+    readonly changePct: FieldRef<"DseStock", 'Float'>
+    readonly marketCap: FieldRef<"DseStock", 'String'>
+    readonly scrapedAt: FieldRef<"DseStock", 'DateTime'>
+    readonly averageVolume: FieldRef<"DseStock", 'Float'>
+    readonly beta: FieldRef<"DseStock", 'Float'>
+    readonly change1m: FieldRef<"DseStock", 'Float'>
+    readonly change1w: FieldRef<"DseStock", 'Float'>
+    readonly change1y: FieldRef<"DseStock", 'Float'>
+    readonly change3y: FieldRef<"DseStock", 'Float'>
+    readonly change5y: FieldRef<"DseStock", 'Float'>
+    readonly change6m: FieldRef<"DseStock", 'Float'>
+    readonly dividendGrowth: FieldRef<"DseStock", 'Float'>
+    readonly dividendYield: FieldRef<"DseStock", 'Float'>
+    readonly dps: FieldRef<"DseStock", 'Float'>
+    readonly eps: FieldRef<"DseStock", 'Float'>
+    readonly fcf: FieldRef<"DseStock", 'Float'>
+    readonly fcfPerShare: FieldRef<"DseStock", 'Float'>
+    readonly industry: FieldRef<"DseStock", 'String'>
+    readonly netIncome: FieldRef<"DseStock", 'Float'>
+    readonly operatingIncome: FieldRef<"DseStock", 'Float'>
+    readonly payoutFrequency: FieldRef<"DseStock", 'String'>
+    readonly payoutRatio: FieldRef<"DseStock", 'Float'>
+    readonly pbRatio: FieldRef<"DseStock", 'Float'>
+    readonly peRatio: FieldRef<"DseStock", 'Float'>
+    readonly psRatio: FieldRef<"DseStock", 'Float'>
+    readonly revenue: FieldRef<"DseStock", 'Float'>
+    readonly roa: FieldRef<"DseStock", 'Float'>
+    readonly roe: FieldRef<"DseStock", 'Float'>
+    readonly rsi: FieldRef<"DseStock", 'Float'>
+    readonly sector: FieldRef<"DseStock", 'String'>
+    readonly sharesOut: FieldRef<"DseStock", 'Float'>
+    readonly updatedAt: FieldRef<"DseStock", 'DateTime'>
+    readonly volume: FieldRef<"DseStock", 'Int'>
+    readonly ytdChange: FieldRef<"DseStock", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DseStock findUnique
+   */
+  export type DseStockFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * Filter, which DseStock to fetch.
+     */
+    where: DseStockWhereUniqueInput
+  }
+
+  /**
+   * DseStock findUniqueOrThrow
+   */
+  export type DseStockFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * Filter, which DseStock to fetch.
+     */
+    where: DseStockWhereUniqueInput
+  }
+
+  /**
+   * DseStock findFirst
+   */
+  export type DseStockFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * Filter, which DseStock to fetch.
+     */
+    where?: DseStockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseStocks to fetch.
+     */
+    orderBy?: DseStockOrderByWithRelationInput | DseStockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DseStocks.
+     */
+    cursor?: DseStockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseStocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseStocks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DseStocks.
+     */
+    distinct?: DseStockScalarFieldEnum | DseStockScalarFieldEnum[]
+  }
+
+  /**
+   * DseStock findFirstOrThrow
+   */
+  export type DseStockFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * Filter, which DseStock to fetch.
+     */
+    where?: DseStockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseStocks to fetch.
+     */
+    orderBy?: DseStockOrderByWithRelationInput | DseStockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DseStocks.
+     */
+    cursor?: DseStockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseStocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseStocks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DseStocks.
+     */
+    distinct?: DseStockScalarFieldEnum | DseStockScalarFieldEnum[]
+  }
+
+  /**
+   * DseStock findMany
+   */
+  export type DseStockFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * Filter, which DseStocks to fetch.
+     */
+    where?: DseStockWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DseStocks to fetch.
+     */
+    orderBy?: DseStockOrderByWithRelationInput | DseStockOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DseStocks.
+     */
+    cursor?: DseStockWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DseStocks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DseStocks.
+     */
+    skip?: number
+    distinct?: DseStockScalarFieldEnum | DseStockScalarFieldEnum[]
+  }
+
+  /**
+   * DseStock create
+   */
+  export type DseStockCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DseStock.
+     */
+    data: XOR<DseStockCreateInput, DseStockUncheckedCreateInput>
+  }
+
+  /**
+   * DseStock createMany
+   */
+  export type DseStockCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DseStocks.
+     */
+    data: DseStockCreateManyInput | DseStockCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DseStock createManyAndReturn
+   */
+  export type DseStockCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * The data used to create many DseStocks.
+     */
+    data: DseStockCreateManyInput | DseStockCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DseStock update
+   */
+  export type DseStockUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DseStock.
+     */
+    data: XOR<DseStockUpdateInput, DseStockUncheckedUpdateInput>
+    /**
+     * Choose, which DseStock to update.
+     */
+    where: DseStockWhereUniqueInput
+  }
+
+  /**
+   * DseStock updateMany
+   */
+  export type DseStockUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DseStocks.
+     */
+    data: XOR<DseStockUpdateManyMutationInput, DseStockUncheckedUpdateManyInput>
+    /**
+     * Filter which DseStocks to update
+     */
+    where?: DseStockWhereInput
+    /**
+     * Limit how many DseStocks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DseStock updateManyAndReturn
+   */
+  export type DseStockUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * The data used to update DseStocks.
+     */
+    data: XOR<DseStockUpdateManyMutationInput, DseStockUncheckedUpdateManyInput>
+    /**
+     * Filter which DseStocks to update
+     */
+    where?: DseStockWhereInput
+    /**
+     * Limit how many DseStocks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DseStock upsert
+   */
+  export type DseStockUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DseStock to update in case it exists.
+     */
+    where: DseStockWhereUniqueInput
+    /**
+     * In case the DseStock found by the `where` argument doesn't exist, create a new DseStock with this data.
+     */
+    create: XOR<DseStockCreateInput, DseStockUncheckedCreateInput>
+    /**
+     * In case the DseStock was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DseStockUpdateInput, DseStockUncheckedUpdateInput>
+  }
+
+  /**
+   * DseStock delete
+   */
+  export type DseStockDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+    /**
+     * Filter which DseStock to delete.
+     */
+    where: DseStockWhereUniqueInput
+  }
+
+  /**
+   * DseStock deleteMany
+   */
+  export type DseStockDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DseStocks to delete
+     */
+    where?: DseStockWhereInput
+    /**
+     * Limit how many DseStocks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DseStock without action
+   */
+  export type DseStockDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DseStock
+     */
+    select?: DseStockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DseStock
+     */
+    omit?: DseStockOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Portfolio
    */
 
@@ -41186,19 +42877,28 @@ export namespace Prisma {
   export type PortfolioStockAvgAggregateOutputType = {
     qty: number | null
     buyPrice: number | null
+    currentPrice: number | null
+    dividend: number | null
   }
 
   export type PortfolioStockSumAggregateOutputType = {
     qty: number | null
     buyPrice: number | null
+    currentPrice: number | null
+    dividend: number | null
   }
 
   export type PortfolioStockMinAggregateOutputType = {
     id: string | null
     portfolioId: string | null
     stockId: string | null
+    ticker: string | null
+    name: string | null
+    sector: string | null
     qty: number | null
     buyPrice: number | null
+    currentPrice: number | null
+    dividend: number | null
     buyDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -41208,8 +42908,13 @@ export namespace Prisma {
     id: string | null
     portfolioId: string | null
     stockId: string | null
+    ticker: string | null
+    name: string | null
+    sector: string | null
     qty: number | null
     buyPrice: number | null
+    currentPrice: number | null
+    dividend: number | null
     buyDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -41219,8 +42924,13 @@ export namespace Prisma {
     id: number
     portfolioId: number
     stockId: number
+    ticker: number
+    name: number
+    sector: number
     qty: number
     buyPrice: number
+    currentPrice: number
+    dividend: number
     buyDate: number
     createdAt: number
     updatedAt: number
@@ -41231,19 +42941,28 @@ export namespace Prisma {
   export type PortfolioStockAvgAggregateInputType = {
     qty?: true
     buyPrice?: true
+    currentPrice?: true
+    dividend?: true
   }
 
   export type PortfolioStockSumAggregateInputType = {
     qty?: true
     buyPrice?: true
+    currentPrice?: true
+    dividend?: true
   }
 
   export type PortfolioStockMinAggregateInputType = {
     id?: true
     portfolioId?: true
     stockId?: true
+    ticker?: true
+    name?: true
+    sector?: true
     qty?: true
     buyPrice?: true
+    currentPrice?: true
+    dividend?: true
     buyDate?: true
     createdAt?: true
     updatedAt?: true
@@ -41253,8 +42972,13 @@ export namespace Prisma {
     id?: true
     portfolioId?: true
     stockId?: true
+    ticker?: true
+    name?: true
+    sector?: true
     qty?: true
     buyPrice?: true
+    currentPrice?: true
+    dividend?: true
     buyDate?: true
     createdAt?: true
     updatedAt?: true
@@ -41264,8 +42988,13 @@ export namespace Prisma {
     id?: true
     portfolioId?: true
     stockId?: true
+    ticker?: true
+    name?: true
+    sector?: true
     qty?: true
     buyPrice?: true
+    currentPrice?: true
+    dividend?: true
     buyDate?: true
     createdAt?: true
     updatedAt?: true
@@ -41361,9 +43090,14 @@ export namespace Prisma {
   export type PortfolioStockGroupByOutputType = {
     id: string
     portfolioId: string
-    stockId: string
+    stockId: string | null
+    ticker: string | null
+    name: string | null
+    sector: string | null
     qty: number
     buyPrice: number
+    currentPrice: number | null
+    dividend: number | null
     buyDate: Date | null
     createdAt: Date
     updatedAt: Date
@@ -41392,78 +43126,103 @@ export namespace Prisma {
     id?: boolean
     portfolioId?: boolean
     stockId?: boolean
+    ticker?: boolean
+    name?: boolean
+    sector?: boolean
     qty?: boolean
     buyPrice?: boolean
+    currentPrice?: boolean
+    dividend?: boolean
     buyDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     portfolio?: boolean | PortfolioDefaultArgs<ExtArgs>
-    stock?: boolean | StockDefaultArgs<ExtArgs>
+    stock?: boolean | PortfolioStock$stockArgs<ExtArgs>
   }, ExtArgs["result"]["portfolioStock"]>
 
   export type PortfolioStockSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     portfolioId?: boolean
     stockId?: boolean
+    ticker?: boolean
+    name?: boolean
+    sector?: boolean
     qty?: boolean
     buyPrice?: boolean
+    currentPrice?: boolean
+    dividend?: boolean
     buyDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     portfolio?: boolean | PortfolioDefaultArgs<ExtArgs>
-    stock?: boolean | StockDefaultArgs<ExtArgs>
+    stock?: boolean | PortfolioStock$stockArgs<ExtArgs>
   }, ExtArgs["result"]["portfolioStock"]>
 
   export type PortfolioStockSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     portfolioId?: boolean
     stockId?: boolean
+    ticker?: boolean
+    name?: boolean
+    sector?: boolean
     qty?: boolean
     buyPrice?: boolean
+    currentPrice?: boolean
+    dividend?: boolean
     buyDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     portfolio?: boolean | PortfolioDefaultArgs<ExtArgs>
-    stock?: boolean | StockDefaultArgs<ExtArgs>
+    stock?: boolean | PortfolioStock$stockArgs<ExtArgs>
   }, ExtArgs["result"]["portfolioStock"]>
 
   export type PortfolioStockSelectScalar = {
     id?: boolean
     portfolioId?: boolean
     stockId?: boolean
+    ticker?: boolean
+    name?: boolean
+    sector?: boolean
     qty?: boolean
     buyPrice?: boolean
+    currentPrice?: boolean
+    dividend?: boolean
     buyDate?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PortfolioStockOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "portfolioId" | "stockId" | "qty" | "buyPrice" | "buyDate" | "createdAt" | "updatedAt", ExtArgs["result"]["portfolioStock"]>
+  export type PortfolioStockOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "portfolioId" | "stockId" | "ticker" | "name" | "sector" | "qty" | "buyPrice" | "currentPrice" | "dividend" | "buyDate" | "createdAt" | "updatedAt", ExtArgs["result"]["portfolioStock"]>
   export type PortfolioStockInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     portfolio?: boolean | PortfolioDefaultArgs<ExtArgs>
-    stock?: boolean | StockDefaultArgs<ExtArgs>
+    stock?: boolean | PortfolioStock$stockArgs<ExtArgs>
   }
   export type PortfolioStockIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     portfolio?: boolean | PortfolioDefaultArgs<ExtArgs>
-    stock?: boolean | StockDefaultArgs<ExtArgs>
+    stock?: boolean | PortfolioStock$stockArgs<ExtArgs>
   }
   export type PortfolioStockIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     portfolio?: boolean | PortfolioDefaultArgs<ExtArgs>
-    stock?: boolean | StockDefaultArgs<ExtArgs>
+    stock?: boolean | PortfolioStock$stockArgs<ExtArgs>
   }
 
   export type $PortfolioStockPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PortfolioStock"
     objects: {
       portfolio: Prisma.$PortfolioPayload<ExtArgs>
-      stock: Prisma.$StockPayload<ExtArgs>
+      stock: Prisma.$StockPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       portfolioId: string
-      stockId: string
+      stockId: string | null
+      ticker: string | null
+      name: string | null
+      sector: string | null
       qty: number
       buyPrice: number
+      currentPrice: number | null
+      dividend: number | null
       buyDate: Date | null
       createdAt: Date
       updatedAt: Date
@@ -41862,7 +43621,7 @@ export namespace Prisma {
   export interface Prisma__PortfolioStockClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     portfolio<T extends PortfolioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PortfolioDefaultArgs<ExtArgs>>): Prisma__PortfolioClient<$Result.GetResult<Prisma.$PortfolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    stock<T extends StockDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StockDefaultArgs<ExtArgs>>): Prisma__StockClient<$Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    stock<T extends PortfolioStock$stockArgs<ExtArgs> = {}>(args?: Subset<T, PortfolioStock$stockArgs<ExtArgs>>): Prisma__StockClient<$Result.GetResult<Prisma.$StockPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -41895,8 +43654,13 @@ export namespace Prisma {
     readonly id: FieldRef<"PortfolioStock", 'String'>
     readonly portfolioId: FieldRef<"PortfolioStock", 'String'>
     readonly stockId: FieldRef<"PortfolioStock", 'String'>
+    readonly ticker: FieldRef<"PortfolioStock", 'String'>
+    readonly name: FieldRef<"PortfolioStock", 'String'>
+    readonly sector: FieldRef<"PortfolioStock", 'String'>
     readonly qty: FieldRef<"PortfolioStock", 'Float'>
     readonly buyPrice: FieldRef<"PortfolioStock", 'Float'>
+    readonly currentPrice: FieldRef<"PortfolioStock", 'Float'>
+    readonly dividend: FieldRef<"PortfolioStock", 'Float'>
     readonly buyDate: FieldRef<"PortfolioStock", 'DateTime'>
     readonly createdAt: FieldRef<"PortfolioStock", 'DateTime'>
     readonly updatedAt: FieldRef<"PortfolioStock", 'DateTime'>
@@ -42293,6 +44057,25 @@ export namespace Prisma {
      * Limit how many PortfolioStocks to delete.
      */
     limit?: number
+  }
+
+  /**
+   * PortfolioStock.stock
+   */
+  export type PortfolioStock$stockArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Stock
+     */
+    select?: StockSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Stock
+     */
+    omit?: StockOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StockInclude<ExtArgs> | null
+    where?: StockWhereInput
   }
 
   /**
@@ -65111,6 +66894,7 @@ export namespace Prisma {
     fundName: 'fundName',
     fundType: 'fundType',
     managerId: 'managerId',
+    managerName: 'managerName',
     description: 'description',
     logoUrl: 'logoUrl',
     inceptionDate: 'inceptionDate',
@@ -65437,6 +67221,51 @@ export namespace Prisma {
   export type DseMarketSummaryScalarFieldEnum = (typeof DseMarketSummaryScalarFieldEnum)[keyof typeof DseMarketSummaryScalarFieldEnum]
 
 
+  export const DseStockScalarFieldEnum: {
+    id: 'id',
+    symbol: 'symbol',
+    name: 'name',
+    price: 'price',
+    change: 'change',
+    changePct: 'changePct',
+    marketCap: 'marketCap',
+    scrapedAt: 'scrapedAt',
+    averageVolume: 'averageVolume',
+    beta: 'beta',
+    change1m: 'change1m',
+    change1w: 'change1w',
+    change1y: 'change1y',
+    change3y: 'change3y',
+    change5y: 'change5y',
+    change6m: 'change6m',
+    dividendGrowth: 'dividendGrowth',
+    dividendYield: 'dividendYield',
+    dps: 'dps',
+    eps: 'eps',
+    fcf: 'fcf',
+    fcfPerShare: 'fcfPerShare',
+    industry: 'industry',
+    netIncome: 'netIncome',
+    operatingIncome: 'operatingIncome',
+    payoutFrequency: 'payoutFrequency',
+    payoutRatio: 'payoutRatio',
+    pbRatio: 'pbRatio',
+    peRatio: 'peRatio',
+    psRatio: 'psRatio',
+    revenue: 'revenue',
+    roa: 'roa',
+    roe: 'roe',
+    rsi: 'rsi',
+    sector: 'sector',
+    sharesOut: 'sharesOut',
+    updatedAt: 'updatedAt',
+    volume: 'volume',
+    ytdChange: 'ytdChange'
+  };
+
+  export type DseStockScalarFieldEnum = (typeof DseStockScalarFieldEnum)[keyof typeof DseStockScalarFieldEnum]
+
+
   export const PortfolioScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -65453,8 +67282,13 @@ export namespace Prisma {
     id: 'id',
     portfolioId: 'portfolioId',
     stockId: 'stockId',
+    ticker: 'ticker',
+    name: 'name',
+    sector: 'sector',
     qty: 'qty',
     buyPrice: 'buyPrice',
+    currentPrice: 'currentPrice',
+    dividend: 'dividend',
     buyDate: 'buyDate',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -67093,6 +68927,7 @@ export namespace Prisma {
     fundName?: StringFilter<"Fund"> | string
     fundType?: EnumFundTypeFilter<"Fund"> | $Enums.FundType
     managerId?: StringNullableFilter<"Fund"> | string | null
+    managerName?: StringNullableFilter<"Fund"> | string | null
     description?: StringFilter<"Fund"> | string
     logoUrl?: StringNullableFilter<"Fund"> | string | null
     inceptionDate?: DateTimeFilter<"Fund"> | Date | string
@@ -67123,6 +68958,7 @@ export namespace Prisma {
     fundName?: SortOrder
     fundType?: SortOrder
     managerId?: SortOrderInput | SortOrder
+    managerName?: SortOrderInput | SortOrder
     description?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     inceptionDate?: SortOrder
@@ -67156,6 +68992,7 @@ export namespace Prisma {
     fundName?: StringFilter<"Fund"> | string
     fundType?: EnumFundTypeFilter<"Fund"> | $Enums.FundType
     managerId?: StringNullableFilter<"Fund"> | string | null
+    managerName?: StringNullableFilter<"Fund"> | string | null
     description?: StringFilter<"Fund"> | string
     logoUrl?: StringNullableFilter<"Fund"> | string | null
     inceptionDate?: DateTimeFilter<"Fund"> | Date | string
@@ -67186,6 +69023,7 @@ export namespace Prisma {
     fundName?: SortOrder
     fundType?: SortOrder
     managerId?: SortOrderInput | SortOrder
+    managerName?: SortOrderInput | SortOrder
     description?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     inceptionDate?: SortOrder
@@ -67210,6 +69048,7 @@ export namespace Prisma {
     fundName?: StringWithAggregatesFilter<"Fund"> | string
     fundType?: EnumFundTypeWithAggregatesFilter<"Fund"> | $Enums.FundType
     managerId?: StringNullableWithAggregatesFilter<"Fund"> | string | null
+    managerName?: StringNullableWithAggregatesFilter<"Fund"> | string | null
     description?: StringWithAggregatesFilter<"Fund"> | string
     logoUrl?: StringNullableWithAggregatesFilter<"Fund"> | string | null
     inceptionDate?: DateTimeWithAggregatesFilter<"Fund"> | Date | string
@@ -68817,6 +70656,230 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"DseMarketSummary"> | Date | string
   }
 
+  export type DseStockWhereInput = {
+    AND?: DseStockWhereInput | DseStockWhereInput[]
+    OR?: DseStockWhereInput[]
+    NOT?: DseStockWhereInput | DseStockWhereInput[]
+    id?: StringFilter<"DseStock"> | string
+    symbol?: StringFilter<"DseStock"> | string
+    name?: StringNullableFilter<"DseStock"> | string | null
+    price?: FloatNullableFilter<"DseStock"> | number | null
+    change?: FloatNullableFilter<"DseStock"> | number | null
+    changePct?: FloatNullableFilter<"DseStock"> | number | null
+    marketCap?: StringNullableFilter<"DseStock"> | string | null
+    scrapedAt?: DateTimeFilter<"DseStock"> | Date | string
+    averageVolume?: FloatNullableFilter<"DseStock"> | number | null
+    beta?: FloatNullableFilter<"DseStock"> | number | null
+    change1m?: FloatNullableFilter<"DseStock"> | number | null
+    change1w?: FloatNullableFilter<"DseStock"> | number | null
+    change1y?: FloatNullableFilter<"DseStock"> | number | null
+    change3y?: FloatNullableFilter<"DseStock"> | number | null
+    change5y?: FloatNullableFilter<"DseStock"> | number | null
+    change6m?: FloatNullableFilter<"DseStock"> | number | null
+    dividendGrowth?: FloatNullableFilter<"DseStock"> | number | null
+    dividendYield?: FloatNullableFilter<"DseStock"> | number | null
+    dps?: FloatNullableFilter<"DseStock"> | number | null
+    eps?: FloatNullableFilter<"DseStock"> | number | null
+    fcf?: FloatNullableFilter<"DseStock"> | number | null
+    fcfPerShare?: FloatNullableFilter<"DseStock"> | number | null
+    industry?: StringNullableFilter<"DseStock"> | string | null
+    netIncome?: FloatNullableFilter<"DseStock"> | number | null
+    operatingIncome?: FloatNullableFilter<"DseStock"> | number | null
+    payoutFrequency?: StringNullableFilter<"DseStock"> | string | null
+    payoutRatio?: FloatNullableFilter<"DseStock"> | number | null
+    pbRatio?: FloatNullableFilter<"DseStock"> | number | null
+    peRatio?: FloatNullableFilter<"DseStock"> | number | null
+    psRatio?: FloatNullableFilter<"DseStock"> | number | null
+    revenue?: FloatNullableFilter<"DseStock"> | number | null
+    roa?: FloatNullableFilter<"DseStock"> | number | null
+    roe?: FloatNullableFilter<"DseStock"> | number | null
+    rsi?: FloatNullableFilter<"DseStock"> | number | null
+    sector?: StringNullableFilter<"DseStock"> | string | null
+    sharesOut?: FloatNullableFilter<"DseStock"> | number | null
+    updatedAt?: DateTimeFilter<"DseStock"> | Date | string
+    volume?: IntNullableFilter<"DseStock"> | number | null
+    ytdChange?: FloatNullableFilter<"DseStock"> | number | null
+  }
+
+  export type DseStockOrderByWithRelationInput = {
+    id?: SortOrder
+    symbol?: SortOrder
+    name?: SortOrderInput | SortOrder
+    price?: SortOrderInput | SortOrder
+    change?: SortOrderInput | SortOrder
+    changePct?: SortOrderInput | SortOrder
+    marketCap?: SortOrderInput | SortOrder
+    scrapedAt?: SortOrder
+    averageVolume?: SortOrderInput | SortOrder
+    beta?: SortOrderInput | SortOrder
+    change1m?: SortOrderInput | SortOrder
+    change1w?: SortOrderInput | SortOrder
+    change1y?: SortOrderInput | SortOrder
+    change3y?: SortOrderInput | SortOrder
+    change5y?: SortOrderInput | SortOrder
+    change6m?: SortOrderInput | SortOrder
+    dividendGrowth?: SortOrderInput | SortOrder
+    dividendYield?: SortOrderInput | SortOrder
+    dps?: SortOrderInput | SortOrder
+    eps?: SortOrderInput | SortOrder
+    fcf?: SortOrderInput | SortOrder
+    fcfPerShare?: SortOrderInput | SortOrder
+    industry?: SortOrderInput | SortOrder
+    netIncome?: SortOrderInput | SortOrder
+    operatingIncome?: SortOrderInput | SortOrder
+    payoutFrequency?: SortOrderInput | SortOrder
+    payoutRatio?: SortOrderInput | SortOrder
+    pbRatio?: SortOrderInput | SortOrder
+    peRatio?: SortOrderInput | SortOrder
+    psRatio?: SortOrderInput | SortOrder
+    revenue?: SortOrderInput | SortOrder
+    roa?: SortOrderInput | SortOrder
+    roe?: SortOrderInput | SortOrder
+    rsi?: SortOrderInput | SortOrder
+    sector?: SortOrderInput | SortOrder
+    sharesOut?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    volume?: SortOrderInput | SortOrder
+    ytdChange?: SortOrderInput | SortOrder
+  }
+
+  export type DseStockWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DseStockWhereInput | DseStockWhereInput[]
+    OR?: DseStockWhereInput[]
+    NOT?: DseStockWhereInput | DseStockWhereInput[]
+    symbol?: StringFilter<"DseStock"> | string
+    name?: StringNullableFilter<"DseStock"> | string | null
+    price?: FloatNullableFilter<"DseStock"> | number | null
+    change?: FloatNullableFilter<"DseStock"> | number | null
+    changePct?: FloatNullableFilter<"DseStock"> | number | null
+    marketCap?: StringNullableFilter<"DseStock"> | string | null
+    scrapedAt?: DateTimeFilter<"DseStock"> | Date | string
+    averageVolume?: FloatNullableFilter<"DseStock"> | number | null
+    beta?: FloatNullableFilter<"DseStock"> | number | null
+    change1m?: FloatNullableFilter<"DseStock"> | number | null
+    change1w?: FloatNullableFilter<"DseStock"> | number | null
+    change1y?: FloatNullableFilter<"DseStock"> | number | null
+    change3y?: FloatNullableFilter<"DseStock"> | number | null
+    change5y?: FloatNullableFilter<"DseStock"> | number | null
+    change6m?: FloatNullableFilter<"DseStock"> | number | null
+    dividendGrowth?: FloatNullableFilter<"DseStock"> | number | null
+    dividendYield?: FloatNullableFilter<"DseStock"> | number | null
+    dps?: FloatNullableFilter<"DseStock"> | number | null
+    eps?: FloatNullableFilter<"DseStock"> | number | null
+    fcf?: FloatNullableFilter<"DseStock"> | number | null
+    fcfPerShare?: FloatNullableFilter<"DseStock"> | number | null
+    industry?: StringNullableFilter<"DseStock"> | string | null
+    netIncome?: FloatNullableFilter<"DseStock"> | number | null
+    operatingIncome?: FloatNullableFilter<"DseStock"> | number | null
+    payoutFrequency?: StringNullableFilter<"DseStock"> | string | null
+    payoutRatio?: FloatNullableFilter<"DseStock"> | number | null
+    pbRatio?: FloatNullableFilter<"DseStock"> | number | null
+    peRatio?: FloatNullableFilter<"DseStock"> | number | null
+    psRatio?: FloatNullableFilter<"DseStock"> | number | null
+    revenue?: FloatNullableFilter<"DseStock"> | number | null
+    roa?: FloatNullableFilter<"DseStock"> | number | null
+    roe?: FloatNullableFilter<"DseStock"> | number | null
+    rsi?: FloatNullableFilter<"DseStock"> | number | null
+    sector?: StringNullableFilter<"DseStock"> | string | null
+    sharesOut?: FloatNullableFilter<"DseStock"> | number | null
+    updatedAt?: DateTimeFilter<"DseStock"> | Date | string
+    volume?: IntNullableFilter<"DseStock"> | number | null
+    ytdChange?: FloatNullableFilter<"DseStock"> | number | null
+  }, "id">
+
+  export type DseStockOrderByWithAggregationInput = {
+    id?: SortOrder
+    symbol?: SortOrder
+    name?: SortOrderInput | SortOrder
+    price?: SortOrderInput | SortOrder
+    change?: SortOrderInput | SortOrder
+    changePct?: SortOrderInput | SortOrder
+    marketCap?: SortOrderInput | SortOrder
+    scrapedAt?: SortOrder
+    averageVolume?: SortOrderInput | SortOrder
+    beta?: SortOrderInput | SortOrder
+    change1m?: SortOrderInput | SortOrder
+    change1w?: SortOrderInput | SortOrder
+    change1y?: SortOrderInput | SortOrder
+    change3y?: SortOrderInput | SortOrder
+    change5y?: SortOrderInput | SortOrder
+    change6m?: SortOrderInput | SortOrder
+    dividendGrowth?: SortOrderInput | SortOrder
+    dividendYield?: SortOrderInput | SortOrder
+    dps?: SortOrderInput | SortOrder
+    eps?: SortOrderInput | SortOrder
+    fcf?: SortOrderInput | SortOrder
+    fcfPerShare?: SortOrderInput | SortOrder
+    industry?: SortOrderInput | SortOrder
+    netIncome?: SortOrderInput | SortOrder
+    operatingIncome?: SortOrderInput | SortOrder
+    payoutFrequency?: SortOrderInput | SortOrder
+    payoutRatio?: SortOrderInput | SortOrder
+    pbRatio?: SortOrderInput | SortOrder
+    peRatio?: SortOrderInput | SortOrder
+    psRatio?: SortOrderInput | SortOrder
+    revenue?: SortOrderInput | SortOrder
+    roa?: SortOrderInput | SortOrder
+    roe?: SortOrderInput | SortOrder
+    rsi?: SortOrderInput | SortOrder
+    sector?: SortOrderInput | SortOrder
+    sharesOut?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    volume?: SortOrderInput | SortOrder
+    ytdChange?: SortOrderInput | SortOrder
+    _count?: DseStockCountOrderByAggregateInput
+    _avg?: DseStockAvgOrderByAggregateInput
+    _max?: DseStockMaxOrderByAggregateInput
+    _min?: DseStockMinOrderByAggregateInput
+    _sum?: DseStockSumOrderByAggregateInput
+  }
+
+  export type DseStockScalarWhereWithAggregatesInput = {
+    AND?: DseStockScalarWhereWithAggregatesInput | DseStockScalarWhereWithAggregatesInput[]
+    OR?: DseStockScalarWhereWithAggregatesInput[]
+    NOT?: DseStockScalarWhereWithAggregatesInput | DseStockScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DseStock"> | string
+    symbol?: StringWithAggregatesFilter<"DseStock"> | string
+    name?: StringNullableWithAggregatesFilter<"DseStock"> | string | null
+    price?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    changePct?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    marketCap?: StringNullableWithAggregatesFilter<"DseStock"> | string | null
+    scrapedAt?: DateTimeWithAggregatesFilter<"DseStock"> | Date | string
+    averageVolume?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    beta?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change1m?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change1w?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change1y?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change3y?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change5y?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    change6m?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    dividendGrowth?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    dividendYield?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    dps?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    eps?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    fcf?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    fcfPerShare?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    industry?: StringNullableWithAggregatesFilter<"DseStock"> | string | null
+    netIncome?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    operatingIncome?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    payoutFrequency?: StringNullableWithAggregatesFilter<"DseStock"> | string | null
+    payoutRatio?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    pbRatio?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    peRatio?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    psRatio?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    revenue?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    roa?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    roe?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    rsi?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    sector?: StringNullableWithAggregatesFilter<"DseStock"> | string | null
+    sharesOut?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+    updatedAt?: DateTimeWithAggregatesFilter<"DseStock"> | Date | string
+    volume?: IntNullableWithAggregatesFilter<"DseStock"> | number | null
+    ytdChange?: FloatNullableWithAggregatesFilter<"DseStock"> | number | null
+  }
+
   export type PortfolioWhereInput = {
     AND?: PortfolioWhereInput | PortfolioWhereInput[]
     OR?: PortfolioWhereInput[]
@@ -68889,22 +70952,32 @@ export namespace Prisma {
     NOT?: PortfolioStockWhereInput | PortfolioStockWhereInput[]
     id?: StringFilter<"PortfolioStock"> | string
     portfolioId?: StringFilter<"PortfolioStock"> | string
-    stockId?: StringFilter<"PortfolioStock"> | string
+    stockId?: StringNullableFilter<"PortfolioStock"> | string | null
+    ticker?: StringNullableFilter<"PortfolioStock"> | string | null
+    name?: StringNullableFilter<"PortfolioStock"> | string | null
+    sector?: StringNullableFilter<"PortfolioStock"> | string | null
     qty?: FloatFilter<"PortfolioStock"> | number
     buyPrice?: FloatFilter<"PortfolioStock"> | number
+    currentPrice?: FloatNullableFilter<"PortfolioStock"> | number | null
+    dividend?: FloatNullableFilter<"PortfolioStock"> | number | null
     buyDate?: DateTimeNullableFilter<"PortfolioStock"> | Date | string | null
     createdAt?: DateTimeFilter<"PortfolioStock"> | Date | string
     updatedAt?: DateTimeFilter<"PortfolioStock"> | Date | string
     portfolio?: XOR<PortfolioScalarRelationFilter, PortfolioWhereInput>
-    stock?: XOR<StockScalarRelationFilter, StockWhereInput>
+    stock?: XOR<StockNullableScalarRelationFilter, StockWhereInput> | null
   }
 
   export type PortfolioStockOrderByWithRelationInput = {
     id?: SortOrder
     portfolioId?: SortOrder
-    stockId?: SortOrder
+    stockId?: SortOrderInput | SortOrder
+    ticker?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    sector?: SortOrderInput | SortOrder
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrderInput | SortOrder
+    dividend?: SortOrderInput | SortOrder
     buyDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -68918,22 +70991,32 @@ export namespace Prisma {
     OR?: PortfolioStockWhereInput[]
     NOT?: PortfolioStockWhereInput | PortfolioStockWhereInput[]
     portfolioId?: StringFilter<"PortfolioStock"> | string
-    stockId?: StringFilter<"PortfolioStock"> | string
+    stockId?: StringNullableFilter<"PortfolioStock"> | string | null
+    ticker?: StringNullableFilter<"PortfolioStock"> | string | null
+    name?: StringNullableFilter<"PortfolioStock"> | string | null
+    sector?: StringNullableFilter<"PortfolioStock"> | string | null
     qty?: FloatFilter<"PortfolioStock"> | number
     buyPrice?: FloatFilter<"PortfolioStock"> | number
+    currentPrice?: FloatNullableFilter<"PortfolioStock"> | number | null
+    dividend?: FloatNullableFilter<"PortfolioStock"> | number | null
     buyDate?: DateTimeNullableFilter<"PortfolioStock"> | Date | string | null
     createdAt?: DateTimeFilter<"PortfolioStock"> | Date | string
     updatedAt?: DateTimeFilter<"PortfolioStock"> | Date | string
     portfolio?: XOR<PortfolioScalarRelationFilter, PortfolioWhereInput>
-    stock?: XOR<StockScalarRelationFilter, StockWhereInput>
+    stock?: XOR<StockNullableScalarRelationFilter, StockWhereInput> | null
   }, "id">
 
   export type PortfolioStockOrderByWithAggregationInput = {
     id?: SortOrder
     portfolioId?: SortOrder
-    stockId?: SortOrder
+    stockId?: SortOrderInput | SortOrder
+    ticker?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    sector?: SortOrderInput | SortOrder
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrderInput | SortOrder
+    dividend?: SortOrderInput | SortOrder
     buyDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -68950,9 +71033,14 @@ export namespace Prisma {
     NOT?: PortfolioStockScalarWhereWithAggregatesInput | PortfolioStockScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PortfolioStock"> | string
     portfolioId?: StringWithAggregatesFilter<"PortfolioStock"> | string
-    stockId?: StringWithAggregatesFilter<"PortfolioStock"> | string
+    stockId?: StringNullableWithAggregatesFilter<"PortfolioStock"> | string | null
+    ticker?: StringNullableWithAggregatesFilter<"PortfolioStock"> | string | null
+    name?: StringNullableWithAggregatesFilter<"PortfolioStock"> | string | null
+    sector?: StringNullableWithAggregatesFilter<"PortfolioStock"> | string | null
     qty?: FloatWithAggregatesFilter<"PortfolioStock"> | number
     buyPrice?: FloatWithAggregatesFilter<"PortfolioStock"> | number
+    currentPrice?: FloatNullableWithAggregatesFilter<"PortfolioStock"> | number | null
+    dividend?: FloatNullableWithAggregatesFilter<"PortfolioStock"> | number | null
     buyDate?: DateTimeNullableWithAggregatesFilter<"PortfolioStock"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"PortfolioStock"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PortfolioStock"> | Date | string
@@ -71731,6 +73819,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -71761,6 +73850,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -71789,6 +73879,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -71819,6 +73910,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -71848,6 +73940,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -71865,6 +73958,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -71883,6 +73977,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73759,6 +75854,300 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DseStockCreateInput = {
+    id?: string
+    symbol: string
+    name?: string | null
+    price?: number | null
+    change?: number | null
+    changePct?: number | null
+    marketCap?: string | null
+    scrapedAt?: Date | string
+    averageVolume?: number | null
+    beta?: number | null
+    change1m?: number | null
+    change1w?: number | null
+    change1y?: number | null
+    change3y?: number | null
+    change5y?: number | null
+    change6m?: number | null
+    dividendGrowth?: number | null
+    dividendYield?: number | null
+    dps?: number | null
+    eps?: number | null
+    fcf?: number | null
+    fcfPerShare?: number | null
+    industry?: string | null
+    netIncome?: number | null
+    operatingIncome?: number | null
+    payoutFrequency?: string | null
+    payoutRatio?: number | null
+    pbRatio?: number | null
+    peRatio?: number | null
+    psRatio?: number | null
+    revenue?: number | null
+    roa?: number | null
+    roe?: number | null
+    rsi?: number | null
+    sector?: string | null
+    sharesOut?: number | null
+    updatedAt?: Date | string
+    volume?: number | null
+    ytdChange?: number | null
+  }
+
+  export type DseStockUncheckedCreateInput = {
+    id?: string
+    symbol: string
+    name?: string | null
+    price?: number | null
+    change?: number | null
+    changePct?: number | null
+    marketCap?: string | null
+    scrapedAt?: Date | string
+    averageVolume?: number | null
+    beta?: number | null
+    change1m?: number | null
+    change1w?: number | null
+    change1y?: number | null
+    change3y?: number | null
+    change5y?: number | null
+    change6m?: number | null
+    dividendGrowth?: number | null
+    dividendYield?: number | null
+    dps?: number | null
+    eps?: number | null
+    fcf?: number | null
+    fcfPerShare?: number | null
+    industry?: string | null
+    netIncome?: number | null
+    operatingIncome?: number | null
+    payoutFrequency?: string | null
+    payoutRatio?: number | null
+    pbRatio?: number | null
+    peRatio?: number | null
+    psRatio?: number | null
+    revenue?: number | null
+    roa?: number | null
+    roe?: number | null
+    rsi?: number | null
+    sector?: string | null
+    sharesOut?: number | null
+    updatedAt?: Date | string
+    volume?: number | null
+    ytdChange?: number | null
+  }
+
+  export type DseStockUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    change?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePct?: NullableFloatFieldUpdateOperationsInput | number | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    scrapedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    averageVolume?: NullableFloatFieldUpdateOperationsInput | number | null
+    beta?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1m?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1w?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change3y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change5y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change6m?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendGrowth?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendYield?: NullableFloatFieldUpdateOperationsInput | number | null
+    dps?: NullableFloatFieldUpdateOperationsInput | number | null
+    eps?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcf?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcfPerShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    netIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    operatingIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    payoutFrequency?: NullableStringFieldUpdateOperationsInput | string | null
+    payoutRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    pbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    peRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    psRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    revenue?: NullableFloatFieldUpdateOperationsInput | number | null
+    roa?: NullableFloatFieldUpdateOperationsInput | number | null
+    roe?: NullableFloatFieldUpdateOperationsInput | number | null
+    rsi?: NullableFloatFieldUpdateOperationsInput | number | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
+    sharesOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    ytdChange?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type DseStockUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    change?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePct?: NullableFloatFieldUpdateOperationsInput | number | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    scrapedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    averageVolume?: NullableFloatFieldUpdateOperationsInput | number | null
+    beta?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1m?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1w?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change3y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change5y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change6m?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendGrowth?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendYield?: NullableFloatFieldUpdateOperationsInput | number | null
+    dps?: NullableFloatFieldUpdateOperationsInput | number | null
+    eps?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcf?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcfPerShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    netIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    operatingIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    payoutFrequency?: NullableStringFieldUpdateOperationsInput | string | null
+    payoutRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    pbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    peRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    psRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    revenue?: NullableFloatFieldUpdateOperationsInput | number | null
+    roa?: NullableFloatFieldUpdateOperationsInput | number | null
+    roe?: NullableFloatFieldUpdateOperationsInput | number | null
+    rsi?: NullableFloatFieldUpdateOperationsInput | number | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
+    sharesOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    ytdChange?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type DseStockCreateManyInput = {
+    id?: string
+    symbol: string
+    name?: string | null
+    price?: number | null
+    change?: number | null
+    changePct?: number | null
+    marketCap?: string | null
+    scrapedAt?: Date | string
+    averageVolume?: number | null
+    beta?: number | null
+    change1m?: number | null
+    change1w?: number | null
+    change1y?: number | null
+    change3y?: number | null
+    change5y?: number | null
+    change6m?: number | null
+    dividendGrowth?: number | null
+    dividendYield?: number | null
+    dps?: number | null
+    eps?: number | null
+    fcf?: number | null
+    fcfPerShare?: number | null
+    industry?: string | null
+    netIncome?: number | null
+    operatingIncome?: number | null
+    payoutFrequency?: string | null
+    payoutRatio?: number | null
+    pbRatio?: number | null
+    peRatio?: number | null
+    psRatio?: number | null
+    revenue?: number | null
+    roa?: number | null
+    roe?: number | null
+    rsi?: number | null
+    sector?: string | null
+    sharesOut?: number | null
+    updatedAt?: Date | string
+    volume?: number | null
+    ytdChange?: number | null
+  }
+
+  export type DseStockUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    change?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePct?: NullableFloatFieldUpdateOperationsInput | number | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    scrapedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    averageVolume?: NullableFloatFieldUpdateOperationsInput | number | null
+    beta?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1m?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1w?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change3y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change5y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change6m?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendGrowth?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendYield?: NullableFloatFieldUpdateOperationsInput | number | null
+    dps?: NullableFloatFieldUpdateOperationsInput | number | null
+    eps?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcf?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcfPerShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    netIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    operatingIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    payoutFrequency?: NullableStringFieldUpdateOperationsInput | string | null
+    payoutRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    pbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    peRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    psRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    revenue?: NullableFloatFieldUpdateOperationsInput | number | null
+    roa?: NullableFloatFieldUpdateOperationsInput | number | null
+    roe?: NullableFloatFieldUpdateOperationsInput | number | null
+    rsi?: NullableFloatFieldUpdateOperationsInput | number | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
+    sharesOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    ytdChange?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type DseStockUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    symbol?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    change?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePct?: NullableFloatFieldUpdateOperationsInput | number | null
+    marketCap?: NullableStringFieldUpdateOperationsInput | string | null
+    scrapedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    averageVolume?: NullableFloatFieldUpdateOperationsInput | number | null
+    beta?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1m?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1w?: NullableFloatFieldUpdateOperationsInput | number | null
+    change1y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change3y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change5y?: NullableFloatFieldUpdateOperationsInput | number | null
+    change6m?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendGrowth?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividendYield?: NullableFloatFieldUpdateOperationsInput | number | null
+    dps?: NullableFloatFieldUpdateOperationsInput | number | null
+    eps?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcf?: NullableFloatFieldUpdateOperationsInput | number | null
+    fcfPerShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    netIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    operatingIncome?: NullableFloatFieldUpdateOperationsInput | number | null
+    payoutFrequency?: NullableStringFieldUpdateOperationsInput | string | null
+    payoutRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    pbRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    peRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    psRatio?: NullableFloatFieldUpdateOperationsInput | number | null
+    revenue?: NullableFloatFieldUpdateOperationsInput | number | null
+    roa?: NullableFloatFieldUpdateOperationsInput | number | null
+    roe?: NullableFloatFieldUpdateOperationsInput | number | null
+    rsi?: NullableFloatFieldUpdateOperationsInput | number | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
+    sharesOut?: NullableFloatFieldUpdateOperationsInput | number | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    ytdChange?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
   export type PortfolioCreateInput = {
     id?: string
     name: string
@@ -73831,21 +76220,31 @@ export namespace Prisma {
 
   export type PortfolioStockCreateInput = {
     id?: string
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     portfolio: PortfolioCreateNestedOneWithoutStocksInput
-    stock: StockCreateNestedOneWithoutPortfoliosInput
+    stock?: StockCreateNestedOneWithoutPortfoliosInput
   }
 
   export type PortfolioStockUncheckedCreateInput = {
     id?: string
     portfolioId: string
-    stockId: string
+    stockId?: string | null
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -73853,21 +76252,31 @@ export namespace Prisma {
 
   export type PortfolioStockUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     portfolio?: PortfolioUpdateOneRequiredWithoutStocksNestedInput
-    stock?: StockUpdateOneRequiredWithoutPortfoliosNestedInput
+    stock?: StockUpdateOneWithoutPortfoliosNestedInput
   }
 
   export type PortfolioStockUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     portfolioId?: StringFieldUpdateOperationsInput | string
-    stockId?: StringFieldUpdateOperationsInput | string
+    stockId?: NullableStringFieldUpdateOperationsInput | string | null
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73876,9 +76285,14 @@ export namespace Prisma {
   export type PortfolioStockCreateManyInput = {
     id?: string
     portfolioId: string
-    stockId: string
+    stockId?: string | null
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -73886,8 +76300,13 @@ export namespace Prisma {
 
   export type PortfolioStockUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -73896,9 +76315,14 @@ export namespace Prisma {
   export type PortfolioStockUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     portfolioId?: StringFieldUpdateOperationsInput | string
-    stockId?: StringFieldUpdateOperationsInput | string
+    stockId?: NullableStringFieldUpdateOperationsInput | string | null
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -76822,6 +79246,7 @@ export namespace Prisma {
     fundName?: SortOrder
     fundType?: SortOrder
     managerId?: SortOrder
+    managerName?: SortOrder
     description?: SortOrder
     logoUrl?: SortOrder
     inceptionDate?: SortOrder
@@ -76840,6 +79265,7 @@ export namespace Prisma {
     fundName?: SortOrder
     fundType?: SortOrder
     managerId?: SortOrder
+    managerName?: SortOrder
     description?: SortOrder
     logoUrl?: SortOrder
     inceptionDate?: SortOrder
@@ -76858,6 +79284,7 @@ export namespace Prisma {
     fundName?: SortOrder
     fundType?: SortOrder
     managerId?: SortOrder
+    managerName?: SortOrder
     description?: SortOrder
     logoUrl?: SortOrder
     inceptionDate?: SortOrder
@@ -78152,6 +80579,198 @@ export namespace Prisma {
     iaChange?: SortOrder
   }
 
+  export type DseStockCountOrderByAggregateInput = {
+    id?: SortOrder
+    symbol?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    change?: SortOrder
+    changePct?: SortOrder
+    marketCap?: SortOrder
+    scrapedAt?: SortOrder
+    averageVolume?: SortOrder
+    beta?: SortOrder
+    change1m?: SortOrder
+    change1w?: SortOrder
+    change1y?: SortOrder
+    change3y?: SortOrder
+    change5y?: SortOrder
+    change6m?: SortOrder
+    dividendGrowth?: SortOrder
+    dividendYield?: SortOrder
+    dps?: SortOrder
+    eps?: SortOrder
+    fcf?: SortOrder
+    fcfPerShare?: SortOrder
+    industry?: SortOrder
+    netIncome?: SortOrder
+    operatingIncome?: SortOrder
+    payoutFrequency?: SortOrder
+    payoutRatio?: SortOrder
+    pbRatio?: SortOrder
+    peRatio?: SortOrder
+    psRatio?: SortOrder
+    revenue?: SortOrder
+    roa?: SortOrder
+    roe?: SortOrder
+    rsi?: SortOrder
+    sector?: SortOrder
+    sharesOut?: SortOrder
+    updatedAt?: SortOrder
+    volume?: SortOrder
+    ytdChange?: SortOrder
+  }
+
+  export type DseStockAvgOrderByAggregateInput = {
+    price?: SortOrder
+    change?: SortOrder
+    changePct?: SortOrder
+    averageVolume?: SortOrder
+    beta?: SortOrder
+    change1m?: SortOrder
+    change1w?: SortOrder
+    change1y?: SortOrder
+    change3y?: SortOrder
+    change5y?: SortOrder
+    change6m?: SortOrder
+    dividendGrowth?: SortOrder
+    dividendYield?: SortOrder
+    dps?: SortOrder
+    eps?: SortOrder
+    fcf?: SortOrder
+    fcfPerShare?: SortOrder
+    netIncome?: SortOrder
+    operatingIncome?: SortOrder
+    payoutRatio?: SortOrder
+    pbRatio?: SortOrder
+    peRatio?: SortOrder
+    psRatio?: SortOrder
+    revenue?: SortOrder
+    roa?: SortOrder
+    roe?: SortOrder
+    rsi?: SortOrder
+    sharesOut?: SortOrder
+    volume?: SortOrder
+    ytdChange?: SortOrder
+  }
+
+  export type DseStockMaxOrderByAggregateInput = {
+    id?: SortOrder
+    symbol?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    change?: SortOrder
+    changePct?: SortOrder
+    marketCap?: SortOrder
+    scrapedAt?: SortOrder
+    averageVolume?: SortOrder
+    beta?: SortOrder
+    change1m?: SortOrder
+    change1w?: SortOrder
+    change1y?: SortOrder
+    change3y?: SortOrder
+    change5y?: SortOrder
+    change6m?: SortOrder
+    dividendGrowth?: SortOrder
+    dividendYield?: SortOrder
+    dps?: SortOrder
+    eps?: SortOrder
+    fcf?: SortOrder
+    fcfPerShare?: SortOrder
+    industry?: SortOrder
+    netIncome?: SortOrder
+    operatingIncome?: SortOrder
+    payoutFrequency?: SortOrder
+    payoutRatio?: SortOrder
+    pbRatio?: SortOrder
+    peRatio?: SortOrder
+    psRatio?: SortOrder
+    revenue?: SortOrder
+    roa?: SortOrder
+    roe?: SortOrder
+    rsi?: SortOrder
+    sector?: SortOrder
+    sharesOut?: SortOrder
+    updatedAt?: SortOrder
+    volume?: SortOrder
+    ytdChange?: SortOrder
+  }
+
+  export type DseStockMinOrderByAggregateInput = {
+    id?: SortOrder
+    symbol?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    change?: SortOrder
+    changePct?: SortOrder
+    marketCap?: SortOrder
+    scrapedAt?: SortOrder
+    averageVolume?: SortOrder
+    beta?: SortOrder
+    change1m?: SortOrder
+    change1w?: SortOrder
+    change1y?: SortOrder
+    change3y?: SortOrder
+    change5y?: SortOrder
+    change6m?: SortOrder
+    dividendGrowth?: SortOrder
+    dividendYield?: SortOrder
+    dps?: SortOrder
+    eps?: SortOrder
+    fcf?: SortOrder
+    fcfPerShare?: SortOrder
+    industry?: SortOrder
+    netIncome?: SortOrder
+    operatingIncome?: SortOrder
+    payoutFrequency?: SortOrder
+    payoutRatio?: SortOrder
+    pbRatio?: SortOrder
+    peRatio?: SortOrder
+    psRatio?: SortOrder
+    revenue?: SortOrder
+    roa?: SortOrder
+    roe?: SortOrder
+    rsi?: SortOrder
+    sector?: SortOrder
+    sharesOut?: SortOrder
+    updatedAt?: SortOrder
+    volume?: SortOrder
+    ytdChange?: SortOrder
+  }
+
+  export type DseStockSumOrderByAggregateInput = {
+    price?: SortOrder
+    change?: SortOrder
+    changePct?: SortOrder
+    averageVolume?: SortOrder
+    beta?: SortOrder
+    change1m?: SortOrder
+    change1w?: SortOrder
+    change1y?: SortOrder
+    change3y?: SortOrder
+    change5y?: SortOrder
+    change6m?: SortOrder
+    dividendGrowth?: SortOrder
+    dividendYield?: SortOrder
+    dps?: SortOrder
+    eps?: SortOrder
+    fcf?: SortOrder
+    fcfPerShare?: SortOrder
+    netIncome?: SortOrder
+    operatingIncome?: SortOrder
+    payoutRatio?: SortOrder
+    pbRatio?: SortOrder
+    peRatio?: SortOrder
+    psRatio?: SortOrder
+    revenue?: SortOrder
+    roa?: SortOrder
+    roe?: SortOrder
+    rsi?: SortOrder
+    sharesOut?: SortOrder
+    volume?: SortOrder
+    ytdChange?: SortOrder
+  }
+
   export type PortfolioFundListRelationFilter = {
     every?: PortfolioFundWhereInput
     some?: PortfolioFundWhereInput
@@ -78194,12 +80813,22 @@ export namespace Prisma {
     isNot?: PortfolioWhereInput
   }
 
+  export type StockNullableScalarRelationFilter = {
+    is?: StockWhereInput | null
+    isNot?: StockWhereInput | null
+  }
+
   export type PortfolioStockCountOrderByAggregateInput = {
     id?: SortOrder
     portfolioId?: SortOrder
     stockId?: SortOrder
+    ticker?: SortOrder
+    name?: SortOrder
+    sector?: SortOrder
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrder
+    dividend?: SortOrder
     buyDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -78208,14 +80837,21 @@ export namespace Prisma {
   export type PortfolioStockAvgOrderByAggregateInput = {
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrder
+    dividend?: SortOrder
   }
 
   export type PortfolioStockMaxOrderByAggregateInput = {
     id?: SortOrder
     portfolioId?: SortOrder
     stockId?: SortOrder
+    ticker?: SortOrder
+    name?: SortOrder
+    sector?: SortOrder
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrder
+    dividend?: SortOrder
     buyDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -78225,8 +80861,13 @@ export namespace Prisma {
     id?: SortOrder
     portfolioId?: SortOrder
     stockId?: SortOrder
+    ticker?: SortOrder
+    name?: SortOrder
+    sector?: SortOrder
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrder
+    dividend?: SortOrder
     buyDate?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -78235,6 +80876,8 @@ export namespace Prisma {
   export type PortfolioStockSumOrderByAggregateInput = {
     qty?: SortOrder
     buyPrice?: SortOrder
+    currentPrice?: SortOrder
+    dividend?: SortOrder
   }
 
   export type PortfolioFundCountOrderByAggregateInput = {
@@ -81335,10 +83978,12 @@ export namespace Prisma {
     update?: XOR<XOR<PortfolioUpdateToOneWithWhereWithoutStocksInput, PortfolioUpdateWithoutStocksInput>, PortfolioUncheckedUpdateWithoutStocksInput>
   }
 
-  export type StockUpdateOneRequiredWithoutPortfoliosNestedInput = {
+  export type StockUpdateOneWithoutPortfoliosNestedInput = {
     create?: XOR<StockCreateWithoutPortfoliosInput, StockUncheckedCreateWithoutPortfoliosInput>
     connectOrCreate?: StockCreateOrConnectWithoutPortfoliosInput
     upsert?: StockUpsertWithoutPortfoliosInput
+    disconnect?: StockWhereInput | boolean
+    delete?: StockWhereInput | boolean
     connect?: StockWhereUniqueInput
     update?: XOR<XOR<StockUpdateToOneWithWhereWithoutPortfoliosInput, StockUpdateWithoutPortfoliosInput>, StockUncheckedUpdateWithoutPortfoliosInput>
   }
@@ -85243,6 +87888,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -85271,6 +87917,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -85329,6 +87976,7 @@ export namespace Prisma {
     fundName?: StringFilter<"Fund"> | string
     fundType?: EnumFundTypeFilter<"Fund"> | $Enums.FundType
     managerId?: StringNullableFilter<"Fund"> | string | null
+    managerName?: StringNullableFilter<"Fund"> | string | null
     description?: StringFilter<"Fund"> | string
     logoUrl?: StringNullableFilter<"Fund"> | string | null
     inceptionDate?: DateTimeFilter<"Fund"> | Date | string
@@ -86221,6 +88869,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86250,6 +88899,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86293,6 +88943,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86322,6 +88973,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86349,6 +89001,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86378,6 +89031,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86421,6 +89075,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86450,6 +89105,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86477,6 +89133,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86506,6 +89163,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86549,6 +89207,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86578,6 +89237,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86605,6 +89265,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86634,6 +89295,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86677,6 +89339,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86706,6 +89369,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86733,6 +89397,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86762,6 +89427,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86805,6 +89471,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86834,6 +89501,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86861,6 +89529,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86890,6 +89559,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -86933,6 +89603,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86962,6 +89633,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -86989,6 +89661,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87018,6 +89691,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87061,6 +89735,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87090,6 +89765,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87117,6 +89793,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87146,6 +89823,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87189,6 +89867,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87218,6 +89897,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87245,6 +89925,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87274,6 +89955,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87317,6 +89999,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87346,6 +90029,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87373,6 +90057,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87402,6 +90087,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87445,6 +90131,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87474,6 +90161,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87501,6 +90189,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87530,6 +90219,7 @@ export namespace Prisma {
     fundName: string
     fundType: $Enums.FundType
     managerId?: string | null
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -87573,6 +90263,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87602,6 +90293,7 @@ export namespace Prisma {
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -87711,8 +90403,13 @@ export namespace Prisma {
 
   export type PortfolioStockCreateWithoutStockInput = {
     id?: string
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -87722,8 +90419,13 @@ export namespace Prisma {
   export type PortfolioStockUncheckedCreateWithoutStockInput = {
     id?: string
     portfolioId: string
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -87819,9 +90521,14 @@ export namespace Prisma {
     NOT?: PortfolioStockScalarWhereInput | PortfolioStockScalarWhereInput[]
     id?: StringFilter<"PortfolioStock"> | string
     portfolioId?: StringFilter<"PortfolioStock"> | string
-    stockId?: StringFilter<"PortfolioStock"> | string
+    stockId?: StringNullableFilter<"PortfolioStock"> | string | null
+    ticker?: StringNullableFilter<"PortfolioStock"> | string | null
+    name?: StringNullableFilter<"PortfolioStock"> | string | null
+    sector?: StringNullableFilter<"PortfolioStock"> | string | null
     qty?: FloatFilter<"PortfolioStock"> | number
     buyPrice?: FloatFilter<"PortfolioStock"> | number
+    currentPrice?: FloatNullableFilter<"PortfolioStock"> | number | null
+    dividend?: FloatNullableFilter<"PortfolioStock"> | number | null
     buyDate?: DateTimeNullableFilter<"PortfolioStock"> | Date | string | null
     createdAt?: DateTimeFilter<"PortfolioStock"> | Date | string
     updatedAt?: DateTimeFilter<"PortfolioStock"> | Date | string
@@ -87982,19 +90689,29 @@ export namespace Prisma {
 
   export type PortfolioStockCreateWithoutPortfolioInput = {
     id?: string
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    stock: StockCreateNestedOneWithoutPortfoliosInput
+    stock?: StockCreateNestedOneWithoutPortfoliosInput
   }
 
   export type PortfolioStockUncheckedCreateWithoutPortfolioInput = {
     id?: string
-    stockId: string
+    stockId?: string | null
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -93013,6 +95730,7 @@ export namespace Prisma {
     fundSlug: string
     fundName: string
     fundType: $Enums.FundType
+    managerName?: string | null
     description: string
     logoUrl?: string | null
     inceptionDate: Date | string
@@ -93030,6 +95748,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93058,6 +95777,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93086,6 +95806,7 @@ export namespace Prisma {
     fundSlug?: StringFieldUpdateOperationsInput | string
     fundName?: StringFieldUpdateOperationsInput | string
     fundType?: EnumFundTypeFieldUpdateOperationsInput | $Enums.FundType
+    managerName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     inceptionDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93790,8 +96511,13 @@ export namespace Prisma {
   export type PortfolioStockCreateManyStockInput = {
     id?: string
     portfolioId: string
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -93913,8 +96639,13 @@ export namespace Prisma {
 
   export type PortfolioStockUpdateWithoutStockInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93924,8 +96655,13 @@ export namespace Prisma {
   export type PortfolioStockUncheckedUpdateWithoutStockInput = {
     id?: StringFieldUpdateOperationsInput | string
     portfolioId?: StringFieldUpdateOperationsInput | string
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93934,8 +96670,13 @@ export namespace Prisma {
   export type PortfolioStockUncheckedUpdateManyWithoutStockInput = {
     id?: StringFieldUpdateOperationsInput | string
     portfolioId?: StringFieldUpdateOperationsInput | string
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93943,9 +96684,14 @@ export namespace Prisma {
 
   export type PortfolioStockCreateManyPortfolioInput = {
     id?: string
-    stockId: string
+    stockId?: string | null
+    ticker?: string | null
+    name?: string | null
+    sector?: string | null
     qty: number
     buyPrice: number
+    currentPrice?: number | null
+    dividend?: number | null
     buyDate?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -93966,19 +96712,29 @@ export namespace Prisma {
 
   export type PortfolioStockUpdateWithoutPortfolioInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    stock?: StockUpdateOneRequiredWithoutPortfoliosNestedInput
+    stock?: StockUpdateOneWithoutPortfoliosNestedInput
   }
 
   export type PortfolioStockUncheckedUpdateWithoutPortfolioInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stockId?: StringFieldUpdateOperationsInput | string
+    stockId?: NullableStringFieldUpdateOperationsInput | string | null
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -93986,9 +96742,14 @@ export namespace Prisma {
 
   export type PortfolioStockUncheckedUpdateManyWithoutPortfolioInput = {
     id?: StringFieldUpdateOperationsInput | string
-    stockId?: StringFieldUpdateOperationsInput | string
+    stockId?: NullableStringFieldUpdateOperationsInput | string | null
+    ticker?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    sector?: NullableStringFieldUpdateOperationsInput | string | null
     qty?: FloatFieldUpdateOperationsInput | number
     buyPrice?: FloatFieldUpdateOperationsInput | number
+    currentPrice?: NullableFloatFieldUpdateOperationsInput | number | null
+    dividend?: NullableFloatFieldUpdateOperationsInput | number | null
     buyDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
