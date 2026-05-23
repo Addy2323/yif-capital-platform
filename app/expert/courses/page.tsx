@@ -128,6 +128,11 @@ export default function LmsCoursesPage() {
     const videoRef = useRef<HTMLInputElement>(null)
     const docsRef = useRef<HTMLInputElement>(null)
 
+    const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
+    const handleImageError = (id: string, type: 'banner' | 'instructor') => {
+        setImageErrors(prev => ({ ...prev, [`${type}-${id}`]: true }))
+    }
+
     // Step 4
     const [price, setPrice] = useState(25000)
     const [isFree, setIsFree] = useState(false)
@@ -430,12 +435,13 @@ export default function LmsCoursesPage() {
                         >
                             {/* ── Banner / Thumbnail ── */}
                             <div className={`relative h-36 bg-gradient-to-br ${gradientClass} overflow-hidden shrink-0`}>
-                                {bannerSrc ? (
+                                {bannerSrc && !imageErrors[`banner-${course.id}`] ? (
                                     // eslint-disable-next-line @next/next/no-img-element
                                     <img
                                         src={bannerSrc}
                                         alt={course.title}
                                         className="w-full h-full object-cover"
+                                        onError={() => handleImageError(course.id, 'banner')}
                                     />
                                 ) : (
                                     <div className="absolute inset-0 flex items-center justify-center opacity-10">
@@ -451,12 +457,13 @@ export default function LmsCoursesPage() {
 
                                 {/* Instructor photo — bottom-left corner, overlapping the banner */}
                                 <div className="absolute -bottom-5 left-4 flex items-end gap-2.5">
-                                    {photoSrc ? (
+                                    {photoSrc && !imageErrors[`instructor-${course.id}`] ? (
                                         // eslint-disable-next-line @next/next/no-img-element
                                         <img
                                             src={photoSrc}
                                             alt={course.instructorName}
                                             className="h-12 w-12 rounded-full object-cover ring-2 ring-slate-800 shadow-lg"
+                                            onError={() => handleImageError(course.id, 'instructor')}
                                         />
                                     ) : (
                                         <div className="h-12 w-12 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-lg ring-2 ring-slate-800 shadow-lg shrink-0">

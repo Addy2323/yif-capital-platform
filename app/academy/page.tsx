@@ -50,7 +50,12 @@ function AcademyContent() {
   const [showSessions, setShowSessions] = useState(false)
   const [courses, setCourses] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
   
+  const handleImageError = (id: string, type: 'banner' | 'instructor') => {
+    setImageErrors(prev => ({ ...prev, [`${type}-${id}`]: true }))
+  }
+
   const isPro = user?.subscription?.plan === "pro" || user?.subscription?.plan === "institutional"
 
   useEffect(() => {
@@ -213,17 +218,53 @@ function AcademyContent() {
                   const Icon = CATEGORY_ICONS[course.category] || BookOpen
                   return (
                     <ScrollAnimation key={course.id} animation="slide-up" delay={index * 50}>
-                      <Card
-                        className="overflow-hidden transition-all hover:border-gold/50 hover:shadow-lg h-full flex flex-col"
+                       <Card
+                        className="overflow-hidden transition-all hover:border-gold/50 hover:shadow-lg h-full flex flex-col group"
                       >
-                        <CardContent className="p-6 flex flex-col h-full">
-                          <div className="flex items-start gap-4">
-                            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
-                              <Icon className="h-6 w-6" />
+                        {/* Course Banner */}
+                        <div className="relative h-48 bg-navy overflow-hidden shrink-0">
+                          {course.thumbnailUrl && !imageErrors[`banner-${course.id}`] ? (
+                            <img
+                              src={course.thumbnailUrl}
+                              alt={course.title}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              onError={() => handleImageError(course.id, 'banner')}
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                              <Icon className="h-24 w-24 text-gold" />
                             </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
+                          
+                          {/* Instructor Avatar overlapping banner */}
+                          <div className="absolute -bottom-6 left-6 flex items-end gap-3">
+                            <div className="relative h-14 w-14 overflow-hidden rounded-full ring-4 ring-navy bg-navy shadow-xl">
+                              {course.expert?.user?.avatar && !imageErrors[`instructor-${course.id}`] ? (
+                                <img
+                                  src={course.expert.user.avatar}
+                                  alt={course.expert?.user?.name || "Instructor"}
+                                  className="h-full w-full object-cover"
+                                  onError={() => handleImageError(course.id, 'instructor')}
+                                />
+                              ) : (
+                                <div className="h-full w-full bg-gold flex items-center justify-center text-navy font-bold text-xl uppercase">
+                                  {(course.expert?.user?.name || "E").charAt(0)}
+                                </div>
+                              )}
+                            </div>
+                            <div className="pb-1">
+                              <p className="text-xs font-medium text-gold/80 uppercase tracking-wider">Expert Instructor</p>
+                              <p className="text-sm font-bold text-white">{course.expert?.user?.name || "Expert"}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <CardContent className="p-6 pt-10 flex flex-col h-full">
+                          <div className="flex items-start gap-4">
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
-                                <h3 className="font-semibold text-card-foreground line-clamp-1">{course.title}</h3>
+                                <h3 className="text-lg font-bold text-card-foreground line-clamp-1">{course.title}</h3>
                                 {course.isFree ? (
                                   <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-bold uppercase text-success">
                                     Free
