@@ -61,8 +61,8 @@ export default function CourseCheckoutPage() {
         if (data.status === "success") {
           setPaymentStatus("success")
           if (pollRef.current) clearInterval(pollRef.current)
-          toast.success("Payment confirmed! Redirecting to your course...")
-          setTimeout(() => router.push(`/academy/course/${courseId}`), 2000)
+          toast.success("Payment confirmed! Redirecting to your courses...")
+          setTimeout(() => router.push(`/lms/courses`), 2000)
         } else if (data.status === "failed") {
           setPaymentStatus("failed")
           if (pollRef.current) clearInterval(pollRef.current)
