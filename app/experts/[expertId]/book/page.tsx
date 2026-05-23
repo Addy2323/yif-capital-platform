@@ -73,6 +73,9 @@ export default function BookingStepper() {
     const [cardNumber, setCardNumber] = useState("")
     const [isProcessing, setIsProcessing] = useState(false)
     const [bookingRef, setBookingRef] = useState("")
+    const [bookingId, setBookingId] = useState<string | null>(null)
+    const [paymentId, setPaymentId] = useState<string | null>(null)
+    const pollInterval = React.useRef<ReturnType<typeof setInterval> | null>(null)
 
     useEffect(() => {
         fetch(`/api/experts/${expertId}`)
@@ -93,6 +96,34 @@ export default function BookingStepper() {
         if (step === 3 && !goalsInput.trim()) { toast.error("Please share your primary investment goals."); return }
         setStep(s => s + 1)
     }
+
+    const startPolling = (bId: string) => {
+        if (pollInterval.current) clearInterval(pollInterval.current)
+        
+        pollInterval.current = setInterval(async () => {
+            try {
+                const res = await fetch(`/api/lms/bookings/${bId}/status`)
+                const data = await res.json()
+                
+                if (data.bookingStatus === "CONFIRMED") {
+                    if (pollInterval.current) clearInterval(pollInterval.current)
+                    setStep(5)
+                } else if (data.bookingStatus === "CANCELLED" || data.paymentStatus === "failed") {
+                    if (pollInterval.current) clearInterval(pollInterval.current)
+                    toast.error("Payment failed or booking was cancelled. Please try again.")
+                    setIsProcessing(false)
+                }
+            } catch (err) {
+                console.error("Polling error:", err)
+            }
+        }, 3000)
+    }
+
+    useEffect(() => {
+        return () => {
+            if (pollInterval.current) clearInterval(pollInterval.current)
+        }
+    }, [])
 
     const handleConfirmPayment = async () => {
         if (!expert) return
@@ -120,7 +151,15 @@ export default function BookingStepper() {
             })
 
             const booking = await res.json()
-            if (!res.ok) { toast.error(booking.error || "Failed to create booking"); return }
+            if (!res.ok) { 
+                toast.error(booking.error || "Failed to create booking"); 
+                setIsProcessing(false)
+                return 
+            }
+
+            setBookingId(booking.id)
+            const ref = booking.id?.slice(0, 8).toUpperCase() ?? `YIF-BK-${Math.floor(10000 + Math.random() * 90000)}`
+            setBookingRef(`YIF-BK-${ref}`)
 
             // 2. Initiate Payment via Snippe
             const payRes = await fetch("/api/payments/initiate/booking", {
@@ -129,22 +168,20 @@ export default function BookingStepper() {
               body: JSON.stringify({
                 bookingId: booking.id,
                 phone: paymentPhone,
-                amount: expert.hourlyRate, // and handle different rates eventually
+                amount: expert.hourlyRate,
               })
             })
 
             const payData = await payRes.json()
             if (payRes.ok) {
-              const ref = booking.id?.slice(0, 8).toUpperCase() ?? `YIF-BK-${Math.floor(10000 + Math.random() * 90000)}`
-              setBookingRef(`YIF-BK-${ref}`)
-              setStep(5)
-              toast.success("Booking created! Check your phone for the payment prompt.")
+              toast.success("Payment initiated! Check your phone for the prompt.")
+              startPolling(booking.id)
             } else {
               toast.error(payData.error || "Failed to initiate payment. Please try again.")
+              setIsProcessing(false)
             }
         } catch (err) {
             toast.error("Something went wrong. Please try again.")
-        } finally {
             setIsProcessing(false)
         }
     }
@@ -421,7 +458,7 @@ export default function BookingStepper() {
                                 <div className="space-y-2">
                                     <h2 className="text-2xl font-bold">Booking Confirmed!</h2>
                                     <p className="text-white/60 text-sm max-w-md mx-auto">
-                                        Your consultation has been scheduled with {expert.user.name}.
+                                        Booking consultation successful. Please wait for confirmation.
                                     </p>
                                 </div>
                                 <div className="bg-slate-900/60 border border-white/5 rounded-2xl p-6 text-left max-w-md mx-auto space-y-3 text-sm">
@@ -473,7 +510,14 @@ export default function BookingStepper() {
                                     </Button>
                                 ) : (
                                     <Button onClick={handleConfirmPayment} disabled={isProcessing} className="bg-emerald-600 hover:bg-emerald-700 text-white min-w-[120px]">
-                                        {isProcessing ? <><Loader2 className="h-4 w-4 mr-1.5 animate-spin" /> Verifying...</> : <>Authorize Pay <Check className="h-4 w-4 ml-1.5" /></>}
+                                        {isProcessing ? (
+                                            <div className="flex items-center gap-2">
+                                                <Loader2 className="h-4 w-4 animate-spin" />
+                                                <span>Awaiting confirmation...</span>
+                                            </div>
+                                        ) : (
+                                            <>Authorize Pay <Check className="h-4 w-4 ml-1.5" /></>
+                                        )}
                                     </Button>
                                 )}
                             </div>

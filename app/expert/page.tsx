@@ -84,8 +84,16 @@ interface Notification {
     createdAt: string
 }
 
+interface CourseAnalytic {
+    id: string
+    title: string
+    students: number
+    revenue: number
+}
+
 interface DashboardData {
     stats: DashboardStats
+    courseAnalytics: CourseAnalytic[]
     upcomingBookings: UpcomingBooking[]
     todayBookings: UpcomingBooking[]
     recentActivity: RecentActivity[]
@@ -240,6 +248,7 @@ export default function ExpertDashboardOverview() {
     }
 
     const stats = data?.stats
+    const courseAnalytics = data?.courseAnalytics ?? []
     const upcomingBookings = data?.upcomingBookings ?? []
     const todayBookings = data?.todayBookings ?? []
     const recentActivity = data?.recentActivity ?? []
@@ -418,6 +427,36 @@ export default function ExpertDashboardOverview() {
 
                                 {recentActivity.length === 0 && (
                                     <div className="text-center p-6 text-muted-foreground italic">No recent course activity.</div>
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="bg-card border-border">
+                        <CardHeader>
+                            <CardTitle className="text-lg">Course Performance</CardTitle>
+                            <CardDescription className="text-muted-foreground">Analytics per course</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                {courseAnalytics.map((course) => (
+                                    <div key={course.id} className="flex items-center justify-between p-4 rounded-lg bg-muted/20 border border-border/50">
+                                        <div className="min-w-0 flex-1">
+                                            <h4 className="font-semibold text-sm truncate">{course.title}</h4>
+                                            <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
+                                                <span className="flex items-center gap-1">
+                                                    <Users className="h-3 w-3" /> {course.students} students
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="text-right ml-4">
+                                            <p className="text-sm font-bold text-emerald-400">{course.revenue.toLocaleString()} TZS</p>
+                                            <p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-0.5">Total Revenue</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                {courseAnalytics.length === 0 && (
+                                    <div className="text-center p-6 text-muted-foreground italic">No course analytics available yet.</div>
                                 )}
                             </div>
                         </CardContent>

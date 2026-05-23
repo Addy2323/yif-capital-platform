@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -32,6 +32,9 @@ export default function CourseCheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<"MOBILE_MONEY" | "BANK">("MOBILE_MONEY")
   const [mobileNumber, setMobileNumber] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
+  const [paymentRef, setPaymentRef] = useState<string | null>(null)
+  const [paymentStatus, setPaymentStatus] = useState<"idle" | "initiated" | "success" | "failed">("idle")
+  const pollRef = React.useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (!user) { router.push("/login"); return }
@@ -41,6 +44,33 @@ export default function CourseCheckoutPage() {
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [courseId, user, router])
+
+  // Clean up polling on unmount
+  useEffect(() => {
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current)
+    }
+  }, [])
+
+  const startPolling = useCallback((reference: string) => {
+    if (pollRef.current) clearInterval(pollRef.current)
+    pollRef.current = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/payments/status/${reference}`)
+        const data = await res.json()
+        if (data.status === "success") {
+          setPaymentStatus("success")
+          if (pollRef.current) clearInterval(pollRef.current)
+          toast.success("Payment confirmed! Redirecting to your course...")
+          setTimeout(() => router.push(`/academy/course/${courseId}`), 2000)
+        } else if (data.status === "failed") {
+          setPaymentStatus("failed")
+          if (pollRef.current) clearInterval(pollRef.current)
+          toast.error("Payment failed. Please try again.")
+        }
+      } catch {}
+    }, 3000)
+  }, [courseId, router])
 
   const handlePay = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -56,15 +86,16 @@ export default function CourseCheckoutPage() {
         body: JSON.stringify({
           courseId: course.id,
           phone: mobileNumber,
-          amount: total,
+          amount: course.price,
         }),
       })
 
       const data = await res.json()
       if (res.ok) {
+        setPaymentRef(data.reference)
+        setPaymentStatus("initiated")
         toast.success("Payment initiated! Please check your phone for the push prompt.")
-        // You could add a polling mechanism here, or just let them wait for the webhook
-        // For now, let's just keep them on this page with a success message
+        startPolling(data.reference)
       } else {
         toast.error(data.error || "Failed to initiate payment")
       }
@@ -99,8 +130,7 @@ export default function CourseCheckoutPage() {
     )
   }
 
-  const platformFee = Math.round(course.price * 0.05)
-  const total = course.price + platformFee
+  const total = course.price
 
   return (
     <div className="flex min-h-screen flex-col bg-muted/20">
@@ -186,24 +216,64 @@ export default function CourseCheckoutPage() {
 
                     <Separator />
 
-                    <Button
-                      type="submit"
-                      disabled={isProcessing}
-                      className="w-full h-11 bg-gold text-navy hover:bg-gold/90 font-semibold"
-                    >
-                      {isProcessing ? (
-                        <span className="flex items-center gap-2">
-                          <Clock className="h-4 w-4 animate-spin" /> Processing…
-                        </span>
-                      ) : (
-                        `Pay TZS ${total.toLocaleString()}`
-                      )}
-                    </Button>
+                    {paymentStatus === "success" ? (
+                      <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-center space-y-2">
+                        <CheckCircle className="h-8 w-8 text-emerald-500 mx-auto" />
+                        <p className="font-semibold text-emerald-600">Payment Confirmed!</p>
+                        <p className="text-xs text-muted-foreground">Redirecting to your course…</p>
+                      </div>
+                    ) : paymentStatus === "initiated" ? (
+                      <div className="space-y-3">
+                        <div className="rounded-lg border border-gold/30 bg-gold/10 p-4 text-center space-y-2">
+                          <Clock className="h-6 w-6 text-gold mx-auto animate-spin" />
+                          <p className="font-semibold text-sm">Awaiting Payment Confirmation</p>
+                          <p className="text-xs text-muted-foreground">Check your phone and confirm the payment prompt.</p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="w-full"
+                          onClick={() => { setPaymentStatus("idle"); setPaymentRef(null); if (pollRef.current) clearInterval(pollRef.current) }}
+                        >
+                          Try Again
+                        </Button>
+                      </div>
+                    ) : paymentStatus === "failed" ? (
+                      <div className="space-y-3">
+                        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-center space-y-1">
+                          <p className="font-semibold text-red-500">Payment Failed</p>
+                          <p className="text-xs text-muted-foreground">Please try again or use a different number.</p>
+                        </div>
+                        <Button
+                          type="button"
+                          className="w-full h-11 bg-gold text-navy hover:bg-gold/90 font-semibold"
+                          onClick={() => setPaymentStatus("idle")}
+                        >
+                          Retry Payment
+                        </Button>
+                      </div>
+                    ) : (
+                      <>
+                        <Button
+                          type="submit"
+                          disabled={isProcessing}
+                          className="w-full h-11 bg-gold text-navy hover:bg-gold/90 font-semibold"
+                        >
+                          {isProcessing ? (
+                            <span className="flex items-center gap-2">
+                              <Clock className="h-4 w-4 animate-spin" /> Processing…
+                            </span>
+                          ) : (
+                            `Pay TZS ${total.toLocaleString()}`
+                          )}
+                        </Button>
 
-                    <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-                      <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-                      Secured by YIF Capital · 256-bit encryption
-                    </div>
+                        <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+                          <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
+                          Secured by YIF Capital · 256-bit encryption
+                        </div>
+                      </>
+                    )}
                   </form>
                 </CardContent>
               </Card>
@@ -238,10 +308,6 @@ export default function CourseCheckoutPage() {
                     <div className="flex justify-between text-muted-foreground">
                       <span>Course price</span>
                       <span>TZS {course.price?.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between text-muted-foreground">
-                      <span>Platform fee (5%)</span>
-                      <span>TZS {platformFee.toLocaleString()}</span>
                     </div>
                     <Separator />
                     <div className="flex justify-between font-bold text-base">

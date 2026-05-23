@@ -28,31 +28,33 @@ export async function GET(req: NextRequest) {
       enrollments,
       activeEnrollments,
       completedSessionsCount,
-      courses,
+      coursesCount,
       publishedCoursesCount,
       upcomingBookings,
       todayBookings,
       recentActivity,
       notifications,
+      coursePayments,
+      expertCourses,
     ] = await Promise.all([
       prisma.expertBooking.findMany({
-        where: { expertId, status: "COMPLETED" },
+        where: { expertId, status: "CONFIRMED" }, // User requested confirmed bookings
         select: { price: true },
       }),
       prisma.expertBooking.findMany({
-        where: { expertId, status: "COMPLETED", scheduledDate: { gte: startOfThisMonth } },
+        where: { expertId, status: "CONFIRMED", scheduledDate: { gte: startOfThisMonth } },
         select: { price: true },
       }),
       prisma.expertBooking.findMany({
-        where: { expertId, status: "COMPLETED", scheduledDate: { gte: startOfLastMonth, lte: endOfLastMonth } },
+        where: { expertId, status: "CONFIRMED", scheduledDate: { gte: startOfLastMonth, lte: endOfLastMonth } },
         select: { price: true },
       }),
       prisma.lmsCourseEnrollment.findMany({
         where: { course: { expertId } },
-        select: { userId: true, isCompleted: true },
+        select: { userId: true, isCompleted: true, courseId: true },
       }),
       prisma.lmsCourseEnrollment.count({ where: { course: { expertId }, isCompleted: false } }),
-      prisma.expertBooking.count({ where: { expertId, status: "COMPLETED" } }),
+      prisma.expertBooking.count({ where: { expertId, status: "CONFIRMED" } }),
       prisma.lmsCourse.count({ where: { expertId } }),
       prisma.lmsCourse.count({ where: { expertId, status: "PUBLISHED" } }),
       prisma.expertBooking.findMany({
@@ -87,11 +89,33 @@ export async function GET(req: NextRequest) {
         orderBy: { createdAt: "desc" },
         take: 8,
       }),
+      prisma.lmsPayment.findMany({
+        where: { 
+          paymentType: "course", 
+          status: "success", 
+          course: { expertId } 
+        },
+        select: { amount: true, courseId: true, completedAt: true }
+      }),
+      prisma.lmsCourse.findMany({
+        where: { expertId },
+        select: { id: true, title: true, price: true }
+      })
     ])
 
-    const totalEarnings = completedBookings.reduce((sum, b) => sum + b.price, 0)
-    const earningsThisMonth = thisMonthBookings.reduce((sum, b) => sum + b.price, 0)
-    const earningsLastMonth = lastMonthBookings.reduce((sum, b) => sum + b.price, 0)
+    const bookingEarnings = completedBookings.reduce((sum, b) => sum + b.price, 0)
+    const courseEarnings = coursePayments.reduce((sum, p) => sum + p.amount, 0)
+    const totalEarnings = bookingEarnings + courseEarnings
+
+    const thisMonthCourseEarnings = coursePayments
+      .filter(p => p.completedAt && p.completedAt >= startOfThisMonth)
+      .reduce((sum, p) => sum + p.amount, 0)
+    const lastMonthCourseEarnings = coursePayments
+      .filter(p => p.completedAt && p.completedAt >= startOfLastMonth && p.completedAt <= endOfLastMonth)
+      .reduce((sum, p) => sum + p.amount, 0)
+
+    const earningsThisMonth = thisMonthBookings.reduce((sum, b) => sum + b.price, 0) + thisMonthCourseEarnings
+    const earningsLastMonth = lastMonthBookings.reduce((sum, b) => sum + b.price, 0) + lastMonthCourseEarnings
 
     let earningsChange = "+0%"
     if (earningsLastMonth > 0) {
@@ -103,6 +127,20 @@ export async function GET(req: NextRequest) {
 
     const uniqueStudentIds = new Set(enrollments.map((e) => e.userId))
 
+    const courseAnalytics = expertCourses.map(course => {
+      const courseEnrollments = enrollments.filter(e => e.courseId === course.id)
+      const courseRevenue = coursePayments
+        .filter(p => p.courseId === course.id)
+        .reduce((sum, p) => sum + p.amount, 0)
+      
+      return {
+        id: course.id,
+        title: course.title,
+        students: courseEnrollments.length,
+        revenue: courseRevenue
+      }
+    })
+
     return NextResponse.json({
       stats: {
         totalEarnings,
@@ -111,10 +149,11 @@ export async function GET(req: NextRequest) {
         totalStudents: uniqueStudentIds.size,
         activeStudents: activeEnrollments,
         completedSessions: completedSessionsCount,
-        totalCourses: courses,
+        totalCourses: coursesCount,
         publishedCourses: publishedCoursesCount,
         rating: expertProfile.rating,
       },
+      courseAnalytics,
       upcomingBookings,
       todayBookings,
       recentActivity,
