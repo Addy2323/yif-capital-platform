@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -82,6 +82,7 @@ export default function BookExpertPage() {
   // Payment state
   const [paymentMethod, setPaymentMethod] = useState<"MOBILE_MONEY" | "BANK">("MOBILE_MONEY")
   const [mobileNumber, setMobileNumber] = useState("")
+  const pollInterval = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (!user) {
@@ -103,6 +104,27 @@ export default function BookExpertPage() {
     return price
   }
 
+  const startPolling = (bId: string) => {
+    if (pollInterval.current) clearInterval(pollInterval.current)
+    pollInterval.current = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/lms/bookings/${bId}/status`)
+        const data = await res.json()
+        if (data.bookingStatus === "CONFIRMED") {
+          if (pollInterval.current) clearInterval(pollInterval.current)
+          setStep(4)
+          setIsSubmitting(false)
+        } else if (data.bookingStatus === "CANCELLED" || data.paymentStatus === "failed") {
+          if (pollInterval.current) clearInterval(pollInterval.current)
+          toast.error("Payment failed or booking was cancelled.")
+          setIsSubmitting(false)
+        }
+      } catch (err) {
+        console.error("Polling error:", err)
+      }
+    }, 3000)
+  }
+
   const handleSubmit = async () => {
     if (!selectedDate || !selectedTime || !sessionType || !category) return
     if (paymentMethod === "MOBILE_MONEY" && !mobileNumber.trim()) {
@@ -112,14 +134,11 @@ export default function BookExpertPage() {
 
     setIsSubmitting(true)
     try {
-      // Simulate payment processing (replace with real Snippe/gateway call)
-      await new Promise(resolve => setTimeout(resolve, 1200))
-      toast.info("Payment confirmed. Creating your booking…")
-
       const endHour = parseInt(selectedTime.split(":")[0]) + 1
       const endTime = `${endHour.toString().padStart(2, "0")}:00`
 
-      const res = await fetch("/api/bookings", {
+      // 1. Create PENDING booking
+      const res = await fetch("/api/lms/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -131,23 +150,37 @@ export default function BookExpertPage() {
           startTime: selectedTime,
           endTime,
           notes,
-          price: calculatePrice(),
-          currency: expert?.currency ?? "TZS",
         }),
       })
 
-      const data = await res.json()
-
+      const booking = await res.json()
       if (!res.ok) {
-        toast.error(data.error || "Failed to create booking")
+        toast.error(booking.error || "Failed to create booking")
+        setIsSubmitting(false)
         return
       }
 
-      toast.success("Booking created successfully!")
-      setStep(4)
-    } catch {
+      // 2. Initiate Real Snippe Payment
+      const payRes = await fetch("/api/payments/initiate/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bookingId: booking.id,
+          phone: mobileNumber,
+          amount: calculatePrice(),
+        })
+      })
+
+      const payData = await payRes.json()
+      if (payRes.ok) {
+        toast.success("Payment initiated! Check your phone for the prompt.")
+        startPolling(booking.id)
+      } else {
+        toast.error(payData.error || "Failed to initiate payment. Please try again.")
+        setIsSubmitting(false)
+      }
+    } catch (error) {
       toast.error("Something went wrong. Please try again.")
-    } finally {
       setIsSubmitting(false)
     }
   }
