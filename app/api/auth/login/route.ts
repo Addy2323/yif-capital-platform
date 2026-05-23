@@ -100,8 +100,12 @@ export async function POST(req: NextRequest) {
             shouldPromptPhone,
         });
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Login error:", error);
-        return NextResponse.json({ error: "Login failed" }, { status: 500 });
+        return NextResponse.json({ 
+            error: "Login failed", 
+            details: error?.message || "Unknown server error",
+            stack: process.env.NODE_ENV === "development" ? error?.stack : undefined 
+        }, { status: 500 });
     }
 }
