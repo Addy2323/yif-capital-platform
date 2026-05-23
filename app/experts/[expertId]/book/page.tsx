@@ -96,11 +96,14 @@ export default function BookingStepper() {
 
     const handleConfirmPayment = async () => {
         if (!expert) return
+        if (!paymentPhone.trim()) { toast.error("Please enter your mobile money phone number."); return }
+
         setIsProcessing(true)
         try {
             const endHour = parseInt(selectedTimeSlot.split(":")[0]) + 1
             const endTime = `${endHour.toString().padStart(2, "0")}:00`
 
+            // 1. Create the booking (status PENDING)
             const res = await fetch("/api/lms/bookings", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -116,14 +119,30 @@ export default function BookingStepper() {
                 }),
             })
 
-            const data = await res.json()
-            if (!res.ok) { toast.error(data.error || "Failed to create booking"); return }
+            const booking = await res.json()
+            if (!res.ok) { toast.error(booking.error || "Failed to create booking"); return }
 
-            const ref = data.id?.slice(0, 8).toUpperCase() ?? `YIF-BK-${Math.floor(10000 + Math.random() * 90000)}`
-            setBookingRef(`YIF-BK-${ref}`)
-            setStep(5)
-            toast.success("Booking Confirmed!")
-        } catch {
+            // 2. Initiate Payment via Snippe
+            const payRes = await fetch("/api/payments/initiate/booking", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                bookingId: booking.id,
+                phone: paymentPhone,
+                amount: expert.hourlyRate, // and handle different rates eventually
+              })
+            })
+
+            const payData = await payRes.json()
+            if (payRes.ok) {
+              const ref = booking.id?.slice(0, 8).toUpperCase() ?? `YIF-BK-${Math.floor(10000 + Math.random() * 90000)}`
+              setBookingRef(`YIF-BK-${ref}`)
+              setStep(5)
+              toast.success("Booking created! Check your phone for the payment prompt.")
+            } else {
+              toast.error(payData.error || "Failed to initiate payment. Please try again.")
+            }
+        } catch (err) {
             toast.error("Something went wrong. Please try again.")
         } finally {
             setIsProcessing(false)

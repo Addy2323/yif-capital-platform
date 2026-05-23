@@ -49,28 +49,30 @@ export default function CourseCheckoutPage() {
       return
     }
     setIsProcessing(true)
-    // Simulate processing — replace with real Snippe/payment API call
-    setTimeout(() => {
-      toast.success("Payment received! Enrolling you now…")
-      // After real payment confirm, hit enroll endpoint then redirect
-      fetch(`/api/lms/courses/${course.id}/enroll`, {
+    try {
+      const res = await fetch("/api/payments/initiate/course", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseId: course.id,
+          phone: mobileNumber,
+          amount: total,
+        }),
       })
-        .then(r => r.json())
-        .then(data => {
-          if (data.enrollment || data.alreadyEnrolled) {
-            router.push(`/courses/${courseId}/learn`)
-          } else {
-            toast.error(data.error || "Enrollment failed after payment")
-            setIsProcessing(false)
-          }
-        })
-        .catch(() => {
-          toast.error("Something went wrong")
-          setIsProcessing(false)
-        })
-    }, 1500)
+
+      const data = await res.json()
+      if (res.ok) {
+        toast.success("Payment initiated! Please check your phone for the push prompt.")
+        // You could add a polling mechanism here, or just let them wait for the webhook
+        // For now, let's just keep them on this page with a success message
+      } else {
+        toast.error(data.error || "Failed to initiate payment")
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.")
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   if (isLoading) {

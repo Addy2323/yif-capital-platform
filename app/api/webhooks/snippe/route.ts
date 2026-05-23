@@ -34,12 +34,13 @@ export async function POST(req: NextRequest) {
 
         console.log("Parsed webhook data:", { status, reference, metadata, webhookAmount, event });
 
-        // 2. Find existing payment by reference
-        const existingPayment = await prisma.payment.findFirst({
-            where: { providerReference: reference }
-        });
+        // 2. Find existing payment (check both legacy Payment and new LmsPayment)
+        const [existingPayment, existingLmsPayment] = await Promise.all([
+            prisma.payment.findFirst({ where: { providerReference: reference } }),
+            prisma.lmsPayment.findFirst({ where: { providerReference: reference } })
+        ]);
 
-        if (existingPayment && existingPayment.status === "success") {
+        if ((existingPayment?.status === "success") || (existingLmsPayment?.status === "success")) {
             console.log("Payment already processed:", reference);
             return NextResponse.json({ message: "Already processed" }, { status: 200 });
         }
@@ -47,94 +48,138 @@ export async function POST(req: NextRequest) {
         // 3. Process successful payment
         if (status === "completed" || status === "success" || event === "payment.completed") {
             const userId = metadata?.userId;
-            const plan = metadata?.plan || "SESSION";
+            const plan = (metadata?.plan || "SESSION").toUpperCase();
 
             if (!userId) {
                 console.error("No userId in metadata for transaction:", reference);
                 return NextResponse.json({ error: "No userId in metadata" }, { status: 400 });
             }
 
-            // Get the expected amount from our database
-            let expectedAmount = 0;
-            let sessionId: string | null = null;
-
-            if (existingPayment) {
-                expectedAmount = existingPayment.amount;
-                sessionId = existingPayment.sessionId;
-            }
-
-            // Validate payment amount matches expected
             const paidAmount = parseFloat(webhookAmount) || 0;
-            if (expectedAmount > 0 && paidAmount < expectedAmount) {
-                console.error(`Payment amount mismatch: expected ${expectedAmount}, got ${paidAmount}`);
-                // Update payment as failed due to insufficient amount
-                if (existingPayment) {
-                    await prisma.payment.update({
-                        where: { id: existingPayment.id },
-                        data: { status: "failed" }
+
+            // Handle based on payment type
+            if (plan === "COURSE") {
+                const courseId = metadata?.courseId;
+                if (!courseId) throw new Error("Missing courseId in metadata");
+
+                await prisma.$transaction(async (tx) => {
+                    // Update LmsPayment
+                    const lmsPayment = await tx.lmsPayment.update({
+                        where: { providerReference: reference },
+                        data: {
+                            status: "success",
+                            completedAt: new Date(),
+                            amount: paidAmount // ensure actual amount from webhook
+                        }
                     });
-                }
-                return NextResponse.json({ error: "Insufficient payment amount" }, { status: 400 });
-            }
 
-            // Update or create payment record
-            const payment = await prisma.payment.upsert({
-                where: { providerReference: reference },
-                update: {
-                    status: "success",
-                    completedAt: new Date(),
-                },
-                create: {
-                    userId,
-                    amount: paidAmount,
-                    currency,
-                    provider: "snippe",
-                    providerReference: reference,
-                    status: "success",
-                    plan: plan.toUpperCase(),
-                    sessionId,
-                    completedAt: new Date(),
-                },
-            });
+                    // Create Enrollment
+                    await tx.lmsCourseEnrollment.upsert({
+                      where: { userId_courseId: { userId, courseId } },
+                      update: { paymentId: lmsPayment.id },
+                      create: {
+                        userId,
+                        courseId,
+                        paymentId: lmsPayment.id,
+                        enrolledAt: new Date(),
+                      }
+                    });
+                });
 
-            // 4. Handle based on payment type
-            if (plan.toUpperCase() === "SESSION" && sessionId) {
-                // SESSION PAYMENT: Just mark payment as successful
-                // User gets access to this specific session only
-                console.log(`Session payment successful for user ${userId}, session ${sessionId}`);
+                console.log(`Course enrollment successful: user ${userId}, course ${courseId}`);
+
+            } else if (plan === "BOOKING") {
+                const bookingId = metadata?.bookingId;
+                if (!bookingId) throw new Error("Missing bookingId in metadata");
+
+                await prisma.$transaction(async (tx) => {
+                    // Update LmsPayment
+                    const lmsPayment = await tx.lmsPayment.update({
+                        where: { providerReference: reference },
+                        data: {
+                            status: "success",
+                            completedAt: new Date(),
+                            amount: paidAmount
+                        }
+                    });
+
+                    // Update Booking
+                    await tx.expertBooking.update({
+                        where: { id: bookingId },
+                        data: {
+                            status: "CONFIRMED",
+                            paymentId: lmsPayment.id
+                        }
+                    });
+                });
+
+                console.log(`Booking confirmed: user ${userId}, booking ${bookingId}`);
+
+            } else if (plan === "SESSION") {
+                // Legacy session payment
+                const sessionId = metadata?.sessionId || existingPayment?.sessionId;
+
+                await prisma.payment.upsert({
+                    where: { providerReference: reference },
+                    update: { status: "success", completedAt: new Date() },
+                    create: {
+                        userId,
+                        amount: paidAmount,
+                        currency,
+                        provider: "snippe",
+                        providerReference: reference,
+                        status: "success",
+                        plan: "SESSION",
+                        sessionId,
+                        completedAt: new Date(),
+                    },
+                });
+                console.log(`Session payment successful: user ${userId}`);
 
             } else {
-                // SUBSCRIPTION PAYMENT: Upgrade user role
+                // Legacy Subscription (PRO/INSTITUTIONAL)
                 const courseId = metadata?.courseId || "academy-access";
+
+                const payment = await prisma.payment.upsert({
+                    where: { providerReference: reference },
+                    update: { status: "success", completedAt: new Date() },
+                    create: {
+                        userId,
+                        amount: paidAmount,
+                        currency,
+                        provider: "snippe",
+                        providerReference: reference,
+                        status: "success",
+                        plan,
+                        completedAt: new Date(),
+                    },
+                });
 
                 await EnrollmentService.createEnrollment(userId, courseId, payment.id);
 
-                // Fetch user to check current role
                 const user = await prisma.user.findUnique({
                     where: { id: userId },
                     select: { role: true }
                 });
 
-                // Only update role if user is NOT an admin
                 if (user && user.role !== 'ADMIN') {
                     await prisma.user.update({
                         where: { id: userId },
-                        data: { role: (plan.toUpperCase() === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'PRO') as any },
+                        data: { role: (plan === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'PRO') as any },
                     });
                 }
-
-                console.log(`Subscription payment successful for user ${userId}, plan ${plan}`);
+                console.log(`Subscription payment successful: user ${userId}, plan ${plan}`);
             }
 
             return NextResponse.json({ message: "Payment processed successfully" }, { status: 200 });
 
         } else if (status === "failed" || event === "payment.failed") {
-            // Handle failed payment
+            // Handle failed payment (check both tables)
             if (existingPayment) {
-                await prisma.payment.update({
-                    where: { id: existingPayment.id },
-                    data: { status: "failed" }
-                });
+                await prisma.payment.update({ where: { id: existingPayment.id }, data: { status: "failed" } });
+            }
+            if (existingLmsPayment) {
+                await prisma.lmsPayment.update({ where: { id: existingLmsPayment.id }, data: { status: "failed" } });
             }
             console.log(`Payment failed for reference ${reference}`);
             return NextResponse.json({ message: "Payment failed recorded" }, { status: 200 });
