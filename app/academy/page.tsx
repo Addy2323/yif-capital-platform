@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -21,73 +21,55 @@ import {
   Check,
   Crown,
   Star,
+  Video,
+  LayoutDashboard,
+  ShieldCheck,
+  Coins,
+  Globe,
+  Briefcase,
+  PieChart as PortfolioIcon,
 } from "lucide-react"
 import Link from "next/link"
 import { ScrollAnimation } from "@/components/ui/scroll-animation"
 import { LiveSessionsDashboard } from "@/components/dashboard/live-sessions"
-import { Video } from "lucide-react"
 
-const courses = [
-  {
-    id: "basics",
-    title: "Capital Markets Basics",
-    description: "Learn the fundamentals of investing, stock markets, and how to start your investment journey.",
-    level: "Beginner",
-    duration: "4 hours",
-    lessons: 12,
-    enrolled: 2450,
-    rating: 4.8,
-    icon: BookOpen,
-    free: true,
-  },
-  {
-    id: "technical",
-    title: "Technical Analysis Fundamentals",
-    description: "Master chart patterns, indicators, and technical trading strategies for better timing.",
-    level: "Intermediate",
-    duration: "6 hours",
-    lessons: 18,
-    enrolled: 1820,
-    rating: 4.9,
-    icon: TrendingUp,
-    free: false,
-  },
-  {
-    id: "valuation",
-    title: "Stock Valuation & Analysis",
-    description: "Deep dive into financial statements, valuation metrics, and fundamental analysis techniques.",
-    level: "Intermediate",
-    duration: "8 hours",
-    lessons: 24,
-    enrolled: 1350,
-    rating: 4.7,
-    icon: BarChart3,
-    free: false,
-  },
-  {
-    id: "portfolio",
-    title: "Portfolio Management",
-    description: "Build and manage a diversified portfolio with professional asset allocation strategies.",
-    level: "Advanced",
-    duration: "10 hours",
-    lessons: 28,
-    enrolled: 980,
-    rating: 4.9,
-    icon: PieChart,
-    free: false,
-  },
-]
-
+const CATEGORY_ICONS: Record<string, any> = {
+  STOCK_MARKET: TrendingUp,
+  REAL_ESTATE: Briefcase,
+  BONDS_TREASURY: ShieldCheck,
+  SACCO_INVESTMENT: Users,
+  FOREX_EDUCATION: Globe,
+  MUTUAL_FUNDS: Coins,
+  STARTUP_INVESTMENT: BarChart3,
+  PERSONAL_FINANCE: PortfolioIcon,
+  SME_INVESTMENT: LayoutDashboard,
+}
 
 function AcademyContent() {
   const { user } = useAuth()
   const [showSessions, setShowSessions] = useState(false)
+  const [courses, setCourses] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  
   const isPro = user?.subscription?.plan === "pro" || user?.subscription?.plan === "institutional"
+
+  useEffect(() => {
+    fetch("/api/lms/courses")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setCourses(data)
+        }
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false))
+  }, [])
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
+        {/* ... Hero Section remains unchanged ... */}
         {/* Hero */}
         <section className="relative border-b border-border bg-navy py-16 overflow-hidden">
           {/* Background Image */}
@@ -215,83 +197,100 @@ function AcademyContent() {
               )}
             </div>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {courses.map((course, index) => (
-                <ScrollAnimation key={course.id} animation="slide-up" delay={index * 50}>
-                  <Card
-                    className="overflow-hidden transition-all hover:border-gold/50 hover:shadow-lg"
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
-                          <course.icon className="h-6 w-6" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <h3 className="font-semibold text-card-foreground">{course.title}</h3>
-                            {course.free ? (
-                              <span className="rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success">
-                                Free
-                              </span>
-                            ) : !isPro ? (
-                              <span className="rounded-full bg-gold/10 px-2 py-0.5 text-xs font-medium text-gold">
-                                Pro
-                              </span>
-                            ) : null}
+            {isLoading ? (
+              <div className="mt-12 flex justify-center py-20">
+                <div className="h-10 w-10 animate-spin rounded-full border-4 border-gold border-t-transparent" />
+              </div>
+            ) : courses.length === 0 ? (
+              <div className="mt-12 text-center py-20 border-2 border-dashed border-muted rounded-2xl">
+                <BookOpen className="mx-auto h-12 w-12 text-muted-foreground/30 mb-4" />
+                <h3 className="text-lg font-medium text-muted-foreground">No courses available yet</h3>
+                <p className="text-sm text-muted-foreground/60 mt-1">Check back later for new investment courses.</p>
+              </div>
+            ) : (
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+                {courses.map((course, index) => {
+                  const Icon = CATEGORY_ICONS[course.category] || BookOpen
+                  return (
+                    <ScrollAnimation key={course.id} animation="slide-up" delay={index * 50}>
+                      <Card
+                        className="overflow-hidden transition-all hover:border-gold/50 hover:shadow-lg h-full flex flex-col"
+                      >
+                        <CardContent className="p-6 flex flex-col h-full">
+                          <div className="flex items-start gap-4">
+                            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
+                              <Icon className="h-6 w-6" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <h3 className="font-semibold text-card-foreground line-clamp-1">{course.title}</h3>
+                                {course.isFree ? (
+                                  <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-bold uppercase text-success">
+                                    Free
+                                  </span>
+                                ) : !isPro ? (
+                                  <span className="rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase text-gold">
+                                    Pro
+                                  </span>
+                                ) : null}
+                              </div>
+                              <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                                {course.shortDescription || course.description}
+                              </p>
+                            </div>
                           </div>
-                          <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                            {course.description}
-                          </p>
-                        </div>
-                      </div>
 
-                      <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                        <span
-                          className={`rounded-full px-2 py-0.5 text-xs font-medium ${course.level === "Beginner"
-                            ? "bg-success/10 text-success"
-                            : course.level === "Intermediate"
-                              ? "bg-gold/10 text-gold"
-                              : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
-                            }`}
-                        >
-                          {course.level}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-4 w-4" />
-                          {course.duration}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <PlayCircle className="h-4 w-4" />
-                          {course.lessons} lessons
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Star className="h-4 w-4 fill-gold text-gold" />
-                          {course.rating}
-                        </span>
-                      </div>
+                          <div className="mt-auto pt-6">
+                            <div className="flex flex-wrap items-center gap-4 text-[13px] text-muted-foreground mb-4">
+                              <span
+                                className={`rounded-full px-2 py-0.5 text-[11px] font-bold uppercase ${course.level === "BEGINNER" || course.level === "Beginner"
+                                  ? "bg-success/10 text-success"
+                                  : course.level === "INTERMEDIATE" || course.level === "Intermediate"
+                                    ? "bg-gold/10 text-gold"
+                                    : "bg-navy/10 text-navy dark:bg-white/10 dark:text-white"
+                                  }`}
+                              >
+                                {course.level?.toLowerCase()}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Clock className="h-4 w-4" />
+                                {Math.round(course.totalDuration / 60) || 0}h {course.totalDuration % 60}m
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <PlayCircle className="h-4 w-4" />
+                                {course.totalLessons || 0} lessons
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Star className="h-4 w-4 fill-gold text-gold" />
+                                {course.rating?.toFixed(1) || "0.0"}
+                              </span>
+                            </div>
 
-                      <div className="mt-4 flex items-center gap-4">
-                        {course.free || isPro ? (
-                          <Button asChild className="flex-1 bg-gold text-navy hover:bg-gold/90">
-                            <Link href={`/academy/course/${course.id}`}>
-                              Start Learning
-                              <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
-                          </Button>
-                        ) : (
-                          <Button asChild variant="outline" className="flex-1 bg-transparent border-gold/30 text-gold hover:bg-gold/10">
-                            <Link href="/contact">
-                              <Crown className="mr-2 h-4 w-4" />
-                              Contact for Pro
-                            </Link>
-                          </Button>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </ScrollAnimation>
-              ))}
-            </div>
+                            <div className="flex items-center gap-4">
+                              {course.isFree || isPro ? (
+                                <Button asChild className="flex-1 bg-gold text-navy hover:bg-gold/90 font-bold">
+                                  <Link href={`/academy/course/${course.id}`}>
+                                    Start Learning
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                  </Link>
+                                </Button>
+                              ) : (
+                                <Button asChild variant="outline" className="flex-1 bg-transparent border-gold/30 text-gold hover:bg-gold/10 font-bold">
+                                  <Link href={`/courses/${course.slug || course.id}`}>
+                                    View Details
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                  </Link>
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </ScrollAnimation>
+                  )
+                })}
+              </div>
+            )}
           </div>
         </section>
 
