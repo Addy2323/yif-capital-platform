@@ -134,7 +134,12 @@ export async function GET(request: NextRequest) {
     } catch (error: any) {
         console.error("[STOCKS API] Error fetching stocks:", error)
         return NextResponse.json(
-            { success: false, data: null, error: error.message },
+            { 
+                success: false, 
+                data: null, 
+                error: "Internal Server Error",
+                details: error.message 
+            },
             { status: 500 }
         )
     }
