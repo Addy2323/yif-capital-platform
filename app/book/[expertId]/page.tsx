@@ -112,8 +112,13 @@ export default function BookExpertPage() {
         const data = await res.json()
         if (data.bookingStatus === "CONFIRMED") {
           if (pollInterval.current) clearInterval(pollInterval.current)
+          toast.success("Payment confirmed! Redirecting to your bookings...")
           setStep(4)
           setIsSubmitting(false)
+          // Small delay then redirect
+          setTimeout(() => {
+            router.push("/lms/bookings")
+          }, 3000)
         } else if (data.bookingStatus === "CANCELLED" || data.paymentStatus === "failed") {
           if (pollInterval.current) clearInterval(pollInterval.current)
           toast.error("Payment failed or booking was cancelled.")
