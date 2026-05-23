@@ -73,15 +73,34 @@ export async function POST(req: NextRequest) {
                         }
                     });
 
+                    // Calculate total lessons
+                    const course = await tx.lmsCourse.findUnique({
+                        where: { id: courseId },
+                        include: {
+                            modules: {
+                                include: {
+                                    lessons: { select: { id: true } }
+                                }
+                            }
+                        }
+                    });
+                    const totalLessons = course?.modules.reduce((acc, m) => acc + m.lessons.length, 0) || 0;
+
                     // Create Enrollment
                     await tx.lmsCourseEnrollment.upsert({
                       where: { userId_courseId: { userId, courseId } },
-                      update: { paymentId: lmsPayment.id },
+                      update: { 
+                        paymentId: lmsPayment.id,
+                        totalLessons // update if re-enrolling
+                      },
                       create: {
                         userId,
                         courseId,
                         paymentId: lmsPayment.id,
                         enrolledAt: new Date(),
+                        totalLessons,
+                        completedLessons: 0,
+                        progress: 0
                       }
                     });
                 });

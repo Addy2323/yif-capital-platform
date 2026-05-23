@@ -35,6 +35,7 @@ export class SnippeService {
         description: string;
         customerEmail: string;
         customerName: string;
+        metadata?: any;
     }) {
         // Parse customer name into firstname and lastname
         const nameParts = params.customerName.trim().split(" ");
@@ -67,7 +68,8 @@ export class SnippeService {
             metadata: {
                 userId: params.userId,
                 plan: params.plan,
-                description: params.description
+                description: params.description,
+                ...params.metadata
             }
         };
 

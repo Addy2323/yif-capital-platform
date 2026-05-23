@@ -116,7 +116,7 @@ export default function LmsMyCoursesPage() {
             ) : (
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {filtered.map(course => (
-                        <Link key={course.id} href={`/courses/${course.slug || course.id}`}>
+                        <Link key={course.id} href={`/academy/course/${course.id}`}>
                             <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors h-full cursor-pointer group shadow-sm dark:shadow-none">
                                 <div className="h-40 rounded-t-lg overflow-hidden bg-gradient-to-br from-blue-700 to-blue-900 relative">
                                     {course.thumbnailUrl ? (

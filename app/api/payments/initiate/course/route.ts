@@ -46,7 +46,8 @@ export async function POST(req: NextRequest) {
             plan: "COURSE",
             description: `Course: ${course.title}`,
             customerEmail: user.email,
-            customerName: user.name || "Student"
+            customerName: user.name || "Student",
+            metadata: { courseId: course.id }
         });
 
         // 4. Create pending LmsPayment record

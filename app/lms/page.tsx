@@ -153,7 +153,7 @@ export default function LmsDashboardPage() {
                         </Card>
                     ) : (
                         enrolledCourses.slice(0, 3).map((course) => (
-                            <Link key={course.id} href={`/courses/${course.id}`}>
+                            <Link key={course.id} href={`/academy/course/${course.id}`}>
                                 <Card className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors cursor-pointer shadow-sm dark:shadow-none">
                                     <CardContent className="p-4 flex items-center gap-4">
                                         <div className="h-16 w-24 shrink-0 rounded-lg bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center overflow-hidden">
@@ -165,10 +165,14 @@ export default function LmsDashboardPage() {
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <p className="font-semibold text-slate-900 dark:text-white truncate">{course.title}</p>
-                                            <p className="text-xs text-slate-500 dark:text-white/50 mt-0.5">{course.expert?.user?.name}</p>
+                                            <div className="flex items-center gap-2 mt-0.5">
+                                                <p className="text-xs text-slate-500 dark:text-white/50">{course.expert?.user?.name}</p>
+                                                <span className="text-[10px] text-slate-400 dark:text-white/30">•</span>
+                                                <span className="text-[10px] text-slate-400 dark:text-white/40">{course.completedLessons}/{course.totalLessons} lessons</span>
+                                            </div>
                                             <div className="flex items-center gap-2 mt-2">
                                                 <Progress value={course.progress} className="h-1.5 flex-1 bg-gray-200 dark:bg-white/10" />
-                                                <span className="text-xs font-medium text-slate-600 dark:text-white/70 shrink-0">{course.progress}%</span>
+                                                <span className="text-xs font-medium text-slate-600 dark:text-white/70 shrink-0">{Math.round(course.progress)}%</span>
                                             </div>
                                         </div>
                                         <Play className="h-8 w-8 shrink-0 text-blue-500 dark:text-blue-400 bg-blue-500/10 rounded-full p-2" />

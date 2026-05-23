@@ -51,7 +51,8 @@ export async function POST(req: NextRequest) {
             plan: "BOOKING",
             description: `Expert Session: ${booking.expert.user.name}`,
             customerEmail: user.email,
-            customerName: user.name || "Student"
+            customerName: user.name || "Student",
+            metadata: { bookingId: booking.id }
         });
 
         // 4. Create pending LmsPayment record and link to booking
