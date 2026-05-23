@@ -30,7 +30,32 @@ export async function GET(req: NextRequest) {
       orderBy: { createdAt: "desc" },
     })
 
-    return NextResponse.json(experts)
+    // Calculate real-time earnings for each expert
+    const expertsWithEarnings = await Promise.all(experts.map(async (expert) => {
+      const [bookingSum, courseSum] = await Promise.all([
+        prisma.expertBooking.aggregate({
+          where: { expertId: expert.id, status: { in: ["CONFIRMED", "COMPLETED"] } },
+          _sum: { price: true }
+        }),
+        prisma.lmsPayment.aggregate({
+          where: { 
+            course: { expertId: expert.id },
+            status: "success",
+            paymentType: "course"
+          },
+          _sum: { amount: true }
+        })
+      ]);
+
+      const gross = (bookingSum._sum.price ?? 0) + (courseSum._sum.amount ?? 0);
+      return {
+        ...expert,
+        totalEarnings: gross, // Update the field on the fly
+        netEarnings: Math.round(gross * 0.8)
+      };
+    }));
+
+    return NextResponse.json(expertsWithEarnings)
   } catch (error) {
     console.error("Fetch experts error:", error)
     return NextResponse.json({ error: "Failed to fetch experts" }, { status: 500 })

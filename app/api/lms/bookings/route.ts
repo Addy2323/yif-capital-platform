@@ -118,12 +118,12 @@ export async function POST(req: NextRequest) {
         scheduledDate: new Date(scheduledDate),
         startTime,
         endTime,
-        price,
+        price: price || 0,
         currency: expert.currency,
         meetingUrl,
         location: sessionType === "PHYSICAL" ? expert.physicalAddress : null,
         notes,
-        status: price > 0 ? "PENDING" : "CONFIRMED",
+        status: (price && price > 0) ? "PENDING" : "CONFIRMED",
       },
       include: {
         expert: {

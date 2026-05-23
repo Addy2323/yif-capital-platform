@@ -458,7 +458,7 @@ export default function BookingStepper() {
                                 <div className="space-y-2">
                                     <h2 className="text-2xl font-bold">Booking Confirmed!</h2>
                                     <p className="text-white/60 text-sm max-w-md mx-auto">
-                                        Booking consultation successful. Please wait for confirmation.
+                                        Your advisory session has been successfully booked and confirmed.
                                     </p>
                                 </div>
                                 <div className="bg-slate-900/60 border border-white/5 rounded-2xl p-6 text-left max-w-md mx-auto space-y-3 text-sm">
@@ -509,11 +509,11 @@ export default function BookingStepper() {
                                         Continue <ArrowRight className="h-4 w-4 ml-1.5" />
                                     </Button>
                                 ) : (
-                                    <Button onClick={handleConfirmPayment} disabled={isProcessing} className="bg-emerald-600 hover:bg-emerald-700 text-white min-w-[120px]">
+                                    <Button onClick={handleConfirmPayment} disabled={isProcessing} className="bg-emerald-600 hover:bg-emerald-700 text-white min-w-[160px]">
                                         {isProcessing ? (
                                             <div className="flex items-center gap-2">
                                                 <Loader2 className="h-4 w-4 animate-spin" />
-                                                <span>Awaiting confirmation...</span>
+                                                <span>Verifying...</span>
                                             </div>
                                         ) : (
                                             <>Authorize Pay <Check className="h-4 w-4 ml-1.5" /></>

@@ -19,8 +19,8 @@ export async function POST(req: NextRequest) {
 
         // 1. Verify Signature
         if (!SnippeService.verifySignature(rawBody, signature)) {
-            console.warn("Invalid Snippe signature detected.");
-            // In production: return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+            console.error("Invalid Snippe signature detected. Rejecting webhook.");
+            return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
         }
 
         // Handle both flat structure and nested data structure

@@ -61,6 +61,7 @@ interface ExpertProfile {
     totalReviews: number
     totalStudents: number
     totalEarnings: number
+    netEarnings: number
     hourlyRate: number
     location: string | null
     isAvailableOnline: boolean
@@ -506,8 +507,20 @@ export default function AdminExpertsPage() {
                                     {/* Stats */}
                                     <div className="grid grid-cols-2 gap-3 text-xs border-y border-white/5 py-3 bg-white/5 rounded-md px-3">
                                         <div>
-                                            <span className="text-white/40 block">Hourly Rate</span>
+                                            <span className="text-white/40 block">Gross Earnings</span>
+                                            <span className="font-semibold text-white tabular-nums">
+                                                {expert.totalEarnings.toLocaleString()} TZS
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="text-white/40 block">Net (80%)</span>
                                             <span className="font-semibold text-emerald-400 tabular-nums">
+                                                {(expert.netEarnings || Math.round(expert.totalEarnings * 0.8)).toLocaleString()} TZS
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="text-white/40 block">Hourly Rate</span>
+                                            <span className="font-semibold text-white/70 tabular-nums">
                                                 {expert.hourlyRate.toLocaleString()} TZS
                                             </span>
                                         </div>

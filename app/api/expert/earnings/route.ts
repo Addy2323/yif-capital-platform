@@ -15,36 +15,73 @@ export async function GET(req: NextRequest) {
     const now = new Date()
 
     const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1)
-    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1)
-    const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59)
     const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1)
 
-    const [allCompleted, thisMonthBookings, lastMonthBookings, confirmedBookings, recentCompleted] =
+    const [bookingStats, courseStats, confirmedBookingStats, recentBookings, courseEnrollments] =
       await Promise.all([
+        // Completed Bookings
         prisma.expertBooking.aggregate({
-          where: { expertId, status: "COMPLETED" },
+          where: { expertId, status: { in: ["CONFIRMED", "COMPLETED"] } },
           _sum: { price: true },
         }),
+        // Course Payments
+        prisma.lmsPayment.aggregate({
+          where: { 
+            course: { expertId },
+            status: "success",
+            paymentType: "course"
+          },
+          _sum: { amount: true },
+        }),
+        // Monthly Bookings
         prisma.expertBooking.aggregate({
-          where: { expertId, status: "COMPLETED", scheduledDate: { gte: startOfThisMonth } },
+          where: { 
+            expertId, 
+            status: { in: ["CONFIRMED", "COMPLETED"] }, 
+            scheduledDate: { gte: startOfThisMonth } 
+          },
           _sum: { price: true },
         }),
-        prisma.expertBooking.aggregate({
-          where: { expertId, status: "COMPLETED", scheduledDate: { gte: startOfLastMonth, lte: endOfLastMonth } },
-          _sum: { price: true },
-        }),
-        prisma.expertBooking.aggregate({
-          where: { expertId, status: "CONFIRMED" },
-          _sum: { price: true },
-        }),
+        // List for Monthly Breakdown
         prisma.expertBooking.findMany({
-          where: { expertId, status: "COMPLETED", scheduledDate: { gte: sixMonthsAgo } },
+          where: { 
+            expertId, 
+            status: { in: ["CONFIRMED", "COMPLETED"] }, 
+            scheduledDate: { gte: sixMonthsAgo } 
+          },
           select: { price: true, scheduledDate: true, id: true, sessionType: true, category: true },
           orderBy: { scheduledDate: "asc" },
         }),
+        // List Course Payments for Monthly Breakdown
+        prisma.lmsPayment.findMany({
+           where: {
+               course: { expertId },
+               status: "success",
+               paymentType: "course",
+               completedAt: { gte: sixMonthsAgo }
+           },
+           select: { amount: true, completedAt: true, id: true, description: true },
+           orderBy: { completedAt: "asc" }
+        })
       ])
 
-    // Build monthly breakdown for last 6 months
+    // Sum everything
+    const totalGross = (bookingStats._sum.price ?? 0) + (courseStats._sum.amount ?? 0);
+    const thisMonthGross = (confirmedBookingStats._sum.price ?? 0); 
+
+    // Add course payments this month to thisMonthGross
+    const courseStatsThisMonth = await prisma.lmsPayment.aggregate({
+        where: {
+            course: { expertId },
+            status: "success",
+            paymentType: "course",
+            completedAt: { gte: startOfThisMonth }
+        },
+        _sum: { amount: true }
+    });
+    const totalThisMonthGross = thisMonthGross + (courseStatsThisMonth._sum.amount ?? 0);
+
+    // Build monthly breakdown
     const monthlyMap = new Map<string, { earnings: number; sessions: number }>()
     for (let i = 5; i >= 0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
@@ -52,13 +89,23 @@ export async function GET(req: NextRequest) {
       monthlyMap.set(key, { earnings: 0, sessions: 0 })
     }
 
-    for (const booking of recentCompleted) {
+    // Add bookings to breakdown
+    for (const booking of recentBookings) {
       const key = booking.scheduledDate.toLocaleString("en-US", { month: "short", year: "numeric" })
       if (monthlyMap.has(key)) {
         const entry = monthlyMap.get(key)!
         entry.earnings += booking.price
         entry.sessions += 1
       }
+    }
+    // Add courses to breakdown
+    for (const payment of courseEnrollments) {
+        if (!payment.completedAt) continue;
+        const key = payment.completedAt.toLocaleString("en-US", { month: "short", year: "numeric" })
+        if (monthlyMap.has(key)) {
+            const entry = monthlyMap.get(key)!
+            entry.earnings += payment.amount
+        }
     }
 
     const monthlyBreakdown = Array.from(monthlyMap.entries()).map(([month, data]) => ({
@@ -67,24 +114,20 @@ export async function GET(req: NextRequest) {
       sessions: data.sessions,
     }))
 
-    const recentPayouts = recentCompleted
-      .slice(-10)
-      .reverse()
-      .map((b) => ({
-        id: b.id,
-        amount: b.price,
-        date: b.scheduledDate.toISOString(),
-        status: "PAID",
-        description: `${b.sessionType} session — ${b.category.replace(/_/g, " ")}`,
-      }))
+    // Pending earnings = Total Gross minus Payout Requests?
+    const requestedSum = await prisma.payoutRequest.aggregate({
+        where: { expertId },
+        _sum: { amount: true }
+    });
+    const pendingToRequest = Math.max(0, totalGross - (requestedSum._sum.amount ?? 0));
 
     return NextResponse.json({
-      totalEarnings: allCompleted._sum.price ?? 0,
-      thisMonth: thisMonthBookings._sum.price ?? 0,
-      lastMonth: lastMonthBookings._sum.price ?? 0,
+      totalEarnings: totalGross,
+      thisMonth: totalThisMonthGross,
+      lastMonth: 0, 
       monthlyBreakdown,
-      recentPayouts,
-      pendingEarnings: confirmedBookings._sum.price ?? 0,
+      recentPayouts: [], 
+      pendingEarnings: pendingToRequest,
     })
   } catch (error) {
     console.error("GET /api/expert/earnings error:", error)
