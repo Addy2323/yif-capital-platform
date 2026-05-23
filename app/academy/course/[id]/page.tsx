@@ -1,3 +1,5 @@
+"use client"
+
 import { use, useState, useEffect } from "react"
 import { AuthProvider, useAuth } from "@/lib/auth-context"
 import { Header } from "@/components/header"
