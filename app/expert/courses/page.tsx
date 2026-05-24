@@ -55,6 +55,8 @@ interface CourseData {
     instructorName: string
     instructorPhotoUrl?: string
     bannerUrl?: string
+    description?: string
+    shortDescription?: string
 }
 
 
@@ -137,6 +139,18 @@ export default function LmsCoursesPage() {
     const [price, setPrice] = useState(25000)
     const [isFree, setIsFree] = useState(false)
 
+    // Edit Course details state
+    const [isEditOpen, setIsEditOpen] = useState(false)
+    const [editingCourseId, setEditingCourseId] = useState<string | null>(null)
+    const [editTitle, setEditTitle] = useState("")
+    const [editDescription, setEditDescription] = useState("")
+    const [editShortDescription, setEditShortDescription] = useState("")
+    const [editCategory, setEditCategory] = useState("STOCK_MARKET")
+    const [editLevel, setEditLevel] = useState("BEGINNER")
+    const [editPrice, setEditPrice] = useState(25000)
+    const [editIsFree, setEditIsFree] = useState(false)
+    const [isSavingEdit, setIsSavingEdit] = useState(false)
+
 
     // Load expert's courses from the database
     useEffect(() => {
@@ -164,6 +178,8 @@ export default function LmsCoursesPage() {
                             instructorName: c.expert?.user?.name ?? user?.name ?? "Expert",
                             instructorPhotoUrl: c.expert?.user?.avatar ?? undefined,
                             bannerUrl: c.thumbnailUrl ?? undefined,
+                            description: c.description ?? "",
+                            shortDescription: c.shortDescription ?? "",
                         })))
                     }
                 }
@@ -292,6 +308,8 @@ export default function LmsCoursesPage() {
                 instructorName: user?.name ?? "Expert",
                 instructorPhotoUrl: uploadedPhotoUrl ?? instructorPhotoPreview ?? undefined,
                 bannerUrl: uploadedThumbnailUrl ?? thumbnailPreview ?? undefined,
+                description: created.description ?? "",
+                shortDescription: created.shortDescription ?? "",
             }
 
             if (newCourse.bannerUrl) setLocalBanners(p => ({ ...p, [created.id]: newCourse.bannerUrl! }))
@@ -304,6 +322,63 @@ export default function LmsCoursesPage() {
         } catch (err) {
             console.error(err)
             toast.error("Failed to save course. Please try again.")
+        }
+    }
+
+    const handleOpenEditModal = (course: CourseData) => {
+        setEditingCourseId(course.id)
+        setEditTitle(course.title)
+        setEditShortDescription(course.shortDescription ?? "")
+        setEditDescription(course.description ?? "")
+        setEditCategory(course.category)
+        setEditLevel(course.level)
+        setEditPrice(course.price)
+        setEditIsFree(course.isFree)
+        setIsEditOpen(true)
+    }
+
+    const handleUpdateCourse = async () => {
+        if (!editTitle.trim() || !editDescription.trim()) {
+            toast.error("Please fill out the course title and description.")
+            return
+        }
+        setIsSavingEdit(true)
+        try {
+            const res = await fetch(`/api/lms/courses/${editingCourseId}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    title: editTitle,
+                    description: editDescription,
+                    shortDescription: editShortDescription,
+                    category: editCategory,
+                    level: editLevel,
+                    price: editIsFree ? 0 : editPrice,
+                    isFree: editIsFree,
+                }),
+            })
+            if (!res.ok) throw new Error(await res.text())
+            const updated = await res.json()
+
+            setCourses(prev => prev.map(c => c.id === editingCourseId ? {
+                ...c,
+                title: updated.title,
+                slug: updated.slug,
+                category: updated.category,
+                level: updated.level,
+                price: updated.price,
+                isFree: updated.isFree,
+                description: updated.description ?? "",
+                shortDescription: updated.shortDescription ?? "",
+            } : c))
+
+            toast.success("Course details updated successfully!")
+            setIsEditOpen(false)
+        } catch (err) {
+            console.error(err)
+            toast.error("Failed to update course details.")
+        } finally {
+            setIsSavingEdit(false)
         }
     }
 
@@ -531,17 +606,25 @@ export default function LmsCoursesPage() {
                                     <Button
                                         size="sm"
                                         variant="outline"
-                                        className="bg-transparent border-border hover:bg-muted/50 text-foreground flex items-center gap-1 h-8 px-3 text-xs"
+                                        className="bg-transparent border-border hover:bg-muted/50 text-foreground flex items-center gap-1 h-8 px-2.5 text-xs"
+                                        onClick={() => handleOpenEditModal(course)}
+                                    >
+                                        <Edit className="h-3.5 w-3.5" /> Edit Info
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="bg-transparent border-border hover:bg-muted/50 text-foreground flex items-center gap-1 h-8 px-2.5 text-xs"
                                         onClick={() => router.push(`/expert/courses/${course.id}/curriculum`)}
                                     >
-                                        <Edit className="h-3.5 w-3.5" /> Curriculum
+                                        <Layers className="h-3.5 w-3.5" /> Curriculum
                                     </Button>
                                     <Button
                                         size="sm"
                                         onClick={() => togglePublishStatus(course.id)}
                                         className={course.status === "PUBLISHED"
-                                            ? "bg-muted hover:bg-muted/80 h-8 px-3 text-xs"
-                                            : "bg-emerald-600 hover:bg-emerald-700 text-white h-8 px-3 text-xs"
+                                            ? "bg-muted hover:bg-muted/80 h-8 px-2.5 text-xs"
+                                            : "bg-emerald-600 hover:bg-emerald-700 text-white h-8 px-2.5 text-xs"
                                         }
                                     >
                                         {course.status === "PUBLISHED" ? "Unpublish" : "Publish"}
@@ -875,6 +958,87 @@ export default function LmsCoursesPage() {
                                 Create Draft Course
                             </Button>
                         )}
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* ════ Edit Course Info Dialog ════ */}
+            <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
+                <DialogContent className="bg-background border border-border text-foreground max-w-lg max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2 text-lg">
+                            <Edit className="h-5 w-5 text-emerald-400" /> Edit Course Info
+                        </DialogTitle>
+                        <DialogDescription className="text-muted-foreground text-xs">
+                            Update course information and pricing details
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 mt-2">
+                        <div className="space-y-1">
+                            <label className="text-xs font-semibold text-foreground/70">Course Title *</label>
+                            <input type="text" placeholder="e.g. Introduction to Dar es Salaam Stock Exchange"
+                                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500 placeholder:text-muted-foreground/50"
+                                value={editTitle} onChange={e => setEditTitle(e.target.value)} />
+                        </div>
+                        <div className="space-y-1">
+                            <label className="text-xs font-semibold text-foreground/70">Short Summary</label>
+                            <input type="text" placeholder="e.g. Learn how to open a CSD account and buy shares."
+                                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500 placeholder:text-muted-foreground/50"
+                                value={editShortDescription} onChange={e => setEditShortDescription(e.target.value)} />
+                        </div>
+                        <div className="space-y-1">
+                            <label className="text-xs font-semibold text-foreground/70">Full Description *</label>
+                            <textarea placeholder="What students will learn, prerequisites, target audience..."
+                                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500 placeholder:text-muted-foreground/50"
+                                rows={4} value={editDescription} onChange={e => setEditDescription(e.target.value)} />
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                                <label className="text-xs font-semibold text-foreground/70">Category</label>
+                                <select className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500"
+                                    value={editCategory} onChange={e => setEditCategory(e.target.value)}>
+                                    {CATEGORIES.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
+                                </select>
+                            </div>
+                            <div className="space-y-1">
+                                <label className="text-xs font-semibold text-foreground/70">Level</label>
+                                <select className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500"
+                                    value={editLevel} onChange={e => setEditLevel(e.target.value)}>
+                                    {LEVELS.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center justify-between bg-muted/30 border border-border/50 p-4 rounded-lg mt-2">
+                            <div>
+                                <h4 className="text-sm font-semibold">Make Course Free</h4>
+                                <p className="text-xs text-muted-foreground">Any registered user can enroll at no cost</p>
+                            </div>
+                            <Switch checked={editIsFree} onCheckedChange={setEditIsFree} className="data-[state=checked]:bg-emerald-500" />
+                        </div>
+                        {!editIsFree && (
+                            <div className="space-y-1">
+                                <label className="text-xs font-semibold text-foreground/70">Course Price (TZS)</label>
+                                <div className="relative">
+                                    <input type="number" step="5000"
+                                        className="w-full bg-background border border-border rounded-lg pl-10 pr-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500"
+                                        value={editPrice} onChange={e => setEditPrice(parseInt(e.target.value) || 0)} />
+                                    <DollarSign className="absolute left-3 top-2.5 h-4 w-4 text-emerald-400" />
+                                </div>
+                                <p className="text-[10px] text-muted-foreground">Suggested: 25,000 – 150,000 TZS based on content depth.</p>
+                            </div>
+                        )}
+                    </div>
+
+                    <DialogFooter className="gap-2 sm:gap-0 pt-4 border-t border-border/50 mt-4">
+                        <Button variant="ghost" className="text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                            onClick={() => setIsEditOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button onClick={handleUpdateCourse} disabled={isSavingEdit} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                            {isSavingEdit ? "Saving..." : "Save Changes"}
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

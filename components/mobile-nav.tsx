@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { BarChart3, GraduationCap, MessageSquare, Activity, Briefcase, Home, GitCompare, Wrench, Search, Download } from "lucide-react"
 
 const defaultNavItems = [
-    { name: "LMS", href: "/academy", icon: GraduationCap },
+    { name: "LMS", href: "/lms", icon: GraduationCap },
     { name: "Forum", href: "https://forum.yifcapital.co.tz", icon: MessageSquare },
     { name: "Funds", href: "/funds", icon: Activity },
     { name: "Stocks", href: "/stocks", icon: BarChart3 },

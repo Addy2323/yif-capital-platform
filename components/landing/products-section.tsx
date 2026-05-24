@@ -9,7 +9,7 @@ const products = [
     description:
       "Learn to invest with confidence through expert-led courses",
     icon: GraduationCap,
-    href: "/academy",
+    href: "/lms",
     label: "Explore Courses",
   },
   {

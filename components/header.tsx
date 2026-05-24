@@ -39,9 +39,9 @@ const navLinks = [
         icon: BarChart2
       },
       {
-        name: "YIF Academy",
+        name: "YIF LMS",
         description: "Investment education",
-        href: "/academy",
+        href: "/lms",
         icon: GraduationCap
       },
       {
@@ -224,14 +224,14 @@ export function Header() {
                     Home
                   </Link>
                   <Link
-                    href="/academy"
+                    href="/lms"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "text-lg font-medium transition-colors",
-                      pathname === "/academy" ? "text-gold" : "text-white/80 hover:text-white"
+                      pathname === "/lms" ? "text-gold" : "text-white/80 hover:text-white"
                     )}
                   >
-                    YIF Academy
+                    YIF LMS
                   </Link>
                   <Link
                     href="/dashboard"
