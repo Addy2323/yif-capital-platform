@@ -47,7 +47,7 @@ interface AuthContextType {
     phone: string
   ) => Promise<RegisterSuccess | RegisterFailure>
   logout: () => void
-  updateUser: (updates: Partial<User>) => void
+  updateUser: (updates: Partial<User>) => Promise<boolean>
   upgradeSubscription: (plan: "pro" | "institutional") => void
   refreshSession: () => Promise<void>
 }
@@ -168,10 +168,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null)
   }
 
-  const updateUser = (updates: Partial<User>) => {
-    if (!user) return
+  const updateUser = async (updates: Partial<User>): Promise<boolean> => {
+    if (!user) return false
     setUser({ ...user, ...updates })
-    // TODO: Implement API call to update user in database
+    try {
+      const res = await fetch("/api/users/me", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updates),
+      })
+      if (!res.ok) {
+        refreshSession()
+        return false
+      }
+      return true
+    } catch {
+      refreshSession()
+      return false
+    }
   }
 
   const upgradeSubscription = (plan: "pro" | "institutional") => {

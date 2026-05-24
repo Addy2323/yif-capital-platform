@@ -33,6 +33,11 @@ export async function POST(
       return NextResponse.json({ error: "Course not found" }, { status: 404 });
     }
 
+    // Check if enrollment deadline has passed
+    if (course.enrollmentDeadline && new Date() > new Date(course.enrollmentDeadline)) {
+      return NextResponse.json({ error: "Enrollment for this course has closed." }, { status: 400 });
+    }
+
     // Check if already enrolled
     const existing = await prisma.lmsCourseEnrollment.findUnique({
       where: { userId_courseId: { userId, courseId } },

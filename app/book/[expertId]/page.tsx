@@ -263,8 +263,12 @@ export default function BookExpertPage() {
           {/* Expert Mini Card */}
           <Card className="mb-8 border-gold/20">
             <CardContent className="flex items-center gap-4 p-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/10 text-gold font-bold text-lg shrink-0">
-                {expert.user.name.charAt(0)}
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/10 text-gold font-bold text-lg shrink-0 overflow-hidden">
+                {expert.user.avatar ? (
+                  <img src={expert.user.avatar} alt={expert.user.name} className="h-full w-full object-cover" />
+                ) : (
+                  expert.user.name.charAt(0)
+                )}
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold">{expert.user.name}</h3>
@@ -471,14 +475,14 @@ export default function BookExpertPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => setPaymentMethod("BANK")}
-                        className={`flex items-center gap-2 rounded-lg border p-3 text-sm font-medium transition-colors ${
-                          paymentMethod === "BANK"
-                            ? "border-gold bg-gold/10 text-gold"
-                            : "border-border text-foreground hover:bg-muted/50"
-                        }`}
+                        disabled
+                        className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm font-medium opacity-50 cursor-not-allowed text-muted-foreground"
                       >
-                        <Building2 className="h-4 w-4 shrink-0" /> Bank Transfer
+                        <Building2 className="h-4 w-4 shrink-0" />
+                        <span>Bank Transfer</span>
+                        <Badge variant="secondary" className="ml-auto text-[10px] px-1.5 py-0.5 bg-muted text-muted-foreground border-none">
+                          Coming Soon
+                        </Badge>
                       </button>
                     </div>
 

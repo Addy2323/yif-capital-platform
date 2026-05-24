@@ -63,6 +63,33 @@ export default function CourseDetailPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isEnrolling, setIsEnrolling] = useState(false)
   const [previewLesson, setPreviewLesson] = useState<any>(null)
+  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null)
+  const [isExpired, setIsExpired] = useState(false)
+
+  useEffect(() => {
+    if (!course?.enrollmentDeadline) return
+
+    const calculateTimeLeft = () => {
+      const difference = +new Date(course.enrollmentDeadline) - +new Date()
+      if (difference <= 0) {
+        setIsExpired(true)
+        setTimeLeft(null)
+        return
+      }
+
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      })
+      setIsExpired(false)
+    }
+
+    calculateTimeLeft()
+    const timer = setInterval(calculateTimeLeft, 1000)
+    return () => clearInterval(timer)
+  }, [course?.enrollmentDeadline])
 
   useEffect(() => {
     fetch(`/api/lms/courses/${courseSlug}`)
@@ -263,16 +290,45 @@ export default function CourseDetailPage() {
                         </div>
                       )}
 
+                      {/* Countdown Timer */}
+                      {course.enrollmentDeadline && (
+                        <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-center space-y-1">
+                          <span className="text-[10px] text-amber-500 font-bold uppercase tracking-wider block">
+                            {isExpired ? "Enrollment Closed" : "Enrollment Closes In"}
+                          </span>
+                          {timeLeft ? (
+                            <div className="flex justify-center gap-2 text-white font-mono text-sm font-semibold">
+                              <div>
+                                <span className="text-amber-400">{timeLeft.days}</span>d
+                              </div>
+                              <div>
+                                <span className="text-amber-400">{timeLeft.hours.toString().padStart(2, '0')}</span>h
+                              </div>
+                              <div>
+                                <span className="text-amber-400">{timeLeft.minutes.toString().padStart(2, '0')}</span>m
+                              </div>
+                              <div>
+                                <span className="text-amber-400">{timeLeft.seconds.toString().padStart(2, '0')}</span>s
+                              </div>
+                            </div>
+                          ) : (
+                            <span className="text-xs font-semibold text-red-500">Expired</span>
+                          )}
+                        </div>
+                      )}
+
                       {/* CTA */}
                       <Button
-                        className="w-full bg-gold text-navy hover:bg-gold/90 h-12 text-base font-semibold"
+                        className="w-full bg-gold text-navy hover:bg-gold/90 h-12 text-base font-semibold animate-all duration-200"
                         onClick={handleEnroll}
-                        disabled={isEnrolling}
+                        disabled={isEnrolling || (isExpired && !course.isEnrolled)}
                       >
                         {isEnrolling ? (
                           <div className="h-5 w-5 animate-spin rounded-full border-2 border-navy border-t-transparent" />
                         ) : course.isEnrolled ? (
                           <>Continue Learning <ArrowRight className="ml-2 h-4 w-4" /></>
+                        ) : isExpired ? (
+                          <>Enrollment Closed</>
                         ) : course.isFree ? (
                           <>Enroll for Free <ArrowRight className="ml-2 h-4 w-4" /></>
                         ) : (

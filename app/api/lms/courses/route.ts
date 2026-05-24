@@ -115,6 +115,7 @@ export async function POST(req: NextRequest) {
       isFree,
       thumbnailUrl,
       instructorPhotoUrl,
+      enrollmentDeadline,
     } = body;
 
     if (!title || !description || !category) {
@@ -143,6 +144,7 @@ export async function POST(req: NextRequest) {
         thumbnailUrl,
         instructorPhotoUrl,
         status: "DRAFT",
+        enrollmentDeadline: enrollmentDeadline ? new Date(enrollmentDeadline) : null,
       },
     });
 

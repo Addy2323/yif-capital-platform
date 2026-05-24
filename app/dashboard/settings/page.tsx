@@ -1,8 +1,6 @@
 "use client"
 
-import React from "react"
-
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,11 +12,15 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { User, Bell, Shield, CreditCard, Loader2, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 export default function SettingsPage() {
   const { user, updateUser } = useAuth()
   const [isUpdating, setIsUpdating] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const [profileData, setProfileData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -31,17 +33,55 @@ export default function SettingsPage() {
     marketNews: true,
   })
 
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("File must be under 2MB")
+      return
+    }
+
+    setIsUploadingAvatar(true)
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("folder", "avatars")
+
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+      const data = await res.json()
+      if (res.ok && data.url) {
+        const success = await updateUser({ avatar: data.url })
+        if (success) {
+          toast.success("Profile picture updated successfully!")
+        } else {
+          toast.error("Failed to save profile picture")
+        }
+      } else {
+        toast.error(data.error || "Upload failed")
+      }
+    } catch {
+      toast.error("An error occurred during upload")
+    } finally {
+      setIsUploadingAvatar(false)
+    }
+  }
+
   const handleProfileUpdate = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsUpdating(true)
 
-    // Simulate update
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    updateUser({ name: profileData.name })
+    const success = await updateUser({ name: profileData.name })
     setIsUpdating(false)
-    setShowSuccess(true)
-    setTimeout(() => setShowSuccess(false), 3000)
+    if (success) {
+      setShowSuccess(true)
+      setTimeout(() => setShowSuccess(false), 3000)
+    } else {
+      toast.error("Failed to update profile information")
+    }
   }
 
   return (
@@ -88,14 +128,40 @@ export default function SettingsPage() {
                 )}
 
                 <div className="flex items-center gap-6">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-3xl font-bold text-navy">
-                    {user?.name?.charAt(0).toUpperCase()}
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-3xl font-bold text-navy overflow-hidden shrink-0">
+                    {user?.avatar ? (
+                      <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
+                    ) : (
+                      user?.name?.charAt(0).toUpperCase()
+                    )}
                   </div>
                   <div>
-                    <Button type="button" variant="outline" size="sm" className="bg-transparent">
-                      Change Avatar
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      className="hidden"
+                      accept="image/jpeg,image/png,image/webp"
+                      onChange={handleAvatarChange}
+                      disabled={isUploadingAvatar}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="bg-transparent"
+                      disabled={isUploadingAvatar}
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      {isUploadingAvatar ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        "Change Avatar"
+                      )}
                     </Button>
-                    <p className="mt-1 text-xs text-muted-foreground">JPG, PNG. Max 2MB</p>
+                    <p className="mt-1 text-xs text-muted-foreground">JPG, PNG, WEBP. Max 2MB</p>
                   </div>
                 </div>
 

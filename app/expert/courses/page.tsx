@@ -22,6 +22,7 @@ import {
     X,
     AlertCircle,
     UserCircle2,
+    Trash2,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -57,6 +58,7 @@ interface CourseData {
     bannerUrl?: string
     description?: string
     shortDescription?: string
+    enrollmentDeadline?: string | null
 }
 
 
@@ -138,6 +140,7 @@ export default function LmsCoursesPage() {
     // Step 4
     const [price, setPrice] = useState(25000)
     const [isFree, setIsFree] = useState(false)
+    const [enrollmentDeadline, setEnrollmentDeadline] = useState("")
 
     // Edit Course details state
     const [isEditOpen, setIsEditOpen] = useState(false)
@@ -149,7 +152,33 @@ export default function LmsCoursesPage() {
     const [editLevel, setEditLevel] = useState("BEGINNER")
     const [editPrice, setEditPrice] = useState(25000)
     const [editIsFree, setEditIsFree] = useState(false)
+    const [editEnrollmentDeadline, setEditEnrollmentDeadline] = useState("")
     const [isSavingEdit, setIsSavingEdit] = useState(false)
+
+    // Delete Course states
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+    const [deletingCourse, setDeletingCourse] = useState<CourseData | null>(null)
+    const [isDeleting, setIsDeleting] = useState(false)
+
+    const handleDeleteCourse = async () => {
+        if (!deletingCourse) return
+        setIsDeleting(true)
+        try {
+            const res = await fetch(`/api/lms/courses/${deletingCourse.id}`, {
+                method: "DELETE",
+            })
+            if (!res.ok) throw new Error(await res.text())
+            setCourses(prev => prev.filter(c => c.id !== deletingCourse.id))
+            toast.success("Course deleted successfully!")
+            setIsDeleteOpen(false)
+            setDeletingCourse(null)
+        } catch (err) {
+            console.error(err)
+            toast.error("Failed to delete course.")
+        } finally {
+            setIsDeleting(false)
+        }
+    }
 
 
     // Load expert's courses from the database
@@ -180,6 +209,7 @@ export default function LmsCoursesPage() {
                             bannerUrl: c.thumbnailUrl ?? undefined,
                             description: c.description ?? "",
                             shortDescription: c.shortDescription ?? "",
+                            enrollmentDeadline: c.enrollmentDeadline ?? null,
                         })))
                     }
                 }
@@ -247,6 +277,7 @@ export default function LmsCoursesPage() {
         setInstructorPhoto(null); setInstructorPhotoPreview(null)
         setIntroVideo(null); setVideoError(""); setDocuments([])
         setPrice(25000); setIsFree(false)
+        setEnrollmentDeadline("")
         setCreateStep(1)
     }
 
@@ -287,6 +318,7 @@ export default function LmsCoursesPage() {
                     price: isFree ? 0 : price, isFree,
                     thumbnailUrl: uploadedThumbnailUrl,
                     instructorPhotoUrl: uploadedPhotoUrl,
+                    enrollmentDeadline: enrollmentDeadline || null,
                 }),
             })
             if (!res.ok) throw new Error(await res.text())
@@ -310,6 +342,7 @@ export default function LmsCoursesPage() {
                 bannerUrl: uploadedThumbnailUrl ?? thumbnailPreview ?? undefined,
                 description: created.description ?? "",
                 shortDescription: created.shortDescription ?? "",
+                enrollmentDeadline: created.enrollmentDeadline ?? null,
             }
 
             if (newCourse.bannerUrl) setLocalBanners(p => ({ ...p, [created.id]: newCourse.bannerUrl! }))
@@ -334,6 +367,18 @@ export default function LmsCoursesPage() {
         setEditLevel(course.level)
         setEditPrice(course.price)
         setEditIsFree(course.isFree)
+
+        const deadlineDate = course.enrollmentDeadline
+        if (deadlineDate) {
+            const dateObj = new Date(deadlineDate)
+            const localISOTime = new Date(dateObj.getTime() - dateObj.getTimezoneOffset() * 60000)
+                .toISOString()
+                .slice(0, 16)
+            setEditEnrollmentDeadline(localISOTime)
+        } else {
+            setEditEnrollmentDeadline("")
+        }
+
         setIsEditOpen(true)
     }
 
@@ -355,6 +400,7 @@ export default function LmsCoursesPage() {
                     level: editLevel,
                     price: editIsFree ? 0 : editPrice,
                     isFree: editIsFree,
+                    enrollmentDeadline: editEnrollmentDeadline || null,
                 }),
             })
             if (!res.ok) throw new Error(await res.text())
@@ -370,6 +416,7 @@ export default function LmsCoursesPage() {
                 isFree: updated.isFree,
                 description: updated.description ?? "",
                 shortDescription: updated.shortDescription ?? "",
+                enrollmentDeadline: updated.enrollmentDeadline ?? null,
             } : c))
 
             toast.success("Course details updated successfully!")
@@ -603,6 +650,17 @@ export default function LmsCoursesPage() {
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
+                                    <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="bg-transparent border-red-500/20 hover:bg-red-500/10 hover:border-red-500/40 text-red-400 flex items-center gap-1 h-8 px-2.5 text-xs"
+                                        onClick={() => {
+                                            setDeletingCourse(course)
+                                            setIsDeleteOpen(true)
+                                        }}
+                                    >
+                                        <Trash2 className="h-3.5 w-3.5" /> Delete
+                                    </Button>
                                     <Button
                                         size="sm"
                                         variant="outline"
@@ -897,6 +955,14 @@ export default function LmsCoursesPage() {
                                 </div>
                             )}
 
+                            <div className="space-y-1">
+                                <label className="text-xs font-semibold text-foreground/70">Enrollment Deadline (Optional)</label>
+                                <input type="datetime-local"
+                                    className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500 [color-scheme:dark]"
+                                    value={enrollmentDeadline} onChange={e => setEnrollmentDeadline(e.target.value)} />
+                                <p className="text-[10px] text-muted-foreground">If set, users will see a countdown and won't be able to enroll after this date/time.</p>
+                            </div>
+
                             {/* Summary with instructor preview */}
                             <div className="bg-background border border-border rounded-xl overflow-hidden">
                                 {/* Mini banner preview */}
@@ -932,6 +998,9 @@ export default function LmsCoursesPage() {
                                         <span>Photo: <strong className={instructorPhoto ? "text-emerald-400" : "text-muted-foreground/40"}>{instructorPhoto ? "✓" : "—"}</strong></span>
                                         <span>Video: <strong className={introVideo ? "text-purple-400" : "text-muted-foreground/40"}>{introVideo ? "✓" : "—"}</strong></span>
                                         <span>Docs: <strong className="text-amber-400">{documents.length} file{documents.length !== 1 ? "s" : ""}</strong></span>
+                                        {enrollmentDeadline && (
+                                            <span className="col-span-2 text-amber-500 font-semibold mt-1">Deadline: {new Date(enrollmentDeadline).toLocaleString()}</span>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -1029,6 +1098,14 @@ export default function LmsCoursesPage() {
                                 <p className="text-[10px] text-muted-foreground">Suggested: 25,000 – 150,000 TZS based on content depth.</p>
                             </div>
                         )}
+
+                        <div className="space-y-1">
+                            <label className="text-xs font-semibold text-foreground/70">Enrollment Deadline (Optional)</label>
+                            <input type="datetime-local"
+                                className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-emerald-500 [color-scheme:dark]"
+                                value={editEnrollmentDeadline} onChange={e => setEditEnrollmentDeadline(e.target.value)} />
+                            <p className="text-[10px] text-muted-foreground">If set, users will see a countdown and won't be able to enroll after this date/time.</p>
+                        </div>
                     </div>
 
                     <DialogFooter className="gap-2 sm:gap-0 pt-4 border-t border-border/50 mt-4">
@@ -1038,6 +1115,36 @@ export default function LmsCoursesPage() {
                         </Button>
                         <Button onClick={handleUpdateCourse} disabled={isSavingEdit} className="bg-emerald-600 hover:bg-emerald-700 text-white">
                             {isSavingEdit ? "Saving..." : "Save Changes"}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* ════ Delete Course Dialog ════ */}
+            <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+                <DialogContent className="bg-background border border-border text-foreground max-w-md">
+                    <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2 text-lg text-red-500">
+                            <AlertCircle className="h-5 w-5" /> Delete Course
+                        </DialogTitle>
+                        <DialogDescription className="text-muted-foreground text-xs">
+                            This action cannot be undone. All modules, lessons, and student enrollments for this course will be deleted permanently.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="py-2">
+                        <p className="text-sm font-medium text-foreground">
+                            Are you sure you want to delete <strong className="text-red-400">"{deletingCourse?.title}"</strong>?
+                        </p>
+                    </div>
+
+                    <DialogFooter className="gap-2 sm:gap-0 pt-4 border-t border-border/50">
+                        <Button variant="ghost" className="text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                            onClick={() => setIsDeleteOpen(false)} disabled={isDeleting}>
+                            Cancel
+                        </Button>
+                        <Button onClick={handleDeleteCourse} disabled={isDeleting} className="bg-red-600 hover:bg-red-700 text-white font-semibold">
+                            {isDeleting ? "Deleting..." : "Delete Course"}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

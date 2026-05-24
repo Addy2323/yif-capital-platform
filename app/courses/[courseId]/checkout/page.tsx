@@ -172,14 +172,14 @@ export default function CourseCheckoutPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => setPaymentMethod("BANK")}
-                        className={`flex items-center gap-2 rounded-lg border p-3 text-sm font-medium transition-colors ${
-                          paymentMethod === "BANK"
-                            ? "border-gold bg-gold/10 text-gold"
-                            : "border-border text-foreground hover:bg-muted/50"
-                        }`}
+                        disabled
+                        className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm font-medium opacity-50 cursor-not-allowed text-muted-foreground"
                       >
-                        <Building2 className="h-4 w-4 shrink-0" /> Bank Transfer
+                        <Building2 className="h-4 w-4 shrink-0" />
+                        <span>Bank Transfer</span>
+                        <Badge variant="secondary" className="ml-auto text-[10px] px-1.5 py-0.5 bg-muted text-muted-foreground border-none">
+                          Coming Soon
+                        </Badge>
                       </button>
                     </div>
 

@@ -532,8 +532,12 @@ export default function BookingStepper() {
                             </CardHeader>
                             <CardContent className="p-6 space-y-6">
                                 <div className="flex gap-3 items-center">
-                                    <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold shrink-0">
-                                        {expert.user.name.charAt(0).toUpperCase()}
+                                    <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold shrink-0 overflow-hidden">
+                                        {expert.user.avatar ? (
+                                            <img src={expert.user.avatar} alt={expert.user.name} className="h-full w-full object-cover" />
+                                        ) : (
+                                            expert.user.name.charAt(0).toUpperCase()
+                                        )}
                                     </div>
                                     <div>
                                         <h4 className="text-sm font-semibold">{expert.user.name}</h4>

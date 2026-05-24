@@ -273,6 +273,7 @@ model Fund {
   fundType      FundType
   managerId     String?
   manager       Manager? @relation(fields: [managerId], references: [id])
+  managerName   String? // [MIGRATION] Restored for data transition
   description   String
   logoUrl       String?
   inceptionDate DateTime
@@ -715,6 +716,54 @@ model DseMarketSummary {
   updatedAt     DateTime @updatedAt
 }
 
+// [MIGRATION] Restored temporarily to prevent data loss on production server
+model DseStock {
+  id        String   @id @default(uuid())
+  symbol    String
+  name      String?
+  price     Float?
+  change    Float?
+  changePct Float?
+  marketCap String?
+  scrapedAt DateTime @default(now())
+
+  // [MIGRATION] Restored columns to prevent data loss on production server
+  averageVolume   Float?
+  beta            Float?
+  change1m        Float?
+  change1w        Float?
+  change1y        Float?
+  change3y        Float?
+  change5y        Float?
+  change6m        Float?
+  dividendGrowth  Float?
+  dividendYield   Float?
+  dps             Float?
+  eps             Float?
+  fcf             Float?
+  fcfPerShare     Float?
+  industry        String?
+  netIncome       Float?
+  operatingIncome Float?
+  payoutFrequency String?
+  payoutRatio     Float?
+  pbRatio         Float?
+  peRatio         Float?
+  psRatio         Float?
+  revenue         Float?
+  roa             Float?
+  roe             Float?
+  rsi             Float?
+  sector          String?
+  sharesOut       Float?
+  updatedAt       DateTime @updatedAt
+  volume          Int?
+  ytdChange       Float?
+
+  @@index([symbol])
+  @@index([scrapedAt])
+}
+
 // ============================================
 // PORTFOLIO MODELS
 // ============================================
@@ -735,17 +784,22 @@ model Portfolio {
 }
 
 model PortfolioStock {
-  id          String    @id @default(uuid())
-  portfolioId String
-  stockId     String
-  qty         Float
-  buyPrice    Float
-  buyDate     DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id           String    @id @default(uuid())
+  portfolioId  String
+  stockId      String? // [MIGRATION] Made optional for data preservation
+  ticker       String? // [MIGRATION] Restored for data transition
+  name         String? // [MIGRATION] Restored for data transition
+  sector       String? // [MIGRATION] Restored for data transition
+  qty          Float
+  buyPrice     Float
+  currentPrice Float? // [MIGRATION] Restored for data transition
+  dividend     Float? // [MIGRATION] Restored for data transition
+  buyDate      DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
-  stock     Stock     @relation(fields: [stockId], references: [id])
+  stock     Stock?    @relation(fields: [stockId], references: [id])
 
   @@index([portfolioId])
   @@index([stockId])
@@ -910,6 +964,7 @@ model LmsCourse {
   totalEnrollments   Int            @default(0)
   createdAt          DateTime       @default(now())
   updatedAt          DateTime       @updatedAt
+  enrollmentDeadline DateTime?
 
   expert       ExpertProfile         @relation(fields: [expertId], references: [id], onDelete: Cascade)
   modules      CourseModule[]
@@ -1147,7 +1202,7 @@ model LmsPayment {
   completedAt       DateTime?
 
   user       User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course     LmsCourse?           @relation(fields: [courseId], references: [id])
+  course     LmsCourse?           @relation(fields: [courseId], references: [id], onDelete: SetNull)
   enrollment LmsCourseEnrollment?
   booking    ExpertBooking?
 

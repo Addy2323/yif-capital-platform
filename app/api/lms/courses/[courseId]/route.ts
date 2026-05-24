@@ -153,7 +153,7 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { status, title, description, price, isFree, thumbnailUrl } = body;
+    const { status, title, description, price, isFree, thumbnailUrl, enrollmentDeadline } = body;
 
     const updated = await prisma.lmsCourse.update({
       where: { id: courseId },
@@ -164,6 +164,7 @@ export async function PATCH(
         ...(price !== undefined && { price }),
         ...(isFree !== undefined && { isFree }),
         ...(thumbnailUrl !== undefined && { thumbnailUrl }),
+        ...(enrollmentDeadline !== undefined && { enrollmentDeadline: enrollmentDeadline ? new Date(enrollmentDeadline) : null }),
       },
     });
 
@@ -171,5 +172,38 @@ export async function PATCH(
   } catch (error) {
     console.error("PATCH /api/lms/courses/[courseId] error:", error);
     return NextResponse.json({ error: "Failed to update course" }, { status: 500 });
+  }
+}
+
+/**
+ * DELETE /api/lms/courses/[courseId] — Expert deletes course
+ */
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ courseId: string }> }
+) {
+  const { courseId } = await params;
+  try {
+    const cookieStore = await cookies();
+    const userId = cookieStore.get("user_id")?.value;
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const course = await prisma.lmsCourse.findUnique({
+      where: { id: courseId },
+      include: { expert: { include: { user: { select: { id: true } } } } },
+    });
+    if (!course) return NextResponse.json({ error: "Course not found" }, { status: 404 });
+    if (course.expert.user.id !== userId) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    await prisma.lmsCourse.delete({
+      where: { id: courseId },
+    });
+
+    return NextResponse.json({ success: true, message: "Course deleted successfully" });
+  } catch (error) {
+    console.error("DELETE /api/lms/courses/[courseId] error:", error);
+    return NextResponse.json({ error: "Failed to delete course" }, { status: 500 });
   }
 }

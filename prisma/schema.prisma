@@ -988,6 +988,7 @@ model LmsCourse {
   totalEnrollments Int          @default(0)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  enrollmentDeadline DateTime?
 
   expert          ExpertProfile @relation(fields: [expertId], references: [id], onDelete: Cascade)
   modules         CourseModule[]
@@ -1225,7 +1226,7 @@ model LmsPayment {
   completedAt       DateTime?
 
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course            LmsCourse? @relation(fields: [courseId], references: [id])
+  course            LmsCourse? @relation(fields: [courseId], references: [id], onDelete: SetNull)
   enrollment        LmsCourseEnrollment?
   booking           ExpertBooking?
 

@@ -46802,6 +46802,7 @@ export namespace Prisma {
     totalEnrollments: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    enrollmentDeadline: Date | null
   }
 
   export type LmsCourseMaxAggregateOutputType = {
@@ -46825,6 +46826,7 @@ export namespace Prisma {
     totalEnrollments: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    enrollmentDeadline: Date | null
   }
 
   export type LmsCourseCountAggregateOutputType = {
@@ -46848,6 +46850,7 @@ export namespace Prisma {
     totalEnrollments: number
     createdAt: number
     updatedAt: number
+    enrollmentDeadline: number
     _all: number
   }
 
@@ -46889,6 +46892,7 @@ export namespace Prisma {
     totalEnrollments?: true
     createdAt?: true
     updatedAt?: true
+    enrollmentDeadline?: true
   }
 
   export type LmsCourseMaxAggregateInputType = {
@@ -46912,6 +46916,7 @@ export namespace Prisma {
     totalEnrollments?: true
     createdAt?: true
     updatedAt?: true
+    enrollmentDeadline?: true
   }
 
   export type LmsCourseCountAggregateInputType = {
@@ -46935,6 +46940,7 @@ export namespace Prisma {
     totalEnrollments?: true
     createdAt?: true
     updatedAt?: true
+    enrollmentDeadline?: true
     _all?: true
   }
 
@@ -47045,6 +47051,7 @@ export namespace Prisma {
     totalEnrollments: number
     createdAt: Date
     updatedAt: Date
+    enrollmentDeadline: Date | null
     _count: LmsCourseCountAggregateOutputType | null
     _avg: LmsCourseAvgAggregateOutputType | null
     _sum: LmsCourseSumAggregateOutputType | null
@@ -47087,6 +47094,7 @@ export namespace Prisma {
     totalEnrollments?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    enrollmentDeadline?: boolean
     expert?: boolean | ExpertProfileDefaultArgs<ExtArgs>
     modules?: boolean | LmsCourse$modulesArgs<ExtArgs>
     enrollments?: boolean | LmsCourse$enrollmentsArgs<ExtArgs>
@@ -47116,6 +47124,7 @@ export namespace Prisma {
     totalEnrollments?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    enrollmentDeadline?: boolean
     expert?: boolean | ExpertProfileDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["lmsCourse"]>
 
@@ -47140,6 +47149,7 @@ export namespace Prisma {
     totalEnrollments?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    enrollmentDeadline?: boolean
     expert?: boolean | ExpertProfileDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["lmsCourse"]>
 
@@ -47164,9 +47174,10 @@ export namespace Prisma {
     totalEnrollments?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    enrollmentDeadline?: boolean
   }
 
-  export type LmsCourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "expertId" | "title" | "slug" | "description" | "shortDescription" | "thumbnailUrl" | "instructorPhotoUrl" | "category" | "level" | "price" | "currency" | "isFree" | "status" | "totalDuration" | "totalLessons" | "rating" | "totalEnrollments" | "createdAt" | "updatedAt", ExtArgs["result"]["lmsCourse"]>
+  export type LmsCourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "expertId" | "title" | "slug" | "description" | "shortDescription" | "thumbnailUrl" | "instructorPhotoUrl" | "category" | "level" | "price" | "currency" | "isFree" | "status" | "totalDuration" | "totalLessons" | "rating" | "totalEnrollments" | "createdAt" | "updatedAt" | "enrollmentDeadline", ExtArgs["result"]["lmsCourse"]>
   export type LmsCourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     expert?: boolean | ExpertProfileDefaultArgs<ExtArgs>
     modules?: boolean | LmsCourse$modulesArgs<ExtArgs>
@@ -47212,6 +47223,7 @@ export namespace Prisma {
       totalEnrollments: number
       createdAt: Date
       updatedAt: Date
+      enrollmentDeadline: Date | null
     }, ExtArgs["result"]["lmsCourse"]>
     composites: {}
   }
@@ -47660,6 +47672,7 @@ export namespace Prisma {
     readonly totalEnrollments: FieldRef<"LmsCourse", 'Int'>
     readonly createdAt: FieldRef<"LmsCourse", 'DateTime'>
     readonly updatedAt: FieldRef<"LmsCourse", 'DateTime'>
+    readonly enrollmentDeadline: FieldRef<"LmsCourse", 'DateTime'>
   }
     
 
@@ -67365,7 +67378,8 @@ export namespace Prisma {
     rating: 'rating',
     totalEnrollments: 'totalEnrollments',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    enrollmentDeadline: 'enrollmentDeadline'
   };
 
   export type LmsCourseScalarFieldEnum = (typeof LmsCourseScalarFieldEnum)[keyof typeof LmsCourseScalarFieldEnum]
@@ -71326,6 +71340,7 @@ export namespace Prisma {
     totalEnrollments?: IntFilter<"LmsCourse"> | number
     createdAt?: DateTimeFilter<"LmsCourse"> | Date | string
     updatedAt?: DateTimeFilter<"LmsCourse"> | Date | string
+    enrollmentDeadline?: DateTimeNullableFilter<"LmsCourse"> | Date | string | null
     expert?: XOR<ExpertProfileScalarRelationFilter, ExpertProfileWhereInput>
     modules?: CourseModuleListRelationFilter
     enrollments?: LmsCourseEnrollmentListRelationFilter
@@ -71354,6 +71369,7 @@ export namespace Prisma {
     totalEnrollments?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    enrollmentDeadline?: SortOrderInput | SortOrder
     expert?: ExpertProfileOrderByWithRelationInput
     modules?: CourseModuleOrderByRelationAggregateInput
     enrollments?: LmsCourseEnrollmentOrderByRelationAggregateInput
@@ -71385,6 +71401,7 @@ export namespace Prisma {
     totalEnrollments?: IntFilter<"LmsCourse"> | number
     createdAt?: DateTimeFilter<"LmsCourse"> | Date | string
     updatedAt?: DateTimeFilter<"LmsCourse"> | Date | string
+    enrollmentDeadline?: DateTimeNullableFilter<"LmsCourse"> | Date | string | null
     expert?: XOR<ExpertProfileScalarRelationFilter, ExpertProfileWhereInput>
     modules?: CourseModuleListRelationFilter
     enrollments?: LmsCourseEnrollmentListRelationFilter
@@ -71413,6 +71430,7 @@ export namespace Prisma {
     totalEnrollments?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    enrollmentDeadline?: SortOrderInput | SortOrder
     _count?: LmsCourseCountOrderByAggregateInput
     _avg?: LmsCourseAvgOrderByAggregateInput
     _max?: LmsCourseMaxOrderByAggregateInput
@@ -71444,6 +71462,7 @@ export namespace Prisma {
     totalEnrollments?: IntWithAggregatesFilter<"LmsCourse"> | number
     createdAt?: DateTimeWithAggregatesFilter<"LmsCourse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"LmsCourse"> | Date | string
+    enrollmentDeadline?: DateTimeNullableWithAggregatesFilter<"LmsCourse"> | Date | string | null
   }
 
   export type CourseModuleWhereInput = {
@@ -76656,6 +76675,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     expert: ExpertProfileCreateNestedOneWithoutCoursesInput
     modules?: CourseModuleCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentCreateNestedManyWithoutCourseInput
@@ -76684,6 +76704,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     modules?: CourseModuleUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutCourseInput
     certificates?: CertificateUncheckedCreateNestedManyWithoutCourseInput
@@ -76710,6 +76731,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expert?: ExpertProfileUpdateOneRequiredWithoutCoursesNestedInput
     modules?: CourseModuleUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUpdateManyWithoutCourseNestedInput
@@ -76738,6 +76760,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: CourseModuleUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -76765,6 +76788,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
   }
 
   export type LmsCourseUpdateManyMutationInput = {
@@ -76787,6 +76811,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type LmsCourseUncheckedUpdateManyInput = {
@@ -76810,6 +76835,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type CourseModuleCreateInput = {
@@ -81144,6 +81170,7 @@ export namespace Prisma {
     totalEnrollments?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    enrollmentDeadline?: SortOrder
   }
 
   export type LmsCourseAvgOrderByAggregateInput = {
@@ -81175,6 +81202,7 @@ export namespace Prisma {
     totalEnrollments?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    enrollmentDeadline?: SortOrder
   }
 
   export type LmsCourseMinOrderByAggregateInput = {
@@ -81198,6 +81226,7 @@ export namespace Prisma {
     totalEnrollments?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    enrollmentDeadline?: SortOrder
   }
 
   export type LmsCourseSumOrderByAggregateInput = {
@@ -91168,6 +91197,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     modules?: CourseModuleCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentCreateNestedManyWithoutCourseInput
     certificates?: CertificateCreateNestedManyWithoutCourseInput
@@ -91194,6 +91224,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     modules?: CourseModuleUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutCourseInput
     certificates?: CertificateUncheckedCreateNestedManyWithoutCourseInput
@@ -91449,6 +91480,7 @@ export namespace Prisma {
     totalEnrollments?: IntFilter<"LmsCourse"> | number
     createdAt?: DateTimeFilter<"LmsCourse"> | Date | string
     updatedAt?: DateTimeFilter<"LmsCourse"> | Date | string
+    enrollmentDeadline?: DateTimeNullableFilter<"LmsCourse"> | Date | string | null
   }
 
   export type ExpertAvailabilityUpsertWithWhereUniqueWithoutExpertInput = {
@@ -91903,6 +91935,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     expert: ExpertProfileCreateNestedOneWithoutCoursesInput
     enrollments?: LmsCourseEnrollmentCreateNestedManyWithoutCourseInput
     certificates?: CertificateCreateNestedManyWithoutCourseInput
@@ -91930,6 +91963,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     enrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutCourseInput
     certificates?: CertificateUncheckedCreateNestedManyWithoutCourseInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutCourseInput
@@ -92039,6 +92073,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expert?: ExpertProfileUpdateOneRequiredWithoutCoursesNestedInput
     enrollments?: LmsCourseEnrollmentUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUpdateManyWithoutCourseNestedInput
@@ -92066,6 +92101,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     enrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUncheckedUpdateManyWithoutCourseNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutCourseNestedInput
@@ -92317,6 +92353,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     expert: ExpertProfileCreateNestedOneWithoutCoursesInput
     modules?: CourseModuleCreateNestedManyWithoutCourseInput
     certificates?: CertificateCreateNestedManyWithoutCourseInput
@@ -92344,6 +92381,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     modules?: CourseModuleUncheckedCreateNestedManyWithoutCourseInput
     certificates?: CertificateUncheckedCreateNestedManyWithoutCourseInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutCourseInput
@@ -92493,6 +92531,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expert?: ExpertProfileUpdateOneRequiredWithoutCoursesNestedInput
     modules?: CourseModuleUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUpdateManyWithoutCourseNestedInput
@@ -92520,6 +92559,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: CourseModuleUncheckedUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUncheckedUpdateManyWithoutCourseNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutCourseNestedInput
@@ -93762,6 +93802,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     expert: ExpertProfileCreateNestedOneWithoutCoursesInput
     modules?: CourseModuleCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentCreateNestedManyWithoutCourseInput
@@ -93789,6 +93830,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     modules?: CourseModuleUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutCourseInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutCourseInput
@@ -93901,6 +93943,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expert?: ExpertProfileUpdateOneRequiredWithoutCoursesNestedInput
     modules?: CourseModuleUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUpdateManyWithoutCourseNestedInput
@@ -93928,6 +93971,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: CourseModuleUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutCourseNestedInput
@@ -94154,6 +94198,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     expert: ExpertProfileCreateNestedOneWithoutCoursesInput
     modules?: CourseModuleCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentCreateNestedManyWithoutCourseInput
@@ -94181,6 +94226,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
     modules?: CourseModuleUncheckedCreateNestedManyWithoutCourseInput
     enrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutCourseInput
     certificates?: CertificateUncheckedCreateNestedManyWithoutCourseInput
@@ -94369,6 +94415,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     expert?: ExpertProfileUpdateOneRequiredWithoutCoursesNestedInput
     modules?: CourseModuleUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUpdateManyWithoutCourseNestedInput
@@ -94396,6 +94443,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: CourseModuleUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -96814,6 +96862,7 @@ export namespace Prisma {
     totalEnrollments?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    enrollmentDeadline?: Date | string | null
   }
 
   export type ExpertAvailabilityCreateManyExpertInput = {
@@ -96885,6 +96934,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: CourseModuleUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUpdateManyWithoutCourseNestedInput
@@ -96911,6 +96961,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: CourseModuleUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     certificates?: CertificateUncheckedUpdateManyWithoutCourseNestedInput
@@ -96937,6 +96988,7 @@ export namespace Prisma {
     totalEnrollments?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enrollmentDeadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ExpertAvailabilityUpdateWithoutExpertInput = {
