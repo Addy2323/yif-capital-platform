@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { BarChart3, GraduationCap, MessageSquare, Activity, Briefcase, Home, GitCompare, Wrench, Search, Download } from "lucide-react"
+import { useAuth } from "@/lib/auth-context"
 
 const defaultNavItems = [
     { name: "LMS", href: "/lms", icon: GraduationCap },
@@ -24,6 +25,8 @@ const fundsNavItems = [
 
 export function MobileNav() {
     const pathname = usePathname()
+    const { user } = useAuth()
+    const isExpert = user?.role?.toLowerCase() === "expert"
     const isFundsPage = pathname === "/funds" || pathname.startsWith("/funds/")
     const navItems = isFundsPage ? fundsNavItems : defaultNavItems
 
@@ -34,11 +37,14 @@ export function MobileNav() {
                 isFundsPage ? "justify-between gap-1" : "justify-between"
             )}>
                 {navItems.map((item) => {
-                    const isActive = pathname === item.href
+                    const isLms = item.href === "/lms"
+                    const targetHref = isLms && isExpert ? "/expert" : item.href
+                    const targetName = isLms && isExpert ? "Expert" : item.name
+                    const isActive = pathname === targetHref
                     return (
                         <Link
                             key={item.name}
-                            href={item.href}
+                            href={targetHref}
                             className="flex flex-col items-center gap-1 min-w-[56px]"
                         >
                             <div className={cn(
@@ -56,7 +62,7 @@ export function MobileNav() {
                                 "text-[10px] font-medium leading-none",
                                 isActive ? "text-[#0a1628] font-semibold" : "text-gray-500"
                             )}>
-                                {item.name}
+                                {targetName}
                             </span>
                             {isActive && !isFundsPage && (
                                 <div className="h-0.5 w-8 bg-gold rounded-full mt-1" />

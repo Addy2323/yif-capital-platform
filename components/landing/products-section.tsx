@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { BarChart3, GraduationCap, MessagesSquare, ChevronRight } from "lucide-react"
+import { useAuth } from "@/lib/auth-context"
 
 const products = [
   {
@@ -31,6 +32,9 @@ const products = [
 ]
 
 export function ProductsSection() {
+  const { user } = useAuth()
+  const isExpert = user?.role?.toLowerCase() === "expert"
+
   return (
     <section
       id="products"
@@ -48,42 +52,48 @@ export function ProductsSection() {
 
         {/* Products Grid / List */}
         <div className="flex flex-col gap-4 sm:grid sm:gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <Link
-              key={product.name}
-              href={product.href}
-              className="group relative flex items-center bg-white sm:flex-col sm:items-center sm:text-center rounded-xl sm:rounded-lg border-0 sm:border border-gray-100 p-4 sm:p-3 shadow-sm hover:shadow-md transition-all duration-300 w-full active:scale-[0.98]"
-            >
-              {/* Icon */}
-              <div className="flex h-12 w-12 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-lg sm:rounded-full bg-gold/15 text-gold mr-4 sm:mr-0 sm:mb-1.5">
-                <product.icon className="h-6 w-6 sm:h-4.5 sm:w-4.5" />
-              </div>
+          {products.map((product) => {
+            const isLms = product.href === "/lms"
+            const targetHref = isLms && isExpert ? "/expert" : product.href
+            const targetLabel = isLms && isExpert ? "Expert Portal" : product.label
 
-              {/* Content */}
-              <div className="flex-1 text-left sm:text-center">
-                <h3 className="text-base sm:text-[10px] sm:text-xs font-bold text-navy mb-1 sm:mb-0.5 tracking-tight group-hover:text-gold transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-sm sm:text-[10px] text-gray-500 leading-snug sm:mb-1.5 sm:h-7 sm:h-8 sm:overflow-hidden sm:line-clamp-2">
-                  {product.description}
-                </p>
-              </div>
-
-              {/* CTA Button / Chevron */}
-              <div className="ml-2 sm:ml-0 sm:w-full flex-shrink-0">
-                <div className="h-8 w-8 bg-gray-50 rounded-full flex items-center justify-center sm:hidden">
-                  <ChevronRight className="h-5 w-5 text-gray-400" />
+            return (
+              <Link
+                key={product.name}
+                href={targetHref}
+                className="group relative flex items-center bg-white sm:flex-col sm:items-center sm:text-center rounded-xl sm:rounded-lg border-0 sm:border border-gray-100 p-4 sm:p-3 shadow-sm hover:shadow-md transition-all duration-300 w-full active:scale-[0.98]"
+              >
+                {/* Icon */}
+                <div className="flex h-12 w-12 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-lg sm:rounded-full bg-gold/15 text-gold mr-4 sm:mr-0 sm:mb-1.5">
+                  <product.icon className="h-6 w-6 sm:h-4.5 sm:w-4.5" />
                 </div>
 
-                <div
-                  className="hidden sm:inline-flex items-center justify-center h-6 sm:h-7 px-2.5 sm:px-3 w-auto sm:w-full rounded bg-navy text-white text-[9px] sm:text-[10px] font-semibold hover:bg-navy/90 transition-all duration-200"
-                >
-                  <span className="hidden sm:inline">{product.label}</span>
-                  <span className="sm:hidden text-[9px]">{product.label}</span>
+                {/* Content */}
+                <div className="flex-1 text-left sm:text-center">
+                  <h3 className="text-base sm:text-[10px] sm:text-xs font-bold text-navy mb-1 sm:mb-0.5 tracking-tight group-hover:text-gold transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm sm:text-[10px] text-gray-500 leading-snug sm:mb-1.5 sm:h-7 sm:h-8 sm:overflow-hidden sm:line-clamp-2">
+                    {product.description}
+                  </p>
                 </div>
-              </div>
-            </Link>
-          ))}
+
+                {/* CTA Button / Chevron */}
+                <div className="ml-2 sm:ml-0 sm:w-full flex-shrink-0">
+                  <div className="h-8 w-8 bg-gray-50 rounded-full flex items-center justify-center sm:hidden">
+                    <ChevronRight className="h-5 w-5 text-gray-400" />
+                  </div>
+
+                  <div
+                    className="hidden sm:inline-flex items-center justify-center h-6 sm:h-7 px-2.5 sm:px-3 w-auto sm:w-full rounded bg-navy text-white text-[9px] sm:text-[10px] font-semibold hover:bg-navy/90 transition-all duration-200"
+                  >
+                    <span className="hidden sm:inline">{targetLabel}</span>
+                    <span className="sm:hidden text-[9px]">{targetLabel}</span>
+                  </div>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </section>

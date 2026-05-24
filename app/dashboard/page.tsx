@@ -194,8 +194,8 @@ export default function DashboardPage() {
           <CardContent>
             <div className="flex flex-wrap gap-3">
               <Button asChild className="bg-emerald-600 text-white hover:bg-emerald-700 font-bold">
-                <Link href="/lms">
-                  LMS Dashboard
+                <Link href={user?.role?.toLowerCase() === "expert" ? "/expert" : "/lms"}>
+                  {user?.role?.toLowerCase() === "expert" ? "Expert Portal" : "LMS Dashboard"}
                 </Link>
               </Button>
               <Button asChild variant="outline" className="bg-transparent border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 dark:bg-transparent">

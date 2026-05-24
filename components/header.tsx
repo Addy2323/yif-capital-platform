@@ -147,25 +147,33 @@ export function Header() {
                       )}
                     >
                       <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-2 overflow-hidden">
-                        {link.dropdownItems?.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group/item"
-                          >
-                            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy/5 text-navy group-hover/item:bg-navy group-hover/item:text-gold transition-colors">
-                              <item.icon className="h-4 w-4" />
-                            </div>
-                            <div className="flex-1 space-y-0.5">
-                              <span className="block text-sm font-semibold text-navy">
-                                {item.name}
-                              </span>
-                              <p className="text-xs text-gray-500 line-clamp-1">
-                                {item.description}
-                              </p>
-                            </div>
-                          </Link>
-                        ))}
+                        {link.dropdownItems?.map((item) => {
+                          const isLms = item.href === "/lms"
+                          const isExpert = user?.role?.toLowerCase() === "expert"
+                          const targetHref = isLms && isExpert ? "/expert" : item.href
+                          const targetName = isLms && isExpert ? "Expert Portal" : item.name
+                          const targetDescription = isLms && isExpert ? "Manage your courses & sessions" : item.description
+
+                          return (
+                            <Link
+                              key={item.name}
+                              href={targetHref}
+                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group/item"
+                            >
+                              <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy/5 text-navy group-hover/item:bg-navy group-hover/item:text-gold transition-colors">
+                                <item.icon className="h-4 w-4" />
+                              </div>
+                              <div className="flex-1 space-y-0.5">
+                                <span className="block text-sm font-semibold text-navy">
+                                  {targetName}
+                                </span>
+                                <p className="text-xs text-gray-500 line-clamp-1">
+                                  {targetDescription}
+                                </p>
+                              </div>
+                            </Link>
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -224,14 +232,14 @@ export function Header() {
                     Home
                   </Link>
                   <Link
-                    href="/lms"
+                    href={user?.role?.toLowerCase() === "expert" ? "/expert" : "/lms"}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "text-lg font-medium transition-colors",
-                      pathname === "/lms" ? "text-gold" : "text-white/80 hover:text-white"
+                      (user?.role?.toLowerCase() === "expert" ? pathname === "/expert" : pathname === "/lms") ? "text-gold" : "text-white/80 hover:text-white"
                     )}
                   >
-                    YIF LMS
+                    {user?.role?.toLowerCase() === "expert" ? "Expert Portal" : "YIF LMS"}
                   </Link>
                   <Link
                     href="/dashboard"

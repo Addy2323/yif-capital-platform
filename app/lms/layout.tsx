@@ -12,8 +12,12 @@ function LmsLayoutContent({ children }: { children: React.ReactNode }) {
     const router = useRouter()
 
     useEffect(() => {
-        if (!isLoading && !user) {
-            router.push("/login")
+        if (!isLoading) {
+            if (!user) {
+                router.push("/login")
+            } else if (user.role?.toLowerCase() === "expert") {
+                router.push("/expert")
+            }
         }
     }, [user, isLoading, router])
 
