@@ -34,6 +34,7 @@ export async function PATCH(
     if (updates.specializations !== undefined) data.specializations = updates.specializations
     if (updates.isAvailableOnline !== undefined) data.isAvailableOnline = updates.isAvailableOnline
     if (updates.isAvailablePhysical !== undefined) data.isAvailablePhysical = updates.isAvailablePhysical
+    if (updates.rating !== undefined) data.rating = Number(updates.rating)
 
     const updated = await prisma.expertProfile.update({
       where: { id: expertId },

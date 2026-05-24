@@ -115,6 +115,7 @@ export default function AdminExpertsPage() {
     const [isAvailableOnline, setIsAvailableOnline] = useState(true)
     const [isAvailablePhysical, setIsAvailablePhysical] = useState(false)
     const [selectedSpecs, setSelectedSpecs] = useState<string[]>([])
+    const [rating, setRating] = useState<number>(0)
     
     // Verification action fields
     const [approvalStatusAction, setApprovalStatusAction] = useState<"APPROVED" | "REJECTED" | "SUSPENDED">("APPROVED")
@@ -247,7 +248,8 @@ export default function AdminExpertsPage() {
                     location,
                     isAvailableOnline,
                     isAvailablePhysical,
-                    specializations: selectedSpecs
+                    specializations: selectedSpecs,
+                    rating
                 })
             })
 
@@ -300,6 +302,7 @@ export default function AdminExpertsPage() {
         setIsAvailableOnline(true)
         setIsAvailablePhysical(false)
         setSelectedSpecs([])
+        setRating(0)
     }
 
     const openAddDialog = () => {
@@ -325,6 +328,7 @@ export default function AdminExpertsPage() {
         setIsAvailableOnline(expert.isAvailableOnline)
         setIsAvailablePhysical(expert.isAvailablePhysical)
         setSelectedSpecs(expert.specializations)
+        setRating(expert.rating)
         setIsEditDialogOpen(true)
     }
 
@@ -927,9 +931,9 @@ export default function AdminExpertsPage() {
                             </div>
                         </div>
 
-                        <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="grid sm:grid-cols-3 gap-4">
                             <div className="space-y-1.5">
-                                <Label htmlFor="edit-rate" className="text-white/80">Hourly Consultation Rate (TZS)</Label>
+                                <Label htmlFor="edit-rate" className="text-white/80">Hourly Rate (TZS)</Label>
                                 <Input
                                     id="edit-rate"
                                     type="number"
@@ -945,6 +949,19 @@ export default function AdminExpertsPage() {
                                     id="edit-loc"
                                     value={location}
                                     onChange={(e) => setLocation(e.target.value)}
+                                    className="bg-white/5 border-white/10 text-white"
+                                />
+                            </div>
+                            <div className="space-y-1.5">
+                                <Label htmlFor="edit-rating" className="text-white/80">Rating (0.0 - 5.0)</Label>
+                                <Input
+                                    id="edit-rating"
+                                    type="number"
+                                    step="0.1"
+                                    min="0"
+                                    max="5"
+                                    value={rating}
+                                    onChange={(e) => setRating(parseFloat(e.target.value) || 0)}
                                     className="bg-white/5 border-white/10 text-white"
                                 />
                             </div>
