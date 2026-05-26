@@ -10,6 +10,16 @@ const nextConfig = {
   },
   // Do not bundle node-cron (uses Node built-ins: path, child_process, etc.)
   serverExternalPackages: ["node-cron"],
+  // Serve runtime-uploaded files through the dynamic API route
+  // so that /uploads/... URLs stored in the DB work in production
+  async rewrites() {
+    return [
+      {
+        source: "/uploads/:path*",
+        destination: "/api/files/:path*",
+      },
+    ]
+  },
   async headers() {
     return [
       {
