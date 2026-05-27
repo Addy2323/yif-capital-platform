@@ -35,14 +35,13 @@ import { LiveSessionsDashboard } from "@/components/dashboard/live-sessions"
 
 const CATEGORY_ICONS: Record<string, any> = {
   STOCK_MARKET: TrendingUp,
-  REAL_ESTATE: Briefcase,
-  BONDS_TREASURY: ShieldCheck,
-  SACCO_INVESTMENT: Users,
-  FOREX_EDUCATION: Globe,
+  BONDS_FIXED_INCOME: ShieldCheck,
   MUTUAL_FUNDS: Coins,
-  STARTUP_INVESTMENT: BarChart3,
   PERSONAL_FINANCE: PortfolioIcon,
-  SME_INVESTMENT: LayoutDashboard,
+  REAL_ESTATE_ALT: Briefcase,
+  ENTREPRENEURSHIP_BUSINESS: BarChart3,
+  INSURANCE_RISK: Globe,
+  SACCOS_COOPERATIVE: Users,
 }
 
 function AcademyContent() {

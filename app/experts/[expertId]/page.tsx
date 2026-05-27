@@ -27,15 +27,14 @@ import {
 } from "lucide-react"
 
 const CATEGORY_LABELS: Record<string, string> = {
-  STOCK_MARKET: "Stock Market",
-  REAL_ESTATE: "Real Estate",
-  BONDS_TREASURY: "Bonds & Treasury",
-  SACCO_INVESTMENT: "SACCO Investment",
-  FOREX_EDUCATION: "Forex Education",
-  MUTUAL_FUNDS: "Mutual Funds",
-  STARTUP_INVESTMENT: "Startup Investment",
+  STOCK_MARKET: "Stock Market Investing",
+  BONDS_FIXED_INCOME: "Bond & Fixed Income Investing",
+  MUTUAL_FUNDS: "Mutual Funds Investing",
   PERSONAL_FINANCE: "Personal Finance",
-  SME_INVESTMENT: "SME Investment",
+  REAL_ESTATE_ALT: "Real Estate & Alternative Investments",
+  ENTREPRENEURSHIP_BUSINESS: "Entrepreneurship & Business Finance",
+  INSURANCE_RISK: "Insurance & Risk Management",
+  SACCOS_COOPERATIVE: "SACCOs & Cooperative Finance",
 }
 
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]

@@ -63,15 +63,14 @@ interface CourseData {
 
 
 const CATEGORIES = [
-    { value: "STOCK_MARKET", label: "Stock Market & DSE" },
-    { value: "REAL_ESTATE", label: "Real Estate & Land" },
-    { value: "BONDS_TREASURY", label: "Treasury Bonds & Bills" },
-    { value: "SACCO_INVESTMENT", label: "SACCOs & Microfinance" },
-    { value: "FOREX_EDUCATION", label: "Forex & Currency Education" },
-    { value: "MUTUAL_FUNDS", label: "Mutual Funds (UTT AMIS)" },
-    { value: "STARTUP_INVESTMENT", label: "Startup & Angel Investing" },
-    { value: "PERSONAL_FINANCE", label: "Personal Finance & Budgeting" },
-    { value: "SME_INVESTMENT", label: "SME & Agribusiness Lending" }
+    { value: "STOCK_MARKET", label: "Stock Market Investing" },
+    { value: "BONDS_FIXED_INCOME", label: "Bond & Fixed Income Investing" },
+    { value: "MUTUAL_FUNDS", label: "Mutual Funds Investing" },
+    { value: "PERSONAL_FINANCE", label: "Personal Finance" },
+    { value: "REAL_ESTATE_ALT", label: "Real Estate & Alternative Investments" },
+    { value: "ENTREPRENEURSHIP_BUSINESS", label: "Entrepreneurship & Business Finance" },
+    { value: "INSURANCE_RISK", label: "Insurance & Risk Management" },
+    { value: "SACCOS_COOPERATIVE", label: "SACCOs & Cooperative Finance" }
 ]
 
 const LEVELS = [
@@ -82,14 +81,13 @@ const LEVELS = [
 
 const CATEGORY_COLORS: Record<string, string> = {
     STOCK_MARKET: "from-emerald-900 to-slate-900",
-    REAL_ESTATE: "from-amber-900 to-slate-900",
-    BONDS_TREASURY: "from-blue-900 to-slate-900",
-    SACCO_INVESTMENT: "from-purple-900 to-slate-900",
-    FOREX_EDUCATION: "from-cyan-900 to-slate-900",
+    BONDS_FIXED_INCOME: "from-blue-900 to-slate-900",
     MUTUAL_FUNDS: "from-rose-900 to-slate-900",
-    STARTUP_INVESTMENT: "from-orange-900 to-slate-900",
     PERSONAL_FINANCE: "from-teal-900 to-slate-900",
-    SME_INVESTMENT: "from-lime-900 to-slate-900",
+    REAL_ESTATE_ALT: "from-amber-900 to-slate-900",
+    ENTREPRENEURSHIP_BUSINESS: "from-orange-900 to-slate-900",
+    INSURANCE_RISK: "from-cyan-900 to-slate-900",
+    SACCOS_COOPERATIVE: "from-purple-900 to-slate-900",
 }
 
 const TOTAL_STEPS = 4

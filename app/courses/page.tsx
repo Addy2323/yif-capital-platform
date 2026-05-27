@@ -28,14 +28,13 @@ import {
 const CATEGORIES = [
   { value: "", label: "All" },
   { value: "STOCK_MARKET", label: "Stock Market" },
-  { value: "REAL_ESTATE", label: "Real Estate" },
-  { value: "BONDS_TREASURY", label: "Bonds & Treasury" },
-  { value: "SACCO_INVESTMENT", label: "SACCO" },
-  { value: "FOREX_EDUCATION", label: "Forex" },
+  { value: "BONDS_FIXED_INCOME", label: "Bonds & Fixed Income" },
   { value: "MUTUAL_FUNDS", label: "Mutual Funds" },
-  { value: "STARTUP_INVESTMENT", label: "Startups" },
   { value: "PERSONAL_FINANCE", label: "Personal Finance" },
-  { value: "SME_INVESTMENT", label: "SME" },
+  { value: "REAL_ESTATE_ALT", label: "Real Estate & Alt" },
+  { value: "ENTREPRENEURSHIP_BUSINESS", label: "Business & Entr" },
+  { value: "INSURANCE_RISK", label: "Insurance & Risk" },
+  { value: "SACCOS_COOPERATIVE", label: "SACCOs & Coop" },
 ]
 
 const LEVELS = [
@@ -46,15 +45,14 @@ const LEVELS = [
 ]
 
 const CATEGORY_LABELS: Record<string, string> = {
-  STOCK_MARKET: "Stock Market",
-  REAL_ESTATE: "Real Estate",
-  BONDS_TREASURY: "Bonds & Treasury",
-  SACCO_INVESTMENT: "SACCO Investment",
-  FOREX_EDUCATION: "Forex Education",
-  MUTUAL_FUNDS: "Mutual Funds",
-  STARTUP_INVESTMENT: "Startup Investment",
+  STOCK_MARKET: "Stock Market Investing",
+  BONDS_FIXED_INCOME: "Bond & Fixed Income Investing",
+  MUTUAL_FUNDS: "Mutual Funds Investing",
   PERSONAL_FINANCE: "Personal Finance",
-  SME_INVESTMENT: "SME Investment",
+  REAL_ESTATE_ALT: "Real Estate & Alternative Investments",
+  ENTREPRENEURSHIP_BUSINESS: "Entrepreneurship & Business Finance",
+  INSURANCE_RISK: "Insurance & Risk Management",
+  SACCOS_COOPERATIVE: "SACCOs & Cooperative Finance",
 }
 
 interface Course {

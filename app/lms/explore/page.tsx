@@ -30,9 +30,14 @@ const LEVEL_COLORS: Record<string, string> = {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-    STOCKS: "Stocks", BONDS: "Bonds", MUTUAL_FUNDS: "Mutual Funds",
-    REAL_ESTATE: "Real Estate", PERSONAL_FINANCE: "Personal Finance",
-    TRADING: "Trading", CRYPTO: "Crypto", GENERAL: "General",
+    STOCK_MARKET: "Stock Market Investing",
+    BONDS_FIXED_INCOME: "Bond & Fixed Income Investing",
+    MUTUAL_FUNDS: "Mutual Funds Investing",
+    PERSONAL_FINANCE: "Personal Finance",
+    REAL_ESTATE_ALT: "Real Estate & Alternative Investments",
+    ENTREPRENEURSHIP_BUSINESS: "Entrepreneurship & Business Finance",
+    INSURANCE_RISK: "Insurance & Risk Management",
+    SACCOS_COOPERATIVE: "SACCOs & Cooperative Finance",
 }
 
 export default function LmsExplorePage() {

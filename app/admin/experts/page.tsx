@@ -78,15 +78,14 @@ interface ExpertProfile {
 }
 
 const CATEGORIES = [
-    { value: "STOCK_MARKET", label: "Stock Market" },
-    { value: "REAL_ESTATE", label: "Real Estate" },
-    { value: "BONDS_TREASURY", label: "Bonds & Treasury" },
-    { value: "SACCO_INVESTMENT", label: "SACCO Investment" },
-    { value: "FOREX_EDUCATION", label: "Forex Education" },
-    { value: "MUTUAL_FUNDS", label: "Mutual Funds" },
-    { value: "STARTUP_INVESTMENT", label: "Startup Investment" },
+    { value: "STOCK_MARKET", label: "Stock Market Investing" },
+    { value: "BONDS_FIXED_INCOME", label: "Bond & Fixed Income Investing" },
+    { value: "MUTUAL_FUNDS", label: "Mutual Funds Investing" },
     { value: "PERSONAL_FINANCE", label: "Personal Finance" },
-    { value: "SME_INVESTMENT", label: "SME Investment" }
+    { value: "REAL_ESTATE_ALT", label: "Real Estate & Alternative Investments" },
+    { value: "ENTREPRENEURSHIP_BUSINESS", label: "Entrepreneurship & Business Finance" },
+    { value: "INSURANCE_RISK", label: "Insurance & Risk Management" },
+    { value: "SACCOS_COOPERATIVE", label: "SACCOs & Cooperative Finance" }
 ]
 
 export default function AdminExpertsPage() {
