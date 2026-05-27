@@ -88,3 +88,47 @@ export function resolveTargetScheme(urlSlug: string, schemes: string[]): string 
         ) ?? null
     )
 }
+
+/**
+ * Human-readable display names for sub-fund URL slugs.
+ * Used to override the DB fund_name (which stores the parent fund/family name)
+ * so each sub-fund page shows its specific product name.
+ */
+export const SLUG_DISPLAY_NAMES: Record<string, string> = {
+    // iTrust sub-funds
+    "itrust-icash":   "iTrust i-Cash",
+    "itrust-idollar": "iTrust i-Dollar",
+    "itrust-igrowth": "iTrust i-Growth",
+    "itrust-iincome": "iTrust i-Income",
+    "itrust-iimaan":  "iTrust i-Imaan",
+    "itrust-isave":   "iTrust i-Save",
+    // UTT AMIS sub-funds
+    "utt-umoja":         "UTT Umoja Fund",
+    "utt-watoto":        "UTT Watoto Fund",
+    "utt-jikiku":        "UTT Jikimu Fund",
+    "utt-wekeza-maisha": "UTT Wekeza Maisha Fund",
+    "utt-bond":          "UTT Bond Fund",
+    "utt-liquid":        "UTT Liquid Fund",
+    // Sanlam sub-funds
+    "sanlam-usd":    "Sanlam USD Fund",
+    // Orbit sub-funds
+    "orbit-inuka-mm":    "Orbit Inuka Money Market Fund",
+    "orbit-inuka-dozen": "Orbit Inuka Dozen Fund",
+    // TSL sub-funds
+    "tsl-imara": "TSL Imara Fund",
+    "tsl-kesho": "TSL Kesho Fund",
+    // APEF sub-funds
+    "apef-ziada": "APEF Ziada Fund",
+    // Zansec sub-funds
+    "zan-timiza": "Zansec Timiza Fund",
+    // WHI sub-funds
+    "whi-faida": "WHI Faida Fund",
+}
+
+/**
+ * Returns the human-readable display name for a URL slug.
+ * Falls back to `defaultName` (from DB) when no override is defined.
+ */
+export function resolveDisplayName(urlSlug: string, defaultName: string): string {
+    return SLUG_DISPLAY_NAMES[urlSlug] ?? defaultName
+}

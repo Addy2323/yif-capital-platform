@@ -7,50 +7,6 @@ import { ArrowLeft } from "lucide-react"
 import type { Fund, FundModuleId } from "@/lib/types/funds"
 import { FUND_MODULE_TABS, FUND_TYPE_CONFIG } from "@/lib/types/funds"
 
-// ── iTrust helpers ────────────────────────────────────────────────────────────
-
-/** True when the fund belongs to the iTrust Finance Fund Family. */
-function isITrustFund(fund: Fund): boolean {
-  return (
-    fund.fund_id.toLowerCase().startsWith("itrust") ||
-    (fund.manager_name?.toLowerCase().includes("itrust") ?? false) ||
-    (fund.fund_name?.toLowerCase().includes("itrust") ?? false)
-  )
-}
-
-/**
- * Returns "iTrust Finance Fund Family" for any iTrust sub-fund,
- * or the fund's own name for everything else.
- */
-function getFundDisplayName(fund: Fund): string {
-  return isITrustFund(fund) ? "iTrust Finance Fund Family" : fund.fund_name
-}
-
-/**
- * For iTrust funds, extracts the sub-fund variant label.
- * Tries fund_slug first (used in URLs, e.g. "itrust-icash"),
- * then fund_id as a fallback.
- * Returns null when no meaningful variant can be determined.
- * e.g. "itrust-icash" → "i-Cash", "itrust-idollar" → "i-Dollar"
- */
-function getITrustVariant(fund: Fund): string | null {
-  if (!isITrustFund(fund)) return null
-
-  // Prefer fund_slug (URL-based) over fund_id — DB ids may differ from URL slugs
-  const source = (fund.fund_slug || fund.fund_id || "").toLowerCase()
-  const slug = source.replace(/^itrust-?/, "").trim()
-
-  // Only show a variant chip when we have a meaningful sub-fund name
-  if (!slug) return null
-
-  // "icash"   → "i-Cash"
-  // "idollar" → "i-Dollar"
-  // Already hyphenated slugs like "i-cash" are handled by the second replace
-  return slug
-    .replace(/^i([a-z])/, (_: string, c: string) => `i-${c.toUpperCase()}`)
-    .replace(/-([a-z])/g, (_: string, c: string) => `-${c.toUpperCase()}`)
-}
-
 // ── Component ─────────────────────────────────────────────────────────────────
 
 interface FundModuleNavProps {
@@ -61,8 +17,6 @@ interface FundModuleNavProps {
 
 export function FundModuleNav({ fund, activeModule, userRole }: FundModuleNavProps) {
   const typeConfig = FUND_TYPE_CONFIG[fund.fund_type]
-  const displayName = getFundDisplayName(fund)
-  const variant = getITrustVariant(fund)
 
   // Hide Attribution tab from non-analysts / non-admins
   const visibleTabs = FUND_MODULE_TABS.filter((tab) => {
@@ -90,17 +44,7 @@ export function FundModuleNav({ fund, activeModule, userRole }: FundModuleNavPro
 
           {/* Title + badges */}
           <div className="flex items-center gap-2.5 flex-wrap">
-            <h1 className="text-xl font-bold">{displayName}</h1>
-
-            {/* Sub-fund variant chip (e.g. "i-Cash") */}
-            {variant && (
-              <Badge
-                variant="outline"
-                className="text-[10px] uppercase tracking-wider border-primary/40 text-primary bg-primary/5"
-              >
-                {variant}
-              </Badge>
-            )}
+            <h1 className="text-xl font-bold">{fund.fund_name}</h1>
 
             {/* Fund type badge (e.g. "MONEY MARKET") */}
             <Badge

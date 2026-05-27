@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { resolveFundId } from "@/lib/fund-utils"
+import { resolveFundId, resolveDisplayName } from "@/lib/fund-utils"
 import type { Fund, ApiResponse } from "@/lib/types/funds"
 
 // GET /api/v1/funds/[fund_id] - Get single fund details
@@ -56,7 +56,7 @@ export async function GET(
     const responseFund: Fund = {
       fund_id: fund.fundId,
       fund_slug: fund.fundSlug,
-      fund_name: fund.fundName,
+      fund_name: resolveDisplayName(raw_fund_id, fund.fundName),
       fund_type: fund.fundType.toLowerCase() as any,
       manager_name: fund.managerName,
       manager_id: fund.managerId || undefined,
