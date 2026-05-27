@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { resolveFundId } from "@/lib/fund-utils"
+import { resolveFundId, resolveTargetScheme } from "@/lib/fund-utils"
 import type { NavRecord, ApiResponse } from "@/lib/types/funds"
 
 // GET /api/v1/funds/[fund_id]/nav - Get historical NAV data for a specific fund
@@ -55,19 +55,24 @@ export async function GET(
             return nav > 0 && aum > 0
         })
 
+        // Filter to the target sub-fund scheme when applicable (e.g. "itrust-icash" → "i-Cash Fund")
+        const allSchemes = [...new Set(validSummaries.map(s => s.schemeName).filter(Boolean))] as string[]
+        const targetScheme = resolveTargetScheme(raw_fund_id, allSchemes)
+        const filtered = targetScheme
+            ? validSummaries.filter(s => s.schemeName === targetScheme)
+            : validSummaries
+
         // Map to NavRecord format
         // Note: The UI expects fields date, nav_per_unit, total_nav, units
         // Since our DB stores 'nav' as price and 'aum' as total_nav, we map accordingly
-        const navRecords: NavRecord[] = validSummaries.map((s) => ({
+        const navRecords: NavRecord[] = filtered.map((s) => ({
             date: s.date.toISOString().split("T")[0],
             nav_per_unit: s.nav,
             total_nav: s.aum,
-            units: s.aum / (s.nav || 1), // Approximate units if not explicitly stored
+            units: s.aum / (s.nav || 1),
             scheme_name: s.schemeName || undefined,
         }))
 
-        // Limit to actual requested data points (distinguishing by date or including all schemes)
-        // For the simple nav route, we return the records as-is
         const data = navRecords.slice(0, limit)
 
         const response: ApiResponse<NavRecord[]> = {

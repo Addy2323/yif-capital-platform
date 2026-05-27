@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { resolveFundId } from "@/lib/fund-utils"
+import { resolveFundId, resolveTargetScheme } from "@/lib/fund-utils"
 import type { PerformanceData, ApiResponse, Timeframe } from "@/lib/types/funds"
 
 // GET /api/v1/funds/[fund_id]/performance - Module 2: Performance Analytics
@@ -53,10 +53,12 @@ export async function GET(
       })
     }
 
-    // Pick the "main" scheme (largest AUM on the latest date)
+    // Pick the target scheme: prefer URL-slug match, then largest AUM on the latest date
+    const allSchemes = [...new Set(rawHistory.map(r => r.schemeName).filter(Boolean))] as string[]
+    const targetScheme = resolveTargetScheme(raw_fund_id, allSchemes)
     const latestDate = rawHistory[rawHistory.length - 1].date
     const latestRecords = rawHistory.filter(r => r.date.getTime() === latestDate.getTime())
-    const mainScheme = latestRecords.sort((a, b) => b.aum - a.aum)[0]?.schemeName
+    const mainScheme = targetScheme ?? latestRecords.sort((a, b) => b.aum - a.aum)[0]?.schemeName
 
     const history = mainScheme
       ? rawHistory.filter(r => r.schemeName === mainScheme).slice(-getTimeframeDays(timeframe))

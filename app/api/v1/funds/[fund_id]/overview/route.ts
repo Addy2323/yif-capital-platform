@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { resolveFundId } from "@/lib/fund-utils"
+import { resolveFundId, resolveTargetScheme } from "@/lib/fund-utils"
 import type { OverviewData, ApiResponse, Timeframe } from "@/lib/types/funds"
 
 // GET /api/v1/funds/[fund_id]/overview - Module 1: Overview Dashboard
@@ -59,45 +59,38 @@ export async function GET(
     // Get unique scheme names
     const schemes = [...new Set(effectiveHistory.map(h => h.schemeName).filter(Boolean))] as string[]
 
-    // For KPIs, pick the "main" scheme (largest AUM or first) or aggregate
-    // First, get the latest date's records
-    const latestDate = effectiveHistory[0].date
-    const latestRecords = effectiveHistory.filter(h => h.date.getTime() === latestDate.getTime())
+    // Try to match a specific sub-fund scheme from the URL slug (e.g. "itrust-icash" → "i-Cash Fund")
+    // This ensures each sub-fund URL shows its own data, not an aggregated or first-scheme value.
+    const targetScheme = resolveTargetScheme(raw_fund_id, schemes)
+    const mainScheme = targetScheme ?? (schemes.length > 0 ? schemes[0] : null)
+
+    // Scope history to the target scheme when one is identified; otherwise use all records
+    const scopedHistory = mainScheme
+      ? effectiveHistory.filter(h => h.schemeName === mainScheme)
+      : effectiveHistory
+
+    // For KPIs use scoped records so each sub-fund shows its own AUM/NAV
+    const latestDate = scopedHistory.length > 0 ? scopedHistory[0].date : effectiveHistory[0].date
+    const latestRecords = scopedHistory.filter(h => h.date.getTime() === latestDate.getTime())
     const totalAum = latestRecords.reduce((sum, r) => sum + r.aum, 0)
 
     // Get previous day records for change calculation
-    const prevDate = effectiveHistory.find(h => h.date.getTime() < latestDate.getTime())?.date
-    const prevRecords = prevDate ? effectiveHistory.filter(h => h.date.getTime() === prevDate.getTime()) : []
+    const prevDate = scopedHistory.find(h => h.date.getTime() < latestDate.getTime())?.date
+    const prevRecords = prevDate ? scopedHistory.filter(h => h.date.getTime() === prevDate.getTime()) : []
     const prevTotalAum = prevRecords.reduce((sum, r) => sum + r.aum, 0)
 
-    // Weighted average NAV across schemes
-    const weightedNav = latestRecords.reduce((sum, r) => sum + r.nav * (r.aum / totalAum || 0), 0)
+    // Weighted average NAV (single scheme = just that scheme's NAV)
+    const weightedNav = latestRecords.reduce((sum, r) => sum + r.nav * (r.aum / (totalAum || 1)), 0)
     const prevWeightedNav = prevRecords.length > 0
       ? prevRecords.reduce((sum, r) => sum + r.nav * (r.aum / (prevTotalAum || 1)), 0)
       : null
 
-    // Calculate returns from aggregated daily data
-    // Group by unique dates (aggregate across schemes)
-    const dateMap = new Map<string, { totalAum: number; weightedNav: number; date: Date }>()
-    for (const r of history) {
-      const dateKey = r.date.toISOString().split("T")[0]
-      if (!dateMap.has(dateKey)) {
-        dateMap.set(dateKey, { totalAum: 0, weightedNav: 0, date: r.date })
-      }
-      const entry = dateMap.get(dateKey)!
-      entry.totalAum += r.aum
-    }
+    // Use scoped history for the NAV series and return calculations
+    const mainSchemeHistory = scopedHistory.sort((a, b) => a.date.getTime() - b.date.getTime())
 
-    // Compute weighted NAV per date using main scheme or average
-    // Use first scheme as representative for NAV series
-    const mainScheme = schemes.length > 0 ? schemes[0] : null
-    const mainSchemeHistory = mainScheme
-      ? effectiveHistory.filter(h => h.schemeName === mainScheme).sort((a, b) => a.date.getTime() - b.date.getTime())
-      : effectiveHistory.sort((a, b) => a.date.getTime() - b.date.getTime())
-
-    // NAV history for chart (aggregate by date: average NAV)
+    // NAV history for chart — use scoped history so each sub-fund shows its own curve
     const navDateMap = new Map<string, { navs: number[]; date: string }>()
-    for (const r of effectiveHistory) {
+    for (const r of scopedHistory) {
       const dk = r.date.toISOString().split("T")[0]
       if (!navDateMap.has(dk)) navDateMap.set(dk, { navs: [], date: dk })
       navDateMap.get(dk)!.navs.push(r.nav)
