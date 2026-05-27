@@ -27,24 +27,28 @@ function getFundDisplayName(fund: Fund): string {
 }
 
 /**
- * For iTrust funds, extracts the sub-fund variant label from the fund_id slug.
+ * For iTrust funds, extracts the sub-fund variant label.
+ * Tries fund_slug first (used in URLs, e.g. "itrust-icash"),
+ * then fund_id as a fallback.
+ * Returns null when no meaningful variant can be determined.
  * e.g. "itrust-icash" → "i-Cash", "itrust-idollar" → "i-Dollar"
- * Returns null for non-iTrust funds or when no variant is found.
  */
 function getITrustVariant(fund: Fund): string | null {
   if (!isITrustFund(fund)) return null
 
-  // Strip "itrust" prefix from the slug
-  const slug = fund.fund_id.toLowerCase().replace(/^itrust-?/, "").trim()
-  if (slug) {
-    // "icash" → "i-Cash", "idollar" → "i-Dollar"
-    return slug
-      .replace(/^i/, "i-")
-      .replace(/-([a-z])/g, (_: string, c: string) => `-${c.toUpperCase()}`)
-  }
+  // Prefer fund_slug (URL-based) over fund_id — DB ids may differ from URL slugs
+  const source = (fund.fund_slug || fund.fund_id || "").toLowerCase()
+  const slug = source.replace(/^itrust-?/, "").trim()
 
-  // Fallback: strip "iTrust " prefix from fund_name
-  return fund.fund_name?.replace(/^itrust\s*/i, "").trim() || null
+  // Only show a variant chip when we have a meaningful sub-fund name
+  if (!slug) return null
+
+  // "icash"   → "i-Cash"
+  // "idollar" → "i-Dollar"
+  // Already hyphenated slugs like "i-cash" are handled by the second replace
+  return slug
+    .replace(/^i([a-z])/, (_: string, c: string) => `i-${c.toUpperCase()}`)
+    .replace(/-([a-z])/g, (_: string, c: string) => `-${c.toUpperCase()}`)
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
