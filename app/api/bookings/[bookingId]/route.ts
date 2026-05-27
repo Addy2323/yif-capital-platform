@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { cookies } from "next/headers"
 
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ bookingId: string }> }
 ) {
   try {
@@ -60,7 +60,8 @@ export async function PATCH(
     let resolvedMeetingUrl = meetingUrl ?? booking.meetingUrl
     if (status === "CONFIRMED" && !resolvedMeetingUrl) {
       if (booking.sessionType === "ONLINE" || booking.sessionType === "VIP_PRIVATE") {
-        resolvedMeetingUrl = `/sessions/${bookingId}`
+        const roomSlug = `yif-${bookingId.replace(/-/g, "").substring(0, 10)}`
+        resolvedMeetingUrl = `https://meet.yifcapital.co.tz/rooms/${roomSlug}`
       }
     }
 

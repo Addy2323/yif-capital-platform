@@ -346,7 +346,7 @@ export default function ExpertAvailabilityPage() {
                             <div>
                                 <h4 className="font-semibold text-foreground">Time Slot Rules</h4>
                                 <p className="mt-1 leading-relaxed">
-                                    Time slots must be at least 30 minutes long. Bookings will automatically generate Google Meet URLs for video consultations or list your address for physical meetings.
+                                    Time slots must be at least 30 minutes long. Online bookings will automatically generate a secure <span className="text-emerald-400 font-medium">meet.yifcapital.co.tz</span> room link. Physical bookings will display your office address to the client.
                                 </p>
                             </div>
                         </CardContent>

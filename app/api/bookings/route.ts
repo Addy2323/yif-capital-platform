@@ -91,7 +91,6 @@ export async function POST(req: NextRequest) {
       price,
       notes,
       location,
-      paymentProvider
     } = body
 
     // Validate required fields
@@ -116,11 +115,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Expert is not currently accepting bookings" }, { status: 400 })
     }
 
-    // Generate a meeting URL for online sessions
+    // Generate a YIF Meet room URL for online sessions
     const bookingId = crypto.randomUUID()
+    const roomSlug = `yif-${bookingId.replace(/-/g, "").substring(0, 10)}`
     const meetingUrl =
       sessionType === "ONLINE" || sessionType === "VIP_PRIVATE"
-        ? `/sessions/${bookingId}`
+        ? `https://meet.yifcapital.co.tz/rooms/${roomSlug}`
         : null
 
     // Create the booking
