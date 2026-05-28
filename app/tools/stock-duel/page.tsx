@@ -1,13 +1,6 @@
 import { StockClash } from "@/components/tools/stock-clash"
 import { DashboardSidebar } from "@/components/dashboard/sidebar"
-import { 
-  Swords, 
-  Sparkles, 
-  Skull,
-  Zap,
-  ShieldCheck,
-  Globe2
-} from "lucide-react"
+import { Swords, Sparkles, Zap, ShieldCheck, Globe2 } from "lucide-react"
 
 export const metadata = {
   title: "DSE Stock Clash | YIF Capital",
@@ -20,7 +13,7 @@ export default function StockClashPage() {
       <DashboardSidebar />
       
       <main className="flex-1 lg:ml-64 p-4 lg:p-8">
-        <div className="max-w-5xl mx-auto space-y-12">
+        <div className="max-w-5xl mx-auto space-y-6">
           
           {/* Hero: The Arena */}
           <div className="relative overflow-hidden rounded-[3rem] bg-slate-900 border border-white/5 p-10 lg:p-16 shadow-2xl">

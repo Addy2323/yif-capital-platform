@@ -88,7 +88,7 @@ export function InstallAppBanner() {
     <>
       <div
         className={cn(
-          "fixed left-0 right-0 z-[55] border-t border-gold/20 bg-navy/95 px-3 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.25)] backdrop-blur-md",
+          "fixed left-0 right-0 z-[55] border-t border-gold/20 bg-navy px-3 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.25)]",
           "pb-[max(0.75rem,env(safe-area-inset-bottom))]",
           bottomOffset,
         )}

@@ -11,7 +11,7 @@ export function LmsHeader() {
     const { user } = useAuth()
 
     return (
-        <header className="sticky top-0 z-20 border-b border-gray-200 dark:border-white/10 bg-white/90 dark:bg-[#0A1628]/90 backdrop-blur-xl w-full">
+        <header className="sticky top-0 z-20 border-b border-gray-200 dark:border-white/10 bg-white dark:bg-[#0A1628] w-full">
             <div className="flex h-16 items-center justify-between pl-14 pr-4 lg:pl-8 lg:pr-8">
                 {/* Search */}
                 <div className="hidden md:flex flex-1 max-w-md">

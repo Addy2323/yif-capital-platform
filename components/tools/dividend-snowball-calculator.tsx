@@ -123,7 +123,7 @@ export function DividendSnowballCalculator() {
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Left: Input Form */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl">
+          <div className="bg-slate-800/80 rounded-2xl p-6 border border-white/10 shadow-xl">
             <div className="flex items-center gap-2 mb-6">
               <Calculator className="h-5 w-5 text-emerald-400" />
               <h3 className="text-lg font-semibold text-white">Projection Inputs</h3>

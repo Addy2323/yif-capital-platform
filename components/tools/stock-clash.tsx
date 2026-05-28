@@ -95,7 +95,7 @@ export function StockClash() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-20">
+    <div className="max-w-4xl mx-auto space-y-8 pb-4">
       {/* Duel Setup */}
       {!duelResult && !loading && (
         <motion.div 
@@ -253,13 +253,19 @@ export function StockClash() {
                 <div className="prose prose-invert prose-sm max-w-none">
                   {duelResult.verdict.split(/\d\./).filter(Boolean).map((section, idx) => {
                     const titles = ["Income Prospect", "Growth Candidate", "Final Verdict"]
+                    const clean = section
+                      .replace(/#{1,6}\s*/g, "")
+                      .replace(/\*\*(.*?)\*\*/g, "$1")
+                      .replace(/\*(.*?)\*/g, "$1")
+                      .replace(/`([^`]*)`/g, "$1")
+                      .trim()
                     return (
                       <div key={idx} className="mb-8 last:mb-0 space-y-3">
                         <div className="flex items-center gap-2 text-gold font-bold uppercase text-[10px] tracking-widest">
                           <ChevronDown className="h-3 w-3 rotate-[-90deg]" />
                           {titles[idx]}
                         </div>
-                        <p className="text-slate-300 leading-relaxed text-base italic">{section.trim()}</p>
+                        <p className="text-slate-300 leading-relaxed text-base italic">{clean}</p>
                       </div>
                     )
                   })}

@@ -27,7 +27,7 @@ export function FundModuleNav({ fund, activeModule, userRole }: FundModuleNavPro
   })
 
   return (
-    <div className="border-b border-border/50 bg-background/95 backdrop-blur-sm sticky top-0 z-40">
+    <div className="border-b border-border/50 bg-background sticky top-0 z-40">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Fund Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 py-4 border-b border-border/30">
@@ -94,7 +94,7 @@ export function FundModuleNav({ fund, activeModule, userRole }: FundModuleNavPro
 
 export function FundModuleNavSkeleton() {
   return (
-    <div className="border-b border-border/50 bg-background/95 backdrop-blur-sm sticky top-0 z-40">
+    <div className="border-b border-border/50 bg-background sticky top-0 z-40">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex justify-between items-center py-4 border-b border-border/30">
           <div className="h-4 w-24 bg-muted animate-pulse rounded" />
