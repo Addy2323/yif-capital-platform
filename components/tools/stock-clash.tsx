@@ -185,9 +185,9 @@ export function StockClash() {
       {/* Duel Result */}
       <AnimatePresence>
         {duelResult && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
             className="space-y-8"
           >
             {/* The Stage */}
