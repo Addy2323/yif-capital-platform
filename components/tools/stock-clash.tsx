@@ -2,14 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { 
-  Zap, 
-  Swords, 
-  Shield, 
-  TrendingUp, 
-  Coins, 
-  Search, 
-  ChevronDown, 
+import {
+  Zap,
+  Swords,
+  ChevronDown,
   AlertCircle,
   Trophy,
   RefreshCcw,
@@ -42,7 +38,7 @@ export function StockClash() {
   useEffect(() => {
     fetch("/api/stocks/list")
       .then(res => res.json())
-      .then(data => setStocks(data))
+      .then(data => setStocks(Array.isArray(data) ? data : []))
       .catch(err => console.error("Failed to load stocks", err))
   }, [])
 
