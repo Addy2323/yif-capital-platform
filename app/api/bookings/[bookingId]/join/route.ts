@@ -31,7 +31,8 @@ export async function GET(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
-  const meetingID = `yif-${bookingId.replace(/-/g, "").substring(0, 10)}`
+  // Use the full UUID as meetingID — no truncation so both sides always match exactly.
+  const meetingID = `yif-${bookingId.replace(/-/g, "")}`
   const sessionName = `YIF – ${booking.category.replace(/_/g, " ")}`
   const fullName = isExpert
     ? (booking.expert.user.name ?? "Expert")
