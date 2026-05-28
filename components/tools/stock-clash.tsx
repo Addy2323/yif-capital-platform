@@ -101,7 +101,7 @@ export function StockClash() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-900 border border-white/10 rounded-3xl p-8 shadow-2xl text-center space-y-8"
+          className="bg-slate-900 border border-white/10 rounded-3xl p-5 sm:p-8 shadow-2xl text-center space-y-8"
         >
           <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gold/20 text-gold mb-4">
             <Swords className="h-8 w-8" />
@@ -187,14 +187,14 @@ export function StockClash() {
             className="space-y-8"
           >
             {/* The Stage */}
-            <div className="relative overflow-hidden bg-slate-900 border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl">
+            <div className="relative overflow-hidden bg-slate-900 border border-white/10 rounded-3xl p-4 sm:p-8 lg:p-12 shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent pointer-events-none" />
               
               {/* Header: VS */}
               <div className="relative z-10 flex items-center justify-between gap-4 mb-12">
                 <div className="text-center flex-1">
                   <div className="text-[10px] font-black text-emerald-400 uppercase tracking-[0.3em] mb-2">Challenger A</div>
-                  <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tighter">{duelResult.stockA.symbol}</h2>
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tighter">{duelResult.stockA.symbol}</h2>
                   <p className="text-slate-500 text-xs truncate max-w-[150px] mx-auto mt-1">{duelResult.stockA.name}</p>
                 </div>
 
@@ -236,7 +236,7 @@ export function StockClash() {
               transition={{ delay: 0.5 }}
               className="bg-slate-900 border-2 border-emerald-500/20 rounded-3xl overflow-hidden shadow-2xl"
             >
-              <div className="bg-emerald-500/10 px-8 py-5 border-b border-white/5 flex items-center justify-between">
+              <div className="bg-emerald-500/10 px-4 sm:px-8 py-4 border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="h-10 w-10 rounded-xl bg-emerald-500 flex items-center justify-center text-emerald-950 shadow-lg shadow-emerald-500/20">
                     <Trophy className="h-6 w-6" />
@@ -249,7 +249,7 @@ export function StockClash() {
                 <Sparkles className="h-6 w-6 text-emerald-400/50" />
               </div>
 
-              <div className="p-8 lg:p-10 space-y-8">
+              <div className="p-4 sm:p-8 lg:p-10 space-y-8">
                 <div className="prose prose-invert prose-sm max-w-none">
                   {duelResult.verdict.split(/\d\./).filter(Boolean).map((section, idx) => {
                     const titles = ["Income Prospect", "Growth Candidate", "Final Verdict"]

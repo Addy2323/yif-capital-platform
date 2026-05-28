@@ -12,11 +12,11 @@ export default function StockClashPage() {
     <div className="flex min-h-screen bg-navy text-slate-200">
       <DashboardSidebar />
       
-      <main className="flex-1 lg:ml-64 p-4 lg:p-8">
+      <main className="flex-1 lg:ml-64 p-4 lg:p-8 overflow-x-hidden">
         <div className="max-w-5xl mx-auto space-y-6">
-          
+
           {/* Hero: The Arena */}
-          <div className="relative overflow-hidden rounded-[3rem] bg-slate-900 border border-white/5 p-10 lg:p-16 shadow-2xl">
+          <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[3rem] bg-slate-900 border border-white/5 p-5 sm:p-10 lg:p-16 shadow-2xl">
             <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
               <Swords className="h-64 w-64 text-emerald-400 rotate-12" />
             </div>
@@ -26,7 +26,7 @@ export default function StockClashPage() {
                 <Sparkles className="h-4 w-4" />
                 DSE Combat Arena
               </div>
-              <h1 className="text-5xl lg:text-7xl font-black text-white tracking-tighter leading-none">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-tighter leading-none">
                 STOCK <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-yellow-300 italic">CLASH</span>
               </h1>
               <p className="text-slate-400 text-xl leading-relaxed font-medium">
