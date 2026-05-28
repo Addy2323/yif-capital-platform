@@ -496,7 +496,7 @@ export default function ExpertEarningsPage() {
                             {payoutMethod === "MOBILE_MONEY" ? (
                                 <p>{mobileProvider} · {mobileNumber}</p>
                             ) : (
-                                <p>{bankName} · {accountNumber}{accountName ? ` · ${accountName}` : ""}</p>
+                                <p>{bankName} · {bankAccount}{accountName ? ` · ${accountName}` : ""}</p>
                             )}
                         </div>
                         <p className="text-xs text-muted-foreground">

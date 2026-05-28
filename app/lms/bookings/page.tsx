@@ -142,10 +142,12 @@ export default function LmsBookingsPage() {
                                             <p className="text-xs text-slate-400 dark:text-white/40 mt-1 truncate">{booking.notes}</p>
                                         )}
                                     </div>
-                                    {tab === "upcoming" && booking.status === "CONFIRMED" && (
-                                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white shrink-0">
-                                            <Video className="mr-1.5 h-3.5 w-3.5" /> Join
-                                        </Button>
+                                    {tab === "upcoming" && booking.status === "CONFIRMED" && (booking.sessionType === "ONLINE" || booking.sessionType === "VIP_PRIVATE") && (
+                                        <Link href={`/api/bookings/${booking.id}/join`} target="_blank" rel="noopener noreferrer">
+                                            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white shrink-0">
+                                                <Video className="mr-1.5 h-3.5 w-3.5" /> Join
+                                            </Button>
+                                        </Link>
                                     )}
                                 </CardContent>
                             </Card>

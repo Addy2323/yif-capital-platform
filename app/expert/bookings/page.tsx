@@ -299,7 +299,7 @@ export default function BookingsManager() {
                                             )}
 
                                             {booking.status === "CONFIRMED" && booking.meetingUrl && (
-                                                <Link href={booking.meetingUrl}>
+                                                <Link href={`/api/bookings/${booking.id}/join`} target="_blank" rel="noopener noreferrer">
                                                     <Button
                                                         size="sm"
                                                         className="bg-emerald-600 hover:bg-emerald-700 text-white h-9 flex items-center gap-1"
@@ -467,7 +467,7 @@ export default function BookingsManager() {
                                 </Button>
                             )}
                             {selectedBooking.status === "CONFIRMED" && selectedBooking.meetingUrl && (
-                                <Link href={selectedBooking.meetingUrl}>
+                                <Link href={`/api/bookings/${selectedBooking.id}/join`} target="_blank" rel="noopener noreferrer">
                                     <Button className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5">
                                         <Video className="h-4 w-4" /> Start Session
                                     </Button>

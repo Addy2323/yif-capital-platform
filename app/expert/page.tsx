@@ -502,7 +502,7 @@ export default function ExpertDashboardOverview() {
                                             <p className="text-[11px] text-muted-foreground mt-0.5">Client: {item.user.name}</p>
                                             {item.meetingUrl && (
                                                 <div className="flex gap-1.5 mt-2.5">
-                                                    <Link href={item.meetingUrl}>
+                                                    <Link href={`/api/bookings/${item.id}/join`} target="_blank" rel="noopener noreferrer">
                                                         <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-[10px] h-6 px-2 flex items-center gap-1">
                                                             <Play className="h-3 w-3 fill-white" /> Start Meet
                                                         </Button>
