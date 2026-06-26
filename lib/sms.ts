@@ -22,6 +22,7 @@ async function sendViaBeem(phoneE164: string, message: string): Promise<void> {
     throw new Error("BEEM_NOT_CONFIGURED")
   }
 
+  const auth = Buffer.from(`${apiKey}:${secret}`).toString("base64")
   const destAddr = destAddrFromE164(phoneE164)
 
   console.info(`[SMS] Sending via Beem to ${destAddr.slice(0, 6)}*** (source: ${sourceAddr})`)
@@ -32,16 +33,14 @@ async function sendViaBeem(phoneE164: string, message: string): Promise<void> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        api_key: apiKey,
-        secret_key: secret,
+        Authorization: `Basic ${auth}`,
       },
       body: JSON.stringify({
         source_addr: sourceAddr,
-        schedule_time: "",
+        schedule_time: null,
         encoding: 0,
         message,
-        recipients: [{ recipient_id: "1", dest_addr: destAddr }],
+        recipients: [{ recipient_id: 1, dest_addr: destAddr }],
       }),
     })
   } catch (networkErr) {

@@ -27,12 +27,15 @@ export async function GET() {
   // If Beem is configured, try checking balance
   if (hasBeem) {
     try {
+      const auth = Buffer.from(
+        `${process.env.BEEM_API_KEY}:${process.env.BEEM_SECRET_KEY}`
+      ).toString("base64")
+
       const balRes = await fetch("https://apisms.beem.africa/public/v1/vendors/balance", {
         method: "GET",
         headers: {
-          Accept: "application/json",
-          api_key: process.env.BEEM_API_KEY!,
-          secret_key: process.env.BEEM_SECRET_KEY!,
+          "Content-Type": "application/json",
+          Authorization: `Basic ${auth}`,
         },
       })
 
