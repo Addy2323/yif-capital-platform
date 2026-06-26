@@ -22,54 +22,90 @@ async function sendViaBeem(phoneE164: string, message: string): Promise<void> {
     throw new Error("BEEM_NOT_CONFIGURED")
   }
 
-  const auth = Buffer.from(`${apiKey}:${secret}`).toString("base64")
   const destAddr = destAddrFromE164(phoneE164)
 
   console.info(`[SMS] Sending via Beem to ${destAddr.slice(0, 6)}*** (source: ${sourceAddr})`)
 
-  let res: Response
-  try {
-    res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${auth}`,
-      },
-      body: JSON.stringify({
-        source_addr: sourceAddr,
-        schedule_time: null,
-        encoding: 0,
-        message,
-        recipients: [{ recipient_id: 1, dest_addr: destAddr }],
-      }),
-    })
-  } catch (networkErr) {
-    console.error("[SMS] Beem network/fetch error:", networkErr)
-    throw new Error(`Beem SMS network error: ${(networkErr as Error).message}`)
+  // Beem dashboard may provide the secret as a base64-encoded string.
+  // Determine the actual secret to use: try the raw value first;
+  // if it looks like base64 (ends with =), also prepare the decoded variant.
+  const isBase64 = /^[A-Za-z0-9+/]+=+$/.test(secret) || /^[A-Za-z0-9+/]{4,}$/.test(secret)
+  const decodedSecret = isBase64
+    ? Buffer.from(secret, "base64").toString("utf-8")
+    : null
+
+  // Build the request body once
+  const body = JSON.stringify({
+    source_addr: sourceAddr,
+    schedule_time: null,
+    encoding: 0,
+    message,
+    recipients: [{ recipient_id: 1, dest_addr: destAddr }],
+  })
+
+  // Try with the raw secret first
+  const secretsToTry = [secret, ...(decodedSecret && decodedSecret !== secret ? [decodedSecret] : [])]
+
+  let lastRes: Response | null = null
+  let lastData: Record<string, unknown> = {}
+  let lastRawBody = ""
+
+  for (const s of secretsToTry) {
+    const auth = Buffer.from(`${apiKey}:${s}`).toString("base64")
+
+    let res: Response
+    try {
+      res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${auth}`,
+        },
+        body,
+      })
+    } catch (networkErr) {
+      console.error("[SMS] Beem network/fetch error:", networkErr)
+      throw new Error(`Beem SMS network error: ${(networkErr as Error).message}`)
+    }
+
+    let data: Record<string, unknown> = {}
+    let rawBody = ""
+    try {
+      rawBody = await res.text()
+      data = JSON.parse(rawBody) as Record<string, unknown>
+    } catch {
+      console.error("[SMS] Beem non-JSON response:", res.status, rawBody.slice(0, 500))
+    }
+
+    // If auth succeeded (not 401), process the response
+    if (res.status !== 401) {
+      if (!res.ok) {
+        const detail = data.message || data.error || rawBody.slice(0, 200) || "(no body)"
+        console.error(`[SMS] Beem HTTP ${res.status}:`, detail, data)
+        throw new Error(`Beem SMS failed (HTTP ${res.status}): ${detail}`)
+      }
+
+      if (data.successful === false) {
+        const detail = data.message || data.error || JSON.stringify(data)
+        console.error("[SMS] Beem API rejected:", detail, data)
+        throw new Error(`Beem SMS rejected: ${detail}`)
+      }
+
+      console.info("[SMS] Beem send OK:", data.request_id || data.code || "success")
+      return
+    }
+
+    // 401 — save for potential retry with decoded secret
+    console.warn(`[SMS] Beem 401 with secret variant (len=${s.length}), trying next...`)
+    lastRes = res
+    lastData = data
+    lastRawBody = rawBody
   }
 
-  let data: Record<string, unknown> = {}
-  let rawBody = ""
-  try {
-    rawBody = await res.text()
-    data = JSON.parse(rawBody) as Record<string, unknown>
-  } catch {
-    console.error("[SMS] Beem non-JSON response:", res.status, rawBody.slice(0, 500))
-  }
-
-  if (!res.ok) {
-    const detail = data.message || data.error || rawBody.slice(0, 200) || "(no body)"
-    console.error(`[SMS] Beem HTTP ${res.status}:`, detail, data)
-    throw new Error(`Beem SMS failed (HTTP ${res.status}): ${detail}`)
-  }
-
-  if (data.successful === false) {
-    const detail = data.message || data.error || JSON.stringify(data)
-    console.error("[SMS] Beem API rejected:", detail, data)
-    throw new Error(`Beem SMS rejected: ${detail}`)
-  }
-
-  console.info("[SMS] Beem send OK:", data.request_id || data.code || "success")
+  // All variants failed with 401
+  const detail = lastData.message || lastData.error || lastRawBody.slice(0, 200) || "(no body)"
+  console.error("[SMS] Beem 401 with all secret variants:", detail, lastData)
+  throw new Error(`Beem SMS failed (HTTP 401): ${detail}`)
 }
 
 async function sendViaTwilio(phoneE164: string, message: string): Promise<void> {
