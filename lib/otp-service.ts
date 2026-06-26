@@ -1,7 +1,7 @@
 import { randomInt } from "crypto"
 import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/prisma"
-import { sendOtpSms } from "@/lib/sms"
+import { sendOtpSms, requestBeemOtp, verifyBeemOtp } from "@/lib/sms"
 import {
   checkOtpSendRateLimit,
   clearVerifyAttempts,
@@ -36,9 +36,28 @@ export async function issueOtpForPhone(phoneE164: string): Promise<{ expiresAt: 
     })
   }
 
+  const expiresAt = new Date(Date.now() + OTP_TTL_MS)
+
+  if (process.env.BEEM_APP_ID) {
+    try {
+      const pinId = await requestBeemOtp(phone)
+      await prisma.otp.deleteMany({ where: { phoneNumber: phone } })
+      await prisma.otp.create({
+        data: {
+          phoneNumber: phone,
+          otpHash: pinId,
+          expiresAt,
+        },
+      })
+      return { expiresAt }
+    } catch (e) {
+      rollbackLastOtpSend(phone)
+      throw e
+    }
+  }
+
   const plainCode = generateOtpDigits()
   const otpHash = await hashOtp(plainCode)
-  const expiresAt = new Date(Date.now() + OTP_TTL_MS)
 
   await prisma.otp.deleteMany({ where: { phoneNumber: phone } })
   await prisma.otp.create({
@@ -107,7 +126,13 @@ export async function verifyPhoneOtpAndActivate(
     return { ok: false, error: "Invalid or expired code", status: 400 }
   }
 
-  const match = await compareOtp(digits, otpRow.otpHash)
+  let match = false
+  if (process.env.BEEM_APP_ID) {
+    match = await verifyBeemOtp(otpRow.otpHash, digits)
+  } else {
+    match = await compareOtp(digits, otpRow.otpHash)
+  }
+
   if (!match) {
     return { ok: false, error: "Invalid or expired code", status: 400 }
   }

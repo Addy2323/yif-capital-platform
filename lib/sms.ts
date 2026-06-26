@@ -108,6 +108,165 @@ async function sendViaBeem(phoneE164: string, message: string): Promise<void> {
   throw new Error(`Beem SMS failed (HTTP 401): ${detail}`)
 }
 
+export async function requestBeemOtp(phoneE164: string): Promise<string> {
+  const apiKey = process.env.BEEM_API_KEY
+  const secret = process.env.BEEM_SECRET_KEY
+  const appId = process.env.BEEM_APP_ID
+
+  if (!apiKey || !secret || !appId) {
+    throw new Error("BEEM_OTP_NOT_CONFIGURED")
+  }
+
+  const destAddr = destAddrFromE164(phoneE164)
+  console.info(`[SMS] Requesting Beem OTP pin for ${destAddr.slice(0, 6)}*** (appId: ${appId})`)
+
+  const isBase64 = /^[A-Za-z0-9+/]+=+$/.test(secret) || /^[A-Za-z0-9+/]{4,}$/.test(secret)
+  const decodedSecret = isBase64
+    ? Buffer.from(secret, "base64").toString("utf-8")
+    : null
+
+  const secretsToTry = [secret, ...(decodedSecret && decodedSecret !== secret ? [decodedSecret] : [])]
+  const body = JSON.stringify({
+    appId: Number(appId),
+    msisdn: destAddr,
+  })
+
+  let lastRes: Response | null = null
+  let lastData: Record<string, unknown> = {}
+  let lastRawBody = ""
+
+  for (const s of secretsToTry) {
+    const auth = Buffer.from(`${apiKey}:${s}`).toString("base64")
+    let res: Response
+    try {
+      res = await fetch("https://apiotp.beem.africa/v1/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${auth}`,
+        },
+        body,
+      })
+    } catch (networkErr) {
+      console.error("[SMS] Beem OTP network/fetch error:", networkErr)
+      throw new Error(`Beem OTP request network error: ${(networkErr as Error).message}`)
+    }
+
+    let data: Record<string, unknown> = {}
+    let rawBody = ""
+    try {
+      rawBody = await res.text()
+      data = JSON.parse(rawBody) as Record<string, unknown>
+    } catch {
+      console.error("[SMS] Beem OTP request non-JSON response:", res.status, rawBody.slice(0, 500))
+    }
+
+    if (res.status !== 401) {
+      if (!res.ok) {
+        const detail = data.message || (data.message as any)?.message || rawBody.slice(0, 200) || "(no body)"
+        console.error(`[SMS] Beem OTP HTTP ${res.status}:`, detail, data)
+        throw new Error(`Beem OTP request failed (HTTP ${res.status}): ${detail}`)
+      }
+
+      const pinId = (data.data as any)?.pinId || data.pinId || (data.data as any)?.pin_id || data.pin_id
+      if (!pinId) {
+        console.error("[SMS] Beem OTP request succeeded but returned no pinId:", data)
+        throw new Error("Beem OTP request returned no pinId")
+      }
+
+      console.info("[SMS] Beem OTP requested OK, pinId:", pinId)
+      return String(pinId)
+    }
+
+    console.warn(`[SMS] Beem OTP 401 with secret variant (len=${s.length}), trying next...`)
+    lastRes = res
+    lastData = data
+    lastRawBody = rawBody
+  }
+
+  const detail = lastData.message || lastRawBody.slice(0, 200) || "(no body)"
+  console.error("[SMS] Beem OTP 401 with all secret variants:", detail, lastData)
+  throw new Error(`Beem OTP request failed (HTTP 401): ${detail}`)
+}
+
+export async function verifyBeemOtp(pinId: string, pin: string): Promise<boolean> {
+  const apiKey = process.env.BEEM_API_KEY
+  const secret = process.env.BEEM_SECRET_KEY
+
+  if (!apiKey || !secret) {
+    throw new Error("BEEM_NOT_CONFIGURED")
+  }
+
+  console.info(`[SMS] Verifying Beem OTP (pinId: ${pinId})`)
+
+  const isBase64 = /^[A-Za-z0-9+/]+=+$/.test(secret) || /^[A-Za-z0-9+/]{4,}$/.test(secret)
+  const decodedSecret = isBase64
+    ? Buffer.from(secret, "base64").toString("utf-8")
+    : null
+
+  const secretsToTry = [secret, ...(decodedSecret && decodedSecret !== secret ? [decodedSecret] : [])]
+  const body = JSON.stringify({
+    pinId,
+    pin,
+  })
+
+  let lastRes: Response | null = null
+  let lastData: Record<string, unknown> = {}
+  let lastRawBody = ""
+
+  for (const s of secretsToTry) {
+    const auth = Buffer.from(`${apiKey}:${s}`).toString("base64")
+    let res: Response
+    try {
+      res = await fetch("https://apiotp.beem.africa/v1/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${auth}`,
+        },
+        body,
+      })
+    } catch (networkErr) {
+      console.error("[SMS] Beem OTP verify network/fetch error:", networkErr)
+      throw new Error(`Beem OTP verify network error: ${(networkErr as Error).message}`)
+    }
+
+    let data: Record<string, unknown> = {}
+    let rawBody = ""
+    try {
+      rawBody = await res.text()
+      data = JSON.parse(rawBody) as Record<string, unknown>
+    } catch {
+      console.error("[SMS] Beem OTP verify non-JSON response:", res.status, rawBody.slice(0, 500))
+    }
+
+    if (res.status !== 401) {
+      if (!res.ok) {
+        const detail = data.message || (data.message as any)?.message || rawBody.slice(0, 200) || "(no body)"
+        console.error(`[SMS] Beem OTP verify HTTP ${res.status}:`, detail, data)
+        return false
+      }
+
+      const msgObj = (data.data as any)?.message || data.message
+      const code = msgObj?.code || data.code || (data.data as any)?.code
+      
+      console.info(`[SMS] Beem OTP verify response code: ${code}`, data)
+      if (code === 117) {
+        return true
+      }
+      return false
+    }
+
+    console.warn(`[SMS] Beem OTP verify 401 with secret variant (len=${s.length}), trying next...`)
+    lastRes = res
+    lastData = data
+    lastRawBody = rawBody
+  }
+
+  console.error("[SMS] Beem OTP verify 401 with all secret variants:", lastRawBody || lastData)
+  return false
+}
+
 async function sendViaTwilio(phoneE164: string, message: string): Promise<void> {
   const sid = process.env.TWILIO_ACCOUNT_SID
   const token = process.env.TWILIO_AUTH_TOKEN
