@@ -77,6 +77,7 @@ export async function registerUser(body: {
   } catch (e: unknown) {
     await prisma.user.delete({ where: { id: userId } }).catch(() => {})
     const err = e as { status?: number; message?: string }
+    console.error("registerUser OTP/SMS error:", err.message || e)
     if (err.status === 429) {
       return {
         ok: false,
@@ -92,10 +93,12 @@ export async function registerUser(body: {
           "SMS service is not configured. Set Beem Africa (BEEM_*) or Twilio env vars, or use development mode.",
       }
     }
+    // Surface the actual SMS error for debugging
+    const detail = err.message || String(e)
     return {
       ok: false,
       status: 500,
-      error: "Could not send verification code. Try again later.",
+      error: `Could not send verification code: ${detail}`,
     }
   }
 }

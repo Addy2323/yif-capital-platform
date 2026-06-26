@@ -35,16 +35,18 @@ export async function handleResendOtp(phoneInput: string) {
       },
     }
   } catch (e: unknown) {
-    const err = e as { status?: number }
+    const err = e as { status?: number; message?: string }
+    console.error("resendOtp SMS error:", err.message || e)
     if (err.status === 429) {
       return {
         status: 429 as const,
         body: { error: "Too many OTP requests. Please wait before trying again." },
       }
     }
+    const detail = err.message || String(e)
     return {
       status: 500 as const,
-      body: { error: "Could not send verification code. Try again later." },
+      body: { error: `Could not send verification code: ${detail}` },
     }
   }
 }

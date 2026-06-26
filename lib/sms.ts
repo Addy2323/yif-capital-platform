@@ -22,41 +22,55 @@ async function sendViaBeem(phoneE164: string, message: string): Promise<void> {
     throw new Error("BEEM_NOT_CONFIGURED")
   }
 
-  const auth = Buffer.from(`${apiKey}:${secret}`).toString("base64")
   const destAddr = destAddrFromE164(phoneE164)
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${auth}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      source_addr: sourceAddr,
-      schedule_time: "",
-      encoding: 0,
-      message,
-      recipients: [{ recipient_id: "1", dest_addr: destAddr }],
-    }),
-  })
+  console.info(`[SMS] Sending via Beem to ${destAddr.slice(0, 6)}*** (source: ${sourceAddr})`)
+
+  let res: Response
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        api_key: apiKey,
+        secret_key: secret,
+      },
+      body: JSON.stringify({
+        source_addr: sourceAddr,
+        schedule_time: "",
+        encoding: 0,
+        message,
+        recipients: [{ recipient_id: "1", dest_addr: destAddr }],
+      }),
+    })
+  } catch (networkErr) {
+    console.error("[SMS] Beem network/fetch error:", networkErr)
+    throw new Error(`Beem SMS network error: ${(networkErr as Error).message}`)
+  }
 
   let data: Record<string, unknown> = {}
+  let rawBody = ""
   try {
-    data = (await res.json()) as Record<string, unknown>
+    rawBody = await res.text()
+    data = JSON.parse(rawBody) as Record<string, unknown>
   } catch {
-    /* ignore */
+    console.error("[SMS] Beem non-JSON response:", res.status, rawBody.slice(0, 500))
   }
 
   if (!res.ok) {
-    console.error("[SMS] Beem HTTP error:", res.status, data)
-    throw new Error("Failed to send verification SMS")
+    const detail = data.message || data.error || rawBody.slice(0, 200) || "(no body)"
+    console.error(`[SMS] Beem HTTP ${res.status}:`, detail, data)
+    throw new Error(`Beem SMS failed (HTTP ${res.status}): ${detail}`)
   }
 
   if (data.successful === false) {
-    console.error("[SMS] Beem API rejected:", data)
-    throw new Error("Failed to send verification SMS")
+    const detail = data.message || data.error || JSON.stringify(data)
+    console.error("[SMS] Beem API rejected:", detail, data)
+    throw new Error(`Beem SMS rejected: ${detail}`)
   }
+
+  console.info("[SMS] Beem send OK:", data.request_id || data.code || "success")
 }
 
 async function sendViaTwilio(phoneE164: string, message: string): Promise<void> {
