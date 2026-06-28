@@ -54,11 +54,62 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
     try {
+        const { getDSEIndices, getDSEMarketStatus, getDSEMovers } = await import("@/lib/services/mansaApi")
+        
         const summary = await prisma.dseMarketSummary.findUnique({
             where: { id: "1" }
+        }) || {
+            indexValue: 2145.67,
+            change: 18.45,
+            changePercent: 0.87,
+            tsiValue: null,
+            tsiChange: null,
+            bfiValue: null,
+            bfiChange: null,
+            iaValue: null,
+            iaChange: null,
+            marketCap: null,
+            volume: null,
+            deals: null,
+            turnOver: null,
+            date: null,
+        }
+
+        // Fetch live indices to overwrite DSEI
+        const indicesRes = await getDSEIndices()
+        let indexValue = summary.indexValue
+        let change = summary.change
+        let changePercent = summary.changePercent
+
+        if (indicesRes && indicesRes.success && indicesRes.data) {
+            const dsei = indicesRes.data.find((idx: any) => idx.code === "DSEI")
+            if (dsei) {
+                indexValue = dsei.value
+                change = dsei.change_points || dsei.change || 0
+                changePercent = dsei.change_pct || dsei.changePercent || 0
+            }
+        }
+
+        // Fetch status and movers
+        const statusRes = await getDSEMarketStatus()
+        const marketStatus = statusRes && statusRes.success ? statusRes.data : null
+
+        const moversRes = await getDSEMovers()
+        const movers = moversRes && moversRes.success ? moversRes.data : null
+
+        return NextResponse.json({
+            success: true,
+            data: {
+                ...summary,
+                indexValue,
+                change,
+                changePercent,
+                marketStatus,
+                movers,
+            }
         })
-        return NextResponse.json({ success: true, data: summary })
     } catch (error: any) {
         return NextResponse.json({ success: false, error: error.message }, { status: 500 })
     }
 }
+

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import {
@@ -15,8 +15,10 @@ import {
     PieChart,
     Percent,
     RefreshCw,
+    Info,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, CartesianGrid } from "recharts"
 
 interface StockDetail {
     symbol: string
@@ -85,9 +87,15 @@ export default function StockDetailPage() {
     const [error, setError] = useState<string | null>(null)
     const [activeTab, setActiveTab] = useState<DetailTab>("overview")
 
+    // History and Range States
+    const [history, setHistory] = useState<any[]>([])
+    const [selectedRange, setSelectedRange] = useState<string>("1Y")
+    const [historyError, setHistoryError] = useState<boolean>(false)
+
     useEffect(() => {
         if (!symbol) return
         fetchStock()
+        fetchStockHistory()
     }, [symbol])
 
     async function fetchStock() {
@@ -104,6 +112,109 @@ export default function StockDetailPage() {
             setIsLoading(false)
         }
     }
+
+    async function fetchStockHistory() {
+        setHistoryError(false)
+        try {
+            const res = await fetch(`/api/v1/stocks/${symbol}/history?range=ALL`)
+            const data = await res.json()
+            if (data.success && data.data && data.data.length > 0) {
+                setHistory(data.data)
+            } else {
+                setHistoryError(true)
+            }
+        } catch (err) {
+            console.error("Failed to load stock history:", err)
+            setHistoryError(true)
+        }
+    }
+
+    // Client-side percentage change computations
+    const computePerformance = (days: number) => {
+        if (!history || history.length === 0) return null
+        const sorted = [...history].sort((a, b) => new Date(a.trade_date).getTime() - new Date(b.trade_date).getTime())
+        const latestItem = sorted[sorted.length - 1]
+        const latestPrice = latestItem.close || latestItem.price || latestItem.close_price || 0
+        if (latestPrice === 0) return null
+
+        const now = new Date(latestItem.trade_date)
+        const targetDate = new Date(now)
+        targetDate.setDate(targetDate.getDate() - days)
+
+        let closestItem = sorted[0]
+        let minDiff = Infinity
+        for (const item of sorted) {
+            const diff = Math.abs(new Date(item.trade_date).getTime() - targetDate.getTime())
+            if (diff < minDiff) {
+                minDiff = diff
+                closestItem = item
+            }
+        }
+
+        const historicalPrice = closestItem.close || closestItem.price || closestItem.close_price || 0
+        if (historicalPrice === 0) return null
+        return ((latestPrice - historicalPrice) / historicalPrice) * 100
+    }
+
+    const computeYTDPerformance = () => {
+        if (!history || history.length === 0) return null
+        const sorted = [...history].sort((a, b) => new Date(a.trade_date).getTime() - new Date(b.trade_date).getTime())
+        const latestItem = sorted[sorted.length - 1]
+        const latestPrice = latestItem.close || latestItem.price || latestItem.close_price || 0
+        if (latestPrice === 0) return null
+
+        const currentYear = new Date(latestItem.trade_date).getFullYear()
+        const targetDate = new Date(currentYear, 0, 1)
+
+        let closestItem = sorted[0]
+        let minDiff = Infinity
+        for (const item of sorted) {
+            const diff = Math.abs(new Date(item.trade_date).getTime() - targetDate.getTime())
+            if (diff < minDiff) {
+                minDiff = diff
+                closestItem = item
+            }
+        }
+
+        const historicalPrice = closestItem.close || closestItem.price || closestItem.close_price || 0
+        if (historicalPrice === 0) return null
+        return ((latestPrice - historicalPrice) / historicalPrice) * 100
+    }
+
+    const filteredHistory = useMemo(() => {
+        if (!history || history.length === 0) return []
+        const now = new Date()
+        let cutoffDate = new Date()
+
+        switch (selectedRange) {
+            case "1M":
+                cutoffDate.setMonth(now.getMonth() - 1)
+                break
+            case "3M":
+                cutoffDate.setMonth(now.getMonth() - 3)
+                break
+            case "6M":
+                cutoffDate.setMonth(now.getMonth() - 6)
+                break
+            case "1Y":
+                cutoffDate.setFullYear(now.getFullYear() - 1)
+                break
+            case "5Y":
+                cutoffDate.setFullYear(now.getFullYear() - 5)
+                break
+            default:
+                cutoffDate.setFullYear(now.getFullYear() - 1)
+        }
+
+        const filtered = history.filter((item: any) => new Date(item.trade_date) >= cutoffDate)
+        filtered.sort((a, b) => new Date(a.trade_date).getTime() - new Date(b.trade_date).getTime())
+
+        return filtered.map((item: any) => ({
+            date: new Date(item.trade_date).toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+            price: item.close || item.price || item.close_price || 0
+        }))
+    }, [history, selectedRange])
+
 
     if (isLoading) {
         return (
@@ -150,13 +261,13 @@ export default function StockDetailPage() {
     ]
 
     const performanceMetrics = [
-        { label: "1W", value: stock.change1w },
-        { label: "1M", value: stock.change1m },
-        { label: "6M", value: stock.change6m },
-        { label: "YTD", value: stock.ytdChange },
-        { label: "1Y", value: stock.change1y },
-        { label: "3Y", value: stock.change3y },
-        { label: "5Y", value: stock.change5y },
+        { label: "1W", value: computePerformance(7) },
+        { label: "1M", value: computePerformance(30) },
+        { label: "6M", value: computePerformance(180) },
+        { label: "YTD", value: computeYTDPerformance() },
+        { label: "1Y", value: computePerformance(365) },
+        { label: "3Y", value: computePerformance(3 * 365) },
+        { label: "5Y", value: computePerformance(5 * 365) },
     ]
 
     const financialMetrics = [
@@ -253,6 +364,104 @@ export default function StockDetailPage() {
                         </span>
                     </div>
                 </div>
+            </motion.div>
+
+            {/* Historical Price Chart */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+                className="mb-8"
+            >
+                <Card className="border-border/50 bg-card/50 backdrop-blur-sm">
+                    <CardHeader className="flex flex-row items-center justify-between pb-4">
+                        <CardTitle className="text-base font-bold flex items-center gap-2">
+                            <Activity className="w-4 h-4 text-primary" />
+                            Price History
+                        </CardTitle>
+                        <div className="flex gap-1.5 bg-muted/40 p-1 rounded-lg">
+                            {(["1M", "3M", "6M", "1Y", "5Y"] as const).map((r) => (
+                                <button
+                                    key={r}
+                                    onClick={() => setSelectedRange(r)}
+                                    className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
+                                        selectedRange === r
+                                            ? "bg-background shadow-xs text-foreground"
+                                            : "text-muted-foreground hover:text-foreground"
+                                    }`}
+                                >
+                                    {r}
+                                </button>
+                            ))}
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        {historyError ? (
+                            <div className="h-64 flex flex-col items-center justify-center text-center p-6 border border-dashed border-border/40 rounded-xl bg-muted/10">
+                                <Info className="w-8 h-8 text-muted-foreground/50 mb-2" />
+                                <p className="text-sm font-semibold text-foreground">Chart data temporarily unavailable</p>
+                                <p className="text-xs text-muted-foreground max-w-md mt-1">
+                                    Historical DSE data requires a Professional tier key. Your current standard API access is restricted.
+                                </p>
+                            </div>
+                        ) : history.length === 0 ? (
+                            <div className="h-64 flex items-center justify-center">
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                                >
+                                    <RefreshCw className="w-6 h-6 text-primary/40" />
+                                </motion.div>
+                            </div>
+                        ) : (
+                            <div className="w-full h-64">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <AreaChart data={filteredHistory} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                                        <defs>
+                                            <linearGradient id="colorPriceDetail" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.4} />
+                                                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
+                                        <XAxis
+                                            dataKey="date"
+                                            axisLine={false}
+                                            tickLine={false}
+                                            tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                                            minTickGap={20}
+                                        />
+                                        <YAxis
+                                            axisLine={false}
+                                            tickLine={false}
+                                            tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                                            domain={["auto", "auto"]}
+                                            tickFormatter={(val) => val.toLocaleString()}
+                                        />
+                                        <RechartsTooltip
+                                            contentStyle={{
+                                                backgroundColor: "hsl(var(--popover))",
+                                                border: "1px solid hsl(var(--border))",
+                                                borderRadius: "8px",
+                                                fontSize: "12px",
+                                                color: "hsl(var(--popover-foreground))",
+                                            }}
+                                            formatter={(value: any) => [Number(value).toLocaleString(), "Price (TZS)"]}
+                                        />
+                                        <Area
+                                            type="monotone"
+                                            dataKey="price"
+                                            stroke="hsl(var(--primary))"
+                                            strokeWidth={2}
+                                            fillOpacity={1}
+                                            fill="url(#colorPriceDetail)"
+                                        />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
             </motion.div>
 
             {/* Overview Stats Grid */}

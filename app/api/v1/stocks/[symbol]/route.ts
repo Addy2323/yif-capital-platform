@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { prisma } from "@/lib/prisma"
+import { getDSEStock, getDSEFundamentals } from "@/lib/services/mansaApi"
 
-// GET /api/v1/stocks/[symbol] — Fetch a single stock by symbol
+// GET /api/v1/stocks/[symbol] — Fetch a single stock by symbol from Mansa API
 export async function GET(
     req: NextRequest,
     { params }: { params: Promise<{ symbol: string }> }
@@ -10,61 +10,62 @@ export async function GET(
         const { symbol } = await params
         const upperSymbol = symbol.toUpperCase()
 
-        // Get the latest record for this symbol
-        const stock = await prisma.dseStock.findFirst({
-            where: { symbol: upperSymbol },
-            orderBy: { scrapedAt: "desc" },
-        })
-
-        if (!stock) {
+        // Fetch stock data from Mansa API
+        const stockRes = await getDSEStock(upperSymbol)
+        if (!stockRes || !stockRes.success || !stockRes.data) {
             return NextResponse.json(
                 { success: false, error: `Stock '${upperSymbol}' not found` },
                 { status: 404 }
             )
         }
+        const stock = stockRes.data
+
+        // Fetch stock fundamentals from Mansa API
+        const fundRes = await getDSEFundamentals(upperSymbol)
+        const fund = fundRes && fundRes.success ? fundRes.data : null
 
         return NextResponse.json({
             success: true,
             data: {
-                symbol: stock.symbol,
+                symbol: stock.ticker,
                 name: stock.name,
                 price: stock.price,
                 change: stock.change,
-                changePct: stock.changePct,
-                marketCap: stock.marketCap,
-                volume: stock.volume,
-                revenue: stock.revenue,
-                peRatio: stock.peRatio,
-                dividendYield: (stock as any).dividendYield,
-                payoutRatio: (stock as any).payoutRatio,
-                netIncome: (stock as any).netIncome,
-                eps: (stock as any).eps,
-                ytdChange: (stock as any).ytdChange,
-                change1w: (stock as any).change1w,
-                change1m: (stock as any).change1m,
-                change6m: (stock as any).change6m,
-                change1y: (stock as any).change1y,
-                change3y: (stock as any).change3y,
-                change5y: (stock as any).change5y,
-                psRatio: (stock as any).psRatio,
-                pbRatio: (stock as any).pbRatio,
-                roe: (stock as any).roe,
-                roa: (stock as any).roa,
-                debtToEquity: (stock as any).debtToEquity,
-                dps: (stock as any).dps,
-                dividendGrowth: (stock as any).dividendGrowth,
-                payoutFrequency: (stock as any).payoutFrequency,
-                operatingIncome: (stock as any).operatingIncome,
-                fcf: (stock as any).fcf,
-                fcfPerShare: (stock as any).fcfPerShare,
-                sharesOut: (stock as any).sharesOut,
-                averageVolume: (stock as any).averageVolume,
-                beta: (stock as any).beta,
-                rsi: (stock as any).rsi,
-                description: (stock as any).description,
-                sector: stock.sector,
-                industry: stock.industry,
-                scrapedAt: stock.scrapedAt.toISOString(),
+                changePct: stock.change_pct,
+                marketCap: fund?.market_cap || null,
+                volume: stock.volume || fund?.latest_volume || null,
+                revenue: null,
+                peRatio: fund?.pe_ratio || null,
+                dividendYield: fund?.dividend_yield_ttm || null,
+                payoutRatio: null,
+                netIncome: null,
+                eps: null,
+                ytdChange: null,
+                change1w: null,
+                change1m: null,
+                change6m: null,
+                change1y: null,
+                change3y: null,
+                change5y: null,
+                psRatio: null,
+                pbRatio: null,
+                roe: null,
+                roa: null,
+                debtToEquity: null,
+                dps: fund?.ttm_dividend_per_share || null,
+                dividendGrowth: null,
+                payoutFrequency: null,
+                operatingIncome: null,
+                fcf: null,
+                fcfPerShare: null,
+                sharesOut: fund?.shares_outstanding || null,
+                averageVolume: null,
+                beta: null,
+                rsi: null,
+                description: null,
+                sector: fund?.sector || "Other",
+                industry: null,
+                scrapedAt: stock.scraped_at || new Date().toISOString(),
             },
         })
     } catch (error: any) {
@@ -75,3 +76,4 @@ export async function GET(
         )
     }
 }
+

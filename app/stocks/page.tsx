@@ -261,7 +261,7 @@ export default function StocksPage() {
                     {lastUpdated && (
                         <div className="flex items-center gap-2 text-emerald-600/70">
                             <Database className="w-3.5 h-3.5" />
-                            Live Sync: {new Date(lastUpdated).toLocaleDateString()}
+                            Live Sync: {new Date(lastUpdated).toLocaleString()}
                         </div>
                     )}
                 </motion.div>
