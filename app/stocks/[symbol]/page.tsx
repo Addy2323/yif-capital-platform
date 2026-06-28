@@ -261,13 +261,13 @@ export default function StockDetailPage() {
     ]
 
     const performanceMetrics = [
-        { label: "1W", value: computePerformance(7) },
-        { label: "1M", value: computePerformance(30) },
-        { label: "6M", value: computePerformance(180) },
-        { label: "YTD", value: computeYTDPerformance() },
-        { label: "1Y", value: computePerformance(365) },
-        { label: "3Y", value: computePerformance(3 * 365) },
-        { label: "5Y", value: computePerformance(5 * 365) },
+        { label: "1W", value: computePerformance(7) ?? stock.change1w },
+        { label: "1M", value: computePerformance(30) ?? stock.change1m },
+        { label: "6M", value: computePerformance(180) ?? stock.change6m },
+        { label: "YTD", value: computeYTDPerformance() ?? stock.ytdChange },
+        { label: "1Y", value: computePerformance(365) ?? stock.change1y },
+        { label: "3Y", value: computePerformance(3 * 365) ?? stock.change3y },
+        { label: "5Y", value: computePerformance(5 * 365) ?? stock.change5y },
     ]
 
     const financialMetrics = [

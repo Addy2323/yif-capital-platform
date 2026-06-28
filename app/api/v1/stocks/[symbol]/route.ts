@@ -1,7 +1,16 @@
 import { NextRequest, NextResponse } from "next/server"
+import { prisma } from "@/lib/prisma"
 import { getDSEStock, getDSEFundamentals } from "@/lib/services/mansaApi"
 
-// GET /api/v1/stocks/[symbol] — Fetch a single stock by symbol from Mansa API
+const parseFloatSafe = (val: any) => {
+    if (val === null || val === undefined) return null
+    if (typeof val === "number") return val
+    const clean = String(val).replace(/,/g, "")
+    const parsed = parseFloat(clean)
+    return isNaN(parsed) ? null : parsed
+}
+
+// GET /api/v1/stocks/[symbol] — Fetch a single stock by symbol from Mansa API with DB fallback
 export async function GET(
     req: NextRequest,
     { params }: { params: Promise<{ symbol: string }> }
@@ -9,6 +18,12 @@ export async function GET(
     try {
         const { symbol } = await params
         const upperSymbol = symbol.toUpperCase()
+
+        // Load latest scraped data from DB to use as fallback/enrichment
+        const dbStock = await prisma.dseStock.findFirst({
+            where: { symbol: upperSymbol },
+            orderBy: { scrapedAt: "desc" }
+        })
 
         // Fetch stock data from Mansa API
         let stockRes = null
@@ -28,28 +43,21 @@ export async function GET(
             const fundRes = await getDSEFundamentals(upperSymbol)
             fund = fundRes && fundRes.success ? fundRes.data : null
         } else {
-            console.warn(`[STOCK DETAIL API] Mansa API failed or returned null for ${upperSymbol}. Falling back to mock data.`)
-            const { dseStocks } = await import("@/lib/market-data")
-            const mock = dseStocks.find(s => s.symbol.toUpperCase() === upperSymbol)
-            if (!mock) {
+            console.warn(`[STOCK DETAIL API] Mansa API failed or returned null for ${upperSymbol}. Falling back to DB data.`)
+            if (!dbStock) {
                 return NextResponse.json(
                     { success: false, error: `Stock '${upperSymbol}' not found` },
                     { status: 404 }
                 )
             }
             stock = {
-                ticker: mock.symbol,
-                name: mock.name,
-                price: mock.price,
-                change: mock.change,
-                change_pct: mock.changePercent,
-                volume: mock.volume,
-                scraped_at: new Date().toISOString()
-            }
-            fund = {
-                market_cap: mock.marketCap,
-                sector: mock.sector,
-                industry: mock.industry
+                ticker: dbStock.symbol,
+                name: dbStock.name,
+                price: dbStock.price,
+                change: dbStock.change,
+                change_pct: dbStock.changePct,
+                volume: dbStock.volume,
+                scraped_at: dbStock.scrapedAt.toISOString()
             }
             isFallback = true
         }
@@ -58,45 +66,45 @@ export async function GET(
             success: true,
             data: {
                 symbol: stock.ticker,
-                name: stock.name,
-                price: stock.price,
-                change: stock.change,
-                changePct: stock.change_pct,
-                marketCap: fund?.market_cap || null,
-                volume: stock.volume || fund?.latest_volume || null,
-                revenue: null,
-                peRatio: fund?.pe_ratio || null,
-                dividendYield: fund?.dividend_yield_ttm || null,
-                payoutRatio: null,
-                netIncome: null,
-                eps: null,
-                ytdChange: null,
-                change1w: null,
-                change1m: null,
-                change6m: null,
-                change1y: null,
-                change3y: null,
-                change5y: null,
-                psRatio: null,
-                pbRatio: null,
-                roe: null,
-                roa: null,
-                debtToEquity: null,
-                dps: fund?.ttm_dividend_per_share || null,
-                dividendGrowth: null,
-                payoutFrequency: null,
-                operatingIncome: null,
-                fcf: null,
-                fcfPerShare: null,
-                sharesOut: fund?.shares_outstanding || null,
-                averageVolume: null,
-                beta: null,
-                rsi: null,
-                description: null,
-                sector: fund?.sector || "Other",
-                industry: null,
-                scrapedAt: stock.scraped_at || new Date().toISOString(),
-                source: isFallback ? "mock_fallback" : "mansa_api",
+                name: stock.name || dbStock?.name || "",
+                price: stock.price ?? dbStock?.price ?? null,
+                change: stock.change ?? dbStock?.change ?? null,
+                changePct: stock.change_pct ?? dbStock?.changePct ?? null,
+                marketCap: fund?.market_cap || parseFloatSafe(dbStock?.marketCap) || null,
+                volume: stock.volume || fund?.latest_volume || dbStock?.volume || null,
+                revenue: dbStock?.revenue ?? null,
+                peRatio: fund?.pe_ratio || dbStock?.peRatio || null,
+                dividendYield: fund?.dividend_yield_ttm || dbStock?.dividendYield || null,
+                payoutRatio: dbStock?.payoutRatio ?? null,
+                netIncome: dbStock?.netIncome ?? null,
+                eps: dbStock?.eps ?? null,
+                ytdChange: dbStock?.ytdChange ?? null,
+                change1w: dbStock?.change1w ?? null,
+                change1m: dbStock?.change1m ?? null,
+                change6m: dbStock?.change6m ?? null,
+                change1y: dbStock?.change1y ?? null,
+                change3y: dbStock?.change3y ?? null,
+                change5y: dbStock?.change5y ?? null,
+                psRatio: dbStock?.psRatio ?? null,
+                pbRatio: dbStock?.pbRatio ?? null,
+                roe: dbStock?.roe ?? null,
+                roa: dbStock?.roa ?? null,
+                debtToEquity: dbStock?.debtToEquity ?? null,
+                dps: fund?.ttm_dividend_per_share || dbStock?.dps || null,
+                dividendGrowth: dbStock?.dividendGrowth ?? null,
+                payoutFrequency: dbStock?.payoutFrequency ?? null,
+                operatingIncome: dbStock?.operatingIncome ?? null,
+                fcf: dbStock?.fcf ?? null,
+                fcfPerShare: dbStock?.fcfPerShare ?? null,
+                sharesOut: fund?.shares_outstanding || dbStock?.sharesOut || null,
+                averageVolume: dbStock?.averageVolume ?? null,
+                beta: dbStock?.beta ?? null,
+                rsi: dbStock?.rsi ?? null,
+                description: dbStock?.description ?? null,
+                sector: fund?.sector || dbStock?.sector || "Other",
+                industry: dbStock?.industry ?? null,
+                scrapedAt: stock.scraped_at || dbStock?.scrapedAt?.toISOString() || new Date().toISOString(),
+                source: isFallback ? "db_fallback" : "mansa_api",
             },
         })
     } catch (error: any) {
