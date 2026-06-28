@@ -10,18 +10,42 @@ export async function GET(request: NextRequest) {
         const order = searchParams.get("order") || "desc"
 
         // Fetch DSE stocks list
-        const mansaStocksRes = await getDSEStocks()
-        if (!mansaStocksRes || !mansaStocksRes.success || !mansaStocksRes.data) {
-            throw new Error("Failed to fetch stocks from Mansa API")
+        let mansaStocksRes = null
+        try {
+            mansaStocksRes = await getDSEStocks()
+        } catch (e) {
+            console.error("[STOCKS API] getDSEStocks call failed:", e)
         }
-        const mansaStocks = mansaStocksRes.data
 
-        // Fetch fundamentals in parallel
-        const fundamentalsPromises = mansaStocks.map((s: any) =>
-            getDSEFundamentals(s.ticker)
+        let mansaStocks = []
+        let isFallback = false
+        let lastUpdated = new Date().toISOString()
+
+        if (mansaStocksRes && mansaStocksRes.success && mansaStocksRes.data && mansaStocksRes.data.length > 0) {
+            mansaStocks = mansaStocksRes.data
+            lastUpdated = mansaStocksRes.meta?.updated_at || lastUpdated
+        } else {
+            console.warn("[STOCKS API] Mansa API returned no stocks or failed. Falling back to mock data.")
+            const { dseStocks } = await import("@/lib/market-data")
+            mansaStocks = dseStocks.map((s) => ({
+                ticker: s.symbol,
+                name: s.name,
+                price: s.price,
+                change: s.change,
+                change_pct: s.changePercent,
+                volume: s.volume,
+                scraped_at: new Date().toISOString()
+            }))
+            isFallback = true
+        }
+
+        // Fetch fundamentals in parallel (skip if in fallback mode)
+        const fundamentalsPromises = mansaStocks.map((s: any) => {
+            if (isFallback) return Promise.resolve(null)
+            return getDSEFundamentals(s.ticker)
                 .then(res => res && res.success ? res.data : null)
                 .catch(() => null)
-        )
+        })
         const fundamentalsResults = await Promise.all(fundamentalsPromises)
 
         // Create fundamentals lookup map
@@ -118,9 +142,9 @@ export async function GET(request: NextRequest) {
                 data: filteredStocks,
                 metadata: {
                     total: filteredStocks.length,
-                    last_updated: mansaStocksRes.meta?.updated_at || new Date().toISOString(),
+                    last_updated: lastUpdated,
                     sectors: sectors,
-                    source: "mansa_api",
+                    source: isFallback ? "mock_fallback" : "mansa_api",
                 },
             },
             {

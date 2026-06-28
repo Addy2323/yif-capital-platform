@@ -11,18 +11,48 @@ export async function GET(
         const upperSymbol = symbol.toUpperCase()
 
         // Fetch stock data from Mansa API
-        const stockRes = await getDSEStock(upperSymbol)
-        if (!stockRes || !stockRes.success || !stockRes.data) {
-            return NextResponse.json(
-                { success: false, error: `Stock '${upperSymbol}' not found` },
-                { status: 404 }
-            )
+        let stockRes = null
+        try {
+            stockRes = await getDSEStock(upperSymbol)
+        } catch (e) {
+            console.error(`[STOCK DETAIL API] getDSEStock call failed for ${upperSymbol}:`, e)
         }
-        const stock = stockRes.data
 
-        // Fetch stock fundamentals from Mansa API
-        const fundRes = await getDSEFundamentals(upperSymbol)
-        const fund = fundRes && fundRes.success ? fundRes.data : null
+        let stock = null
+        let fund = null
+        let isFallback = false
+
+        if (stockRes && stockRes.success && stockRes.data) {
+            stock = stockRes.data
+            // Fetch fundamentals from Mansa API
+            const fundRes = await getDSEFundamentals(upperSymbol)
+            fund = fundRes && fundRes.success ? fundRes.data : null
+        } else {
+            console.warn(`[STOCK DETAIL API] Mansa API failed or returned null for ${upperSymbol}. Falling back to mock data.`)
+            const { dseStocks } = await import("@/lib/market-data")
+            const mock = dseStocks.find(s => s.symbol.toUpperCase() === upperSymbol)
+            if (!mock) {
+                return NextResponse.json(
+                    { success: false, error: `Stock '${upperSymbol}' not found` },
+                    { status: 404 }
+                )
+            }
+            stock = {
+                ticker: mock.symbol,
+                name: mock.name,
+                price: mock.price,
+                change: mock.change,
+                change_pct: mock.changePercent,
+                volume: mock.volume,
+                scraped_at: new Date().toISOString()
+            }
+            fund = {
+                market_cap: mock.marketCap,
+                sector: mock.sector,
+                industry: mock.industry
+            }
+            isFallback = true
+        }
 
         return NextResponse.json({
             success: true,
@@ -66,6 +96,7 @@ export async function GET(
                 sector: fund?.sector || "Other",
                 industry: null,
                 scrapedAt: stock.scraped_at || new Date().toISOString(),
+                source: isFallback ? "mock_fallback" : "mansa_api",
             },
         })
     } catch (error: any) {
