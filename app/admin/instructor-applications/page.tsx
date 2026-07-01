@@ -18,7 +18,8 @@ import {
   Bookmark,
   Calendar,
   User,
-  ExternalLink
+  ExternalLink,
+  GraduationCap
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -192,7 +193,7 @@ export default function AdminInstructorApplicationsPage() {
   }
 
   return (
-    <div className="space-y-6 text-white p-6 bg-[#060E1C] min-h-screen">
+    <div className="space-y-6 text-white p-4 sm:p-6 bg-[#060E1C] min-h-screen">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Instructor Applications</h1>
@@ -243,7 +244,7 @@ export default function AdminInstructorApplicationsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+              <table className="w-full min-w-[800px] text-left border-collapse">
                 <thead>
                   <tr className="border-b border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-wider text-white/40">
                     <th className="px-6 py-4">Applicant</th>
