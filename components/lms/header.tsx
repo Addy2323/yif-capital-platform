@@ -32,7 +32,7 @@ export function LmsHeader() {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="relative text-white/60 hover:text-white hover:bg-white/10"
+                            className="relative text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10"
                         >
                             <Bell className="h-5 w-5" />
                             <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 text-[10px] font-bold text-white">
@@ -45,7 +45,13 @@ export function LmsHeader() {
                     <div className="hidden sm:flex items-center gap-3 pl-4 border-l border-gray-200 dark:border-white/10">
                         <div className="text-right">
                             <p className="text-sm font-medium text-slate-900 dark:text-white">{user?.name}</p>
-                            <p className="text-xs text-blue-500 dark:text-blue-400">Learner</p>
+                            <p className="text-xs text-blue-500 dark:text-blue-400">
+                                {user?.role === "admin" ? "Admin" :
+                                 user?.role === "expert" ? "Instructor" :
+                                 user?.role === "pro" ? "Pro Learner" :
+                                 user?.role === "institutional" ? "Institutional" :
+                                 "Learner"}
+                            </p>
                         </div>
                         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white font-bold">
                             {user?.name?.charAt(0).toUpperCase()}

@@ -263,6 +263,11 @@ export type ReadinessQuestion = $Result.DefaultSelection<Prisma.$ReadinessQuesti
  * 
  */
 export type ReadinessResult = $Result.DefaultSelection<Prisma.$ReadinessResultPayload>
+/**
+ * Model InstructorApplication
+ * 
+ */
+export type InstructorApplication = $Result.DefaultSelection<Prisma.$InstructorApplicationPayload>
 
 /**
  * Enums
@@ -412,6 +417,17 @@ export const NotificationType: {
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
 
+
+export const InstructorApplicationStatus: {
+  PENDING: 'PENDING',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  MORE_INFO: 'MORE_INFO'
+};
+
+export type InstructorApplicationStatus = (typeof InstructorApplicationStatus)[keyof typeof InstructorApplicationStatus]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -469,6 +485,10 @@ export const InvestorLevel: typeof $Enums.InvestorLevel
 export type NotificationType = $Enums.NotificationType
 
 export const NotificationType: typeof $Enums.NotificationType
+
+export type InstructorApplicationStatus = $Enums.InstructorApplicationStatus
+
+export const InstructorApplicationStatus: typeof $Enums.InstructorApplicationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1087,6 +1107,16 @@ export class PrismaClient<
     * ```
     */
   get readinessResult(): Prisma.ReadinessResultDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.instructorApplication`: Exposes CRUD operations for the **InstructorApplication** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InstructorApplications
+    * const instructorApplications = await prisma.instructorApplication.findMany()
+    * ```
+    */
+  get instructorApplication(): Prisma.InstructorApplicationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1577,7 +1607,8 @@ export namespace Prisma {
     PayoutRequest: 'PayoutRequest',
     ReadinessQuiz: 'ReadinessQuiz',
     ReadinessQuestion: 'ReadinessQuestion',
-    ReadinessResult: 'ReadinessResult'
+    ReadinessResult: 'ReadinessResult',
+    InstructorApplication: 'InstructorApplication'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1596,7 +1627,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userSession" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "otp" | "bulkSmsCampaign" | "manager" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "stock" | "stockPriceHistory" | "economicIndicator" | "dseMarketSummary" | "dseStock" | "portfolio" | "portfolioStock" | "portfolioFund" | "expertProfile" | "lmsCourse" | "courseModule" | "lesson" | "lmsCourseEnrollment" | "lessonProgress" | "quiz" | "quizQuestion" | "quizAttempt" | "expertAvailability" | "expertBooking" | "certificate" | "notification" | "lmsPayment" | "payoutRequest" | "readinessQuiz" | "readinessQuestion" | "readinessResult"
+      modelProps: "user" | "userSession" | "enrollment" | "liveSession" | "accessToken" | "accessAttemptLog" | "payment" | "pricingPlan" | "passwordReset" | "otp" | "bulkSmsCampaign" | "manager" | "fund" | "fundDailySummary" | "fundNavHistory" | "fundPerformance" | "fundPortfolio" | "fundHolding" | "fundRisk" | "fundIncome" | "fundFinancials" | "fundBenchmarking" | "fundCompliance" | "fundAttribution" | "stock" | "stockPriceHistory" | "economicIndicator" | "dseMarketSummary" | "dseStock" | "portfolio" | "portfolioStock" | "portfolioFund" | "expertProfile" | "lmsCourse" | "courseModule" | "lesson" | "lmsCourseEnrollment" | "lessonProgress" | "quiz" | "quizQuestion" | "quizAttempt" | "expertAvailability" | "expertBooking" | "certificate" | "notification" | "lmsPayment" | "payoutRequest" | "readinessQuiz" | "readinessQuestion" | "readinessResult" | "instructorApplication"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -5300,6 +5331,80 @@ export namespace Prisma {
           }
         }
       }
+      InstructorApplication: {
+        payload: Prisma.$InstructorApplicationPayload<ExtArgs>
+        fields: Prisma.InstructorApplicationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InstructorApplicationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InstructorApplicationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>
+          }
+          findFirst: {
+            args: Prisma.InstructorApplicationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InstructorApplicationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>
+          }
+          findMany: {
+            args: Prisma.InstructorApplicationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>[]
+          }
+          create: {
+            args: Prisma.InstructorApplicationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>
+          }
+          createMany: {
+            args: Prisma.InstructorApplicationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InstructorApplicationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>[]
+          }
+          delete: {
+            args: Prisma.InstructorApplicationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>
+          }
+          update: {
+            args: Prisma.InstructorApplicationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>
+          }
+          deleteMany: {
+            args: Prisma.InstructorApplicationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InstructorApplicationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InstructorApplicationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>[]
+          }
+          upsert: {
+            args: Prisma.InstructorApplicationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InstructorApplicationPayload>
+          }
+          aggregate: {
+            args: Prisma.InstructorApplicationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInstructorApplication>
+          }
+          groupBy: {
+            args: Prisma.InstructorApplicationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InstructorApplicationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InstructorApplicationCountArgs<ExtArgs>
+            result: $Utils.Optional<InstructorApplicationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -5446,6 +5551,7 @@ export namespace Prisma {
     readinessQuiz?: ReadinessQuizOmit
     readinessQuestion?: ReadinessQuestionOmit
     readinessResult?: ReadinessResultOmit
+    instructorApplication?: InstructorApplicationOmit
   }
 
   /* Types for Logging */
@@ -5540,6 +5646,8 @@ export namespace Prisma {
     readinessResults: number
     lmsPayments: number
     sessions: number
+    instructorApplications: number
+    reviewedApplications: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5557,6 +5665,8 @@ export namespace Prisma {
     readinessResults?: boolean | UserCountOutputTypeCountReadinessResultsArgs
     lmsPayments?: boolean | UserCountOutputTypeCountLmsPaymentsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    instructorApplications?: boolean | UserCountOutputTypeCountInstructorApplicationsArgs
+    reviewedApplications?: boolean | UserCountOutputTypeCountReviewedApplicationsArgs
   }
 
   // Custom InputTypes
@@ -5666,6 +5776,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserSessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInstructorApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstructorApplicationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewedApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstructorApplicationWhereInput
   }
 
 
@@ -6498,6 +6622,8 @@ export namespace Prisma {
     readinessResults?: boolean | User$readinessResultsArgs<ExtArgs>
     lmsPayments?: boolean | User$lmsPaymentsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    instructorApplications?: boolean | User$instructorApplicationsArgs<ExtArgs>
+    reviewedApplications?: boolean | User$reviewedApplicationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6566,6 +6692,8 @@ export namespace Prisma {
     readinessResults?: boolean | User$readinessResultsArgs<ExtArgs>
     lmsPayments?: boolean | User$lmsPaymentsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    instructorApplications?: boolean | User$instructorApplicationsArgs<ExtArgs>
+    reviewedApplications?: boolean | User$reviewedApplicationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6589,6 +6717,8 @@ export namespace Prisma {
       readinessResults: Prisma.$ReadinessResultPayload<ExtArgs>[]
       lmsPayments: Prisma.$LmsPaymentPayload<ExtArgs>[]
       sessions: Prisma.$UserSessionPayload<ExtArgs>[]
+      instructorApplications: Prisma.$InstructorApplicationPayload<ExtArgs>[]
+      reviewedApplications: Prisma.$InstructorApplicationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7016,6 +7146,8 @@ export namespace Prisma {
     readinessResults<T extends User$readinessResultsArgs<ExtArgs> = {}>(args?: Subset<T, User$readinessResultsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReadinessResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lmsPayments<T extends User$lmsPaymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$lmsPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LmsPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    instructorApplications<T extends User$instructorApplicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$instructorApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewedApplications<T extends User$reviewedApplicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7798,6 +7930,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserSessionScalarFieldEnum | UserSessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.instructorApplications
+   */
+  export type User$instructorApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    where?: InstructorApplicationWhereInput
+    orderBy?: InstructorApplicationOrderByWithRelationInput | InstructorApplicationOrderByWithRelationInput[]
+    cursor?: InstructorApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InstructorApplicationScalarFieldEnum | InstructorApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewedApplications
+   */
+  export type User$reviewedApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    where?: InstructorApplicationWhereInput
+    orderBy?: InstructorApplicationOrderByWithRelationInput | InstructorApplicationOrderByWithRelationInput[]
+    cursor?: InstructorApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InstructorApplicationScalarFieldEnum | InstructorApplicationScalarFieldEnum[]
   }
 
   /**
@@ -66702,6 +66882,1346 @@ export namespace Prisma {
 
 
   /**
+   * Model InstructorApplication
+   */
+
+  export type AggregateInstructorApplication = {
+    _count: InstructorApplicationCountAggregateOutputType | null
+    _avg: InstructorApplicationAvgAggregateOutputType | null
+    _sum: InstructorApplicationSumAggregateOutputType | null
+    _min: InstructorApplicationMinAggregateOutputType | null
+    _max: InstructorApplicationMaxAggregateOutputType | null
+  }
+
+  export type InstructorApplicationAvgAggregateOutputType = {
+    experienceYears: number | null
+  }
+
+  export type InstructorApplicationSumAggregateOutputType = {
+    experienceYears: number | null
+  }
+
+  export type InstructorApplicationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    occupation: string | null
+    company: string | null
+    experienceYears: number | null
+    expertise: string | null
+    courseTitle: string | null
+    courseCategory: string | null
+    courseDescription: string | null
+    education: string | null
+    certifications: string | null
+    linkedin: string | null
+    website: string | null
+    cvUrl: string | null
+    certificatesUrl: string | null
+    motivation: string | null
+    status: $Enums.InstructorApplicationStatus | null
+    adminNote: string | null
+    reviewedBy: string | null
+    reviewedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InstructorApplicationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    occupation: string | null
+    company: string | null
+    experienceYears: number | null
+    expertise: string | null
+    courseTitle: string | null
+    courseCategory: string | null
+    courseDescription: string | null
+    education: string | null
+    certifications: string | null
+    linkedin: string | null
+    website: string | null
+    cvUrl: string | null
+    certificatesUrl: string | null
+    motivation: string | null
+    status: $Enums.InstructorApplicationStatus | null
+    adminNote: string | null
+    reviewedBy: string | null
+    reviewedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InstructorApplicationCountAggregateOutputType = {
+    id: number
+    userId: number
+    occupation: number
+    company: number
+    experienceYears: number
+    expertise: number
+    courseTitle: number
+    courseCategory: number
+    courseDescription: number
+    education: number
+    certifications: number
+    linkedin: number
+    website: number
+    cvUrl: number
+    certificatesUrl: number
+    motivation: number
+    status: number
+    adminNote: number
+    reviewedBy: number
+    reviewedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InstructorApplicationAvgAggregateInputType = {
+    experienceYears?: true
+  }
+
+  export type InstructorApplicationSumAggregateInputType = {
+    experienceYears?: true
+  }
+
+  export type InstructorApplicationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    occupation?: true
+    company?: true
+    experienceYears?: true
+    expertise?: true
+    courseTitle?: true
+    courseCategory?: true
+    courseDescription?: true
+    education?: true
+    certifications?: true
+    linkedin?: true
+    website?: true
+    cvUrl?: true
+    certificatesUrl?: true
+    motivation?: true
+    status?: true
+    adminNote?: true
+    reviewedBy?: true
+    reviewedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InstructorApplicationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    occupation?: true
+    company?: true
+    experienceYears?: true
+    expertise?: true
+    courseTitle?: true
+    courseCategory?: true
+    courseDescription?: true
+    education?: true
+    certifications?: true
+    linkedin?: true
+    website?: true
+    cvUrl?: true
+    certificatesUrl?: true
+    motivation?: true
+    status?: true
+    adminNote?: true
+    reviewedBy?: true
+    reviewedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InstructorApplicationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    occupation?: true
+    company?: true
+    experienceYears?: true
+    expertise?: true
+    courseTitle?: true
+    courseCategory?: true
+    courseDescription?: true
+    education?: true
+    certifications?: true
+    linkedin?: true
+    website?: true
+    cvUrl?: true
+    certificatesUrl?: true
+    motivation?: true
+    status?: true
+    adminNote?: true
+    reviewedBy?: true
+    reviewedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InstructorApplicationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InstructorApplication to aggregate.
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstructorApplications to fetch.
+     */
+    orderBy?: InstructorApplicationOrderByWithRelationInput | InstructorApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InstructorApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstructorApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstructorApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InstructorApplications
+    **/
+    _count?: true | InstructorApplicationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InstructorApplicationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InstructorApplicationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InstructorApplicationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InstructorApplicationMaxAggregateInputType
+  }
+
+  export type GetInstructorApplicationAggregateType<T extends InstructorApplicationAggregateArgs> = {
+        [P in keyof T & keyof AggregateInstructorApplication]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInstructorApplication[P]>
+      : GetScalarType<T[P], AggregateInstructorApplication[P]>
+  }
+
+
+
+
+  export type InstructorApplicationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InstructorApplicationWhereInput
+    orderBy?: InstructorApplicationOrderByWithAggregationInput | InstructorApplicationOrderByWithAggregationInput[]
+    by: InstructorApplicationScalarFieldEnum[] | InstructorApplicationScalarFieldEnum
+    having?: InstructorApplicationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InstructorApplicationCountAggregateInputType | true
+    _avg?: InstructorApplicationAvgAggregateInputType
+    _sum?: InstructorApplicationSumAggregateInputType
+    _min?: InstructorApplicationMinAggregateInputType
+    _max?: InstructorApplicationMaxAggregateInputType
+  }
+
+  export type InstructorApplicationGroupByOutputType = {
+    id: string
+    userId: string
+    occupation: string
+    company: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications: string | null
+    linkedin: string | null
+    website: string | null
+    cvUrl: string | null
+    certificatesUrl: string | null
+    motivation: string
+    status: $Enums.InstructorApplicationStatus
+    adminNote: string | null
+    reviewedBy: string | null
+    reviewedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InstructorApplicationCountAggregateOutputType | null
+    _avg: InstructorApplicationAvgAggregateOutputType | null
+    _sum: InstructorApplicationSumAggregateOutputType | null
+    _min: InstructorApplicationMinAggregateOutputType | null
+    _max: InstructorApplicationMaxAggregateOutputType | null
+  }
+
+  type GetInstructorApplicationGroupByPayload<T extends InstructorApplicationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InstructorApplicationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InstructorApplicationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InstructorApplicationGroupByOutputType[P]>
+            : GetScalarType<T[P], InstructorApplicationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InstructorApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    occupation?: boolean
+    company?: boolean
+    experienceYears?: boolean
+    expertise?: boolean
+    courseTitle?: boolean
+    courseCategory?: boolean
+    courseDescription?: boolean
+    education?: boolean
+    certifications?: boolean
+    linkedin?: boolean
+    website?: boolean
+    cvUrl?: boolean
+    certificatesUrl?: boolean
+    motivation?: boolean
+    status?: boolean
+    adminNote?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | InstructorApplication$reviewerArgs<ExtArgs>
+  }, ExtArgs["result"]["instructorApplication"]>
+
+  export type InstructorApplicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    occupation?: boolean
+    company?: boolean
+    experienceYears?: boolean
+    expertise?: boolean
+    courseTitle?: boolean
+    courseCategory?: boolean
+    courseDescription?: boolean
+    education?: boolean
+    certifications?: boolean
+    linkedin?: boolean
+    website?: boolean
+    cvUrl?: boolean
+    certificatesUrl?: boolean
+    motivation?: boolean
+    status?: boolean
+    adminNote?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | InstructorApplication$reviewerArgs<ExtArgs>
+  }, ExtArgs["result"]["instructorApplication"]>
+
+  export type InstructorApplicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    occupation?: boolean
+    company?: boolean
+    experienceYears?: boolean
+    expertise?: boolean
+    courseTitle?: boolean
+    courseCategory?: boolean
+    courseDescription?: boolean
+    education?: boolean
+    certifications?: boolean
+    linkedin?: boolean
+    website?: boolean
+    cvUrl?: boolean
+    certificatesUrl?: boolean
+    motivation?: boolean
+    status?: boolean
+    adminNote?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | InstructorApplication$reviewerArgs<ExtArgs>
+  }, ExtArgs["result"]["instructorApplication"]>
+
+  export type InstructorApplicationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    occupation?: boolean
+    company?: boolean
+    experienceYears?: boolean
+    expertise?: boolean
+    courseTitle?: boolean
+    courseCategory?: boolean
+    courseDescription?: boolean
+    education?: boolean
+    certifications?: boolean
+    linkedin?: boolean
+    website?: boolean
+    cvUrl?: boolean
+    certificatesUrl?: boolean
+    motivation?: boolean
+    status?: boolean
+    adminNote?: boolean
+    reviewedBy?: boolean
+    reviewedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InstructorApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "occupation" | "company" | "experienceYears" | "expertise" | "courseTitle" | "courseCategory" | "courseDescription" | "education" | "certifications" | "linkedin" | "website" | "cvUrl" | "certificatesUrl" | "motivation" | "status" | "adminNote" | "reviewedBy" | "reviewedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["instructorApplication"]>
+  export type InstructorApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | InstructorApplication$reviewerArgs<ExtArgs>
+  }
+  export type InstructorApplicationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | InstructorApplication$reviewerArgs<ExtArgs>
+  }
+  export type InstructorApplicationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    reviewer?: boolean | InstructorApplication$reviewerArgs<ExtArgs>
+  }
+
+  export type $InstructorApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InstructorApplication"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      reviewer: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      occupation: string
+      company: string | null
+      experienceYears: number
+      expertise: string
+      courseTitle: string
+      courseCategory: string
+      courseDescription: string
+      education: string
+      certifications: string | null
+      linkedin: string | null
+      website: string | null
+      cvUrl: string | null
+      certificatesUrl: string | null
+      motivation: string
+      status: $Enums.InstructorApplicationStatus
+      adminNote: string | null
+      reviewedBy: string | null
+      reviewedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["instructorApplication"]>
+    composites: {}
+  }
+
+  type InstructorApplicationGetPayload<S extends boolean | null | undefined | InstructorApplicationDefaultArgs> = $Result.GetResult<Prisma.$InstructorApplicationPayload, S>
+
+  type InstructorApplicationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InstructorApplicationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InstructorApplicationCountAggregateInputType | true
+    }
+
+  export interface InstructorApplicationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InstructorApplication'], meta: { name: 'InstructorApplication' } }
+    /**
+     * Find zero or one InstructorApplication that matches the filter.
+     * @param {InstructorApplicationFindUniqueArgs} args - Arguments to find a InstructorApplication
+     * @example
+     * // Get one InstructorApplication
+     * const instructorApplication = await prisma.instructorApplication.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InstructorApplicationFindUniqueArgs>(args: SelectSubset<T, InstructorApplicationFindUniqueArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InstructorApplication that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InstructorApplicationFindUniqueOrThrowArgs} args - Arguments to find a InstructorApplication
+     * @example
+     * // Get one InstructorApplication
+     * const instructorApplication = await prisma.instructorApplication.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InstructorApplicationFindUniqueOrThrowArgs>(args: SelectSubset<T, InstructorApplicationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InstructorApplication that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationFindFirstArgs} args - Arguments to find a InstructorApplication
+     * @example
+     * // Get one InstructorApplication
+     * const instructorApplication = await prisma.instructorApplication.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InstructorApplicationFindFirstArgs>(args?: SelectSubset<T, InstructorApplicationFindFirstArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InstructorApplication that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationFindFirstOrThrowArgs} args - Arguments to find a InstructorApplication
+     * @example
+     * // Get one InstructorApplication
+     * const instructorApplication = await prisma.instructorApplication.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InstructorApplicationFindFirstOrThrowArgs>(args?: SelectSubset<T, InstructorApplicationFindFirstOrThrowArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InstructorApplications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InstructorApplications
+     * const instructorApplications = await prisma.instructorApplication.findMany()
+     * 
+     * // Get first 10 InstructorApplications
+     * const instructorApplications = await prisma.instructorApplication.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const instructorApplicationWithIdOnly = await prisma.instructorApplication.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InstructorApplicationFindManyArgs>(args?: SelectSubset<T, InstructorApplicationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InstructorApplication.
+     * @param {InstructorApplicationCreateArgs} args - Arguments to create a InstructorApplication.
+     * @example
+     * // Create one InstructorApplication
+     * const InstructorApplication = await prisma.instructorApplication.create({
+     *   data: {
+     *     // ... data to create a InstructorApplication
+     *   }
+     * })
+     * 
+     */
+    create<T extends InstructorApplicationCreateArgs>(args: SelectSubset<T, InstructorApplicationCreateArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InstructorApplications.
+     * @param {InstructorApplicationCreateManyArgs} args - Arguments to create many InstructorApplications.
+     * @example
+     * // Create many InstructorApplications
+     * const instructorApplication = await prisma.instructorApplication.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InstructorApplicationCreateManyArgs>(args?: SelectSubset<T, InstructorApplicationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InstructorApplications and returns the data saved in the database.
+     * @param {InstructorApplicationCreateManyAndReturnArgs} args - Arguments to create many InstructorApplications.
+     * @example
+     * // Create many InstructorApplications
+     * const instructorApplication = await prisma.instructorApplication.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InstructorApplications and only return the `id`
+     * const instructorApplicationWithIdOnly = await prisma.instructorApplication.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InstructorApplicationCreateManyAndReturnArgs>(args?: SelectSubset<T, InstructorApplicationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InstructorApplication.
+     * @param {InstructorApplicationDeleteArgs} args - Arguments to delete one InstructorApplication.
+     * @example
+     * // Delete one InstructorApplication
+     * const InstructorApplication = await prisma.instructorApplication.delete({
+     *   where: {
+     *     // ... filter to delete one InstructorApplication
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InstructorApplicationDeleteArgs>(args: SelectSubset<T, InstructorApplicationDeleteArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InstructorApplication.
+     * @param {InstructorApplicationUpdateArgs} args - Arguments to update one InstructorApplication.
+     * @example
+     * // Update one InstructorApplication
+     * const instructorApplication = await prisma.instructorApplication.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InstructorApplicationUpdateArgs>(args: SelectSubset<T, InstructorApplicationUpdateArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InstructorApplications.
+     * @param {InstructorApplicationDeleteManyArgs} args - Arguments to filter InstructorApplications to delete.
+     * @example
+     * // Delete a few InstructorApplications
+     * const { count } = await prisma.instructorApplication.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InstructorApplicationDeleteManyArgs>(args?: SelectSubset<T, InstructorApplicationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InstructorApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InstructorApplications
+     * const instructorApplication = await prisma.instructorApplication.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InstructorApplicationUpdateManyArgs>(args: SelectSubset<T, InstructorApplicationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InstructorApplications and returns the data updated in the database.
+     * @param {InstructorApplicationUpdateManyAndReturnArgs} args - Arguments to update many InstructorApplications.
+     * @example
+     * // Update many InstructorApplications
+     * const instructorApplication = await prisma.instructorApplication.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InstructorApplications and only return the `id`
+     * const instructorApplicationWithIdOnly = await prisma.instructorApplication.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InstructorApplicationUpdateManyAndReturnArgs>(args: SelectSubset<T, InstructorApplicationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InstructorApplication.
+     * @param {InstructorApplicationUpsertArgs} args - Arguments to update or create a InstructorApplication.
+     * @example
+     * // Update or create a InstructorApplication
+     * const instructorApplication = await prisma.instructorApplication.upsert({
+     *   create: {
+     *     // ... data to create a InstructorApplication
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InstructorApplication we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InstructorApplicationUpsertArgs>(args: SelectSubset<T, InstructorApplicationUpsertArgs<ExtArgs>>): Prisma__InstructorApplicationClient<$Result.GetResult<Prisma.$InstructorApplicationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InstructorApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationCountArgs} args - Arguments to filter InstructorApplications to count.
+     * @example
+     * // Count the number of InstructorApplications
+     * const count = await prisma.instructorApplication.count({
+     *   where: {
+     *     // ... the filter for the InstructorApplications we want to count
+     *   }
+     * })
+    **/
+    count<T extends InstructorApplicationCountArgs>(
+      args?: Subset<T, InstructorApplicationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InstructorApplicationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InstructorApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InstructorApplicationAggregateArgs>(args: Subset<T, InstructorApplicationAggregateArgs>): Prisma.PrismaPromise<GetInstructorApplicationAggregateType<T>>
+
+    /**
+     * Group by InstructorApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstructorApplicationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InstructorApplicationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InstructorApplicationGroupByArgs['orderBy'] }
+        : { orderBy?: InstructorApplicationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InstructorApplicationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInstructorApplicationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InstructorApplication model
+   */
+  readonly fields: InstructorApplicationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InstructorApplication.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InstructorApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reviewer<T extends InstructorApplication$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, InstructorApplication$reviewerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InstructorApplication model
+   */
+  interface InstructorApplicationFieldRefs {
+    readonly id: FieldRef<"InstructorApplication", 'String'>
+    readonly userId: FieldRef<"InstructorApplication", 'String'>
+    readonly occupation: FieldRef<"InstructorApplication", 'String'>
+    readonly company: FieldRef<"InstructorApplication", 'String'>
+    readonly experienceYears: FieldRef<"InstructorApplication", 'Int'>
+    readonly expertise: FieldRef<"InstructorApplication", 'String'>
+    readonly courseTitle: FieldRef<"InstructorApplication", 'String'>
+    readonly courseCategory: FieldRef<"InstructorApplication", 'String'>
+    readonly courseDescription: FieldRef<"InstructorApplication", 'String'>
+    readonly education: FieldRef<"InstructorApplication", 'String'>
+    readonly certifications: FieldRef<"InstructorApplication", 'String'>
+    readonly linkedin: FieldRef<"InstructorApplication", 'String'>
+    readonly website: FieldRef<"InstructorApplication", 'String'>
+    readonly cvUrl: FieldRef<"InstructorApplication", 'String'>
+    readonly certificatesUrl: FieldRef<"InstructorApplication", 'String'>
+    readonly motivation: FieldRef<"InstructorApplication", 'String'>
+    readonly status: FieldRef<"InstructorApplication", 'InstructorApplicationStatus'>
+    readonly adminNote: FieldRef<"InstructorApplication", 'String'>
+    readonly reviewedBy: FieldRef<"InstructorApplication", 'String'>
+    readonly reviewedAt: FieldRef<"InstructorApplication", 'DateTime'>
+    readonly createdAt: FieldRef<"InstructorApplication", 'DateTime'>
+    readonly updatedAt: FieldRef<"InstructorApplication", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InstructorApplication findUnique
+   */
+  export type InstructorApplicationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which InstructorApplication to fetch.
+     */
+    where: InstructorApplicationWhereUniqueInput
+  }
+
+  /**
+   * InstructorApplication findUniqueOrThrow
+   */
+  export type InstructorApplicationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which InstructorApplication to fetch.
+     */
+    where: InstructorApplicationWhereUniqueInput
+  }
+
+  /**
+   * InstructorApplication findFirst
+   */
+  export type InstructorApplicationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which InstructorApplication to fetch.
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstructorApplications to fetch.
+     */
+    orderBy?: InstructorApplicationOrderByWithRelationInput | InstructorApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InstructorApplications.
+     */
+    cursor?: InstructorApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstructorApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstructorApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InstructorApplications.
+     */
+    distinct?: InstructorApplicationScalarFieldEnum | InstructorApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * InstructorApplication findFirstOrThrow
+   */
+  export type InstructorApplicationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which InstructorApplication to fetch.
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstructorApplications to fetch.
+     */
+    orderBy?: InstructorApplicationOrderByWithRelationInput | InstructorApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InstructorApplications.
+     */
+    cursor?: InstructorApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstructorApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstructorApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InstructorApplications.
+     */
+    distinct?: InstructorApplicationScalarFieldEnum | InstructorApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * InstructorApplication findMany
+   */
+  export type InstructorApplicationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which InstructorApplications to fetch.
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstructorApplications to fetch.
+     */
+    orderBy?: InstructorApplicationOrderByWithRelationInput | InstructorApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InstructorApplications.
+     */
+    cursor?: InstructorApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstructorApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstructorApplications.
+     */
+    skip?: number
+    distinct?: InstructorApplicationScalarFieldEnum | InstructorApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * InstructorApplication create
+   */
+  export type InstructorApplicationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InstructorApplication.
+     */
+    data: XOR<InstructorApplicationCreateInput, InstructorApplicationUncheckedCreateInput>
+  }
+
+  /**
+   * InstructorApplication createMany
+   */
+  export type InstructorApplicationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InstructorApplications.
+     */
+    data: InstructorApplicationCreateManyInput | InstructorApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InstructorApplication createManyAndReturn
+   */
+  export type InstructorApplicationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to create many InstructorApplications.
+     */
+    data: InstructorApplicationCreateManyInput | InstructorApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InstructorApplication update
+   */
+  export type InstructorApplicationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InstructorApplication.
+     */
+    data: XOR<InstructorApplicationUpdateInput, InstructorApplicationUncheckedUpdateInput>
+    /**
+     * Choose, which InstructorApplication to update.
+     */
+    where: InstructorApplicationWhereUniqueInput
+  }
+
+  /**
+   * InstructorApplication updateMany
+   */
+  export type InstructorApplicationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InstructorApplications.
+     */
+    data: XOR<InstructorApplicationUpdateManyMutationInput, InstructorApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which InstructorApplications to update
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * Limit how many InstructorApplications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InstructorApplication updateManyAndReturn
+   */
+  export type InstructorApplicationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to update InstructorApplications.
+     */
+    data: XOR<InstructorApplicationUpdateManyMutationInput, InstructorApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which InstructorApplications to update
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * Limit how many InstructorApplications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InstructorApplication upsert
+   */
+  export type InstructorApplicationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InstructorApplication to update in case it exists.
+     */
+    where: InstructorApplicationWhereUniqueInput
+    /**
+     * In case the InstructorApplication found by the `where` argument doesn't exist, create a new InstructorApplication with this data.
+     */
+    create: XOR<InstructorApplicationCreateInput, InstructorApplicationUncheckedCreateInput>
+    /**
+     * In case the InstructorApplication was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InstructorApplicationUpdateInput, InstructorApplicationUncheckedUpdateInput>
+  }
+
+  /**
+   * InstructorApplication delete
+   */
+  export type InstructorApplicationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+    /**
+     * Filter which InstructorApplication to delete.
+     */
+    where: InstructorApplicationWhereUniqueInput
+  }
+
+  /**
+   * InstructorApplication deleteMany
+   */
+  export type InstructorApplicationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InstructorApplications to delete
+     */
+    where?: InstructorApplicationWhereInput
+    /**
+     * Limit how many InstructorApplications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InstructorApplication.reviewer
+   */
+  export type InstructorApplication$reviewerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * InstructorApplication without action
+   */
+  export type InstructorApplicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstructorApplication
+     */
+    select?: InstructorApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InstructorApplication
+     */
+    omit?: InstructorApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InstructorApplicationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -67620,6 +69140,34 @@ export namespace Prisma {
   export type ReadinessResultScalarFieldEnum = (typeof ReadinessResultScalarFieldEnum)[keyof typeof ReadinessResultScalarFieldEnum]
 
 
+  export const InstructorApplicationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    occupation: 'occupation',
+    company: 'company',
+    experienceYears: 'experienceYears',
+    expertise: 'expertise',
+    courseTitle: 'courseTitle',
+    courseCategory: 'courseCategory',
+    courseDescription: 'courseDescription',
+    education: 'education',
+    certifications: 'certifications',
+    linkedin: 'linkedin',
+    website: 'website',
+    cvUrl: 'cvUrl',
+    certificatesUrl: 'certificatesUrl',
+    motivation: 'motivation',
+    status: 'status',
+    adminNote: 'adminNote',
+    reviewedBy: 'reviewedBy',
+    reviewedAt: 'reviewedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InstructorApplicationScalarFieldEnum = (typeof InstructorApplicationScalarFieldEnum)[keyof typeof InstructorApplicationScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -67944,6 +69492,20 @@ export namespace Prisma {
    */
   export type ListEnumInvestorLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvestorLevel[]'>
     
+
+
+  /**
+   * Reference to a field of type 'InstructorApplicationStatus'
+   */
+  export type EnumInstructorApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstructorApplicationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InstructorApplicationStatus[]'
+   */
+  export type ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstructorApplicationStatus[]'>
+    
   /**
    * Deep Input Types
    */
@@ -67981,6 +69543,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultListRelationFilter
     lmsPayments?: LmsPaymentListRelationFilter
     sessions?: UserSessionListRelationFilter
+    instructorApplications?: InstructorApplicationListRelationFilter
+    reviewedApplications?: InstructorApplicationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -68012,6 +69576,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultOrderByRelationAggregateInput
     lmsPayments?: LmsPaymentOrderByRelationAggregateInput
     sessions?: UserSessionOrderByRelationAggregateInput
+    instructorApplications?: InstructorApplicationOrderByRelationAggregateInput
+    reviewedApplications?: InstructorApplicationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -68046,6 +69612,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultListRelationFilter
     lmsPayments?: LmsPaymentListRelationFilter
     sessions?: UserSessionListRelationFilter
+    instructorApplications?: InstructorApplicationListRelationFilter
+    reviewedApplications?: InstructorApplicationListRelationFilter
   }, "id" | "email" | "phoneNumber">
 
   export type UserOrderByWithAggregationInput = {
@@ -72724,6 +74292,151 @@ export namespace Prisma {
     completedAt?: DateTimeWithAggregatesFilter<"ReadinessResult"> | Date | string
   }
 
+  export type InstructorApplicationWhereInput = {
+    AND?: InstructorApplicationWhereInput | InstructorApplicationWhereInput[]
+    OR?: InstructorApplicationWhereInput[]
+    NOT?: InstructorApplicationWhereInput | InstructorApplicationWhereInput[]
+    id?: StringFilter<"InstructorApplication"> | string
+    userId?: StringFilter<"InstructorApplication"> | string
+    occupation?: StringFilter<"InstructorApplication"> | string
+    company?: StringNullableFilter<"InstructorApplication"> | string | null
+    experienceYears?: IntFilter<"InstructorApplication"> | number
+    expertise?: StringFilter<"InstructorApplication"> | string
+    courseTitle?: StringFilter<"InstructorApplication"> | string
+    courseCategory?: StringFilter<"InstructorApplication"> | string
+    courseDescription?: StringFilter<"InstructorApplication"> | string
+    education?: StringFilter<"InstructorApplication"> | string
+    certifications?: StringNullableFilter<"InstructorApplication"> | string | null
+    linkedin?: StringNullableFilter<"InstructorApplication"> | string | null
+    website?: StringNullableFilter<"InstructorApplication"> | string | null
+    cvUrl?: StringNullableFilter<"InstructorApplication"> | string | null
+    certificatesUrl?: StringNullableFilter<"InstructorApplication"> | string | null
+    motivation?: StringFilter<"InstructorApplication"> | string
+    status?: EnumInstructorApplicationStatusFilter<"InstructorApplication"> | $Enums.InstructorApplicationStatus
+    adminNote?: StringNullableFilter<"InstructorApplication"> | string | null
+    reviewedBy?: StringNullableFilter<"InstructorApplication"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"InstructorApplication"> | Date | string | null
+    createdAt?: DateTimeFilter<"InstructorApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"InstructorApplication"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    reviewer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type InstructorApplicationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    occupation?: SortOrder
+    company?: SortOrderInput | SortOrder
+    experienceYears?: SortOrder
+    expertise?: SortOrder
+    courseTitle?: SortOrder
+    courseCategory?: SortOrder
+    courseDescription?: SortOrder
+    education?: SortOrder
+    certifications?: SortOrderInput | SortOrder
+    linkedin?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    cvUrl?: SortOrderInput | SortOrder
+    certificatesUrl?: SortOrderInput | SortOrder
+    motivation?: SortOrder
+    status?: SortOrder
+    adminNote?: SortOrderInput | SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+  }
+
+  export type InstructorApplicationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InstructorApplicationWhereInput | InstructorApplicationWhereInput[]
+    OR?: InstructorApplicationWhereInput[]
+    NOT?: InstructorApplicationWhereInput | InstructorApplicationWhereInput[]
+    userId?: StringFilter<"InstructorApplication"> | string
+    occupation?: StringFilter<"InstructorApplication"> | string
+    company?: StringNullableFilter<"InstructorApplication"> | string | null
+    experienceYears?: IntFilter<"InstructorApplication"> | number
+    expertise?: StringFilter<"InstructorApplication"> | string
+    courseTitle?: StringFilter<"InstructorApplication"> | string
+    courseCategory?: StringFilter<"InstructorApplication"> | string
+    courseDescription?: StringFilter<"InstructorApplication"> | string
+    education?: StringFilter<"InstructorApplication"> | string
+    certifications?: StringNullableFilter<"InstructorApplication"> | string | null
+    linkedin?: StringNullableFilter<"InstructorApplication"> | string | null
+    website?: StringNullableFilter<"InstructorApplication"> | string | null
+    cvUrl?: StringNullableFilter<"InstructorApplication"> | string | null
+    certificatesUrl?: StringNullableFilter<"InstructorApplication"> | string | null
+    motivation?: StringFilter<"InstructorApplication"> | string
+    status?: EnumInstructorApplicationStatusFilter<"InstructorApplication"> | $Enums.InstructorApplicationStatus
+    adminNote?: StringNullableFilter<"InstructorApplication"> | string | null
+    reviewedBy?: StringNullableFilter<"InstructorApplication"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"InstructorApplication"> | Date | string | null
+    createdAt?: DateTimeFilter<"InstructorApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"InstructorApplication"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    reviewer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type InstructorApplicationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    occupation?: SortOrder
+    company?: SortOrderInput | SortOrder
+    experienceYears?: SortOrder
+    expertise?: SortOrder
+    courseTitle?: SortOrder
+    courseCategory?: SortOrder
+    courseDescription?: SortOrder
+    education?: SortOrder
+    certifications?: SortOrderInput | SortOrder
+    linkedin?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    cvUrl?: SortOrderInput | SortOrder
+    certificatesUrl?: SortOrderInput | SortOrder
+    motivation?: SortOrder
+    status?: SortOrder
+    adminNote?: SortOrderInput | SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InstructorApplicationCountOrderByAggregateInput
+    _avg?: InstructorApplicationAvgOrderByAggregateInput
+    _max?: InstructorApplicationMaxOrderByAggregateInput
+    _min?: InstructorApplicationMinOrderByAggregateInput
+    _sum?: InstructorApplicationSumOrderByAggregateInput
+  }
+
+  export type InstructorApplicationScalarWhereWithAggregatesInput = {
+    AND?: InstructorApplicationScalarWhereWithAggregatesInput | InstructorApplicationScalarWhereWithAggregatesInput[]
+    OR?: InstructorApplicationScalarWhereWithAggregatesInput[]
+    NOT?: InstructorApplicationScalarWhereWithAggregatesInput | InstructorApplicationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    userId?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    occupation?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    company?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    experienceYears?: IntWithAggregatesFilter<"InstructorApplication"> | number
+    expertise?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    courseTitle?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    courseCategory?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    courseDescription?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    education?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    certifications?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    linkedin?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    website?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    cvUrl?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    certificatesUrl?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    motivation?: StringWithAggregatesFilter<"InstructorApplication"> | string
+    status?: EnumInstructorApplicationStatusWithAggregatesFilter<"InstructorApplication"> | $Enums.InstructorApplicationStatus
+    adminNote?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    reviewedBy?: StringNullableWithAggregatesFilter<"InstructorApplication"> | string | null
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"InstructorApplication"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"InstructorApplication"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InstructorApplication"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -72753,6 +74466,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -72784,6 +74499,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUpdateInput = {
@@ -72815,6 +74532,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -72846,6 +74565,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -78165,6 +79886,179 @@ export namespace Prisma {
     completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type InstructorApplicationCreateInput = {
+    id?: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutInstructorApplicationsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedApplicationsInput
+  }
+
+  export type InstructorApplicationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstructorApplicationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInstructorApplicationsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedApplicationsNestedInput
+  }
+
+  export type InstructorApplicationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstructorApplicationCreateManyInput = {
+    id?: string
+    userId: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstructorApplicationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstructorApplicationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -78329,6 +80223,12 @@ export namespace Prisma {
     none?: UserSessionWhereInput
   }
 
+  export type InstructorApplicationListRelationFilter = {
+    every?: InstructorApplicationWhereInput
+    some?: InstructorApplicationWhereInput
+    none?: InstructorApplicationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -78387,6 +80287,10 @@ export namespace Prisma {
   }
 
   export type UserSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InstructorApplicationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -82123,6 +84027,106 @@ export namespace Prisma {
     _max?: NestedEnumInvestorLevelFilter<$PrismaModel>
   }
 
+  export type EnumInstructorApplicationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstructorApplicationStatus | EnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstructorApplicationStatusFilter<$PrismaModel> | $Enums.InstructorApplicationStatus
+  }
+
+  export type InstructorApplicationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    occupation?: SortOrder
+    company?: SortOrder
+    experienceYears?: SortOrder
+    expertise?: SortOrder
+    courseTitle?: SortOrder
+    courseCategory?: SortOrder
+    courseDescription?: SortOrder
+    education?: SortOrder
+    certifications?: SortOrder
+    linkedin?: SortOrder
+    website?: SortOrder
+    cvUrl?: SortOrder
+    certificatesUrl?: SortOrder
+    motivation?: SortOrder
+    status?: SortOrder
+    adminNote?: SortOrder
+    reviewedBy?: SortOrder
+    reviewedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstructorApplicationAvgOrderByAggregateInput = {
+    experienceYears?: SortOrder
+  }
+
+  export type InstructorApplicationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    occupation?: SortOrder
+    company?: SortOrder
+    experienceYears?: SortOrder
+    expertise?: SortOrder
+    courseTitle?: SortOrder
+    courseCategory?: SortOrder
+    courseDescription?: SortOrder
+    education?: SortOrder
+    certifications?: SortOrder
+    linkedin?: SortOrder
+    website?: SortOrder
+    cvUrl?: SortOrder
+    certificatesUrl?: SortOrder
+    motivation?: SortOrder
+    status?: SortOrder
+    adminNote?: SortOrder
+    reviewedBy?: SortOrder
+    reviewedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstructorApplicationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    occupation?: SortOrder
+    company?: SortOrder
+    experienceYears?: SortOrder
+    expertise?: SortOrder
+    courseTitle?: SortOrder
+    courseCategory?: SortOrder
+    courseDescription?: SortOrder
+    education?: SortOrder
+    certifications?: SortOrder
+    linkedin?: SortOrder
+    website?: SortOrder
+    cvUrl?: SortOrder
+    certificatesUrl?: SortOrder
+    motivation?: SortOrder
+    status?: SortOrder
+    adminNote?: SortOrder
+    reviewedBy?: SortOrder
+    reviewedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InstructorApplicationSumOrderByAggregateInput = {
+    experienceYears?: SortOrder
+  }
+
+  export type EnumInstructorApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstructorApplicationStatus | EnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstructorApplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.InstructorApplicationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInstructorApplicationStatusFilter<$PrismaModel>
+    _max?: NestedEnumInstructorApplicationStatusFilter<$PrismaModel>
+  }
+
   export type AccessAttemptLogCreateNestedManyWithoutUserInput = {
     create?: XOR<AccessAttemptLogCreateWithoutUserInput, AccessAttemptLogUncheckedCreateWithoutUserInput> | AccessAttemptLogCreateWithoutUserInput[] | AccessAttemptLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccessAttemptLogCreateOrConnectWithoutUserInput | AccessAttemptLogCreateOrConnectWithoutUserInput[]
@@ -82227,6 +84231,20 @@ export namespace Prisma {
     connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
   }
 
+  export type InstructorApplicationCreateNestedManyWithoutUserInput = {
+    create?: XOR<InstructorApplicationCreateWithoutUserInput, InstructorApplicationUncheckedCreateWithoutUserInput> | InstructorApplicationCreateWithoutUserInput[] | InstructorApplicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutUserInput | InstructorApplicationCreateOrConnectWithoutUserInput[]
+    createMany?: InstructorApplicationCreateManyUserInputEnvelope
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+  }
+
+  export type InstructorApplicationCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<InstructorApplicationCreateWithoutReviewerInput, InstructorApplicationUncheckedCreateWithoutReviewerInput> | InstructorApplicationCreateWithoutReviewerInput[] | InstructorApplicationUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutReviewerInput | InstructorApplicationCreateOrConnectWithoutReviewerInput[]
+    createMany?: InstructorApplicationCreateManyReviewerInputEnvelope
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+  }
+
   export type AccessAttemptLogUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccessAttemptLogCreateWithoutUserInput, AccessAttemptLogUncheckedCreateWithoutUserInput> | AccessAttemptLogCreateWithoutUserInput[] | AccessAttemptLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccessAttemptLogCreateOrConnectWithoutUserInput | AccessAttemptLogCreateOrConnectWithoutUserInput[]
@@ -82329,6 +84347,20 @@ export namespace Prisma {
     connectOrCreate?: UserSessionCreateOrConnectWithoutUserInput | UserSessionCreateOrConnectWithoutUserInput[]
     createMany?: UserSessionCreateManyUserInputEnvelope
     connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+  }
+
+  export type InstructorApplicationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<InstructorApplicationCreateWithoutUserInput, InstructorApplicationUncheckedCreateWithoutUserInput> | InstructorApplicationCreateWithoutUserInput[] | InstructorApplicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutUserInput | InstructorApplicationCreateOrConnectWithoutUserInput[]
+    createMany?: InstructorApplicationCreateManyUserInputEnvelope
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+  }
+
+  export type InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<InstructorApplicationCreateWithoutReviewerInput, InstructorApplicationUncheckedCreateWithoutReviewerInput> | InstructorApplicationCreateWithoutReviewerInput[] | InstructorApplicationUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutReviewerInput | InstructorApplicationCreateOrConnectWithoutReviewerInput[]
+    createMany?: InstructorApplicationCreateManyReviewerInputEnvelope
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -82569,6 +84601,34 @@ export namespace Prisma {
     deleteMany?: UserSessionScalarWhereInput | UserSessionScalarWhereInput[]
   }
 
+  export type InstructorApplicationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InstructorApplicationCreateWithoutUserInput, InstructorApplicationUncheckedCreateWithoutUserInput> | InstructorApplicationCreateWithoutUserInput[] | InstructorApplicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutUserInput | InstructorApplicationCreateOrConnectWithoutUserInput[]
+    upsert?: InstructorApplicationUpsertWithWhereUniqueWithoutUserInput | InstructorApplicationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InstructorApplicationCreateManyUserInputEnvelope
+    set?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    disconnect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    delete?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    update?: InstructorApplicationUpdateWithWhereUniqueWithoutUserInput | InstructorApplicationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InstructorApplicationUpdateManyWithWhereWithoutUserInput | InstructorApplicationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InstructorApplicationScalarWhereInput | InstructorApplicationScalarWhereInput[]
+  }
+
+  export type InstructorApplicationUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<InstructorApplicationCreateWithoutReviewerInput, InstructorApplicationUncheckedCreateWithoutReviewerInput> | InstructorApplicationCreateWithoutReviewerInput[] | InstructorApplicationUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutReviewerInput | InstructorApplicationCreateOrConnectWithoutReviewerInput[]
+    upsert?: InstructorApplicationUpsertWithWhereUniqueWithoutReviewerInput | InstructorApplicationUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: InstructorApplicationCreateManyReviewerInputEnvelope
+    set?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    disconnect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    delete?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    update?: InstructorApplicationUpdateWithWhereUniqueWithoutReviewerInput | InstructorApplicationUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: InstructorApplicationUpdateManyWithWhereWithoutReviewerInput | InstructorApplicationUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: InstructorApplicationScalarWhereInput | InstructorApplicationScalarWhereInput[]
+  }
+
   export type AccessAttemptLogUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccessAttemptLogCreateWithoutUserInput, AccessAttemptLogUncheckedCreateWithoutUserInput> | AccessAttemptLogCreateWithoutUserInput[] | AccessAttemptLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccessAttemptLogCreateOrConnectWithoutUserInput | AccessAttemptLogCreateOrConnectWithoutUserInput[]
@@ -82773,6 +84833,34 @@ export namespace Prisma {
     update?: UserSessionUpdateWithWhereUniqueWithoutUserInput | UserSessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserSessionUpdateManyWithWhereWithoutUserInput | UserSessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserSessionScalarWhereInput | UserSessionScalarWhereInput[]
+  }
+
+  export type InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InstructorApplicationCreateWithoutUserInput, InstructorApplicationUncheckedCreateWithoutUserInput> | InstructorApplicationCreateWithoutUserInput[] | InstructorApplicationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutUserInput | InstructorApplicationCreateOrConnectWithoutUserInput[]
+    upsert?: InstructorApplicationUpsertWithWhereUniqueWithoutUserInput | InstructorApplicationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InstructorApplicationCreateManyUserInputEnvelope
+    set?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    disconnect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    delete?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    update?: InstructorApplicationUpdateWithWhereUniqueWithoutUserInput | InstructorApplicationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InstructorApplicationUpdateManyWithWhereWithoutUserInput | InstructorApplicationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InstructorApplicationScalarWhereInput | InstructorApplicationScalarWhereInput[]
+  }
+
+  export type InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<InstructorApplicationCreateWithoutReviewerInput, InstructorApplicationUncheckedCreateWithoutReviewerInput> | InstructorApplicationCreateWithoutReviewerInput[] | InstructorApplicationUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: InstructorApplicationCreateOrConnectWithoutReviewerInput | InstructorApplicationCreateOrConnectWithoutReviewerInput[]
+    upsert?: InstructorApplicationUpsertWithWhereUniqueWithoutReviewerInput | InstructorApplicationUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: InstructorApplicationCreateManyReviewerInputEnvelope
+    set?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    disconnect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    delete?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    connect?: InstructorApplicationWhereUniqueInput | InstructorApplicationWhereUniqueInput[]
+    update?: InstructorApplicationUpdateWithWhereUniqueWithoutReviewerInput | InstructorApplicationUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: InstructorApplicationUpdateManyWithWhereWithoutReviewerInput | InstructorApplicationUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: InstructorApplicationScalarWhereInput | InstructorApplicationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -85148,6 +87236,40 @@ export namespace Prisma {
     update?: XOR<XOR<ReadinessQuizUpdateToOneWithWhereWithoutResultsInput, ReadinessQuizUpdateWithoutResultsInput>, ReadinessQuizUncheckedUpdateWithoutResultsInput>
   }
 
+  export type UserCreateNestedOneWithoutInstructorApplicationsInput = {
+    create?: XOR<UserCreateWithoutInstructorApplicationsInput, UserUncheckedCreateWithoutInstructorApplicationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInstructorApplicationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewedApplicationsInput = {
+    create?: XOR<UserCreateWithoutReviewedApplicationsInput, UserUncheckedCreateWithoutReviewedApplicationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedApplicationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumInstructorApplicationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InstructorApplicationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutInstructorApplicationsNestedInput = {
+    create?: XOR<UserCreateWithoutInstructorApplicationsInput, UserUncheckedCreateWithoutInstructorApplicationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInstructorApplicationsInput
+    upsert?: UserUpsertWithoutInstructorApplicationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInstructorApplicationsInput, UserUpdateWithoutInstructorApplicationsInput>, UserUncheckedUpdateWithoutInstructorApplicationsInput>
+  }
+
+  export type UserUpdateOneWithoutReviewedApplicationsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewedApplicationsInput, UserUncheckedCreateWithoutReviewedApplicationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedApplicationsInput
+    upsert?: UserUpsertWithoutReviewedApplicationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewedApplicationsInput, UserUpdateWithoutReviewedApplicationsInput>, UserUncheckedUpdateWithoutReviewedApplicationsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -85663,6 +87785,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumInvestorLevelFilter<$PrismaModel>
     _max?: NestedEnumInvestorLevelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumInstructorApplicationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstructorApplicationStatus | EnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstructorApplicationStatusFilter<$PrismaModel> | $Enums.InstructorApplicationStatus
+  }
+
+  export type NestedEnumInstructorApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InstructorApplicationStatus | EnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InstructorApplicationStatus[] | ListEnumInstructorApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumInstructorApplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.InstructorApplicationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInstructorApplicationStatusFilter<$PrismaModel>
+    _max?: NestedEnumInstructorApplicationStatusFilter<$PrismaModel>
   }
 
   export type AccessAttemptLogCreateWithoutUserInput = {
@@ -86188,6 +88327,122 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type InstructorApplicationCreateWithoutUserInput = {
+    id?: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reviewer?: UserCreateNestedOneWithoutReviewedApplicationsInput
+  }
+
+  export type InstructorApplicationUncheckedCreateWithoutUserInput = {
+    id?: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstructorApplicationCreateOrConnectWithoutUserInput = {
+    where: InstructorApplicationWhereUniqueInput
+    create: XOR<InstructorApplicationCreateWithoutUserInput, InstructorApplicationUncheckedCreateWithoutUserInput>
+  }
+
+  export type InstructorApplicationCreateManyUserInputEnvelope = {
+    data: InstructorApplicationCreateManyUserInput | InstructorApplicationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InstructorApplicationCreateWithoutReviewerInput = {
+    id?: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutInstructorApplicationsInput
+  }
+
+  export type InstructorApplicationUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    userId: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstructorApplicationCreateOrConnectWithoutReviewerInput = {
+    where: InstructorApplicationWhereUniqueInput
+    create: XOR<InstructorApplicationCreateWithoutReviewerInput, InstructorApplicationUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type InstructorApplicationCreateManyReviewerInputEnvelope = {
+    data: InstructorApplicationCreateManyReviewerInput | InstructorApplicationCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccessAttemptLogUpsertWithWhereUniqueWithoutUserInput = {
     where: AccessAttemptLogWhereUniqueInput
     update: XOR<AccessAttemptLogUpdateWithoutUserInput, AccessAttemptLogUncheckedUpdateWithoutUserInput>
@@ -86694,6 +88949,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserSession"> | Date | string
   }
 
+  export type InstructorApplicationUpsertWithWhereUniqueWithoutUserInput = {
+    where: InstructorApplicationWhereUniqueInput
+    update: XOR<InstructorApplicationUpdateWithoutUserInput, InstructorApplicationUncheckedUpdateWithoutUserInput>
+    create: XOR<InstructorApplicationCreateWithoutUserInput, InstructorApplicationUncheckedCreateWithoutUserInput>
+  }
+
+  export type InstructorApplicationUpdateWithWhereUniqueWithoutUserInput = {
+    where: InstructorApplicationWhereUniqueInput
+    data: XOR<InstructorApplicationUpdateWithoutUserInput, InstructorApplicationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InstructorApplicationUpdateManyWithWhereWithoutUserInput = {
+    where: InstructorApplicationScalarWhereInput
+    data: XOR<InstructorApplicationUpdateManyMutationInput, InstructorApplicationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type InstructorApplicationScalarWhereInput = {
+    AND?: InstructorApplicationScalarWhereInput | InstructorApplicationScalarWhereInput[]
+    OR?: InstructorApplicationScalarWhereInput[]
+    NOT?: InstructorApplicationScalarWhereInput | InstructorApplicationScalarWhereInput[]
+    id?: StringFilter<"InstructorApplication"> | string
+    userId?: StringFilter<"InstructorApplication"> | string
+    occupation?: StringFilter<"InstructorApplication"> | string
+    company?: StringNullableFilter<"InstructorApplication"> | string | null
+    experienceYears?: IntFilter<"InstructorApplication"> | number
+    expertise?: StringFilter<"InstructorApplication"> | string
+    courseTitle?: StringFilter<"InstructorApplication"> | string
+    courseCategory?: StringFilter<"InstructorApplication"> | string
+    courseDescription?: StringFilter<"InstructorApplication"> | string
+    education?: StringFilter<"InstructorApplication"> | string
+    certifications?: StringNullableFilter<"InstructorApplication"> | string | null
+    linkedin?: StringNullableFilter<"InstructorApplication"> | string | null
+    website?: StringNullableFilter<"InstructorApplication"> | string | null
+    cvUrl?: StringNullableFilter<"InstructorApplication"> | string | null
+    certificatesUrl?: StringNullableFilter<"InstructorApplication"> | string | null
+    motivation?: StringFilter<"InstructorApplication"> | string
+    status?: EnumInstructorApplicationStatusFilter<"InstructorApplication"> | $Enums.InstructorApplicationStatus
+    adminNote?: StringNullableFilter<"InstructorApplication"> | string | null
+    reviewedBy?: StringNullableFilter<"InstructorApplication"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"InstructorApplication"> | Date | string | null
+    createdAt?: DateTimeFilter<"InstructorApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"InstructorApplication"> | Date | string
+  }
+
+  export type InstructorApplicationUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: InstructorApplicationWhereUniqueInput
+    update: XOR<InstructorApplicationUpdateWithoutReviewerInput, InstructorApplicationUncheckedUpdateWithoutReviewerInput>
+    create: XOR<InstructorApplicationCreateWithoutReviewerInput, InstructorApplicationUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type InstructorApplicationUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: InstructorApplicationWhereUniqueInput
+    data: XOR<InstructorApplicationUpdateWithoutReviewerInput, InstructorApplicationUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type InstructorApplicationUpdateManyWithWhereWithoutReviewerInput = {
+    where: InstructorApplicationScalarWhereInput
+    data: XOR<InstructorApplicationUpdateManyMutationInput, InstructorApplicationUncheckedUpdateManyWithoutReviewerInput>
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     email: string
@@ -86722,6 +89037,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -86752,6 +89069,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -86798,6 +89117,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -86828,6 +89149,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PaymentCreateWithoutEnrollmentInput = {
@@ -86891,6 +89214,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -86921,6 +89246,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -87006,6 +89333,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -87036,6 +89365,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type AccessAttemptLogCreateWithoutSessionInput = {
@@ -87255,6 +89586,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAccessTokensInput = {
@@ -87285,6 +89618,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAccessTokensInput = {
@@ -87378,6 +89713,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccessTokensInput = {
@@ -87408,6 +89745,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type LiveSessionCreateWithoutAccessLogsInput = {
@@ -87479,6 +89818,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutAccessLogsInput = {
@@ -87509,6 +89850,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutAccessLogsInput = {
@@ -87602,6 +89945,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccessLogsInput = {
@@ -87632,6 +89977,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type EnrollmentCreateWithoutPaymentInput = {
@@ -87726,6 +90073,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -87756,6 +90105,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -87878,6 +90229,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -87908,6 +90261,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type FundCreateWithoutManagerInput = {
@@ -90678,6 +93033,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutPortfoliosInput = {
@@ -90708,6 +93065,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutPortfoliosInput = {
@@ -90830,6 +93189,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPortfoliosInput = {
@@ -90860,6 +93221,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type PortfolioStockUpsertWithWhereUniqueWithoutPortfolioInput = {
@@ -91139,6 +93502,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutExpertProfileInput = {
@@ -91169,6 +93534,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutExpertProfileInput = {
@@ -91407,6 +93774,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutExpertProfileInput = {
@@ -91437,6 +93806,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type LmsCourseUpsertWithWhereUniqueWithoutExpertInput = {
@@ -92295,6 +94666,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutLmsEnrollmentsInput = {
@@ -92325,6 +94698,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutLmsEnrollmentsInput = {
@@ -92467,6 +94842,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLmsEnrollmentsInput = {
@@ -92497,6 +94874,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type LmsCourseUpsertWithoutEnrollmentsInput = {
@@ -92635,6 +95014,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutLessonProgressInput = {
@@ -92665,6 +95046,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutLessonProgressInput = {
@@ -92744,6 +95127,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLessonProgressInput = {
@@ -92774,6 +95159,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type LessonUpsertWithoutProgressInput = {
@@ -93056,6 +95443,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutQuizAttemptsInput = {
@@ -93086,6 +95475,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutQuizAttemptsInput = {
@@ -93157,6 +95548,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutQuizAttemptsInput = {
@@ -93187,6 +95580,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type QuizUpsertWithoutAttemptsInput = {
@@ -93388,6 +95783,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutBookingsAsUserInput = {
@@ -93418,6 +95815,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutBookingsAsUserInput = {
@@ -93568,6 +95967,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBookingsAsUserInput = {
@@ -93598,6 +95999,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ExpertProfileUpsertWithoutBookingsInput = {
@@ -93744,6 +96147,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutCertificatesInput = {
@@ -93774,6 +96179,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutCertificatesInput = {
@@ -93879,6 +96286,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCertificatesInput = {
@@ -93909,6 +96318,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type LmsCourseUpsertWithoutCertificatesInput = {
@@ -94004,6 +96415,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -94034,6 +96447,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -94080,6 +96495,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -94110,6 +96527,8 @@ export namespace Prisma {
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserCreateWithoutLmsPaymentsInput = {
@@ -94140,6 +96559,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutLmsPaymentsInput = {
@@ -94170,6 +96591,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutLmsPaymentsInput = {
@@ -94351,6 +96774,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLmsPaymentsInput = {
@@ -94381,6 +96806,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type LmsCourseUpsertWithoutLmsPaymentsInput = {
@@ -94851,6 +97278,8 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
     sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
   }
 
   export type UserUncheckedCreateWithoutReadinessResultsInput = {
@@ -94881,6 +97310,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
     sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
   }
 
   export type UserCreateOrConnectWithoutReadinessResultsInput = {
@@ -94950,6 +97381,8 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReadinessResultsInput = {
@@ -94980,6 +97413,8 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
   export type ReadinessQuizUpsertWithoutResultsInput = {
@@ -95009,6 +97444,294 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: ReadinessQuestionUncheckedUpdateManyWithoutQuizNestedInput
+  }
+
+  export type UserCreateWithoutInstructorApplicationsInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    phoneNumber?: string | null
+    lastPhonePromptDate?: Date | string | null
+    isVerified?: boolean
+    role?: $Enums.UserRole
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    failedLoginAttempts?: number
+    lockoutUntil?: Date | string | null
+    accessLogs?: AccessAttemptLogCreateNestedManyWithoutUserInput
+    accessTokens?: AccessTokenCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    portfolios?: PortfolioCreateNestedManyWithoutUserInput
+    expertProfile?: ExpertProfileCreateNestedOneWithoutUserInput
+    lmsEnrollments?: LmsCourseEnrollmentCreateNestedManyWithoutUserInput
+    lessonProgress?: LessonProgressCreateNestedManyWithoutUserInput
+    quizAttempts?: QuizAttemptCreateNestedManyWithoutUserInput
+    bookingsAsUser?: ExpertBookingCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
+    lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
+    sessions?: UserSessionCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserUncheckedCreateWithoutInstructorApplicationsInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    phoneNumber?: string | null
+    lastPhonePromptDate?: Date | string | null
+    isVerified?: boolean
+    role?: $Enums.UserRole
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    failedLoginAttempts?: number
+    lockoutUntil?: Date | string | null
+    accessLogs?: AccessAttemptLogUncheckedCreateNestedManyWithoutUserInput
+    accessTokens?: AccessTokenUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    portfolios?: PortfolioUncheckedCreateNestedManyWithoutUserInput
+    expertProfile?: ExpertProfileUncheckedCreateNestedOneWithoutUserInput
+    lmsEnrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    lessonProgress?: LessonProgressUncheckedCreateNestedManyWithoutUserInput
+    quizAttempts?: QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    bookingsAsUser?: ExpertBookingUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
+    lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
+    sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    reviewedApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutInstructorApplicationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInstructorApplicationsInput, UserUncheckedCreateWithoutInstructorApplicationsInput>
+  }
+
+  export type UserCreateWithoutReviewedApplicationsInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    phoneNumber?: string | null
+    lastPhonePromptDate?: Date | string | null
+    isVerified?: boolean
+    role?: $Enums.UserRole
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    failedLoginAttempts?: number
+    lockoutUntil?: Date | string | null
+    accessLogs?: AccessAttemptLogCreateNestedManyWithoutUserInput
+    accessTokens?: AccessTokenCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    portfolios?: PortfolioCreateNestedManyWithoutUserInput
+    expertProfile?: ExpertProfileCreateNestedOneWithoutUserInput
+    lmsEnrollments?: LmsCourseEnrollmentCreateNestedManyWithoutUserInput
+    lessonProgress?: LessonProgressCreateNestedManyWithoutUserInput
+    quizAttempts?: QuizAttemptCreateNestedManyWithoutUserInput
+    bookingsAsUser?: ExpertBookingCreateNestedManyWithoutUserInput
+    certificates?: CertificateCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    readinessResults?: ReadinessResultCreateNestedManyWithoutUserInput
+    lmsPayments?: LmsPaymentCreateNestedManyWithoutUserInput
+    sessions?: UserSessionCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewedApplicationsInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    phoneNumber?: string | null
+    lastPhonePromptDate?: Date | string | null
+    isVerified?: boolean
+    role?: $Enums.UserRole
+    avatar?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    failedLoginAttempts?: number
+    lockoutUntil?: Date | string | null
+    accessLogs?: AccessAttemptLogUncheckedCreateNestedManyWithoutUserInput
+    accessTokens?: AccessTokenUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    portfolios?: PortfolioUncheckedCreateNestedManyWithoutUserInput
+    expertProfile?: ExpertProfileUncheckedCreateNestedOneWithoutUserInput
+    lmsEnrollments?: LmsCourseEnrollmentUncheckedCreateNestedManyWithoutUserInput
+    lessonProgress?: LessonProgressUncheckedCreateNestedManyWithoutUserInput
+    quizAttempts?: QuizAttemptUncheckedCreateNestedManyWithoutUserInput
+    bookingsAsUser?: ExpertBookingUncheckedCreateNestedManyWithoutUserInput
+    certificates?: CertificateUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    readinessResults?: ReadinessResultUncheckedCreateNestedManyWithoutUserInput
+    lmsPayments?: LmsPaymentUncheckedCreateNestedManyWithoutUserInput
+    sessions?: UserSessionUncheckedCreateNestedManyWithoutUserInput
+    instructorApplications?: InstructorApplicationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewedApplicationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewedApplicationsInput, UserUncheckedCreateWithoutReviewedApplicationsInput>
+  }
+
+  export type UserUpsertWithoutInstructorApplicationsInput = {
+    update: XOR<UserUpdateWithoutInstructorApplicationsInput, UserUncheckedUpdateWithoutInstructorApplicationsInput>
+    create: XOR<UserCreateWithoutInstructorApplicationsInput, UserUncheckedCreateWithoutInstructorApplicationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInstructorApplicationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInstructorApplicationsInput, UserUncheckedUpdateWithoutInstructorApplicationsInput>
+  }
+
+  export type UserUpdateWithoutInstructorApplicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPhonePromptDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    failedLoginAttempts?: IntFieldUpdateOperationsInput | number
+    lockoutUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessLogs?: AccessAttemptLogUpdateManyWithoutUserNestedInput
+    accessTokens?: AccessTokenUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    portfolios?: PortfolioUpdateManyWithoutUserNestedInput
+    expertProfile?: ExpertProfileUpdateOneWithoutUserNestedInput
+    lmsEnrollments?: LmsCourseEnrollmentUpdateManyWithoutUserNestedInput
+    lessonProgress?: LessonProgressUpdateManyWithoutUserNestedInput
+    quizAttempts?: QuizAttemptUpdateManyWithoutUserNestedInput
+    bookingsAsUser?: ExpertBookingUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
+    lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
+    sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInstructorApplicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPhonePromptDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    failedLoginAttempts?: IntFieldUpdateOperationsInput | number
+    lockoutUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessLogs?: AccessAttemptLogUncheckedUpdateManyWithoutUserNestedInput
+    accessTokens?: AccessTokenUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    portfolios?: PortfolioUncheckedUpdateManyWithoutUserNestedInput
+    expertProfile?: ExpertProfileUncheckedUpdateOneWithoutUserNestedInput
+    lmsEnrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    lessonProgress?: LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+    quizAttempts?: QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    bookingsAsUser?: ExpertBookingUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
+    lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    reviewedApplications?: InstructorApplicationUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUpsertWithoutReviewedApplicationsInput = {
+    update: XOR<UserUpdateWithoutReviewedApplicationsInput, UserUncheckedUpdateWithoutReviewedApplicationsInput>
+    create: XOR<UserCreateWithoutReviewedApplicationsInput, UserUncheckedCreateWithoutReviewedApplicationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewedApplicationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewedApplicationsInput, UserUncheckedUpdateWithoutReviewedApplicationsInput>
+  }
+
+  export type UserUpdateWithoutReviewedApplicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPhonePromptDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    failedLoginAttempts?: IntFieldUpdateOperationsInput | number
+    lockoutUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessLogs?: AccessAttemptLogUpdateManyWithoutUserNestedInput
+    accessTokens?: AccessTokenUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    portfolios?: PortfolioUpdateManyWithoutUserNestedInput
+    expertProfile?: ExpertProfileUpdateOneWithoutUserNestedInput
+    lmsEnrollments?: LmsCourseEnrollmentUpdateManyWithoutUserNestedInput
+    lessonProgress?: LessonProgressUpdateManyWithoutUserNestedInput
+    quizAttempts?: QuizAttemptUpdateManyWithoutUserNestedInput
+    bookingsAsUser?: ExpertBookingUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    readinessResults?: ReadinessResultUpdateManyWithoutUserNestedInput
+    lmsPayments?: LmsPaymentUpdateManyWithoutUserNestedInput
+    sessions?: UserSessionUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewedApplicationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    lastPhonePromptDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    failedLoginAttempts?: IntFieldUpdateOperationsInput | number
+    lockoutUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accessLogs?: AccessAttemptLogUncheckedUpdateManyWithoutUserNestedInput
+    accessTokens?: AccessTokenUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    portfolios?: PortfolioUncheckedUpdateManyWithoutUserNestedInput
+    expertProfile?: ExpertProfileUncheckedUpdateOneWithoutUserNestedInput
+    lmsEnrollments?: LmsCourseEnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    lessonProgress?: LessonProgressUncheckedUpdateManyWithoutUserNestedInput
+    quizAttempts?: QuizAttemptUncheckedUpdateManyWithoutUserNestedInput
+    bookingsAsUser?: ExpertBookingUncheckedUpdateManyWithoutUserNestedInput
+    certificates?: CertificateUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    readinessResults?: ReadinessResultUncheckedUpdateManyWithoutUserNestedInput
+    lmsPayments?: LmsPaymentUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: UserSessionUncheckedUpdateManyWithoutUserNestedInput
+    instructorApplications?: InstructorApplicationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccessAttemptLogCreateManyUserInput = {
@@ -95160,6 +97883,54 @@ export namespace Prisma {
     expiresAt: Date | string
     userAgent?: string | null
     ipAddress?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstructorApplicationCreateManyUserInput = {
+    id?: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedBy?: string | null
+    reviewedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InstructorApplicationCreateManyReviewerInput = {
+    id?: string
+    userId: string
+    occupation: string
+    company?: string | null
+    experienceYears: number
+    expertise: string
+    courseTitle: string
+    courseCategory: string
+    courseDescription: string
+    education: string
+    certifications?: string | null
+    linkedin?: string | null
+    website?: string | null
+    cvUrl?: string | null
+    certificatesUrl?: string | null
+    motivation: string
+    status?: $Enums.InstructorApplicationStatus
+    adminNote?: string | null
+    reviewedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -95629,6 +98400,150 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstructorApplicationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewer?: UserUpdateOneWithoutReviewedApplicationsNestedInput
+  }
+
+  export type InstructorApplicationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstructorApplicationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstructorApplicationUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInstructorApplicationsNestedInput
+  }
+
+  export type InstructorApplicationUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstructorApplicationUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    occupation?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    experienceYears?: IntFieldUpdateOperationsInput | number
+    expertise?: StringFieldUpdateOperationsInput | string
+    courseTitle?: StringFieldUpdateOperationsInput | string
+    courseCategory?: StringFieldUpdateOperationsInput | string
+    courseDescription?: StringFieldUpdateOperationsInput | string
+    education?: StringFieldUpdateOperationsInput | string
+    certifications?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    cvUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    certificatesUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    motivation?: StringFieldUpdateOperationsInput | string
+    status?: EnumInstructorApplicationStatusFieldUpdateOperationsInput | $Enums.InstructorApplicationStatus
+    adminNote?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

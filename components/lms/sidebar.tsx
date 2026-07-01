@@ -19,6 +19,7 @@ import {
     Menu,
     X,
     ArrowLeft,
+    GraduationCap,
 } from "lucide-react"
 
 interface NavItem {
@@ -34,6 +35,7 @@ const navigation: NavItem[] = [
     { name: "My Bookings", href: "/lms/bookings", icon: Calendar },
     { name: "Certificates", href: "/lms/certificates", icon: Award },
     { name: "Readiness Quiz", href: "/lms/readiness", icon: Target },
+    { name: "Teach on YIF LMS", href: "/lms/become-instructor", icon: GraduationCap },
     { name: "Notifications", href: "/lms/notifications", icon: Bell },
     { name: "Settings", href: "/lms/settings", icon: Settings },
 ]
@@ -73,7 +75,13 @@ export function LmsSidebar() {
                     </div>
                     <div className="flex-1 min-w-0">
                         <p className="truncate font-medium text-white">{user?.name}</p>
-                        <p className="text-xs text-blue-400">Learner</p>
+                        <p className="text-xs text-blue-400">
+                            {user?.role === "admin" ? "Admin" :
+                             user?.role === "expert" ? "Instructor" :
+                             user?.role === "pro" ? "Pro Learner" :
+                             user?.role === "institutional" ? "Institutional" :
+                             "Learner"}
+                        </p>
                     </div>
                 </div>
             </div>

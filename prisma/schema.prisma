@@ -41,6 +41,8 @@ model User {
   readinessResults   ReadinessResult[]
   lmsPayments        LmsPayment[]
   sessions           UserSession[]
+  instructorApplications InstructorApplication[] @relation("ApplicantUser")
+  reviewedApplications   InstructorApplication[] @relation("ApplicationReviewer")
 }
 
 model UserSession {
@@ -1301,5 +1303,43 @@ model ReadinessResult {
 
   @@index([userId])
   @@index([quizId])
+}
+
+enum InstructorApplicationStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  MORE_INFO
+}
+
+model InstructorApplication {
+  id                String                      @id @default(uuid())
+  userId            String                      @map("user_id")
+  user              User                        @relation("ApplicantUser", fields: [userId], references: [id], onDelete: Cascade)
+  occupation        String
+  company           String?
+  experienceYears   Int                         @map("experience_years")
+  expertise         String
+  courseTitle       String                      @map("course_title")
+  courseCategory    String                      @map("course_category")
+  courseDescription String                      @map("course_description")
+  education         String
+  certifications    String?
+  linkedin          String?
+  website           String?
+  cvUrl             String?                     @map("cv")
+  certificatesUrl   String?                     @map("certificates")
+  motivation        String
+  status            InstructorApplicationStatus @default(PENDING)
+  adminNote         String?                     @map("admin_note")
+  reviewedBy        String?                     @map("reviewed_by")
+  reviewer          User?                       @relation("ApplicationReviewer", fields: [reviewedBy], references: [id], onDelete: SetNull)
+  reviewedAt        DateTime?                   @map("reviewed_at")
+  createdAt         DateTime                    @default(now()) @map("created_at")
+  updatedAt         DateTime                    @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@index([status])
 }
 

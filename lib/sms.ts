@@ -315,9 +315,7 @@ export function isSmsProviderConfigured(): boolean {
   return hasBeem() || hasTwilio()
 }
 
-export async function sendOtpSms(phoneE164: string, plainCode: string): Promise<void> {
-  const message = OTP_MESSAGE(plainCode)
-
+export async function sendGeneralSms(phoneE164: string, message: string): Promise<void> {
   if (hasBeem()) {
     await sendViaBeem(phoneE164, message)
     return
@@ -329,9 +327,14 @@ export async function sendOtpSms(phoneE164: string, plainCode: string): Promise<
   }
 
   if (process.env.NODE_ENV === "production") {
-    console.error("[SMS] No Beem or Twilio credentials; cannot send OTP in production")
+    console.error(`[SMS] No Beem or Twilio credentials; cannot send SMS to ${phoneE164} in production`)
     throw new Error("SMS service is not configured")
   }
 
   console.info(`[DEV SMS] → ${phoneE164}: ${message}`)
+}
+
+export async function sendOtpSms(phoneE164: string, plainCode: string): Promise<void> {
+  const message = OTP_MESSAGE(plainCode)
+  await sendGeneralSms(phoneE164, message)
 }

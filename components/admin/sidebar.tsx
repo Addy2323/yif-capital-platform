@@ -29,6 +29,7 @@ import {
     MessageSquare,
     Award,
     Banknote,
+    GraduationCap,
 } from "lucide-react"
 
 interface NavItem {
@@ -46,6 +47,7 @@ const navigation: NavItem[] = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Users", href: "/admin/users", icon: Users },
     { name: "Experts", href: "/admin/experts", icon: Award },
+    { name: "Instructor Apps", href: "/admin/instructor-applications", icon: GraduationCap },
     { name: "Payout Requests", href: "/admin/payout-requests", icon: Banknote },
     { name: "Live Sessions", href: "/admin/sessions", icon: Video },
     { name: "Access Logs", href: "/admin/access-logs", icon: ShieldAlert },
