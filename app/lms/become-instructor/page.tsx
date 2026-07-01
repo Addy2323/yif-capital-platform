@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -263,51 +263,51 @@ export default function BecomeInstructorPage() {
     const StatusIcon = statusConfig.icon
 
     return (
-      <div className="mx-auto max-w-2xl px-4 py-8">
-        <Card className="border border-white/10 bg-[#0B1528] text-white">
-          <CardHeader className="text-center">
+      <div className="mx-auto max-w-2xl py-4 sm:py-8">
+        <Card className="border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0B1528] text-slate-900 dark:text-white shadow-sm dark:shadow-none">
+          <CardHeader className="text-center p-4 sm:p-6">
             <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border ${statusConfig.color}`}>
               <StatusIcon className="h-8 w-8" />
             </div>
             <CardTitle className="text-2xl font-bold">{statusConfig.label}</CardTitle>
-            <CardDescription className="text-white/60 mt-2">
+            <CardDescription className="text-slate-500 dark:text-white/60 mt-2">
               Application ID: {application.id}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="rounded-lg bg-white/5 p-4 border border-white/10">
-              <p className="text-sm leading-relaxed text-white/80">{statusConfig.desc}</p>
+          <CardContent className="p-4 sm:p-6 space-y-6">
+            <div className="rounded-lg bg-gray-50 dark:bg-white/5 p-4 border border-gray-200 dark:border-white/10">
+              <p className="text-sm leading-relaxed text-slate-700 dark:text-white/80">{statusConfig.desc}</p>
             </div>
 
             {application.adminNote && (
               <div className="space-y-2">
-                <Label className="text-sm font-semibold text-white/90">Review Notes</Label>
+                <Label className="text-sm font-semibold text-slate-800 dark:text-white/90">Review Notes</Label>
                 <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-4">
-                  <p className="text-sm italic text-amber-300">"{application.adminNote}"</p>
+                  <p className="text-sm italic text-amber-600 dark:text-amber-300">"{application.adminNote}"</p>
                 </div>
               </div>
             )}
 
-            <div className="border-t border-white/10 pt-6 space-y-4">
-              <h3 className="font-semibold text-white/90">Your Submitted Details</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm text-white/70">
+            <div className="border-t border-gray-200 dark:border-white/10 pt-6 space-y-4">
+              <h3 className="font-semibold text-slate-800 dark:text-white/90">Your Submitted Details</h3>
+              <div className="grid grid-cols-2 gap-4 text-sm text-slate-600 dark:text-white/70">
                 <div>
-                  <span className="block text-xs text-white/40 uppercase">Role / Occupation</span>
-                  <span className="font-medium text-white">{application.occupation}</span>
+                  <span className="block text-xs text-slate-400 dark:text-white/40 uppercase">Role / Occupation</span>
+                  <span className="font-medium text-slate-950 dark:text-white">{application.occupation}</span>
                 </div>
                 <div>
-                  <span className="block text-xs text-white/40 uppercase">Proposed Course Title</span>
-                  <span className="font-medium text-white">{application.courseTitle}</span>
+                  <span className="block text-xs text-slate-400 dark:text-white/40 uppercase">Proposed Course Title</span>
+                  <span className="font-medium text-slate-950 dark:text-white">{application.courseTitle}</span>
                 </div>
                 <div>
-                  <span className="block text-xs text-white/40 uppercase">Category</span>
-                  <span className="font-medium text-white">
+                  <span className="block text-xs text-slate-400 dark:text-white/40 uppercase">Category</span>
+                  <span className="font-medium text-slate-950 dark:text-white">
                     {CATEGORIES.find(c => c.value === application.courseCategory)?.label || application.courseCategory}
                   </span>
                 </div>
                 <div>
-                  <span className="block text-xs text-white/40 uppercase">Experience</span>
-                  <span className="font-medium text-white">{application.experienceYears} Years</span>
+                  <span className="block text-xs text-slate-400 dark:text-white/40 uppercase">Experience</span>
+                  <span className="font-medium text-slate-950 dark:text-white">{application.experienceYears} Years</span>
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default function BecomeInstructorPage() {
                     setCertUrl(application.certificatesUrl || "")
                     setShowForm(true)
                   }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg"
                 >
                   {application.status === "MORE_INFO" ? "Update Details" : "Re-apply Now"}
                 </Button>
@@ -346,7 +346,7 @@ export default function BecomeInstructorPage() {
               <div className="pt-6 text-center">
                 <Button
                   onClick={() => window.location.href = "/expert"}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium w-full"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium w-full py-2.5 rounded-lg"
                 >
                   Go to Instructor Dashboard
                 </Button>
@@ -361,9 +361,9 @@ export default function BecomeInstructorPage() {
   // Render Landing Page
   if (!showForm) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-8 space-y-12">
+      <div className="mx-auto max-w-5xl py-4 sm:py-8 space-y-8 sm:space-y-12">
         {/* Hero Section */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-900/40 to-slate-900 border border-blue-500/20 px-6 py-12 text-center sm:px-12 sm:py-20">
+        <div className="relative overflow-hidden rounded-2xl bg-[#0B1528] border border-blue-500/20 px-4 py-10 text-center sm:px-12 sm:py-20">
           <div className="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl"></div>
           <div className="absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-blue-600/10 blur-3xl"></div>
 
@@ -371,17 +371,17 @@ export default function BecomeInstructorPage() {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">
               <GraduationCap className="h-8 w-8" />
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Become a YIF LMS Instructor
             </h1>
-            <p className="mx-auto max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mx-auto max-w-xl text-sm sm:text-lg text-white/70 leading-relaxed">
               Share your expertise with thousands of learners across Tanzania and beyond. Join our community of professional instructors and earn income by creating high-quality investment, business, finance, and technology courses.
             </p>
-            <div className="pt-4">
+            <div className="pt-2">
               <Button
                 onClick={() => setShowForm(true)}
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold px-8 py-6 rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:scale-[1.02]"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-semibold px-6 sm:px-8 py-5 sm:py-6 rounded-xl shadow-lg shadow-blue-600/20 transition-all hover:scale-[1.02]"
               >
                 Apply Now
               </Button>
@@ -392,7 +392,7 @@ export default function BecomeInstructorPage() {
         {/* Benefits Grid */}
         <div className="space-y-6">
           <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-white">Why teach with YIF LMS?</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 icon: DollarSign,
@@ -427,12 +427,12 @@ export default function BecomeInstructorPage() {
             ].map((benefit, index) => {
               const Icon = benefit.icon
               return (
-                <div key={index} className="rounded-xl border border-white/5 bg-[#0B1528] p-6 space-y-3 hover:border-blue-500/30 transition-all">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+                <div key={index} className="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0B1528] p-5 sm:p-6 space-y-3 shadow-sm dark:shadow-none hover:border-blue-500/50 dark:hover:border-blue-500/30 transition-all">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white">{benefit.title}</h3>
-                  <p className="text-sm text-white/60 leading-relaxed">{benefit.desc}</p>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{benefit.title}</h3>
+                  <p className="text-sm text-slate-500 dark:text-white/60 leading-relaxed">{benefit.desc}</p>
                 </div>
               )
             })}
@@ -444,56 +444,56 @@ export default function BecomeInstructorPage() {
 
   // Render Application Form
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
-      <Card className="border border-white/10 bg-[#0B1528] text-white">
-        <CardHeader>
-          <div className="flex items-center justify-between">
+    <div className="mx-auto max-w-4xl py-4 sm:py-8">
+      <Card className="border border-gray-200 dark:border-white/10 bg-white dark:bg-[#0B1528] text-slate-900 dark:text-white shadow-sm dark:shadow-none">
+        <CardHeader className="p-4 sm:p-6">
+          <div className="flex items-center justify-between gap-4">
             <div className="space-y-1">
-              <CardTitle className="text-2xl font-bold">Apply as an Instructor</CardTitle>
-              <CardDescription className="text-white/60">
+              <CardTitle className="text-xl sm:text-2xl font-bold">Apply as an Instructor</CardTitle>
+              <CardDescription className="text-slate-500 dark:text-white/60 text-xs sm:text-sm">
                 Provide accurate details about your professional background and proposed course.
               </CardDescription>
             </div>
             <Button
               variant="ghost"
               onClick={() => setShowForm(false)}
-              className="text-white/60 hover:text-white hover:bg-white/5"
+              className="text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 shrink-0"
             >
               Cancel
             </Button>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 sm:p-6">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Personal Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400 border-b border-white/10 pb-2">Personal Information</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-white/10 pb-2">Personal Information</h3>
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="space-y-2">
-                  <Label htmlFor="fullName">Full Name</Label>
+                  <Label htmlFor="fullName" className="text-sm">Full Name</Label>
                   <Input
                     id="fullName"
                     value={user?.name || ""}
                     disabled
-                    className="bg-white/5 border-white/10 text-white/60 cursor-not-allowed"
+                    className="bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-500 dark:text-white/60 cursor-not-allowed text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-sm">Email</Label>
                   <Input
                     id="email"
                     value={user?.email || ""}
                     disabled
-                    className="bg-white/5 border-white/10 text-white/60 cursor-not-allowed"
+                    className="bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-500 dark:text-white/60 cursor-not-allowed text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
+                  <Label htmlFor="phone" className="text-sm">Phone Number</Label>
                   <Input
                     id="phone"
                     value={user?.phoneNumber || ""}
                     disabled
-                    className="bg-white/5 border-white/10 text-white/60 cursor-not-allowed"
+                    className="bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-500 dark:text-white/60 cursor-not-allowed text-sm"
                     placeholder="No phone number"
                   />
                 </div>
@@ -502,31 +502,31 @@ export default function BecomeInstructorPage() {
 
             {/* Professional Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400 border-b border-white/10 pb-2">Professional Details</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-white/10 pb-2">Professional Details</h3>
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="space-y-2">
-                  <Label htmlFor="occupation">Current Occupation *</Label>
+                  <Label htmlFor="occupation" className="text-sm">Current Occupation *</Label>
                   <Input
                     id="occupation"
                     required
                     value={formData.occupation}
                     onChange={handleInputChange}
-                    placeholder="e.g. Portfolio Manager, Financial Analyst"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    placeholder="e.g. Portfolio Manager"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="company">Company (Optional)</Label>
+                  <Label htmlFor="company" className="text-sm">Company (Optional)</Label>
                   <Input
                     id="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    placeholder="e.g. YIF Capital, Bank of Tanzania"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    placeholder="e.g. YIF Capital"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="experienceYears">Years of Industry Experience *</Label>
+                  <Label htmlFor="experienceYears" className="text-sm">Years of Experience *</Label>
                   <Input
                     id="experienceYears"
                     type="number"
@@ -534,48 +534,48 @@ export default function BecomeInstructorPage() {
                     required
                     value={formData.experienceYears}
                     onChange={handleInputChange}
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="expertise">Areas of Expertise *</Label>
+                <Label htmlFor="expertise" className="text-sm">Areas of Expertise *</Label>
                 <Textarea
                   id="expertise"
                   required
                   value={formData.expertise}
                   onChange={handleInputChange}
                   placeholder="e.g. Valuation modeling, bond yields, personal retirement planning, real estate investment trusts (REITs)"
-                  className="bg-white/5 border-white/10 text-white placeholder-white/30 min-h-[80px]"
+                  className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 min-h-[80px] text-sm"
                 />
               </div>
             </div>
 
             {/* Course Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400 border-b border-white/10 pb-2">Teaching Idea</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-white/10 pb-2">Teaching Idea</h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="courseTitle">First Course Title Idea *</Label>
+                  <Label htmlFor="courseTitle" className="text-sm">First Course Title Idea *</Label>
                   <Input
                     id="courseTitle"
                     required
                     value={formData.courseTitle}
                     onChange={handleInputChange}
                     placeholder="e.g. Introduction to DSE Stock Trading"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="courseCategory">Primary Course Category *</Label>
+                  <Label htmlFor="courseCategory" className="text-sm">Primary Course Category *</Label>
                   <Select onValueChange={handleSelectChange} value={formData.courseCategory}>
-                    <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                    <SelectTrigger className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white text-sm">
                       <SelectValue placeholder="Select course category" />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0B1528] border-white/10 text-white">
+                    <SelectContent className="bg-white dark:bg-[#0B1528] border-gray-200 dark:border-white/10 text-slate-900 dark:text-white">
                       {CATEGORIES.map(category => (
-                        <SelectItem key={category.value} value={category.value} className="hover:bg-white/5">
+                        <SelectItem key={category.value} value={category.value} className="hover:bg-slate-100 dark:hover:bg-white/5">
                           {category.label}
                         </SelectItem>
                       ))}
@@ -585,49 +585,49 @@ export default function BecomeInstructorPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="courseDescription">Course Overview & Learning Objectives *</Label>
+                <Label htmlFor="courseDescription" className="text-sm">Course Overview & Objectives *</Label>
                 <Textarea
                   id="courseDescription"
                   required
                   value={formData.courseDescription}
                   onChange={handleInputChange}
                   placeholder="Outline what students will learn, target audience, and the structure of this course."
-                  className="bg-white/5 border-white/10 text-white placeholder-white/30 min-h-[100px]"
+                  className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 min-h-[100px] text-sm"
                 />
               </div>
             </div>
 
             {/* Qualifications & File Uploads */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400 border-b border-white/10 pb-2">Qualifications & Supporting Docs</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-white/10 pb-2">Qualifications & Supporting Docs</h3>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="education">Highest Level of Education *</Label>
+                  <Label htmlFor="education" className="text-sm">Highest Level of Education *</Label>
                   <Input
                     id="education"
                     required
                     value={formData.education}
                     onChange={handleInputChange}
-                    placeholder="e.g. Master's in Finance, BSc in Computer Science"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    placeholder="e.g. Master's in Finance"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="certifications">Professional Certifications (Optional)</Label>
+                  <Label htmlFor="certifications" className="text-sm">Professional Certifications</Label>
                   <Input
                     id="certifications"
                     value={formData.certifications}
                     onChange={handleInputChange}
-                    placeholder="e.g. CFA Level II, CPA (T), FMVA"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    placeholder="e.g. CFA, CPA (T), FMVA"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="linkedin" className="flex items-center gap-1">
-                    <Linkedin className="h-4 w-4 text-blue-400" /> LinkedIn Profile Link
+                  <Label htmlFor="linkedin" className="flex items-center gap-1 text-sm">
+                    <Linkedin className="h-4 w-4 text-blue-500" /> LinkedIn Profile Link
                   </Label>
                   <Input
                     id="linkedin"
@@ -635,12 +635,12 @@ export default function BecomeInstructorPage() {
                     value={formData.linkedin}
                     onChange={handleInputChange}
                     placeholder="https://linkedin.com/in/username"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="website" className="flex items-center gap-1">
-                    <Globe className="h-4 w-4 text-blue-400" /> Portfolio or Website Link
+                  <Label htmlFor="website" className="flex items-center gap-1 text-sm">
+                    <Globe className="h-4 w-4 text-blue-500" /> Portfolio or Website Link
                   </Label>
                   <Input
                     id="website"
@@ -648,20 +648,20 @@ export default function BecomeInstructorPage() {
                     value={formData.website}
                     onChange={handleInputChange}
                     placeholder="https://mywebsite.com"
-                    className="bg-white/5 border-white/10 text-white placeholder-white/30"
+                    className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 text-sm"
                   />
                 </div>
               </div>
 
               {/* Uploads */}
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2 border border-dashed border-white/10 rounded-lg p-4 bg-white/5">
+                <div className="space-y-2 border border-dashed border-gray-200 dark:border-white/10 rounded-lg p-4 bg-gray-50 dark:bg-white/5">
                   <Label htmlFor="cv" className="block text-sm font-semibold mb-2">Upload CV/Resume (PDF) *</Label>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
                     <Button
                       type="button"
                       variant="outline"
-                      className="bg-white/5 border-white/10 text-white"
+                      className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white"
                       disabled={cvUploading}
                       onClick={() => document.getElementById("cvInput")?.click()}
                     >
@@ -679,19 +679,19 @@ export default function BecomeInstructorPage() {
                       className="hidden"
                       onChange={handleCvChange}
                     />
-                    <span className="text-xs text-white/50 truncate max-w-[150px]">
+                    <span className="text-xs text-slate-500 dark:text-white/50 truncate max-w-[150px]">
                       {cvFile ? cvFile.name : cvUrl ? "CV Uploaded" : "No file chosen"}
                     </span>
                   </div>
                 </div>
 
-                <div className="space-y-2 border border-dashed border-white/10 rounded-lg p-4 bg-white/5">
+                <div className="space-y-2 border border-dashed border-gray-200 dark:border-white/10 rounded-lg p-4 bg-gray-50 dark:bg-white/5">
                   <Label htmlFor="certs" className="block text-sm font-semibold mb-2">Certificates / Transcripts (PDF)</Label>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
                     <Button
                       type="button"
                       variant="outline"
-                      className="bg-white/5 border-white/10 text-white"
+                      className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white"
                       disabled={certUploading}
                       onClick={() => document.getElementById("certInput")?.click()}
                     >
@@ -709,7 +709,7 @@ export default function BecomeInstructorPage() {
                       className="hidden"
                       onChange={handleCertChange}
                     />
-                    <span className="text-xs text-white/50 truncate max-w-[150px]">
+                    <span className="text-xs text-slate-500 dark:text-white/50 truncate max-w-[150px]">
                       {certFile ? certFile.name : certUrl ? "Certificates Uploaded" : "No file chosen"}
                     </span>
                   </div>
@@ -719,30 +719,30 @@ export default function BecomeInstructorPage() {
 
             {/* Motivation */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-blue-400 border-b border-white/10 pb-2">Motivation</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 border-b border-gray-200 dark:border-white/10 pb-2">Motivation</h3>
               <div className="space-y-2">
-                <Label htmlFor="motivation">Why do you want to become a YIF LMS instructor? *</Label>
+                <Label htmlFor="motivation" className="text-sm">Why do you want to become a YIF LMS instructor? *</Label>
                 <Textarea
                   id="motivation"
                   required
                   value={formData.motivation}
                   onChange={handleInputChange}
                   placeholder="Share your passion, target goals, and why you are a good fit to teach our financial community."
-                  className="bg-white/5 border-white/10 text-white placeholder-white/30 min-h-[100px]"
+                  className="bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/30 min-h-[100px] text-sm"
                 />
               </div>
             </div>
 
             {/* Agreement & Submit */}
-            <div className="space-y-4 border-t border-white/10 pt-6">
-              <div className="flex items-center space-x-2">
+            <div className="space-y-4 border-t border-gray-200 dark:border-white/10 pt-6">
+              <div className="flex items-start space-x-2">
                 <Checkbox
                   id="agreement"
                   checked={formData.agreement}
                   onCheckedChange={(checked) => setFormData(prev => ({ ...prev, agreement: checked === true }))}
-                  className="border-white/20 bg-white/5 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
+                  className="border-gray-300 dark:border-white/20 bg-gray-50 dark:bg-white/5 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white mt-1"
                 />
-                <Label htmlFor="agreement" className="text-sm font-medium text-white/70 leading-none cursor-pointer">
+                <Label htmlFor="agreement" className="text-xs sm:text-sm font-medium text-slate-700 dark:text-white/70 leading-normal cursor-pointer">
                   I confirm that all information provided is accurate and correct.
                 </Label>
               </div>
@@ -751,7 +751,7 @@ export default function BecomeInstructorPage() {
                 <Button
                   type="submit"
                   disabled={submitting || cvUploading || certUploading}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-5 rounded-lg text-base font-semibold shadow-lg shadow-blue-600/20"
+                  className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto px-8 py-5 rounded-lg text-sm sm:text-base font-semibold shadow-lg shadow-blue-600/20"
                 >
                   {submitting ? (
                     <>
